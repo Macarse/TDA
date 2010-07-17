@@ -14,6 +14,21 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-annotations</artifactId>
+        <version>3.2.1.ga</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>javax.transaction</groupId>
+                <artifactId>jta</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.8.1</version>
@@ -33,5 +48,13 @@
          <directory>src/main/resources</directory>
       </resource>
    </resources>
-</build>
+  </build>
+
+  <!-- JBoss repository -->
+  <repositories>
+        <repository>
+            <id>jboss</id>
+            <url>http://repository.jboss.org/maven2</url>
+        </repository>
+  </repositories>
 </project>
