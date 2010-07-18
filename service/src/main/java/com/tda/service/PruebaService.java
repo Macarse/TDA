@@ -5,6 +5,7 @@ import java.util.List;
 import com.tda.model.Prueba;
 
 public interface PruebaService {
+
 	void save(Prueba prueba);
 	
 	void delete(Prueba prueba);

@@ -1,12 +1,16 @@
 package com.tda.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 
 @Entity
-public class Prueba {
+public class Prueba implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private int id;
 
 	private String nombre;
@@ -29,4 +33,8 @@ public class Prueba {
 		return nombre;
 	}
 
+	@Override
+	public String toString() {
+		return "Prueba [id=" + id + ", nombre=" + nombre + "]";
+	}
 }

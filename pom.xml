@@ -16,9 +16,9 @@
 					<target>1.5</target>
 			</configuration>
 		</plugin>
-	</plugins>			
+	</plugins>
 	</build>
-	
+
   	<modules>
  		<module>model</module>
 		<module>persistence</module>
