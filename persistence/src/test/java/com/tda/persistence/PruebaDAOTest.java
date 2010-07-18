@@ -19,12 +19,12 @@ public class PruebaDAOTest {
 	@Test
 	public void testPruebaSave() {
 		Prueba prueba = new Prueba();
-		prueba.setId(1);
+		prueba.setId(1L);
 		prueba.setNombre("polaco");
 		
 		pruebaDAO.save(prueba);
 		
-		Prueba aPrueba = pruebaDAO.getById(prueba.getId());
+		Prueba aPrueba = pruebaDAO.findById(prueba.getId());
 		
 		assertEquals(prueba.getId(), aPrueba.getId());
 		assertEquals(prueba.getNombre(), aPrueba.getNombre());

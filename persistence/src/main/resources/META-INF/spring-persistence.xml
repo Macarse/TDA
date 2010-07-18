@@ -28,6 +28,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.tda.model.Prueba</value>
+				<value>com.tda.model.Item</value>
 			</list>
 		</property>
 
@@ -43,7 +44,12 @@
 		</property>
 	</bean>
 
-	<bean id="pruebaDao" class="com.tda.persistence.PruebaDAOImpl">
+	<bean id="pruebaDAO" class="com.tda.persistence.PruebaDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="itemDAO" class="com.tda.persistence.ItemDAO">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
 		</property>
