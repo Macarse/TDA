@@ -2,7 +2,6 @@ package com.tda.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,32 +10,31 @@ import com.tda.persistence.PruebaDAO;
 
 public class PruebaServiceImpl implements PruebaService {
 
-	PruebaDAO pruebaDAO;
+	PruebaDAO pruebaDao;
 
-	@Autowired
 	@Required
-	public void setPruebaDAO(PruebaDAO pruebaDAO) {
-		this.pruebaDAO = pruebaDAO;
+	public void setPruebaDao(PruebaDAO pruebaDao) {
+		this.pruebaDao = pruebaDao;
 	}
 
 	@Transactional(readOnly = false)
 	public void save(Prueba prueba) {
-		pruebaDAO.save(prueba);
+		pruebaDao.save(prueba);
 	}
 
 	@Transactional(readOnly = false)
 	public void delete(Prueba prueba) {
-		pruebaDAO.delete(prueba);
+		pruebaDao.delete(prueba);
 	}
 
 	@Transactional(readOnly = true)
 	public Prueba getById(int id) {
-		return pruebaDAO.getById(id);
+		return pruebaDao.getById(id);
 	}
 
 	@Transactional(readOnly = true)
 	public List<Prueba> getAll() {
-		return pruebaDAO.getAll();
+		return pruebaDao.getAll();
 	}
 
 }

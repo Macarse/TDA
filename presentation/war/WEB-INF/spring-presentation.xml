@@ -49,5 +49,8 @@
 		</property>
 	</bean>
 
-	<bean id="pruebaService" class="com.tda.service.PruebaServiceImpl"/>
+	<bean id="pruebaService" class="com.tda.service.PruebaServiceImpl">
+		<property name="pruebaDao" ref="pruebaDao" />
+	</bean>
+
 </beans>

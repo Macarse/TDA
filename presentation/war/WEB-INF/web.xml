@@ -15,6 +15,11 @@
   </servlet>
 
   <servlet-mapping>
+	<servlet-name>greetServlet</servlet-name>
+	<url-pattern>/prueba/greet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
     <servlet-name>pruebaServlet</servlet-name>
     <url-pattern>/prueba/prueba</url-pattern>
   </servlet-mapping>
