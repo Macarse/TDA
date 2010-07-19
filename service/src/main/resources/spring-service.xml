@@ -5,6 +5,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="pruebaService" class="com.tda.service.PruebaServiceImpl"/>
+	<bean id="pruebaService" class="com.tda.service.PruebaServiceImpl">
+		<property name="pruebaDao" ref="pruebaDao" />
+	</bean>
 
 </beans>
