@@ -31,7 +31,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/spring-presentation.xml
+			classpath:spring-service.xml
+			classpath:spring-persistence.xml
 		</param-value>
 	</context-param>
 
