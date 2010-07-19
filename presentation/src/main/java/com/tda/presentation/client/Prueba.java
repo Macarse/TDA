@@ -61,6 +61,7 @@ public class Prueba implements EntryPoint {
 			
 			public void onClick(ClickEvent event) {
 				com.tda.model.Prueba prueba = new com.tda.model.Prueba();
+				prueba.setId(182L);
 				prueba.setNombre(userName.getText());
 				pruebaService.save(prueba, new AsyncCallback<Void>() {
 
@@ -79,7 +80,7 @@ public class Prueba implements EntryPoint {
 		refreshButton.addClickHandler(new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
-				pruebaService.getAll(new AsyncCallback<List<com.tda.model.Prueba>>() {
+				pruebaService.findAll(new AsyncCallback<List<com.tda.model.Prueba>>() {
 
 					public void onFailure(Throwable caught) {
 						errorLabel.setText("Fallo: "+caught.getMessage());

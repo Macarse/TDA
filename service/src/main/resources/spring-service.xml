@@ -6,7 +6,7 @@
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="pruebaService" class="com.tda.service.PruebaServiceImpl">
-		<property name="pruebaDao" ref="pruebaDao" />
+		<property name="pruebaDAO" ref="pruebaDAO" />
 	</bean>
 
 </beans>

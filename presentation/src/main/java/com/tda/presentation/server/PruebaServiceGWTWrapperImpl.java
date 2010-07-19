@@ -32,11 +32,11 @@ public class PruebaServiceGWTWrapperImpl extends AutoinjectingRemoteServiceServl
 		pruebaService.delete(prueba);
 	}
 
-	public Prueba getById(int id) {
-		return pruebaService.getById(id);
+	public Prueba getById(Long id) {
+		return pruebaService.findById(id);
 	}
 
-	public List<Prueba> getAll() {
-		return pruebaService.getAll();
+	public List<Prueba> findAll() {
+		return pruebaService.findAll();
 	}
 }

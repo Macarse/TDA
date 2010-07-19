@@ -16,7 +16,7 @@ public interface PruebaServiceGWTWrapper extends RemoteService {
 	
 	void delete(Prueba prueba);
 	
-	Prueba getById(int id);
+	Prueba getById(Long id);
 	
-	List<Prueba> getAll();
+	List<Prueba> findAll();
 }

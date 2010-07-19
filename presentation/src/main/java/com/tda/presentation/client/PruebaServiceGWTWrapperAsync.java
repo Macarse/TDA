@@ -9,9 +9,9 @@ public interface PruebaServiceGWTWrapperAsync {
 
 	void delete(Prueba prueba, AsyncCallback<Void> callback);
 
-	void getById(int id, AsyncCallback<Prueba> callback);
+	void getById(Long id, AsyncCallback<Prueba> callback);
 
-	void getAll(AsyncCallback<List<Prueba>> callback);
+	void findAll(AsyncCallback<List<Prueba>> callback);
 
 	void save(Prueba prueba, AsyncCallback<Void> callback);
 }

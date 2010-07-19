@@ -6,18 +6,18 @@ import com.tda.persistence.PruebaDAO;
 
 public class PruebaServiceImpl implements PruebaService {
 
-	PruebaDAO pruebaDao;
+	PruebaDAO pruebaDAO;
 
-	public void setPruebaDao(PruebaDAO pruebaDao) {
-		this.pruebaDao = pruebaDao;
+	public void setPruebaDAO(PruebaDAO pruebaDAO) {
+		this.pruebaDAO = pruebaDAO;
 	}
 
 	public void save(Prueba prueba) {
-		pruebaDao.save(prueba);
+		pruebaDAO.save(prueba);
 	}
 
 	public void delete(Prueba prueba) {
-		pruebaDao.delete(prueba);
+		pruebaDAO.delete(prueba);
 	}
 
 	public void update(Prueba prueba) {
