@@ -38,31 +38,22 @@ public class ItemsViewImpl<T> extends Composite implements ItemsView<T> {
 	@UiField
 	Button deleteButton;
 
+	private ItemsDataSource itemsDataSouce;
+
 	public ItemsViewImpl() {
 		initWidget(uiBinder.createAndBindUi(this));
+
+		itemsDataSouce = new ItemsDataSource();
 
 		listGrid = new ListGrid();
 		listGrid.setWidth(750);  
 		listGrid.setHeight(224);  
 		listGrid.setHeaderHeight(40);
-		listGrid.setDataSource(new ItemsDataSource());
-        listGrid.setAutoFetchData(false);
+		listGrid.setDataSource(itemsDataSouce);
+        listGrid.setAutoFetchData(true);
 
-		ListGridField idField = new ListGridField("id", "id");
-		idField.setAlign(Alignment.CENTER);  
-		idField.setType(ListGridFieldType.INTEGER);
-		idField.setCanSort(true);
+        itemsContainer.add(listGrid);
 
-		ListGridField nameField = new ListGridField("name", "Nombre");
-		nameField.setAlign(Alignment.CENTER);  
-		nameField.setType(ListGridFieldType.SEQUENCE);
-		nameField.setCanSort(true);
-
-		listGrid.setFields(idField, nameField);
-		
-		itemsContainer.add(listGrid);
-
-		
 	}
 
 	public void setPresenter(Presenter<T> presenter) {
@@ -74,12 +65,15 @@ public class ItemsViewImpl<T> extends Composite implements ItemsView<T> {
 	}
 
 	public void setRowData(List<Item> items) {
+
 		for (Item item : items) {
+			System.out.println( "asdasdasd " + item.getId());
 			ListGridRecord record = new ListGridRecord();
-			record.setAttribute("id", item.getId());
-			record.setAttribute("name", item.getName());		
-			listGrid.addData(record);
+			record.setAttribute("id", item.getId().toString());
+			record.setAttribute("name", item.getName());
+			itemsDataSouce.addData(record);
 		}
-		listGrid.fetchData();
+
+		listGrid.refreshFields();
 	}
 }
