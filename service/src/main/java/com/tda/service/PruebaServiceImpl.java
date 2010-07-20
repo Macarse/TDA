@@ -1,15 +1,16 @@
 package com.tda.service;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.tda.model.Prueba;
 import com.tda.persistence.PruebaDAO;
 
 public class PruebaServiceImpl implements PruebaService {
-	@Autowired
+
 	PruebaDAO pruebaDAO;
+
+	public void setPruebaDAO(PruebaDAO pruebaDAO) {
+		this.pruebaDAO = pruebaDAO;
+	}
 
 	public void save(Prueba prueba) {
 		pruebaDAO.save(prueba);
@@ -30,5 +31,4 @@ public class PruebaServiceImpl implements PruebaService {
 	public List<Prueba> findAll() {
 		return pruebaDAO.findAll();
 	}
-
 }

@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.tda.model.Prueba;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath*:/META-INF/spring-persistence.xml"})
+@ContextConfiguration(locations={"classpath:spring-persistence.xml"})
 public class PruebaDAOTest {
 	@Autowired
 	PruebaDAO pruebaDAO;

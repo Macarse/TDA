@@ -1,5 +1,7 @@
 package com.tda.presentation.client;
 
+import java.util.List;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -7,6 +9,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -32,6 +35,9 @@ public class Prueba implements EntryPoint {
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
+	private final PruebaServiceGWTWrapperAsync pruebaService = GWT
+	.create(PruebaServiceGWTWrapper.class);
+
 	private final GreetingServiceGWTWrapperAsync greetingService = GWT
 			.create(GreetingServiceGWTWrapper.class);
 
@@ -41,16 +47,67 @@ public class Prueba implements EntryPoint {
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
+
 		nameField.setText("GWT User");
 		final Label errorLabel = new Label();
 
+		final Button refreshButton = new Button("Refresh");
+
+		final Button addUserButton = new Button("Add User");
+		final TextBox userName = new TextBox();
+		nameField.setText("UserName");
+
+		addUserButton.addClickHandler(new ClickHandler() {
+			
+			public void onClick(ClickEvent event) {
+				com.tda.model.Prueba prueba = new com.tda.model.Prueba();
+				prueba.setId(182L);
+				prueba.setNombre(userName.getText());
+				pruebaService.save(prueba, new AsyncCallback<Void>() {
+
+					public void onFailure(Throwable caught) {
+						Window.alert("Error while adding that user. " + caught.getMessage());
+					}
+
+					public void onSuccess(Void result) {
+						Window.alert("User added!");
+						userName.setText("");
+					}
+				});
+			}
+		});
+		
+		refreshButton.addClickHandler(new ClickHandler() {
+			
+			public void onClick(ClickEvent event) {
+				pruebaService.findAll(new AsyncCallback<List<com.tda.model.Prueba>>() {
+
+					public void onFailure(Throwable caught) {
+						errorLabel.setText("Fallo: "+caught.getMessage());
+					}
+
+					public void onSuccess(List<com.tda.model.Prueba> result) {
+						for (com.tda.model.Prueba prueba : result) {
+							Label label = new Label();
+							label.setText("User: " + prueba.toString());
+							RootPanel.get("nameFieldContainer").add(label);
+						}
+					}
+				});
+			}
+		});
+
+		
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel.get("nameFieldContainer").add(nameField);
+		RootPanel.get("nameFieldContainer").add(userName);
 		RootPanel.get("sendButtonContainer").add(sendButton);
+		RootPanel.get("sendButtonContainer").add(addUserButton);
+		RootPanel.get("sendButtonContainer").add(refreshButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 
 		// Focus the cursor on the name field when the app loads
