@@ -19,6 +19,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.tda.model.validators.FieldVerifier;
+import com.tda.presentation.client.service.GreetingServiceGWTWrapper;
+import com.tda.presentation.client.service.GreetingServiceGWTWrapperAsync;
+import com.tda.presentation.client.service.PruebaServiceGWTWrapper;
+import com.tda.presentation.client.service.PruebaServiceGWTWrapperAsync;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.

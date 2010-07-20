@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 import com.tda.model.Prueba;
-import com.tda.presentation.client.PruebaServiceGWTWrapper;
+import com.tda.presentation.client.service.PruebaServiceGWTWrapper;
 import com.tda.service.PruebaService;
 
 @SuppressWarnings("serial")

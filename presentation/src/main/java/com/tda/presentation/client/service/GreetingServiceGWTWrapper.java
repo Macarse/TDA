@@ -1,4 +1,4 @@
-package com.tda.presentation.client;
+package com.tda.presentation.client.service;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

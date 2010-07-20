@@ -1,12 +1,12 @@
 package com.tda.service;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import com.tda.model.Item;
 import com.tda.persistence.ItemDAO;
 
 public class ItemServiceImpl implements ItemService {
-	@Autowired
+
 	ItemDAO itemDAO;
 
 	public void setItemDAO(ItemDAO itemDAO) {

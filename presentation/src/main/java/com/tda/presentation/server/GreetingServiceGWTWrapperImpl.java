@@ -1,6 +1,6 @@
 package com.tda.presentation.server;
 
-import com.tda.presentation.client.GreetingServiceGWTWrapper;
+import com.tda.presentation.client.service.GreetingServiceGWTWrapper;
 import com.tda.service.GreetingService;
 import com.tda.service.GreetingServiceImpl;
 
