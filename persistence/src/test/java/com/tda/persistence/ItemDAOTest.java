@@ -13,7 +13,7 @@ import com.tda.model.Item;
 import com.tda.model.MeasureUnit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath*:/META-INF/spring-persistence.xml"})
+@ContextConfiguration(locations={"classpath:/spring-persistence.xml"})
 public class ItemDAOTest {
 	@Autowired
 	ItemDAO itemDao;

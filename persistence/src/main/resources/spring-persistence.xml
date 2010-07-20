@@ -54,6 +54,5 @@
 			<ref local="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="itemService" class="com.tda.service.ItemServiceImpl"/>
-
+	
 </beans>

@@ -9,6 +9,10 @@ public class ItemServiceImpl implements ItemService {
 	@Autowired
 	ItemDAO itemDAO;
 
+	public void setItemDAO(ItemDAO itemDAO) {
+		this.itemDAO = itemDAO;
+	}
+
 	public void save(Item item) {
 		itemDAO.save(item);
 	}

@@ -8,5 +8,8 @@
 	<bean id="pruebaService" class="com.tda.service.PruebaServiceImpl">
 		<property name="pruebaDAO" ref="pruebaDAO" />
 	</bean>
-
+	
+	<bean id="itemService" class="com.tda.service.ItemServiceImpl">
+		<property name="itemDAO" ref="itemDAO" />
+	</bean>
 </beans>
