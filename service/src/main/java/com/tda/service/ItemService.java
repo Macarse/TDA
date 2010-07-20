@@ -13,4 +13,13 @@ public interface ItemService {
     Item findById(Long id);
 
     List<Item> findAll();
+    
+    List<Item> findByName(String name);
+    
+    List<Item> findByExample(Item example);
+    
+    List<Item> findByDescription(String description);
+    
+    List<Item> findByRange(int minQ, int maxQ);
+    
 }

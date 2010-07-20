@@ -29,4 +29,20 @@ public class ItemServiceImpl implements ItemService {
 		return itemDAO.findAll();
 	}
 
+	public List<Item> findByName(String name) {
+		return itemDAO.findByName(name);
+	}
+	
+	public List<Item> findByExample(Item example) {
+		return itemDAO.findByExample(example);
+	}
+
+	public List<Item> findByDescription(String description) {
+		return itemDAO.findByDescription(description);
+	}
+
+	public List<Item> findByRange(int minQ, int maxQ) {
+		return itemDAO.findByRange(minQ, maxQ);
+	}
+
 }
