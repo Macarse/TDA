@@ -72,4 +72,11 @@ public class ItemServiceTest {
 		List<Item> items = itemService.findByQuantityRange(200L, 5000L);
 		assertEquals(items.size(), 2);
 	}
+	
+	@Test
+	public void testItemServiceUpdate() {
+		testItems.get(0).setName("NOMBRE");
+		itemService.update(testItems.get(0));
+		assertEquals(itemService.findById(testItems.get(0).getId()).getName(), "NOMBRE");
+	}
 }
