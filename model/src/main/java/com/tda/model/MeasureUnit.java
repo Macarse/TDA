@@ -1,5 +1,5 @@
 package com.tda.model;
 
 public enum MeasureUnit {
-	mts, lts;
+	mts, lts, unit;
 }

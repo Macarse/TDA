@@ -45,8 +45,7 @@ public class ItemServiceImpl implements ItemService {
 		return itemDAO.findByDescription(description);
 	}
 
-	public List<Item> findByRange(int minQ, int maxQ) {
-		return itemDAO.findByRange(minQ, maxQ);
+	public List<Item> findByQuantityRange(Long minQ, Long maxQ) {
+		return itemDAO.findByQuantityRange(minQ, maxQ);
 	}
-
 }

@@ -28,7 +28,6 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements G
     @SuppressWarnings("unchecked")
     public List<T> findAll() {
         return getHibernateTemplate().find("from " + this.persistentClass.getName() + " o");
-
     }
 
     public void deleteById(final Long id) {
@@ -41,12 +40,10 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements G
         List<Long> list = getHibernateTemplate().find("select count(*) from " + persistentClass.getName() + " o");
         Long count = list.get(0);
         return count.intValue();
-
     }
 
     @SuppressWarnings("unchecked")
     public List<T> findByExample(final T exampleObject) {
         return getHibernateTemplate().findByExample(exampleObject);
-
     }
 }

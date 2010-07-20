@@ -27,7 +27,7 @@ public class ItemDAO extends GenericDAOImpl<Item> implements GenericDAO<Item> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Item> findByRange(int minQ, int maxQ) {
+	public List<Item> findByQuantityRange(Long minQ, Long maxQ) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
 		criteria.add(Restrictions.between("quantity", minQ, maxQ));
 		return getHibernateTemplate().findByCriteria(criteria);

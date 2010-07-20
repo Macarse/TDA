@@ -20,6 +20,6 @@ public interface ItemService {
     
     List<Item> findByDescription(String description);
     
-    List<Item> findByRange(int minQ, int maxQ);
+    List<Item> findByQuantityRange(Long minQ, Long maxQ);
     
 }
