@@ -21,16 +21,17 @@ import com.tda.model.MeasureUnit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:/spring-persistence.xml"})
-public class ItemDAOTest {
+public class GenericDAOTest {
+	/*
+	 * GenericDAO tests using the ItemDAO implementation
+	 */
 	@Autowired
 	ItemDAO itemService;
 	static List<Item> testItems = new ArrayList<Item>();
 	
 	//Variables used in tests
-	String nameStringForTest = "Jeringa";
-	String descriptionStringForTest = "para";
-	Long minQForTest = 400L;
-	Long maxQForTest = 5000L;
+	int itemIndexForTest = 0;
+	String updateStringForTest = "UPDATED";
 	
 	@BeforeClass  
 	public static void runBeforeClass() {  
@@ -79,23 +80,58 @@ public class ItemDAOTest {
 				//In case a delete test has deleted an item before
 			}
 		}
-	}  
-	
-	@Test
-	public void testItemDAOFindByName() {
-		List<Item> items = itemService.findByName(nameStringForTest);
-		assertEquals(items.size(), testItems.size()-1);
 	}
 	
 	@Test
-	public void testItemDAOFindByDescription() {
-		List<Item> items = itemService.findByDescription(descriptionStringForTest);
-		assertEquals(items.size(), testItems.size());
+	public void TestGenericDAOSave() {
+		assertEquals(itemService.findAll().size(), testItems.size());
 	}
-	
+
 	@Test
-	public void testItemDAOFindByQuantityRange() {
-		List<Item> items = itemService.findByQuantityRange(minQForTest, maxQForTest);
-		assertEquals(items.size(), testItems.size()-1);
+	public void TestGenericDAODelete() {
+		itemService.delete(testItems.get(itemIndexForTest));
+		assertEquals(itemService.findAll().size(), testItems.size()-1);
+	}
+    
+	@Test
+	public void TestGenericDAOUpdate() {
+		testItems.get(itemIndexForTest).setName(updateStringForTest);
+		itemService.update(testItems.get(itemIndexForTest));
+		assertEquals(itemService.findById(testItems.get(itemIndexForTest).getId()).getName(), updateStringForTest);
+	}
+
+	@Test
+	public void TestGenericDAOFindById() {
+		Item testItem = itemService.findById(testItems.get(itemIndexForTest).getId());
+		assertEquals(testItem.getName(), testItems.get(itemIndexForTest).getName());
+	}
+
+	@Test
+	public void TestGenericDAOFindAll() {
+		assertEquals(itemService.findAll().size(), testItems.size());
+	}
+
+	@Test
+	public void TestGenericDAODeleteById() {
+		//itemService.deleteById(testItems.get(itemIndexForTest).getId());
+		//assertEquals(itemService.findAll().size(), testItems.size()-1);
+	}
+
+	@Test
+	public void TestGenericDAOCount() {
+		assertEquals(itemService.count(), testItems.size());
+	}
+
+	@Test
+	public void TestGenericDAOFindByExample() {
+		Item testItem = new Item();
+		testItem.setMeasureUnit(MeasureUnit.unit);
+		
+		int correctSize = 0;
+		for( Item item : testItems )
+			if( item.getMeasureUnit() == MeasureUnit.unit )
+				correctSize++;
+		
+		assertEquals(itemService.findByExample(testItem).size(), correctSize);
 	}
 }
