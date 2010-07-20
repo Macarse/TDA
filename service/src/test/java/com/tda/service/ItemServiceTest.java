@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.tda.model.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath*:/META-INF/spring-persistence.xml"})
+@ContextConfiguration(locations={"classpath:spring-service.xml", "classpath:spring-persistence.xml"})
 public class ItemServiceTest {
 	@Autowired
 	ItemService itemService;
@@ -33,7 +33,6 @@ public class ItemServiceTest {
 		itemService.save(item3);
 		
 		List<Item> items = itemService.findByName("item");
-		//List<Item> items = itemService.findAll();
 		
 		assertEquals(items.size(), 2);
 	}

@@ -15,22 +15,21 @@ public class ItemDAO extends GenericDAOImpl<Item> implements GenericDAO<Item> {
 	@SuppressWarnings("unchecked")
 	public List<Item> findByName(String name) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
-		criteria.add(Restrictions.like("name", name));
+		criteria.add(Restrictions.like("name", "%"+name+"%"));
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Item> findByDescription(String description) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
-		criteria.add(Restrictions.like("description", description));
+		criteria.add(Restrictions.like("description", "%"+description+"%"));
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Item> findByRange(int minQ, int maxQ) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
-		criteria.add(Restrictions.ge("quantity", minQ));
-		criteria.add(Restrictions.le("quantity", maxQ));
+		criteria.add(Restrictions.between("quantity", minQ, maxQ));
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 }
