@@ -2,20 +2,85 @@ package com.tda.presentation.client.view;
 
 import java.util.List;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.Item;
+import com.tda.presentation.client.presenter.ItemPresenter;
 
-public interface ItemsView<T> {
+public class ItemsView extends Composite implements ItemPresenter.Display {
 
-	public interface Presenter<T> {
-		void onAddButtonClicked();
-
-		void onDeleteButtonClicked();
+	@UiTemplate("ItemsView.ui.xml")
+	interface ItemsViewUiBinder extends UiBinder<Widget, ItemsView> {
 	}
 
-	void setPresenter(Presenter<T> presenter);
+	private static ItemsViewUiBinder uiBinder = GWT
+			.create(ItemsViewUiBinder.class);
 
-	void setRowData(List<Item> items);
+	@UiField
+	VerticalPanel itemsContainer;
 
-	Widget asWidget();
+	@UiField
+	Button addButton;
+
+	@UiField
+	Button deleteButton;
+
+	ListGrid listGrid;
+
+	public ItemsView() {
+		initWidget(uiBinder.createAndBindUi(this));
+
+		listGrid = new ListGrid();
+		listGrid.setWidth(750);
+		listGrid.setHeight(224);
+		listGrid.setHeaderHeight(40);
+		listGrid.setDataSource(ItemsDataSource.getInstance());
+		listGrid.setAutoFetchData(true);
+
+		itemsContainer.add(listGrid);
+	}
+
+	public HasClickHandlers getAddButton() {
+		return addButton;
+	}
+
+	public HasClickHandlers getDeleteButton() {
+		return deleteButton;
+	}
+
+	public ListGrid getGrid() {
+		return listGrid;
+	}
+
+	public void setData(List<Item> data) {
+		for (Item item : data) {
+
+			ListGridRecord record = new ListGridRecord();
+			record.setAttribute("id", item.getId().toString());
+			record.setAttribute("name", item.getName());
+			ItemsDataSource.getInstance().addData(record);
+		}
+	}
+
+	public ListGridRecord getClickedRow(ClickEvent e) {
+		return listGrid.getSelectedRecord();
+	}
+
+	public ListGridRecord[] getSelectedRows() {
+		return listGrid.getSelection();
+	}
+
+	public Widget asWidget() {
+		return this;
+	}
 }

@@ -7,10 +7,23 @@ import com.smartgwt.client.types.FieldType;
 
 public class ItemsDataSource extends DataSource {
 
-	public ItemsDataSource() {
+	private static ItemsDataSource _instance;
+
+	public static ItemsDataSource getInstance() {
+		if ( _instance == null ) {
+			_instance = new ItemsDataSource();
+		}
+
+		return _instance;
+	}
+
+	private ItemsDataSource() {
 		setID("ItemsDataSource");
 
+		/* Just use the data from the client. It will not fetch data with
+		 * the rpc call */
 		setClientOnly(true);
+
 		DataSourceIntegerField idField = new DataSourceIntegerField("id", "Id");
 		idField.setType(FieldType.SEQUENCE);
 		idField.setRequired(true);
