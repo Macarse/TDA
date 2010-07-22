@@ -31,6 +31,8 @@ public class ItemDAOTest {
 	String descriptionStringForTest = "para";
 	Long minQForTest = 400L;
 	Long maxQForTest = 5000L;
+	int itemIndexForTest = 0;
+	String updateStringForTest = "UPDATED";
 	
 	@BeforeClass  
 	public static void runBeforeClass() {  
@@ -80,6 +82,61 @@ public class ItemDAOTest {
 			}
 		}
 	}  
+	
+	@Test
+	public void testItemDAOSave() {
+		assertEquals(itemService.findAll().size(), testItems.size());
+	}
+
+	@Test
+	public void testItemDAODelete() {
+		itemService.delete(testItems.get(itemIndexForTest));
+		assertEquals(itemService.findAll().size(), testItems.size()-1);
+	}
+    
+	@Test
+	public void testItemDAOUpdate() {
+		String originalName = testItems.get(itemIndexForTest).getName();
+		testItems.get(itemIndexForTest).setName(updateStringForTest);
+		itemService.update(testItems.get(itemIndexForTest));
+		assertEquals(itemService.findById(testItems.get(itemIndexForTest).getId()).getName(), updateStringForTest);
+		testItems.get(itemIndexForTest).setName(originalName);
+	}
+
+	@Test
+	public void testItemDAOFindById() {
+		Item testItem = itemService.findById(testItems.get(itemIndexForTest).getId());
+		assertEquals(testItem.getName(), testItems.get(itemIndexForTest).getName());
+	}
+
+	@Test
+	public void testItemDAOFindAll() {
+		assertEquals(itemService.findAll().size(), testItems.size());
+	}
+
+	@Test
+	public void testItemDAODeleteById() {
+		itemService.deleteById(testItems.get(itemIndexForTest).getId());
+		assertEquals(itemService.findAll().size(), testItems.size()-1);
+	}
+
+	@Test
+	public void testItemDAOCount() {
+		assertEquals(itemService.count(), testItems.size());
+	}
+
+	@Test
+	public void testItemDAOFindByExample() {
+		Item testItem = new Item();
+		testItem.setMeasureUnit(MeasureUnit.unit);
+		
+		int correctSize = 0;
+		for( Item item : testItems )
+			if( item.getMeasureUnit() == MeasureUnit.unit )
+				correctSize++;
+		
+		assertEquals(itemService.findByExample(testItem).size(), correctSize);
+	}
 	
 	@Test
 	public void testItemDAOFindByName() {
