@@ -20,7 +20,6 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements G
         getHibernateTemplate().update(entity);
     }
 
-    @SuppressWarnings("unchecked")
     public T findById(final Long id) {
         return (T) getHibernateTemplate().get(this.persistentClass, id);
     }
