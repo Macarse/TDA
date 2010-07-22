@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -15,6 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.Item;
+import com.tda.presentation.client.datasource.ItemGwtRPCDS;
 import com.tda.presentation.client.presenter.ItemPresenter;
 
 public class ItemsView extends Composite implements ItemPresenter.Display {
@@ -44,10 +46,18 @@ public class ItemsView extends Composite implements ItemPresenter.Display {
 		listGrid.setWidth(750);
 		listGrid.setHeight(224);
 		listGrid.setHeaderHeight(40);
-		listGrid.setDataSource(ItemsDataSource.getInstance());
+		listGrid.setDataSource(ItemGwtRPCDS.getInstance());
 		listGrid.setAutoFetchData(true);
 
 		itemsContainer.add(listGrid);
+
+		/* TODO: REMOVE THIS */
+		deleteButton.addClickHandler(new ClickHandler() {
+			
+			public void onClick(ClickEvent arg0) {
+				listGrid.fetchData();
+			}
+		});
 	}
 
 	public HasClickHandlers getAddButton() {
@@ -68,7 +78,7 @@ public class ItemsView extends Composite implements ItemPresenter.Display {
 			ListGridRecord record = new ListGridRecord();
 			record.setAttribute("id", item.getId().toString());
 			record.setAttribute("name", item.getName());
-			ItemsDataSource.getInstance().addData(record);
+			ItemGwtRPCDS.getInstance().addData(record);
 		}
 	}
 

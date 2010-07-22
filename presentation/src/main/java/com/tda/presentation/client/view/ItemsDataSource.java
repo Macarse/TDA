@@ -9,7 +9,7 @@ public class ItemsDataSource extends DataSource {
 
 	private static ItemsDataSource _instance;
 
-	public static ItemsDataSource getInstance() {
+	private static ItemsDataSource getInstance() {
 		if ( _instance == null ) {
 			_instance = new ItemsDataSource();
 		}
@@ -34,5 +34,10 @@ public class ItemsDataSource extends DataSource {
 		nameField.setRequired(true);
 		nameField.setType(FieldType.TEXT);
 		setFields(nameField);		
+	}
+	@Override
+	public void fetchData() {
+		super.fetchData();
+		System.out.println("fetchData called");
 	}
 }

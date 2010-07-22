@@ -37,12 +37,46 @@ public class AddItemPresenter implements Presenter {
 		display.getSubmitButton().addClickHandler(new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
-				if ( display.getForm().validate() ) {
+				final DynamicForm form = display.getForm();
+
+				if ( form.validate() ) {
 					System.out.println("Values added!");
-					Item item = new Item();
-					item.setName("Pablo");
+					form.saveData();
+					System.out.println("Form saved!");
+
+					/* TODO: Create a new Item just to fire an Event.
+					 * Change this! */
+					final Item item = new Item();
+					item.setName((String) form.getValue("name"));
 					eventBus.fireEvent(new NewItemEvent(item));
+
 					onDestroy();
+					
+//					
+//					final Item item = new Item();
+//					
+//					/* Hack */
+//					Integer id = (Integer) form.getValue("id");
+//					item.setId(id.longValue());
+//
+//					item.setName((String) form.getValue("name"));
+//
+//					rpc.save(item, new AsyncCallback<Void>() {
+//						
+//						public void onSuccess(Void arg0) {
+//							System.out.println("Saved in the db!");
+//							eventBus.fireEvent(new NewItemEvent(item));
+//							/* Update the data source */
+//							form.saveData();
+//							onDestroy();
+//						}
+//						
+//						public void onFailure(Throwable e) {
+//							/*TODO: Handle error */
+//							display.getForm().setErrorsPreamble(e.getMessage());
+//						}
+//					});
+
 				} else {
 					/* Do nothing */
 				}

@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
@@ -32,6 +33,7 @@ public class ItemPresenter implements Presenter {
 	private final Display display;
 	private final ItemServiceGWTWrapperAsync rpc;
 	private final HandlerManager eventBus;
+	private HandlerRegistration handlerRegistration;
 
 	public ItemPresenter(ItemServiceGWTWrapperAsync rpc, HandlerManager eventBus, Display view) {
 		this.display = view;
@@ -46,9 +48,10 @@ public class ItemPresenter implements Presenter {
 	}
 
 	private void bind() {
-		eventBus.addHandler(NewItemEvent.TYPE, new NewItemEventHandler() {
+		handlerRegistration = eventBus.addHandler(NewItemEvent.TYPE, new NewItemEventHandler() {
 
 			public void onNewItem(NewItemEvent event) {
+				System.out.println("ItemPresenter: new Item! from " + this);
 				Window.alert("Se agrego: " + event.getNewItem().getName());
 			}
 		});
@@ -62,6 +65,6 @@ public class ItemPresenter implements Presenter {
 	}
 
 	public void onDestroy() {
-		/* Do nothing */
+		handlerRegistration.removeHandler();
 	}
 }

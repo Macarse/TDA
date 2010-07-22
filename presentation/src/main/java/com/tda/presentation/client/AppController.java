@@ -7,6 +7,8 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.tda.presentation.client.event.AddItemEvent;
 import com.tda.presentation.client.event.AddItemEventHandler;
+import com.tda.presentation.client.event.NewItemEvent;
+import com.tda.presentation.client.event.NewItemEventHandler;
 import com.tda.presentation.client.presenter.AddItemPresenter;
 import com.tda.presentation.client.presenter.ItemPresenter;
 import com.tda.presentation.client.presenter.Presenter;
@@ -36,6 +38,17 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				doAddNewItem();
 			}
 		});
+
+		eventBus.addHandler(NewItemEvent.TYPE, new NewItemEventHandler() {
+
+			public void onNewItem(NewItemEvent event) {
+				doOnNewItem();
+			}
+		});
+	}
+
+	private void doOnNewItem() {
+		History.newItem("itemsList");
 	}
 
 	private void doAddNewItem() {

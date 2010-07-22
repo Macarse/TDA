@@ -2,11 +2,13 @@ package com.tda.presentation.client.view;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.smartgwt.client.types.DSOperationType;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ButtonItem;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
+import com.tda.presentation.client.datasource.ItemGwtRPCDS;
 import com.tda.presentation.client.presenter.AddItemPresenter;
 
 public class AddItemView extends Composite implements AddItemPresenter.Display {
@@ -30,8 +32,9 @@ public class AddItemView extends Composite implements AddItemPresenter.Display {
         form.setWidth100();
         form.setPadding(5);
         form.setLayoutAlign(VerticalAlignment.CENTER);
+        form.setSaveOperationType(DSOperationType.ADD);
 
-        form.setDataSource(ItemsDataSource.getInstance());
+        form.setDataSource(ItemGwtRPCDS.getInstance());
         form.setUseAllDataSourceFields(true);
         
         submitButton = new ButtonItem();  
