@@ -1,18 +1,24 @@
 package com.tda.presentation.client.presenter;
 
+import java.util.List;
+
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.smartgwt.client.core.DataClass;
+import com.smartgwt.client.data.Record;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 import com.smartgwt.client.widgets.form.fields.events.HasClickHandlers;
 import com.tda.model.Item;
-import com.tda.presentation.client.event.NewItemEvent;
+import com.tda.presentation.client.datasource.ItemDS;
+import com.tda.presentation.client.event.EditedItemEvent;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 
-public class AddItemPresenter implements Presenter {
+public class EditItemPresenter implements Presenter {
 
 	public interface Display {
 		HasClickHandlers getSubmitButton();
@@ -25,12 +31,33 @@ public class AddItemPresenter implements Presenter {
 	private final Display display;
 	private final ItemServiceGWTWrapperAsync rpc;
 	private final HandlerManager eventBus;
+	private final long itemId;
 
-	public AddItemPresenter(ItemServiceGWTWrapperAsync rpc, HandlerManager eventBus, Display view) {
+	public EditItemPresenter(ItemServiceGWTWrapperAsync rpc, HandlerManager eventBus, Display view, long itemId) {
 		this.display = view;
 		this.rpc = rpc;
 		this.eventBus = eventBus;
+		this.itemId = itemId;
 		bind();
+		setItemForm(itemId);
+	}
+	
+	private void setItemForm(long id){
+		rpc.findById((long)id, new AsyncCallback<Item>() {
+			public void onSuccess(Item item) {
+				Record b = new Record();
+				b.setAttribute("id", item.getId());
+				b.setAttribute("name", item.getName());
+				
+				display.getForm().setValue("id", item.getId());
+				display.getForm().setValue("name", item.getName());
+			}
+
+			public void onFailure(Throwable arg0) {
+				// TODO: show message error
+				System.out.println("Error en el fetch del item");
+			}
+		});
 	}
 
 	private void bind() {
@@ -40,11 +67,11 @@ public class AddItemPresenter implements Presenter {
 				final DynamicForm form = display.getForm();
 
 				if ( form.validate() ) {
-					System.out.println("Values added!");
+					System.out.println("Values Edited!");
 					form.saveData();
 					System.out.println("Form saved!");
 
-					eventBus.fireEvent(new NewItemEvent());
+					eventBus.fireEvent(new EditedItemEvent());
 
 					onDestroy();
 				} else {

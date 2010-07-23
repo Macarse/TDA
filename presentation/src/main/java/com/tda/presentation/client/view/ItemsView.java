@@ -36,6 +36,9 @@ public class ItemsView extends Composite implements ItemPresenter.Display {
 
 	@UiField
 	Button deleteButton;
+	
+	@UiField
+	Button editButton;
 
 	ListGrid listGrid;
 
@@ -67,6 +70,10 @@ public class ItemsView extends Composite implements ItemPresenter.Display {
 	public HasClickHandlers getDeleteButton() {
 		return deleteButton;
 	}
+	
+	public HasClickHandlers getEditButton() {
+		return editButton;
+	}
 
 	public ListGrid getGrid() {
 		return listGrid;
@@ -82,7 +89,7 @@ public class ItemsView extends Composite implements ItemPresenter.Display {
 		}
 	}
 
-	public ListGridRecord getClickedRow(ClickEvent e) {
+	public ListGridRecord getClickedRow() {
 		return listGrid.getSelectedRecord();
 	}
 

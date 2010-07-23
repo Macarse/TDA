@@ -7,13 +7,19 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.tda.presentation.client.event.AddItemEvent;
 import com.tda.presentation.client.event.AddItemEventHandler;
+import com.tda.presentation.client.event.EditItemEvent;
+import com.tda.presentation.client.event.EditItemEventHandler;
+import com.tda.presentation.client.event.EditedItemEvent;
+import com.tda.presentation.client.event.EditedItemEventHandler;
 import com.tda.presentation.client.event.NewItemEvent;
 import com.tda.presentation.client.event.NewItemEventHandler;
 import com.tda.presentation.client.presenter.AddItemPresenter;
+import com.tda.presentation.client.presenter.EditItemPresenter;
 import com.tda.presentation.client.presenter.ItemPresenter;
 import com.tda.presentation.client.presenter.Presenter;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 import com.tda.presentation.client.view.AddItemView;
+import com.tda.presentation.client.view.EditItemView;
 import com.tda.presentation.client.view.ItemsView;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
@@ -32,27 +38,56 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	private void bind() {
 		History.addValueChangeHandler(this);
+		
+		/*
+		 * Handler for new item
+		 */
 		eventBus.addHandler(AddItemEvent.TYPE, new AddItemEventHandler() {
-
 			public void onAddItem(AddItemEvent event) {
 				doAddNewItem();
 			}
 		});
 
+		/*
+		 * Handler after an item was added
+		 */
 		eventBus.addHandler(NewItemEvent.TYPE, new NewItemEventHandler() {
-
 			public void onNewItem(NewItemEvent event) {
-				doOnNewItem();
+				showList();
+			}
+		});
+		
+		/*
+		 * Handler after an item was edited
+		 */
+		eventBus.addHandler(EditedItemEvent.TYPE, new EditedItemEventHandler() {
+			public void onEditedItem(EditedItemEvent event) {
+				showList();
+			}
+		});
+		
+		/*
+		 * Handler for edit item
+		 */
+		eventBus.addHandler(EditItemEvent.TYPE, new EditItemEventHandler() {
+			public void onEditItem(EditItemEvent event) {
+				doEditItem(event.getId());
 			}
 		});
 	}
-
-	private void doOnNewItem() {
+	
+	private void showList(){
 		History.newItem("itemsList");
 	}
 
 	private void doAddNewItem() {
 		History.newItem("addItem");
+	}
+	
+	private void doEditItem(long id) {
+		History.newItem("editItem",false);
+		Presenter presenter = new EditItemPresenter(rpcService, eventBus, new EditItemView(), id);
+	    presenter.go(container);
 	}
 
 	public void go(HasWidgets container) {
@@ -81,6 +116,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			} else if (token.equals("addItem")) {
 				presenter = new AddItemPresenter(rpcService, eventBus,
 						new AddItemView());
+			} else if (token.equals("editItem")) {
+				// si se quiere hacer que cuando haga edit 
+				// sin item seleccionado muestre algo
+				//presenter = new AddItemPresenter(rpcService, eventBus,
+				//		new AddItemView());
 			}
 
 			if (presenter != null) {

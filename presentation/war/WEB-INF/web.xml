@@ -4,10 +4,13 @@
        version="2.4">
   
   <!-- Servlets -->
-  <servlet>
+  <!-- 
+  <servlet> 
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>com.tda.presentation.server.GreetingServiceGWTWrapperImpl</servlet-class>
   </servlet>
+  -->
+  
 
   <servlet>
     <servlet-name>pruebaServlet</servlet-name>
@@ -19,10 +22,12 @@
     <servlet-class>com.tda.presentation.server.ItemServiceGWTWrapperImpl</servlet-class>
   </servlet>
 
+<!--
   <servlet-mapping>
 	<servlet-name>greetServlet</servlet-name>
 	<url-pattern>/prueba/greet</url-pattern>
   </servlet-mapping>
+  -->
 
   <servlet-mapping>
 	<servlet-name>itemServlet</servlet-name>

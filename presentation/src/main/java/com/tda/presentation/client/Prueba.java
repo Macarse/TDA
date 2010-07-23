@@ -19,8 +19,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.tda.model.validators.FieldVerifier;
-import com.tda.presentation.client.service.GreetingServiceGWTWrapper;
-import com.tda.presentation.client.service.GreetingServiceGWTWrapperAsync;
+//import com.tda.presentation.client.service.GreetingServiceGWTWrapper;
+//import com.tda.presentation.client.service.GreetingServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.PruebaServiceGWTWrapper;
 import com.tda.presentation.client.service.PruebaServiceGWTWrapperAsync;
 
@@ -42,8 +42,8 @@ public class Prueba implements EntryPoint {
 	private final PruebaServiceGWTWrapperAsync pruebaService = GWT
 	.create(PruebaServiceGWTWrapper.class);
 
-	private final GreetingServiceGWTWrapperAsync greetingService = GWT
-			.create(GreetingServiceGWTWrapper.class);
+//	private final GreetingServiceGWTWrapperAsync greetingService = GWT
+//			.create(GreetingServiceGWTWrapper.class);
 
 	/**
 	 * This is the entry point method.
@@ -180,28 +180,28 @@ public class Prueba implements EntryPoint {
 				sendButton.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
-						new AsyncCallback<String>() {
-							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
-								dialogBox
-										.setText("Remote Procedure Call - Failure");
-								serverResponseLabel
-										.addStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(SERVER_ERROR);
-								dialogBox.center();
-								closeButton.setFocus(true);
-							}
-
-							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
-								serverResponseLabel
-										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
-								dialogBox.center();
-								closeButton.setFocus(true);
-							}
-						});
+//				greetingService.greetServer(textToServer,
+//						new AsyncCallback<String>() {
+//							public void onFailure(Throwable caught) {
+//								// Show the RPC error message to the user
+//								dialogBox
+//										.setText("Remote Procedure Call - Failure");
+//								serverResponseLabel
+//										.addStyleName("serverResponseLabelError");
+//								serverResponseLabel.setHTML(SERVER_ERROR);
+//								dialogBox.center();
+//								closeButton.setFocus(true);
+//							}
+//
+//							public void onSuccess(String result) {
+//								dialogBox.setText("Remote Procedure Call");
+//								serverResponseLabel
+//										.removeStyleName("serverResponseLabelError");
+//								serverResponseLabel.setHTML(result);
+//								dialogBox.center();
+//								closeButton.setFocus(true);
+//							}
+//						});
 			}
 		}
 

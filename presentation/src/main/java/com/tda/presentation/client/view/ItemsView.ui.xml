@@ -18,6 +18,7 @@
 			<g:HorizontalPanel addStyleNames="{style.itemsViewButtonHPanel}">
 				<g:Button ui:field="addButton">Add</g:Button>
 				<g:Button ui:field="deleteButton">Delete</g:Button>
+				<g:Button ui:field="editButton">Edit</g:Button>
 			</g:HorizontalPanel>
 		</g:VerticalPanel>
 

@@ -123,7 +123,10 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
 				processResponse(requestId, response);
 			}
-
+			
+			/*
+			 * When element has successfully been persisted...
+			 */
 			public void onSuccess(Void arg0) {
 //				ListGridRecord[] list = new ListGridRecord[1];
 //				ListGridRecord newRec = new ListGridRecord();
