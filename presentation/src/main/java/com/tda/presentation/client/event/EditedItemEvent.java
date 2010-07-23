@@ -1,7 +1,6 @@
 package com.tda.presentation.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.tda.model.Item;
 
 public class EditedItemEvent extends GwtEvent<EditedItemEventHandler> {
 

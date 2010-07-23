@@ -13,6 +13,10 @@ import com.tda.presentation.client.event.EditedItemEvent;
 import com.tda.presentation.client.event.EditedItemEventHandler;
 import com.tda.presentation.client.event.NewItemEvent;
 import com.tda.presentation.client.event.NewItemEventHandler;
+import com.tda.presentation.client.event.RemoveItemEvent;
+import com.tda.presentation.client.event.RemoveItemEventHandler;
+import com.tda.presentation.client.event.RemovedItemEvent;
+import com.tda.presentation.client.event.RemovedItemEventHandler;
 import com.tda.presentation.client.presenter.AddItemPresenter;
 import com.tda.presentation.client.presenter.EditItemPresenter;
 import com.tda.presentation.client.presenter.ItemPresenter;
@@ -74,6 +78,30 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				doEditItem(event.getId());
 			}
 		});
+		
+		/*
+		 * Handler for remove item
+		 */
+		eventBus.addHandler(RemoveItemEvent.TYPE, new RemoveItemEventHandler() {
+			public void onEvent(RemoveItemEvent event) {
+				doRemoveItem(event.getId());
+			}
+		});
+		
+		/*
+		 * Handler after an item was removed
+		 */
+		eventBus.addHandler(RemovedItemEvent.TYPE, new RemovedItemEventHandler() {
+			public void onEvent(RemovedItemEvent event) {
+				//total HACK
+				History.newItem("removeItem");
+			}
+		});
+		
+	}
+	
+	private void doRemoveItem(long id){
+		
 	}
 	
 	private void showList(){
@@ -119,8 +147,10 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			} else if (token.equals("editItem")) {
 				// si se quiere hacer que cuando haga edit 
 				// sin item seleccionado muestre algo
-				//presenter = new AddItemPresenter(rpcService, eventBus,
-				//		new AddItemView());
+			} else if (token.equals("removeItem")) {
+				// TODO: sacar hack
+				presenter = new ItemPresenter(rpcService, eventBus,
+						new ItemsView());
 			}
 
 			if (presenter != null) {

@@ -8,9 +8,12 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.data.Record;
+import com.smartgwt.client.util.BooleanCallback;
+import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.Item;
@@ -18,6 +21,8 @@ import com.tda.presentation.client.event.AddItemEvent;
 import com.tda.presentation.client.event.EditItemEvent;
 import com.tda.presentation.client.event.NewItemEvent;
 import com.tda.presentation.client.event.NewItemEventHandler;
+import com.tda.presentation.client.event.RemoveItemEvent;
+import com.tda.presentation.client.event.RemovedItemEvent;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 
 public class ItemPresenter implements Presenter {
@@ -70,6 +75,49 @@ public class ItemPresenter implements Presenter {
 		display.getEditButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new EditItemEvent(Long.valueOf(display.getClickedRow().getAttribute("id"))));
+			}
+		});
+		
+		display.getDeleteButton().addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				//eventBus.fireEvent(new RemoveItemEvent(Long.valueOf(display.getClickedRow().getAttribute("id"))));
+				SC.ask("Desea borrar el item?", new BooleanCallback() {
+					public void execute(Boolean value) {
+						if (value){
+							long id = Long.valueOf(display.getClickedRow().getAttribute("id"));
+							removeItem(id);
+						}
+					}
+				});
+			}
+		});
+	}
+	
+	/*
+	 * TODO: MEJORAR!!!!!!!!!
+	 */
+	private void removeItem(long id){
+		/*
+		 * First got to fetch item(id)
+		 */
+		rpc.findById(id, new AsyncCallback<Item>() {
+			public void onFailure(Throwable arg0) {
+				SC.say("Error al retribuir el item");
+			}
+
+			public void onSuccess(Item item) {
+				rpc.delete(item, new AsyncCallback<Void>(){
+
+					public void onFailure(Throwable arg0) {
+						SC.say("Error al eliminar el item");
+					}
+
+					public void onSuccess(Void arg0) {
+						//fire event
+						eventBus.fireEvent(new RemovedItemEvent());
+					}
+					
+				});
 			}
 		});
 	}

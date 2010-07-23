@@ -31,13 +31,11 @@ public class EditItemPresenter implements Presenter {
 	private final Display display;
 	private final ItemServiceGWTWrapperAsync rpc;
 	private final HandlerManager eventBus;
-	private final long itemId;
 
 	public EditItemPresenter(ItemServiceGWTWrapperAsync rpc, HandlerManager eventBus, Display view, long itemId) {
 		this.display = view;
 		this.rpc = rpc;
 		this.eventBus = eventBus;
-		this.itemId = itemId;
 		bind();
 		setItemForm(itemId);
 	}
@@ -45,10 +43,7 @@ public class EditItemPresenter implements Presenter {
 	private void setItemForm(long id){
 		rpc.findById((long)id, new AsyncCallback<Item>() {
 			public void onSuccess(Item item) {
-				Record b = new Record();
-				b.setAttribute("id", item.getId());
-				b.setAttribute("name", item.getName());
-				
+				// TODO: Mejorar, deberia setear el record directamente
 				display.getForm().setValue("id", item.getId());
 				display.getForm().setValue("name", item.getName());
 			}
