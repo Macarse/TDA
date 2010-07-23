@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.core.DataClass;
 import com.smartgwt.client.data.Record;
+import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
@@ -66,6 +67,7 @@ public class EditItemPresenter implements Presenter {
 					form.saveData();
 					System.out.println("Form saved!");
 
+					SC.say("Item Editado!");
 					eventBus.fireEvent(new EditedItemEvent());
 
 					onDestroy();

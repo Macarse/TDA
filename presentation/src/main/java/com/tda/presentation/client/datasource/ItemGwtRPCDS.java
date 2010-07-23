@@ -41,8 +41,8 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 
 		DataSourceIntegerField idField = new DataSourceIntegerField("id", "Id");
 		idField.setType(FieldType.SEQUENCE);
-		idField.setRequired(true);
 		idField.setPrimaryKey(true);
+		idField.setHidden(true);
 		addField(idField);
 
 		DataSourceTextField nameField = new DataSourceTextField("name", "Nombre");
@@ -115,6 +115,8 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 		// Retrieve record which should be added.
 		JavaScriptObject data = request.getData();
 		ListGridRecord rec = new ListGridRecord(data);
+		//TODO: Hack para que no llore por el insert sin ID
+		rec.setAttribute("id", 1);
 		Item testRec = new Item();
 		copyValues(rec, testRec);
 		ItemServiceGWTWrapperAsync service = GWT.create(ItemServiceGWTWrapper.class);

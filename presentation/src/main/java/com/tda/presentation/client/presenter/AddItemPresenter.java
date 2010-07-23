@@ -3,6 +3,7 @@ package com.tda.presentation.client.presenter;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
@@ -44,6 +45,7 @@ public class AddItemPresenter implements Presenter {
 					form.saveData();
 					System.out.println("Form saved!");
 
+					SC.say("Item Guardado!");
 					eventBus.fireEvent(new NewItemEvent());
 
 					onDestroy();
