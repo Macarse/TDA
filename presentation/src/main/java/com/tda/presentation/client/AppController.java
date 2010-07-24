@@ -1,27 +1,48 @@
 package com.tda.presentation.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.tda.presentation.client.presenter.ItemPresenter;
+import com.tda.presentation.client.presenter.LoginPresenter;
 import com.tda.presentation.client.presenter.Presenter;
+import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
+import com.tda.presentation.client.service.LoginServiceGWTWrapper;
+import com.tda.presentation.client.service.LoginServiceGWTWrapperAsync;
 import com.tda.presentation.client.view.ItemView;
+import com.tda.presentation.client.view.LoginView;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	private final HandlerManager eventBus;
-	private final ItemServiceGWTWrapperAsync rpcService;
+	private ItemServiceGWTWrapperAsync itemRPC;
+	private LoginServiceGWTWrapperAsync loginRPC;
 	private HasWidgets container;
 	private Presenter presenter;
 
-	public AppController(ItemServiceGWTWrapperAsync rpcService,
-			HandlerManager eventBus) {
-		this.eventBus = eventBus;
-		this.rpcService = rpcService;
+	public AppController() {
+		this.eventBus = new HandlerManager(null);
 		bind();
+	}
+
+	public ItemServiceGWTWrapperAsync getItemRPC() {
+		if ( itemRPC == null ) {
+			itemRPC = GWT.create(ItemServiceGWTWrapper.class);
+		}
+
+		return itemRPC;
+	}
+
+	public LoginServiceGWTWrapperAsync getLoginRPC() {
+		if ( loginRPC == null ) {
+			loginRPC = GWT.create(LoginServiceGWTWrapper.class);
+		}
+
+		return loginRPC;
 	}
 
 	private void bind() {
@@ -33,7 +54,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		this.container = container;
 
 		if ("".equals(History.getToken())) {
-			History.newItem("itemsList");
+			History.newItem("login");
 		} else {
 			History.fireCurrentHistoryState();
 		}
@@ -48,8 +69,10 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = null;
 			}
 
-			if (token.equals("itemsList")) {
-				presenter = new ItemPresenter(rpcService, eventBus, new ItemView());
+			if (token.equals("itemList")) {
+				presenter = new ItemPresenter(getItemRPC(), eventBus, new ItemView());
+			} else if ( token.equals("login") ) {
+				presenter = new LoginPresenter(getLoginRPC(), eventBus, new LoginView());
 			}
 			
 			if (presenter != null) {

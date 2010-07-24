@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.tda</groupId>
   <artifactId>presentation</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>presentation</name>
   <url>http://maven.apache.org</url>
@@ -78,10 +78,7 @@
         <configuration>
           <output>${basedir}/war</output>
           <runTarget>Prueba.html</runTarget>
-		  <!--
-	  	  <style>DETAILED</style>
-		  -Dgwt.style=[PRETTY|DETAILED]
-		  -->
+
           <webXml>${basedir}/war/WEB-INF/web.xml</webXml>
           <hostedWebapp>${basedir}/war</hostedWebapp>
         </configuration>
