@@ -1,11 +1,11 @@
-package com.tda.persistence;
+package com.tda.persistence.dao;
 
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
-import com.tda.model.Item;
+import com.tda.model.item.Item;
 
 public class ItemDAO extends GenericDAOImpl<Item> {
 	@Override

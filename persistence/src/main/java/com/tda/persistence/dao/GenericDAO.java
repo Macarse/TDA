@@ -1,4 +1,4 @@
-package com.tda.persistence;
+package com.tda.persistence.dao;
 
 import java.util.List;
 

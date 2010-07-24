@@ -10,8 +10,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tda.model.ApplicationUser;
-import com.tda.model.ApplicationUserBuilder;
+import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.ApplicationUserBuilder;
+import com.tda.persistence.dao.ApplicationUserDAO;
+import com.tda.persistence.dao.AuthorityDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring-persistence.xml" })

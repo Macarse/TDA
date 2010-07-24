@@ -1,4 +1,4 @@
-package com.tda.model;
+package com.tda.model.item;
 
 public enum Category {
 	misc, medical;

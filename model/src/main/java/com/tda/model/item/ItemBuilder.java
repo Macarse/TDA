@@ -1,4 +1,5 @@
-package com.tda.model;
+package com.tda.model.item;
+
 
 public class ItemBuilder {
 

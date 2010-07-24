@@ -1,7 +1,8 @@
-package com.tda.service;
+package com.tda.service.api;
 
 import java.util.List;
-import com.tda.model.Item;
+
+import com.tda.model.item.Item;
 
 public interface ItemService {
 

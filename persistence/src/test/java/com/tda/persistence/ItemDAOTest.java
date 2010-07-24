@@ -11,8 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tda.model.Item;
-import com.tda.model.ItemBuilder;
+import com.tda.model.item.Item;
+import com.tda.model.item.ItemBuilder;
+import com.tda.persistence.dao.ItemDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring-persistence.xml" })

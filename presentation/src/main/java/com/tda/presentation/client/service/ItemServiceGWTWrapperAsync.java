@@ -3,7 +3,7 @@ package com.tda.presentation.client.service;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.tda.model.Item;
+import com.tda.model.item.Item;
 
 public interface ItemServiceGWTWrapperAsync {
 

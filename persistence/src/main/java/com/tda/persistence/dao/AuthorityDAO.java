@@ -1,8 +1,8 @@
-package com.tda.persistence;
+package com.tda.persistence.dao;
 
 import java.util.List;
 
-import com.tda.model.Authority;
+import com.tda.model.applicationuser.Authority;
 
 public class AuthorityDAO extends GenericDAOImpl<Authority> {
 	@Override

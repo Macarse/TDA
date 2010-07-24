@@ -16,7 +16,7 @@ import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
-import com.tda.model.Item;
+import com.tda.model.item.Item;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 
 public class ItemPresenter implements Presenter, ValueChangeHandler<String> {

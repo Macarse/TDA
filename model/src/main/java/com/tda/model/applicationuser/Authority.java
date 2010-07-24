@@ -1,4 +1,4 @@
-package com.tda.model;
+package com.tda.model.applicationuser;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;

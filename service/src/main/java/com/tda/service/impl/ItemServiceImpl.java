@@ -1,9 +1,10 @@
-package com.tda.service;
+package com.tda.service.impl;
 
 import java.util.List;
 
-import com.tda.model.Item;
-import com.tda.persistence.ItemDAO;
+import com.tda.model.item.Item;
+import com.tda.persistence.dao.ItemDAO;
+import com.tda.service.api.ItemService;
 
 public class ItemServiceImpl implements ItemService {
 

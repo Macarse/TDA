@@ -1,4 +1,4 @@
-package com.tda.model;
+package com.tda.model.applicationuser;
 
 import java.util.ArrayList;
 import java.util.Collection;

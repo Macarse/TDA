@@ -1,4 +1,4 @@
-package com.tda.model;
+package com.tda.model.item;
 
 import java.io.Serializable;
 
@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 
 @Entity
 public class Item implements Serializable {

@@ -1,4 +1,4 @@
-package com.tda.service;
+package com.tda.service.impl;
 
 import java.util.List;
 
@@ -7,9 +7,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.tda.model.ApplicationUser;
-import com.tda.model.ApplicationUserBuilder;
-import com.tda.persistence.ApplicationUserDAO;
+import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.ApplicationUserBuilder;
+import com.tda.persistence.dao.ApplicationUserDAO;
+import com.tda.service.api.ApplicationUserService;
 
 public class ApplicationUserServiceImpl implements ApplicationUserService {
 	@Autowired

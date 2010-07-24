@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
-import com.tda.model.Item;
+import com.tda.model.item.Item;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
-import com.tda.service.ItemService;
+import com.tda.service.api.ItemService;
 
 @SuppressWarnings("serial")
 public class ItemServiceGWTWrapperImpl extends AutoinjectingRemoteServiceServlet implements
