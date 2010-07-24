@@ -3,6 +3,8 @@ package com.tda.persistence.provider;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.tda.model.applicationuser.Authority;
 import com.tda.persistence.dao.AuthorityDAO;
 import com.tda.persistence.exception.NoDataFoundException;
@@ -11,6 +13,7 @@ import com.tda.persistence.exception.SingleResultExpectedException;
 public class RoleProvider {
 	private Properties propertiesHolder;
 
+	@Autowired
 	private AuthorityDAO authorityDAO;
 
 	public void init() {
@@ -31,6 +34,8 @@ public class RoleProvider {
 			try {
 				authority = authorityDAO.findByAuthority(role);
 			} catch (NoDataFoundException e) {
+				authority = new Authority();
+				authority.setAuthority(role);
 				authorityDAO.save(authority);
 
 			} catch (SingleResultExpectedException e) {
