@@ -3,18 +3,11 @@
        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
        version="2.4">
   
-  <!-- Servlets -->
-  <!-- 
-  <servlet> 
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.tda.presentation.server.GreetingServiceGWTWrapperImpl</servlet-class>
-  </servlet>
-  -->
-  
+  <!-- Servlets -->  
 
   <servlet>
-    <servlet-name>pruebaServlet</servlet-name>
-    <servlet-class>com.tda.presentation.server.PruebaServiceGWTWrapperImpl</servlet-class>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>com.tda.presentation.server.LoginServiceGWTWrapperImpl</servlet-class>
   </servlet>
 
   <servlet>
@@ -22,21 +15,14 @@
     <servlet-class>com.tda.presentation.server.ItemServiceGWTWrapperImpl</servlet-class>
   </servlet>
 
-<!--
   <servlet-mapping>
-	<servlet-name>greetServlet</servlet-name>
-	<url-pattern>/prueba/greet</url-pattern>
-  </servlet-mapping>
-  -->
-
-  <servlet-mapping>
-	<servlet-name>itemServlet</servlet-name>
-	<url-pattern>/prueba/item</url-pattern>
+	<servlet-name>loginServlet</servlet-name>
+	<url-pattern>/prueba/login</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>pruebaServlet</servlet-name>
-    <url-pattern>/prueba/prueba</url-pattern>
+    <servlet-name>itemServlet</servlet-name>
+    <url-pattern>/prueba/item</url-pattern>
   </servlet-mapping>
 
 	<listener>
