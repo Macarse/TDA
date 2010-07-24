@@ -1,90 +1,131 @@
 package com.tda.presentation.client.presenter;
 
-import java.util.List;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.Item;
-import com.tda.presentation.client.event.AddItemEvent;
-import com.tda.presentation.client.event.EditItemEvent;
-import com.tda.presentation.client.event.NewItemEvent;
-import com.tda.presentation.client.event.NewItemEventHandler;
-import com.tda.presentation.client.event.RemoveItemEvent;
-import com.tda.presentation.client.event.RemovedItemEvent;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 
-public class ItemPresenter implements Presenter {
+public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 
-	/*
-	 * TODO: ListGridRecord MUST be a Record
-	 */
 	public interface Display {
 		HasClickHandlers getAddButton();
 		HasClickHandlers getEditButton();
 		HasClickHandlers getDeleteButton();
+		HasClickHandlers getSubmitButton();
 		ListGrid getGrid();
-		void setData(List<Item> data);
 		Record getClickedRow();
 		Record[] getSelectedRows();
+		DynamicForm getForm();
 		Widget asWidget();
+		Panel getListContainer();
+		Panel getFormContainer();
 	}
+
 
 	private final Display display;
 	private final ItemServiceGWTWrapperAsync rpc;
 	private final HandlerManager eventBus;
-	private HandlerRegistration handlerRegistration;
-
+	private Status status;
+	
 	public ItemPresenter(ItemServiceGWTWrapperAsync rpc, HandlerManager eventBus, Display view) {
 		this.display = view;
 		this.rpc = rpc;
 		this.eventBus = eventBus;
+		this.status = Status.LIST;
+		History.addValueChangeHandler(this);
 	}
 
 	public void go(HasWidgets container) {
 		bind();
 		container.clear();
 		container.add(display.asWidget());
+		display.getGrid().fetchData();
+	}
+
+	private void showForm() {
+		display.getListContainer().setVisible(false);
+		display.getFormContainer().setVisible(true);
+	}
+
+	private void showList() {
+		display.getFormContainer().setVisible(false);
+		display.getListContainer().setVisible(true);
+		display.getGrid().fetchData();
+		display.getForm().clearValues();
 	}
 
 	private void bind() {
-		handlerRegistration = eventBus.addHandler(NewItemEvent.TYPE, new NewItemEventHandler() {
-			public void onNewItem(NewItemEvent event) {
-				System.out.println("ItemPresenter: new Item! from " + this);
-				Window.alert("Se agrego un item");
-			}
-		});
 		
 		display.getAddButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new AddItemEvent());
+				status = Status.ADD;
+				History.newItem("addForm");
 			}
 		});
 		
 		display.getEditButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new EditItemEvent(Long.valueOf(display.getClickedRow().getAttribute("id"))));
+
+				/* No item selected */
+				if ( display.getClickedRow() == null )
+					return;
+
+				loadFormWithRecord(display.getClickedRow());
+				status = Status.EDIT;
+				History.newItem("editForm");
+			}
+
+
+		});
+
+		display.getSubmitButton().addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				if ( !display.getForm().validate() ) {
+					return;
+				}
+
+				switch (status) {
+				case ADD:
+					addItem();
+					break;
+
+				case EDIT:
+					editItem();
+					break;
+
+				default:
+					break;
+				}
 			}
 		});
-		
+
 		display.getDeleteButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				//eventBus.fireEvent(new RemoveItemEvent(Long.valueOf(display.getClickedRow().getAttribute("id"))));
+
+				/* No item selected */
+				if ( display.getClickedRow() == null )
+					return;
+
+				final long id = Long.valueOf(display.getClickedRow().getAttribute("id"));
+
 				SC.ask("Desea borrar el item?", new BooleanCallback() {
 					public void execute(Boolean value) {
-						if (value){
-							long id = Long.valueOf(display.getClickedRow().getAttribute("id"));
+						if (value) {
 							removeItem(id);
 						}
 					}
@@ -92,7 +133,61 @@ public class ItemPresenter implements Presenter {
 			}
 		});
 	}
-	
+
+	private void editItem() {
+		Item item = getItemFromForm();
+		rpc.update(item, new AsyncCallback<Void>() {
+
+			public void onFailure(Throwable caught) {
+				SC.say("Item no pudo ser editado. " + caught.getMessage());
+			}
+
+			public void onSuccess(Void result) {
+				History.newItem("itemsList");
+				SC.say("Item editado.");
+			}
+			
+		});
+	}
+
+	private void addItem() {
+		Item item = getItemFromForm();
+		rpc.save(item, new AsyncCallback<Void>() {
+
+			public void onFailure(Throwable caught) {
+				SC.say("Item no pudo ser agregado. " + caught.getMessage());
+				
+			}
+
+			public void onSuccess(Void result) {
+				History.newItem("itemsList");
+				SC.say("Item agregado.");
+			}
+		});
+		
+	}
+
+	private void loadFormWithRecord(Record record) {
+		DynamicForm form = display.getForm();
+		form.setValue("name", record.getAttribute("name"));
+		form.setValue("id", record.getAttribute("id"));
+	}
+
+	private Item getItemFromForm() {
+		Item item = new Item();
+
+		DynamicForm form = display.getForm();
+		item.setName(form.getValueAsString("name"));
+		String idString = form.getValueAsString("id");
+		if ( idString == null ) {
+			idString = "1";
+		}
+
+		item.setId(Long.valueOf(idString));
+
+		return item;
+	}
+
 	/*
 	 * TODO: MEJORAR!!!!!!!!!
 	 */
@@ -113,8 +208,10 @@ public class ItemPresenter implements Presenter {
 					}
 
 					public void onSuccess(Void arg0) {
-						//fire event
-						eventBus.fireEvent(new RemovedItemEvent());
+						SC.say("Item removido");
+						/* TODO: This is not updating data */
+						display.getGrid().fetchData();
+						display.getGrid().redraw();
 					}
 					
 				});
@@ -123,6 +220,20 @@ public class ItemPresenter implements Presenter {
 	}
 
 	public void onDestroy() {
-		handlerRegistration.removeHandler();
+
+	}
+
+	public void onValueChange(ValueChangeEvent<String> event) {
+		String token = event.getValue();
+
+		if (token != null) {
+			if (token.equals("itemsList")) {
+				showList();
+			} else if ( token.equals("addForm") ) {
+				showForm();
+			} else if ( token.equals("editForm") ) {
+				showForm();
+			}
+		}
 	}
 }
