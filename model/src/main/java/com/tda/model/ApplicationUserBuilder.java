@@ -3,16 +3,14 @@ package com.tda.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.springframework.security.core.GrantedAuthority;
-
 public class ApplicationUserBuilder {
-	private String password = "password";
-	private String username = "username";
-	private Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-	private boolean isAccountNonExpired = true;
-	private boolean isAccountNonLocked = true;
-	private boolean isCredentialsNonExpired = true;
-	private boolean isEnabled = true;
+	private String password;
+	private String username;
+	private Collection<Authority> authorities = new ArrayList<Authority>();
+	private boolean isAccountNonExpired;
+	private boolean isAccountNonLocked;
+	private boolean isCredentialsNonExpired;
+	private boolean isEnabled;
 
 	private ApplicationUserBuilder() {
 	}
@@ -38,12 +36,12 @@ public class ApplicationUserBuilder {
 	}
 
 	public ApplicationUserBuilder withAuthorities(
-			Collection<GrantedAuthority> authorities) {
+			Collection<Authority> authorities) {
 		this.authorities.addAll(authorities);
 		return this;
 	}
 
-	public ApplicationUserBuilder withAuthority(GrantedAuthority authority) {
+	public ApplicationUserBuilder withAuthority(Authority authority) {
 		this.authorities.add(authority);
 		return this;
 	}

@@ -13,7 +13,7 @@ import com.tda.model.ApplicationUserBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring-persistence.xml" })
-public class ApplicationUserDAOTest {
+public class AuthorityDAOTest {
 	@Autowired
 	ApplicationUserDAO applicationUserDAO;
 	@Autowired

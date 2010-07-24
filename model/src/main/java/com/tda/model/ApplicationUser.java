@@ -1,6 +1,8 @@
 package com.tda.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -9,9 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ForeignKey;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
@@ -22,19 +26,23 @@ public class ApplicationUser implements UserDetails {
 	private Long id;
 	private String password;
 	private String username;
-	private Collection<GrantedAuthority> authorities;
+	private Collection<Authority> myAuthorities;
 	private boolean isAccountNonExpired;
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
 
+	public ApplicationUser() {
+		super();
+	}
+
 	public ApplicationUser(String username, String password,
-			Collection<GrantedAuthority> authorities,
-			boolean isAccountNonExpired, boolean isAccountNonLocked,
-			boolean isCredentialsNonExpired, boolean isEnabled) {
+			Collection<Authority> authorities, boolean isAccountNonExpired,
+			boolean isAccountNonLocked, boolean isCredentialsNonExpired,
+			boolean isEnabled) {
 		this.username = username;
 		this.password = password;
-		this.authorities = authorities;
+		this.myAuthorities = authorities;
 		this.isAccountNonExpired = isAccountNonExpired;
 		this.isAccountNonLocked = isAccountNonLocked;
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -59,14 +67,23 @@ public class ApplicationUser implements UserDetails {
 		this.username = username;
 	}
 
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@ForeignKey(name = "ID_USER", inverseName = "ID_AUTH")
+	@Transient
 	public Collection<GrantedAuthority> getAuthorities() {
-		return authorities;
+		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+		for (Authority authority : myAuthorities) {
+			list.add(new GrantedAuthorityImpl(authority.getAuthority()));
+		}
+		return list;
 	}
 
-	public void setAuthorities(Collection<GrantedAuthority> authorities) {
-		this.authorities = authorities;
+	@ManyToMany(targetEntity = Authority.class, cascade = { CascadeType.ALL })
+	@ForeignKey(name = "ID_USER", inverseName = "ID_AUTH")
+	public Collection<Authority> getMyAuthorities() {
+		return myAuthorities;
+	}
+
+	public void setMyAuthorities(Collection<Authority> myAuthorities) {
+		this.myAuthorities = myAuthorities;
 	}
 
 	@Basic
