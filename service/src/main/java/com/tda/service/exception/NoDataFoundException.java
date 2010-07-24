@@ -1,4 +1,4 @@
-package com.tda.persistence.exception;
+package com.tda.service.exception;
 
 @SuppressWarnings("serial")
 public class NoDataFoundException extends Exception {
