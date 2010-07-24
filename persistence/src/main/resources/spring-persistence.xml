@@ -67,16 +67,16 @@
 		</property>
 	</bean>
 
-<!--	<bean id="roleProvider" class="com.tda.persistence.provider.RoleProvider"-->
-<!--		init-method="init">-->
-<!---->
-<!--		<property name="propertiesHolder">-->
-<!--			<util:properties location="classpath:roles.properties" />-->
-<!--		</property>-->
-<!--		<property name="authorityDAO">-->
-<!--			<ref local="authorityDAO" />-->
-<!--		</property>-->
-<!--	</bean>-->
+	<bean id="roleProvider" class="com.tda.persistence.provider.RoleProvider"
+		init-method="init">
+
+		<property name="propertiesHolder">
+			<util:properties location="classpath:roles.properties" />
+		</property>
+		<property name="authorityDAO">
+			<ref local="authorityDAO" />
+		</property>
+	</bean>
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -91,7 +91,6 @@
 		</constructor-arg>
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager"
-		proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
