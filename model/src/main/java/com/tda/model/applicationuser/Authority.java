@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Authority {
+public class Authority implements Comparable<Authority> {
 
 	private Long id;
 	private String authority;
@@ -31,4 +31,10 @@ public class Authority {
 		this.authority = authority;
 	}
 
+	public int compareTo(Authority o) {
+		if (this.authority.equalsIgnoreCase(o.authority))
+			return 0;
+
+		return 1;
+	}
 }

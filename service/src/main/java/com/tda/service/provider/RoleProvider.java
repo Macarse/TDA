@@ -1,20 +1,17 @@
-package com.tda.persistence.provider;
+package com.tda.service.provider;
 
 import java.util.Enumeration;
 import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.tda.model.applicationuser.Authority;
-import com.tda.persistence.dao.AuthorityDAO;
-import com.tda.persistence.exception.NoDataFoundException;
-import com.tda.persistence.exception.SingleResultExpectedException;
+import com.tda.service.api.AuthorityService;
+import com.tda.service.exception.NoDataFoundException;
+import com.tda.service.exception.SingleResultExpectedException;
 
 public class RoleProvider {
 	private Properties propertiesHolder;
 
-	@Autowired
-	private AuthorityDAO authorityDAO;
+	private AuthorityService authorityService;
 
 	public void init() {
 		loadDefaultRoles(propertiesHolder);
@@ -32,11 +29,11 @@ public class RoleProvider {
 
 			Authority authority = null;
 			try {
-				authority = authorityDAO.findByAuthority(role);
+				authority = authorityService.findByAuthority(role);
 			} catch (NoDataFoundException e) {
 				authority = new Authority();
 				authority.setAuthority(role);
-				authorityDAO.save(authority);
+				authorityService.save(authority);
 
 			} catch (SingleResultExpectedException e) {
 				// TODO we should log this as it is an anomaly in the data
@@ -46,11 +43,11 @@ public class RoleProvider {
 		}
 	}
 
-	public void setAuthorityDAO(AuthorityDAO authorityDAO) {
-		this.authorityDAO = authorityDAO;
+	public void setAuthorityService(AuthorityService authorityService) {
+		this.authorityService = authorityService;
 	}
 
-	public AuthorityDAO getAuthorityDAO() {
-		return authorityDAO;
+	public AuthorityService getAuthorityService() {
+		return authorityService;
 	}
 }

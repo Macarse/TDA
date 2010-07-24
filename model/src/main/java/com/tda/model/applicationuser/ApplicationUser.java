@@ -132,4 +132,62 @@ public class ApplicationUser implements UserDetails {
 		return id;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isAccountNonExpired ? 1231 : 1237);
+		result = prime * result + (isAccountNonLocked ? 1231 : 1237);
+		result = prime * result + (isCredentialsNonExpired ? 1231 : 1237);
+		result = prime * result + (isEnabled ? 1231 : 1237);
+		result = prime * result
+				+ ((myAuthorities == null) ? 0 : myAuthorities.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ApplicationUser other = (ApplicationUser) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (isAccountNonExpired != other.isAccountNonExpired)
+			return false;
+		if (isAccountNonLocked != other.isAccountNonLocked)
+			return false;
+		if (isCredentialsNonExpired != other.isCredentialsNonExpired)
+			return false;
+		if (isEnabled != other.isEnabled)
+			return false;
+		if (myAuthorities == null) {
+			if (other.myAuthorities != null)
+				return false;
+		} else if (!myAuthorities.equals(other.myAuthorities))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+
 }
