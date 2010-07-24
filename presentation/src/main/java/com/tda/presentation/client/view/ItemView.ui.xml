@@ -9,7 +9,7 @@
 
 	</ui:style>
 
-	<g:DecoratorPanel>
+	<g:DecoratorPanel ui:field="parent">
 
 		<g:VerticalPanel>
 			<g:VerticalPanel ui:field="listContainer">

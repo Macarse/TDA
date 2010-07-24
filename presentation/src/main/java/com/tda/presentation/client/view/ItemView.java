@@ -26,6 +26,9 @@ public class ItemView extends Composite implements ItemPresenter.Display {
 	private static ItemViewUiBinder uiBinder = GWT.create(ItemViewUiBinder.class);
 
 	@UiField
+	Panel parent;
+	
+	@UiField
 	Panel listContainer;
 
 	@UiField
@@ -114,6 +117,10 @@ public class ItemView extends Composite implements ItemPresenter.Display {
 
 	public Panel getListContainer() {
 		return listContainer;
+	}
+
+	public Panel getParent() {
+		return parent;
 	}
 
 	public Panel getFormContainer() {

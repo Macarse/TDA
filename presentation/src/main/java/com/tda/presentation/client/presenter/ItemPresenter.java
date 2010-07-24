@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.tda.model.item.Item;
@@ -33,10 +34,16 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 		Widget asWidget();
 		Panel getListContainer();
 		Panel getFormContainer();
+		Panel getParent();
 	}
 
 
 	private final Display display;
+
+	public Display getDisplay() {
+		return display;
+	}
+
 	private final ItemServiceGWTWrapperAsync rpc;
 	private final HandlerManager eventBus;
 	private Status status;
@@ -53,6 +60,12 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 		bind();
 		container.clear();
 		container.add(display.asWidget());
+		display.getGrid().fetchData();
+	}
+
+	public void go(Canvas canvas) {
+		canvas.clear();
+		canvas.addChild(display.asWidget());
 		display.getGrid().fetchData();
 	}
 

@@ -15,6 +15,16 @@
     <servlet-class>com.tda.presentation.server.ItemServiceGWTWrapperImpl</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>adminServlet</servlet-name>
+    <servlet-class>com.tda.presentation.server.AdminServiceGWTWrapperImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>adminServlet</servlet-name>
+	<url-pattern>/prueba/admin</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
 	<servlet-name>loginServlet</servlet-name>
 	<url-pattern>/prueba/login</url-pattern>

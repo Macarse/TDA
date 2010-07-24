@@ -50,7 +50,7 @@ public class LoginPresenter implements Presenter {
 					
 					public void onSuccess(Boolean result) {
 						if ( result ) {
-							History.newItem("itemList");
+							History.newItem("adminHome");
 						} else {
 							display.getForm().setValue("password", "");
 							SC.say("Usuario o contraseña inválidos.");
