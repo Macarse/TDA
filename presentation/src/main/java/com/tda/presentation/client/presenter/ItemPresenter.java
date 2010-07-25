@@ -9,6 +9,7 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.data.Record;
@@ -248,5 +249,12 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 				showForm();
 			}
 		}
+	}
+
+	public void attach(Canvas container) {
+		bind();
+		Label l = new Label("asddsa");
+//		container.addChild(display.asWidget());
+		container.addChild(l);
 	}
 }

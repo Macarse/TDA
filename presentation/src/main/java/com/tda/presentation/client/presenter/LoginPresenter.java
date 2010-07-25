@@ -9,6 +9,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.tda.presentation.client.service.LoginServiceGWTWrapperAsync;
 
@@ -68,6 +69,12 @@ public class LoginPresenter implements Presenter {
 
 	public void onDestroy() {
 		/* Do nothing */
+	}
+
+	public void attach(Canvas container) {
+		bind();
+		container.clear();
+		container.addChild(display.asWidget());
 	}
 
 }
