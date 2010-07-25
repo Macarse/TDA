@@ -5,6 +5,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.smartgwt.client.widgets.Canvas;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
@@ -103,6 +104,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	}
 
 	public void attach(Canvas container) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void go(DecoratedTabPanel panel) {
 		// TODO Auto-generated method stub
 		
 	}

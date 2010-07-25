@@ -8,6 +8,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -61,6 +62,11 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 		bind();
 		container.clear();
 		container.add(display.asWidget());
+	}
+	
+	public void go(DecoratedTabPanel panel) {
+		bind();
+		panel.add(display.asWidget(), "items");
 	}
 
 	private void showForm() {
@@ -244,9 +250,4 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 		}
 	}
 
-	public void attach(Canvas container) {
-		bind();
-		container.addChild(display.asWidget());
-
-	}
 }

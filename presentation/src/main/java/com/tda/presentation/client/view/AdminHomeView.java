@@ -1,26 +1,15 @@
 package com.tda.presentation.client.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.smartgwt.client.types.Side;
-import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.events.ClickHandler;
-import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.tab.Tab;
-import com.smartgwt.client.widgets.tab.TabSet;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
-import com.tda.presentation.client.presenter.Presenter;
 
 public class AdminHomeView extends Composite implements AdminHomePresenter.Display {
 
@@ -36,40 +25,18 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 	@UiField
 	VerticalPanel mainContainer;
 
-	private TabSet topTabSet;
-	private List<Tab> tabs;  
+	private DecoratedTabPanel tabSet;
 	
 	public AdminHomeView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		tabs = new ArrayList<Tab>();
 		createTabs();
-//		tabsContainer.add(layout);
+		tabsContainer.add(tabSet);
 	}
 
 	private void createTabs() {
-		topTabSet = new TabSet();  
-        topTabSet.setTabBarPosition(Side.TOP);
-        topTabSet.setWidth100();
-        topTabSet.setHeight100();
-        
-		Tab userTab = new Tab("Usuarios");
-		Tab itemsTab = new Tab("Items");
-		
-		Canvas c = new Canvas("c1");
-		c.setWidth100();
-		c.setHeight100();
-		c.addChild(new Label("tab 1"));
-		userTab.setPane(c);
-		
-		Canvas d = new Canvas("c2");
-		d.setWidth100();
-		d.setHeight100();
-		itemsTab.setPane(d);
-		
-		tabs.add(userTab);
-		tabs.add(itemsTab);
-
-		topTabSet.setTabs(userTab, itemsTab);
+		tabSet = new DecoratedTabPanel();
+		tabSet.setWidth("500");
+		tabSet.setHeight("500");
 	}
 
 	public Widget asWidget() {
@@ -84,16 +51,12 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 		return mainContainer;
 	}
 
-	public Tab getTab(int index) {
-		return tabs.get(index);
-	}
-	
-	public Canvas getTabCanvas(int index){
-		return tabs.get(index).getPane();
+	public DecoratedTabPanel getTab(int index) {
+		return tabSet;
 	}
 
-	public void draw() {
-		topTabSet.draw();
+	public DecoratedTabPanel getTab() {
+		return tabSet;
 	}
 
 }

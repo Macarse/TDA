@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.util.SC;
@@ -75,6 +76,11 @@ public class LoginPresenter implements Presenter {
 		bind();
 		container.clear();
 		container.addChild(display.asWidget());
+	}
+
+	public void go(DecoratedTabPanel panel) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
