@@ -40,7 +40,7 @@ public class ItemBuilder {
 		return this;
 	}
 
-	public ItemBuilder withAccountNonExpired(MeasureUnit measureUnit) {
+	public ItemBuilder withMeasureUnit(MeasureUnit measureUnit) {
 		this.measureUnit = measureUnit;
 		return this;
 	}

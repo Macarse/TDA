@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-           
-      
+
+
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName">
@@ -38,9 +37,6 @@
 				<value>com.tda.model.applicationuser.Authority</value>
 			</list>
 		</property>
-
-		<!-- TODO: externalizar las properties a otro lado pag 359 libro Spring 
-			Persistence with Hibernate -->
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
@@ -56,11 +52,13 @@
 			<ref local="sessionFactory" />
 		</property>
 	</bean>
+
 	<bean id="applicationUserDAO" class="com.tda.persistence.dao.ApplicationUserDAO">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
 		</property>
 	</bean>
+
 	<bean id="authorityDAO" class="com.tda.persistence.dao.AuthorityDAO">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
