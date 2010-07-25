@@ -61,13 +61,6 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 		bind();
 		container.clear();
 		container.add(display.asWidget());
-		display.getGrid().fetchData();
-	}
-
-	public void go(Canvas canvas) {
-		canvas.clear();
-		canvas.addChild(display.asWidget());
-		display.getGrid().fetchData();
 	}
 
 	private void showForm() {
@@ -253,8 +246,7 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 
 	public void attach(Canvas container) {
 		bind();
-		Label l = new Label("asddsa");
-//		container.addChild(display.asWidget());
-		container.addChild(l);
+		container.addChild(display.asWidget());
+
 	}
 }

@@ -38,21 +38,15 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 
 	private TabSet topTabSet;
 	private List<Tab> tabs;  
-	private VLayout layout;
 	
 	public AdminHomeView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		tabs = new ArrayList<Tab>();
 		createTabs();
 //		tabsContainer.add(layout);
-//		layout.draw();
 	}
 
 	private void createTabs() {
-		layout = new VLayout();
-		layout.setWidth100();
-		layout.setHeight100();
-		
 		topTabSet = new TabSet();  
         topTabSet.setTabBarPosition(Side.TOP);
         topTabSet.setWidth100();
@@ -70,16 +64,12 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 		Canvas d = new Canvas("c2");
 		d.setWidth100();
 		d.setHeight100();
-		d.addChild(new Label("tab 2"));
 		itemsTab.setPane(d);
 		
 		tabs.add(userTab);
 		tabs.add(itemsTab);
 
-		topTabSet.addTab(userTab);
-		topTabSet.addTab(itemsTab);
-		
-		layout.addMember(topTabSet);
+		topTabSet.setTabs(userTab, itemsTab);
 	}
 
 	public Widget asWidget() {
