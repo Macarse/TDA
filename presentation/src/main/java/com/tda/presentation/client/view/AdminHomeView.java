@@ -16,6 +16,7 @@ import com.smartgwt.client.types.Side;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
@@ -37,15 +38,21 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 
 	private TabSet topTabSet;
 	private List<Tab> tabs;  
+	private VLayout layout;
 	
 	public AdminHomeView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		tabs = new ArrayList<Tab>();
 		createTabs();
-		tabsContainer.add(topTabSet);
+//		tabsContainer.add(layout);
+//		layout.draw();
 	}
 
 	private void createTabs() {
+		layout = new VLayout();
+		layout.setWidth100();
+		layout.setHeight100();
+		
 		topTabSet = new TabSet();  
         topTabSet.setTabBarPosition(Side.TOP);
         topTabSet.setWidth100();
@@ -54,13 +61,16 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 		Tab userTab = new Tab("Usuarios");
 		Tab itemsTab = new Tab("Items");
 		
-		Canvas c = new Canvas();
+		Canvas c = new Canvas("c1");
 		c.setWidth100();
 		c.setHeight100();
+		c.addChild(new Label("tab 1"));
 		userTab.setPane(c);
-		Canvas d = new Canvas();
-		c.setWidth100();
-		c.setHeight100();
+		
+		Canvas d = new Canvas("c2");
+		d.setWidth100();
+		d.setHeight100();
+		d.addChild(new Label("tab 2"));
 		itemsTab.setPane(d);
 		
 		tabs.add(userTab);
@@ -69,6 +79,7 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 		topTabSet.addTab(userTab);
 		topTabSet.addTab(itemsTab);
 		
+		layout.addMember(topTabSet);
 	}
 
 	public Widget asWidget() {
@@ -89,6 +100,10 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 	
 	public Canvas getTabCanvas(int index){
 		return tabs.get(index).getPane();
+	}
+
+	public void draw() {
+		topTabSet.draw();
 	}
 
 }

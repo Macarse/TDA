@@ -28,6 +28,8 @@ public class AdminHomePresenter implements Presenter {
 		Panel getMainContainer();
 		Tab getTab(int index);
 		Canvas getTabCanvas(int index);
+		//for tabs showing 
+		void draw();
 	}
 
 	private Display display;
@@ -48,7 +50,9 @@ public class AdminHomePresenter implements Presenter {
 		appendPresenters();
 		bind();
 		container.clear();
-		container.add(display.asWidget());
+//		container.add(display.asWidget());
+		//Hack for smartgwt tabs
+		display.draw();
 	}
 	
 	public void appendPresenters(){

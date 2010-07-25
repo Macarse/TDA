@@ -3,8 +3,8 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
 	<g:VerticalPanel>
-		<g:VerticalPanel ui:field="tabsContainer"/>		
-		<g:VerticalPanel ui:field="mainContainer"/>
+		<g:VerticalPanel ui:field="tabsContainer"></g:VerticalPanel>		
+		<g:VerticalPanel ui:field="mainContainer"></g:VerticalPanel>
 	</g:VerticalPanel>
 	
 </ui:UiBinder> 
