@@ -18,6 +18,10 @@
 		<property name="authorityDAO" ref="authorityDAO" />
 	</bean>
 
+	<bean id="authenticationService" class="com.tda.service.impl.AuthenticationServiceImpl">
+		<property name="authenticationManager" ref="org.springframework.security.authenticationManager" />
+	</bean>
+
 	<bean id="roleProvider" class="com.tda.service.provider.RoleProvider"
 		init-method="init">
 
