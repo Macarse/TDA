@@ -1,39 +1,54 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-       version="2.4">
-  
-  <!-- Servlets -->  
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
 
-  <servlet>
-    <servlet-name>loginServlet</servlet-name>
-    <servlet-class>com.tda.presentation.server.LoginServiceGWTWrapperImpl</servlet-class>
-  </servlet>
+	<!-- Servlets -->
 
-  <servlet>
-    <servlet-name>itemServlet</servlet-name>
-    <servlet-class>com.tda.presentation.server.ItemServiceGWTWrapperImpl</servlet-class>
-  </servlet>
+	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.tda.presentation.server.LoginServiceGWTWrapperImpl</servlet-class>
+	</servlet>
 
-  <servlet>
-    <servlet-name>adminServlet</servlet-name>
-    <servlet-class>com.tda.presentation.server.AdminServiceGWTWrapperImpl</servlet-class>
-  </servlet>
+	<servlet>
+		<servlet-name>itemServlet</servlet-name>
+		<servlet-class>com.tda.presentation.server.ItemServiceGWTWrapperImpl</servlet-class>
+	</servlet>
 
-  <servlet-mapping>
-	<servlet-name>adminServlet</servlet-name>
-	<url-pattern>/prueba/admin</url-pattern>
-  </servlet-mapping>
+	<servlet>
+		<servlet-name>adminServlet</servlet-name>
+		<servlet-class>com.tda.presentation.server.AdminServiceGWTWrapperImpl</servlet-class>
+	</servlet>
 
-  <servlet-mapping>
-	<servlet-name>loginServlet</servlet-name>
-	<url-pattern>/prueba/login</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>adminServlet</servlet-name>
+		<url-pattern>/prueba/admin</url-pattern>
+	</servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>itemServlet</servlet-name>
-    <url-pattern>/prueba/item</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/prueba/login</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>itemServlet</servlet-name>
+		<url-pattern>/prueba/item</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>
+			org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -44,12 +59,13 @@
 		<param-value>
 			classpath:spring-service.xml
 			classpath:spring-persistence.xml
+			classpath:spring-security.xml
 		</param-value>
 	</context-param>
 
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>Hola.html</welcome-file>
-  </welcome-file-list>
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>Hola.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>
