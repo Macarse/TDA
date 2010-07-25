@@ -10,7 +10,6 @@
 	</ui:style>
 
 	<g:DecoratorPanel ui:field="parent">
-
 		<g:VerticalPanel>
 			<g:VerticalPanel ui:field="listContainer">
 				<g:HorizontalPanel addStyleNames="{style.itemsViewButtonHPanel}">

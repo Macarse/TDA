@@ -119,7 +119,7 @@ public class ItemView extends Composite implements ItemPresenter.Display {
 		return listContainer;
 	}
 
-	public Panel getParent() {
+	public Panel getParentContainer() {
 		return parent;
 	}
 

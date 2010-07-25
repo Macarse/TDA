@@ -34,7 +34,7 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 		Widget asWidget();
 		Panel getListContainer();
 		Panel getFormContainer();
-		Panel getParent();
+		Panel getParentContainer();
 	}
 
 
