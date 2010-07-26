@@ -12,7 +12,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.tda.presentation.client.service.AdminServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
-import com.tda.presentation.client.view.ItemView;
+import com.tda.presentation.client.view.CrudView;
+import com.tda.presentation.client.presenter.CrudPresenter;
 
 public class AdminHomePresenter implements Presenter {
 
@@ -54,7 +55,7 @@ public class AdminHomePresenter implements Presenter {
 	}
 	
 	public void instancePresenters(){
-		tabsPresenters.add(new ItemPresenter(getItemRPC(), eventBus, new ItemView()));
+		tabsPresenters.add(new CrudPresenter(getItemRPC(), eventBus, new CrudView()));
 	}
 	
 	public ItemServiceGWTWrapperAsync getItemRPC() {

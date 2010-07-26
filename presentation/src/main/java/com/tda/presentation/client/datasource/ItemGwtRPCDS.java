@@ -6,10 +6,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
+import com.smartgwt.client.data.Record;
 import com.smartgwt.client.data.fields.DataSourceIntegerField;
 import com.smartgwt.client.data.fields.DataSourceTextField;
 import com.smartgwt.client.rpc.RPCResponse;
 import com.smartgwt.client.types.FieldType;
+import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.item.Item;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
@@ -47,6 +49,30 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 		nameField.setType(FieldType.TEXT);
 		setFields(nameField);
 
+	}
+	
+	public static void copyValues(DynamicForm form, Record record){
+		form.setValue("name", record.getAttribute("name"));
+		form.setValue("id", record.getAttribute("id"));
+	}
+	
+	public static void copyValues(Record record, DynamicForm form ){
+		form.setValue("name", record.getAttribute("name"));
+		form.setValue("id", record.getAttribute("id"));
+	}
+	
+	public static Item getItem(DynamicForm form){
+		Item item = new Item();
+
+		item.setName(form.getValueAsString("name"));
+		String idString = form.getValueAsString("id");
+		if ( idString == null ) {
+			idString = "1";
+		}
+
+		item.setId(Long.valueOf(idString));
+
+		return item;
 	}
 
 	@Override
@@ -113,11 +139,6 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 	@Override
 	protected void executeRemove(final String requestId,
 			final DSRequest request, final DSResponse response) {
-	}
-
-	private static void copyValues(ListGridRecord from, Item to) {
-		to.setId(from.getAttributeAsInt("id").longValue());
-		to.setName(from.getAttributeAsString("name"));
 	}
 
 	private static void copyValues(Item from, ListGridRecord to) {
