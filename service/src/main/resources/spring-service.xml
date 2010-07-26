@@ -19,12 +19,25 @@
 	</bean>
 
 	<bean id="authenticationService" class="com.tda.service.impl.AuthenticationServiceImpl">
-		<property name="authenticationManager" ref="org.springframework.security.authenticationManager" />
+		<property name="authenticationManager"
+			ref="org.springframework.security.authenticationManager" />
 	</bean>
 
-	<bean id="roleProvider" class="com.tda.service.provider.RoleProvider"
-		init-method="init">
+	<bean id="userProvider" class="com.tda.service.provider.UserDefaultProvider"
+		init-method="init" depends-on="roleProvider">
+		<property name="propertiesHolder">
+			<util:properties location="classpath:users.properties" />
+		</property>
+		<property name="applicationUserService">
+			<ref local="applicationUserService" />
+		</property>
+		<property name="authorityService">
+			<ref local="authorityService" />
+		</property>
+	</bean>
 
+	<bean id="roleProvider" class="com.tda.service.provider.RoleDefaultProvider"
+		init-method="init">
 		<property name="propertiesHolder">
 			<util:properties location="classpath:roles.properties" />
 		</property>
