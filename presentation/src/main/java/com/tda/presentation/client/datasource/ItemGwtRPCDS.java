@@ -6,19 +6,23 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
+import com.smartgwt.client.data.Record;
 import com.smartgwt.client.data.fields.DataSourceEnumField;
 import com.smartgwt.client.data.fields.DataSourceIntegerField;
 import com.smartgwt.client.data.fields.DataSourceTextField;
 import com.smartgwt.client.rpc.RPCResponse;
 import com.smartgwt.client.types.FieldType;
+import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
+import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
+
 
 /**
  * Example <code>GwtRpcDataSource</code> implementation.
@@ -27,18 +31,13 @@ import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
  * @author System Tier
  * @version 1.0
  */
-public class ItemGwtRPCDS extends GwtRpcDataSource {
+public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 
-	private static ItemGwtRPCDS _instance;
+	private CrudServiceGWTWrapperAsync<Item> rpc;
 
-	public static ItemGwtRPCDS getInstance() {
-		if ( _instance == null )
-			_instance = new ItemGwtRPCDS();
+	public ItemGwtRPCDS(CrudServiceGWTWrapperAsync<Item> rpc) {
+		this.rpc = rpc;
 
-		return _instance;
-	}
-
-	private ItemGwtRPCDS() {
 		setID("ItemsDataSource");
 
 		DataSourceIntegerField idField = new DataSourceIntegerField("id", "Id");
@@ -83,6 +82,30 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 		measureSelect.setDefaultValue(MeasureUnit.unit.toString());
 		measureField.setEditorType(measureSelect);
 		addField(measureField);
+	}
+	
+	@Override
+	public void copyValues(Record record, DynamicForm form) {
+		form.setValue("id", record.getAttribute("id"));
+		form.setValue("name", record.getAttribute("name"));
+		form.setValue("description", record.getAttribute("description"));
+		form.setValue("measure", record.getAttribute("measure"));
+		form.setValue("category", record.getAttribute("category"));
+		form.setValue("quantity", record.getAttribute("quantity"));
+	}
+	
+	public static Item getItem(DynamicForm form){
+		Item item = new Item();
+
+		item.setName(form.getValueAsString("name"));
+		String idString = form.getValueAsString("id");
+		if ( idString == null ) {
+			idString = "1";
+		}
+
+		item.setId(Long.valueOf(idString));
+
+		return item;
 	}
 
 	@Override
@@ -151,12 +174,8 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 			final DSRequest request, final DSResponse response) {
 	}
 
-	private static void copyValues(ListGridRecord from, Item to) {
-		to.setId(from.getAttributeAsInt("id").longValue());
-		to.setName(from.getAttributeAsString("name"));
-	}
-
-	private static void copyValues(Item from, ListGridRecord to) {
+	@Override
+	protected void copyValues(Item from, ListGridRecord to) {
 
 		to.setAttribute("id", from.getId().toString());
 		to.setAttribute("name", from.getName());
@@ -176,5 +195,30 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 		if ( from.getCategory() != null ) {
 			to.setAttribute("category", from.getCategory().toString());
 		}
+	}
+
+	@Override
+	protected CrudServiceGWTWrapperAsync<Item> getRpc() {
+		return this.rpc;
+	}
+
+	@Override
+	public Item get(DynamicForm form) {
+		Item item = new Item();
+
+		item.setName(form.getValueAsString("name"));
+		item.setCategory(Category.valueOf(form.getValueAsString("category")));
+		item.setMeasureUnit(MeasureUnit.valueOf(form.getValueAsString("measure")));
+		item.setDescription(form.getValueAsString("description"));
+		item.setQuantity(Long.valueOf(form.getValueAsString("quantity")));
+		
+		String idString = form.getValueAsString("id");
+		if ( idString == null ) {
+			idString = "1";
+		}
+
+		item.setId(Long.valueOf(idString));
+
+		return item;
 	}
 }

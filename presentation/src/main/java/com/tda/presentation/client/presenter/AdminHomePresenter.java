@@ -9,10 +9,11 @@ import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
+import com.tda.model.item.Item;
 import com.tda.presentation.client.service.AdminServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
-import com.tda.presentation.client.view.ItemView;
+import com.tda.presentation.client.view.CrudView;
 
 public class AdminHomePresenter implements Presenter {
 
@@ -39,7 +40,6 @@ public class AdminHomePresenter implements Presenter {
 	public void go(HasWidgets container) {
 		instancePresenters();
 		appendPresenters();
-		bind();
 		container.clear();
 		//select displayed tab
 		display.getTab().selectTab(0);
@@ -54,7 +54,7 @@ public class AdminHomePresenter implements Presenter {
 	}
 	
 	public void instancePresenters(){
-		tabsPresenters.add(new ItemPresenter(getItemRPC(), eventBus, new ItemView()));
+		tabsPresenters.add(new ItemPresenter(eventBus, new CrudView<Item>()));
 	}
 	
 	public ItemServiceGWTWrapperAsync getItemRPC() {
@@ -65,15 +65,11 @@ public class AdminHomePresenter implements Presenter {
 		return itemRPC;
 	}
 
-	private void bind() {
-	}
-
 	public void onDestroy() {
 		/* Do nothing */
 	}
 
 	public void go(DecoratedTabPanel panel) {
-		bind();
 		panel.add(display.asWidget(), "Admin");
 	}
 
