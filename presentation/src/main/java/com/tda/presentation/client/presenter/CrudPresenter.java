@@ -18,10 +18,11 @@ import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.tda.model.item.Item;
-import com.tda.presentation.client.datasource.ItemGwtRPCDS;
+import com.tda.presentation.client.datasource.CrudGwtRPCDS;
+import com.tda.presentation.client.datasource.GwtRpcDataSource;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 
-public class CrudPresenter implements Presenter, ValueChangeHandler<String> {
+public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Presenter, ValueChangeHandler<String> {
 
 	public interface Display {
 		HasClickHandlers getAddButton();
@@ -108,7 +109,7 @@ public class CrudPresenter implements Presenter, ValueChangeHandler<String> {
 				 * TODO: ItemServiceGWTWrapperAsync must be generic
 				 * 		 as well ItemGwtRPCDS
 				 */           
-				ItemGwtRPCDS.copyValues(display.getClickedRow(), display.getForm());
+				T.copyValues(display.getClickedRow(), display.getForm());
 				status = Status.EDIT;
 				History.newItem("editForm");
 			}
