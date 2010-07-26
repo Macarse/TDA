@@ -70,7 +70,9 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 		listGrid.setHeight(224);
 		listGrid.setHeaderHeight(40);
 		listGrid.setDataSource(ds);
-		listGrid.setAutoFetchData(false);
+		listGrid.setAutoFetchData(true);
+		listGrid.setShowFilterEditor(true);
+		
 	}
 
 	public HasClickHandlers getAddButton() {
