@@ -39,7 +39,7 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 
 	private void createForm() {
 		form = new DynamicForm();
-		TextItem login = new TextItem("username", "Usuario");
+		TextItem login = new TextItem("user", "Usuario");
 		PasswordItem password = new PasswordItem("passwd", "Contraseña");
 		form.setFields(login, password);
 

@@ -9,6 +9,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("login")
 public interface LoginServiceGWTWrapper extends RemoteService {
 
-	boolean login(String user, String passwd);
+	boolean login(String username, String password);
 
+	void logout();
 }

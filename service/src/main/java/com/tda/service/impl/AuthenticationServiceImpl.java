@@ -5,14 +5,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.tda.service.api.AuthenticationService;
 
 public class AuthenticationServiceImpl implements AuthenticationService {
 	private AuthenticationManager authenticationManager;
 
-	@Transactional(readOnly = true)
 	public boolean authenticate(String username, String password) {
 		boolean authenticated = false;
 
@@ -27,6 +25,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		} catch (AuthenticationException e) {
 			authenticated = false;
 		}
+
 		return authenticated;
 	}
 
