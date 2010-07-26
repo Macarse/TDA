@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.tda.model.item.Item;
 
-public interface ItemServiceGWTWrapperAsync {
+public interface ItemServiceGWTWrapperAsync extends CrudServiceGWTWrapperAsync<Item> {
 
 	void delete(Item item, AsyncCallback<Void> callback);
 

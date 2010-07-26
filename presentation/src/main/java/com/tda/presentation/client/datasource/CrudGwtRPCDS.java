@@ -2,20 +2,14 @@ package com.tda.presentation.client.datasource;
 
 import java.util.List;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
 import com.smartgwt.client.data.Record;
-import com.smartgwt.client.data.fields.DataSourceIntegerField;
-import com.smartgwt.client.data.fields.DataSourceTextField;
 import com.smartgwt.client.rpc.RPCResponse;
-import com.smartgwt.client.types.FieldType;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
-import com.tda.model.item.Item;
-import com.tda.presentation.client.service.ItemServiceGWTWrapper;
-import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
+import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 
 /**
  * Example <code>GwtRpcDataSource</code> implementation.
@@ -25,30 +19,33 @@ import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
  * @version 1.0
  */
 public abstract class CrudGwtRPCDS<T> extends GwtRpcDataSource {
+	
+	private CrudServiceGWTWrapperAsync<T> rpc;
 
 	public CrudGwtRPCDS(){
-		setID("CrudDataSource");
 	}
+	
+	protected abstract CrudServiceGWTWrapperAsync<T> getRpc();
 	
 	/*
 	 * Copy values from form to record
 	 */
-	abstract void copyValues(DynamicForm form, Record record);
+	public abstract void copyValues(DynamicForm form, Record record);
 	
 	/*
 	 * Copy values from record to form
 	 */
-	abstract void copyValues(Record record, DynamicForm form );
+	public abstract void copyValues(Record record, DynamicForm form );
 	
 	/*
 	 * Given a form returns an record
 	 */
-	abstract T getItem(DynamicForm form);
+	public abstract T get(DynamicForm form);
 
 	/*
 	 * Given a item returns a listgridrecord
 	 */
-	abstract void copyValues(Item from, ListGridRecord to);
+	protected abstract void copyValues(T from, ListGridRecord to);
 	
 	@Override
 	protected void executeFetch(final String requestId,
@@ -61,17 +58,14 @@ public abstract class CrudGwtRPCDS<T> extends GwtRpcDataSource {
 		// but for this example I will do "paging" on client side
 		final int startIndex = (request.getStartRow() < 0) ? 0 : request.getStartRow();
 		final int endIndex = (request.getEndRow() == null) ? -1 : request.getEndRow();
-
-		ItemServiceGWTWrapperAsync service = GWT.create(ItemServiceGWTWrapper.class);
-
 		
-		service.findAll(new AsyncCallback<List<Item>>() {
+		getRpc().findAll(new AsyncCallback<List<T>>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
 				processResponse(requestId, response);
 			}
 
-			public void onSuccess(List<Item> result) {
+			public void onSuccess(List<T> result) {
 				// Calculating size of return list
 				int size = result.size();
 				if (endIndex >= 0) {

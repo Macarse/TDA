@@ -17,12 +17,10 @@ import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
-import com.tda.model.item.Item;
 import com.tda.presentation.client.datasource.CrudGwtRPCDS;
-import com.tda.presentation.client.datasource.GwtRpcDataSource;
-import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
+import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 
-public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Presenter, ValueChangeHandler<String> {
+public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<String> {
 
 	public interface Display {
 		HasClickHandlers getAddButton();
@@ -50,7 +48,6 @@ public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Pre
 	 * TODO: ItemServiceGWTWrapperAsync must be generic
 	 * 		 as well ItemGwtRPCDS
 	 */           
-	private final ItemServiceGWTWrapperAsync rpc;
 	private final HandlerManager eventBus;
 	private Status status;
 	
@@ -58,13 +55,16 @@ public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Pre
 	 * TODO: ItemServiceGWTWrapperAsync must be generic
 	 * 		 as well ItemGwtRPCDS
 	 */           
-	public CrudPresenter(ItemServiceGWTWrapperAsync rpc, HandlerManager eventBus, Display view) {
+	public CrudPresenter(HandlerManager eventBus, Display view) {
 		this.display = view;
-		this.rpc = rpc;
 		this.eventBus = eventBus;
 		this.status = Status.LIST;
 		History.addValueChangeHandler(this);
 	}
+	
+	protected abstract CrudServiceGWTWrapperAsync<T> getService();
+	
+	protected abstract CrudGwtRPCDS<T> getDataSource();
 
 	public void go(HasWidgets container) {
 		bind();
@@ -89,8 +89,7 @@ public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Pre
 		display.getForm().clearValues();
 	}
 
-	private void bind() {
-		
+	private void bind() {		
 		display.getAddButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				status = Status.ADD;
@@ -109,7 +108,7 @@ public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Pre
 				 * TODO: ItemServiceGWTWrapperAsync must be generic
 				 * 		 as well ItemGwtRPCDS
 				 */           
-				T.copyValues(display.getClickedRow(), display.getForm());
+				getDataSource().copyValues(display.getClickedRow(), display.getForm());
 				status = Status.EDIT;
 				History.newItem("editForm");
 			}
@@ -164,8 +163,8 @@ public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Pre
 		 * TODO: ItemServiceGWTWrapperAsync must be generic
 		 * 		 as well ItemGwtRPCDS, Item
 		 */           
-		Item item = ItemGwtRPCDS.getItem(display.getForm());
-		rpc.update(item, new AsyncCallback<Void>() {
+		T item = getDataSource().get(display.getForm());
+		getService().update(item, new AsyncCallback<Void>() {
 
 			public void onFailure(Throwable caught) {
 				SC.say("Item no pudo ser editado. " + caught.getMessage());
@@ -183,8 +182,8 @@ public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Pre
 		 * TODO: ItemServiceGWTWrapperAsync must be generic
 		 * 		 as well ItemGwtRPCDS, Item
 		 */           
-		Item item = ItemGwtRPCDS.getItem(display.getForm());
-		rpc.save(item, new AsyncCallback<Void>() {
+		T item = getDataSource().get(display.getForm());
+		getService().save(item, new AsyncCallback<Void>() {
 
 			public void onFailure(Throwable caught) {
 				SC.say("Item no pudo ser agregado. " + caught.getMessage());
@@ -206,13 +205,13 @@ public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Pre
 		/*
 		 * First got to fetch item(id)
 		 */
-		rpc.findById(id, new AsyncCallback<Item>() {
+		getService().findById(id, new AsyncCallback<T>() {
 			public void onFailure(Throwable arg0) {
 				SC.say("Error al retribuir el item");
 			}
 
-			public void onSuccess(Item item) {
-				rpc.delete(item, new AsyncCallback<Void>(){
+			public void onSuccess(T item) {
+				getService().delete(item, new AsyncCallback<Void>(){
 
 					public void onFailure(Throwable arg0) {
 						SC.say("Error al eliminar el item");
@@ -230,25 +229,7 @@ public abstract class CrudPresenter<T extends CrudGwtRPCDS<Item>> implements Pre
 		});
 	}
 
-	public void onDestroy() {
-
-	}
-
-	public void onValueChange(ValueChangeEvent<String> event) {
-		String token = event.getValue();
-
-		/*
-		 * TODO: history has to be with different names
-		 */
-		if (token != null) {
-			if (token.equals("itemsList")) {
-				showList();
-			} else if ( token.equals("addForm") ) {
-				showForm();
-			} else if ( token.equals("editForm") ) {
-				showForm();
-			}
-		}
-	}
-
+	public abstract void onDestroy();
+	
+	public abstract void onValueChange(ValueChangeEvent<String> event);
 }
