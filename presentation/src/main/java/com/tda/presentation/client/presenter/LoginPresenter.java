@@ -6,9 +6,11 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.tda.presentation.client.service.LoginServiceGWTWrapperAsync;
 
@@ -68,6 +70,17 @@ public class LoginPresenter implements Presenter {
 
 	public void onDestroy() {
 		/* Do nothing */
+	}
+
+	public void attach(Canvas container) {
+		bind();
+		container.clear();
+		container.addChild(display.asWidget());
+	}
+
+	public void go(DecoratedTabPanel panel) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

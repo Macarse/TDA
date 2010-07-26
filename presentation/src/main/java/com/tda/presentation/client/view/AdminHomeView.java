@@ -5,14 +5,10 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.smartgwt.client.types.Side;
-import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.events.ClickHandler;
-import com.smartgwt.client.widgets.tab.Tab;
-import com.smartgwt.client.widgets.tab.TabSet;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
 
 public class AdminHomeView extends Composite implements AdminHomePresenter.Display {
@@ -29,32 +25,18 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 	@UiField
 	VerticalPanel mainContainer;
 
-	private TabSet topTabSet;
+	private DecoratedTabPanel tabSet;
 	
 	public AdminHomeView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		createTabs();
-		tabsContainer.add(topTabSet);
+		tabsContainer.add(tabSet);
 	}
 
 	private void createTabs() {
-		topTabSet = new TabSet();  
-        topTabSet.setTabBarPosition(Side.TOP);
-        
-		Tab userTab = new Tab("Usuarios");
-		
-		Tab itemsTab = new Tab("Items");
-
-		topTabSet.addClickHandler(new ClickHandler() {
-			
-			public void onClick(ClickEvent event) {
-				System.out.println("clicked! " + topTabSet.getSelectedTab().getTitle());
-				
-			}
-		});
-
-		topTabSet.addTab(userTab);
-		topTabSet.addTab(itemsTab);
+		tabSet = new DecoratedTabPanel();
+		tabSet.setWidth("500");
+		tabSet.setHeight("500");
 	}
 
 	public Widget asWidget() {
@@ -68,4 +50,13 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 	public Panel getMainContainer() {
 		return mainContainer;
 	}
+
+	public DecoratedTabPanel getTab(int index) {
+		return tabSet;
+	}
+
+	public DecoratedTabPanel getTab() {
+		return tabSet;
+	}
+
 }
