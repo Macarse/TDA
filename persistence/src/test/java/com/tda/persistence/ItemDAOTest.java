@@ -56,13 +56,14 @@ public class ItemDAOTest {
 
 	@Test
 	public void findAll() {
+		int originalCount = itemDAO.count();
 		Item anItem1 = ItemBuilder.createItem().withName("nombre1").build();
 		itemDAO.save(anItem1);
 		Item anItem2 = ItemBuilder.createItem().withName("nombre2").build();
 		itemDAO.save(anItem2);
 		Item anItem3 = ItemBuilder.createItem().withName("nombre3").build();
 		itemDAO.save(anItem3);
-		assertEquals(3, itemDAO.findAll().size());
+		assertEquals(originalCount + 3, itemDAO.findAll().size());
 	}
 
 	@Test
@@ -75,13 +76,14 @@ public class ItemDAOTest {
 
 	@Test
 	public void count() {
+		int originalCount = itemDAO.count();
 		Item anItem1 = ItemBuilder.createItem().withName("nombre1").build();
 		itemDAO.save(anItem1);
 		Item anItem2 = ItemBuilder.createItem().withName("nombre2").build();
 		itemDAO.save(anItem2);
 		Item anItem3 = ItemBuilder.createItem().withName("nombre3").build();
 		itemDAO.save(anItem3);
-		assertEquals(3, itemDAO.count());
+		assertEquals(3, originalCount + itemDAO.count());
 	}
 
 	@Test
