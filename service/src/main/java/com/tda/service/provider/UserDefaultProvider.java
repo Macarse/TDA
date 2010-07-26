@@ -47,8 +47,8 @@ public class UserDefaultProvider implements UserProvider {
 							.loadUserByUsername(key);
 				} catch (UsernameNotFoundException e) {
 					anUser = buildUserFromProps(key, props);
+					applicationUserService.save(anUser);
 				}
-				applicationUserService.save(anUser);
 			}
 		}
 	}

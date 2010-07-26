@@ -26,4 +26,7 @@
 		<property name="userDetailsService" ref="applicationUserService" />
 	</bean>
 
+	<security:global-method-security
+		secured-annotations="enabled" jsr250-annotations="disabled" />
+
 </beans>
