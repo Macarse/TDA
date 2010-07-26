@@ -7,15 +7,21 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
 import com.smartgwt.client.data.Record;
+import com.smartgwt.client.data.fields.DataSourceEnumField;
 import com.smartgwt.client.data.fields.DataSourceIntegerField;
 import com.smartgwt.client.data.fields.DataSourceTextField;
 import com.smartgwt.client.rpc.RPCResponse;
 import com.smartgwt.client.types.FieldType;
 import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.tda.model.item.Category;
 import com.tda.model.item.Item;
+import com.tda.model.item.MeasureUnit;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
+
 
 /**
  * Example <code>GwtRpcDataSource</code> implementation.
@@ -47,8 +53,39 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 		DataSourceTextField nameField = new DataSourceTextField("name", "Nombre");
 		nameField.setRequired(true);
 		nameField.setType(FieldType.TEXT);
-		setFields(nameField);
+		addField(nameField);
 
+		DataSourceTextField descriptionField = new DataSourceTextField("description", "Descripción", 200);
+		descriptionField.setRequired(false);
+		descriptionField.setType(FieldType.TEXT);
+		TextAreaItem textAreaItem = new TextAreaItem();
+        textAreaItem.setHeight(70);
+		descriptionField.setEditorType(textAreaItem);
+		addField(descriptionField);
+
+		DataSourceIntegerField quantityField = new DataSourceIntegerField("quantity", "Cantidad");
+		quantityField.setRequired(true);
+		quantityField.setType(FieldType.INTEGER);
+		addField(quantityField);
+
+
+		DataSourceEnumField categoryField = new DataSourceEnumField("category", "Categoría");
+		categoryField.setRequired(true);
+		categoryField.setType(FieldType.ENUM);
+		SelectItem categorySelect = new SelectItem();
+		categorySelect.setDefaultValue(Category.medical.toString());
+		categorySelect.setValueMap(Category.getMap());
+		categoryField.setEditorType(categorySelect);
+		addField(categoryField);
+
+		DataSourceEnumField measureField = new DataSourceEnumField("measure", "Medida");
+		measureField.setRequired(true);
+		measureField.setType(FieldType.ENUM);
+		SelectItem measureSelect = new SelectItem();
+		measureSelect.setValueMap(MeasureUnit.getMap());
+		measureSelect.setDefaultValue(MeasureUnit.unit.toString());
+		measureField.setEditorType(measureSelect);
+		addField(measureField);
 	}
 	
 	public static void copyValues(DynamicForm form, Record record){
@@ -142,7 +179,24 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 	}
 
 	private static void copyValues(Item from, ListGridRecord to) {
+
 		to.setAttribute("id", from.getId().toString());
 		to.setAttribute("name", from.getName());
+
+		if ( from.getDescription() != null ) {
+			to.setAttribute("description", from.getDescription());
+		}	
+
+		if ( from.getQuantity() != null ) {
+			to.setAttribute("quantity", from.getQuantity().toString());
+		}
+
+		if ( from.getMeasureUnit() != null ) {
+			to.setAttribute("measure", from.getMeasureUnit().toString());
+		}
+
+		if ( from.getCategory() != null ) {
+			to.setAttribute("category", from.getCategory().toString());
+		}
 	}
 }

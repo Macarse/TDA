@@ -10,16 +10,16 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
-import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
+import com.tda.model.item.Category;
 import com.tda.model.item.Item;
+import com.tda.model.item.MeasureUnit;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 
 public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
@@ -182,15 +182,25 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 
 	private void loadFormWithRecord(Record record) {
 		DynamicForm form = display.getForm();
-		form.setValue("name", record.getAttribute("name"));
 		form.setValue("id", record.getAttribute("id"));
+		form.setValue("name", record.getAttribute("name"));
+		form.setValue("description", record.getAttribute("description"));
+		form.setValue("measure", record.getAttribute("measure"));
+		form.setValue("category", record.getAttribute("category"));
+		form.setValue("quantity", record.getAttribute("quantity"));
 	}
 
 	private Item getItemFromForm() {
 		Item item = new Item();
 
 		DynamicForm form = display.getForm();
+
 		item.setName(form.getValueAsString("name"));
+		item.setCategory(Category.valueOf(form.getValueAsString("category")));
+		item.setMeasureUnit(MeasureUnit.valueOf(form.getValueAsString("measure")));
+		item.setDescription(form.getValueAsString("description"));
+		item.setQuantity(Long.valueOf(form.getValueAsString("quantity")));
+		
 		String idString = form.getValueAsString("id");
 		if ( idString == null ) {
 			idString = "1";
@@ -200,6 +210,7 @@ public class ItemPresenter implements Presenter, ValueChangeHandler<String> {
 
 		return item;
 	}
+
 
 	/*
 	 * TODO: MEJORAR!!!!!!!!!
