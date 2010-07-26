@@ -21,12 +21,7 @@ import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 public abstract class CrudGwtRPCDS<T> extends GwtRpcDataSource {
 
 	protected abstract CrudServiceGWTWrapperAsync<T> getRpc();
-	
-	/*
-	 * Copy values from form to record
-	 */
-	public abstract void copyValues(DynamicForm form, Record record);
-	
+
 	/*
 	 * Copy values from record to form
 	 */

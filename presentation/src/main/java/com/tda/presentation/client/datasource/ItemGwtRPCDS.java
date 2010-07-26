@@ -83,17 +83,15 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 		measureField.setEditorType(measureSelect);
 		addField(measureField);
 	}
-
-	@Override
-	public void copyValues(DynamicForm form, Record record) {
-		form.setValue("name", record.getAttribute("name"));
-		form.setValue("id", record.getAttribute("id"));
-	}
 	
 	@Override
 	public void copyValues(Record record, DynamicForm form) {
-		form.setValue("name", record.getAttribute("name"));
 		form.setValue("id", record.getAttribute("id"));
+		form.setValue("name", record.getAttribute("name"));
+		form.setValue("description", record.getAttribute("description"));
+		form.setValue("measure", record.getAttribute("measure"));
+		form.setValue("category", record.getAttribute("category"));
+		form.setValue("quantity", record.getAttribute("quantity"));
 	}
 	
 	public static Item getItem(DynamicForm form){

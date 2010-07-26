@@ -14,7 +14,6 @@ import com.tda.presentation.client.service.AdminServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 import com.tda.presentation.client.view.CrudView;
-import com.tda.presentation.client.presenter.CrudPresenter;
 
 public class AdminHomePresenter implements Presenter {
 
@@ -41,7 +40,6 @@ public class AdminHomePresenter implements Presenter {
 	public void go(HasWidgets container) {
 		instancePresenters();
 		appendPresenters();
-		bind();
 		container.clear();
 		//select displayed tab
 		display.getTab().selectTab(0);
@@ -67,15 +65,11 @@ public class AdminHomePresenter implements Presenter {
 		return itemRPC;
 	}
 
-	private void bind() {
-	}
-
 	public void onDestroy() {
 		/* Do nothing */
 	}
 
 	public void go(DecoratedTabPanel panel) {
-		bind();
 		panel.add(display.asWidget(), "Admin");
 	}
 

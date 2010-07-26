@@ -1,7 +1,5 @@
 package com.tda.presentation.client.presenter;
 
-import org.apache.catalina.startup.SetDocBaseRule;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -77,6 +75,7 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 	}
 	
 	public void go(DecoratedTabPanel panel) {
+		display.setDataSource(getDataSource());
 		bind();
 		panel.add(display.asWidget(), "items");
 	}
@@ -181,11 +180,7 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 		});
 	}
 
-	private void addItem() {
-		/*
-		 * TODO: ItemServiceGWTWrapperAsync must be generic
-		 * 		 as well ItemGwtRPCDS, Item
-		 */           
+	private void addItem() {        
 		T item = getDataSource().get(display.getForm());
 		getService().save(item, new AsyncCallback<Void>() {
 
