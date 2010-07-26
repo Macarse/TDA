@@ -19,6 +19,7 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
+import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 
@@ -30,18 +31,13 @@ import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
  * @author System Tier
  * @version 1.0
  */
-public class ItemGwtRPCDS extends GwtRpcDataSource {
+public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 
-	private static ItemGwtRPCDS _instance;
+	private CrudServiceGWTWrapperAsync<Item> rpc;
 
-	public static ItemGwtRPCDS getInstance() {
-		if ( _instance == null )
-			_instance = new ItemGwtRPCDS();
+	public ItemGwtRPCDS(CrudServiceGWTWrapperAsync<Item> rpc) {
+		this.rpc = rpc;
 
-		return _instance;
-	}
-
-	private ItemGwtRPCDS() {
 		setID("ItemsDataSource");
 
 		DataSourceIntegerField idField = new DataSourceIntegerField("id", "Id");
@@ -87,13 +83,15 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 		measureField.setEditorType(measureSelect);
 		addField(measureField);
 	}
-	
-	public static void copyValues(DynamicForm form, Record record){
+
+	@Override
+	public void copyValues(DynamicForm form, Record record) {
 		form.setValue("name", record.getAttribute("name"));
 		form.setValue("id", record.getAttribute("id"));
 	}
 	
-	public static void copyValues(Record record, DynamicForm form ){
+	@Override
+	public void copyValues(Record record, DynamicForm form) {
 		form.setValue("name", record.getAttribute("name"));
 		form.setValue("id", record.getAttribute("id"));
 	}
@@ -178,7 +176,8 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 			final DSRequest request, final DSResponse response) {
 	}
 
-	private static void copyValues(Item from, ListGridRecord to) {
+	@Override
+	protected void copyValues(Item from, ListGridRecord to) {
 
 		to.setAttribute("id", from.getId().toString());
 		to.setAttribute("name", from.getName());
@@ -198,5 +197,30 @@ public class ItemGwtRPCDS extends GwtRpcDataSource {
 		if ( from.getCategory() != null ) {
 			to.setAttribute("category", from.getCategory().toString());
 		}
+	}
+
+	@Override
+	protected CrudServiceGWTWrapperAsync<Item> getRpc() {
+		return this.rpc;
+	}
+
+	@Override
+	public Item get(DynamicForm form) {
+		Item item = new Item();
+
+		item.setName(form.getValueAsString("name"));
+		item.setCategory(Category.valueOf(form.getValueAsString("category")));
+		item.setMeasureUnit(MeasureUnit.valueOf(form.getValueAsString("measure")));
+		item.setDescription(form.getValueAsString("description"));
+		item.setQuantity(Long.valueOf(form.getValueAsString("quantity")));
+		
+		String idString = form.getValueAsString("id");
+		if ( idString == null ) {
+			idString = "1";
+		}
+
+		item.setId(Long.valueOf(idString));
+
+		return item;
 	}
 }

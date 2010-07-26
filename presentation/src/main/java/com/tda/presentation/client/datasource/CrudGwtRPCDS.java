@@ -19,12 +19,7 @@ import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
  * @version 1.0
  */
 public abstract class CrudGwtRPCDS<T> extends GwtRpcDataSource {
-	
-	private CrudServiceGWTWrapperAsync<T> rpc;
 
-	public CrudGwtRPCDS(){
-	}
-	
 	protected abstract CrudServiceGWTWrapperAsync<T> getRpc();
 	
 	/*

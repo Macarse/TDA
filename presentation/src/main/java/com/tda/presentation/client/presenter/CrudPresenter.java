@@ -1,5 +1,7 @@
 package com.tda.presentation.client.presenter;
 
+import org.apache.catalina.startup.SetDocBaseRule;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -22,7 +24,7 @@ import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 
 public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<String> {
 
-	public interface Display {
+	public interface Display<T> {
 		HasClickHandlers getAddButton();
 		HasClickHandlers getEditButton();
 		HasClickHandlers getDeleteButton();
@@ -35,12 +37,13 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 		Panel getListContainer();
 		Panel getFormContainer();
 		Panel getParentContainer();
+		void setDataSource(CrudGwtRPCDS<T> ds);
 	}
 
 
-	private final Display display;
+	private final Display<T> display;
 
-	public Display getDisplay() {
+	public Display<T> getDisplay() {
 		return display;
 	}
 
@@ -55,7 +58,7 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 	 * TODO: ItemServiceGWTWrapperAsync must be generic
 	 * 		 as well ItemGwtRPCDS
 	 */           
-	public CrudPresenter(HandlerManager eventBus, Display view) {
+	public CrudPresenter(HandlerManager eventBus, Display<T> view) {
 		this.display = view;
 		this.eventBus = eventBus;
 		this.status = Status.LIST;
@@ -67,6 +70,7 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 	protected abstract CrudGwtRPCDS<T> getDataSource();
 
 	public void go(HasWidgets container) {
+		display.setDataSource(getDataSource());
 		bind();
 		container.clear();
 		container.add(display.asWidget());
@@ -77,12 +81,12 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 		panel.add(display.asWidget(), "items");
 	}
 
-	private void showForm() {
+	protected void showForm() {
 		display.getListContainer().setVisible(false);
 		display.getFormContainer().setVisible(true);
 	}
 
-	private void showList() {
+	protected void showList() {
 		display.getFormContainer().setVisible(false);
 		display.getListContainer().setVisible(true);
 		display.getGrid().fetchData();

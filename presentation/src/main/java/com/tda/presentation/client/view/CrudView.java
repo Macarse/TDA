@@ -14,10 +14,10 @@ import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
-import com.tda.presentation.client.datasource.ItemGwtRPCDS;
+import com.tda.presentation.client.datasource.CrudGwtRPCDS;
 import com.tda.presentation.client.presenter.CrudPresenter;
 
-public class CrudView extends Composite implements CrudPresenter.Display {
+public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 
 	@UiTemplate("CrudView.ui.xml")
 	interface ItemViewUiBinder extends UiBinder<Widget, CrudView> {
@@ -47,34 +47,24 @@ public class CrudView extends Composite implements CrudPresenter.Display {
 
 	private ListGrid listGrid;
 	private DynamicForm form;
-	private ItemGwtRPCDS ds;
 
 	public CrudView() {
 		initWidget(uiBinder.createAndBindUi(this));
-
-		ds = ItemGwtRPCDS.getInstance();
-		createList();
-		createForm();
-
-		listContainer.add(listGrid);
-		formContainer.setVisible(false);
-		formContainer.add(form);
-        formContainer.add(submitButton);
 	}
 
-	private void createForm() {
+	
+	private void createForm(CrudGwtRPCDS<T> ds) {
 		form = new DynamicForm();
         form.setLayoutAlign(VerticalAlignment.CENTER);
         form.setSaveOperationType(DSOperationType.ADD);
-
         form.setDataSource(ds);
         form.setUseAllDataSourceFields(true);
 
         submitButton = new Button();
-        submitButton.setText("Submit");
+        submitButton.setText("Enviar");
 	}
 
-	private void createList() {
+	private void createList(CrudGwtRPCDS<T> ds) {
 		listGrid = new ListGrid();
 		listGrid.setWidth(750);
 		listGrid.setHeight(224);
@@ -129,5 +119,17 @@ public class CrudView extends Composite implements CrudPresenter.Display {
 
 	public HasClickHandlers getSubmitButton() {
 		return submitButton;
+	}
+
+	public void setDataSource(CrudGwtRPCDS<T> ds) {
+
+		createList(ds);
+		createForm(ds);
+
+		listContainer.add(listGrid);
+		formContainer.setVisible(false);
+		formContainer.add(form);
+        formContainer.add(submitButton);
+        
 	}
 }

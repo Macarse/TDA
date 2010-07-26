@@ -8,6 +8,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.smartgwt.client.widgets.Canvas;
+import com.tda.model.item.Item;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
 import com.tda.presentation.client.presenter.ItemPresenter;
 import com.tda.presentation.client.presenter.LoginPresenter;
@@ -19,7 +20,7 @@ import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.LoginServiceGWTWrapper;
 import com.tda.presentation.client.service.LoginServiceGWTWrapperAsync;
 import com.tda.presentation.client.view.AdminHomeView;
-import com.tda.presentation.client.view.ItemView;
+import com.tda.presentation.client.view.CrudView;
 import com.tda.presentation.client.view.LoginView;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
@@ -85,9 +86,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = null;
 			}
 
-			if (token.equals("itemList")) {
-				presenter = new ItemPresenter(getItemRPC(), eventBus, new ItemView());
-			} else if ( token.equals("login") ) {
+			if ( token.equals("login") ) {
 				presenter = new LoginPresenter(getLoginRPC(), eventBus, new LoginView());
 			} else if ( token.equals("adminHome") ) {
 				presenter = new AdminHomePresenter(getAdminRPC(), eventBus, new AdminHomeView());
