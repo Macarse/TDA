@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tda.model.item.Category;
 import com.tda.model.item.Item;
+import com.tda.model.item.ItemBuilder;
+import com.tda.model.item.MeasureUnit;
 import com.tda.persistence.dao.ItemDAO;
 import com.tda.service.api.ItemService;
 
@@ -44,8 +47,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Item> findByName(String name) {
-		return itemDAO.findByName(name);
+	public List<Item> findByNameContaining(String name) {
+		return itemDAO.findByNameContaining(name);
 	}
 
 	@Transactional(readOnly = true)
@@ -54,12 +57,34 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Item> findByDescription(String description) {
-		return itemDAO.findByDescription(description);
+	public List<Item> findByDescriptionContaining(String description) {
+		return itemDAO.findByDescriptionContaining(description);
 	}
 
 	@Transactional(readOnly = true)
 	public List<Item> findByQuantityRange(Long minQ, Long maxQ) {
 		return itemDAO.findByQuantityRange(minQ, maxQ);
+	}
+
+	public List<Item> findByName(String name) {
+		Item example = ItemBuilder.createItem().withName(name).build();
+		return itemDAO.findByExample(example);
+	}
+
+	public List<Item> findByDescription(String description) {
+		Item example = ItemBuilder.createItem().withDescription(description)
+				.build();
+		return itemDAO.findByExample(example);
+	}
+
+	public List<Item> findByCategory(Category category) {
+		Item example = ItemBuilder.createItem().withCategory(category).build();
+		return itemDAO.findByExample(example);
+	}
+
+	public List<Item> findByMeasureUnit(MeasureUnit measureUnit) {
+		Item example = ItemBuilder.createItem().withMeasureUnit(measureUnit)
+				.build();
+		return itemDAO.findByExample(example);
 	}
 }

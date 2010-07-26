@@ -101,7 +101,7 @@ public class ItemDAOTest {
 	}
 
 	@Test
-	public void findByName() {
+	public void findByNameContaining() {
 		Item anItem1 = ItemBuilder.createItem().withName("nombre1").build();
 		itemDAO.save(anItem1);
 		Item anItem2 = ItemBuilder.createItem().withName("nombre2").build();
@@ -109,11 +109,11 @@ public class ItemDAOTest {
 		Item anItem3 = ItemBuilder.createItem().withName("nada").build();
 		itemDAO.save(anItem3);
 
-		assertEquals(itemDAO.findByName("nombre").size(), 2);
+		assertEquals(itemDAO.findByNameContaining("nombre").size(), 2);
 	}
 
 	@Test
-	public void findByDescription() {
+	public void findByDescriptionContaining() {
 		Item anItem1 = ItemBuilder.createItem().withName("nombre1")
 				.withDescription("desc").build();
 		itemDAO.save(anItem1);
@@ -124,7 +124,7 @@ public class ItemDAOTest {
 				.withDescription("anda").build();
 		itemDAO.save(anItem3);
 
-		assertEquals(itemDAO.findByName("nada").size(), 1);
+		assertEquals(itemDAO.findByDescriptionContaining("nada").size(), 1);
 	}
 
 	@Test

@@ -33,8 +33,11 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.tda.model.item.Item</value>
+				
 				<value>com.tda.model.applicationuser.ApplicationUser</value>
 				<value>com.tda.model.applicationuser.Authority</value>
+				
+				<value>com.tda.model.patient.Patient</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -60,6 +63,12 @@
 	</bean>
 
 	<bean id="authorityDAO" class="com.tda.persistence.dao.AuthorityDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="patientDAO" class="com.tda.persistence.dao.PatientDAO">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
 		</property>

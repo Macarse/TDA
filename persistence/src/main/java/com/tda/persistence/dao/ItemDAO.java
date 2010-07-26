@@ -14,14 +14,14 @@ public class ItemDAO extends GenericDAOImpl<Item> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Item> findByName(String name) {
+	public List<Item> findByNameContaining(String name) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
 		criteria.add(Restrictions.like("name", "%" + name + "%"));
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Item> findByDescription(String description) {
+	public List<Item> findByDescriptionContaining(String description) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
 		criteria.add(Restrictions.like("description", "%" + description + "%"));
 		return getHibernateTemplate().findByCriteria(criteria);
