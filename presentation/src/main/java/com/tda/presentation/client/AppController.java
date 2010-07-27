@@ -1,45 +1,80 @@
 package com.tda.presentation.client;
 
+import java.util.HashMap;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
-import com.tda.model.item.Item;
+import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
-import com.tda.presentation.client.presenter.ItemPresenter;
 import com.tda.presentation.client.presenter.LoginPresenter;
 import com.tda.presentation.client.presenter.Presenter;
 import com.tda.presentation.client.service.AdminServiceGWTWrapper;
 import com.tda.presentation.client.service.AdminServiceGWTWrapperAsync;
+import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapper;
+import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.LoginServiceGWTWrapper;
 import com.tda.presentation.client.service.LoginServiceGWTWrapperAsync;
 import com.tda.presentation.client.view.AdminHomeView;
-import com.tda.presentation.client.view.CrudView;
 import com.tda.presentation.client.view.LoginView;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
+
+	public static final String ADMIN_HOME = "adminHome";
+	public static final String SOCIAL_HOME = "socialHome";
+	private ApplicationUser loggedApplicationUser;
+	public static final String LOGIN = "login";
+
+	private static final HashMap<String, String> redirectMap;
+
+	static {
+		redirectMap = new HashMap<String, String>(2);
+		redirectMap.put("ROLE_ADMIN", AppController.ADMIN_HOME);
+		redirectMap.put("ROLE_SOCIAL_WORKER", AppController.SOCIAL_HOME);
+	}
 
 	private final HandlerManager eventBus;
 	private ItemServiceGWTWrapperAsync itemRPC;
 	private LoginServiceGWTWrapperAsync loginRPC;
 	private AdminServiceGWTWrapperAsync adminRPC;
+	private ApplicationUserServiceGWTWrapperAsync applicationUserRPC;
 
 	private HasWidgets container;
 	private Presenter presenter;
+	private static AppController instance;
 
-	public AppController() {
+	public static AppController getInstance() {
+		if (instance == null) {
+			instance = new AppController();
+		}
+		return instance;
+	}
+
+	private AppController() {
 		this.eventBus = new HandlerManager(null);
 		bind();
 	}
 
+	public ApplicationUserServiceGWTWrapperAsync getapplicationUserRPC() {
+		if (applicationUserRPC == null) {
+			applicationUserRPC = GWT
+					.create(ApplicationUserServiceGWTWrapper.class);
+		}
+
+		return applicationUserRPC;
+	}
+
 	public AdminServiceGWTWrapperAsync getAdminRPC() {
-		if ( adminRPC == null ) {
+		if (adminRPC == null) {
 			adminRPC = GWT.create(AdminServiceGWTWrapper.class);
 		}
 
@@ -47,7 +82,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	}
 
 	public ItemServiceGWTWrapperAsync getItemRPC() {
-		if ( itemRPC == null ) {
+		if (itemRPC == null) {
 			itemRPC = GWT.create(ItemServiceGWTWrapper.class);
 		}
 
@@ -55,7 +90,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	}
 
 	public LoginServiceGWTWrapperAsync getLoginRPC() {
-		if ( loginRPC == null ) {
+		if (loginRPC == null) {
 			loginRPC = GWT.create(LoginServiceGWTWrapper.class);
 		}
 
@@ -64,14 +99,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	private void bind() {
 		History.addValueChangeHandler(this);
-		
+
 	}
 
 	public void go(HasWidgets container) {
 		this.container = container;
 
 		if ("".equals(History.getToken())) {
-			History.newItem("login");
+			History.newItem(LOGIN);
 		} else {
 			History.fireCurrentHistoryState();
 		}
@@ -86,12 +121,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = null;
 			}
 
-			if ( token.equals("login") ) {
-				presenter = new LoginPresenter(getLoginRPC(), eventBus, new LoginView());
-			} else if ( token.equals("adminHome") ) {
-				presenter = new AdminHomePresenter(getAdminRPC(), eventBus, new AdminHomeView());
+			if (token.equals(LOGIN)) {
+				presenter = new LoginPresenter(getLoginRPC(), eventBus,
+						new LoginView());
+			} else if (token.equals(ADMIN_HOME)) {
+				presenter = new AdminHomePresenter(getAdminRPC(), eventBus,
+						new AdminHomeView());
 			}
-			
+
 			if (presenter != null) {
 				presenter.go(container);
 			}
@@ -103,12 +140,32 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	}
 
 	public void attach(Canvas container) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void go(DecoratedTabPanel panel) {
-		// TODO Auto-generated method stub
-		
+	}
+
+	public void redirect(String username) {
+
+		getapplicationUserRPC().findByUsername(username,
+				new AsyncCallback<ApplicationUser>() {
+
+					public void onSuccess(ApplicationUser result) {
+						/* TODO: Fix This. */
+						loggedApplicationUser = result;
+						System.out.println("authority: "
+								+ loggedApplicationUser.getMyAuthorities()
+										.toArray()[0]);
+						History.newItem(redirectMap.get(loggedApplicationUser
+								.getMyAuthorities().toArray()[0]));
+						System.out.println("redirect to: "
+								+ redirectMap.get(loggedApplicationUser
+										.getMyAuthorities().toArray()[0]));
+					}
+
+					public void onFailure(Throwable caught) {
+						SC.say("Usuario no encontrado. Error en la base de datos.");
+					}
+				});
 	}
 }

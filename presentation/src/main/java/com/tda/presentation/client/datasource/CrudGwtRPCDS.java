@@ -25,8 +25,8 @@ public abstract class CrudGwtRPCDS<T> extends GwtRpcDataSource {
 	/*
 	 * Copy values from record to form
 	 */
-	public abstract void copyValues(Record record, DynamicForm form );
-	
+	public abstract void copyValues(Record record, DynamicForm form);
+
 	/*
 	 * Given a form returns an record
 	 */
@@ -36,7 +36,7 @@ public abstract class CrudGwtRPCDS<T> extends GwtRpcDataSource {
 	 * Given a item returns a listgridrecord
 	 */
 	protected abstract void copyValues(T from, ListGridRecord to);
-	
+
 	@Override
 	protected void executeFetch(final String requestId,
 			final DSRequest request, final DSResponse response) {
@@ -46,9 +46,11 @@ public abstract class CrudGwtRPCDS<T> extends GwtRpcDataSource {
 		// Finding which rows were requested
 		// Normally these two indexes should be passed to server
 		// but for this example I will do "paging" on client side
-		final int startIndex = (request.getStartRow() < 0) ? 0 : request.getStartRow();
-		final int endIndex = (request.getEndRow() == null) ? -1 : request.getEndRow();
-		
+		final int startIndex = (request.getStartRow() < 0) ? 0 : request
+				.getStartRow();
+		final int endIndex = (request.getEndRow() == null) ? -1 : request
+				.getEndRow();
+
 		getRpc().findAll(new AsyncCallback<List<T>>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);

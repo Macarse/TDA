@@ -20,7 +20,8 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 	interface LoginViewUiBinder extends UiBinder<Widget, LoginView> {
 	}
 
-	private static LoginViewUiBinder uiBinder = GWT.create(LoginViewUiBinder.class);
+	private static LoginViewUiBinder uiBinder = GWT
+			.create(LoginViewUiBinder.class);
 
 	@UiField
 	Panel formContainer;
@@ -39,8 +40,9 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 
 	private void createForm() {
 		form = new DynamicForm();
-		TextItem login = new TextItem("user", "Usuario");
-		PasswordItem password = new PasswordItem("passwd", "Contraseña");
+		TextItem login = new TextItem(LoginPresenter.USERNAME, "Usuario");
+		PasswordItem password = new PasswordItem(LoginPresenter.PASSWORD,
+				"Contraseña");
 		form.setFields(login, password);
 
 		loginButton = new Button("Login");

@@ -1,8 +1,10 @@
 package com.tda.model.patient;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PatientBuilder {
+public class PatientBuilder implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private String dni;
 

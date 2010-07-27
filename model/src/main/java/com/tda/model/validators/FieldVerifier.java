@@ -1,5 +1,7 @@
 package com.tda.model.validators;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * FieldVerifier validates that the name the user enters is valid.
@@ -20,17 +22,19 @@ package com.tda.model.validators;
  * JavaScript (such as Widgets) cannot be run on the server.
  * </p>
  */
-public class FieldVerifier {
+public class FieldVerifier implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Verifies that the specified name is valid for our service.
 	 * 
 	 * In this example, we only require that the name is at least four
-	 * characters. In your application, you can use more complex checks to ensure
-	 * that usernames, passwords, email addresses, URLs, and other fields have the
-	 * proper syntax.
+	 * characters. In your application, you can use more complex checks to
+	 * ensure that usernames, passwords, email addresses, URLs, and other fields
+	 * have the proper syntax.
 	 * 
-	 * @param name the name to validate
+	 * @param name
+	 *            the name to validate
 	 * @return true if valid, false if invalid
 	 */
 	public static boolean isValidName(String name) {

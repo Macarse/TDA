@@ -1,5 +1,7 @@
 package com.tda.model.applicationuser;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Authority implements Comparable<Authority> {
+public class Authority implements Comparable<Authority>, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String authority;
