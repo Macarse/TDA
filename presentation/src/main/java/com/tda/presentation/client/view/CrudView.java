@@ -10,10 +10,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.types.DSOperationType;
+import com.smartgwt.client.types.FetchMode;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.smartgwt.client.widgets.layout.VLayout;
 import com.tda.presentation.client.datasource.CrudGwtRPCDS;
 import com.tda.presentation.client.presenter.CrudPresenter;
 
@@ -47,6 +49,7 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 
 	private ListGrid listGrid;
 	private DynamicForm form;
+	private VLayout layout;
 
 	public CrudView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -65,14 +68,22 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 	}
 
 	private void createList(CrudGwtRPCDS<T> ds) {
+		layout = new VLayout();
 		listGrid = new ListGrid();
 		listGrid.setWidth(750);
 		listGrid.setHeight(224);
-		listGrid.setHeaderHeight(40);
+		
+		//filter config
+		listGrid.setShowFilterEditor(true);
+		listGrid.setFilterByCell(true);
+		
+		listGrid.setShowAllRecords(false);
+		listGrid.setDataFetchMode(FetchMode.PAGED);
+		listGrid.setDataPageSize(10);
+		listGrid.setDrawAheadRatio(1.5f);
 		listGrid.setDataSource(ds);
 		listGrid.setAutoFetchData(true);
-		listGrid.setShowFilterEditor(true);
-		
+		layout.addMember(listGrid);
 	}
 
 	public HasClickHandlers getAddButton() {
@@ -128,7 +139,7 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 		createList(ds);
 		createForm(ds);
 
-		listContainer.add(listGrid);
+		listContainer.add(layout);
 		formContainer.setVisible(false);
 		formContainer.add(form);
         formContainer.add(submitButton);
