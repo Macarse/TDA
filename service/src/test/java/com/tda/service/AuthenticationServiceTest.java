@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tda.applicationuser.ApplicationUser;
-import com.tda.applicationuser.ApplicationUserBuilder;
+import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.ApplicationUserBuilder;
 import com.tda.service.api.ApplicationUserService;
 import com.tda.service.api.AuthenticationService;
 import com.tda.service.api.AuthorityService;

@@ -1,4 +1,4 @@
-package com.tda.applicationuser;
+package com.tda.model.applicationuser;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,8 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.tda.model.applicationuser.ApplicationUserGWT;
-import com.tda.model.applicationuser.Authority;
 
 @Entity
 public class ApplicationUser extends ApplicationUserGWT implements UserDetails {

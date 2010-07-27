@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.tda.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.ApplicationUser;
 
 public interface ApplicationUserService extends UserDetailsService {
 

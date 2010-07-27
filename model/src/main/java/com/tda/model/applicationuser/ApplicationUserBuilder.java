@@ -1,10 +1,9 @@
-package com.tda.applicationuser;
+package com.tda.model.applicationuser;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.tda.model.applicationuser.Authority;
 
 public class ApplicationUserBuilder implements Serializable {
 	private static final long serialVersionUID = 1L;
