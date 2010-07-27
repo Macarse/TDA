@@ -1,8 +1,7 @@
 package com.tda.model.applicationuser;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -12,16 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.ForeignKey;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
-import org.springframework.security.core.userdetails.UserDetails;
-
 
 @Entity
-public class ApplicationUser implements UserDetails {
+public class ApplicationUserGWT implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,11 +28,11 @@ public class ApplicationUser implements UserDetails {
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
 
-	public ApplicationUser() {
+	public ApplicationUserGWT() {
 		super();
 	}
 
-	public ApplicationUser(String username, String password,
+	public ApplicationUserGWT(String username, String password,
 			Collection<Authority> authorities, boolean isAccountNonExpired,
 			boolean isAccountNonLocked, boolean isCredentialsNonExpired,
 			boolean isEnabled) {
@@ -67,15 +61,6 @@ public class ApplicationUser implements UserDetails {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	@Transient
-	public Collection<GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		for (Authority authority : myAuthorities) {
-			list.add(new GrantedAuthorityImpl(authority.getAuthority()));
-		}
-		return list;
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Authority.class, cascade = { CascadeType.ALL })
@@ -160,7 +145,7 @@ public class ApplicationUser implements UserDetails {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ApplicationUser other = (ApplicationUser) obj;
+		ApplicationUserGWT other = (ApplicationUserGWT) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

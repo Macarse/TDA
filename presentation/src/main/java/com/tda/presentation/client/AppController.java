@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
-import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.ApplicationUserGWT;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
 import com.tda.presentation.client.presenter.LoginPresenter;
 import com.tda.presentation.client.presenter.Presenter;
@@ -31,7 +31,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	public static final String ADMIN_HOME = "adminHome";
 	public static final String SOCIAL_HOME = "socialHome";
-	private ApplicationUser loggedApplicationUser;
+	private ApplicationUserGWT loggedApplicationUser;
 	public static final String LOGIN = "login";
 
 	private static final HashMap<String, String> redirectMap;
@@ -148,9 +148,9 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	public void redirect(String username) {
 
 		getapplicationUserRPC().findByUsername(username,
-				new AsyncCallback<ApplicationUser>() {
+				new AsyncCallback<ApplicationUserGWT>() {
 
-					public void onSuccess(ApplicationUser result) {
+					public void onSuccess(ApplicationUserGWT result) {
 						/* TODO: Fix This. */
 						loggedApplicationUser = result;
 						System.out.println("authority: "

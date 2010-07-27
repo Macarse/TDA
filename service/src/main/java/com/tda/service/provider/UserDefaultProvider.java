@@ -7,8 +7,8 @@ import java.util.Properties;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.tda.model.applicationuser.ApplicationUser;
-import com.tda.model.applicationuser.ApplicationUserBuilder;
+import com.tda.applicationuser.ApplicationUser;
+import com.tda.applicationuser.ApplicationUserBuilder;
 import com.tda.model.applicationuser.Authority;
 import com.tda.service.api.ApplicationUserService;
 import com.tda.service.api.AuthorityService;

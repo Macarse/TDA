@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
-import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.ApplicationUserGWT;
 import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapper;
 import com.tda.service.api.ApplicationUserService;
 
@@ -21,24 +21,27 @@ public class ApplicationUserServiceGWTWrapperImpl extends
 				.getBean("applicationUserService");
 	}
 
-	public void save(ApplicationUser applicationUser) {
-		applicationUserService.save(applicationUser);
+	/* TODO: FIX this class! */
+
+	public void save(ApplicationUserGWT applicationUser) {
+		// applicationUserService.save(applicationUser);
 	}
 
-	public void delete(ApplicationUser applicationUser) {
-		applicationUserService.delete(applicationUser);
+	public void delete(ApplicationUserGWT applicationUser) {
+		// applicationUserService.delete(applicationUser);
 	}
 
-	public void update(ApplicationUser applicationUser) {
-		applicationUserService.update(applicationUser);
+	public void update(ApplicationUserGWT applicationUser) {
+		// applicationUserService.update(applicationUser);
 	}
 
-	public ApplicationUser findById(Long id) {
+	public ApplicationUserGWT findById(Long id) {
 		return applicationUserService.findById(id);
 	}
 
-	public List<ApplicationUser> findAll() {
-		return applicationUserService.findAll();
+	public List<ApplicationUserGWT> findAll() {
+		// return applicationUserService.findAll();
+		return null;
 	}
 
 	public void deleteById(Long id) {
@@ -49,12 +52,14 @@ public class ApplicationUserServiceGWTWrapperImpl extends
 		return applicationUserService.count();
 	}
 
-	public List<ApplicationUser> findByExample(ApplicationUser exampleObject) {
-		return applicationUserService.findByExample(exampleObject);
+	public List<ApplicationUserGWT> findByExample(
+			ApplicationUserGWT exampleObject) {
+		// return applicationUserService.findByExample(exampleObject);
+		return null;
 	}
 
-	public ApplicationUser findByUsername(String username) {
-		return (ApplicationUser) applicationUserService
+	public ApplicationUserGWT findByUsername(String username) {
+		return (ApplicationUserGWT) applicationUserService
 				.loadUserByUsername(username);
 	}
 }

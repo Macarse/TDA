@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.ApplicationUserGWT;
 
 /**
  * The client side stub for the RPC service.
@@ -12,21 +12,21 @@ import com.tda.model.applicationuser.ApplicationUser;
 @RemoteServiceRelativePath("applicationUser")
 public interface ApplicationUserServiceGWTWrapper extends RemoteService {
 
-	void save(ApplicationUser applicationUser);
+	void save(ApplicationUserGWT applicationUser);
 
-	void delete(ApplicationUser applicationUser);
+	void delete(ApplicationUserGWT applicationUser);
 
-	void update(ApplicationUser applicationUser);
+	void update(ApplicationUserGWT applicationUser);
 
-	ApplicationUser findById(Long id);
+	ApplicationUserGWT findById(Long id);
 
-	List<ApplicationUser> findAll();
+	List<ApplicationUserGWT> findAll();
 
 	void deleteById(Long id);
 
 	int count();
 
-	List<ApplicationUser> findByExample(ApplicationUser exampleObject);
+	List<ApplicationUserGWT> findByExample(ApplicationUserGWT exampleObject);
 
-	ApplicationUser findByUsername(String username);
+	ApplicationUserGWT findByUsername(String username);
 }

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.applicationuser.ApplicationUser;
 import com.tda.persistence.dao.ApplicationUserDAO;
 import com.tda.service.api.ApplicationUserService;
 
