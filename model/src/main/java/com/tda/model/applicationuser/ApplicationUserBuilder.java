@@ -1,9 +1,13 @@
 package com.tda.model.applicationuser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ApplicationUserBuilder {
+
+public class ApplicationUserBuilder implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String password;
 	private String username;
 	private Collection<Authority> authorities = new ArrayList<Authority>();

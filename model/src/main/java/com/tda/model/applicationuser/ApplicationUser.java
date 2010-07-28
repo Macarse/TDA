@@ -68,15 +68,6 @@ public class ApplicationUser implements UserDetails {
 		this.username = username;
 	}
 
-	@Transient
-	public Collection<GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		for (Authority authority : myAuthorities) {
-			list.add(new GrantedAuthorityImpl(authority.getAuthority()));
-		}
-		return list;
-	}
-
 	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Authority.class, cascade = { CascadeType.ALL })
 	@ForeignKey(name = "ID_USER", inverseName = "ID_AUTH")
 	public Collection<Authority> getMyAuthorities() {
@@ -191,4 +182,12 @@ public class ApplicationUser implements UserDetails {
 		return true;
 	}
 
+	@Transient
+	public Collection<GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+		for (Authority authority : getMyAuthorities()) {
+			list.add(new GrantedAuthorityImpl(authority.getAuthority()));
+		}
+		return list;
+	}
 }

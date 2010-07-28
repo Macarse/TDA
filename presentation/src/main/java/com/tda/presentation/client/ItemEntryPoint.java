@@ -6,7 +6,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class ItemEntryPoint implements EntryPoint {
 
 	public void onModuleLoad() {
-		AppController appViewer = new AppController();
-		appViewer.go(RootPanel.get());
+		AppController.getInstance().go(RootPanel.get());
 	}
 }

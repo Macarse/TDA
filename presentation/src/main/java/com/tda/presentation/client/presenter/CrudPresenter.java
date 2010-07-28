@@ -3,7 +3,6 @@ package com.tda.presentation.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
@@ -20,24 +19,41 @@ import com.smartgwt.client.widgets.grid.ListGrid;
 import com.tda.presentation.client.datasource.CrudGwtRPCDS;
 import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 
-public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<String> {
+public abstract class CrudPresenter<T> implements Presenter,
+		ValueChangeHandler<String> {
+
+	private static final String ID = "id";
+	private static final String LIST = "List";
+	private static final String EDIT_FORM = "EditForm";
+	private static final String ADD_FORM = "AddForm";
 
 	public interface Display<T> {
 		HasClickHandlers getAddButton();
+
 		HasClickHandlers getEditButton();
+
 		HasClickHandlers getDeleteButton();
+
 		HasClickHandlers getSubmitButton();
+
 		ListGrid getGrid();
+
 		Record getClickedRow();
+
 		Record[] getSelectedRows();
+
 		DynamicForm getForm();
+
 		Widget asWidget();
+
 		Panel getListContainer();
+
 		Panel getFormContainer();
+
 		Panel getParentContainer();
+
 		void setDataSource(CrudGwtRPCDS<T> ds);
 	}
-
 
 	private final Display<T> display;
 
@@ -45,26 +61,18 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 		return display;
 	}
 
-	/*
-	 * TODO: ItemServiceGWTWrapperAsync must be generic
-	 * 		 as well ItemGwtRPCDS
-	 */           
 	private final HandlerManager eventBus;
 	private Status status;
-	
-	/*
-	 * TODO: ItemServiceGWTWrapperAsync must be generic
-	 * 		 as well ItemGwtRPCDS
-	 */           
+
 	public CrudPresenter(HandlerManager eventBus, Display<T> view) {
 		this.display = view;
 		this.eventBus = eventBus;
 		this.status = Status.LIST;
 		History.addValueChangeHandler(this);
 	}
-	
+
 	protected abstract CrudServiceGWTWrapperAsync<T> getService();
-	
+
 	protected abstract CrudGwtRPCDS<T> getDataSource();
 
 	public void go(HasWidgets container) {
@@ -73,11 +81,11 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 		container.clear();
 		container.add(display.asWidget());
 	}
-	
+
 	public void go(DecoratedTabPanel panel) {
 		display.setDataSource(getDataSource());
 		bind();
-		panel.add(display.asWidget(), "items");
+		panel.add(display.asWidget(), getPrefix());
 	}
 
 	protected void showForm() {
@@ -92,37 +100,33 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 		display.getForm().clearValues();
 	}
 
-	private void bind() {		
+	private void bind() {
 		display.getAddButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				status = Status.ADD;
-				History.newItem("addForm");
+				History.newItem(getPrefix() + ADD_FORM);
 			}
 		});
-		
+
 		display.getEditButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
 				/* No item selected */
-				if ( display.getClickedRow() == null )
+				if (display.getClickedRow() == null)
 					return;
 
-				/*
-				 * TODO: ItemServiceGWTWrapperAsync must be generic
-				 * 		 as well ItemGwtRPCDS
-				 */           
-				getDataSource().copyValues(display.getClickedRow(), display.getForm());
+				getDataSource().copyValues(display.getClickedRow(),
+						display.getForm());
 				status = Status.EDIT;
-				History.newItem("editForm");
+				History.newItem(getPrefix() + EDIT_FORM);
 			}
-
 
 		});
 
 		display.getSubmitButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				if ( !display.getForm().validate() ) {
+				if (!display.getForm().validate()) {
 					return;
 				}
 
@@ -145,90 +149,101 @@ public abstract class CrudPresenter<T> implements Presenter, ValueChangeHandler<
 			public void onClick(ClickEvent event) {
 
 				/* No item selected */
-				if ( display.getClickedRow() == null )
+				if (display.getClickedRow() == null)
 					return;
 
-				final long id = Long.valueOf(display.getClickedRow().getAttribute("id"));
+				final long id = Long.valueOf(display.getClickedRow()
+						.getAttribute(ID));
 
-				SC.ask("Desea borrar el item?", new BooleanCallback() {
-					public void execute(Boolean value) {
-						if (value) {
-							removeItem(id);
-						}
-					}
-				});
+				SC.ask("¿Desea borrar el elemento seleccionado?",
+						new BooleanCallback() {
+							public void execute(Boolean value) {
+								if (value) {
+									removeItem(id);
+								}
+							}
+						});
 			}
 		});
 	}
 
 	private void editItem() {
-		/*
-		 * TODO: ItemServiceGWTWrapperAsync must be generic
-		 * 		 as well ItemGwtRPCDS, Item
-		 */           
 		T item = getDataSource().get(display.getForm());
 		getService().update(item, new AsyncCallback<Void>() {
 
 			public void onFailure(Throwable caught) {
-				SC.say("Item no pudo ser editado. " + caught.getMessage());
+				SC.say("El elemento no pudo ser editado. "
+						+ caught.getMessage());
 			}
 
 			public void onSuccess(Void result) {
-				History.newItem("itemsList");
-				SC.say("Item editado.");
+				History.newItem(getPrefix() + LIST);
+				SC.say("Elemento editado.");
 			}
 		});
 	}
 
-	private void addItem() {        
+	private void addItem() {
 		T item = getDataSource().get(display.getForm());
 		getService().save(item, new AsyncCallback<Void>() {
 
 			public void onFailure(Throwable caught) {
-				SC.say("Item no pudo ser agregado. " + caught.getMessage());
-				
+				SC.say("El elemento no pudo ser agregado. "
+						+ caught.getMessage());
+
 			}
 
 			public void onSuccess(Void result) {
-				History.newItem("itemsList");
-				SC.say("Item agregado.");
+				History.newItem(getPrefix() + LIST);
+				SC.say("Elemento agregado.");
 			}
 		});
-		
+
 	}
 
+	protected abstract String getPrefix();
+
 	/*
-	 * TODO: MEJORAR!!!!!!!!!
+	 * TODO: Improve!
 	 */
-	private void removeItem(long id){
-		/*
-		 * First got to fetch item(id)
-		 */
+	private void removeItem(long id) {
+
+		/* First got to fetch item(id) */
 		getService().findById(id, new AsyncCallback<T>() {
 			public void onFailure(Throwable arg0) {
-				SC.say("Error al retribuir el item");
+				SC.say("Elemento no encontrado");
 			}
 
 			public void onSuccess(T item) {
-				getService().delete(item, new AsyncCallback<Void>(){
+				getService().delete(item, new AsyncCallback<Void>() {
 
 					public void onFailure(Throwable arg0) {
-						SC.say("Error al eliminar el item");
+						SC.say("Error al eliminar el elemento");
 					}
 
 					public void onSuccess(Void arg0) {
-						SC.say("Item removido");
-						/* TODO: This is not updating data */
+						SC.say("Elemento removido");
+
 						display.getGrid().fetchData();
 						display.getGrid().redraw();
 					}
-					
+
 				});
 			}
 		});
 	}
 
+	protected String getListToken() {
+		return getPrefix() + LIST;
+	}
+
+	protected String getAddFormToken() {
+		return getPrefix() + ADD_FORM;
+	}
+
+	protected String getEditFormToken() {
+		return getPrefix() + EDIT_FORM;
+	}
+
 	public abstract void onDestroy();
-	
-	public abstract void onValueChange(ValueChangeEvent<String> event);
 }

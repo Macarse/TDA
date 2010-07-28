@@ -2,7 +2,6 @@ package com.tda.presentation.client.datasource;
 
 import java.util.List;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
@@ -18,12 +17,10 @@ import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
+import com.tda.model.item.ItemBuilder;
 import com.tda.model.item.MeasureUnit;
 import com.tda.presentation.client.exception.NotInitializedException;
 import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
-import com.tda.presentation.client.service.ItemServiceGWTWrapper;
-import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
-
 
 /**
  * Example <code>GwtRpcDataSource</code> implementation.
@@ -36,7 +33,14 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 
 	private static CrudServiceGWTWrapperAsync<Item> rpc;
 	private static ItemGwtRPCDS _instance;
-	
+
+    private static final String QUANTITY = "quantity";
+    private static final String CATEGORY = "category";
+    private static final String MEASURE = "measure";
+    private static final String DESCRIPTION = "description";
+    private static final String NAME = "name";
+    private static final String ID = "id";
+
 	public static ItemGwtRPCDS getInstance() throws NotInitializedException{
 		if (_instance == null)
 			throw new NotInitializedException("ItemGwtRPCDS");
@@ -54,32 +58,34 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 	private ItemGwtRPCDS(CrudServiceGWTWrapperAsync<Item> rpc) {
 		setID("ItemsDataSource");
 
-		DataSourceIntegerField idField = new DataSourceIntegerField("id", "Id");
+		DataSourceIntegerField idField = new DataSourceIntegerField(ID, "Id");
 		idField.setType(FieldType.SEQUENCE);
 		idField.setPrimaryKey(true);
 		idField.setHidden(true);
 		addField(idField);
 
-		DataSourceTextField nameField = new DataSourceTextField("name", "Nombre");
+		DataSourceTextField nameField = new DataSourceTextField(NAME, "Nombre");
 		nameField.setRequired(true);
 		nameField.setType(FieldType.TEXT);
 		addField(nameField);
 
-		DataSourceTextField descriptionField = new DataSourceTextField("description", "Descripción", 200);
+		DataSourceTextField descriptionField = new DataSourceTextField(
+				DESCRIPTION, "Descripción");
 		descriptionField.setRequired(false);
 		descriptionField.setType(FieldType.TEXT);
 		TextAreaItem textAreaItem = new TextAreaItem();
-        textAreaItem.setHeight(70);
+		textAreaItem.setHeight(70);
 		descriptionField.setEditorType(textAreaItem);
 		addField(descriptionField);
 
-		DataSourceIntegerField quantityField = new DataSourceIntegerField("quantity", "Cantidad");
+		DataSourceIntegerField quantityField = new DataSourceIntegerField(
+				QUANTITY, "Cantidad");
 		quantityField.setRequired(true);
 		quantityField.setType(FieldType.INTEGER);
 		addField(quantityField);
 
-
-		DataSourceEnumField categoryField = new DataSourceEnumField("category", "Categoría");
+		DataSourceEnumField categoryField = new DataSourceEnumField(CATEGORY,
+				"Categoría");
 		categoryField.setRequired(true);
 		categoryField.setType(FieldType.ENUM);
 		SelectItem categorySelect = new SelectItem();
@@ -88,7 +94,8 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 		categoryField.setEditorType(categorySelect);
 		addField(categoryField);
 
-		DataSourceEnumField measureField = new DataSourceEnumField("measure", "Medida");
+		DataSourceEnumField measureField = new DataSourceEnumField(MEASURE,
+				"Medida");
 		measureField.setRequired(true);
 		measureField.setType(FieldType.ENUM);
 		SelectItem measureSelect = new SelectItem();
@@ -97,29 +104,15 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 		measureField.setEditorType(measureSelect);
 		addField(measureField);
 	}
-	
+
 	@Override
 	public void copyValues(Record record, DynamicForm form) {
-		form.setValue("id", record.getAttribute("id"));
-		form.setValue("name", record.getAttribute("name"));
-		form.setValue("description", record.getAttribute("description"));
-		form.setValue("measure", record.getAttribute("measure"));
-		form.setValue("category", record.getAttribute("category"));
-		form.setValue("quantity", record.getAttribute("quantity"));
-	}
-	
-	public static Item getItem(DynamicForm form){
-		Item item = new Item();
-
-		item.setName(form.getValueAsString("name"));
-		String idString = form.getValueAsString("id");
-		if ( idString == null ) {
-			idString = "1";
-		}
-
-		item.setId(Long.valueOf(idString));
-
-		return item;
+		form.setValue(ID, record.getAttribute(ID));
+		form.setValue(NAME, record.getAttribute(NAME));
+		form.setValue(DESCRIPTION, record.getAttribute(DESCRIPTION));
+		form.setValue(MEASURE, record.getAttribute(MEASURE));
+		form.setValue(CATEGORY, record.getAttribute(CATEGORY));
+		form.setValue(QUANTITY, record.getAttribute(QUANTITY));
 	}
 
 	@Override
@@ -131,12 +124,12 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 		// Finding which rows were requested
 		// Normally these two indexes should be passed to server
 		// but for this example I will do "paging" on client side
-		final int startIndex = (request.getStartRow() < 0) ? 0 : request.getStartRow();
-		final int endIndex = (request.getEndRow() == null) ? -1 : request.getEndRow();
+		final int startIndex = (request.getStartRow() < 0) ? 0 : request
+				.getStartRow();
+		final int endIndex = (request.getEndRow() == null) ? -1 : request
+				.getEndRow();
 
-		ItemServiceGWTWrapperAsync service = GWT.create(ItemServiceGWTWrapper.class);
-		
-		service.findAll(new AsyncCallback<List<Item>>() {
+		rpc.findAll(new AsyncCallback<List<Item>>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
 				processResponse(requestId, response);
@@ -190,23 +183,23 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 	@Override
 	protected void copyValues(Item from, ListGridRecord to) {
 
-		to.setAttribute("id", from.getId().toString());
-		to.setAttribute("name", from.getName());
+		to.setAttribute(ID, from.getId().toString());
+		to.setAttribute(NAME, from.getName());
 
-		if ( from.getDescription() != null ) {
-			to.setAttribute("description", from.getDescription());
-		}	
-
-		if ( from.getQuantity() != null ) {
-			to.setAttribute("quantity", from.getQuantity().toString());
+		if (from.getDescription() != null) {
+			to.setAttribute(DESCRIPTION, from.getDescription());
 		}
 
-		if ( from.getMeasureUnit() != null ) {
-			to.setAttribute("measure", from.getMeasureUnit().toString());
+		if (from.getQuantity() != null) {
+			to.setAttribute(QUANTITY, from.getQuantity().toString());
 		}
 
-		if ( from.getCategory() != null ) {
-			to.setAttribute("category", from.getCategory().toString());
+		if (from.getMeasureUnit() != null) {
+			to.setAttribute(MEASURE, from.getMeasureUnit().toString());
+		}
+
+		if (from.getCategory() != null) {
+			to.setAttribute(CATEGORY, from.getCategory().toString());
 		}
 	}
 
@@ -217,20 +210,21 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 
 	@Override
 	public Item get(DynamicForm form) {
-		Item item = new Item();
 
-		item.setName(form.getValueAsString("name"));
-		item.setCategory(Category.valueOf(form.getValueAsString("category")));
-		item.setMeasureUnit(MeasureUnit.valueOf(form.getValueAsString("measure")));
-		item.setDescription(form.getValueAsString("description"));
-		item.setQuantity(Long.valueOf(form.getValueAsString("quantity")));
-		
-		String idString = form.getValueAsString("id");
-		if ( idString == null ) {
-			idString = "1";
+		Item item = ItemBuilder
+				.createItem()
+				.withName(form.getValueAsString(NAME))
+				.withCategory(Category.valueOf(form.getValueAsString(CATEGORY)))
+				.withMeasureUnit(
+						MeasureUnit.valueOf(form.getValueAsString(MEASURE)))
+				.withDescription(form.getValueAsString(DESCRIPTION))
+				.withQuantity(Long.valueOf(form.getValueAsString(QUANTITY)))
+				.build();
+
+		String idString = form.getValueAsString(ID);
+		if (idString != null) {
+			item.setId(Long.valueOf(idString));
 		}
-
-		item.setId(Long.valueOf(idString));
 
 		return item;
 	}
