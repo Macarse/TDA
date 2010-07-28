@@ -19,6 +19,7 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
+import com.tda.presentation.client.exception.NotInitializedException;
 import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
@@ -33,11 +34,24 @@ import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
  */
 public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 
-	private CrudServiceGWTWrapperAsync<Item> rpc;
+	private static CrudServiceGWTWrapperAsync<Item> rpc;
+	private static ItemGwtRPCDS _instance;
+	
+	public static ItemGwtRPCDS getInstance() throws NotInitializedException{
+		if (_instance == null)
+			throw new NotInitializedException("ItemGwtRPCDS");
+			
+		return _instance;
+	}
+	
+	public static void setRpc(CrudServiceGWTWrapperAsync<Item> service){
+		if (_instance == null){
+			rpc = service;
+			_instance = new ItemGwtRPCDS(rpc);
+		}
+	}
 
-	public ItemGwtRPCDS(CrudServiceGWTWrapperAsync<Item> rpc) {
-		this.rpc = rpc;
-
+	private ItemGwtRPCDS(CrudServiceGWTWrapperAsync<Item> rpc) {
 		setID("ItemsDataSource");
 
 		DataSourceIntegerField idField = new DataSourceIntegerField("id", "Id");
@@ -121,7 +135,6 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 		final int endIndex = (request.getEndRow() == null) ? -1 : request.getEndRow();
 
 		ItemServiceGWTWrapperAsync service = GWT.create(ItemServiceGWTWrapper.class);
-
 		
 		service.findAll(new AsyncCallback<List<Item>>() {
 			public void onFailure(Throwable caught) {
@@ -199,7 +212,7 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 
 	@Override
 	protected CrudServiceGWTWrapperAsync<Item> getRpc() {
-		return this.rpc;
+		return rpc;
 	}
 
 	@Override

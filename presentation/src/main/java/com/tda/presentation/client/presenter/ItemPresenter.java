@@ -19,17 +19,13 @@ public class ItemPresenter extends CrudPresenter<Item> {
 	public ItemPresenter(HandlerManager eventBus, Display<Item> view) {
 		super(eventBus, view);
 		this.rpc = GWT.create(ItemServiceGWTWrapper.class);
-		this.dataSource = new ItemGwtRPCDS(this.rpc);
-	}
-
-	private void loadFormWithRecord(Record record) {
-		DynamicForm form = getDisplay().getForm();
-		form.setValue("id", record.getAttribute("id"));
-		form.setValue("name", record.getAttribute("name"));
-		form.setValue("description", record.getAttribute("description"));
-		form.setValue("measure", record.getAttribute("measure"));
-		form.setValue("category", record.getAttribute("category"));
-		form.setValue("quantity", record.getAttribute("quantity"));
+		ItemGwtRPCDS.setRpc(this.rpc);
+		try{
+			this.dataSource = ItemGwtRPCDS.getInstance();
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
 	}
 
 	public void onDestroy() {

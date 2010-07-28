@@ -2,6 +2,8 @@ package com.tda.presentation.client.datasource;
 
 import java.util.List;
 
+import org.hibernate.hql.ast.tree.DotNode.IllegalCollectionDereferenceExceptionBuilder;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
