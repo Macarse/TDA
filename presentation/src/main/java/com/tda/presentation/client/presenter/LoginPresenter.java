@@ -11,6 +11,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
+import com.smartgwt.client.widgets.form.fields.events.KeyUpHandler;
 import com.tda.presentation.client.AppController;
 import com.tda.presentation.client.service.LoginServiceGWTWrapperAsync;
 
@@ -30,12 +32,14 @@ public class LoginPresenter implements Presenter {
 	private Display display;
 	private HandlerManager eventBus;
 	private LoginServiceGWTWrapperAsync rpc;
+	private LoginClickHandler loginClickHandler;
 
 	public LoginPresenter(LoginServiceGWTWrapperAsync rpc,
 			HandlerManager eventBus, Display view) {
 		this.display = view;
 		this.rpc = rpc;
 		this.eventBus = eventBus;
+		this.loginClickHandler = new LoginClickHandler();
 	}
 
 	public void go(HasWidgets container) {
@@ -45,34 +49,51 @@ public class LoginPresenter implements Presenter {
 	}
 
 	private void bind() {
-		display.getLoginButton().addClickHandler(new ClickHandler() {
+		display.getLoginButton().addClickHandler(loginClickHandler);
+		EnterToLogin enterToLogin = new EnterToLogin();
 
-			public void onClick(ClickEvent event) {
-				DynamicForm form = display.getForm();
-				if (!form.validate())
-					return;
+		display.getForm().getField(USERNAME).addKeyUpHandler(enterToLogin);
+		display.getForm().getField(PASSWORD).addKeyUpHandler(enterToLogin);
 
-				final String user = form.getValueAsString(USERNAME);
-				final String passwd = form.getValueAsString(PASSWORD);
-				rpc.login(user, passwd, new AsyncCallback<Boolean>() {
+	}
 
-					public void onSuccess(Boolean result) {
-						if (result) {
-							AppController.getInstance().redirect(user);
-						} else {
-							display.getForm().setValue(PASSWORD, "");
-							SC.say("Usuario o contraseña inválidos.");
-						}
+	private class EnterToLogin implements KeyUpHandler {
 
-					}
-
-					public void onFailure(Throwable caught) {
-						SC.say("No se pudo conectar con la base de datos. "
-								+ caught.getLocalizedMessage());
-					}
-				});
+		public void onKeyUp(KeyUpEvent event) {
+			if ("Enter".equals(event.getKeyName())) {
+				loginClickHandler.onClick(null);
 			}
-		});
+		}
+
+	}
+
+	final class LoginClickHandler implements ClickHandler {
+
+		public void onClick(ClickEvent event) {
+			DynamicForm form = display.getForm();
+			if (!form.validate())
+				return;
+
+			final String user = form.getValueAsString(USERNAME);
+			final String passwd = form.getValueAsString(PASSWORD);
+			rpc.login(user, passwd, new AsyncCallback<Boolean>() {
+
+				public void onSuccess(Boolean result) {
+					if (result) {
+						AppController.getInstance().redirect(user);
+					} else {
+						display.getForm().setValue(PASSWORD, "");
+						SC.say("Usuario o contraseña inválidos.");
+					}
+
+				}
+
+				public void onFailure(Throwable caught) {
+					SC.say("No se pudo conectar con la base de datos. "
+							+ caught.getLocalizedMessage());
+				}
+			});
+		}
 	}
 
 	public void onDestroy() {
