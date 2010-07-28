@@ -9,15 +9,16 @@ import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.tda.presentation.client.presenter.AdminHomePresenter;
+import com.tda.presentation.client.presenter.HomePresenter;
 
-public class AdminHomeView extends Composite implements AdminHomePresenter.Display {
+public class HomeView extends Composite implements HomePresenter.Display {
 
-	@UiTemplate("AdminHomeView.ui.xml")
-	interface AdminHomeViewUiBinder extends UiBinder<Widget, AdminHomeView> {
+	@UiTemplate("HomeView.ui.xml")
+	interface HomeViewUiBinder extends UiBinder<Widget, HomeView> {
 	}
 
-	private static AdminHomeViewUiBinder uiBinder = GWT.create(AdminHomeViewUiBinder.class);
+	private static HomeViewUiBinder uiBinder = GWT
+			.create(HomeViewUiBinder.class);
 
 	@UiField
 	VerticalPanel tabsContainer;
@@ -26,8 +27,8 @@ public class AdminHomeView extends Composite implements AdminHomePresenter.Displ
 	VerticalPanel mainContainer;
 
 	private DecoratedTabPanel tabSet;
-	
-	public AdminHomeView() {
+
+	public HomeView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		createTabs();
 		tabsContainer.add(tabSet);

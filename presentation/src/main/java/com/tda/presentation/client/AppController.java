@@ -17,13 +17,14 @@ import com.tda.model.applicationuser.Authority;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
 import com.tda.presentation.client.presenter.LoginPresenter;
 import com.tda.presentation.client.presenter.Presenter;
+import com.tda.presentation.client.presenter.SocialHomePresenter;
 import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapper;
 import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 import com.tda.presentation.client.service.ItemServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.LoginServiceGWTWrapper;
 import com.tda.presentation.client.service.LoginServiceGWTWrapperAsync;
-import com.tda.presentation.client.view.AdminHomeView;
+import com.tda.presentation.client.view.HomeView;
 import com.tda.presentation.client.view.LoginView;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
@@ -115,8 +116,9 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = new LoginPresenter(getLoginRPC(), eventBus,
 						new LoginView());
 			} else if (token.equals(ADMIN_HOME)) {
-				presenter = new AdminHomePresenter(eventBus,
-						new AdminHomeView());
+				presenter = new AdminHomePresenter(eventBus, new HomeView());
+			} else if (token.equals(SOCIAL_HOME)) {
+				presenter = new SocialHomePresenter(eventBus, new HomeView());
 			}
 
 			if (presenter != null) {

@@ -16,6 +16,11 @@
 	</servlet>
 
 	<servlet>
+		<servlet-name>patientServlet</servlet-name>
+		<servlet-class>com.tda.presentation.server.PatientServiceGWTWrapperImpl</servlet-class>
+	</servlet>
+
+	<servlet>
 		<servlet-name>adminServlet</servlet-name>
 		<servlet-class>com.tda.presentation.server.AdminServiceGWTWrapperImpl</servlet-class>
 	</servlet>
@@ -43,6 +48,11 @@
 	<servlet-mapping>
 		<servlet-name>itemServlet</servlet-name>
 		<url-pattern>/prueba/item</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>patientServlet</servlet-name>
+		<url-pattern>/prueba/patient</url-pattern>
 	</servlet-mapping>
 
 	<filter>
