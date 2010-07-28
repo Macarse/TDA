@@ -17,8 +17,6 @@ import com.tda.model.applicationuser.Authority;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
 import com.tda.presentation.client.presenter.LoginPresenter;
 import com.tda.presentation.client.presenter.Presenter;
-import com.tda.presentation.client.service.AdminServiceGWTWrapper;
-import com.tda.presentation.client.service.AdminServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapper;
 import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapperAsync;
 import com.tda.presentation.client.service.ItemServiceGWTWrapper;
@@ -46,7 +44,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private final HandlerManager eventBus;
 	private ItemServiceGWTWrapperAsync itemRPC;
 	private LoginServiceGWTWrapperAsync loginRPC;
-	private AdminServiceGWTWrapperAsync adminRPC;
 	private ApplicationUserServiceGWTWrapperAsync applicationUserRPC;
 
 	private HasWidgets container;
@@ -72,14 +69,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		}
 
 		return applicationUserRPC;
-	}
-
-	public AdminServiceGWTWrapperAsync getAdminRPC() {
-		if (adminRPC == null) {
-			adminRPC = GWT.create(AdminServiceGWTWrapper.class);
-		}
-
-		return adminRPC;
 	}
 
 	public ItemServiceGWTWrapperAsync getItemRPC() {
@@ -126,7 +115,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = new LoginPresenter(getLoginRPC(), eventBus,
 						new LoginView());
 			} else if (token.equals(ADMIN_HOME)) {
-				presenter = new AdminHomePresenter(getAdminRPC(), eventBus,
+				presenter = new AdminHomePresenter(eventBus,
 						new AdminHomeView());
 			}
 
