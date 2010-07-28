@@ -12,11 +12,11 @@ import com.tda.model.applicationuser.ApplicationUserGWT;
 @RemoteServiceRelativePath("applicationUser")
 public interface ApplicationUserServiceGWTWrapper extends RemoteService {
 
-	void save(ApplicationUserGWT applicationUser);
+	void save(ApplicationUserGWT applicationUserGWT);
 
-	void delete(ApplicationUserGWT applicationUser);
+	void delete(ApplicationUserGWT applicationUserGWT);
 
-	void update(ApplicationUserGWT applicationUser);
+	void update(ApplicationUserGWT applicationUserGWT);
 
 	ApplicationUserGWT findById(Long id);
 

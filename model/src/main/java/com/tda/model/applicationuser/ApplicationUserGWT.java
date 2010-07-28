@@ -3,16 +3,7 @@ package com.tda.model.applicationuser;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 public class ApplicationUserGWT implements Serializable {
@@ -28,24 +19,14 @@ public class ApplicationUserGWT implements Serializable {
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
 
-	public ApplicationUserGWT() {
-		super();
+	public Long getId() {
+		return id;
 	}
 
-	public ApplicationUserGWT(String username, String password,
-			Collection<Authority> authorities, boolean isAccountNonExpired,
-			boolean isAccountNonLocked, boolean isCredentialsNonExpired,
-			boolean isEnabled) {
-		this.username = username;
-		this.password = password;
-		this.myAuthorities = authorities;
-		this.isAccountNonExpired = isAccountNonExpired;
-		this.isAccountNonLocked = isAccountNonLocked;
-		this.isCredentialsNonExpired = isCredentialsNonExpired;
-		this.isEnabled = isEnabled;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	@Basic
 	public String getPassword() {
 		return password;
 	}
@@ -54,7 +35,6 @@ public class ApplicationUserGWT implements Serializable {
 		this.password = password;
 	}
 
-	@Basic
 	public String getUsername() {
 		return username;
 	}
@@ -63,8 +43,6 @@ public class ApplicationUserGWT implements Serializable {
 		this.username = username;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Authority.class, cascade = { CascadeType.ALL })
-	@ForeignKey(name = "ID_USER", inverseName = "ID_AUTH")
 	public Collection<Authority> getMyAuthorities() {
 		return myAuthorities;
 	}
@@ -73,7 +51,6 @@ public class ApplicationUserGWT implements Serializable {
 		this.myAuthorities = myAuthorities;
 	}
 
-	@Basic
 	public boolean isAccountNonExpired() {
 		return isAccountNonExpired;
 	}
@@ -82,7 +59,6 @@ public class ApplicationUserGWT implements Serializable {
 		this.isAccountNonExpired = isAccountNonExpired;
 	}
 
-	@Basic
 	public boolean isAccountNonLocked() {
 		return isAccountNonLocked;
 	}
@@ -91,7 +67,6 @@ public class ApplicationUserGWT implements Serializable {
 		this.isAccountNonLocked = isAccountNonLocked;
 	}
 
-	@Basic
 	public boolean isCredentialsNonExpired() {
 		return isCredentialsNonExpired;
 	}
@@ -100,81 +75,12 @@ public class ApplicationUserGWT implements Serializable {
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
 	}
 
-	@Basic
 	public boolean isEnabled() {
 		return isEnabled;
 	}
 
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isAccountNonExpired ? 1231 : 1237);
-		result = prime * result + (isAccountNonLocked ? 1231 : 1237);
-		result = prime * result + (isCredentialsNonExpired ? 1231 : 1237);
-		result = prime * result + (isEnabled ? 1231 : 1237);
-		result = prime * result
-				+ ((myAuthorities == null) ? 0 : myAuthorities.hashCode());
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result
-				+ ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ApplicationUserGWT other = (ApplicationUserGWT) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (isAccountNonExpired != other.isAccountNonExpired)
-			return false;
-		if (isAccountNonLocked != other.isAccountNonLocked)
-			return false;
-		if (isCredentialsNonExpired != other.isCredentialsNonExpired)
-			return false;
-		if (isEnabled != other.isEnabled)
-			return false;
-		if (myAuthorities == null) {
-			if (other.myAuthorities != null)
-				return false;
-		} else if (!myAuthorities.equals(other.myAuthorities))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
 	}
 
 }

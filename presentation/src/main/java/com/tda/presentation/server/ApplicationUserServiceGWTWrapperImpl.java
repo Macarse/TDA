@@ -1,9 +1,11 @@
 package com.tda.presentation.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
+import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.ApplicationUserGWT;
 import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapper;
 import com.tda.service.api.ApplicationUserService;
@@ -21,27 +23,24 @@ public class ApplicationUserServiceGWTWrapperImpl extends
 				.getBean("applicationUserService");
 	}
 
-	/* TODO: FIX this class! */
-
-	public void save(ApplicationUserGWT applicationUser) {
-		// applicationUserService.save(applicationUser);
+	public void save(ApplicationUserGWT applicationUserGWT) {
+		applicationUserService.save(wrap(applicationUserGWT));
 	}
 
-	public void delete(ApplicationUserGWT applicationUser) {
-		// applicationUserService.delete(applicationUser);
+	public void delete(ApplicationUserGWT applicationUserGWT) {
+		applicationUserService.delete(wrap(applicationUserGWT));
 	}
 
-	public void update(ApplicationUserGWT applicationUser) {
-		// applicationUserService.update(applicationUser);
+	public void update(ApplicationUserGWT applicationUserGWT) {
+		applicationUserService.update(wrap(applicationUserGWT));
 	}
 
 	public ApplicationUserGWT findById(Long id) {
-		return applicationUserService.findById(id);
+		return wrap(applicationUserService.findById(id));
 	}
 
 	public List<ApplicationUserGWT> findAll() {
-		// return applicationUserService.findAll();
-		return null;
+		return wrap(applicationUserService.findAll());
 	}
 
 	public void deleteById(Long id) {
@@ -54,12 +53,53 @@ public class ApplicationUserServiceGWTWrapperImpl extends
 
 	public List<ApplicationUserGWT> findByExample(
 			ApplicationUserGWT exampleObject) {
-		// return applicationUserService.findByExample(exampleObject);
-		return null;
+		return wrap(applicationUserService.findByExample(wrap(exampleObject)));
 	}
 
 	public ApplicationUserGWT findByUsername(String username) {
-		return (ApplicationUserGWT) applicationUserService
-				.loadUserByUsername(username);
+		return wrap((ApplicationUser) applicationUserService
+				.loadUserByUsername(username));
+	}
+
+	private static List<ApplicationUserGWT> wrap(List<ApplicationUser> from) {
+		List<ApplicationUserGWT> ret = new ArrayList<ApplicationUserGWT>();
+
+		for (ApplicationUser applicationUser : from) {
+			ret.add(wrap(applicationUser));
+		}
+
+		return ret;
+	}
+
+	private static ApplicationUser wrap(ApplicationUserGWT from) {
+
+		ApplicationUser to = new ApplicationUser();
+
+		to.setId(from.getId());
+		to.setUsername(from.getUsername());
+		to.setPassword(from.getPassword());
+		to.setAccountNonExpired(from.isAccountNonExpired());
+		to.setAccountNonLocked(from.isAccountNonLocked());
+		to.setCredentialsNonExpired(from.isCredentialsNonExpired());
+		to.setEnabled(from.isEnabled());
+		to.setMyAuthorities(from.getMyAuthorities());
+
+		return to;
+	}
+
+	private static ApplicationUserGWT wrap(ApplicationUser from) {
+
+		ApplicationUserGWT to = new ApplicationUserGWT();
+
+		to.setId(from.getId());
+		to.setUsername(from.getUsername());
+		to.setPassword(from.getPassword());
+		to.setAccountNonExpired(from.isAccountNonExpired());
+		to.setAccountNonLocked(from.isAccountNonLocked());
+		to.setCredentialsNonExpired(from.isCredentialsNonExpired());
+		to.setEnabled(from.isEnabled());
+		to.setMyAuthorities(from.getMyAuthorities());
+
+		return to;
 	}
 }
