@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
 import com.tda.model.applicationuser.ApplicationUserGWT;
+import com.tda.model.applicationuser.Authority;
 import com.tda.presentation.client.presenter.AdminHomePresenter;
 import com.tda.presentation.client.presenter.LoginPresenter;
 import com.tda.presentation.client.presenter.Presenter;
@@ -153,14 +154,9 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 					public void onSuccess(ApplicationUserGWT result) {
 						/* TODO: Fix This. */
 						loggedApplicationUser = result;
-						System.out.println("authority: "
-								+ loggedApplicationUser.getMyAuthorities()
-										.toArray()[0]);
-						History.newItem(redirectMap.get(loggedApplicationUser
-								.getMyAuthorities().toArray()[0]));
-						System.out.println("redirect to: "
-								+ redirectMap.get(loggedApplicationUser
-										.getMyAuthorities().toArray()[0]));
+						Authority auth = (Authority) loggedApplicationUser
+								.getMyAuthorities().toArray()[0];
+						History.newItem(redirectMap.get(auth.getAuthority()));
 					}
 
 					public void onFailure(Throwable caught) {

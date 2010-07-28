@@ -1,12 +1,14 @@
 package com.tda.presentation.server;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.ApplicationUserGWT;
+import com.tda.model.applicationuser.Authority;
 import com.tda.presentation.client.service.ApplicationUserServiceGWTWrapper;
 import com.tda.service.api.ApplicationUserService;
 
@@ -82,7 +84,7 @@ public class ApplicationUserServiceGWTWrapperImpl extends
 		to.setAccountNonLocked(from.isAccountNonLocked());
 		to.setCredentialsNonExpired(from.isCredentialsNonExpired());
 		to.setEnabled(from.isEnabled());
-		to.setMyAuthorities(from.getMyAuthorities());
+		to.setMyAuthorities(wrap(from.getMyAuthorities()));
 
 		return to;
 	}
@@ -98,8 +100,21 @@ public class ApplicationUserServiceGWTWrapperImpl extends
 		to.setAccountNonLocked(from.isAccountNonLocked());
 		to.setCredentialsNonExpired(from.isCredentialsNonExpired());
 		to.setEnabled(from.isEnabled());
-		to.setMyAuthorities(from.getMyAuthorities());
+
+		to.setMyAuthorities(wrap(from.getMyAuthorities()));
 
 		return to;
+	}
+
+	private static Collection<Authority> wrap(Collection<Authority> authorities) {
+		Collection<Authority> ret = new ArrayList<Authority>();
+		for (Authority authority : authorities) {
+			Authority newAuthority = new Authority();
+			newAuthority.setId(authority.getId());
+			newAuthority.setAuthority(authority.getAuthority());
+			ret.add(newAuthority);
+		}
+
+		return ret;
 	}
 }
