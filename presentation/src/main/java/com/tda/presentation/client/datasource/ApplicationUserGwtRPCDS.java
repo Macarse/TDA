@@ -1,5 +1,6 @@
 package com.tda.presentation.client.datasource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -14,9 +15,10 @@ import com.smartgwt.client.data.fields.DataSourceTextField;
 import com.smartgwt.client.rpc.RPCResponse;
 import com.smartgwt.client.types.FieldType;
 import com.smartgwt.client.widgets.form.DynamicForm;
-import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.applicationuser.ApplicationUserGWT;
+import com.tda.model.applicationuser.Authorities;
+import com.tda.model.applicationuser.Authority;
 import com.tda.presentation.client.exception.NotInitializedException;
 import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 
@@ -79,14 +81,14 @@ public class ApplicationUserGwtRPCDS extends CrudGwtRPCDS<ApplicationUserGWT> {
 		passwordField.setType(FieldType.PASSWORD);
 		addField(passwordField);
 
-		DataSourceEnumField authoritiesField = new DataSourceEnumField(
+		final DataSourceEnumField authoritiesField = new DataSourceEnumField(
 				AUTHORITIES, "Rol");
 		authoritiesField.setRequired(true);
 		authoritiesField.setType(FieldType.ENUM);
-		authoritiesField.setMultiple(true);
-		SelectItem authSelect = new SelectItem();
-		authSelect.setValues("Admin", "Otro");
-		authSelect.setEditorType(authSelect);
+		// authoritiesField.setMultiple(true);
+
+		authoritiesField.setValueMap(Authorities.getMap());
+
 		addField(authoritiesField);
 
 		DataSourceBooleanField nonExpiredField = new DataSourceBooleanField(
@@ -200,7 +202,9 @@ public class ApplicationUserGwtRPCDS extends CrudGwtRPCDS<ApplicationUserGWT> {
 		to.setAttribute(ID, from.getId().toString());
 		to.setAttribute(USERNAME, from.getUsername());
 		to.setAttribute(PASSWORD, from.getPassword());
-		to.setAttribute(AUTHORITIES, from.getMyAuthorities().toString());
+
+		Authority auth = (Authority) from.getMyAuthorities().toArray()[0];
+		to.setAttribute(AUTHORITIES, Authorities.getKey(auth.getAuthority()));
 		to.setAttribute(IS_ACCOUNT_NON_EXPIRED, from.isAccountNonExpired());
 		to.setAttribute(IS_ACCOUNT_NON_LOCKED, from.isAccountNonLocked());
 		to.setAttribute(IS_CREDENTIAL_NON_EXPIRED, from.isAccountNonExpired());
@@ -227,7 +231,15 @@ public class ApplicationUserGwtRPCDS extends CrudGwtRPCDS<ApplicationUserGWT> {
 				.getValueAsString(IS_ACCOUNT_NON_LOCKED)));
 		applicationUserGWT.setCredentialsNonExpired(Boolean.parseBoolean(form
 				.getValueAsString(IS_CREDENTIAL_NON_EXPIRED)));
-		applicationUserGWT.setMyAuthorities(form.getValues().values());
+
+		List<Authority> authList = new ArrayList<Authority>();
+		Authority auth = new Authority();
+		auth.setId(-1L);
+		auth.setAuthority(Authorities.valueOf(
+				form.getValueAsString(AUTHORITIES)).toString());
+		authList.add(auth);
+
+		applicationUserGWT.setMyAuthorities(authList);
 
 		String idString = form.getValueAsString(ID);
 		if (idString != null) {

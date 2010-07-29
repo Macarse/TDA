@@ -12,6 +12,7 @@
 
 	<bean id="applicationUserService" class="com.tda.service.impl.ApplicationUserServiceImpl">
 		<property name="applicationUserDAO" ref="applicationUserDAO" />
+		<property name="authorityDAO" ref="authorityDAO" />
 	</bean>
 
 	<bean id="authorityService" class="com.tda.service.impl.AuthorityServiceImpl">

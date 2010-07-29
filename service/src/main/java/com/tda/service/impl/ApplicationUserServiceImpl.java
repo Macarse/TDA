@@ -3,16 +3,20 @@ package com.tda.service.impl;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.Authority;
 import com.tda.persistence.dao.ApplicationUserDAO;
+import com.tda.persistence.dao.AuthorityDAO;
 import com.tda.service.api.ApplicationUserService;
 
 public class ApplicationUserServiceImpl implements ApplicationUserService {
 	private ApplicationUserDAO applicationUserDAO;
+	private AuthorityDAO authorityDAO;
 
 	public ApplicationUserDAO getApplicationUserDAO() {
 		return applicationUserDAO;
@@ -20,6 +24,14 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 
 	public void setApplicationUserDAO(ApplicationUserDAO applicationUserDAO) {
 		this.applicationUserDAO = applicationUserDAO;
+	}
+
+	public AuthorityDAO getAuthorityDAO() {
+		return authorityDAO;
+	}
+
+	public void setAuthorityDAO(AuthorityDAO authorityDAO) {
+		this.authorityDAO = authorityDAO;
 	}
 
 	@Transactional(readOnly = true)
@@ -38,6 +50,14 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 
 	@Transactional
 	public void save(ApplicationUser applicationUser) {
+		GrantedAuthority auth = (GrantedAuthority) applicationUser
+				.getAuthorities().toArray()[0];
+		Authority realAuth = null;
+		realAuth = authorityDAO.findByAuthority(auth.getAuthority()).get(0);
+
+		applicationUser.getMyAuthorities().clear();
+		applicationUser.getMyAuthorities().add(realAuth);
+
 		applicationUserDAO.save(applicationUser);
 	}
 
@@ -48,6 +68,14 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 
 	@Transactional
 	public void update(ApplicationUser applicationUser) {
+		GrantedAuthority auth = (GrantedAuthority) applicationUser
+				.getAuthorities().toArray()[0];
+		Authority realAuth = null;
+		realAuth = authorityDAO.findByAuthority(auth.getAuthority()).get(0);
+
+		applicationUser.getMyAuthorities().clear();
+		applicationUser.getMyAuthorities().add(realAuth);
+
 		applicationUserDAO.update(applicationUser);
 	}
 

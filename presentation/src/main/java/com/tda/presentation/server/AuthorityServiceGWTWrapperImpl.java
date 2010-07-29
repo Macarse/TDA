@@ -38,10 +38,18 @@ public class AuthorityServiceGWTWrapperImpl extends
 		return authorityService.findById(id);
 	}
 
-	public Authority findByAuthority(String authority)
-			throws SingleResultExpectedException, NoDataFoundException {
-
-		return authorityService.findByAuthority(authority);
+	public Authority findByAuthority(String authority) {
+		/* TODO: Exceptions are not serializables */
+		try {
+			return authorityService.findByAuthority(authority);
+		} catch (SingleResultExpectedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoDataFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public List<Authority> findAll() {

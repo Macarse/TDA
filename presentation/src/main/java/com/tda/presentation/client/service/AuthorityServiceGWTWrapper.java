@@ -5,8 +5,6 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.tda.model.applicationuser.Authority;
-import com.tda.service.exception.NoDataFoundException;
-import com.tda.service.exception.SingleResultExpectedException;
 
 /**
  * The client side stub for the RPC service.
@@ -22,8 +20,7 @@ public interface AuthorityServiceGWTWrapper extends RemoteService {
 
 	Authority findById(Long id);
 
-	Authority findByAuthority(String authority)
-			throws SingleResultExpectedException, NoDataFoundException;
+	Authority findByAuthority(String authority);
 
 	List<Authority> findAll();
 
