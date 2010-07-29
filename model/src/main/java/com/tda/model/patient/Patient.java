@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Patient implements Serializable {
@@ -52,7 +54,7 @@ public class Patient implements Serializable {
 		this.id = id;
 	}
 
-	@Basic
+	@Column(unique = true)
 	public String getDni() {
 		return dni;
 	}

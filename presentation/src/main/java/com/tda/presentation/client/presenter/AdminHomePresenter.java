@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.event.shared.HandlerManager;
+import com.tda.model.applicationuser.ApplicationUserGWT;
 import com.tda.model.item.Item;
 import com.tda.presentation.client.view.CrudView;
 
@@ -24,6 +25,8 @@ public class AdminHomePresenter extends HomePresenter {
 	protected List<Presenter> getPresenters() {
 		List<Presenter> presenters = new ArrayList<Presenter>();
 		presenters.add(new ItemPresenter(eventBus, new CrudView<Item>()));
+		presenters.add(new ApplicationUserPresenter(eventBus,
+				new CrudView<ApplicationUserGWT>()));
 
 		return presenters;
 	}
