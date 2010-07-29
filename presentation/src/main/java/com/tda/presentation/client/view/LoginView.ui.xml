@@ -1,10 +1,17 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+    .center{ margin-left: auto ;
+        margin-right: auto;}
+    .width100{ width: 100%; }
+  </ui:style>
 
-	<g:DecoratorPanel>
-		<g:VerticalPanel ui:field="formContainer">
-		</g:VerticalPanel>
-	</g:DecoratorPanel>
+  <g:AbsolutePanel styleName="{style.width100}">
+		<g:DecoratorPanel styleName="{style.center}">
+			<g:VerticalPanel ui:field="formContainer">
+			</g:VerticalPanel>
+		</g:DecoratorPanel>
+	</g:AbsolutePanel>
 	
 </ui:UiBinder> 
