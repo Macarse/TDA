@@ -3,6 +3,7 @@ package com.tda.presentation.client.presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
@@ -246,4 +247,18 @@ public abstract class CrudPresenter<T> implements Presenter,
 	}
 
 	public abstract void onDestroy();
+
+	public void onValueChange(ValueChangeEvent<String> event) {
+		String token = event.getValue();
+
+		if (token != null) {
+			if (token.equals(getListToken())) {
+				showList();
+			} else if (token.equals(getAddFormToken())) {
+				showForm();
+			} else if (token.equals(getEditFormToken())) {
+				showForm();
+			}
+		}
+	}
 }

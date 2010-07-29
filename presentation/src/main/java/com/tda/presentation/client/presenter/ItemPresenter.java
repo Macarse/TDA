@@ -1,7 +1,6 @@
 package com.tda.presentation.client.presenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.tda.model.item.Item;
 import com.tda.presentation.client.datasource.CrudGwtRPCDS;
@@ -19,29 +18,15 @@ public class ItemPresenter extends CrudPresenter<Item> {
 		super(eventBus, view);
 		this.rpc = GWT.create(ItemServiceGWTWrapper.class);
 		ItemGwtRPCDS.setRpc(this.rpc);
-		try{
+		try {
 			this.dataSource = ItemGwtRPCDS.getInstance();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);
 		}
 	}
 
 	public void onDestroy() {
-	}
-
-	public void onValueChange(ValueChangeEvent<String> event) {
-		String token = event.getValue();
-
-		if (token != null) {
-			if (token.equals(getListToken())) {
-				showList();
-			} else if (token.equals(getAddFormToken())) {
-				showForm();
-			} else if (token.equals(getEditFormToken())) {
-				showForm();
-			}
-		}
 	}
 
 	@Override

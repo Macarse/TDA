@@ -5,7 +5,8 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.tda.model.applicationuser.ApplicationUserGWT;
 
-public interface ApplicationUserServiceGWTWrapperAsync {
+public interface ApplicationUserServiceGWTWrapperAsync extends
+		CrudServiceGWTWrapperAsync<ApplicationUserGWT> {
 
 	void count(AsyncCallback<Integer> callback);
 
