@@ -2,7 +2,6 @@ package com.tda.service.impl;
 
 import java.util.List;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tda.model.item.Category;
@@ -26,7 +25,6 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Transactional
-	@Secured("ROLE_ADMIN")
 	public void delete(Item item) {
 		itemDAO.delete(item);
 	}

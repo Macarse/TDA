@@ -6,7 +6,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.Sex;
 
-public interface PatientServiceGWTWrapperAsync {
+public interface PatientServiceGWTWrapperAsync extends
+		CrudServiceGWTWrapperAsync<Patient> {
 
 	void delete(Patient patient, AsyncCallback<Void> callback);
 

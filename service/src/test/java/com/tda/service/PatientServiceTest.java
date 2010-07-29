@@ -75,7 +75,7 @@ public class PatientServiceTest {
 	@Test
 	public void findByMotherNameContaining() {
 		Patient patient = PatientBuilder.createPatient()
-				.withMohterName("myname").build();
+				.withMotherName("myname").build();
 		patientService.save(patient);
 
 		assertEquals(patient, patientService.findByMotherNameContaining("name")

@@ -34,22 +34,22 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 	private static CrudServiceGWTWrapperAsync<Item> rpc;
 	private static ItemGwtRPCDS _instance;
 
-    private static final String QUANTITY = "quantity";
-    private static final String CATEGORY = "category";
-    private static final String MEASURE = "measure";
-    private static final String DESCRIPTION = "description";
-    private static final String NAME = "name";
-    private static final String ID = "id";
+	private static final String QUANTITY = "quantity";
+	private static final String CATEGORY = "category";
+	private static final String MEASURE = "measure";
+	private static final String DESCRIPTION = "description";
+	private static final String NAME = "name";
+	private static final String ID = "id";
 
-	public static ItemGwtRPCDS getInstance() throws NotInitializedException{
+	public static ItemGwtRPCDS getInstance() throws NotInitializedException {
 		if (_instance == null)
 			throw new NotInitializedException("ItemGwtRPCDS");
-			
+
 		return _instance;
 	}
-	
-	public static void setRpc(CrudServiceGWTWrapperAsync<Item> service){
-		if (_instance == null){
+
+	public static void setRpc(CrudServiceGWTWrapperAsync<Item> service) {
+		if (_instance == null) {
 			rpc = service;
 			_instance = new ItemGwtRPCDS(rpc);
 		}
@@ -88,10 +88,7 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 				"Categoría");
 		categoryField.setRequired(true);
 		categoryField.setType(FieldType.ENUM);
-		SelectItem categorySelect = new SelectItem();
-		categorySelect.setDefaultValue(Category.medical.toString());
-		categorySelect.setValueMap(Category.getMap());
-		categoryField.setEditorType(categorySelect);
+		categoryField.setValueMap(Category.getMap());
 		addField(categoryField);
 
 		DataSourceEnumField measureField = new DataSourceEnumField(MEASURE,
@@ -100,7 +97,6 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 		measureField.setType(FieldType.ENUM);
 		SelectItem measureSelect = new SelectItem();
 		measureSelect.setValueMap(MeasureUnit.getMap());
-		measureSelect.setDefaultValue(MeasureUnit.unit.toString());
 		measureField.setEditorType(measureSelect);
 		addField(measureField);
 	}
@@ -110,8 +106,8 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 		form.setValue(ID, record.getAttribute(ID));
 		form.setValue(NAME, record.getAttribute(NAME));
 		form.setValue(DESCRIPTION, record.getAttribute(DESCRIPTION));
-		form.setValue(MEASURE, record.getAttribute(MEASURE));
-		form.setValue(CATEGORY, record.getAttribute(CATEGORY));
+		form.setValue(MEASURE, MeasureUnit.getKey(record.getAttribute(MEASURE)));
+		form.setValue(CATEGORY, Category.getKey(record.getAttribute(CATEGORY)));
 		form.setValue(QUANTITY, record.getAttribute(QUANTITY));
 	}
 
@@ -195,11 +191,11 @@ public class ItemGwtRPCDS extends CrudGwtRPCDS<Item> {
 		}
 
 		if (from.getMeasureUnit() != null) {
-			to.setAttribute(MEASURE, from.getMeasureUnit().toString());
+			to.setAttribute(MEASURE, MeasureUnit.getName(from.getMeasureUnit()));
 		}
 
 		if (from.getCategory() != null) {
-			to.setAttribute(CATEGORY, from.getCategory().toString());
+			to.setAttribute(CATEGORY, Category.getName(from.getCategory()));
 		}
 	}
 

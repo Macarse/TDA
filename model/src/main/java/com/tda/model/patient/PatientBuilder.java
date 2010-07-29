@@ -54,7 +54,7 @@ public class PatientBuilder implements Serializable {
 		return this;
 	}
 
-	public PatientBuilder withMohterName(String motherName) {
+	public PatientBuilder withMotherName(String motherName) {
 		this.motherName = motherName;
 		return this;
 	}

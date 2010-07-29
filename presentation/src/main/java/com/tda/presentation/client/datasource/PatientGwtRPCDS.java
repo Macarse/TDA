@@ -3,17 +3,20 @@ package com.tda.presentation.client.datasource;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
 import com.smartgwt.client.data.Record;
+import com.smartgwt.client.data.fields.DataSourceDateField;
 import com.smartgwt.client.data.fields.DataSourceEnumField;
 import com.smartgwt.client.data.fields.DataSourceIntegerField;
 import com.smartgwt.client.data.fields.DataSourceTextField;
 import com.smartgwt.client.rpc.RPCResponse;
+import com.smartgwt.client.types.DateDisplayFormat;
 import com.smartgwt.client.types.FieldType;
 import com.smartgwt.client.widgets.form.DynamicForm;
-import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.DateItem;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientBuilder;
@@ -23,6 +26,7 @@ import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 
 public class PatientGwtRPCDS extends CrudGwtRPCDS<Patient> {
 
+	private static final String DATE_FMT = "dd/MM/yyyy";
 	private static CrudServiceGWTWrapperAsync<Patient> rpc;
 	private static PatientGwtRPCDS _instance;
 
@@ -62,6 +66,7 @@ public class PatientGwtRPCDS extends CrudGwtRPCDS<Patient> {
 		nameField.setType(FieldType.TEXT);
 		addField(nameField);
 
+		/* TODO: Check if there is a way to make this field unique. */
 		DataSourceIntegerField dniField = new DataSourceIntegerField(DNI, "DNI");
 		dniField.setRequired(true);
 		dniField.setType(FieldType.INTEGER);
@@ -70,16 +75,19 @@ public class PatientGwtRPCDS extends CrudGwtRPCDS<Patient> {
 		DataSourceEnumField sexField = new DataSourceEnumField(SEX, "Sexo");
 		sexField.setRequired(true);
 		sexField.setType(FieldType.ENUM);
-		SelectItem sexSelect = new SelectItem();
-		sexSelect.setDefaultValue(Sex.male.toString());
-		sexSelect.setValueMap(Sex.getMap());
-		sexField.setEditorType(sexSelect);
+		sexField.setValueMap(Sex.getMap());
 		addField(sexField);
 
-		DataSourceTextField birthdateField = new DataSourceTextField(BIRTHDATE,
+		DataSourceDateField birthdateField = new DataSourceDateField(BIRTHDATE,
 				"Nacimiento");
 		birthdateField.setRequired(true);
-		birthdateField.setType(FieldType.TEXT);
+		birthdateField.setType(FieldType.DATE);
+		DateItem dateItem = new DateItem();
+		dateItem.setDisplayFormat(DateDisplayFormat.TOEUROPEANSHORTDATE);
+		dateItem.setInputFormat("DMY");
+		dateItem.setUseTextField(true);
+		dateItem.setUseMask(true);
+		birthdateField.setEditorType(dateItem);
 		addField(birthdateField);
 
 		DataSourceTextField fatherNameField = new DataSourceTextField(
@@ -101,7 +109,7 @@ public class PatientGwtRPCDS extends CrudGwtRPCDS<Patient> {
 		form.setValue(ID, record.getAttribute(ID));
 		form.setValue(NAME, record.getAttribute(NAME));
 		form.setValue(DNI, record.getAttribute(DNI));
-		form.setValue(SEX, record.getAttribute(SEX));
+		form.setValue(SEX, Sex.getKey(record.getAttribute(SEX)));
 		form.setValue(BIRTHDATE, record.getAttribute(BIRTHDATE));
 		form.setValue(FATHERNAME, record.getAttribute(FATHERNAME));
 		form.setValue(MOTHERNAME, record.getAttribute(MOTHERNAME));
@@ -183,11 +191,13 @@ public class PatientGwtRPCDS extends CrudGwtRPCDS<Patient> {
 		}
 
 		if (from.getSex() != null) {
-			to.setAttribute(SEX, from.getSex());
+			to.setAttribute(SEX, Sex.getName(from.getSex()));
 		}
 
 		if (from.getBirthdate() != null) {
-			to.setAttribute(BIRTHDATE, from.getBirthdate());
+			/* TODO: Fix the date format. String.format will not work */
+			to.setAttribute(BIRTHDATE, DateTimeFormat.getFormat(DATE_FMT)
+					.format(from.getBirthdate()));
 		}
 
 		if (from.getFatherName() != null) {
@@ -204,17 +214,17 @@ public class PatientGwtRPCDS extends CrudGwtRPCDS<Patient> {
 		return rpc;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Patient get(DynamicForm form) {
 
-		Patient patient = PatientBuilder
-				.createPatient()
+		Patient patient = PatientBuilder.createPatient()
 				.withName(form.getValueAsString(NAME))
 				.withDni(form.getValueAsString(DNI))
-				// .withBirthdate(new Date(form.getValueAsString(BIRTHDATE)))
-				.withBirthdate(new Date())
+				.withSex(Sex.valueOf(form.getValueAsString(SEX)))
+				.withBirthdate((Date) form.getValue(BIRTHDATE))
 				.withFatherName(form.getValueAsString(FATHERNAME))
-				.withMohterName(form.getValueAsString(MOTHERNAME)).build();
+				.withMotherName(form.getValueAsString(MOTHERNAME)).build();
 
 		String idString = form.getValueAsString(ID);
 		if (idString != null) {
@@ -223,4 +233,5 @@ public class PatientGwtRPCDS extends CrudGwtRPCDS<Patient> {
 
 		return patient;
 	}
+
 }
