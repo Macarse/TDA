@@ -11,7 +11,9 @@ import com.tda.presentation.client.service.PatientServiceGWTWrapper;
 
 public class PatientPresenter extends CrudPresenter<Patient> {
 
+	private static final String TITLE = "Pacientes";
 	private static final String PREFIX = "patient";
+
 	private final CrudServiceGWTWrapperAsync<Patient> rpc;
 	private PatientGwtRPCDS dataSource;
 
@@ -57,6 +59,11 @@ public class PatientPresenter extends CrudPresenter<Patient> {
 	@Override
 	protected String getPrefix() {
 		return PREFIX;
+	}
+
+	@Override
+	protected String getTitle() {
+		return TITLE;
 	}
 
 }

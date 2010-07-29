@@ -10,7 +10,9 @@ import com.tda.presentation.client.service.CrudServiceGWTWrapperAsync;
 
 public class ApplicationUserPresenter extends CrudPresenter<ApplicationUserGWT> {
 
+	private static final String TITLE = "Usuarios";
 	private static final String PREFIX = "applicationUser";
+
 	private final CrudServiceGWTWrapperAsync<ApplicationUserGWT> rpc;
 	private ApplicationUserGwtRPCDS dataSource;
 
@@ -43,6 +45,11 @@ public class ApplicationUserPresenter extends CrudPresenter<ApplicationUserGWT> 
 	@Override
 	protected String getPrefix() {
 		return PREFIX;
+	}
+
+	@Override
+	protected String getTitle() {
+		return TITLE;
 	}
 
 }

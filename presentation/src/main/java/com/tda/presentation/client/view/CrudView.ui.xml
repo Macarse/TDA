@@ -9,17 +9,15 @@
 
 	</ui:style>
 
-	<g:DecoratorPanel ui:field="parent">
-		<g:VerticalPanel>
-			<g:VerticalPanel ui:field="listContainer">
-				<g:HorizontalPanel addStyleNames="{style.itemsViewButtonHPanel}">
-					<g:Button ui:field="addButton">Add</g:Button>
-					<g:Button ui:field="deleteButton">Delete</g:Button>
-					<g:Button ui:field="editButton">Edit</g:Button>
-				</g:HorizontalPanel>
-			</g:VerticalPanel>
-			<g:VerticalPanel ui:field="formContainer"/>
+	<g:VerticalPanel>
+		<g:VerticalPanel ui:field="listContainer">
+			<g:HorizontalPanel addStyleNames="{style.itemsViewButtonHPanel}">
+				<g:Button ui:field="addButton">Agregar</g:Button>
+				<g:Button ui:field="deleteButton">Eliminar</g:Button>
+				<g:Button ui:field="editButton">Editar</g:Button>
+			</g:HorizontalPanel>
 		</g:VerticalPanel>
-	</g:DecoratorPanel>
+		<g:VerticalPanel ui:field="formContainer"/>
+	</g:VerticalPanel>
 	
 </ui:UiBinder> 

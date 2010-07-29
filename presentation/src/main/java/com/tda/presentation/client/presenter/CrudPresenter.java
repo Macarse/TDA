@@ -51,8 +51,6 @@ public abstract class CrudPresenter<T> implements Presenter,
 
 		Panel getFormContainer();
 
-		Panel getParentContainer();
-
 		void setDataSource(CrudGwtRPCDS<T> ds);
 	}
 
@@ -86,7 +84,7 @@ public abstract class CrudPresenter<T> implements Presenter,
 	public void go(DecoratedTabPanel panel) {
 		display.setDataSource(getDataSource());
 		bind();
-		panel.add(display.asWidget(), getPrefix());
+		panel.add(display.asWidget(), getTitle());
 	}
 
 	protected void showForm() {
@@ -201,6 +199,8 @@ public abstract class CrudPresenter<T> implements Presenter,
 		});
 
 	}
+
+	protected abstract String getTitle();
 
 	protected abstract String getPrefix();
 

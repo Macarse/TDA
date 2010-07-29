@@ -7,8 +7,8 @@
     .width100{ width: 100%; }
   </ui:style>
 
-  <g:AbsolutePanel styleName="{style.width100}">
-		<g:DecoratorPanel styleName="{style.center}">
+  <g:AbsolutePanel>
+		<g:DecoratorPanel>
 			<g:VerticalPanel ui:field="formContainer">
 			</g:VerticalPanel>
 		</g:DecoratorPanel>

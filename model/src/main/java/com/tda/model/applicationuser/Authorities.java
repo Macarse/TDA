@@ -42,7 +42,7 @@ public enum Authorities {
 		return keys.get(auth);
 	}
 
-	public static String getName(Authorities auth) {
-		return values.get(auth.toString());
+	public static String getName(String auth) {
+		return values.get(auth);
 	}
 }

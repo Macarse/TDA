@@ -25,11 +25,9 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 	interface ItemViewUiBinder extends UiBinder<Widget, CrudView> {
 	}
 
-	private static ItemViewUiBinder uiBinder = GWT.create(ItemViewUiBinder.class);
+	private static ItemViewUiBinder uiBinder = GWT
+			.create(ItemViewUiBinder.class);
 
-	@UiField
-	Panel parent;
-	
 	@UiField
 	Panel listContainer;
 
@@ -38,7 +36,7 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 
 	@UiField
 	Button deleteButton;
-	
+
 	@UiField
 	Button editButton;
 
@@ -55,16 +53,15 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	
 	private void createForm(CrudGwtRPCDS<T> ds) {
 		form = new DynamicForm();
-        form.setLayoutAlign(VerticalAlignment.CENTER);
-        form.setSaveOperationType(DSOperationType.ADD);
-        form.setDataSource(ds);
-        form.setUseAllDataSourceFields(true);
+		form.setLayoutAlign(VerticalAlignment.CENTER);
+		form.setSaveOperationType(DSOperationType.ADD);
+		form.setDataSource(ds);
+		form.setUseAllDataSourceFields(true);
 
-        submitButton = new Button();
-        submitButton.setText("Enviar");
+		submitButton = new Button();
+		submitButton.setText("Enviar");
 	}
 
 	private void createList(CrudGwtRPCDS<T> ds) {
@@ -72,11 +69,11 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 		listGrid = new ListGrid();
 		listGrid.setWidth(750);
 		listGrid.setHeight(224);
-		
-		//filter config
+
+		// filter config
 		listGrid.setShowFilterEditor(true);
 		listGrid.setFilterByCell(true);
-		
+
 		listGrid.setShowAllRecords(false);
 		listGrid.setDataFetchMode(FetchMode.PAGED);
 		listGrid.setDataPageSize(10);
@@ -122,10 +119,6 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 		return listContainer;
 	}
 
-	public Panel getParentContainer() {
-		return parent;
-	}
-
 	public Panel getFormContainer() {
 		return formContainer;
 	}
@@ -142,7 +135,7 @@ public class CrudView<T> extends Composite implements CrudPresenter.Display<T> {
 		listContainer.add(layout);
 		formContainer.setVisible(false);
 		formContainer.add(form);
-        formContainer.add(submitButton);
-        
+		formContainer.add(submitButton);
+
 	}
 }

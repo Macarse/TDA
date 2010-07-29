@@ -10,7 +10,9 @@ import com.tda.presentation.client.service.ItemServiceGWTWrapper;
 
 public class ItemPresenter extends CrudPresenter<Item> {
 
+	private static final String TITLE = "Items";
 	private static final String PREFIX = "item";
+
 	private final CrudServiceGWTWrapperAsync<Item> rpc;
 	private ItemGwtRPCDS dataSource;
 
@@ -42,6 +44,11 @@ public class ItemPresenter extends CrudPresenter<Item> {
 	@Override
 	protected String getPrefix() {
 		return PREFIX;
+	}
+
+	@Override
+	protected String getTitle() {
+		return TITLE;
 	}
 
 }
