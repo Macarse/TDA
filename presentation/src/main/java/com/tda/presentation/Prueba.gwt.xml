@@ -5,6 +5,7 @@
 	<inherits name='com.tda.Model' />
 	<inherits name="com.smartgwt.SmartGwt"/>
 
+	<extend-property name="locale" values="es"/>
 	<!-- Inherit the default GWT style sheet.  You can change       -->
 	<!-- the theme of your GWT application by uncommenting          -->
 	<!-- any one of the following lines.                            -->
