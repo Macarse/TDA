@@ -10,7 +10,7 @@
 <body>
 
 <c:forEach items="${itemList}" var="item">
-		${item.name} ${item.description} ${item.quantity} ${item.category}
+		${item.name} ${item.description} ${item.quantity} ${item.category} 
 		<br />
 </c:forEach>
 

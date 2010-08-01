@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.NotNull;
+import org.hibernate.validator.Size;
 
 @Entity
 public class Item implements Serializable {
@@ -16,8 +18,12 @@ public class Item implements Serializable {
 
 	private Long id;
 
+	@NotNull
+	@Size(min = 1, max = 200)
 	private String name;
 
+	@NotNull
+	@Size(min = 1, max = 200)
 	private String description;
 
 	private Long quantity;
