@@ -145,6 +145,7 @@ public class ItemDAOTest {
 
 	@Test
 	public void findByQuantityRange() {
+		int originalCount = itemDAO.findByQuantityRange(7L, 20L).size();
 		Item anItem1 = ItemBuilder.createItem().withName("nombre1")
 				.withDescription("descripcion").withQuantity(5L).build();
 		itemDAO.save(anItem1);
@@ -155,6 +156,7 @@ public class ItemDAOTest {
 				.withDescription("descripcion").withQuantity(15L).build();
 		itemDAO.save(anItem3);
 
-		assertEquals(2, itemDAO.findByQuantityRange(7L, 20L).size());
+		assertEquals(2 + originalCount, itemDAO.findByQuantityRange(7L, 20L)
+				.size());
 	}
 }
