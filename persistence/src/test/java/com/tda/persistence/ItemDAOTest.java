@@ -25,14 +25,16 @@ public class ItemDAOTest {
 
 	@Test
 	public void save() {
-		Item anItem = ItemBuilder.createItem().withName("nombre").build();
+		Item anItem = ItemBuilder.createItem().withName("nombre")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem);
 		assertEquals(anItem, itemDAO.findById(anItem.getId()));
 	}
 
 	@Test
 	public void delete() {
-		Item anItem = ItemBuilder.createItem().withName("nombre").build();
+		Item anItem = ItemBuilder.createItem().withName("nombre")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem);
 		itemDAO.delete(anItem);
 		assertNull(itemDAO.findById(anItem.getId()));
@@ -40,7 +42,8 @@ public class ItemDAOTest {
 
 	@Test
 	public void update() {
-		Item anItem = ItemBuilder.createItem().withName("nombre").build();
+		Item anItem = ItemBuilder.createItem().withName("nombre")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem);
 		anItem.setName("newName");
 		itemDAO.update(anItem);
@@ -49,7 +52,8 @@ public class ItemDAOTest {
 
 	@Test
 	public void findById() {
-		Item anItem = ItemBuilder.createItem().withName("nombre").build();
+		Item anItem = ItemBuilder.createItem().withName("nombre")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem);
 		assertEquals(anItem, itemDAO.findById(anItem.getId()));
 	}
@@ -57,18 +61,22 @@ public class ItemDAOTest {
 	@Test
 	public void findAll() {
 		int originalCount = itemDAO.count();
-		Item anItem1 = ItemBuilder.createItem().withName("nombre1").build();
+		Item anItem1 = ItemBuilder.createItem().withName("nombre1")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem1);
-		Item anItem2 = ItemBuilder.createItem().withName("nombre2").build();
+		Item anItem2 = ItemBuilder.createItem().withName("nombre2")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem2);
-		Item anItem3 = ItemBuilder.createItem().withName("nombre3").build();
+		Item anItem3 = ItemBuilder.createItem().withName("nombre3")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem3);
 		assertEquals(originalCount + 3, itemDAO.findAll().size());
 	}
 
 	@Test
 	public void deleteById() {
-		Item anItem = ItemBuilder.createItem().withName("nombre").build();
+		Item anItem = ItemBuilder.createItem().withName("nombre")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem);
 		itemDAO.deleteById(anItem.getId());
 		assertNull(itemDAO.findById(anItem.getId()));
@@ -77,11 +85,14 @@ public class ItemDAOTest {
 	@Test
 	public void count() {
 		int originalCount = itemDAO.count();
-		Item anItem1 = ItemBuilder.createItem().withName("nombre1").build();
+		Item anItem1 = ItemBuilder.createItem().withName("nombre1")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem1);
-		Item anItem2 = ItemBuilder.createItem().withName("nombre2").build();
+		Item anItem2 = ItemBuilder.createItem().withName("nombre2")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem2);
-		Item anItem3 = ItemBuilder.createItem().withName("nombre3").build();
+		Item anItem3 = ItemBuilder.createItem().withName("nombre3")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem3);
 		assertEquals(3 + originalCount, itemDAO.count());
 	}
@@ -89,13 +100,13 @@ public class ItemDAOTest {
 	@Test
 	public void findByExample() {
 		Item anItem1 = ItemBuilder.createItem().withName("nombre1")
-				.withQuantity(5L).build();
+				.withDescription("descripcion").withQuantity(5L).build();
 		itemDAO.save(anItem1);
 		Item anItem2 = ItemBuilder.createItem().withName("nombre2")
-				.withQuantity(5L).build();
+				.withDescription("descripcion").withQuantity(5L).build();
 		itemDAO.save(anItem2);
 		Item anItem3 = ItemBuilder.createItem().withName("nombre3")
-				.withQuantity(10L).build();
+				.withDescription("descripcion").withQuantity(10L).build();
 		itemDAO.save(anItem3);
 
 		Item example = ItemBuilder.createItem().withQuantity(5L).build();
@@ -104,11 +115,14 @@ public class ItemDAOTest {
 
 	@Test
 	public void findByNameContaining() {
-		Item anItem1 = ItemBuilder.createItem().withName("nombre1").build();
+		Item anItem1 = ItemBuilder.createItem().withName("nombre1")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem1);
-		Item anItem2 = ItemBuilder.createItem().withName("nombre2").build();
+		Item anItem2 = ItemBuilder.createItem().withName("nombre2")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem2);
-		Item anItem3 = ItemBuilder.createItem().withName("nada").build();
+		Item anItem3 = ItemBuilder.createItem().withName("nada")
+				.withDescription("descripcion").build();
 		itemDAO.save(anItem3);
 
 		assertEquals(itemDAO.findByNameContaining("nombre").size(), 2);
@@ -132,13 +146,13 @@ public class ItemDAOTest {
 	@Test
 	public void findByQuantityRange() {
 		Item anItem1 = ItemBuilder.createItem().withName("nombre1")
-				.withQuantity(5L).build();
+				.withDescription("descripcion").withQuantity(5L).build();
 		itemDAO.save(anItem1);
 		Item anItem2 = ItemBuilder.createItem().withName("nombre2")
-				.withQuantity(10L).build();
+				.withDescription("descripcion").withQuantity(10L).build();
 		itemDAO.save(anItem2);
 		Item anItem3 = ItemBuilder.createItem().withName("nombre3")
-				.withQuantity(15L).build();
+				.withDescription("descripcion").withQuantity(15L).build();
 		itemDAO.save(anItem3);
 
 		assertEquals(2, itemDAO.findByQuantityRange(7L, 20L).size());
