@@ -35,7 +35,7 @@
 
 	<!-- Handles all requests into the application -->
 	<servlet>
-		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<servlet-name>TDA</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -46,8 +46,21 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:spring-service.xml
+			classpath:spring-persistence.xml
+			classpath:spring-security.xml
+		</param-value>
+	</context-param>
+
 	<servlet-mapping>
-		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<servlet-name>TDA</servlet-name>
 		<url-pattern>/presentation/*</url-pattern>
 	</servlet-mapping>
 
