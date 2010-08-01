@@ -83,7 +83,7 @@ public class ItemDAOTest {
 		itemDAO.save(anItem2);
 		Item anItem3 = ItemBuilder.createItem().withName("nombre3").build();
 		itemDAO.save(anItem3);
-		assertEquals(3, originalCount + itemDAO.count());
+		assertEquals(3 + originalCount, itemDAO.count());
 	}
 
 	@Test
