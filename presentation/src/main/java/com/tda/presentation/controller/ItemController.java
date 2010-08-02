@@ -1,4 +1,4 @@
-package com.tda.presentation.item;
+package com.tda.presentation.controller;
 
 import javax.validation.Valid;
 
@@ -41,7 +41,6 @@ public class ItemController {
 		if (result.hasErrors()) {
 			return "item/createForm";
 		}
-		System.out.println("CORNUDO:>" + anItem.getId());
 		itemService.save(anItem);
 
 		return "redirect:/presentation/item/list";
