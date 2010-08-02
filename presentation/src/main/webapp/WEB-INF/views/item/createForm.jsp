@@ -17,7 +17,11 @@
 
 <div class="span-12 last"><form:form modelAttribute="item"
 	action="add" method="post">
-	<fieldset><legend>Item</legend>
+	<fieldset>
+	
+	<form:hidden path="id" />
+	
+	<legend>Item</legend>
 	<p><form:label for="name" path="name" cssErrorClass="error">Nombre</form:label><br />
 	<form:input path="name" /> <form:errors path="name" /></p>
 
