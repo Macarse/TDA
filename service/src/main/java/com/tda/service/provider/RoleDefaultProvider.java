@@ -32,7 +32,10 @@ public class RoleDefaultProvider implements RoleProvider {
 	private void loadDefaultRoles(final Properties properties) {
 		for (Enumeration<Object> en = properties.keys(); en.hasMoreElements();) {
 			String key = (String) en.nextElement();
-			String role = properties.getProperty(key);
+			// String role = properties.getProperty(key);
+			String[] props = properties.getProperty(key).split(",");
+			String role = props[0];
+			String name = props[1];
 
 			Authority authority = null;
 			try {
@@ -40,6 +43,7 @@ public class RoleDefaultProvider implements RoleProvider {
 			} catch (NoDataFoundException e) {
 				authority = new Authority();
 				authority.setAuthority(role);
+				authority.setName(name);
 				authorityService.save(authority);
 
 			} catch (SingleResultExpectedException e) {

@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.validator.NotNull;
+import org.hibernate.validator.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,12 +27,23 @@ public class ApplicationUser implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+
+	@NotNull
+	@Size(min = 4, max = 8)
 	private String password;
+
+	@NotNull
+	@Size(min = 6, max = 12)
 	private String username;
+
 	private Collection<Authority> myAuthorities;
+
 	private boolean isAccountNonExpired;
+
 	private boolean isAccountNonLocked;
+
 	private boolean isCredentialsNonExpired;
+
 	private boolean isEnabled;
 
 	public ApplicationUser() {

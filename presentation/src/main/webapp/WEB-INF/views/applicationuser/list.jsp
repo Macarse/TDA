@@ -16,7 +16,7 @@
 		<tr>
 			<th>Nombre de usuario</th>
 			<th>Contraseña</th>
-			<th></th>
+			<th>Autoridades</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -34,13 +34,14 @@
 		<tr>
 			<td>${user.username}</td>
 			<td>${user.password}</td>
+			<td>${user.myAuthorities}</td>
 			<td>
-				<form:form method="POST" action="${startUrl}${deleteUrl}${item.id}">
+				<form:form method="POST" action="${startUrl}${deleteUrl}${user.id}">
 					<input type="submit" value="${deleteLabel}"/>
 				</form:form>
 			</td>
 			<td>
-				<form:form method="GET" action="${startUrl}${editUrl}${item.id}" >
+				<form:form method="GET" action="${startUrl}${editUrl}${user.id}" >
 					<input type="submit" value="${editLabel}"/>
 				</form:form>
 			</td>

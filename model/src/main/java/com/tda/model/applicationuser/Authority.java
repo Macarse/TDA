@@ -14,6 +14,7 @@ public class Authority implements Comparable<Authority>, Serializable {
 
 	private Long id;
 	private String authority;
+	private String name;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +35,24 @@ public class Authority implements Comparable<Authority>, Serializable {
 		this.authority = authority;
 	}
 
+	@Basic
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int compareTo(Authority o) {
 		if (this.authority.equalsIgnoreCase(o.authority))
 			return 0;
 
 		return 1;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }

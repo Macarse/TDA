@@ -13,12 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.service.api.ApplicationUserService;
+import com.tda.service.api.AuthorityService;
 
 @Controller
 @RequestMapping(value = "/applicationuser")
 public class ApplicationUserController {
 
 	private ApplicationUserService applicationUserService;
+	private AuthorityService authorityService;
 
 	@Autowired
 	public void setApplicationUserService(
@@ -26,11 +28,16 @@ public class ApplicationUserController {
 		this.applicationUserService = applicationUserService;
 	}
 
+	@Autowired
+	public void setAuthorityService(AuthorityService authorityService) {
+		this.authorityService = authorityService;
+	}
+
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getCreateForm(Model model) {
 		model.addAttribute(new ApplicationUser());
 
-		// model.addAttribute("allRoles", authorityService.findAll());
+		model.addAttribute("allAuthorities", authorityService.findAll());
 
 		return "applicationuser/createForm";
 	}
@@ -50,7 +57,7 @@ public class ApplicationUserController {
 		// TODO refactor... repeated code from getCreateForm
 		model.addAttribute(applicationUserService.findById(id));
 
-		// model.addAttribute("allRoles", authorityService.findAll());
+		model.addAttribute("allAuthorities", authorityService.findAll());
 
 		return "applicationuser/createForm";
 	}
