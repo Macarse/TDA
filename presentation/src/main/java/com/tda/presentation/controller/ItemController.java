@@ -3,12 +3,14 @@ package com.tda.presentation.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.item.Category;
@@ -21,10 +23,15 @@ import com.tda.service.api.ItemService;
 public class ItemController {
 
 	private ItemService itemService;
+	private PagedListHolder<Item> pagedHolder;
 
 	@Autowired
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
+		
+		//set page holder
+		pagedHolder = new PagedListHolder<Item>(itemService.findAll());
+		pagedHolder.setPageSize(1);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -64,10 +71,18 @@ public class ItemController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView getList() {
+	public ModelAndView getList(@RequestParam(value = "page", required = false) String pageNr) {
 		ModelAndView modelAndView = new ModelAndView("item/list");
-		modelAndView.addObject("itemList", itemService.findAll());
-
+//		modelAndView.addObject("itemList", itemService.findAll());
+		
+		modelAndView.addObject("itemList", pagedHolder);
+		
+		if ("next".equals(pageNr)){
+			pagedHolder.nextPage();
+		}else if ("previous".equals(pageNr)){
+			pagedHolder.previousPage();
+		}
+		
 		return modelAndView;
 	}
 

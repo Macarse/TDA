@@ -32,7 +32,7 @@
 		<spring:url value="edit/" var="editUrl"/>
 		<spring:message text="Editar" var="editLabel"/>
 		
-		<c:forEach items="${itemList}" var="item">
+		<c:forEach items="${itemList.pageList}" var="item">
 		<tr>
 			<td>${item.name}</td>
 			<td>${item.description}</td>
@@ -48,6 +48,18 @@
 					<input type="submit" value="${editLabel}"/>
 				</form:form>
 			</td>
+		</tr>
+		<tr>
+		  <td>
+		  <c:if test="${!itemList.firstPage}">
+		    <a href="?page=previous"><B>&lt;&lt; Prev</B></a>
+		  </c:if>
+		  </td>
+		  <td>
+		  <c:if test="${!itemList.lastPage}">
+		    <a href="?page=next"><B>Next &gt;&gt;</B></a>
+		  </c:if>
+		  </td>
 		</tr>
 		</c:forEach>
 	</tbody>
