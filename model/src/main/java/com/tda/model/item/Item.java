@@ -8,9 +8,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.hibernate.validator.NotNull;
-import org.hibernate.validator.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Item implements Serializable {
@@ -18,18 +18,20 @@ public class Item implements Serializable {
 
 	private Long id;
 
-	@NotNull
-	@Size(min = 1, max = 200)
+	@Size(min = 1, max = 100)
 	private String name;
 
-	@NotNull
 	@Size(min = 1, max = 200)
 	private String description;
 
+	@NotNull
+	@Min(value = 0)
 	private Long quantity;
 
+	@NotNull
 	private Category category;
 
+	@NotNull
 	private MeasureUnit measureUnit;
 
 	public Item() {

@@ -29,16 +29,15 @@ public class ItemController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getCreateForm(Model model) {
-		model.addAttribute(new Item());
-		model.addAttribute("categories", Category.values());
-		model.addAttribute("measureUnits", MeasureUnit.values());
+		setupForm(model, new Item());
 
 		return "item/createForm";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(@Valid Item anItem, BindingResult result) {
+	public String create(Model model, @Valid Item anItem, BindingResult result) {
 		if (result.hasErrors()) {
+			setupForm(model, anItem);
 			return "item/createForm";
 		}
 		itemService.save(anItem);
@@ -48,10 +47,7 @@ public class ItemController {
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getUpdateForm(@PathVariable Long id, Model model) {
-		// TODO refactor... repeated code from getCreateForm
-		model.addAttribute(itemService.findById(id));
-		model.addAttribute("categories", Category.values());
-		model.addAttribute("measureUnits", MeasureUnit.values());
+		setupForm(model, itemService.findById(id));
 
 		return "item/createForm";
 	}
@@ -71,4 +67,9 @@ public class ItemController {
 		return modelAndView;
 	}
 
+	private void setupForm(Model model, Item item) {
+		model.addAttribute(item);
+		model.addAttribute("categories", Category.values());
+		model.addAttribute("measureUnits", MeasureUnit.values());
+	}
 }

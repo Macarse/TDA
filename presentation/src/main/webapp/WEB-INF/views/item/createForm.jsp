@@ -8,7 +8,7 @@
 <html>
 <head>
 <META  http-equiv="Content-Type"  content="text/html;charset=UTF-8">
-<title>Crear Item</title>
+<title><fmt:message key="item.form.title" /></title>
 
 </head>
 <body>
