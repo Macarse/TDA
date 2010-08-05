@@ -26,7 +26,7 @@
 	<tbody>
 	
 		<!-- Edit/Delete buttons variables -->
-		<spring:url value="/presentation/item/" var="startUrl"/>
+		<spring:url value="/item/" var="startUrl"/>
 		<spring:url value="delete/" var="deleteUrl"/>
 		<spring:message text="Eliminar" var="deleteLabel"/>
 		<spring:url value="edit/" var="editUrl"/>

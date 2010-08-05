@@ -43,7 +43,7 @@ public class ItemController {
 		}
 		itemService.save(anItem);
 
-		return "redirect:/presentation/item/list";
+		return "redirect:/item";
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -60,10 +60,10 @@ public class ItemController {
 	public String deleteItem(@PathVariable Long id) {
 		itemService.delete(itemService.findById(id));
 
-		return "redirect:/presentation/item/list";
+		return "redirect:/item";
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList() {
 		ModelAndView modelAndView = new ModelAndView("item/list");
 		modelAndView.addObject("itemList", itemService.findAll());
