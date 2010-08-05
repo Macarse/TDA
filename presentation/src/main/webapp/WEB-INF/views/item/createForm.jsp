@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-<h1>Crear Item</h1>
+<h1><fmt:message key="item.form.title" /></h1>
 
 <div class="span-12 last"><form:form modelAttribute="item"
 	action="add" method="post">
@@ -21,18 +21,18 @@
 	
 	<form:hidden path="id" />
 	
-	<legend>Item</legend>
-	<p><form:label for="name" path="name" cssErrorClass="error">Nombre</form:label><br />
+	<legend><fmt:message key="item.form.legend" /></legend>
+	<p><form:label for="name" path="name" cssErrorClass="error"><fmt:message key="item.form.name" /></form:label><br />
 	<form:input path="name" /> <form:errors path="name" /></p>
 
 	<p><form:label for="description" path="description"
-		cssErrorClass="error">Descripción</form:label><br />
+		cssErrorClass="error"><fmt:message key="item.form.description" /></form:label><br />
 	<form:input path="description" /> <form:errors path="description" /></p>
 
-	<p><form:label for="quantity" path="quantity" cssErrorClass="error">Cantidad</form:label><br />
+	<p><form:label for="quantity" path="quantity" cssErrorClass="error"><fmt:message key="item.form.quantity" /></form:label><br />
 	<form:input path="quantity" /> <form:errors path="quantity" /></p>
 
-	<p><form:label for="category" path="category" cssErrorClass="error">Categoría</form:label><br />
+	<p><form:label for="category" path="category" cssErrorClass="error"><fmt:message key="item.form.category" /></form:label><br />
 	<form:select path="category">
 		<c:forEach var="category" items="${categories}">
 			<form:option value="${category}"> ${category.description} </form:option>
@@ -40,7 +40,7 @@
 	</form:select><form:errors path="category" /></p>
 
 	<p><form:label for="measureUnit" path="measureUnit"
-		cssErrorClass="error">Unidad de medida</form:label><br />
+		cssErrorClass="error"><fmt:message key="item.form.measureUnit" /></form:label><br />
 	<form:select path="measureUnit">
 		<c:forEach var="measureUnit" items="${measureUnits}">
 			<form:option value="${measureUnit}"> ${measureUnit.description} </form:option>
