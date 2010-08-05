@@ -75,17 +75,6 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<!-- JSR 303 with Hibernate Validator -->
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.0.2.GA</version>
-		</dependency>
 
 		<!-- Joda Time -->
 		<dependency>
@@ -121,17 +110,6 @@
 		</dependency>
 
 	</dependencies>
-	<repositories>
-		<!-- For Hibernate Validator -->
-		<repository>
-			<id>org.jboss.repository.release</id>
-			<name>JBoss Maven Release Repository</name>
-			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	<build>
 		<plugins>
 			<plugin>
