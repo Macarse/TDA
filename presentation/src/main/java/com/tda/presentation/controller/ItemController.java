@@ -1,14 +1,18 @@
 package com.tda.presentation.controller;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.item.Category;
@@ -18,15 +22,16 @@ import com.tda.service.api.ItemService;
 
 @Controller
 @RequestMapping(value = "/item")
+@SessionAttributes("item")
 public class ItemController {
 
 	private static final String ITEM_FORM_DELETE_ERROR = "item.form.deleteError";
 	private static final String ITEM_FORM_NOT_FOUND = "item.form.notFound";
-	private static final String ITEM_LIST = "item/list";
 	private static final String ITEM_FORM_MESSAGE = "message";
 	private static final String ITEM_FORM_ADD_SUCCESSFUL = "item.form.addSuccessful";
 	private static final String REDIRECT_TO_ITEM_LIST = "redirect:/item";
 	private static final String ITEM_CREATE_FORM = "item/createForm";
+	private static final String ITEM_LIST = "item/list";
 	private ItemService itemService;
 
 	@Autowired
@@ -34,20 +39,31 @@ public class ItemController {
 		this.itemService = itemService;
 	}
 
+	@ModelAttribute("categories")
+	public Category[] populateCategories() {
+		return Category.values();
+	}
+
+	@ModelAttribute("measureUnits")
+	public MeasureUnit[] populateMeasureUnits() {
+		return MeasureUnit.values();
+	}
+
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getCreateForm(Model model) {
-		setupForm(model, new Item());
+		model.addAttribute("item", new Item());
 
 		return ITEM_CREATE_FORM;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView create(Model model, @Valid Item anItem,
+	public ModelAndView create(Model model, @Valid @ModelAttribute Item anItem,
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 
+		// TODO if we're editing and not adding a new item the message
+		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors()) {
-			setupForm(model, anItem);
 			modelAndView.setViewName(ITEM_CREATE_FORM);
 		} else {
 			modelAndView.setViewName(REDIRECT_TO_ITEM_LIST);
@@ -60,7 +76,8 @@ public class ItemController {
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getUpdateForm(@PathVariable Long id, Model model) {
-		setupForm(model, itemService.findById(id));
+		Item anItem = itemService.findById(id);
+		model.addAttribute("item", anItem);
 
 		return ITEM_CREATE_FORM;
 	}
@@ -90,11 +107,5 @@ public class ItemController {
 		modelAndView.addObject("itemList", itemService.findAll());
 
 		return modelAndView;
-	}
-
-	private void setupForm(Model model, Item item) {
-		model.addAttribute(item);
-		model.addAttribute("categories", Category.values());
-		model.addAttribute("measureUnits", MeasureUnit.values());
 	}
 }
