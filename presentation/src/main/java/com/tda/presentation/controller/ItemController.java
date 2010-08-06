@@ -20,6 +20,13 @@ import com.tda.service.api.ItemService;
 @RequestMapping(value = "/item")
 public class ItemController {
 
+	private static final String ITEM_FORM_DELETE_ERROR = "item.form.deleteError";
+	private static final String ITEM_FORM_NOT_FOUND = "item.form.notFound";
+	private static final String ITEM_LIST = "item/list";
+	private static final String ITEM_FORM_MESSAGE = "message";
+	private static final String ITEM_FORM_ADD_SUCCESSFUL = "item.form.addSuccessful";
+	private static final String REDIRECT_TO_ITEM_LIST = "redirect:/item";
+	private static final String ITEM_CREATE_FORM = "item/createForm";
 	private ItemService itemService;
 
 	@Autowired
@@ -31,37 +38,55 @@ public class ItemController {
 	public String getCreateForm(Model model) {
 		setupForm(model, new Item());
 
-		return "item/createForm";
+		return ITEM_CREATE_FORM;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(Model model, @Valid Item anItem, BindingResult result) {
+	public ModelAndView create(Model model, @Valid Item anItem,
+			BindingResult result) {
+		ModelAndView modelAndView = new ModelAndView();
+
 		if (result.hasErrors()) {
 			setupForm(model, anItem);
-			return "item/createForm";
+			modelAndView.setViewName(ITEM_CREATE_FORM);
+		} else {
+			modelAndView.setViewName(REDIRECT_TO_ITEM_LIST);
+			modelAndView.addObject(ITEM_FORM_MESSAGE, ITEM_FORM_ADD_SUCCESSFUL);
+			itemService.save(anItem);
 		}
-		itemService.save(anItem);
 
-		return "redirect:/item";
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getUpdateForm(@PathVariable Long id, Model model) {
 		setupForm(model, itemService.findById(id));
 
-		return "item/createForm";
+		return ITEM_CREATE_FORM;
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-	public String deleteItem(@PathVariable Long id) {
-		itemService.delete(itemService.findById(id));
+	public ModelAndView deleteItem(@PathVariable Long id) {
+		ModelAndView modelAndView = new ModelAndView(REDIRECT_TO_ITEM_LIST);
+		Item anItem = itemService.findById(id);
 
-		return "redirect:/item";
+		if (anItem == null) {
+			modelAndView.addObject(ITEM_FORM_MESSAGE, ITEM_FORM_NOT_FOUND);
+		} else {
+
+			try {
+				itemService.delete(anItem);
+			} catch (Exception e) {
+				modelAndView.addObject(ITEM_FORM_MESSAGE,
+						ITEM_FORM_DELETE_ERROR);
+			}
+		}
+		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList() {
-		ModelAndView modelAndView = new ModelAndView("item/list");
+		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
 		modelAndView.addObject("itemList", itemService.findAll());
 
 		return modelAndView;
