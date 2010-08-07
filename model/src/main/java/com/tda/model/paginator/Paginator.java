@@ -5,6 +5,7 @@ public class Paginator {
 	private int pageIndex;
 	private int rowsCount;
 	private Order order;
+	private String orderField;
 
 	public Paginator(int pageSize, int pageIndex, Order order) {
 		this.pageSize = pageSize;
@@ -44,4 +45,11 @@ public class Paginator {
 		this.order = order;
 	}
 
+	public String getOrderField() {
+		return orderField;
+	}
+
+	public void setOrderField(String orderField) {
+		this.orderField = orderField;
+	}
 }

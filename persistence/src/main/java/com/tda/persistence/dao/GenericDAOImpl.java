@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.tda.model.paginator.Order;
 import com.tda.model.paginator.Paginator;
 
 public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
@@ -67,8 +68,19 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 		HibernateCallback<List<T>> callback = new HibernateCallback<List<T>>() {
 			public List<T> doInHibernate(org.hibernate.Session session)
 					throws HibernateException, SQLException {
+
+				String queryString = "from " + localClass.getName();
+
+				if (paginator.getOrder() != null
+						&& paginator.getOrderField() != null) {
+					queryString += " order by "
+							+ paginator.getOrderField()
+							+ " "
+							+ (paginator.getOrder() == Order.asc ? "ASC"
+									: "DESC");
+				}
 				return session
-						.createQuery("from " + localClass.getName() + " o")
+						.createQuery(queryString)
 						.setFirstResult(
 								paginator.getPageSize()
 										* paginator.getPageIndex())
