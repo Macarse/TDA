@@ -52,4 +52,18 @@ public class Paginator {
 	public void setOrderField(String orderField) {
 		this.orderField = orderField;
 	}
+	
+	public int getPageCount(){
+		return (this.rowsCount + this.pageSize - 1) / this.rowsCount;
+	}
+	
+	public boolean isLastPage(){
+		System.out.println(getPageCount() == getPageIndex());
+		return getPageCount() == getPageIndex(); 
+	}
+	
+	public boolean isFirstPage(){
+		System.out.println(0 == getPageIndex());
+		return 0 == getPageIndex(); 
+	}
 }

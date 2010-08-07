@@ -6,6 +6,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import com.tda.model.item.Item;
+import com.tda.model.paginator.Paginator;
 
 public class ItemDAO extends GenericDAOImpl<Item> {
 	@Override

@@ -16,22 +16,23 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
+import com.tda.model.paginator.Order;
+import com.tda.model.paginator.Paginator;
 import com.tda.service.api.ItemService;
 
 @Controller
 @RequestMapping(value = "/item")
 public class ItemController {
-
+	
 	private ItemService itemService;
-	private PagedListHolder<Item> pagedHolder;
+	private Paginator paginator;
 
 	@Autowired
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
 		
-		//set page holder
-		pagedHolder = new PagedListHolder<Item>(itemService.findAll());
-		pagedHolder.setPageSize(1);
+		//set paginator
+		paginator = new Paginator(1, 0, Order.asc);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -69,15 +70,16 @@ public class ItemController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(@RequestParam(value = "page", required = false) String pageNr) {
 		ModelAndView modelAndView = new ModelAndView("item/list");
-//		modelAndView.addObject("itemList", itemService.findAll());
 		
-		modelAndView.addObject("itemList", pagedHolder);
-		
+		//set paginator values
 		if ("next".equals(pageNr)){
-			pagedHolder.nextPage();
+			paginator.setPageIndex(paginator.getPageIndex()+1);
 		}else if ("previous".equals(pageNr)){
-			pagedHolder.previousPage();
+			paginator.setPageIndex(paginator.getPageIndex()-1);
 		}
+		
+		modelAndView.addObject("paginator", paginator);
+		modelAndView.addObject("itemList", itemService.findAllPaged(paginator));
 		
 		return modelAndView;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
+import com.tda.model.paginator.Paginator;
 
 public interface ItemService {
 
@@ -17,6 +18,8 @@ public interface ItemService {
 	Item findById(Long id);
 
 	List<Item> findAll();
+	
+	List<Item> findAllPaged(Paginator paginator);
 
 	List<Item> findByName(String name);
 
