@@ -1,8 +1,13 @@
 package com.tda.persistence.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.tda.model.paginator.Paginator;
 
 public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 		GenericDAO<T> {
@@ -48,5 +53,29 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 	@SuppressWarnings("unchecked")
 	public List<T> findByExample(final T exampleObject) {
 		return getHibernateTemplate().findByExample(exampleObject);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> findAllPaged(final Paginator paginator) {
+
+		paginator.setRowsCount(count());
+
+		// No puedo acceder a la variable persistentClass desde la
+		// inner class!
+		final Class<T> localClass = this.persistentClass;
+
+		HibernateCallback<List<T>> callback = new HibernateCallback<List<T>>() {
+			public List<T> doInHibernate(org.hibernate.Session session)
+					throws HibernateException, SQLException {
+				return session
+						.createQuery("from " + localClass.getName() + " o")
+						.setFirstResult(
+								paginator.getPageSize()
+										* paginator.getPageIndex())
+						.setMaxResults(paginator.getPageSize()).list();
+			}
+		};
+
+		return getHibernateTemplate().execute(callback);
 	}
 }

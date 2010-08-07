@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tda.model.item.Item;
 import com.tda.model.item.ItemBuilder;
+import com.tda.model.paginator.Order;
+import com.tda.model.paginator.Paginator;
 import com.tda.persistence.dao.ItemDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -158,5 +160,24 @@ public class ItemDAOTest {
 
 		assertEquals(2 + originalCount, itemDAO.findByQuantityRange(7L, 20L)
 				.size());
+	}
+
+	@Test
+	public void findAllPaged() {
+		int originalCount = itemDAO.findAll().size();
+		Item anItem1 = ItemBuilder.createItem().withName("nombre1")
+				.withDescription("descripcion").withQuantity(5L).build();
+		itemDAO.save(anItem1);
+		Item anItem2 = ItemBuilder.createItem().withName("nombre2")
+				.withDescription("descripcion").withQuantity(10L).build();
+		itemDAO.save(anItem2);
+		Item anItem3 = ItemBuilder.createItem().withName("nombre3")
+				.withDescription("descripcion").withQuantity(15L).build();
+		itemDAO.save(anItem3);
+
+		Paginator paginator = new Paginator(10, 0, Order.asc);
+		itemDAO.findAllPaged(paginator);
+
+		assertEquals(originalCount + 3, paginator.getRowsCount());
 	}
 }

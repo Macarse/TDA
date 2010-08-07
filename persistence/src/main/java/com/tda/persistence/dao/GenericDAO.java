@@ -2,20 +2,24 @@ package com.tda.persistence.dao;
 
 import java.util.List;
 
+import com.tda.model.paginator.Paginator;
+
 public interface GenericDAO<T> {
 	void save(T entity);
 
-    void delete(T entity);
-    
-    void update(T entity);
+	void delete(T entity);
 
-    T findById(Long id);
+	void update(T entity);
 
-    List<T> findAll();
+	T findById(Long id);
 
-    void deleteById(Long id);
+	List<T> findAll();
 
-    int count();
+	void deleteById(Long id);
 
-    List<T> findByExample(T exampleObject);
+	int count();
+
+	List<T> findByExample(T exampleObject);
+
+	List<T> findAllPaged(Paginator paginator);
 }
