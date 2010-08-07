@@ -16,7 +16,8 @@ import com.tda.model.item.ItemBuilder;
 import com.tda.persistence.dao.ItemDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/spring-persistence.xml" })
+@ContextConfiguration(locations = { "classpath:/spring-persistence.xml",
+		"classpath:/test-datasource.xml" })
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class ItemDAOTest {
