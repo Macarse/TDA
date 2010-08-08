@@ -55,28 +55,28 @@ public class Paginator {
 	public void setOrderField(String orderField) {
 		this.orderField = orderField;
 	}
-	
-	public int getPageCount(){
-		return (this.rowsCount + this.pageSize - 1) / this.rowsCount + 1;
+
+	public int getPageCount() {
+		return (this.rowsCount + this.pageSize - 1) / this.rowsCount;
 	}
-	
-	public boolean isLastPage(){
-		return getPageCount() == getPageIndex(); 
+
+	public boolean isLastPage() {
+		return getPageCount() == (getPageIndex() + 1);
 	}
-	
-	public boolean isFirstPage(){
-		return 0 == getPageIndex(); 
+
+	public boolean isFirstPage() {
+		return 0 == getPageIndex();
 	}
-	
-	public List<Integer> getPages(){
+
+	public List<Integer> getPages() {
 		ArrayList<Integer> pages = new ArrayList<Integer>();
-		for(int i=0; i<=getPageCount(); i++)
-			pages.add(i+1);
-			
+		for (int i = 0; i < getPageCount(); i++)
+			pages.add(i + 1);
+
 		return pages;
 	}
-	
-	public int getActualPage(){
+
+	public int getActualPage() {
 		return this.pageIndex;
 	}
 }
