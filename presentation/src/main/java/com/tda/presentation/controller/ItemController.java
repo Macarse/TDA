@@ -82,10 +82,8 @@ public class ItemController {
 				System.out.println("page is not a number");
 			}
 		}
-			
 		
 		modelAndView.addObject("paginator", paginator);
-		modelAndView.addObject("text", "hola");
 		modelAndView.addObject("itemList", itemService.findAllPaged(paginator));
 		
 		return modelAndView;

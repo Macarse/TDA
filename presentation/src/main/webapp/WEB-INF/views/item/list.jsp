@@ -46,38 +46,31 @@
 				</form:form>
 			</td>
 		</tr>
+		</c:forEach>
+	</tbody>
+	
+	<tfoot>
 		<tr>
 		  <td colspan="2"> 
+		    <c:if test="${!paginator.firstPage}">
+		      <a href="?page=previous"><B>&lt;&lt; Prev</B></a>
+		    </c:if>
 		    <c:forEach items="${paginator.pages}" var="page">
 		      <c:choose>
 		        <c:when test="${false}">
-		          <c:out value="${page}"/>
+		          <b><c:out value="${page}"/></b>
 		        </c:when>
 		        <c:otherwise>
 		          <a href="?page=<c:out value="${page}"/>"><c:out value="${page}"/></a>
 		        </c:otherwise>
 		      </c:choose>
 		    </c:forEach> 
+			<c:if test="${!paginator.lastPage}">
+			  <a href="?page=next"><B>Next &gt;&gt;</B></a>
+			</c:if>
 		  </td>
 		</tr>
-		<tr>
-		  <td>
-		  <c:if test="${!paginator.firstPage}">
-		    <a href="?page=previous"><B>&lt;&lt; Prev</B></a>
-		  </c:if>
-		  </td>
-		  <td>
-		  <c:if test="${!paginator.lastPage}">
-		    <a href="?page=next"><B>Next &gt;&gt;</B></a>
-		  </c:if>
-		  </td>
-		</tr>
-		</c:forEach>
-	</tbody>
-	
-	<tfoot>
 	</tfoot>
 </table>
-
 </body>
 </html>
