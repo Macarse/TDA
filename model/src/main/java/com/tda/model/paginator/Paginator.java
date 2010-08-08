@@ -4,24 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Paginator {
-	private int pageSize;
-	private int pageIndex;
-	private int rowsCount;
+	private int resultsPerPage;
+	private int pageIndex = 1;
+	private int totalResultsCount;
 	private Order order;
 	private String orderField;
 
-	public Paginator(int pageSize, int pageIndex, Order order) {
-		this.pageSize = pageSize;
-		this.pageIndex = pageIndex;
-		this.order = order;
+	public Paginator(int resultsPerPage) {
+		this.resultsPerPage = resultsPerPage;
 	}
 
-	public int getPageSize() {
-		return pageSize;
+	public int getResultsPerPage() {
+		return resultsPerPage;
 	}
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+	public void setResultsPerPage(int resultsPerPage) {
+		this.resultsPerPage = resultsPerPage;
 	}
 
 	public int getPageIndex() {
@@ -32,12 +30,12 @@ public class Paginator {
 		this.pageIndex = pageIndex;
 	}
 
-	public int getRowsCount() {
-		return rowsCount;
+	public int getTotalResultsCount() {
+		return totalResultsCount;
 	}
 
-	public void setRowsCount(int rowsCount) {
-		this.rowsCount = rowsCount;
+	public void setTotalResultsCount(int totalResultsCount) {
+		this.totalResultsCount = totalResultsCount;
 	}
 
 	public Order getOrder() {
@@ -57,16 +55,18 @@ public class Paginator {
 	}
 
 	public int getPageCount() {
-		if (this.rowsCount == 0)
+		if (this.totalResultsCount == 0)
 			return 0;
 
-		return (int) Math.ceil((this.rowsCount + this.pageSize)
-				/ (double) this.rowsCount);
+		/* Get how many pages depending on the results */
+		return (int) Math.ceil((this.totalResultsCount + this.resultsPerPage)
+				/ (double) this.totalResultsCount);
 	}
 
 	public boolean isLastPage() {
 		if (getPageCount() == 0)
 			return true;
+
 		return getPageCount() == (getPageIndex() + 1);
 	}
 

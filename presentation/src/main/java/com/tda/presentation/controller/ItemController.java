@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
-import com.tda.model.paginator.Order;
 import com.tda.model.paginator.Paginator;
 import com.tda.service.api.ItemService;
 
@@ -31,7 +30,7 @@ public class ItemController {
 		this.itemService = itemService;
 
 		// set paginator
-		paginator = new Paginator(1, 0, Order.asc);
+		paginator = new Paginator(1);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -71,17 +70,11 @@ public class ItemController {
 			@RequestParam(value = "page", required = false) String pageNr) {
 		ModelAndView modelAndView = new ModelAndView("item/list");
 
-		// set paginator values
-		if ("next".equals(pageNr)) {
-			paginator.setPageIndex(paginator.getPageIndex() + 1);
-		} else if ("previous".equals(pageNr)) {
-			paginator.setPageIndex(paginator.getPageIndex() - 1);
-		} else {
-			try {
-				paginator.setPageIndex(Integer.valueOf(pageNr) - 1);
-			} catch (Exception e) {
-				System.out.println("page is not a number");
-			}
+		try {
+			paginator.setPageIndex(Integer.valueOf(pageNr) - 1);
+		} catch (Exception e) {
+			/* TODO: Fix this. */
+			System.out.println("page is not a number");
 		}
 
 		modelAndView.addObject("itemList", itemService.findAllPaged(paginator));

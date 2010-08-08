@@ -59,10 +59,8 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 	@SuppressWarnings("unchecked")
 	public List<T> findAllPaged(final Paginator paginator) {
 
-		paginator.setRowsCount(count());
+		paginator.setTotalResultsCount(count());
 
-		// No puedo acceder a la variable persistentClass desde la
-		// inner class!
 		final Class<T> localClass = this.persistentClass;
 
 		HibernateCallback<List<T>> callback = new HibernateCallback<List<T>>() {
@@ -82,9 +80,9 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 				return session
 						.createQuery(queryString)
 						.setFirstResult(
-								paginator.getPageSize()
+								paginator.getResultsPerPage()
 										* paginator.getPageIndex())
-						.setMaxResults(paginator.getPageSize()).list();
+						.setMaxResults(paginator.getResultsPerPage()).list();
 			}
 		};
 
