@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tda.model.item.Item;
 import com.tda.model.item.ItemBuilder;
 import com.tda.persistence.dao.ItemDAO;
-import com.tda.persistence.paginator.Order;
 import com.tda.persistence.paginator.Paginator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -176,9 +175,9 @@ public class ItemDAOTest {
 				.withDescription("descripcion").withQuantity(15L).build();
 		itemDAO.save(anItem3);
 
-		Paginator paginator = new Paginator(10, 0, Order.asc);
+		Paginator paginator = new Paginator(10);
 		itemDAO.findAllPaged(paginator);
 
-		assertEquals(originalCount + 3, paginator.getRowsCount());
+		assertEquals(originalCount + 3, paginator.getTotalResultsCount());
 	}
 }

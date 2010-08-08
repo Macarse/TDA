@@ -71,7 +71,7 @@ public class Paginator {
 	}
 
 	public boolean isFirstPage() {
-		return 0 == getPageIndex();
+		return 1 == getPageIndex();
 	}
 
 	public List<Integer> getPages() {
@@ -82,7 +82,11 @@ public class Paginator {
 		return pages;
 	}
 
-	public int getActualPage() {
-		return this.pageIndex;
+	public Integer getNextPage() {
+		return pageIndex + 1;
+	}
+
+	public Integer getPreviousPage() {
+		return pageIndex - 1;
 	}
 }

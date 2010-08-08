@@ -109,14 +109,11 @@ public class ItemController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
-			@RequestParam(value = "page", required = false) String pageNr) {
+			@RequestParam(value = "page", required = false) Integer pageNumber) {
 		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
 
-		try {
-			paginator.setPageIndex(Integer.valueOf(pageNr) - 1);
-		} catch (Exception e) {
-			/* TODO: Fix this. */
-			System.out.println("page is not a number");
+		if (pageNumber != null) {
+			paginator.setPageIndex(pageNumber);
 		}
 
 		modelAndView.addObject("itemList", itemService.findAllPaged(paginator));
