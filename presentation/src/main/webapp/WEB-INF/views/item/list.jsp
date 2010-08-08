@@ -57,28 +57,11 @@
 	<tfoot>
 		<tr>
 		  <td colspan="2">
-		    <c:if test="${!paginator.firstPage}">
-		      <a href="?page=<c:out value="${paginator.previousPage}"/>"> <B>&lt;&lt; Prev</B></a>
-		    </c:if>
-
-		    <c:forEach items="${paginator.pages}" var="page">
-		    	<c:choose>
-		    		<c:when test="${page == paginator.pageIndex}">
-		      			<c:out value="${page}"/>
-		    		</c:when>
-		    		<c:otherwise>
-        				<a href="?page=<c:out value="${page}"/>"><c:out value="${page}"/></a>
-    				</c:otherwise>
-    			</c:choose>
-		    </c:forEach>
-		    
-			<c:if test="${!paginator.lastPage}">
-			  <a href="?page=<c:out value="${paginator.nextPage}"/>"> <B>Next &gt;&gt;</B></a>
-			</c:if>
-
+			<jsp:include page="/WEB-INF/views/paginator/paginator.jsp" flush="true"/>
 		  </td>
 		</tr>
 	</tfoot>
 </table>
+
 </body>
 </html>
