@@ -1,4 +1,4 @@
-package com.tda.model.paginator;
+package com.tda.persistence.paginator;
 
 import java.util.ArrayList;
 import java.util.List;

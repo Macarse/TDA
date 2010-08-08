@@ -5,7 +5,7 @@ import java.util.List;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
-import com.tda.model.paginator.Paginator;
+import com.tda.persistence.paginator.Paginator;
 
 public interface ItemService {
 

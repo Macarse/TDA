@@ -17,7 +17,8 @@ import com.tda.service.api.PatientService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring-persistence.xml",
-		"classpath:/spring-service.xml", "classpath:/spring-security.xml" })
+		"classpath:/test-datasource.xml", "classpath:/spring-service.xml",
+		"classpath:/spring-security.xml" })
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class PatientServiceTest {

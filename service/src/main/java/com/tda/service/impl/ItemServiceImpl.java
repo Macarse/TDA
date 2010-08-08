@@ -8,8 +8,8 @@ import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.ItemBuilder;
 import com.tda.model.item.MeasureUnit;
-import com.tda.model.paginator.Paginator;
 import com.tda.persistence.dao.ItemDAO;
+import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.ItemService;
 
 public class ItemServiceImpl implements ItemService {

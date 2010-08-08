@@ -2,7 +2,7 @@ package com.tda.persistence.dao;
 
 import java.util.List;
 
-import com.tda.model.paginator.Paginator;
+import com.tda.persistence.paginator.Paginator;
 
 public interface GenericDAO<T> {
 	void save(T entity);

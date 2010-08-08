@@ -7,8 +7,8 @@ import org.hibernate.HibernateException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.tda.model.paginator.Order;
-import com.tda.model.paginator.Paginator;
+import com.tda.persistence.paginator.Order;
+import com.tda.persistence.paginator.Paginator;
 
 public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 		GenericDAO<T> {

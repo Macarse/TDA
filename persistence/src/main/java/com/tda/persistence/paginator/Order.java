@@ -1,4 +1,4 @@
-package com.tda.model.paginator;
+package com.tda.persistence.paginator;
 
 public enum Order {
 	asc("Ascendente"), desc("Descendente");

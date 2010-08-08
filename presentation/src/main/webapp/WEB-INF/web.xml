@@ -54,8 +54,9 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:spring-service.xml
+			classpath:spring-datasource.xml
 			classpath:spring-persistence.xml
+			classpath:spring-service.xml
 			classpath:spring-security.xml
 		</param-value>
 	</context-param>
