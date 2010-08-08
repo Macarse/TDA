@@ -59,12 +59,12 @@ public class Paginator {
 			return 0;
 
 		/* Get how many pages depending on the results */
-		return (int) Math.ceil((this.totalResultsCount + this.resultsPerPage)
-				/ (double) this.totalResultsCount);
+		return (int) Math.ceil(this.totalResultsCount
+				/ (double) this.resultsPerPage);
 	}
 
 	public boolean isLastPage() {
-		if (getPageCount() == 0)
+		if (getPageCount() == 1)
 			return true;
 
 		return getPageCount() == (getPageIndex() + 1);

@@ -77,11 +77,15 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 							+ (paginator.getOrder() == Order.asc ? "ASC"
 									: "DESC");
 				}
+
+				// System.out.println("CACA" + paginator.getResultsPerPage()
+				// * paginator.getPageIndex());
+
 				return session
 						.createQuery(queryString)
 						.setFirstResult(
 								paginator.getResultsPerPage()
-										* paginator.getPageIndex())
+										* (paginator.getPageIndex() - 1))
 						.setMaxResults(paginator.getResultsPerPage()).list();
 			}
 		};
