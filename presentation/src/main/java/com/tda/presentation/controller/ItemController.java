@@ -3,7 +3,6 @@ package com.tda.presentation.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -76,9 +75,17 @@ public class ItemController {
 			paginator.setPageIndex(paginator.getPageIndex()+1);
 		}else if ("previous".equals(pageNr)){
 			paginator.setPageIndex(paginator.getPageIndex()-1);
+		}else{
+			try{
+				paginator.setPageIndex(Integer.valueOf(pageNr)-1);
+			}catch (Exception e) {
+				System.out.println("page is not a number");
+			}
 		}
+			
 		
 		modelAndView.addObject("paginator", paginator);
+		modelAndView.addObject("text", "hola");
 		modelAndView.addObject("itemList", itemService.findAllPaged(paginator));
 		
 		return modelAndView;

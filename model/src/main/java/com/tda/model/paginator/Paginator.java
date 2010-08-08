@@ -1,5 +1,8 @@
 package com.tda.model.paginator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Paginator {
 	private int pageSize;
 	private int pageIndex;
@@ -54,16 +57,26 @@ public class Paginator {
 	}
 	
 	public int getPageCount(){
-		return (this.rowsCount + this.pageSize - 1) / this.rowsCount;
+		return (this.rowsCount + this.pageSize - 1) / this.rowsCount + 1;
 	}
 	
 	public boolean isLastPage(){
-		System.out.println(getPageCount() == getPageIndex());
 		return getPageCount() == getPageIndex(); 
 	}
 	
 	public boolean isFirstPage(){
-		System.out.println(0 == getPageIndex());
 		return 0 == getPageIndex(); 
+	}
+	
+	public List<Integer> getPages(){
+		ArrayList<Integer> pages = new ArrayList<Integer>();
+		for(int i=0; i<=getPageCount(); i++)
+			pages.add(i+1);
+			
+		return pages;
+	}
+	
+	public int getActualPage(){
+		return this.pageIndex;
 	}
 }

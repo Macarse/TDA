@@ -10,7 +10,6 @@
 <title>Item list</title>
 </head>
 <body>
-hola
 <table>
 	<thead>
 		<tr>
@@ -22,7 +21,6 @@ hola
 			<th></th>
 		</tr>
 	</thead>
-	
 	<tbody>
 		<!-- Edit/Delete buttons variables -->
 		<spring:url value="/item/" var="startUrl"/>
@@ -47,6 +45,20 @@ hola
 					<input type="submit" value="${editLabel}"/>
 				</form:form>
 			</td>
+		</tr>
+		<tr>
+		  <td colspan="2"> 
+		    <c:forEach items="${paginator.pages}" var="page">
+		      <c:choose>
+		        <c:when test="${false}">
+		          <c:out value="${page}"/>
+		        </c:when>
+		        <c:otherwise>
+		          <a href="?page=<c:out value="${page}"/>"><c:out value="${page}"/></a>
+		        </c:otherwise>
+		      </c:choose>
+		    </c:forEach> 
+		  </td>
 		</tr>
 		<tr>
 		  <td>
