@@ -22,15 +22,15 @@ import com.tda.service.api.ItemService;
 @Controller
 @RequestMapping(value = "/item")
 public class ItemController {
-	
+
 	private ItemService itemService;
 	private Paginator paginator;
 
 	@Autowired
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
-		
-		//set paginator
+
+		// set paginator
 		paginator = new Paginator(1, 0, Order.asc);
 	}
 
@@ -67,25 +67,26 @@ public class ItemController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(value = "page", required = false) String pageNr) {
+	public ModelAndView getList(
+			@RequestParam(value = "page", required = false) String pageNr) {
 		ModelAndView modelAndView = new ModelAndView("item/list");
-		
-		//set paginator values
-		if ("next".equals(pageNr)){
-			paginator.setPageIndex(paginator.getPageIndex()+1);
-		}else if ("previous".equals(pageNr)){
-			paginator.setPageIndex(paginator.getPageIndex()-1);
-		}else{
-			try{
-				paginator.setPageIndex(Integer.valueOf(pageNr)-1);
-			}catch (Exception e) {
+
+		// set paginator values
+		if ("next".equals(pageNr)) {
+			paginator.setPageIndex(paginator.getPageIndex() + 1);
+		} else if ("previous".equals(pageNr)) {
+			paginator.setPageIndex(paginator.getPageIndex() - 1);
+		} else {
+			try {
+				paginator.setPageIndex(Integer.valueOf(pageNr) - 1);
+			} catch (Exception e) {
 				System.out.println("page is not a number");
 			}
 		}
-		
-		modelAndView.addObject("paginator", paginator);
+
 		modelAndView.addObject("itemList", itemService.findAllPaged(paginator));
-		
+		modelAndView.addObject("paginator", paginator);
+
 		return modelAndView;
 	}
 

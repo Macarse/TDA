@@ -57,10 +57,16 @@ public class Paginator {
 	}
 
 	public int getPageCount() {
-		return (this.rowsCount + this.pageSize - 1) / this.rowsCount;
+		if (this.rowsCount == 0)
+			return 0;
+
+		return (int) Math.ceil((this.rowsCount + this.pageSize)
+				/ (double) this.rowsCount);
 	}
 
 	public boolean isLastPage() {
+		if (getPageCount() == 0)
+			return true;
 		return getPageCount() == (getPageIndex() + 1);
 	}
 
