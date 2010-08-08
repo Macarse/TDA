@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
+import com.tda.persistence.paginator.Order;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.ItemService;
 
@@ -43,6 +44,8 @@ public class ItemController {
 	@Autowired
 	public void setPaginator(Paginator paginator) {
 		this.paginator = paginator;
+		paginator.setOrder(Order.asc);
+		paginator.setOrderField("id");
 	}
 
 	@ModelAttribute("categories")

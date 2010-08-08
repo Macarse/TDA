@@ -62,11 +62,18 @@
 		    </c:if>
 
 		    <c:forEach items="${paginator.pages}" var="page">
-		          <a href="?page=<c:out value="${page}"/>"><c:out value="${page}"/></a>
+		    	<c:choose>
+		    		<c:when test="${page == paginator.pageIndex}">
+		      			<c:out value="${page}"/>
+		    		</c:when>
+		    		<c:otherwise>
+        				<a href="?page=<c:out value="${page}"/>"><c:out value="${page}"/></a>
+    				</c:otherwise>
+    			</c:choose>
 		    </c:forEach>
 		    
 			<c:if test="${!paginator.lastPage}">
-			  <a href="?page= <c:out value="${paginator.nextPage}"/>"> <B>Next &gt;&gt;</B></a>
+			  <a href="?page=<c:out value="${paginator.nextPage}"/>"> <B>Next &gt;&gt;</B></a>
 			</c:if>
 
 		  </td>

@@ -67,7 +67,7 @@ public class Paginator {
 		if (getPageCount() == 1)
 			return true;
 
-		return getPageCount() == (getPageIndex() + 1);
+		return getPageCount() == pageIndex;
 	}
 
 	public boolean isFirstPage() {
