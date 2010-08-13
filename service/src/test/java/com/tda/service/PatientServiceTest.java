@@ -28,18 +28,18 @@ public class PatientServiceTest {
 
 	@Test
 	public void findByName() {
-		Patient patient = PatientBuilder.createPatient().withName("myname")
-				.build();
+		Patient patient = PatientBuilder.createPatient()
+				.withFirstName("myname").build();
 		patientService.save(patient);
 
-		assertEquals(patient, patientService.findByName("myname").get(0));
+		assertEquals(patient, patientService.findByFirstName("myname").get(0));
 
 	}
 
 	@Test
 	public void findByExample() {
-		Patient patient = PatientBuilder.createPatient().withName("myname")
-				.build();
+		Patient patient = PatientBuilder.createPatient()
+				.withFirstName("myname").build();
 		patientService.save(patient);
 
 		assertEquals(patient, patientService.findByExample(patient).get(0));
@@ -47,8 +47,8 @@ public class PatientServiceTest {
 
 	@Test
 	public void findByNameContaining() {
-		Patient patient = PatientBuilder.createPatient().withName("myname")
-				.build();
+		Patient patient = PatientBuilder.createPatient()
+				.withFirstName("myname").build();
 		patientService.save(patient);
 
 		assertEquals(patient, patientService.findByNameContaining("name")
@@ -73,23 +73,4 @@ public class PatientServiceTest {
 		assertEquals(patient, patientService.findBySex(Sex.male).get(0));
 	}
 
-	@Test
-	public void findByMotherNameContaining() {
-		Patient patient = PatientBuilder.createPatient()
-				.withMotherName("myname").build();
-		patientService.save(patient);
-
-		assertEquals(patient, patientService.findByMotherNameContaining("name")
-				.get(0));
-	}
-
-	@Test
-	public void findByFatherNameContaining() {
-		Patient patient = PatientBuilder.createPatient()
-				.withFatherName("myname").build();
-		patientService.save(patient);
-
-		assertEquals(patient, patientService.findByFatherNameContaining("name")
-				.get(0));
-	}
 }

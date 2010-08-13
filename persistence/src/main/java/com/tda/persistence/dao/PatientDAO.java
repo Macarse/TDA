@@ -17,7 +17,7 @@ public class PatientDAO extends GenericDAOImpl<Patient> {
 	@SuppressWarnings("unchecked")
 	public List<Patient> findByNameContaining(String name) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Patient.class);
-		criteria.add(Restrictions.like("name", "%" + name + "%"));
+		criteria.add(Restrictions.like("firstName", "%" + name + "%"));
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 

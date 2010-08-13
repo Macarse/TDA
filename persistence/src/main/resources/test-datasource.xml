@@ -34,6 +34,7 @@
 				<value>com.tda.model.applicationuser.ApplicationUser</value>
 				<value>com.tda.model.applicationuser.Authority</value>
 				<value>com.tda.model.patient.Patient</value>
+				<value>com.tda.model.socialworker.SocialWorkerForm</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

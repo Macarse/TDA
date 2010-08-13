@@ -36,8 +36,9 @@ public class PatientServiceImpl implements PatientService {
 		return patientDAO.findAll();
 	}
 
-	public List<Patient> findByName(String name) {
-		Patient example = PatientBuilder.createPatient().withName(name).build();
+	public List<Patient> findByFirstName(String name) {
+		Patient example = PatientBuilder.createPatient().withFirstName(name)
+				.build();
 		return patientDAO.findByExample(example);
 	}
 

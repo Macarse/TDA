@@ -8,15 +8,13 @@ public class PatientBuilder implements Serializable {
 
 	private String dni;
 
-	private String name;
+	private String firstName;
+
+	private String lastName;
 
 	private Sex sex;
 
 	private Date birthdate;
-
-	private String fatherName;
-
-	private String motherName;
 
 	private PatientBuilder() {
 	}
@@ -26,7 +24,7 @@ public class PatientBuilder implements Serializable {
 	}
 
 	public Patient build() {
-		return new Patient(dni, name, sex, birthdate, fatherName, motherName);
+		return new Patient(dni, firstName, lastName, sex, birthdate);
 	}
 
 	public PatientBuilder withDni(String dni) {
@@ -34,8 +32,13 @@ public class PatientBuilder implements Serializable {
 		return this;
 	}
 
-	public PatientBuilder withName(String name) {
-		this.name = name;
+	public PatientBuilder withFirstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
+
+	public PatientBuilder withLastName(String lastName) {
+		this.lastName = lastName;
 		return this;
 	}
 
@@ -49,13 +52,4 @@ public class PatientBuilder implements Serializable {
 		return this;
 	}
 
-	public PatientBuilder withFatherName(String fatherName) {
-		this.fatherName = fatherName;
-		return this;
-	}
-
-	public PatientBuilder withMotherName(String motherName) {
-		this.motherName = motherName;
-		return this;
-	}
 }

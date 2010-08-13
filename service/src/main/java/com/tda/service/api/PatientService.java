@@ -17,7 +17,7 @@ public interface PatientService {
 
 	List<Patient> findAll();
 
-	List<Patient> findByName(String name);
+	List<Patient> findByFirstName(String name);
 
 	List<Patient> findByExample(Patient example);
 

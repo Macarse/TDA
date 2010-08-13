@@ -34,6 +34,7 @@
 				<value>com.tda.model.applicationuser.ApplicationUser</value>
 				<value>com.tda.model.applicationuser.Authority</value>
 				<value>com.tda.model.patient.Patient</value>
+				<value>com.tda.model.socialworker.SocialWorkerForm</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -41,7 +42,7 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.max_fetch_depth">2</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 			</props>
 		</property>
 	</bean>
