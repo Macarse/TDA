@@ -3,15 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User list</title>
-</head>
-<body>
 
-<table>
+<!-- Edit/Delete buttons variables -->
+<spring:url value="applicationuser/" var="startUrl"/>
+<spring:url value="delete/" var="deleteUrl"/>
+<spring:message text="Eliminar" var="deleteLabel"/>
+<spring:url value="edit/" var="editUrl"/>
+<spring:message text="Editar" var="editLabel"/>
+
+<table class="list-table">
 	<thead>
 		<tr>
 			<th>Nombre de usuario</th>
@@ -23,13 +23,6 @@
 	
 	<tbody>
 	
-		<!-- Edit/Delete buttons variables -->
-		<spring:url value="/presentation/applicationuser/" var="startUrl"/>
-		<spring:url value="delete/" var="deleteUrl"/>
-		<spring:message text="Eliminar" var="deleteLabel"/>
-		<spring:url value="edit/" var="editUrl"/>
-		<spring:message text="Editar" var="editLabel"/>
-		
 		<c:forEach items="${applicationUserList}" var="user">
 		<tr>
 			<td>${user.username}</td>
@@ -52,6 +45,3 @@
 	<tfoot>
 	</tfoot>
 </table>
-
-</body>
-</html>

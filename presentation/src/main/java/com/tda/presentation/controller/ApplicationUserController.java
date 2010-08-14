@@ -69,7 +69,7 @@ public class ApplicationUserController {
 		return "redirect:/presentation/applicationuser/list";
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList() {
 		ModelAndView modelAndView = new ModelAndView("applicationuser/list");
 		modelAndView.addObject("applicationUserList",

@@ -21,5 +21,15 @@
 		<put-attribute name="title" value="New Item" />
 		<put-attribute name="body" value="/WEB-INF/views/item/createForm.jsp" />
 	</definition>
+	
+	<definition name="applicationuser/list" extends="base.definition">
+		<put-attribute name="title" value="User List" />
+		<put-attribute name="body" value="/WEB-INF/views/applicationuser/list.jsp" />
+	</definition>
+	
+	<definition name="applicationuser/createForm" extends="base.definition">
+		<put-attribute name="title" value="New User" />
+		<put-attribute name="body" value="/WEB-INF/views/applicationuser/createForm.jsp" />
+	</definition>
 
 </tiles-definitions>

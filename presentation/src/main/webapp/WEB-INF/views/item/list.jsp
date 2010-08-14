@@ -5,18 +5,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Item list</title>
-</head>
-<body>
+<!-- Edit/Delete buttons variables -->
+<spring:url value="item/" var="startUrl" />
+<spring:url value="delete" var="deleteUrl" />
+<spring:message text="Eliminar" var="deleteLabel" />
+<spring:url value="edit" var="editUrl" />
+<spring:url value="add" var="addUrl" />
+<spring:message text="Editar" var="editLabel" />
 
 <c:if test="${!empty param.message}">
 	<fmt:message key="${param.message }" />
 </c:if>
 
-<table>
+<a href="${startUrl}${addUrl}">Agregar</a>
+
+<table class="list-table">
 	<thead>
 		<tr>
 			<th><fmt:message key="item.form.name" /></th>
@@ -29,12 +32,6 @@
 	</thead>
 	<tbody>
 
-		<!-- Edit/Delete buttons variables -->
-		<spring:url value="/item/" var="startUrl" />
-		<spring:url value="delete/" var="deleteUrl" />
-		<spring:message text="Eliminar" var="deleteLabel" />
-		<spring:url value="edit/" var="editUrl" />
-		<spring:message text="Editar" var="editLabel" />
 
 		<c:forEach items="${itemList}" var="item">
 			<tr>
@@ -43,11 +40,11 @@
 				<td>${item.quantity}</td>
 				<td>${item.category}</td>
 				<td><form:form method="POST"
-					action="${startUrl}${deleteUrl}${item.id}">
+					action="${startUrl}${deleteUrl}/${item.id}">
 					<input type="submit" value="${deleteLabel}" />
 				</form:form></td>
 				<td><form:form method="GET"
-					action="${startUrl}${editUrl}${item.id}">
+					action="${startUrl}${editUrl}/${item.id}">
 					<input type="submit" value="${editLabel}" />
 				</form:form></td>
 			</tr>
@@ -62,6 +59,3 @@
 		</tr>
 	</tfoot>
 </table>
-
-</body>
-</html>

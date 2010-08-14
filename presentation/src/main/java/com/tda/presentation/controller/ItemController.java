@@ -46,6 +46,7 @@ public class ItemController {
 		this.paginator = paginator;
 		paginator.setOrder(Order.asc);
 		paginator.setOrderField("id");
+		paginator.setResultsPerPage(15);
 	}
 
 	@ModelAttribute("categories")

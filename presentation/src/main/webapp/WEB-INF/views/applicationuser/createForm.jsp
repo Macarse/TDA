@@ -5,17 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<html>
-<head>
-<META  http-equiv="Content-Type"  content="text/html;charset=UTF-8">
-<title>Crear Usuario</title>
-
-</head>
-<body>
-<div class="container">
-<h1>Crear Usuario</h1>
-
-<div class="span-12 last"><form:form modelAttribute="applicationUser"
+<form:form modelAttribute="applicationUser"
 	action="add" method="post">
 	<fieldset>
 	
@@ -35,8 +25,4 @@
 
 	<p><input type="submit" /></p>
 	</fieldset>
-</form:form></div>
-<hr>
-</div>
-</body>
-</html>
+</form:form>

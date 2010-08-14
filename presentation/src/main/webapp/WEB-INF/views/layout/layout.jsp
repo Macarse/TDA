@@ -10,18 +10,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
-<link  rel="stylesheet" href='<spring:theme code="layout.css"/>' type="text/css" /> 
+<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="layout.css"/>' type="text/css" />
+<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="list.css"/>' type="text/css" /> 
 </head>
 <body>
 <div class="main-container">
 	<div class="header-container">
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div class="menu-container">
-		<tiles:insertAttribute name="menu" />
-	</div>
-	<div class="body-container">
-		<tiles:insertAttribute name="body" />
+	<div class="menu-body-container">
+		<div class="menu-container">
+			<tiles:insertAttribute name="menu" />
+		</div>
+		<div class="body-container">
+			<tiles:insertAttribute name="body" />
+		</div>
 	</div>
 	<div class="footer-container">
 		<tiles:insertAttribute name="footer" />

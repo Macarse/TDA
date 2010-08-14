@@ -5,17 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<html>
-<head>
-<META  http-equiv="Content-Type"  content="text/html;charset=UTF-8">
-<title><fmt:message key="item.form.title" /></title>
-
-</head>
-<body>
-<div class="container">
-<h1><fmt:message key="item.form.title" /></h1>
-
-<div class="span-12 last"><form:form modelAttribute="item"
+<form:form modelAttribute="item"
 	action="add" method="post">
 	<fieldset>
 	
@@ -47,11 +37,6 @@
 		</c:forEach>
 	</form:select><form:errors path="measureUnit" /></p>
 
-
 	<p><input type="submit" /></p>
 	</fieldset>
-</form:form></div>
-<hr>
-</div>
-</body>
-</html>
+</form:form>
