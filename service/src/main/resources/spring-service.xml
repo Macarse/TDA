@@ -18,9 +18,13 @@
 	<bean id="authorityService" class="com.tda.service.impl.AuthorityServiceImpl">
 		<property name="authorityDAO" ref="authorityDAO" />
 	</bean>
-	
+
 	<bean id="patientService" class="com.tda.service.impl.PatientServiceImpl">
 		<property name="patientDAO" ref="patientDAO" />
+	</bean>
+
+	<bean id="socialWorkerFormService" class="com.tda.service.impl.SocialWorkerFormServiceImpl">
+		<property name="socialWorkerFormDAO" ref="socialWorkerFormDAO" />
 	</bean>
 
 	<bean id="authenticationService" class="com.tda.service.impl.AuthenticationServiceImpl">
