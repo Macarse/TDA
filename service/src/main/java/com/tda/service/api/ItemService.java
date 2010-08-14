@@ -18,12 +18,14 @@ public interface ItemService {
 	Item findById(Long id);
 
 	List<Item> findAll();
-	
+
 	List<Item> findAllPaged(Paginator paginator);
 
 	List<Item> findByName(String name);
 
 	List<Item> findByExample(Item example);
+
+	List<Item> findByExamplePaged(Item example, Paginator paginator);
 
 	List<Item> findByDescription(String description);
 
