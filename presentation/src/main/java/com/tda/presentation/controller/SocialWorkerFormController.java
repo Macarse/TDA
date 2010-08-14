@@ -37,10 +37,10 @@ import com.tda.service.api.PatientService;
 import com.tda.service.api.SocialWorkerFormService;
 
 @Controller
-@RequestMapping(value = "/patient/{patientId}/socialworker/add")
+@RequestMapping(value = "/patient/{patientId}/socialworker/new")
 @SessionAttributes("socialWorkerForm")
 public class SocialWorkerFormController {
-	private static final String SOCIAL_WORKER_ADD_FORM = "socialWorkerForm/form";
+	private static final String SOCIAL_WORKER_ADD_FORM = "socialworkerform/form";
 	private SocialWorkerFormService socialWorkerFormService;
 	private PatientService patientService;
 
