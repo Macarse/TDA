@@ -6,11 +6,13 @@
 
 <!-- Edit/Delete buttons variables -->
 <spring:url value="applicationuser/" var="startUrl"/>
-<spring:url value="delete/" var="deleteUrl"/>
+<spring:url value="delete" var="deleteUrl"/>
 <spring:message text="Eliminar" var="deleteLabel"/>
-<spring:url value="edit/" var="editUrl"/>
+<spring:url value="edit" var="editUrl"/>
+<spring:url value="add" var="addUrl"/>
 <spring:message text="Editar" var="editLabel"/>
 
+<a href="${startUrl}${addUrl}">Agregar</a>
 <table class="list-table">
 	<thead>
 		<tr>
@@ -29,12 +31,12 @@
 			<td>${user.password}</td>
 			<td>${user.myAuthorities}</td>
 			<td>
-				<form:form method="POST" action="${startUrl}${deleteUrl}${user.id}">
+				<form:form method="POST" action="${startUrl}${deleteUrl}/${user.id}">
 					<input type="submit" value="${deleteLabel}"/>
 				</form:form>
 			</td>
 			<td>
-				<form:form method="GET" action="${startUrl}${editUrl}${user.id}" >
+				<form:form method="GET" action="${startUrl}${editUrl}/${user.id}" >
 					<input type="submit" value="${editLabel}"/>
 				</form:form>
 			</td>
