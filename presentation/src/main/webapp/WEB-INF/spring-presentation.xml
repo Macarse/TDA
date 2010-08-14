@@ -56,5 +56,14 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+	</bean>
+	
+	<bean id="themeResolver" class="org.springframework.web.servlet.theme.FixedThemeResolver">
+		<property name="defaultThemeName">
+			<value>default</value>
+		</property>
+	</bean>
 
 </beans>
