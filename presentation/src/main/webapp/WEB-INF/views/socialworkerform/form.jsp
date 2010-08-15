@@ -225,9 +225,3 @@
 	</fieldset>
 </form:form></div>
 <hr>
-
-<c:if test="${!socialWorkerForm.new}">
-  <form:form method="delete">
-    <p class="submit"><input type="submit" value="Eliminar Formulario"/></p>
-  </form:form>
-</c:if>    
