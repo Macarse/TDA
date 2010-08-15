@@ -50,6 +50,11 @@
 	</tbody>
 	
 	<tfoot>
+		<tr>
+		  <td colspan="2">
+			<jsp:include page="/WEB-INF/views/paginator/paginator.jsp" flush="true"/>
+		  </td>
+		</tr>
 	</tfoot>
 </table>
 

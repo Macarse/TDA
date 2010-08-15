@@ -18,10 +18,10 @@
 <div class="span-12 last"><form:form modelAttribute="applicationUser"
 	action="add" method="post">
 	<fieldset>
-	
+
 	<form:hidden path="id" />
 	
-	<legend>Usuario</legend>
+	<legend><fmt:message key="user.form.legend" /></legend>
 	<p><form:label for="username" path="username" cssErrorClass="error">Nombre de usuario</form:label><br />
 	<form:input path="username" /> <form:errors path="username" /></p>
 
