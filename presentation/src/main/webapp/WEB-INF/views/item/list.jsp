@@ -6,7 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!-- Edit/Delete buttons variables -->
-<spring:url value="item/" var="startUrl" />
+<spring:url value="item" var="startUrl" />
 <spring:url value="delete" var="deleteUrl" />
 <spring:message text="Eliminar" var="deleteLabel" />
 <spring:url value="edit" var="editUrl" />
@@ -14,10 +14,25 @@
 <spring:message text="Editar" var="editLabel" />
 
 <c:if test="${!empty param.message}">
-	<fmt:message key="${param.message }" />
+	<div class="message">
+		<fmt:message key="${param.message }" />
+	</div>
 </c:if>
 
-<a href="${startUrl}${addUrl}">Agregar</a>
+<div class="filter-container">
+	<form action="${startUrl}" method="get">
+		<div><label for="name">Nombre</label>
+			<input type="text" name="name"></div>
+		<div><label for="description">Descripcion</label>
+			<input type="text" name="description"></div>
+		<div><label for="quantity">Cantidad</label>
+			<input type="text" name="quantity"></div>
+		<div><input type="submit" value="Buscar">
+		<input type="hidden" name="search" value="true"></div>
+	</form>	
+</div>
+
+<a href="${startUrl}/${addUrl}">Agregar</a>
 
 <table class="list-table">
 	<thead>
@@ -40,11 +55,11 @@
 				<td>${item.quantity}</td>
 				<td>${item.category}</td>
 				<td><form:form method="POST"
-					action="${startUrl}${deleteUrl}/${item.id}">
+					action="${startUrl}/${deleteUrl}/${item.id}">
 					<input type="submit" value="${deleteLabel}" />
 				</form:form></td>
 				<td><form:form method="GET"
-					action="${startUrl}${editUrl}/${item.id}">
+					action="${startUrl}/${editUrl}/${item.id}">
 					<input type="submit" value="${editLabel}" />
 				</form:form></td>
 			</tr>

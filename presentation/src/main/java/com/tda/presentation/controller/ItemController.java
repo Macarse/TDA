@@ -1,5 +1,7 @@
 package com.tda.presentation.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,6 @@ public class ItemController {
 		this.paginator = paginator;
 		paginator.setOrder(Order.asc);
 		paginator.setOrderField("id");
-		paginator.setResultsPerPage(15);
 	}
 
 	@ModelAttribute("categories")
@@ -113,14 +114,34 @@ public class ItemController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
-			@RequestParam(value = "page", required = false) Integer pageNumber) {
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value="search", required = false) Boolean search,
+			@RequestParam(value="name", required = false) String sName,
+			@RequestParam(value="description", required = false) String sDescription,
+			@RequestParam(value="quantity", required = false) Long sQuantity){
 		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
-
+		
+		Item sItem = new Item();
+		List<Item> itemList = null;
+		
 		if (pageNumber != null) {
 			paginator.setPageIndex(pageNumber);
 		}
+		
+		if((search != null) && search){
+			if (sName != "")
+				sItem.setName(sName);
+			if(sDescription != "")
+				sItem.setDescription(sDescription);
+			if(sQuantity != null)
+				sItem.setQuantity(sQuantity);
+			
+			itemList = itemService.findByExamplePaged(sItem, paginator);
+		}else{
+			itemList = itemService.findAllPaged(paginator);
+		}
 
-		modelAndView.addObject("itemList", itemService.findAllPaged(paginator));
+		modelAndView.addObject("itemList", itemList);
 		modelAndView.addObject("paginator", paginator);
 
 		return modelAndView;
