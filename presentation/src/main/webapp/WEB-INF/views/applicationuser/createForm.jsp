@@ -8,12 +8,12 @@
 <html>
 <head>
 <META  http-equiv="Content-Type"  content="text/html;charset=UTF-8">
-<title>Crear Usuario</title>
+<title><fmt:message key="user.form.title" /></title>
 
 </head>
 <body>
 <div class="container">
-<h1>Crear Usuario</h1>
+<h1><fmt:message key="user.form.title" /></h1>
 
 <div class="span-12 last"><form:form modelAttribute="applicationUser"
 	action="add" method="post">

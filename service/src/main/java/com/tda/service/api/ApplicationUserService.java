@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.persistence.paginator.Paginator;
 
 public interface ApplicationUserService extends UserDetailsService {
 
@@ -23,5 +24,7 @@ public interface ApplicationUserService extends UserDetailsService {
 	int count();
 
 	List<ApplicationUser> findByExample(ApplicationUser exampleObject);
+
+	List<ApplicationUser> findAllPaged(Paginator paginator);
 
 }

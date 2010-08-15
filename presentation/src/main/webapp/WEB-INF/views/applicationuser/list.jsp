@@ -22,13 +22,13 @@
 	</thead>
 	
 	<tbody>
-	
+
 		<!-- Edit/Delete buttons variables -->
-		<spring:url value="/presentation/applicationuser/" var="startUrl"/>
-		<spring:url value="delete/" var="deleteUrl"/>
-		<spring:message text="Eliminar" var="deleteLabel"/>
-		<spring:url value="edit/" var="editUrl"/>
-		<spring:message text="Editar" var="editLabel"/>
+		<spring:url value="/applicationUser/" var="startUrl" />
+		<spring:url value="delete/" var="deleteUrl" />
+		<spring:message text="Eliminar" var="deleteLabel" />
+		<spring:url value="edit/" var="editUrl" />
+		<spring:message text="Editar" var="editLabel" />
 		
 		<c:forEach items="${applicationUserList}" var="user">
 		<tr>
