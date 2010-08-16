@@ -11,6 +11,7 @@
 <spring:message text="Eliminar" var="deleteLabel" />
 <spring:url value="edit" var="editUrl" />
 <spring:url value="add" var="addUrl" />
+<spring:url value="search" var="searchUrl" />
 <spring:message text="Editar" var="editLabel" />
 
 <c:if test="${!empty param.message}">
@@ -20,16 +21,7 @@
 </c:if>
 
 <div class="filter-container">
-	<form action="${startUrl}" method="get">
-		<div><label for="name">Nombre</label>
-			<input type="text" name="name"></div>
-		<div><label for="description">Descripcion</label>
-			<input type="text" name="description"></div>
-		<div><label for="quantity">Cantidad</label>
-			<input type="text" name="quantity"></div>
-		<div><input type="submit" value="Buscar">
-		<input type="hidden" name="search" value="true"></div>
-	</form>	
+	<jsp:include page="/WEB-INF/views/item/filter.jsp" flush="true"/>
 </div>
 
 <a href="${startUrl}/${addUrl}">Agregar</a>

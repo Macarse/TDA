@@ -110,19 +110,16 @@ public class ItemController {
 		}
 		return modelAndView;
 	}
-
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView getList(
+	
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String getSearch(
+			Model model,
+			@Valid @ModelAttribute Item anItem,
+			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
-			@RequestParam(value = "search", required = false) Boolean search,
-			@RequestParam(value = "name", required = false) String sName,
-			@RequestParam(value = "description", required = false) String sDescription,
-			@RequestParam(value = "quantity", required = false) Long sQuantity,
 			@RequestParam(value = "orderField", required = false) String orderField,
-			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
-		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
-
-		Item sItem = new Item();
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending){
+		
 		List<Item> itemList = null;
 
 		// Pagination
@@ -136,20 +133,38 @@ public class ItemController {
 			paginator.setOrderField(orderField);
 		}
 
-		// Search
-		if ((search != null) && search) {
-			if (sName != "")
-				sItem.setName(sName);
-			if (sDescription != "")
-				sItem.setDescription(sDescription);
-			if (sQuantity != null)
-				sItem.setQuantity(sQuantity);
+		itemList = itemService.findByExamplePaged(anItem, paginator);
+//		itemList = itemService.findAllPaged(paginator);
+		
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("paginator", paginator);
+			
+		return ITEM_LIST;
+	}
 
-			itemList = itemService.findByExamplePaged(sItem, paginator);
-		} else {
-			itemList = itemService.findAllPaged(paginator);
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView getList(
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
+		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
+
+		List<Item> itemList = null;
+
+		// Pagination
+		if (pageNumber != null) {
+			paginator.setPageIndex(pageNumber);
 		}
 
+		// Order
+		if (orderField != null && orderAscending != null) {
+			paginator.setOrderAscending(orderAscending);
+			paginator.setOrderField(orderField);
+		}
+
+	//		itemList = itemService.findByExamplePaged(sItem, paginator);
+		itemList = itemService.findAllPaged(paginator);
+		modelAndView.addObject("item", new Item());
 		modelAndView.addObject("itemList", itemList);
 		modelAndView.addObject("paginator", paginator);
 
