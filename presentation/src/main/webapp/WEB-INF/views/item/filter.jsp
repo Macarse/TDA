@@ -54,7 +54,5 @@
 			<input type="submit" value="<fmt:message key="filter.submit" />" />
 		</div>
 		
-		<input type="hidden" name="search" value="true" />
-		
 	</form:form>
 </div>

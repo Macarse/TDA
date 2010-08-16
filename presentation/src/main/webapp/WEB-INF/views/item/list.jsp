@@ -24,7 +24,7 @@
 	<jsp:include page="/WEB-INF/views/item/filter.jsp" flush="true"/>
 </div>
 
-<a href="${startUrl}/${addUrl}">Agregar</a>
+<a href="${addUrl}">Agregar</a>
 
 <table class="list-table">
 	<thead>
@@ -72,11 +72,11 @@
 				<td>${item.quantity}</td>
 				<td>${item.category}</td>
 				<td><form:form method="POST"
-					action="${startUrl}/${deleteUrl}/${item.id}">
+					action="${deleteUrl}/${item.id}">
 					<input type="submit" value="${deleteLabel}" />
 				</form:form></td>
 				<td><form:form method="GET"
-					action="${startUrl}/${editUrl}/${item.id}">
+					action="${editUrl}/${item.id}">
 					<input type="submit" value="${editLabel}" />
 				</form:form></td>
 			</tr>

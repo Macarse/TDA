@@ -1,7 +1,9 @@
 package com.tda.persistence.paginator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Paginator {
 	private int resultsPerPage;
@@ -9,8 +11,10 @@ public class Paginator {
 	private int totalResultsCount;
 	private Boolean orderAscending;
 	private String orderField;
+	private Map<String, String> params;
 
 	public Paginator(int resultsPerPage) {
+		this.params = new HashMap<String, String>();
 		this.resultsPerPage = resultsPerPage;
 	}
 
@@ -88,5 +92,19 @@ public class Paginator {
 
 	public Integer getPreviousPage() {
 		return pageIndex - 1;
+	}
+
+	public void setParam(String key, String value) {
+		this.params.put(key, value);
+	}
+
+	public String getParams() {
+		String ret = "";
+		
+		for (String e : this.params.keySet()) {
+			ret += e + "=" + this.params.get(e) + "&";
+		}
+		
+		return ret;
 	}
 }

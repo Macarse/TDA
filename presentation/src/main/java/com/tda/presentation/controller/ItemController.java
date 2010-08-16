@@ -31,9 +31,10 @@ public class ItemController {
 	private static final String ITEM_FORM_NOT_FOUND = "item.form.notFound";
 	private static final String ITEM_FORM_MESSAGE = "message";
 	private static final String ITEM_FORM_ADD_SUCCESSFUL = "item.form.addSuccessful";
-	private static final String REDIRECT_TO_ITEM_LIST = "redirect:/item";
+	private static final String REDIRECT_TO_ITEM_LIST = "redirect:/item/";
 	private static final String ITEM_CREATE_FORM = "item/createForm";
 	private static final String ITEM_LIST = "item/list";
+	private static final String ITEM_LIST_SEARCH = "item/search";
 	private ItemService itemService;
 	private Paginator paginator;
 
@@ -114,27 +115,38 @@ public class ItemController {
 	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public String getSearch(
 			Model model,
-			@Valid @ModelAttribute Item anItem,
+			@ModelAttribute Item anItem,
 			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending){
 		
 		List<Item> itemList = null;
+		System.out.println(anItem.getDescription() + " " + anItem.getName());
 
 		// Pagination
 		if (pageNumber != null) {
 			paginator.setPageIndex(pageNumber);
 		}
+		
+		paginator.setParam("description", anItem.getDescription());
+		paginator.setParam("name", anItem.getName());
+		if (anItem.getCategory() != null)
+			paginator.setParam("category", anItem.getCategory().toString());
+		if (anItem.getMeasureUnit() != null)
+			paginator.setParam("measureunit", anItem.getMeasureUnit().toString());
+		if (anItem.getQuantity() != null)
+			paginator.setParam("quantity", anItem.getQuantity().toString());
+		
 
 		// Order
 		if (orderField != null && orderAscending != null) {
 			paginator.setOrderAscending(orderAscending);
 			paginator.setOrderField(orderField);
 		}
+		
 
 		itemList = itemService.findByExamplePaged(anItem, paginator);
-//		itemList = itemService.findAllPaged(paginator);
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("paginator", paginator);
@@ -162,7 +174,6 @@ public class ItemController {
 			paginator.setOrderField(orderField);
 		}
 
-	//		itemList = itemService.findByExamplePaged(sItem, paginator);
 		itemList = itemService.findAllPaged(paginator);
 		modelAndView.addObject("item", new Item());
 		modelAndView.addObject("itemList", itemList);

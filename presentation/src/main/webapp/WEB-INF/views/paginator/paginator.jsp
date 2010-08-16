@@ -15,7 +15,7 @@
   			<c:out value="${page}"/>
 		</c:when>
 		<c:otherwise>
-  				<a href="?page=<c:out value="${page}"/>"><c:out value="${page}"/></a>
+  				<a href="?page=<c:out value="${page}&${paginator.params}"/>"><c:out value="${page}"/></a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
