@@ -7,7 +7,6 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.tda.persistence.paginator.Order;
 import com.tda.persistence.paginator.Paginator;
 
 public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
@@ -70,8 +69,9 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 
 		DetachedCriteria c = DetachedCriteria.forClass(persistentClass);
 
-		if (paginator.getOrder() != null && paginator.getOrderField() != null) {
-			if (paginator.getOrder() == Order.asc)
+		if (paginator.getOrderAscending() != null
+				&& paginator.getOrderField() != null) {
+			if (paginator.getOrderAscending())
 				c.addOrder(org.hibernate.criterion.Order.asc(paginator
 						.getOrderField()));
 			else
@@ -98,8 +98,9 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 		DetachedCriteria c = DetachedCriteria.forClass(persistentClass).add(
 				example);
 
-		if (paginator.getOrder() != null && paginator.getOrderField() != null) {
-			if (paginator.getOrder() == Order.asc)
+		if (paginator.getOrderAscending() != null
+				&& paginator.getOrderField() != null) {
+			if (paginator.getOrderAscending())
 				c.addOrder(org.hibernate.criterion.Order.asc(paginator
 						.getOrderField()));
 			else

@@ -14,7 +14,6 @@ public class AuthorityDAO extends GenericDAOImpl<Authority> {
 		Authority example = new Authority();
 		example.setAuthority(authority);
 		List<Authority> authorities = findByExample(example);
-
 		return authorities;
 	}
 }

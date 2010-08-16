@@ -7,7 +7,7 @@ public class Paginator {
 	private int resultsPerPage;
 	private int pageIndex = 1;
 	private int totalResultsCount;
-	private Order order;
+	private Boolean orderAscending;
 	private String orderField;
 
 	public Paginator(int resultsPerPage) {
@@ -38,12 +38,12 @@ public class Paginator {
 		this.totalResultsCount = totalResultsCount;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Boolean getOrderAscending() {
+		return orderAscending;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrderAscending(Boolean orderAscending) {
+		this.orderAscending = orderAscending;
 	}
 
 	public String getOrderField() {

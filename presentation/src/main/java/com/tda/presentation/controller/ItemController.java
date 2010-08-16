@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
-import com.tda.persistence.paginator.Order;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.ItemService;
 
@@ -46,7 +45,7 @@ public class ItemController {
 	@Autowired
 	public void setPaginator(Paginator paginator) {
 		this.paginator = paginator;
-		paginator.setOrder(Order.asc);
+		paginator.setOrderAscending(true);
 		paginator.setOrderField("id");
 	}
 
@@ -115,29 +114,39 @@ public class ItemController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
 			@RequestParam(value = "page", required = false) Integer pageNumber,
-			@RequestParam(value="search", required = false) Boolean search,
-			@RequestParam(value="name", required = false) String sName,
-			@RequestParam(value="description", required = false) String sDescription,
-			@RequestParam(value="quantity", required = false) Long sQuantity){
+			@RequestParam(value = "search", required = false) Boolean search,
+			@RequestParam(value = "name", required = false) String sName,
+			@RequestParam(value = "description", required = false) String sDescription,
+			@RequestParam(value = "quantity", required = false) Long sQuantity,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
-		
+
 		Item sItem = new Item();
 		List<Item> itemList = null;
-		
+
+		// Pagination
 		if (pageNumber != null) {
 			paginator.setPageIndex(pageNumber);
 		}
-		
-		if((search != null) && search){
+
+		// Order
+		if (orderField != null && orderAscending != null) {
+			paginator.setOrderAscending(orderAscending);
+			paginator.setOrderField(orderField);
+		}
+
+		// Search
+		if ((search != null) && search) {
 			if (sName != "")
 				sItem.setName(sName);
-			if(sDescription != "")
+			if (sDescription != "")
 				sItem.setDescription(sDescription);
-			if(sQuantity != null)
+			if (sQuantity != null)
 				sItem.setQuantity(sQuantity);
-			
+
 			itemList = itemService.findByExamplePaged(sItem, paginator);
-		}else{
+		} else {
 			itemList = itemService.findAllPaged(paginator);
 		}
 
