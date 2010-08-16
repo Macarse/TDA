@@ -29,7 +29,7 @@
 <table class="list-table">
 	<thead>
 		<tr>
-			<th><a href="${startUrl}?orderField=name&orderAscending=<%
+			<th><a href="?orderField=name&orderAscending=<%
 			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
 			        out.println("false");
 			    } else {
@@ -37,21 +37,21 @@
 			    }
 			%>">
 			<fmt:message key="item.form.name" /></a></th>
-			<th><a href="${startUrl}?orderField=description&orderAscending=<%
+			<th><a href="?orderField=description&orderAscending=<%
 			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
 			        out.println("false");
 			    } else {
 			        out.println("true");
 			    }
 			%>"><fmt:message key="item.form.description" /></a></th>
-			<th><a href="${startUrl}?orderField=quantity&orderAscending=<%
+			<th><a href="?orderField=quantity&orderAscending=<%
 			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
 			        out.println("false");
 			    } else {
 			        out.println("true");
 			    }
 			%>"><fmt:message key="item.form.quantity" /></a></th>
-			<th><a href="${startUrl}?orderField=category&orderAscending=<%
+			<th><a href="?orderField=category&orderAscending=<%
 			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
 			        out.println("false");
 			    } else {

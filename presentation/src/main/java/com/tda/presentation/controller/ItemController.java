@@ -143,6 +143,8 @@ public class ItemController {
 		if (orderField != null && orderAscending != null) {
 			paginator.setOrderAscending(orderAscending);
 			paginator.setOrderField(orderField);
+			paginator.setParam("orderField", orderField);
+			paginator.setParam("orderAscending", orderAscending.toString());
 		}
 		
 
@@ -172,6 +174,8 @@ public class ItemController {
 		if (orderField != null && orderAscending != null) {
 			paginator.setOrderAscending(orderAscending);
 			paginator.setOrderField(orderField);
+			paginator.setParam("orderField", orderField);
+			paginator.setParam("orderAscending", orderAscending.toString());
 		}
 
 		itemList = itemService.findAllPaged(paginator);
