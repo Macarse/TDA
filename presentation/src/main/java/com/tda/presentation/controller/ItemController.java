@@ -122,7 +122,6 @@ public class ItemController {
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending){
 		
 		List<Item> itemList = null;
-		System.out.println(anItem.getDescription() + " " + anItem.getName());
 
 		// Pagination
 		if (pageNumber != null) {
