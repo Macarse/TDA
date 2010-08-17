@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -81,7 +80,7 @@ public class ApplicationUser implements UserDetails {
 		this.username = username;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Authority.class, cascade = { CascadeType.ALL })
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Authority.class)
 	@ForeignKey(name = "ID_USER", inverseName = "ID_AUTH")
 	public Collection<Authority> getMyAuthorities() {
 		return myAuthorities;
