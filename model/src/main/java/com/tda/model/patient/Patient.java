@@ -13,6 +13,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.NotNull;
+import org.hibernate.validator.Past;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,6 +39,7 @@ public class Patient implements Serializable {
 	private Sex sex;
 
 	@NotNull
+	@Past
 	private Date birthdate;
 
 	public Patient() {

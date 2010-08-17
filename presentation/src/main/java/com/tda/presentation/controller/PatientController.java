@@ -74,12 +74,18 @@ public class PatientController {
 			paginator.setOrderField(orderField);
 			paginator.setParam("orderField", orderField);
 			paginator.setParam("orderAscending", orderAscending.toString());
+		}else{
+			//default order = name ascending
+			orderField="firstName";
+			orderAscending=true;
 		}
 
 		patientList = patientService.findAllPaged(paginator);
 		modelAndView.addObject("patient", new Patient());
 		modelAndView.addObject("patientList", patientList);
 		modelAndView.addObject("paginator", paginator);
+		modelAndView.addObject("orderField", orderField);
+		modelAndView.addObject("orderAscending", orderAscending.toString());
 
 		return modelAndView;
 	}
@@ -134,6 +140,58 @@ public class PatientController {
 			}
 		}
 		return modelAndView;
+	}
+	
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String getSearch(
+			Model model,
+			@ModelAttribute Patient aPatient,
+			BindingResult result,
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending){
+		
+		List<Patient> patientList = null;
+
+		// Pagination
+		if (pageNumber != null) {
+			paginator.setPageIndex(pageNumber);
+		}
+		
+		if(aPatient.getFirstName() != "")
+			paginator.setParam("firstName", aPatient.getFirstName());
+		if(aPatient.getLastName() != "")
+			paginator.setParam("lastName", aPatient.getLastName());
+		if(aPatient.getDni() != "")
+			paginator.setParam("dni", aPatient.getDni());
+		//TODO: birdhday format?
+		if (aPatient.getBirthdate() != null)
+			paginator.setParam("birthday", aPatient.getBirthdate().toString());
+		if (aPatient.getSex() != null)
+			paginator.setParam("sex", aPatient.getSex().toString());
+		
+
+		// Order
+		if (orderField != null && orderAscending != null) {
+			paginator.setOrderAscending(orderAscending);
+			paginator.setOrderField(orderField);
+			paginator.setParam("orderField", orderField);
+			paginator.setParam("orderAscending", orderAscending.toString());
+		}else{
+			//default order = name ascending
+			orderField="firstName";
+			orderAscending=true;
+		}
+		
+
+		patientList = patientService.findByExamplePaged(aPatient, paginator);
+		
+		model.addAttribute("patientList", patientList);
+		model.addAttribute("paginator", paginator);
+		model.addAttribute("orderField", orderField);
+		model.addAttribute("orderAscending", orderAscending.toString());
+			
+		return LIST;
 	}
 
 }
