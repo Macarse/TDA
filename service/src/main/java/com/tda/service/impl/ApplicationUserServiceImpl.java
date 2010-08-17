@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.persistence.dao.ApplicationUserDAO;
 import com.tda.persistence.dao.AuthorityDAO;
+import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.ApplicationUserService;
 
 public class ApplicationUserServiceImpl implements ApplicationUserService {
@@ -84,5 +85,14 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	@Transactional(readOnly = true)
 	public List<ApplicationUser> findByExample(ApplicationUser exampleObject) {
 		return applicationUserDAO.findByExample(exampleObject);
+	}
+
+	public List<ApplicationUser> findAllPaged(Paginator paginator) {
+		return applicationUserDAO.findAllPaged(paginator);
+	}
+
+	public List<ApplicationUser> findByExamplePaged(ApplicationUser example,
+			Paginator paginator) {
+		return applicationUserDAO.findByExamplePaged(example, paginator);
 	}
 }

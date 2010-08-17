@@ -15,11 +15,13 @@ public interface GenericDAO<T> {
 
 	List<T> findAll();
 
+	List<T> findAllPaged(Paginator paginator);
+
 	void deleteById(Long id);
 
 	int count();
 
 	List<T> findByExample(T exampleObject);
 
-	List<T> findAllPaged(Paginator paginator);
+	List<T> findByExamplePaged(T exampleObject, Paginator paginator);
 }

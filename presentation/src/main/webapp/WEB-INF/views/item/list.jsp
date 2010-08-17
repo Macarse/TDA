@@ -5,36 +5,65 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Item list</title>
-</head>
-<body>
+<!-- Edit/Delete buttons variables -->
+<spring:url value="item" var="startUrl" />
+<spring:url value="delete" var="deleteUrl" />
+<spring:message text="Eliminar" var="deleteLabel" />
+<spring:url value="edit" var="editUrl" />
+<spring:url value="add" var="addUrl" />
+<spring:url value="search" var="searchUrl" />
+<spring:message text="Editar" var="editLabel" />
 
 <c:if test="${!empty param.message}">
-	<fmt:message key="${param.message }" />
+	<div class="message">
+		<fmt:message key="${param.message }" />
+	</div>
 </c:if>
 
-<table>
+<div class="filter-container">
+	<jsp:include page="/WEB-INF/views/item/filter.jsp" flush="true"/>
+</div>
+
+<a href="${addUrl}">Agregar</a>
+
+<table class="list-table">
 	<thead>
 		<tr>
-			<th><fmt:message key="item.form.name" /></th>
-			<th><fmt:message key="item.form.description" /></th>
-			<th><fmt:message key="item.form.quantity" /></th>
-			<th><fmt:message key="item.form.category" /></th>
+			<th><a href="?orderField=name&orderAscending=<%
+			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
+			        out.println("false");
+			    } else {
+			        out.println("true");
+			    }
+			%>">
+			<fmt:message key="item.form.name" /></a></th>
+			<th><a href="?orderField=description&orderAscending=<%
+			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
+			        out.println("false");
+			    } else {
+			        out.println("true");
+			    }
+			%>"><fmt:message key="item.form.description" /></a></th>
+			<th><a href="?orderField=quantity&orderAscending=<%
+			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
+			        out.println("false");
+			    } else {
+			        out.println("true");
+			    }
+			%>"><fmt:message key="item.form.quantity" /></a></th>
+			<th><a href="?orderField=category&orderAscending=<%
+			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
+			        out.println("false");
+			    } else {
+			        out.println("true");
+			    }
+			%>"><fmt:message key="item.form.category" /></a></th>
 			<th></th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 
-		<!-- Edit/Delete buttons variables -->
-		<spring:url value="/item/" var="startUrl" />
-		<spring:url value="delete/" var="deleteUrl" />
-		<spring:message text="Eliminar" var="deleteLabel" />
-		<spring:url value="edit/" var="editUrl" />
-		<spring:message text="Editar" var="editLabel" />
 
 		<c:forEach items="${itemList}" var="item">
 			<tr>
@@ -43,11 +72,11 @@
 				<td>${item.quantity}</td>
 				<td>${item.category}</td>
 				<td><form:form method="POST"
-					action="${startUrl}${deleteUrl}${item.id}">
+					action="${deleteUrl}/${item.id}">
 					<input type="submit" value="${deleteLabel}" />
 				</form:form></td>
 				<td><form:form method="GET"
-					action="${startUrl}${editUrl}${item.id}">
+					action="${editUrl}/${item.id}">
 					<input type="submit" value="${editLabel}" />
 				</form:form></td>
 			</tr>
@@ -62,6 +91,3 @@
 		</tr>
 	</tfoot>
 </table>
-
-</body>
-</html>

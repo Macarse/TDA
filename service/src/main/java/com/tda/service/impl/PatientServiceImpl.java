@@ -8,6 +8,7 @@ import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientBuilder;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.dao.PatientDAO;
+import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.PatientService;
 
 public class PatientServiceImpl implements PatientService {
@@ -56,8 +57,8 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Patient> findByNameContaining(String name) {
-		return patientDAO.findByNameContaining(name);
+	public List<Patient> findByFirstNameContaining(String name) {
+		return patientDAO.findByFirstNameContaining(name);
 	}
 
 	@Transactional(readOnly = true)
@@ -72,14 +73,12 @@ public class PatientServiceImpl implements PatientService {
 		return patientDAO.findByExample(example);
 	}
 
-	@Transactional(readOnly = true)
-	public List<Patient> findByMotherNameContaining(String motherName) {
-		return patientDAO.findByMotherNameContaining(motherName);
+	public List<Patient> findAllPaged(Paginator paginator) {
+		return patientDAO.findAllPaged(paginator);
 	}
 
-	@Transactional(readOnly = true)
-	public List<Patient> findByFatherNameContaining(String fatherName) {
-		return patientDAO.findByFatherNameContaining(fatherName);
+	public List<Patient> findByExamplePaged(Patient example, Paginator paginator) {
+		return patientDAO.findByExamplePaged(example, paginator);
 	}
 
 }

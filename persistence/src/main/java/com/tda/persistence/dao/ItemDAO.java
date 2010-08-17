@@ -6,6 +6,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import com.tda.model.item.Item;
+import com.tda.model.item.ItemBuilder;
 
 public class ItemDAO extends GenericDAOImpl<Item> {
 	@Override
@@ -13,18 +14,15 @@ public class ItemDAO extends GenericDAOImpl<Item> {
 		return Item.class;
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Item> findByNameContaining(String name) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
-		criteria.add(Restrictions.like("name", "%" + name + "%"));
-		return getHibernateTemplate().findByCriteria(criteria);
+		Item exampleObject = ItemBuilder.createItem().withName(name).build();
+		return this.findByExample(exampleObject);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Item> findByDescriptionContaining(String description) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Item.class);
-		criteria.add(Restrictions.like("description", "%" + description + "%"));
-		return getHibernateTemplate().findByCriteria(criteria);
+		Item exampleObject = ItemBuilder.createItem()
+				.withDescription(description).build();
+		return this.findByExample(exampleObject);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -3,15 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User list</title>
-</head>
-<body>
 
-<table>
+<!-- Edit/Delete buttons variables -->
+<spring:url value="applicationuser/" var="startUrl"/>
+<spring:url value="delete" var="deleteUrl"/>
+<spring:message text="Eliminar" var="deleteLabel"/>
+<spring:url value="edit" var="editUrl"/>
+<spring:url value="add" var="addUrl"/>
+<spring:message text="Editar" var="editLabel"/>
+
+<a href="${startUrl}${addUrl}">Agregar</a>
+<table class="list-table">
 	<thead>
 		<tr>
 			<th>Nombre de usuario</th>
@@ -23,25 +25,18 @@
 	
 	<tbody>
 	
-		<!-- Edit/Delete buttons variables -->
-		<spring:url value="/presentation/applicationuser/" var="startUrl"/>
-		<spring:url value="delete/" var="deleteUrl"/>
-		<spring:message text="Eliminar" var="deleteLabel"/>
-		<spring:url value="edit/" var="editUrl"/>
-		<spring:message text="Editar" var="editLabel"/>
-		
 		<c:forEach items="${applicationUserList}" var="user">
 		<tr>
 			<td>${user.username}</td>
 			<td>${user.password}</td>
 			<td>${user.myAuthorities}</td>
 			<td>
-				<form:form method="POST" action="${startUrl}${deleteUrl}${user.id}">
+				<form:form method="POST" action="${startUrl}${deleteUrl}/${user.id}">
 					<input type="submit" value="${deleteLabel}"/>
 				</form:form>
 			</td>
 			<td>
-				<form:form method="GET" action="${startUrl}${editUrl}${user.id}" >
+				<form:form method="GET" action="${startUrl}${editUrl}/${user.id}" >
 					<input type="submit" value="${editLabel}"/>
 				</form:form>
 			</td>
@@ -52,6 +47,3 @@
 	<tfoot>
 	</tfoot>
 </table>
-
-</body>
-</html>

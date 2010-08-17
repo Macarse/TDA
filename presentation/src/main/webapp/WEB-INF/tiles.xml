@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition"
+		template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/layout/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+
+	<definition name="item/list" extends="base.definition">
+		<put-attribute name="title" value="Item List" />
+		<put-attribute name="body" value="/WEB-INF/views/item/list.jsp" />
+	</definition>
+	
+	<definition name="item/createForm" extends="base.definition">
+		<put-attribute name="title" value="New Item" />
+		<put-attribute name="body" value="/WEB-INF/views/item/createForm.jsp" />
+	</definition>
+	
+	<definition name="applicationuser/list" extends="base.definition">
+		<put-attribute name="title" value="User List" />
+		<put-attribute name="body" value="/WEB-INF/views/applicationuser/list.jsp" />
+	</definition>
+	
+	<definition name="applicationuser/createForm" extends="base.definition">
+		<put-attribute name="title" value="New User" />
+		<put-attribute name="body" value="/WEB-INF/views/applicationuser/createForm.jsp" />
+	</definition>
+	
+	<definition name="socialworkerform/form" extends="base.definition">
+		<put-attribute name="title" value="Social Worker Form" />
+		<put-attribute name="body" value="/WEB-INF/views/socialworkerform/form.jsp" />
+	</definition>
+
+</tiles-definitions>
