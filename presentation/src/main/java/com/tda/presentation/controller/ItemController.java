@@ -144,6 +144,10 @@ public class ItemController {
 			paginator.setOrderField(orderField);
 			paginator.setParam("orderField", orderField);
 			paginator.setParam("orderAscending", orderAscending.toString());
+		}else{
+			//default order = name ascending
+			orderField="name";
+			orderAscending=true;
 		}
 		
 
@@ -151,6 +155,8 @@ public class ItemController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("paginator", paginator);
+		model.addAttribute("orderField", orderField);
+		model.addAttribute("orderAscending", orderAscending.toString());
 			
 		return ITEM_LIST;
 	}
@@ -175,12 +181,18 @@ public class ItemController {
 			paginator.setOrderField(orderField);
 			paginator.setParam("orderField", orderField);
 			paginator.setParam("orderAscending", orderAscending.toString());
+		}else{
+			//default order = name ascending
+			orderField="name";
+			orderAscending=true;
 		}
 
 		itemList = itemService.findAllPaged(paginator);
 		modelAndView.addObject("item", new Item());
 		modelAndView.addObject("itemList", itemList);
 		modelAndView.addObject("paginator", paginator);
+		modelAndView.addObject("orderField", orderField);
+		modelAndView.addObject("orderAscending", orderAscending.toString());
 
 		return modelAndView;
 	}
