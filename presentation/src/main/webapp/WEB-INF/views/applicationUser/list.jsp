@@ -16,7 +16,7 @@
 		<tr>
 			<th>Nombre de usuario</th>
 			<th>Contraseña</th>
-			<th>Autoridades</th>
+			<th>Autoridades </th>
 			<th></th>
 		</tr>
 	</thead>

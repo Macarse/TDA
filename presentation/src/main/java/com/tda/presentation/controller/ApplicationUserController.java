@@ -78,6 +78,7 @@ public class ApplicationUserController {
 
 		// TODO if we're editing and not adding a new item the message
 		// seems somewhat... misleading, CHANGE IT :D
+
 		if (result.hasErrors()) {
 			modelAndView.setViewName(USER_CREATE_FORM);
 		} else {

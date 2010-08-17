@@ -22,18 +22,22 @@
 	<form:hidden path="id" />
 	
 	<legend><fmt:message key="user.form.legend" /></legend>
-	<p><form:label for="username" path="username" cssErrorClass="error">Nombre de usuario</form:label><br />
+	<p><form:label for="username" path="username" cssErrorClass="error"><fmt:message key="user.form.username" /></form:label><br />
 	<form:input path="username" /> <form:errors path="username" /></p>
 
 	<p><form:label for="password" path="password"
-		cssErrorClass="error">Contraseña</form:label><br />
-	<form:input path="password" /> <form:errors path="password" /></p>
+		cssErrorClass="error"><fmt:message key="user.form.password" /></form:label><br />
+	<form:password path="password" /> <form:errors path="password" /></p>
+
+	<p><form:label for="password" path="password"
+		cssErrorClass="error"><fmt:message key="user.form.password2" /></form:label><br />
+	<form:password path="password" /> <form:errors path="password" /></p>
 	
 	<p><form:label for="myAuthorities" path="myAuthorities"
-		cssErrorClass="error">Autoridades</form:label><br />
+		cssErrorClass="error"><fmt:message key="user.form.autorities" /></form:label><br />
 	<form:checkboxes items="${allAuthorities}" path="myAuthorities" itemLabel="name"/><form:errors path="myAuthorities" /></p>
 
-	<p><input type="submit" /></p>
+	<p><input type="submit"/></p>
 	</fieldset>
 </form:form></div>
 <hr>
