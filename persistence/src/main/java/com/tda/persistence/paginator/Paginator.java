@@ -97,6 +97,10 @@ public class Paginator {
 	public void setParam(String key, String value) {
 		this.params.put(key, value);
 	}
+	
+	public String getParam(String key){
+		return this.params.get(key);
+	}
 
 	public String getParams() {
 		String ret = "";

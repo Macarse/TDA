@@ -49,6 +49,9 @@
 				</c:forEach>
 			</form:select><form:errors path="measureUnit" />
 		</div>
+		
+		<input type="hidden" name="orderField" value="${orderField}" />
+		<input type="hidden" name="orderAscending" value="${orderAscending}" />
 
 		<div class="filter-submit">	
 			<input type="submit" value="<fmt:message key="filter.submit" />" />
