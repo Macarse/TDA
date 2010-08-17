@@ -9,6 +9,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.NotNull;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Patient implements Serializable {
@@ -16,14 +22,22 @@ public class Patient implements Serializable {
 
 	private Long id;
 
+	@Size(min = 0, max = 10)
+	@Digits(fraction=0, integer=10)
 	private String dni;
 
+	@NotNull
+	@Size(min = 1, max = 100)
 	private String firstName;
 
+	@NotNull
+	@Size(min = 1, max = 100)
 	private String lastName;
 
+	@NotNull
 	private Sex sex;
 
+	@NotNull
 	private Date birthdate;
 
 	public Patient() {

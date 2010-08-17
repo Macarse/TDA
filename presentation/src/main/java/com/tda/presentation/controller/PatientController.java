@@ -2,35 +2,47 @@ package com.tda.presentation.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.patient.Patient;
+import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
-import com.tda.service.api.ItemService;
 import com.tda.service.api.PatientService;
 
 @Controller
 @RequestMapping(value = "/patient")
 @SessionAttributes("patient")
 public class PatientController {
-	private static final String PATIENT_FORM_DELETE_ERROR = "patient.form.deleteError";
-	private static final String PATIENT_FORM_NOT_FOUND = "patient.form.notFound";
-	private static final String PATIENT_FORM_MESSAGE = "message";
-	private static final String PATIENT_FORM_ADD_SUCCESSFUL = "patient.form.addSuccessful";
-	private static final String REDIRECT_TO_PATIENT_LIST = "redirect:/patient/";
-	private static final String PATIENT_CREATE_FORM = "patient/createForm";
-	private static final String PATIENT_LIST = "patient/list";
-	private static final String PATIENT_LIST_SEARCH = "patient/search";
+	private static final String FORM_DELETE_ERROR = "form.deleteError";
+	private static final String FORM_NOT_FOUND = "form.notFound";
+	private static final String FORM_MESSAGE = "message";
+	private static final String FORM_ADD_SUCCESSFUL = "form.addSuccessful";
+	private static final String REDIRECT_TO_LIST = "redirect:/patient/";
+	private static final String CREATE_FORM = "patient/createForm";
+	private static final String LIST = "patient/list";
+	private static final String LIST_SEARCH = "patient/search";
 	
 	private PatientService patientService;
 	private Paginator paginator;
+	
+	@ModelAttribute("sex")
+	public Sex[] populateCategories() {
+		return Sex.values();
+	}
 	
 	@Autowired
 	public void setPatientService(PatientService patientService) {
@@ -49,7 +61,7 @@ public class PatientController {
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
-		ModelAndView modelAndView = new ModelAndView(PATIENT_LIST);
+		ModelAndView modelAndView = new ModelAndView(LIST);
 
 		List<Patient> patientList = null;
 
@@ -72,6 +84,39 @@ public class PatientController {
 		modelAndView.addObject("paginator", paginator);
 
 		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String getCreateForm(Model model) {
+		model.addAttribute("patient", new Patient());
+
+		return CREATE_FORM;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView create(Model model, @Valid @ModelAttribute Patient aPatient,
+			BindingResult result) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		// TODO if we're editing and not adding a new item the message
+		// seems somewhat... misleading, CHANGE IT :D
+		if (result.hasErrors()) {
+			modelAndView.setViewName(CREATE_FORM);
+		} else {
+			modelAndView.setViewName(REDIRECT_TO_LIST);
+			modelAndView.addObject(FORM_MESSAGE, FORM_ADD_SUCCESSFUL);
+			patientService.save(aPatient);
+		}
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String getUpdateForm(@PathVariable Long id, Model model) {
+		Patient patient = patientService.findById(id);
+		model.addAttribute("patient", patient);
+
+		return CREATE_FORM;
 	}
 
 }

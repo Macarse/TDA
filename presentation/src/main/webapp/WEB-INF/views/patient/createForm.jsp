@@ -5,38 +5,51 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<form:form modelAttribute="item"
-	action="add" method="post">
-	<fieldset>
+<div class="form-container">
+	<form:form modelAttribute="patient"
+		action="add" method="post">
+		
+		<form:hidden path="id" />
+		
+		<legend><fmt:message key="patient.form.title" /></legend>
+		
+		<div class="form-value">
+			<form:label for="firstName" path="firstName" cssErrorClass="error">
+			<fmt:message key="patient.form.firstName" /></form:label>
+			<form:input path="firstName" /> <form:errors path="firstName" />
+		</div>
 	
-	<form:hidden path="id" />
+		<div class="form-value">
+			<form:label for="lastName" path="lastName" cssErrorClass="error">
+			<fmt:message key="patient.form.lastName" /></form:label>
+			<form:input path="lastName" /> <form:errors path="lastName" />
+		</div>
+		
+		<div class="form-value">
+			<form:label for="sex" path="sex"
+				cssErrorClass="error"><fmt:message key="patient.form.sex" /></form:label>
+			<form:select path="sex">
+				<c:forEach var="sex" items="${sex}">
+				<form:option value="${sex}"> ${sex.description} </form:option>
+			</c:forEach>
+			</form:select><form:errors path="sex" />	
+		</div>
+		
+		<div class="form-value">
+			<form:label for="birthdate" path="birthdate" cssErrorClass="error">
+			<fmt:message key="patient.form.birthdate" /></form:label>
+			<form:input path="birthdate" /> <form:errors path="birthdate" />
+		</div>
 	
-	<legend><fmt:message key="item.form.legend" /></legend>
-	<p><form:label for="name" path="name" cssErrorClass="error"><fmt:message key="item.form.name" /></form:label><br />
-	<form:input path="name" /> <form:errors path="name" /></p>
+		<div class="form-value">
+			<form:label for="dni" path="dni" cssErrorClass="error">
+			<fmt:message key="patient.form.dni" /></form:label>
+			<form:input path="dni" /> <form:errors path="dni" />
+		</div>
 
-	<p><form:label for="description" path="description"
-		cssErrorClass="error"><fmt:message key="item.form.description" /></form:label><br />
-	<form:input path="description" /> <form:errors path="description" /></p>
-
-	<p><form:label for="quantity" path="quantity" cssErrorClass="error"><fmt:message key="item.form.quantity" /></form:label><br />
-	<form:input path="quantity" /> <form:errors path="quantity" /></p>
-
-	<p><form:label for="category" path="category" cssErrorClass="error"><fmt:message key="item.form.category" /></form:label><br />
-	<form:select path="category">
-		<c:forEach var="category" items="${categories}">
-			<form:option value="${category}"> ${category.description} </form:option>
-		</c:forEach>
-	</form:select><form:errors path="category" /></p>
-
-	<p><form:label for="measureUnit" path="measureUnit"
-		cssErrorClass="error"><fmt:message key="item.form.measureUnit" /></form:label><br />
-	<form:select path="measureUnit">
-		<c:forEach var="measureUnit" items="${measureUnits}">
-			<form:option value="${measureUnit}"> ${measureUnit.description} </form:option>
-		</c:forEach>
-	</form:select><form:errors path="measureUnit" /></p>
-
-	<p><input type="submit" /></p>
-	</fieldset>
-</form:form>
+		<div class="form-submit">	
+			<input type="submit" value="<fmt:message key="form.submit" />" />
+		</div>
+		
+	</form:form>
+</div>
