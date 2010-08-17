@@ -29,35 +29,81 @@
 <table class="list-table">
 	<thead>
 		<tr>
-			<th><a href="?orderField=name&orderAscending=<%
-			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
-			        out.println("false");
-			    } else {
-			        out.println("true");
-			    }
-			%>">
-			<fmt:message key="item.form.name" /></a></th>
-			<th><a href="?orderField=description&orderAscending=<%
-			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
-			        out.println("false");
-			    } else {
-			        out.println("true");
-			    }
-			%>"><fmt:message key="item.form.description" /></a></th>
-			<th><a href="?orderField=quantity&orderAscending=<%
-			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
-			        out.println("false");
-			    } else {
-			        out.println("true");
-			    }
-			%>"><fmt:message key="item.form.quantity" /></a></th>
-			<th><a href="?orderField=category&orderAscending=<%
-			    if (request.getParameter("orderAscending") == null || ((String)request.getParameter("orderAscending")).equals("true")) {
-			        out.println("false");
-			    } else {
-			        out.println("true");
-			    }
-			%>"><fmt:message key="item.form.category" /></a></th>
+			<th>
+				<a href="?orderField=name&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.name" />
+				</a>
+				<c:if test="${paginator.orderField=='name'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=description&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.description" />
+				</a>
+				<c:if test="${paginator.orderField=='description'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=quantity&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.quantity" />
+				</a>
+				<c:if test="${paginator.orderField=='quantity'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=category&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.category" />
+				</a>
+				<c:if test="${paginator.orderField=='category'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=measureUnit&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.measureUnit" />
+				</a>
+				<c:if test="${paginator.orderField=='measureUnit'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -71,6 +117,7 @@
 				<td>${item.description}</td>
 				<td>${item.quantity}</td>
 				<td>${item.category}</td>
+				<td>${item.measureUnit}</td>
 				<td><form:form method="POST"
 					action="${deleteUrl}/${item.id}">
 					<input type="submit" value="${deleteLabel}" />
