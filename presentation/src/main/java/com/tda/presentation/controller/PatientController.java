@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tda.model.item.Category;
-import com.tda.model.item.Item;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
@@ -117,6 +115,25 @@ public class PatientController {
 		model.addAttribute("patient", patient);
 
 		return CREATE_FORM;
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+	public ModelAndView deleteItem(@PathVariable Long id) {
+		ModelAndView modelAndView = new ModelAndView(REDIRECT_TO_LIST);
+		Patient aPatient = patientService.findById(id);
+
+		if (aPatient == null) {
+			modelAndView.addObject(FORM_MESSAGE, FORM_NOT_FOUND);
+		} else {
+
+			try {
+				patientService.delete(aPatient);
+			} catch (Exception e) {
+				modelAndView.addObject(FORM_MESSAGE,
+						FORM_DELETE_ERROR);
+			}
+		}
+		return modelAndView;
 	}
 
 }
