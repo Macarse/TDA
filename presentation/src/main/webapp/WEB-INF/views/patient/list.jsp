@@ -29,11 +29,81 @@
 <table class="list-table">
 	<thead>
 		<tr>
-			<th><fmt:message key="patient.form.firstName" /></th>
-			<th><fmt:message key="patient.form.lastName" /></th>
-			<th><fmt:message key="patient.form.sex" /></th>
-			<th><fmt:message key="patient.form.birthdate" /></th>
-			<th><fmt:message key="patient.form.dni" /></th>
+			<th>
+				<a href="?orderField=firstName&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="patient.form.firstName" />
+				</a>
+				<c:if test="${paginator.orderField=='firstName'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=lastName&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="patient.form.lastName" />
+				</a>
+				<c:if test="${paginator.orderField=='lastName'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=sex&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="patient.form.sex" />
+				</a>
+				<c:if test="${paginator.orderField=='sex'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=birthdate&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="patient.form.birthdate" />
+				</a>
+				<c:if test="${paginator.orderField=='birthdate'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=dni&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="patient.form.dni" />
+				</a>
+				<c:if test="${paginator.orderField=='dni'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
 			<th></th>
 		</tr>
 	</thead>
