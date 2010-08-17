@@ -1,5 +1,6 @@
 package com.tda.presentation.controller;
 
+import java.beans.PropertyEditorSupport;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,8 @@ import com.tda.persistence.paginator.Order;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.ApplicationUserService;
 import com.tda.service.api.AuthorityService;
+import com.tda.service.exception.NoDataFoundException;
+import com.tda.service.exception.SingleResultExpectedException;
 
 @Controller
 @RequestMapping(value = "/applicationUser")
@@ -132,4 +137,31 @@ public class ApplicationUserController {
 
 		return modelAndView;
 	}
+
+	@InitBinder
+	public void initBinder(WebDataBinder b) {
+		b.registerCustomEditor(Authority.class, new AuthorityEditor());
+	}
+
+	private class AuthorityEditor extends PropertyEditorSupport {
+
+		@Override
+		public void setAsText(String text) throws IllegalArgumentException {
+			try {
+				setValue(authorityService.findByAuthority(text));
+			} catch (SingleResultExpectedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoDataFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		public String getAsText() {
+			return ((Authority) getValue()).getAuthority();
+		}
+	}
+
 }
