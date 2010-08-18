@@ -144,16 +144,15 @@ public class ApplicationUserController {
 					.toString());
 
 		// Order
-		if (orderField != null && orderAscending != null) {
-			paginator.setOrderAscending(orderAscending);
-			paginator.setOrderField(orderField);
-			paginator.setParam("orderField", orderField);
-			paginator.setParam("orderAscending", orderAscending.toString());
-		} else {
-			// default order = name ascending
-			orderField = "name";
+		if (orderField == null || orderAscending == null) {
+			orderField = "username";
 			orderAscending = true;
 		}
+
+		paginator.setOrderAscending(orderAscending);
+		paginator.setOrderField(orderField);
+		paginator.setParam("orderField", orderField);
+		paginator.setParam("orderAscending", orderAscending.toString());
 
 		applicationUserList = applicationUserService.findByExamplePaged(aUser,
 				paginator);
@@ -181,20 +180,15 @@ public class ApplicationUserController {
 		}
 
 		// Order
-		if (orderField != null && orderAscending != null) {
-			paginator.setOrderAscending(orderAscending);
-			paginator.setOrderField(orderField);
-			paginator.setParam("orderField", orderField);
-			paginator.setParam("orderAscending", orderAscending.toString());
-		} else {
-			// default order = name ascending
+		if (orderField == null || orderAscending == null) {
 			orderField = "username";
 			orderAscending = true;
 		}
 
-		modelAndView.addObject("applicationUserList",
-				applicationUserService.findAllPaged(paginator));
-		modelAndView.addObject("paginator", paginator);
+		paginator.setOrderAscending(orderAscending);
+		paginator.setOrderField(orderField);
+		paginator.setParam("orderField", orderField);
+		paginator.setParam("orderAscending", orderAscending.toString());
 
 		applicationUserList = applicationUserService.findAllPaged(paginator);
 		modelAndView.addObject("applicationUser", new ApplicationUser());
