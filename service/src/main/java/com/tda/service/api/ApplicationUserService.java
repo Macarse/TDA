@@ -19,12 +19,15 @@ public interface ApplicationUserService extends UserDetailsService {
 
 	List<ApplicationUser> findAll();
 
+	List<ApplicationUser> findAllPaged(Paginator paginator);
+
 	void deleteById(Long id);
 
 	int count();
 
 	List<ApplicationUser> findByExample(ApplicationUser exampleObject);
 
-	List<ApplicationUser> findAllPaged(Paginator paginator);
+	List<ApplicationUser> findByExamplePaged(ApplicationUser example,
+			Paginator paginator);
 
 }

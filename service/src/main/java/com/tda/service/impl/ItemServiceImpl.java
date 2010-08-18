@@ -86,8 +86,12 @@ public class ItemServiceImpl implements ItemService {
 				.build();
 		return itemDAO.findByExample(example);
 	}
-	
+
 	public List<Item> findAllPaged(Paginator paginator) {
 		return itemDAO.findAllPaged(paginator);
+	}
+
+	public List<Item> findByExamplePaged(Item example, Paginator paginator) {
+		return itemDAO.findByExamplePaged(example, paginator);
 	}
 }

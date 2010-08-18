@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.Authority;
-import com.tda.persistence.paginator.Order;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.ApplicationUserService;
 import com.tda.service.api.AuthorityService;
@@ -59,7 +58,6 @@ public class ApplicationUserController {
 	@Autowired
 	public void setPaginator(Paginator paginator) {
 		this.paginator = paginator;
-		paginator.setOrder(Order.asc);
 		paginator.setOrderField("id");
 	}
 

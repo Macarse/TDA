@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.tda.model.patient.Patient;
 
@@ -485,6 +486,11 @@ public class SocialWorkerForm {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Transient
+	public boolean isNew() {
+		return id == null;
 	}
 
 	@Id

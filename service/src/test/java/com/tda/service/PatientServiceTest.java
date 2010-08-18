@@ -46,13 +46,12 @@ public class PatientServiceTest {
 	}
 
 	@Test
-	public void findByNameContaining() {
+	public void findByFirstNameContaining() {
 		Patient patient = PatientBuilder.createPatient()
 				.withFirstName("myname").build();
 		patientService.save(patient);
 
-		assertEquals(patient, patientService.findByNameContaining("name")
-				.get(0));
+		assertEquals(patient, patientService.findByFirstName("name").get(0));
 	}
 
 	@Test

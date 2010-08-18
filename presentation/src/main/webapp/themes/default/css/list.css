@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+.list-table{
+	width: 600px;
+}
+
+.list-table tr:nth-child(even) {
+	background: #CCC
+}
+
+.list-table tr:nth-child{
+	background: #FFF
+}
+
+.body-container form{
+	font-size: 20px;
+	display: table;
+}
+
+.body-container form fieldset{
+
+}

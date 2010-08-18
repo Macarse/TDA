@@ -2,10 +2,8 @@ package com.tda.persistence.dao;
 
 import java.util.List;
 
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
-
 import com.tda.model.patient.Patient;
+import com.tda.model.patient.PatientBuilder;
 
 public class PatientDAO extends GenericDAOImpl<Patient> {
 
@@ -14,24 +12,9 @@ public class PatientDAO extends GenericDAOImpl<Patient> {
 		return Patient.class;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Patient> findByNameContaining(String name) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Patient.class);
-		criteria.add(Restrictions.like("firstName", "%" + name + "%"));
-		return getHibernateTemplate().findByCriteria(criteria);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Patient> findByMotherNameContaining(String motherName) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Patient.class);
-		criteria.add(Restrictions.like("motherName", "%" + motherName + "%"));
-		return getHibernateTemplate().findByCriteria(criteria);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Patient> findByFatherNameContaining(String fatherName) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Patient.class);
-		criteria.add(Restrictions.like("fatherName", "%" + fatherName + "%"));
-		return getHibernateTemplate().findByCriteria(criteria);
+	public List<Patient> findByFirstNameContaining(String name) {
+		Patient exampleObject = PatientBuilder.createPatient()
+				.withFirstName(name).build();
+		return this.findByExample(exampleObject);
 	}
 }

@@ -1,13 +1,12 @@
 package com.tda.persistence.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.tda.persistence.paginator.Order;
 import com.tda.persistence.paginator.Paginator;
 
 public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
@@ -53,43 +52,64 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 
 	@SuppressWarnings("unchecked")
 	public List<T> findByExample(final T exampleObject) {
-		return getHibernateTemplate().findByExample(exampleObject);
+		Example example = Example.create(exampleObject);
+		example.enableLike(MatchMode.ANYWHERE);
+		example.ignoreCase();
+
+		DetachedCriteria c = DetachedCriteria.forClass(persistentClass).add(
+				example);
+
+		return getHibernateTemplate().findByCriteria(c);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> findAllPaged(final Paginator paginator) {
+	public List<T> findAllPaged(Paginator paginator) {
 
 		paginator.setTotalResultsCount(count());
 
-		final Class<T> localClass = this.persistentClass;
+		DetachedCriteria c = DetachedCriteria.forClass(persistentClass);
 
-		HibernateCallback<List<T>> callback = new HibernateCallback<List<T>>() {
-			public List<T> doInHibernate(org.hibernate.Session session)
-					throws HibernateException, SQLException {
+		if (paginator.getOrderAscending() != null
+				&& paginator.getOrderField() != null) {
+			if (paginator.getOrderAscending())
+				c.addOrder(org.hibernate.criterion.Order.asc(paginator
+						.getOrderField()));
+			else
+				c.addOrder(org.hibernate.criterion.Order.desc(paginator
+						.getOrderField()));
+		}
 
-				String queryString = "from " + localClass.getName();
+		return getHibernateTemplate().findByCriteria(c,
+				paginator.getResultsPerPage() * (paginator.getPageIndex() - 1),
+				paginator.getResultsPerPage());
+	}
 
-				if (paginator.getOrder() != null
-						&& paginator.getOrderField() != null) {
-					queryString += " order by "
-							+ paginator.getOrderField()
-							+ " "
-							+ (paginator.getOrder() == Order.asc ? "ASC"
-									: "DESC");
-				}
+	@SuppressWarnings("unchecked")
+	public List<T> findByExamplePaged(T exampleObject, Paginator paginator) {
 
-				// System.out.println("CACA" + paginator.getResultsPerPage()
-				// * paginator.getPageIndex());
+		// TODO Hardcoded count, it must do just a COUNT, not retrieve the data
+		paginator.setTotalResultsCount(findByExample(exampleObject).size());
 
-				return session
-						.createQuery(queryString)
-						.setFirstResult(
-								paginator.getResultsPerPage()
-										* (paginator.getPageIndex() - 1))
-						.setMaxResults(paginator.getResultsPerPage()).list();
-			}
-		};
+		Example example = Example.create(exampleObject);
+		example.enableLike(MatchMode.ANYWHERE);
+		example.ignoreCase();
+		// example.excludeProperty("property1");
 
-		return getHibernateTemplate().execute(callback);
+		DetachedCriteria c = DetachedCriteria.forClass(persistentClass).add(
+				example);
+
+		if (paginator.getOrderAscending() != null
+				&& paginator.getOrderField() != null) {
+			if (paginator.getOrderAscending())
+				c.addOrder(org.hibernate.criterion.Order.asc(paginator
+						.getOrderField()));
+			else
+				c.addOrder(org.hibernate.criterion.Order.desc(paginator
+						.getOrderField()));
+		}
+
+		return getHibernateTemplate().findByCriteria(c,
+				paginator.getResultsPerPage() * (paginator.getPageIndex() - 1),
+				paginator.getResultsPerPage());
 	}
 }

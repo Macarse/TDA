@@ -90,4 +90,9 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	public List<ApplicationUser> findAllPaged(Paginator paginator) {
 		return applicationUserDAO.findAllPaged(paginator);
 	}
+
+	public List<ApplicationUser> findByExamplePaged(ApplicationUser example,
+			Paginator paginator) {
+		return applicationUserDAO.findByExamplePaged(example, paginator);
+	}
 }

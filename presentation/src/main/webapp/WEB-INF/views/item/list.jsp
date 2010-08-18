@@ -5,36 +5,111 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Item list</title>
-</head>
-<body>
+<!-- Edit/Delete buttons variables -->
+<spring:url value="item" var="startUrl" />
+<spring:url value="delete" var="deleteUrl" />
+<spring:message text="Eliminar" var="deleteLabel" />
+<spring:url value="edit" var="editUrl" />
+<spring:url value="add" var="addUrl" />
+<spring:url value="search" var="searchUrl" />
+<spring:message text="Editar" var="editLabel" />
 
 <c:if test="${!empty param.message}">
-	<fmt:message key="${param.message }" />
+	<div class="message">
+		<fmt:message key="${param.message }" />
+	</div>
 </c:if>
 
-<table>
+<div class="filter-container">
+	<jsp:include page="/WEB-INF/views/item/filter.jsp" flush="true"/>
+</div>
+
+<a href="${addUrl}">Agregar</a>
+
+<table class="list-table">
 	<thead>
 		<tr>
-			<th><fmt:message key="item.form.name" /></th>
-			<th><fmt:message key="item.form.description" /></th>
-			<th><fmt:message key="item.form.quantity" /></th>
-			<th><fmt:message key="item.form.category" /></th>
+			<th>
+				<a href="?orderField=name&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.name" />
+				</a>
+				<c:if test="${paginator.orderField=='name'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=description&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.description" />
+				</a>
+				<c:if test="${paginator.orderField=='description'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=quantity&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.quantity" />
+				</a>
+				<c:if test="${paginator.orderField=='quantity'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=category&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.category" />
+				</a>
+				<c:if test="${paginator.orderField=='category'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=measureUnit&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="item.form.measureUnit" />
+				</a>
+				<c:if test="${paginator.orderField=='measureUnit'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
 			<th></th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 
-		<!-- Edit/Delete buttons variables -->
-		<spring:url value="/item/" var="startUrl" />
-		<spring:url value="delete/" var="deleteUrl" />
-		<spring:message text="Eliminar" var="deleteLabel" />
-		<spring:url value="edit/" var="editUrl" />
-		<spring:message text="Editar" var="editLabel" />
 
 		<c:forEach items="${itemList}" var="item">
 			<tr>
@@ -42,12 +117,13 @@
 				<td>${item.description}</td>
 				<td>${item.quantity}</td>
 				<td>${item.category}</td>
+				<td>${item.measureUnit}</td>
 				<td><form:form method="POST"
-					action="${startUrl}${deleteUrl}${item.id}">
+					action="${deleteUrl}/${item.id}">
 					<input type="submit" value="${deleteLabel}" />
 				</form:form></td>
 				<td><form:form method="GET"
-					action="${startUrl}${editUrl}${item.id}">
+					action="${editUrl}/${item.id}">
 					<input type="submit" value="${editLabel}" />
 				</form:form></td>
 			</tr>
@@ -62,6 +138,3 @@
 		</tr>
 	</tfoot>
 </table>
-
-</body>
-</html>
