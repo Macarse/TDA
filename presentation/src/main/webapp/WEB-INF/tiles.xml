@@ -22,14 +22,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/item/createForm.jsp" />
 	</definition>
 	
-	<definition name="applicationuser/list" extends="base.definition">
+	<definition name="applicationUser/list" extends="base.definition">
 		<put-attribute name="title" value="User List" />
-		<put-attribute name="body" value="/WEB-INF/views/applicationuser/list.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/applicationUser/list.jsp" />
 	</definition>
 	
-	<definition name="applicationuser/createForm" extends="base.definition">
+	<definition name="applicationUser/createForm" extends="base.definition">
 		<put-attribute name="title" value="New User" />
-		<put-attribute name="body" value="/WEB-INF/views/applicationuser/createForm.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/applicationUser/createForm.jsp" />
 	</definition>
 	
 	<definition name="socialworkerform/form" extends="base.definition">

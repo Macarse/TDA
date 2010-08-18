@@ -2,23 +2,78 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!-- Edit/Delete buttons variables -->
-<spring:url value="applicationuser/" var="startUrl"/>
+<spring:url value="applicationUser" var="startUrl"/>
 <spring:url value="delete" var="deleteUrl"/>
 <spring:message text="Eliminar" var="deleteLabel"/>
 <spring:url value="edit" var="editUrl"/>
 <spring:url value="add" var="addUrl"/>
+<spring:url value="search" var="searchUrl" />
 <spring:message text="Editar" var="editLabel"/>
 
-<a href="${startUrl}${addUrl}">Agregar</a>
+<c:if test="${!empty param.message}">
+	<div class="message">
+		<fmt:message key="${param.message }" />
+	</div>
+</c:if>
+
+<div class="filter-container">
+	<jsp:include page="/WEB-INF/views/applicationUser/filter.jsp" flush="true"/>
+</div>
+
+<a href="${addUrl}">Agregar</a>
+
 <table class="list-table">
 	<thead>
 		<tr>
-			<th>Nombre de usuario</th>
-			<th>Contraseña</th>
-			<th>Autoridades </th>
+			<th>
+				<a href="?orderField=username&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="user.form.username" />
+				</a>
+				<c:if test="${paginator.orderField=='username'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=password&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="user.form.password" />
+				</a>
+				<c:if test="${paginator.orderField=='password'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
+			<th>
+				<a href="?orderField=myAuthorities&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+					<fmt:message key="user.form.autorities" />
+				</a>
+				<c:if test="${paginator.orderField=='myAuthorities'}">
+					<c:choose>
+						<c:when test="${paginator.orderAscending}">
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
+						</c:when>
+						<c:otherwise>
+			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</th>
 			<th></th>
 		</tr>
 	</thead>
