@@ -3,11 +3,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<spring:url value="search" var="searchUrl" />
-
 <div class="filter-container">
 	<form:form modelAttribute="item"
-		action="${searchUrl}" method="get">
+		action="" method="get">
 		<legend><fmt:message key="filter.title" /></legend>
 		
 		<div class="filter-value">

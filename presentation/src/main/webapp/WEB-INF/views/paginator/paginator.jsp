@@ -6,7 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <c:if test="${!paginator.firstPage}">
-  <a href="?page=<c:out value="${paginator.previousPage}&${paginator.params}"/>"> <B>&lt;&lt; Prev</B></a>
+  <a href="?page=<c:out value="${paginator.previousPage}&${params}"/>"> <B>&lt;&lt; Prev</B></a>
 </c:if>
 
 <c:forEach items="${paginator.pages}" var="page">
@@ -15,11 +15,11 @@
   			<c:out value="${page}"/>
 		</c:when>
 		<c:otherwise>
-  				<a href="?page=<c:out value="${page}&${paginator.params}"/>"><c:out value="${page}"/></a>
+  				<a href="?page=<c:out value="${page}&${params}"/>"><c:out value="${page}"/></a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 
 <c:if test="${!paginator.lastPage}">
-	<a href="?page=<c:out value="${paginator.nextPage}&${paginator.params}"/>"> <B>Next &gt;&gt;</B></a>
+	<a href="?page=<c:out value="${paginator.nextPage}&${params}"/>"> <B>Next &gt;&gt;</B></a>
 </c:if>

@@ -20,6 +20,7 @@ import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
 import com.tda.persistence.paginator.Paginator;
+import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.ItemService;
 
 @Controller
@@ -36,6 +37,11 @@ public class ItemController {
 	private static final String ITEM_LIST = "item/list";
 	private ItemService itemService;
 	private Paginator paginator;
+	private ParamContainer params;
+	
+	public ItemController() {
+		params = new ParamContainer();
+	}
 
 	@Autowired
 	public void setItemService(ItemService itemService) {
@@ -132,15 +138,26 @@ public class ItemController {
 			orderField = "name";
 			orderAscending = true;
 		}
+		
+		params.setParam("description", anItem.getDescription());
+		params.setParam("name", anItem.getName());
+		if (anItem.getCategory() != null)
+			params.setParam("category", anItem.getCategory().toString());
+		if (anItem.getMeasureUnit() != null)
+			params.setParam("measureunit", anItem.getMeasureUnit()
+					.toString());
+		if (anItem.getQuantity() != null)
+			params.setParam("quantity", anItem.getQuantity().toString());
 
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
-		paginator.setParam("orderField", orderField);
-		paginator.setParam("orderAscending", orderAscending.toString());
+		params.setParam("orderField", orderField);
+		params.setParam("orderAscending", orderAscending.toString());
 
 		itemList = itemService.findByExamplePaged(anItem, paginator);
 		modelAndView.addObject("itemList", itemList);
 		modelAndView.addObject("paginator", paginator);
+		modelAndView.addObject("params", params);
 		modelAndView.addObject("orderField", orderField);
 		modelAndView.addObject("orderAscending", orderAscending.toString());
 
