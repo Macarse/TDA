@@ -111,54 +111,10 @@ public class ItemController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "search", method = RequestMethod.GET)
-	public String getSearch(
-			Model model,
-			@ModelAttribute Item anItem,
-			BindingResult result,
-			@RequestParam(value = "page", required = false) Integer pageNumber,
-			@RequestParam(value = "orderField", required = false) String orderField,
-			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
-
-		List<Item> itemList = null;
-
-		// Pagination
-		if (pageNumber != null) {
-			paginator.setPageIndex(pageNumber);
-		}
-
-		paginator.setParam("description", anItem.getDescription());
-		paginator.setParam("name", anItem.getName());
-		if (anItem.getCategory() != null)
-			paginator.setParam("category", anItem.getCategory().toString());
-		if (anItem.getMeasureUnit() != null)
-			paginator.setParam("measureunit", anItem.getMeasureUnit()
-					.toString());
-		if (anItem.getQuantity() != null)
-			paginator.setParam("quantity", anItem.getQuantity().toString());
-
-		// Order
-		if (orderField == null || orderAscending == null) {
-			orderField = "name";
-			orderAscending = true;
-		}
-
-		paginator.setOrderAscending(orderAscending);
-		paginator.setOrderField(orderField);
-		paginator.setParam("orderField", orderField);
-		paginator.setParam("orderAscending", orderAscending.toString());
-
-		itemList = itemService.findByExamplePaged(anItem, paginator);
-		model.addAttribute("itemList", itemList);
-		model.addAttribute("paginator", paginator);
-		model.addAttribute("orderField", orderField);
-		model.addAttribute("orderAscending", orderAscending.toString());
-
-		return ITEM_LIST;
-	}
-
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
+			@ModelAttribute Item anItem,
+			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
@@ -182,8 +138,7 @@ public class ItemController {
 		paginator.setParam("orderField", orderField);
 		paginator.setParam("orderAscending", orderAscending.toString());
 
-		itemList = itemService.findAllPaged(paginator);
-		modelAndView.addObject("item", new Item());
+		itemList = itemService.findByExamplePaged(anItem, paginator);
 		modelAndView.addObject("itemList", itemList);
 		modelAndView.addObject("paginator", paginator);
 		modelAndView.addObject("orderField", orderField);
