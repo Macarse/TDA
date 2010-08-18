@@ -1,6 +1,7 @@
 package com.tda.presentation.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -154,8 +155,14 @@ public class ApplicationUserController {
 		paginator.setParam("orderField", orderField);
 		paginator.setParam("orderAscending", orderAscending.toString());
 
+		List<String> excludedFields = new ArrayList<String>();
+		excludedFields.add("accountNonExpired");
+		excludedFields.add("accountNonLocked");
+		excludedFields.add("credentialsNonExpired");
+		excludedFields.add("enabled");
+
 		applicationUserList = applicationUserService.findByExamplePaged(aUser,
-				paginator);
+				paginator, excludedFields);
 
 		model.addAttribute("applicationUserList", applicationUserList);
 		model.addAttribute("paginator", paginator);

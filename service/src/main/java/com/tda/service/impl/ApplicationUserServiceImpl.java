@@ -95,4 +95,15 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 			Paginator paginator) {
 		return applicationUserDAO.findByExamplePaged(example, paginator);
 	}
+
+	public List<ApplicationUser> findByExample(ApplicationUser exampleObject,
+			List<String> excludedFields) {
+		return applicationUserDAO.findByExample(exampleObject, excludedFields);
+	}
+
+	public List<ApplicationUser> findByExamplePaged(ApplicationUser example,
+			Paginator paginator, List<String> excludedFields) {
+		return applicationUserDAO.findByExamplePaged(example, paginator,
+				excludedFields);
+	}
 }

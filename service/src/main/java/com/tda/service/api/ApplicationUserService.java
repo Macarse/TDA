@@ -30,4 +30,10 @@ public interface ApplicationUserService extends UserDetailsService {
 	List<ApplicationUser> findByExamplePaged(ApplicationUser example,
 			Paginator paginator);
 
+	List<ApplicationUser> findByExample(ApplicationUser exampleObject,
+			List<String> excludedFields);
+
+	List<ApplicationUser> findByExamplePaged(ApplicationUser example,
+			Paginator paginator, List<String> excludedFields);
+
 }

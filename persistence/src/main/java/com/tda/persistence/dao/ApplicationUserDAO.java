@@ -21,7 +21,5 @@ public class ApplicationUserDAO extends GenericDAOImpl<ApplicationUser> {
 		criteria.add(Restrictions.eq("username", username));
 		return (List<ApplicationUser>) getHibernateTemplate().findByCriteria(
 				criteria);
-
 	}
-
 }
