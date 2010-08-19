@@ -30,7 +30,7 @@
 	<thead>
 		<tr>
 			<th>
-				<a href="?orderField=firstName&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?orderField=firstName&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
 					<fmt:message key="patient.form.firstName" />
 				</a>
 				<c:if test="${paginator.orderField=='firstName'}">
@@ -45,7 +45,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=lastName&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?orderField=lastName&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
 					<fmt:message key="patient.form.lastName" />
 				</a>
 				<c:if test="${paginator.orderField=='lastName'}">
@@ -60,7 +60,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=sex&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?orderField=sex&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
 					<fmt:message key="patient.form.sex" />
 				</a>
 				<c:if test="${paginator.orderField=='sex'}">
@@ -75,7 +75,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=birthdate&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?orderField=birthdate&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
 					<fmt:message key="patient.form.birthdate" />
 				</a>
 				<c:if test="${paginator.orderField=='birthdate'}">
@@ -90,7 +90,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=dni&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?orderField=dni&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
 					<fmt:message key="patient.form.dni" />
 				</a>
 				<c:if test="${paginator.orderField=='dni'}">

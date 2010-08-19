@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tda.model.item.Item;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
@@ -62,37 +63,31 @@ public class PatientController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
-			@ModelAttribute Patient aPatient,
-			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(LIST);
 
-		List<Patient> patientList = null;
+		modelAndView = processRequest(modelAndView, new Patient(), pageNumber, orderField, orderAscending);
 
-		// Pagination
-		if (pageNumber != null) {
-			paginator.setPageIndex(pageNumber);
-		}
-
-		// Order
-		if (orderField != null && orderAscending != null) {
-			paginator.setOrderAscending(orderAscending);
-			paginator.setOrderField(orderField);
-			params.setParam("orderField", orderField);
-			params.setParam("orderAscending", orderAscending.toString());
-		}else{
-			//default order = name ascending
-			orderField="firstName";
-			orderAscending=true;
-		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="search", method = RequestMethod.GET)
+	public ModelAndView getList(
+			@ModelAttribute Patient aPatient,
+			BindingResult result,
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		
-		if(aPatient.getFirstName() != "")
+		ModelAndView modelAndView = new ModelAndView(LIST);
+		
+		if(aPatient.getFirstName() != null)
 			params.setParam("firstName", aPatient.getFirstName());
-		if(aPatient.getLastName() != "")
+		if(aPatient.getLastName() != null)
 			params.setParam("lastName", aPatient.getLastName());
-		if(aPatient.getDni() != "")
+		if(aPatient.getDni() != null)
 			params.setParam("dni", aPatient.getDni());
 		//TODO: birdhday format?
 		if (aPatient.getBirthdate() != null)
@@ -100,14 +95,8 @@ public class PatientController {
 		if (aPatient.getSex() != null)
 			params.setParam("sex", aPatient.getSex().toString());
 
-		patientList = patientService.findByExamplePaged(aPatient, paginator);
+		modelAndView = processRequest(modelAndView, aPatient, pageNumber, orderField, orderAscending);
 		
-		modelAndView.addObject("patientList", patientList);
-		modelAndView.addObject("paginator", paginator);
-		modelAndView.addObject("params", params);
-		modelAndView.addObject("orderField", orderField);
-		modelAndView.addObject("orderAscending", orderAscending.toString());
-
 		return modelAndView;
 	}
 	
@@ -160,6 +149,36 @@ public class PatientController {
 						FORM_DELETE_ERROR);
 			}
 		}
+		return modelAndView;
+	}
+	
+	private ModelAndView processRequest(ModelAndView modelAndView, 
+			Patient aPatient, Integer pageNumber, String orderField, Boolean orderAscending){
+		List<Patient> patientList = null;
+		
+		// Pagination
+		if (pageNumber != null) {
+			paginator.setPageIndex(pageNumber);
+		}
+
+		// Order
+		if (orderField == null || orderAscending == null) {
+			orderField = "firstName";
+			orderAscending = true;
+		}
+		
+		paginator.setOrderAscending(orderAscending);
+		paginator.setOrderField(orderField);
+		
+		patientList = patientService.findByExamplePaged(aPatient, paginator);
+		
+		modelAndView.addObject("patient", new Patient());
+		modelAndView.addObject("patientList", patientList);
+		modelAndView.addObject("paginator", paginator);
+		modelAndView.addObject("params", params);
+		modelAndView.addObject("orderField", orderField);
+		modelAndView.addObject("orderAscending", orderAscending.toString());
+		
 		return modelAndView;
 	}
 
