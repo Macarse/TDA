@@ -30,7 +30,7 @@
 	<thead>
 		<tr>
 			<th>
-				<a href="?orderField=name&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?${params}&orderField=name&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
 					<fmt:message key="item.form.name" />
 				</a>
 				<c:if test="${paginator.orderField=='name'}">
@@ -45,7 +45,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=description&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?${params}&orderField=description&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
 					<fmt:message key="item.form.description" />
 				</a>
 				<c:if test="${paginator.orderField=='description'}">
@@ -60,7 +60,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=quantity&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?${params}&orderField=quantity&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
 					<fmt:message key="item.form.quantity" />
 				</a>
 				<c:if test="${paginator.orderField=='quantity'}">
@@ -75,7 +75,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=category&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?${params}&orderField=category&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
 					<fmt:message key="item.form.category" />
 				</a>
 				<c:if test="${paginator.orderField=='category'}">
@@ -90,7 +90,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=measureUnit&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?${params}&orderField=measureUnit&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
 					<fmt:message key="item.form.measureUnit" />
 				</a>
 				<c:if test="${paginator.orderField=='measureUnit'}">
@@ -109,8 +109,6 @@
 		</tr>
 	</thead>
 	<tbody>
-
-
 		<c:forEach items="${itemList}" var="item">
 			<tr>
 				<td>${item.name}</td>

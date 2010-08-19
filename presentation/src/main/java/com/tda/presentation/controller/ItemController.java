@@ -172,8 +172,6 @@ public class ItemController {
 		
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
-		params.setParam("orderField", orderField);
-		params.setParam("orderAscending", orderAscending.toString());
 		
 		itemList = itemService.findByExamplePaged(item, paginator);
 		

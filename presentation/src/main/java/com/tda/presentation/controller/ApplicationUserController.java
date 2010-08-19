@@ -152,21 +152,11 @@ public class ApplicationUserController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
-//			@ModelAttribute ApplicationUser aUser,
-//			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(USER_LIST);
 
-//		//filter params
-//		params.setParam("username", aUser.getUsername());
-//		params.setParam("password", aUser.getPassword());
-//
-//		if (aUser.getMyAuthorities() != null)
-//			params.setParam("myAuthorities", aUser.getMyAuthorities()
-//					.toString());
-		
 		modelAndView = processRequest(modelAndView, new ApplicationUser(), pageNumber, orderField, orderAscending);
 
 		return modelAndView;
@@ -189,8 +179,6 @@ public class ApplicationUserController {
 		
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
-		params.setParam("orderField", orderField);
-		params.setParam("orderAscending", orderAscending.toString());
 		
 		List<String> excludedFields = new ArrayList<String>();
 		excludedFields.add("accountNonExpired");
@@ -204,9 +192,9 @@ public class ApplicationUserController {
 		modelAndView.addObject("applicationUser", new ApplicationUser());
 		modelAndView.addObject("applicationUserList", ApplicationUserList);
 		modelAndView.addObject("paginator", paginator);
-		modelAndView.addObject("params", params);
 		modelAndView.addObject("orderField", orderField);
 		modelAndView.addObject("orderAscending", orderAscending.toString());
+		modelAndView.addObject("params", params);
 		
 		return modelAndView;
 	}

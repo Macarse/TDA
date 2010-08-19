@@ -30,7 +30,7 @@
 	<thead>
 		<tr>
 			<th>
-				<a href="?orderField=username&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?${params}&orderField=username&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
 					<fmt:message key="user.form.username" />
 				</a>
 				<c:if test="${paginator.orderField=='username'}">
@@ -45,7 +45,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=password&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?${params}&orderField=password&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
 					<fmt:message key="user.form.password" />
 				</a>
 				<c:if test="${paginator.orderField=='password'}">
@@ -60,7 +60,7 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=myAuthorities&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
+				<a href="?${params}&orderField=myAuthorities&orderAscending=<c:out value="${!paginator.orderAscending}"/>">
 					<fmt:message key="user.form.autorities" />
 				</a>
 				<c:if test="${paginator.orderField=='myAuthorities'}">
