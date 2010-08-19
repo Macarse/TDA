@@ -112,4 +112,52 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 				paginator.getResultsPerPage() * (paginator.getPageIndex() - 1),
 				paginator.getResultsPerPage());
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> findByExample(T exampleObject, List<String> excludedFields) {
+		Example example = Example.create(exampleObject);
+		example.enableLike(MatchMode.ANYWHERE);
+		example.ignoreCase();
+
+		for (String field : excludedFields)
+			example.excludeProperty(field);
+
+		DetachedCriteria c = DetachedCriteria.forClass(persistentClass).add(
+				example);
+
+		return getHibernateTemplate().findByCriteria(c);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> findByExamplePaged(T exampleObject, Paginator paginator,
+			List<String> excludedFields) {
+
+		// TODO Hardcoded count, it must do just a COUNT, not retrieve the data
+		paginator.setTotalResultsCount(findByExample(exampleObject,
+				excludedFields).size());
+
+		Example example = Example.create(exampleObject);
+		example.enableLike(MatchMode.ANYWHERE);
+		example.ignoreCase();
+
+		for (String field : excludedFields)
+			example.excludeProperty(field);
+
+		DetachedCriteria c = DetachedCriteria.forClass(persistentClass).add(
+				example);
+
+		if (paginator.getOrderAscending() != null
+				&& paginator.getOrderField() != null) {
+			if (paginator.getOrderAscending())
+				c.addOrder(org.hibernate.criterion.Order.asc(paginator
+						.getOrderField()));
+			else
+				c.addOrder(org.hibernate.criterion.Order.desc(paginator
+						.getOrderField()));
+		}
+
+		return getHibernateTemplate().findByCriteria(c,
+				paginator.getResultsPerPage() * (paginator.getPageIndex() - 1),
+				paginator.getResultsPerPage());
+	}
 }

@@ -20,6 +20,7 @@ import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
 import com.tda.persistence.paginator.Paginator;
+import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.ItemService;
 
 @Controller
@@ -34,9 +35,13 @@ public class ItemController {
 	private static final String REDIRECT_TO_ITEM_LIST = "redirect:/item/";
 	private static final String ITEM_CREATE_FORM = "item/createForm";
 	private static final String ITEM_LIST = "item/list";
-	private static final String ITEM_LIST_SEARCH = "item/search";
 	private ItemService itemService;
 	private Paginator paginator;
+	private ParamContainer params;
+	
+	public ItemController() {
+		params = new ParamContainer();
+	}
 
 	@Autowired
 	public void setItemService(ItemService itemService) {
@@ -111,58 +116,11 @@ public class ItemController {
 		}
 		return modelAndView;
 	}
-	
-	@RequestMapping(value = "search", method = RequestMethod.GET)
-	public String getSearch(
-			Model model,
-			@ModelAttribute Item anItem,
-			BindingResult result,
-			@RequestParam(value = "page", required = false) Integer pageNumber,
-			@RequestParam(value = "orderField", required = false) String orderField,
-			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending){
-		
-		List<Item> itemList = null;
-
-		// Pagination
-		if (pageNumber != null) {
-			paginator.setPageIndex(pageNumber);
-		}
-		
-		paginator.setParam("description", anItem.getDescription());
-		paginator.setParam("name", anItem.getName());
-		if (anItem.getCategory() != null)
-			paginator.setParam("category", anItem.getCategory().toString());
-		if (anItem.getMeasureUnit() != null)
-			paginator.setParam("measureunit", anItem.getMeasureUnit().toString());
-		if (anItem.getQuantity() != null)
-			paginator.setParam("quantity", anItem.getQuantity().toString());
-		
-
-		// Order
-		if (orderField != null && orderAscending != null) {
-			paginator.setOrderAscending(orderAscending);
-			paginator.setOrderField(orderField);
-			paginator.setParam("orderField", orderField);
-			paginator.setParam("orderAscending", orderAscending.toString());
-		}else{
-			//default order = name ascending
-			orderField="name";
-			orderAscending=true;
-		}
-		
-
-		itemList = itemService.findByExamplePaged(anItem, paginator);
-		
-		model.addAttribute("itemList", itemList);
-		model.addAttribute("paginator", paginator);
-		model.addAttribute("orderField", orderField);
-		model.addAttribute("orderAscending", orderAscending.toString());
-			
-		return ITEM_LIST;
-	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
+			@ModelAttribute Item anItem,
+			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
@@ -176,21 +134,30 @@ public class ItemController {
 		}
 
 		// Order
-		if (orderField != null && orderAscending != null) {
-			paginator.setOrderAscending(orderAscending);
-			paginator.setOrderField(orderField);
-			paginator.setParam("orderField", orderField);
-			paginator.setParam("orderAscending", orderAscending.toString());
-		}else{
-			//default order = name ascending
-			orderField="name";
-			orderAscending=true;
+		if (orderField == null || orderAscending == null) {
+			orderField = "name";
+			orderAscending = true;
 		}
+		
+		params.setParam("description", anItem.getDescription());
+		params.setParam("name", anItem.getName());
+		if (anItem.getCategory() != null)
+			params.setParam("category", anItem.getCategory().toString());
+		if (anItem.getMeasureUnit() != null)
+			params.setParam("measureunit", anItem.getMeasureUnit()
+					.toString());
+		if (anItem.getQuantity() != null)
+			params.setParam("quantity", anItem.getQuantity().toString());
 
-		itemList = itemService.findAllPaged(paginator);
-		modelAndView.addObject("item", new Item());
+		paginator.setOrderAscending(orderAscending);
+		paginator.setOrderField(orderField);
+		params.setParam("orderField", orderField);
+		params.setParam("orderAscending", orderAscending.toString());
+
+		itemList = itemService.findByExamplePaged(anItem, paginator);
 		modelAndView.addObject("itemList", itemList);
 		modelAndView.addObject("paginator", paginator);
+		modelAndView.addObject("params", params);
 		modelAndView.addObject("orderField", orderField);
 		modelAndView.addObject("orderAscending", orderAscending.toString());
 

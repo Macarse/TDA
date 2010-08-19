@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ForeignKey;
-import org.hibernate.validator.NotNull;
-import org.hibernate.validator.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -81,7 +82,8 @@ public class ApplicationUser implements UserDetails {
 		this.username = username;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Authority.class, cascade = { CascadeType.ALL })
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Authority.class)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@ForeignKey(name = "ID_USER", inverseName = "ID_AUTH")
 	public Collection<Authority> getMyAuthorities() {
 		return myAuthorities;
