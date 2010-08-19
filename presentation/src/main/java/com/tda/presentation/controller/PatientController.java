@@ -83,6 +83,9 @@ public class PatientController {
 		
 		ModelAndView modelAndView = new ModelAndView(LIST);
 		
+		//set first page paginator
+		paginator.setPageIndex(1);
+		
 		if(aPatient.getFirstName() != null)
 			params.setParam("firstName", aPatient.getFirstName());
 		if(aPatient.getLastName() != null)

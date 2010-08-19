@@ -137,6 +137,9 @@ public class ApplicationUserController {
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(USER_LIST);
 
+		//set first page paginator
+		paginator.setPageIndex(1);
+		
 		//filter params
 		params.setParam("username", aUser.getUsername());
 		params.setParam("password", aUser.getPassword());

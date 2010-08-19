@@ -127,6 +127,9 @@ public class ItemController {
 		
 		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
 		
+		//set first page paginator
+		paginator.setPageIndex(1);
+		
 		params.setParam("description", anItem.getDescription());
 		params.setParam("name", anItem.getName());
 		if (anItem.getCategory() != null)
