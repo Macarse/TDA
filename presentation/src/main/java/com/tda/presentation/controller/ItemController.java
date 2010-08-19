@@ -116,18 +116,49 @@ public class ItemController {
 		}
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public ModelAndView search(
+			@ModelAttribute Item anItem,
+			BindingResult result,
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending){
+		
+		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
+		
+		params.setParam("description", anItem.getDescription());
+		params.setParam("name", anItem.getName());
+		if (anItem.getCategory() != null)
+			params.setParam("category", anItem.getCategory().toString());
+		if (anItem.getMeasureUnit() != null)
+			params.setParam("measureunit", anItem.getMeasureUnit()
+					.toString());
+		if (anItem.getQuantity() != null)
+			params.setParam("quantity", anItem.getQuantity().toString());
+		
+		modelAndView = processRequest(modelAndView, anItem, pageNumber, orderField, orderAscending);
+		
+		return modelAndView;
+	}
+
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
-			@ModelAttribute Item anItem,
-			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
 
-		List<Item> itemList = null;
+		modelAndView = processRequest(modelAndView, new Item(), pageNumber, orderField, orderAscending);
 
+		return modelAndView;
+	}
+	
+	private ModelAndView processRequest(ModelAndView modelAndView, 
+			Item item, Integer pageNumber, String orderField, Boolean orderAscending){
+		List<Item> itemList = null;
+		
 		// Pagination
 		if (pageNumber != null) {
 			paginator.setPageIndex(pageNumber);
@@ -139,28 +170,21 @@ public class ItemController {
 			orderAscending = true;
 		}
 		
-		params.setParam("description", anItem.getDescription());
-		params.setParam("name", anItem.getName());
-		if (anItem.getCategory() != null)
-			params.setParam("category", anItem.getCategory().toString());
-		if (anItem.getMeasureUnit() != null)
-			params.setParam("measureunit", anItem.getMeasureUnit()
-					.toString());
-		if (anItem.getQuantity() != null)
-			params.setParam("quantity", anItem.getQuantity().toString());
-
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
 		params.setParam("orderField", orderField);
 		params.setParam("orderAscending", orderAscending.toString());
-
-		itemList = itemService.findByExamplePaged(anItem, paginator);
+		
+		itemList = itemService.findByExamplePaged(item, paginator);
+		
+		modelAndView.addObject("item", new Item());
 		modelAndView.addObject("itemList", itemList);
 		modelAndView.addObject("paginator", paginator);
 		modelAndView.addObject("params", params);
 		modelAndView.addObject("orderField", orderField);
 		modelAndView.addObject("orderAscending", orderAscending.toString());
-
+		
 		return modelAndView;
+		
 	}
 }
