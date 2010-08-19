@@ -25,7 +25,7 @@
 	</definition>
 	
 	<!-- ApplicationUser -->
-	<definition name="applicationuser/list" extends="base.definition">
+	<definition name="applicationUser/list" extends="base.definition">
 		<put-attribute name="title" value="User List" />
 		<put-attribute name="body" value="/WEB-INF/views/applicationUser/list.jsp" />
 	</definition>
