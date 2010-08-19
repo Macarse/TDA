@@ -5,7 +5,7 @@
 
 <div class="filter-container">
 	<form:form modelAttribute="applicationUser"
-		action="" method="get">
+		action="search" method="get">
 		<legend><fmt:message key="filter.title" /></legend>
 		
 		<div class="filter-value">

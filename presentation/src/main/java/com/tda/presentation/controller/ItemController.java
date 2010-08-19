@@ -185,6 +185,5 @@ public class ItemController {
 		modelAndView.addObject("orderAscending", orderAscending.toString());
 		
 		return modelAndView;
-		
 	}
 }

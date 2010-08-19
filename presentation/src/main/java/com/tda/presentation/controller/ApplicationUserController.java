@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.Authority;
+import com.tda.model.item.Item;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.ApplicationUserService;
@@ -126,8 +127,8 @@ public class ApplicationUserController {
 		}
 		return modelAndView;
 	}
-
-	@RequestMapping(method = RequestMethod.GET)
+	
+	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public ModelAndView getList(
 			@ModelAttribute ApplicationUser aUser,
 			BindingResult result,
@@ -136,8 +137,45 @@ public class ApplicationUserController {
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(USER_LIST);
 
-		List<ApplicationUser> applicationUserList = null;
+		//filter params
+		params.setParam("username", aUser.getUsername());
+		params.setParam("password", aUser.getPassword());
 
+		if (aUser.getMyAuthorities() != null)
+			params.setParam("myAuthorities", aUser.getMyAuthorities()
+					.toString());
+		
+		modelAndView = processRequest(modelAndView, aUser, pageNumber, orderField, orderAscending);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView getList(
+//			@ModelAttribute ApplicationUser aUser,
+//			BindingResult result,
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
+		ModelAndView modelAndView = new ModelAndView(USER_LIST);
+
+//		//filter params
+//		params.setParam("username", aUser.getUsername());
+//		params.setParam("password", aUser.getPassword());
+//
+//		if (aUser.getMyAuthorities() != null)
+//			params.setParam("myAuthorities", aUser.getMyAuthorities()
+//					.toString());
+		
+		modelAndView = processRequest(modelAndView, new ApplicationUser(), pageNumber, orderField, orderAscending);
+
+		return modelAndView;
+	}
+	
+	private ModelAndView processRequest(ModelAndView modelAndView, 
+			ApplicationUser item, Integer pageNumber, String orderField, Boolean orderAscending){
+		List<ApplicationUser> ApplicationUserList = null;
+		
 		// Pagination
 		if (pageNumber != null) {
 			paginator.setPageIndex(pageNumber);
@@ -148,36 +186,28 @@ public class ApplicationUserController {
 			orderField = "username";
 			orderAscending = true;
 		}
-
+		
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
-		//order params
 		params.setParam("orderField", orderField);
 		params.setParam("orderAscending", orderAscending.toString());
 		
-		//filter params
-		params.setParam("username", aUser.getUsername());
-		params.setParam("password", aUser.getPassword());
-
-		if (aUser.getMyAuthorities() != null)
-			params.setParam("myAuthorities", aUser.getMyAuthorities()
-					.toString());
-
 		List<String> excludedFields = new ArrayList<String>();
 		excludedFields.add("accountNonExpired");
 		excludedFields.add("accountNonLocked");
 		excludedFields.add("credentialsNonExpired");
 		excludedFields.add("enabled");
-
-		applicationUserList = applicationUserService.findByExamplePaged(aUser,
-				paginator, excludedFields);
+		
+		ApplicationUserList = applicationUserService.findByExamplePaged(item, paginator, 
+				excludedFields);
+		
 		modelAndView.addObject("applicationUser", new ApplicationUser());
-		modelAndView.addObject("applicationUserList", applicationUserList);
+		modelAndView.addObject("applicationUserList", ApplicationUserList);
 		modelAndView.addObject("paginator", paginator);
 		modelAndView.addObject("params", params);
 		modelAndView.addObject("orderField", orderField);
 		modelAndView.addObject("orderAscending", orderAscending.toString());
-
+		
 		return modelAndView;
 	}
 
