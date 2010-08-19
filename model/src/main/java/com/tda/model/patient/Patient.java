@@ -14,8 +14,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Past;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Patient implements Serializable {
@@ -24,7 +22,7 @@ public class Patient implements Serializable {
 	private Long id;
 
 	@Size(min = 0, max = 10)
-	@Digits(fraction=0, integer=10)
+	@Digits(fraction = 0, integer = 10)
 	private String dni;
 
 	@NotNull
