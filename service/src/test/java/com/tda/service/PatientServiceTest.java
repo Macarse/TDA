@@ -2,6 +2,8 @@ package com.tda.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,9 @@ public class PatientServiceTest {
 	@Test
 	public void findByName() {
 		Patient patient = PatientBuilder.createPatient()
-				.withFirstName("myname").build();
+				.withFirstName("myname").withLastName("last")
+				.withBirthdate(new Date()).withDni("00000000")
+				.withSex(Sex.male).build();
 		patientService.save(patient);
 
 		assertEquals(patient, patientService.findByFirstName("myname").get(0));
@@ -39,7 +43,9 @@ public class PatientServiceTest {
 	@Test
 	public void findByExample() {
 		Patient patient = PatientBuilder.createPatient()
-				.withFirstName("myname").build();
+				.withFirstName("myname").withLastName("last")
+				.withBirthdate(new Date()).withDni("00000000")
+				.withSex(Sex.male).build();
 		patientService.save(patient);
 
 		assertEquals(patient, patientService.findByExample(patient).get(0));
@@ -48,7 +54,9 @@ public class PatientServiceTest {
 	@Test
 	public void findByFirstNameContaining() {
 		Patient patient = PatientBuilder.createPatient()
-				.withFirstName("myname").build();
+				.withFirstName("myname").withLastName("last")
+				.withBirthdate(new Date()).withDni("00000000")
+				.withSex(Sex.male).build();
 		patientService.save(patient);
 
 		assertEquals(patient, patientService.findByFirstName("name").get(0));
@@ -56,8 +64,10 @@ public class PatientServiceTest {
 
 	@Test
 	public void findByDni() {
-		Patient patient = PatientBuilder.createPatient().withDni("32018393")
-				.build();
+		Patient patient = PatientBuilder.createPatient()
+				.withFirstName("myname").withLastName("last")
+				.withBirthdate(new Date()).withDni("32018393")
+				.withSex(Sex.male).build();
 		patientService.save(patient);
 
 		assertEquals(patient, patientService.findByDni("32018393").get(0));
@@ -65,8 +75,10 @@ public class PatientServiceTest {
 
 	@Test
 	public void findBySex() {
-		Patient patient = PatientBuilder.createPatient().withSex(Sex.male)
-				.build();
+		Patient patient = PatientBuilder.createPatient()
+				.withFirstName("myname").withLastName("last")
+				.withBirthdate(new Date()).withDni("32018393")
+				.withSex(Sex.male).build();
 		patientService.save(patient);
 
 		assertEquals(patient, patientService.findBySex(Sex.male).get(0));

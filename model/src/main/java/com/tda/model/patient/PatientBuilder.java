@@ -7,13 +7,9 @@ public class PatientBuilder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String dni;
-
 	private String firstName;
-
 	private String lastName;
-
 	private Sex sex;
-
 	private Date birthdate;
 
 	private PatientBuilder() {
