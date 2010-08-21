@@ -45,21 +45,6 @@
 				</c:if>
 			</th>
 			<th>
-				<a href="?orderField=password&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
-					<fmt:message key="user.form.password" />
-				</a>
-				<c:if test="${paginator.orderField=='password'}">
-					<c:choose>
-						<c:when test="${paginator.orderAscending}">
-			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
-						</c:when>
-						<c:otherwise>
-			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-			</th>
-			<th>
 				<a href="?orderField=myAuthorities&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
 					<fmt:message key="user.form.autorities" />
 				</a>
@@ -82,15 +67,14 @@
 		<c:forEach items="${applicationUserList}" var="user">
 		<tr>
 			<td>${user.username}</td>
-			<td>${user.password}</td>
 			<td>${user.myAuthorities}</td>
 			<td>
-				<form:form method="POST" action="${startUrl}${deleteUrl}/${user.id}">
+				<form:form method="POST" action="${deleteUrl}/${user.id}">
 					<input type="submit" value="${deleteLabel}"/>
 				</form:form>
 			</td>
 			<td>
-				<form:form method="GET" action="${startUrl}${editUrl}/${user.id}" >
+				<form:form method="GET" action="${editUrl}/${user.id}" >
 					<input type="submit" value="${editLabel}"/>
 				</form:form>
 			</td>
