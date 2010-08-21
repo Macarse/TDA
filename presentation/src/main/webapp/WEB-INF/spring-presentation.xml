@@ -48,6 +48,7 @@
 			</value>
 		</property>
 	</bean>
+	
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">

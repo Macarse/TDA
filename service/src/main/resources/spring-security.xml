@@ -11,6 +11,8 @@
 
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
+		<security:intercept-url pattern="/login/login.html" filters="none"/>
+		<security:form-login login-page="/login/login.html"/>
     </security:http>
     
 	<bean id="org.springframework.security.authenticationManager"
