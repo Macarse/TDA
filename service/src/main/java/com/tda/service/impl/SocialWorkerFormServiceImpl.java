@@ -1,5 +1,6 @@
 package com.tda.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,9 @@ public class SocialWorkerFormServiceImpl implements SocialWorkerFormService {
 
 	@Transactional
 	public void save(SocialWorkerForm socialWorkerForm) {
+		if (socialWorkerForm.getFillingDate() == null) {
+			socialWorkerForm.setFillingDate(new Date());
+		}
 		socialWorkerFormDAO.save(socialWorkerForm);
 	}
 

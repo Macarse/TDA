@@ -19,13 +19,11 @@ body{
 .menu-container{
 	float: left;
 	width: 219px;
-	height: 600px;
 }
 
 .body-container{
 	float: right; 
 	width: 779px;
-	height: 600px;
 	overflow: -moz-scrollbars-vertical; 
     overflow-y: auto;
     overflow-x: none; 
@@ -47,10 +45,8 @@ body{
 }
 
 .footer-container{
-	position: absolute;
 	width: 1000px;
 	clear: both;
-	bottom: 0px;
 	border-style: solid;
 	border-width: 1px;
 	background-color: white;
