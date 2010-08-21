@@ -39,7 +39,7 @@ public class ApplicationUserController {
 	private static final String USER_FORM_NOT_FOUND = "user.form.notFound";
 	private static final String USER_FORM_MESSAGE = "message";
 	private static final String USER_FORM_ADD_SUCCESSFUL = "user.form.addSuccessful";
-	private static final String REDIRECT_TO_USER_LIST = "redirect:/applicationUser";
+	private static final String REDIRECT_TO_USER_LIST = "redirect:/applicationUser/";
 	private static final String USER_CREATE_FORM = "applicationUser/createForm";
 	private static final String USER_LIST = "applicationUser/list";
 
