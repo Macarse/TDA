@@ -64,7 +64,7 @@ public class Paginator {
 	}
 
 	public boolean isLastPage() {
-		if (getPageCount() == 1)
+		if (getPageCount() == 0)
 			return true;
 
 		return getPageCount() == pageIndex;
