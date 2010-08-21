@@ -13,12 +13,6 @@
 			<fmt:message key="user.form.username" /></form:label>
 			<form:input path="username" /> <form:errors path="username" />
 		</div>
-	
-		<div class="filter-value">
-			<form:label for="password" path="password" cssErrorClass="error">
-			<fmt:message key="user.form.password" /></form:label>
-			<form:input path="password" /> <form:errors path="password" />
-		</div>
 		
 		<div class="filter-value">
 			<form:label for="myAuthorities" path="myAuthorities" cssErrorClass="error">

@@ -19,13 +19,13 @@
 		cssErrorClass="error"><fmt:message key="user.form.password" /></form:label><br />
 	<form:password path="password" /> <form:errors path="password" /></p>
 
-	<p><form:label for="password" path="password"
+	<p><form:label for="password" path="confirmPassword"
 		cssErrorClass="error"><fmt:message key="user.form.password2" /></form:label><br />
-	<form:password path="password" /> <form:errors path="password" /></p>
+	<form:password path="confirmPassword" /> <form:errors path="confirmPassword" /></p>
 	
 	<p><form:label for="myAuthorities" path="myAuthorities"
 		cssErrorClass="error"><fmt:message key="user.form.autorities" /></form:label><br />
-	<form:checkboxes items="${allAuthorities}" path="myAuthorities" itemLabel="name"/><form:errors path="myAuthorities" /></p>
+	<form:checkboxes items="${allAuthorities}" path="myAuthorities" itemLabel="name" itemValue="name"/><form:errors path="myAuthorities" /></p>
 
 	<p><input type="submit"/></p>
 	</fieldset>

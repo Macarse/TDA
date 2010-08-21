@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.Authority;
-import com.tda.model.item.Item;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.ApplicationUserService;
@@ -47,7 +47,7 @@ public class ApplicationUserController {
 	private ParamContainer params;
 	private ApplicationUserService applicationUserService;
 	private AuthorityService authorityService;
-	
+
 	public ApplicationUserController() {
 		params = new ParamContainer();
 	}
@@ -87,9 +87,17 @@ public class ApplicationUserController {
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 
+		// Checking if passwords are the same
+		// FIXME: We should do something similar to this:
+		// http://stackoverflow.com/questions/1972933/cross-field-validation-with-hibernate-validator-jsr-303
+		// http://stackoverflow.com/questions/3503798/handling-password-confirmations-on-spring-mvc
+		if (!applicationUser.getPassword().equals(
+				applicationUser.getConfirmPassword())) {
+			result.addError(new FieldError("applicationUser",
+					"confirmPassword", "Las contrase–as no son iguales"));
+		}
 		// TODO if we're editing and not adding a new item the message
 		// seems somewhat... misleading, CHANGE IT :D
-
 		if (result.hasErrors()) {
 			modelAndView.setViewName(USER_CREATE_FORM);
 		} else {
@@ -127,7 +135,7 @@ public class ApplicationUserController {
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public ModelAndView getList(
 			@ModelAttribute ApplicationUser aUser,
@@ -137,18 +145,18 @@ public class ApplicationUserController {
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(USER_LIST);
 
-		//set first page paginator
+		// set first page paginator
 		paginator.setPageIndex(1);
-		
-		//filter params
+
+		// filter params
 		params.setParam("username", aUser.getUsername());
-		params.setParam("password", aUser.getPassword());
 
 		if (aUser.getMyAuthorities() != null)
 			params.setParam("myAuthorities", aUser.getMyAuthorities()
 					.toString());
-		
-		modelAndView = processRequest(modelAndView, aUser, pageNumber, orderField, orderAscending);
+
+		modelAndView = processRequest(modelAndView, aUser, pageNumber,
+				orderField, orderAscending);
 
 		return modelAndView;
 	}
@@ -160,15 +168,17 @@ public class ApplicationUserController {
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(USER_LIST);
 
-		modelAndView = processRequest(modelAndView, new ApplicationUser(), pageNumber, orderField, orderAscending);
+		modelAndView = processRequest(modelAndView, new ApplicationUser(),
+				pageNumber, orderField, orderAscending);
 
 		return modelAndView;
 	}
-	
-	private ModelAndView processRequest(ModelAndView modelAndView, 
-			ApplicationUser item, Integer pageNumber, String orderField, Boolean orderAscending){
+
+	private ModelAndView processRequest(ModelAndView modelAndView,
+			ApplicationUser item, Integer pageNumber, String orderField,
+			Boolean orderAscending) {
 		List<ApplicationUser> ApplicationUserList = null;
-		
+
 		// Pagination
 		if (pageNumber != null) {
 			paginator.setPageIndex(pageNumber);
@@ -179,26 +189,26 @@ public class ApplicationUserController {
 			orderField = "username";
 			orderAscending = true;
 		}
-		
+
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
-		
+
 		List<String> excludedFields = new ArrayList<String>();
 		excludedFields.add("accountNonExpired");
 		excludedFields.add("accountNonLocked");
 		excludedFields.add("credentialsNonExpired");
 		excludedFields.add("enabled");
-		
-		ApplicationUserList = applicationUserService.findByExamplePaged(item, paginator, 
-				excludedFields);
-		
+
+		ApplicationUserList = applicationUserService.findByExamplePaged(item,
+				paginator, excludedFields);
+
 		modelAndView.addObject("applicationUser", new ApplicationUser());
 		modelAndView.addObject("applicationUserList", ApplicationUserList);
 		modelAndView.addObject("paginator", paginator);
 		modelAndView.addObject("orderField", orderField);
 		modelAndView.addObject("orderAscending", orderAscending.toString());
 		modelAndView.addObject("params", params);
-		
+
 		return modelAndView;
 	}
 
