@@ -234,7 +234,7 @@ public class ApplicationUserController {
 
 		@Override
 		public String getAsText() {
-			return ((Authority) getValue()).getAuthority();
+			return ((Authority) getValue()).getName();
 		}
 	}
 
