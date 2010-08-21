@@ -51,5 +51,11 @@
 		<put-attribute name="title" value="New Patient" />
 		<put-attribute name="body" value="/WEB-INF/views/patient/createForm.jsp" />
 	</definition>
+	
+	<!-- Welcome -->
+	<definition name="welcome/list" extends="base.definition">
+		<put-attribute name="title" value="Patient List" />
+		<put-attribute name="body" value="/WEB-INF/views/welcome/welcome.jsp" />
+	</definition>
 
 </tiles-definitions>
