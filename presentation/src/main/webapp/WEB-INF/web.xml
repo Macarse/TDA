@@ -74,7 +74,7 @@
 	<!-- Static Content -->
 	<servlet-mapping>
     	<servlet-name>default</servlet-name>
-    	<url-pattern>/login/login.jsp</url-pattern>
+    	<url-pattern>/login/login.html</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
