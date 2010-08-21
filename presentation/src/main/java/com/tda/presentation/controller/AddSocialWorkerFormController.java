@@ -24,6 +24,8 @@ import com.tda.service.api.SocialWorkerFormService;
 public class AddSocialWorkerFormController extends
 		BaseSocialWorkerFormController {
 	private static final String SOCIAL_WORKER_ADD_FORM = "socialworkerform/form";
+	private static final String REDIRECT_AFTER_SAVE = "redirect:/welcome/";
+	
 	private SocialWorkerFormService socialWorkerFormService;
 	private PatientService patientService;
 
@@ -47,7 +49,8 @@ public class AddSocialWorkerFormController extends
 		} else {
 			socialWorkerFormService.save(socialWorkerForm);
 			status.setComplete();
-			return "redirect:/patient/" + socialWorkerForm.getPatient().getId();
+//			return "redirect:/patient/" + socialWorkerForm.getPatient().getId();
+			return REDIRECT_AFTER_SAVE;
 		}
 	}
 
