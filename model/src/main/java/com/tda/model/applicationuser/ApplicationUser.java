@@ -34,6 +34,10 @@ public class ApplicationUser implements UserDetails {
 	private String password;
 
 	@NotNull
+	@Size(min = 4, max = 8)
+	private String confirmPassword;
+
+	@NotNull
 	@Size(min = 6, max = 12)
 	private String username;
 
@@ -204,5 +208,13 @@ public class ApplicationUser implements UserDetails {
 			list.add(new GrantedAuthorityImpl(authority.getAuthority()));
 		}
 		return list;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 }
