@@ -24,8 +24,6 @@
 	<jsp:include page="/WEB-INF/views/item/filter.jsp" flush="true"/>
 </div>
 
-<a href="${addUrl}">Agregar</a>
-
 <table class="list-table">
 	<thead>
 		<tr>
@@ -104,8 +102,7 @@
 					</c:choose>
 				</c:if>
 			</th>
-			<th></th>
-			<th></th>
+			<th colspan="2"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="#"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -116,13 +113,13 @@
 				<td>${item.quantity}</td>
 				<td>${item.category}</td>
 				<td>${item.measureUnit}</td>
-				<td><form:form method="POST"
-					action="${deleteUrl}/${item.id}">
-					<input type="submit" value="${deleteLabel}" />
-				</form:form></td>
 				<td><form:form method="GET"
 					action="${editUrl}/${item.id}">
-					<input type="submit" value="${editLabel}" />
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> Editar</button>
+				</form:form></td>
+				<td class=""><form:form method="POST"
+					action="${deleteUrl}/${item.id}">
+						<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick button-icon"></span> Eliminar</button>
 				</form:form></td>
 			</tr>
 		</c:forEach>
@@ -130,7 +127,7 @@
 
 	<tfoot>
 		<tr>
-		  <td colspan="2">
+		  <td colspan="7">
 			<jsp:include page="/WEB-INF/views/paginator/paginator.jsp" flush="true"/>
 		  </td>
 		</tr>

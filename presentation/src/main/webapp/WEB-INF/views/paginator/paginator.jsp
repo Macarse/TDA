@@ -5,21 +5,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<c:if test="${!paginator.firstPage}">
-  <a href="?page=<c:out value="${paginator.previousPage}&orderField=${orderField}&orderAscending=${orderAscending}&${params}"/>"> <B>&lt;&lt; Prev</B></a>
-</c:if>
-
-<c:forEach items="${paginator.pages}" var="page">
-	<c:choose>
-		<c:when test="${page == paginator.pageIndex}">
-  			<c:out value="${page}"/>
-		</c:when>
-		<c:otherwise>
-  				<a href="?page=<c:out value="${page}&orderField=${orderField}&orderAscending=${orderAscending}&${params}"/>"><c:out value="${page}"/></a>
-		</c:otherwise>
-	</c:choose>
-</c:forEach>
-
-<c:if test="${!paginator.lastPage}">
-	<a href="?page=<c:out value="${paginator.nextPage}&orderField=${orderField}&orderAscending=${orderAscending}&${params}"/>"> <B>Next &gt;&gt;</B></a>
-</c:if>
+<div class="paginator">
+	<ul id="pagination-digg">
+		<c:if test="${!paginator.firstPage}">
+			<li class="previous"><a href="?page=<c:out value="${paginator.previousPage}&orderField=${orderField}&orderAscending=${orderAscending}&${params}"/>"> <B>&lt;&lt; Anterior</B></a></li>
+		</c:if>
+		<c:if test="${paginator.firstPage}">
+			<li class="previous-off"><B>&lt;&lt; Anterior</B></li>
+		</c:if>
+		
+		<c:forEach items="${paginator.pages}" var="page">
+			<c:choose>
+				<c:when test="${page == paginator.pageIndex}">
+		  			<li class="active"><c:out value="${page}"/></li>
+				</c:when>
+				<c:otherwise>
+	  				<li><a href="?page=<c:out value="${page}&orderField=${orderField}&orderAscending=${orderAscending}&${params}"/>"><c:out value="${page}"/></a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<c:if test="${!paginator.lastPage}">
+			<li class="next"><a href="?page=<c:out value="${paginator.nextPage}&orderField=${orderField}&orderAscending=${orderAscending}&${params}"/>"> <B>Siguiente &gt;&gt;</B></a></li>
+		</c:if>
+		<c:if test="${paginator.lastPage}">
+			<li class="next-off"><B>Siguiente &gt;&gt;</B></li>
+		</c:if>
+	</ul>
+</div>
+<br/>

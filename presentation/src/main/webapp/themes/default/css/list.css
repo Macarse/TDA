@@ -1,11 +1,28 @@
 @CHARSET "UTF-8";
 
+/* buttons and icons */
 .list-table{
-	width: 600px;
+	width: 760px;
 }
 
 .list-table tr:nth-child(even) {
-	background: #CCC
+	background: #AED0EA
+}
+
+/* header */
+.list-table thead th{
+	width: 150px;
+}
+
+.list-table thead th > img{
+	position: relative;
+	top: -2px;
+}
+
+/* body */
+.list-table tbody td{
+	border-bottom: 1px solid;
+	border-color:#AED0EA;
 }
 
 .list-table tr:nth-child{

@@ -14,11 +14,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.jqueryui"/>"></script> 
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="layout.css"/>' type="text/css"/>
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="list.css"/>' type="text/css"/>
+<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="paginator.css"/>' type="text/css"/>	
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="form.css"/>' type="text/css"/>
-<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="jqueryui.css"/>' type="text/css"/>	
+<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="jqueryui.css"/>' type="text/css"/>
 </head>
 <body>
-<div class="main-container">
+<div class="main-container ">
 	<div class="header-container">
 		<tiles:insertAttribute name="header" />
 	</div>
