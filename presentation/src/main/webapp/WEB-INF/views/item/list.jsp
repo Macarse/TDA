@@ -127,7 +127,7 @@
 
 	<tfoot>
 		<tr>
-		  <td colspan="7">
+		  <td colspan="7" align="center">
 			<jsp:include page="/WEB-INF/views/paginator/paginator.jsp" flush="true"/>
 		  </td>
 		</tr>

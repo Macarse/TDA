@@ -1,16 +1,13 @@
 @CHARSET "UTF-8";
 
 .paginator{
-	width: 760px;
-	text-align: center; 
-	margin-left: auto;
-	margin-right: auto;
 }
 
-#pagination-digg {}
-.paginator ul{
-	border:0; padding:0;
-	}
+#pagination-digg {
+	position: relative;
+	left: 30%;
+}
+.paginator ul{ border:0; padding:0; }
 
 .paginator li{
 border:0; margin:0; padding:0;
