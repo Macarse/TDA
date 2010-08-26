@@ -40,6 +40,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/applicationUser/editForm.jsp" />
 	</definition>
 
+	<definition name="applicationUser/passwordForm" extends="base.definition">
+		<put-attribute name="title" value="Editar Contraseña" />
+		<put-attribute name="body" value="/WEB-INF/views/applicationUser/passwordForm.jsp" />
+	</definition>
+
 	<!-- SocialWorker -->	
 	<definition name="socialworkerform/form" extends="base.definition">
 		<put-attribute name="title" value="Social Worker Form" />
