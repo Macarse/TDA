@@ -25,7 +25,7 @@ import com.tda.service.api.ItemService;
 
 @Controller
 @RequestMapping(value = "/item")
-@SessionAttributes("item")
+@SessionAttributes({"item"})
 public class ItemController {
 
 	private static final String ITEM_FORM_DELETE_ERROR = "item.form.deleteError";
@@ -41,6 +41,11 @@ public class ItemController {
 	
 	public ItemController() {
 		params = new ParamContainer();
+	}
+	
+	@ModelAttribute("user")
+	public String getUser(){
+		return "ancla";
 	}
 
 	@Autowired

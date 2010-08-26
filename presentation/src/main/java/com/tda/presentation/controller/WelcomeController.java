@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -26,7 +28,7 @@ import com.tda.service.api.PatientService;
 
 @Controller
 @RequestMapping(value = "/")
-@SessionAttributes("patient")
+@SessionAttributes({"patient", "user"})
 public class WelcomeController {
 	private static final String REDIRECT_TO_LIST = "redirect:/welcome/";
 	private static final String LIST = "welcome/list";
@@ -47,6 +49,12 @@ public class WelcomeController {
 	@ModelAttribute("sex")
 	public Sex[] populateCategories() {
 		return Sex.values();
+	}
+	
+	@ModelAttribute("user")
+	public UserDetails getUser() {
+		Object aux = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return ((UserDetails)aux);
 	}
 
 	@Autowired
