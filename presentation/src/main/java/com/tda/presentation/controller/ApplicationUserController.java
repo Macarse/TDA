@@ -39,8 +39,10 @@ public class ApplicationUserController {
 	private static final String USER_FORM_NOT_FOUND = "user.form.notFound";
 	private static final String USER_FORM_MESSAGE = "message";
 	private static final String USER_FORM_ADD_SUCCESSFUL = "user.form.addSuccessful";
+	private static final String USER_FORM_EDIT_SUCCESSFUL = "user.form.editSuccessful";
 	private static final String REDIRECT_TO_USER_LIST = "redirect:/applicationUser/";
 	private static final String USER_CREATE_FORM = "applicationUser/createForm";
+	private static final String USER_EDIT_FORM = "applicationUser/editForm";
 	private static final String USER_LIST = "applicationUser/list";
 
 	private Paginator paginator;
@@ -81,12 +83,8 @@ public class ApplicationUserController {
 		return USER_CREATE_FORM;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView create(Model model,
-			@Valid @ModelAttribute ApplicationUser applicationUser,
+	private void validateUserPasswords(ApplicationUser applicationUser,
 			BindingResult result) {
-		ModelAndView modelAndView = new ModelAndView();
-
 		// Checking if passwords are the same
 		// FIXME: We should do something similar to this:
 		// http://stackoverflow.com/questions/1972933/cross-field-validation-with-hibernate-validator-jsr-303
@@ -96,6 +94,36 @@ public class ApplicationUserController {
 			result.addError(new FieldError("applicationUser",
 					"confirmPassword", "Las contrase–as no son iguales"));
 		}
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public ModelAndView edit(Model model,
+			@Valid @ModelAttribute ApplicationUser applicationUser,
+			BindingResult result) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		// TODO if we're editing and not adding a new item the message
+		// seems somewhat... misleading, CHANGE IT :D
+		if (result.hasErrors()) {
+			modelAndView.setViewName(USER_EDIT_FORM);
+		} else {
+			modelAndView.setViewName(REDIRECT_TO_USER_LIST);
+			modelAndView
+					.addObject(USER_FORM_MESSAGE, USER_FORM_EDIT_SUCCESSFUL);
+			applicationUserService.save(applicationUser);
+		}
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public ModelAndView create(Model model,
+			@Valid @ModelAttribute ApplicationUser applicationUser,
+			BindingResult result) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		validateUserPasswords(applicationUser, result);
+
 		// TODO if we're editing and not adding a new item the message
 		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors()) {
@@ -114,7 +142,7 @@ public class ApplicationUserController {
 		ApplicationUser applicationUser = applicationUserService.findById(id);
 		model.addAttribute("applicationUser", applicationUser);
 
-		return USER_CREATE_FORM;
+		return USER_EDIT_FORM;
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
