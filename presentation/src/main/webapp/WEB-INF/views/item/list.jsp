@@ -111,8 +111,8 @@
 				<td>${item.name}</td>
 				<td>${item.description}</td>
 				<td>${item.quantity}</td>
-				<td>${item.category}</td>
-				<td>${item.measureUnit}</td>
+				<td>${item.category.description}</td>
+				<td>${item.measureUnit.description}</td>
 				<td><form:form method="GET"
 					action="${editUrl}/${item.id}">
 					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> Editar</button>
