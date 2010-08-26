@@ -34,6 +34,11 @@
 		<put-attribute name="title" value="New User" />
 		<put-attribute name="body" value="/WEB-INF/views/applicationUser/createForm.jsp" />
 	</definition>
+	
+	<definition name="applicationUser/editForm" extends="base.definition">
+		<put-attribute name="title" value="Edit User" />
+		<put-attribute name="body" value="/WEB-INF/views/applicationUser/editForm.jsp" />
+	</definition>
 
 	<!-- SocialWorker -->	
 	<definition name="socialworkerform/form" extends="base.definition">
