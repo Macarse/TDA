@@ -114,7 +114,7 @@
 			<tr>
 				<td>${patient.firstName}</td>
 				<td>${patient.lastName}</td>
-				<td>${patient.sex}</td>
+				<td>${patient.sex.description}</td>
 				<td><fmt:formatDate value="${patient.birthdate}" pattern="dd/MM/yyyy"/></td>
 				<td>${patient.dni}</td>
 				<td><form:form method="POST"
