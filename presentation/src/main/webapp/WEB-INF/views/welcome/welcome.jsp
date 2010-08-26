@@ -73,7 +73,7 @@
 			<tr>
 				<td>${patient.firstName}</td>
 				<td>${patient.lastName}</td>
-				<td>${patient.sex}</td>
+				<td>${patient.sex.description}</td>
 				<td><a href="${pageContext.request.contextPath}/patient/${patient.id}/socialworker/new">Formulario Trabajador Social</a></td>
 			</tr>
 		</c:forEach>
