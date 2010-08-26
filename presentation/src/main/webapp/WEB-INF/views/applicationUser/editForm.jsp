@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <form:form modelAttribute="applicationUser"
-	action="edit" method="post">
+	action="" method="post">
 	<fieldset>
 
 	<form:hidden path="id" />

@@ -10,8 +10,10 @@
 <spring:url value="delete" var="deleteUrl"/>
 <spring:message text="Eliminar" var="deleteLabel"/>
 <spring:url value="edit" var="editUrl"/>
+<spring:url value="passwordEdit" var="passwordEditUrl"/>
 <spring:url value="add" var="addUrl"/>
 <spring:url value="search" var="searchUrl" />
+<spring:message text="Cambiar Contraseña" var="passwordEditLabel"/>
 <spring:message text="Editar" var="editLabel"/>
 
 <c:if test="${!empty param.message}">
@@ -76,6 +78,11 @@
 			<td>
 				<form:form method="GET" action="${editUrl}/${user.id}" >
 					<input type="submit" value="${editLabel}"/>
+				</form:form>
+			</td>
+			<td>
+				<form:form method="GET" action="${passwordEditUrl}/${user.id}" >
+					<input type="submit" value="${passwordEditLabel}"/>
 				</form:form>
 			</td>
 		</tr>

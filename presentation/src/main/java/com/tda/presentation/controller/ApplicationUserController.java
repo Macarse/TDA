@@ -40,9 +40,11 @@ public class ApplicationUserController {
 	private static final String USER_FORM_MESSAGE = "message";
 	private static final String USER_FORM_ADD_SUCCESSFUL = "user.form.addSuccessful";
 	private static final String USER_FORM_EDIT_SUCCESSFUL = "user.form.editSuccessful";
+	private static final String PASSWORD_FORM_EDIT_SUCCESSFUL = "user.form.passwordEditSuccessful";
 	private static final String REDIRECT_TO_USER_LIST = "redirect:/applicationUser/";
 	private static final String USER_CREATE_FORM = "applicationUser/createForm";
 	private static final String USER_EDIT_FORM = "applicationUser/editForm";
+	private static final String PASSWORD_EDIT_FORM = "applicationUser/passwordForm";
 	private static final String USER_LIST = "applicationUser/list";
 
 	private Paginator paginator;
@@ -96,8 +98,30 @@ public class ApplicationUserController {
 		}
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView edit(Model model,
+	@RequestMapping(value = "/passwordEdit/{id}", method = RequestMethod.POST)
+	public ModelAndView passwordEdit(@PathVariable Long id, Model model,
+			@Valid @ModelAttribute ApplicationUser applicationUser,
+			BindingResult result) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		validateUserPasswords(applicationUser, result);
+
+		// TODO if we're editing and not adding a new item the message
+		// seems somewhat... misleading, CHANGE IT :D
+		if (result.hasErrors()) {
+			modelAndView.setViewName(PASSWORD_EDIT_FORM);
+		} else {
+			modelAndView.setViewName(REDIRECT_TO_USER_LIST);
+			modelAndView.addObject(USER_FORM_MESSAGE,
+					PASSWORD_FORM_EDIT_SUCCESSFUL);
+			applicationUserService.save(applicationUser);
+		}
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+	public ModelAndView edit(@PathVariable Long id, Model model,
 			@Valid @ModelAttribute ApplicationUser applicationUser,
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -137,10 +161,21 @@ public class ApplicationUserController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/passwordEdit/{id}", method = RequestMethod.GET)
+	public String getPassForm(@PathVariable Long id, Model model) {
+		ApplicationUser applicationUser = applicationUserService.findById(id);
+		model.addAttribute("applicationUser", applicationUser);
+
+		return PASSWORD_EDIT_FORM;
+	}
+
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getUpdateForm(@PathVariable Long id, Model model) {
 		ApplicationUser applicationUser = applicationUserService.findById(id);
 		model.addAttribute("applicationUser", applicationUser);
+
+		System.out.println("user" + applicationUser.getUsername());
+		System.out.println("password" + applicationUser.getPassword());
 
 		return USER_EDIT_FORM;
 	}
