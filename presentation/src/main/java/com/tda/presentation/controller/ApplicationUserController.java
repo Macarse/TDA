@@ -174,9 +174,6 @@ public class ApplicationUserController {
 		ApplicationUser applicationUser = applicationUserService.findById(id);
 		model.addAttribute("applicationUser", applicationUser);
 
-		System.out.println("user" + applicationUser.getUsername());
-		System.out.println("password" + applicationUser.getPassword());
-
 		return USER_EDIT_FORM;
 	}
 
