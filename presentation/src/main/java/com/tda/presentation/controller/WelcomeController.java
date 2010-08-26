@@ -25,7 +25,7 @@ import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.PatientService;
 
 @Controller
-@RequestMapping(value = "/welcome")
+@RequestMapping(value = "/")
 @SessionAttributes("patient")
 public class WelcomeController {
 	private static final String REDIRECT_TO_LIST = "redirect:/welcome/";
