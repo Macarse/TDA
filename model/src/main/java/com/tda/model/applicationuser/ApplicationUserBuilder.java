@@ -4,17 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 public class ApplicationUserBuilder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String password;
 	private String username;
 	private Collection<Authority> authorities = new ArrayList<Authority>();
-	private boolean isAccountNonExpired;
-	private boolean isAccountNonLocked;
-	private boolean isCredentialsNonExpired;
-	private boolean isEnabled;
+	private boolean isAccountNonExpired = true;
+	private boolean isAccountNonLocked = true;
+	private boolean isCredentialsNonExpired = true;
+	private boolean isEnabled = true;
 
 	private ApplicationUserBuilder() {
 	}

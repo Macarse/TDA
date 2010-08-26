@@ -43,13 +43,13 @@ public class ApplicationUser implements UserDetails {
 
 	private Collection<Authority> myAuthorities;
 
-	private boolean isAccountNonExpired;
+	private boolean isAccountNonExpired = true;
 
-	private boolean isAccountNonLocked;
+	private boolean isAccountNonLocked = true;
 
-	private boolean isCredentialsNonExpired;
+	private boolean isCredentialsNonExpired = true;
 
-	private boolean isEnabled;
+	private boolean isEnabled = true;
 
 	public ApplicationUser() {
 		super();
