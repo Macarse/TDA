@@ -43,11 +43,6 @@ public class ItemController {
 		params = new ParamContainer();
 	}
 	
-	@ModelAttribute("user")
-	public String getUser(){
-		return "ancla";
-	}
-
 	@Autowired
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;

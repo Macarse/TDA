@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div style="float:left">
-<img src="${pageContext.request.contextPath}/themes/default/image/header.jpg" />
+<img src="${pageContext.request.contextPath}/themes/default/image/header.jpg" width="1000" />
 </div>
 
 <div style="text-align:right; font-size:25px; float: right">
