@@ -102,7 +102,7 @@
 					</c:choose>
 				</c:if>
 			</th>
-			<th colspan="2"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="#"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></th>
+			<th colspan="2"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -127,7 +127,7 @@
 
 	<tfoot>
 		<tr>
-		  <td colspan="7" align="center">
+		  <td colspan="2">
 			<jsp:include page="/WEB-INF/views/paginator/paginator.jsp" flush="true"/>
 		  </td>
 		</tr>

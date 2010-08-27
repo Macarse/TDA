@@ -26,8 +26,6 @@
 	<jsp:include page="/WEB-INF/views/applicationUser/filter.jsp" flush="true"/>
 </div>
 
-<a href="${addUrl}">Agregar</a>
-
 <table class="list-table">
 	<thead>
 		<tr>
@@ -61,7 +59,7 @@
 					</c:choose>
 				</c:if>
 			</th>
-			<th></th>
+			<th colspan="2"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></th>
 		</tr>
 	</thead>
 	
@@ -69,20 +67,20 @@
 		<c:forEach items="${applicationUserList}" var="user">
 		<tr>
 			<td>${user.username}</td>
-			<td>${user.myAuthorities}</td>
-			<td>
-				<form:form method="POST" action="${deleteUrl}/${user.id}">
-					<input type="submit" value="${deleteLabel}"/>
+			<td width="400">${user.myAuthorities}</td>
+			<td width="100">
+				<form:form method="GET" action="${editUrl}/${user.id}" >
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick button-icon"></span> <c:out value="${editLabel}" /> </button>
 				</form:form>
 			</td>
 			<td>
-				<form:form method="GET" action="${editUrl}/${user.id}" >
-					<input type="submit" value="${editLabel}"/>
+				<form:form method="POST" action="${deleteUrl}/${user.id}">
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span>  <c:out value="${deleteLabel}" /> </button>
 				</form:form>
 			</td>
 			<td>
 				<form:form method="GET" action="${passwordEditUrl}/${user.id}" >
-					<input type="submit" value="${passwordEditLabel}"/>
+					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span>  <c:out value="${passwordEditLabel}" /> </button>
 				</form:form>
 			</td>
 		</tr>

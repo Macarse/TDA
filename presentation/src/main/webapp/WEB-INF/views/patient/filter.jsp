@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="filter-submit">	
-			<input type="submit" value="<fmt:message key="filter.submit" />" />
+			<button type="submit" class="button-text button-search fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-search button-icon"></span> <fmt:message key="filter.submit" /></button>
 		</div>
 		
 	</form:form>
