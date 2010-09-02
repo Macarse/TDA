@@ -26,7 +26,11 @@
 	<bean id="socialWorkerFormService" class="com.tda.service.impl.SocialWorkerFormServiceImpl">
 		<property name="socialWorkerFormDAO" ref="socialWorkerFormDAO" />
 	</bean>
-
+	
+	<bean id="pediatricianFormService" class="com.tda.service.impl.PediatricianFormServiceImpl">
+		<property name="pediatricianFormDAO" ref="pediatricianFormDAO" />
+	</bean>
+	
 	<bean id="authenticationService" class="com.tda.service.impl.AuthenticationServiceImpl">
 		<property name="authenticationManager"
 			ref="org.springframework.security.authenticationManager" />
