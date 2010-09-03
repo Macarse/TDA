@@ -295,25 +295,195 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 			</p>	
 		</div>
 		
+		<!-- FAMILY BACKGROUND -->
 		<div id="tab-fab">
+			<p>
+				<form:label for="cardiovascular" path="cardiovascular" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.cardiovascular" />
+				</form:label>
+				<form:checkbox path="cardiovascular" /> 
+				<form:errors path="cardiovascular" />
+			</p>
+			
+			<p>
+				<form:label for="dbt" path="dbt" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.dbt" />
+				</form:label>
+				<form:checkbox path="dbt" /> 
+				<form:errors path="dbt" />
+			</p>
+			
+			<p>
+				<form:label for="hta" path="hta" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.hta" />
+				</form:label>
+				<form:checkbox path="hta" /> 
+				<form:errors path="hta" />
+			</p>
+			
+			<p>
+				<form:label for="asthma" path="asthma" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.asthma" />
+				</form:label>
+				<form:checkbox path="asthma" /> 
+				<form:errors path="asthma" />
+			</p>
+			
+			<p>
+				<form:label for="mentalDisorder" path="mentalDisorder" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.mentalDisorder" />
+				</form:label>
+				<form:checkbox path="mentalDisorder" /> 
+				<form:errors path="mentalDisorder" />
+			</p>
+			
+			<p>
+				<form:label for="familyAllergies" path="familyAllergies" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.familyAllergies" />
+				</form:label>
+				<form:checkbox path="familyAllergies" /> 
+				<form:errors path="familyAllergies" />
+			</p>
+			
+			<p>
+				<form:label for="addictions" path="addictions" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.addictions" />
+				</form:label>
+				<form:checkbox path="addictions" /> 
+				<form:errors path="addictions" />
+			</p>
+			
+			<p>
+				<form:label for="familyInfectiousDiseases" path="familyInfectiousDiseases" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.familyInfectiousDiseases" />
+				</form:label>
+				<form:checkbox path="familyInfectiousDiseases" /> 
+				<form:errors path="familyInfectiousDiseases" />
+			</p>
+						
+			<p>
+				<form:label for="familyHemorrhagic" path="familyHemorrhagic" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.familyHemorrhagic" />
+				</form:label>
+				<form:checkbox path="familyHemorrhagic" /> 
+				<form:errors path="familyHemorrhagic" />
+			</p>
+			
+			<p>
+				<form:label for="otherFamilyDiaseases" path="otherFamilyDiaseases" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.otherFamilyDiaseases" />
+				</form:label>
+				<br />
+				<form:textarea path="otherFamilyDiaseases" /><form:errors path="otherFamilyDiaseases" />
+			</p>	
 		</div>
 		
+		<!-- MATURATION AND DEVELOPMENT -->
 		<div id="tab-mat">
+			<p>
+				<form:label for="maturationAndDevelopment" path="maturationAndDevelopment" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.maturationAndDevelopment" />
+				</form:label>
+				<br />
+				<form:textarea path="maturationAndDevelopment" />
+				<form:errors path="maturationAndDevelopment" />
+			</p>	
 		</div>
 		
+		<!-- PHYSICAL EXAM -->
 		<div id="tab-phy">
+			<p>
+				<form:label for="symptoms" path="symptoms" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.symptoms" />
+				</form:label>
+				<br />
+				<form:textarea path="symptoms" />
+				<form:errors path="symptoms" />
+			</p>	
+			
+			<p>
+				<form:label for="pathologyFound" path="pathologyFound" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.pathologyFound" />
+				</form:label>
+				<br />
+				<form:textarea path="pathologyFound" />
+				<form:errors path="pathologyFound" />
+			</p>	
 		</div>
 		
+		<!-- LABORATORY -->
 		<div id="tab-lab">
 		</div>
 		
+		<!-- RADIOLOGY -->
 		<div id="tab-rad">
+			<p>
+				<form:label for="chest" path="chest" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.chest" />
+				</form:label>
+				<br />
+				<form:textarea path="chest" />
+				<form:errors path="chest" />
+			</p>
+			
+			<p>
+				<form:label for="bones" path="bones" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.bones" />
+				</form:label>
+				<br />
+				<form:textarea path="bones" />
+				<form:errors path="bones" />
+			</p>
+						
+			<p>
+				<form:label for="radiologyOther" path="radiologyOther" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.radiologyOther" />
+				</form:label>
+				<br />
+				<form:textarea path="radiologyOther" />
+				<form:errors path="radiologyOther" />
+			</p>
+									
+			<p>
+				<form:label for="radiologyComments" path="radiologyComments" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.radiologyComments" />
+				</form:label>
+				<br />
+				<form:textarea path="radiologyComments" />
+				<form:errors path="radiologyComments" />
+			</p>
 		</div>
 		
+		<!-- DIAGNOSIS -->
 		<div id="tab-dia">
 		</div>
 		
+		<!-- INTERNMENT -->
 		<div id="tab-int">
+			<p>
+				<form:label for="interconsultation" path="interconsultation" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.interconsultation" />
+				</form:label>
+				<form:checkbox path="interconsultation" /> 
+				<form:errors path="interconsultation" />
+			</p>
+			
+			<p>
+				<form:label for="internment" path="internment" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.internment" />
+				</form:label>
+				<form:checkbox path="internment" /> 
+				<form:errors path="internment" />
+			</p>
+							
+			<p>
+				<form:label for="treatment" path="treatment" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.treatment" />
+				</form:label>
+				<br />
+				<form:textarea path="treatment" />
+				<form:errors path="treatment" />
+			</p>
 		</div>
 		
 		<p>
