@@ -49,6 +49,7 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 			<li><a href="#tab-int"><fmt:message key="pediatrician.form.internment" /></a></li>		 
 		</ul>
 		
+		<!-- PERINATAL BACKGROUND -->
 		<div id="tab-peb">
 			<p>
 				<form:label for="birthPlace" path="birthPlace" cssErrorClass="error">
@@ -209,7 +210,7 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					<fmt:message key="pediatrician.form.otherPerinatalDiseases" />
 				</form:label>
 				<br />
-				<form:input path="otherPerinatalDiseases" />
+				<form:textarea path="otherPerinatalDiseases" />
 				<form:errors path="otherPerinatalDiseases" />
 			</p>
 			
@@ -227,7 +228,71 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 
 		</div>
 		
+		<!-- PATIENT BACKGROUND -->
 		<div id="tab-pab">
+			<p>
+				<form:label for="consumedTobacco" path="consumedTobacco" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.consumedTobacco" />
+				</form:label>
+				<form:checkbox path="consumedTobacco" /> <form:errors path="consumedTobacco" />
+			</p>
+			
+			<p>
+				<form:label for="consumedAlcohol" path="consumedAlcohol" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.consumedAlcohol" />
+				</form:label>
+				<form:checkbox path="consumedAlcohol" /> <form:errors path="consumedAlcohol" />
+			</p>
+			
+			<p>
+				<form:label for="tattooed" path="tattooed" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.tattooed" />
+				</form:label>
+				<form:checkbox path="tattooed" /> <form:errors path="tattooed" />
+			</p>
+			
+			<p>
+				<form:label for="infectiousDiseases" path="infectiousDiseases" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.infectiousDiseases" />
+				</form:label>
+				<form:checkbox path="infectiousDiseases" /> <form:errors path="infectiousDiseases" />
+			</p>
+			
+			<p>
+				<form:label for="hemorrhagic" path="hemorrhagic" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.hemorrhagic" />
+				</form:label>
+				<form:checkbox path="hemorrhagic" /> <form:errors path="hemorrhagic" />
+			</p>
+			
+			<p>
+				<form:label for="trauma" path="trauma" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.trauma" />
+				</form:label>
+				<form:checkbox path="trauma" /> <form:errors path="trauma" />
+			</p>
+			
+			<p>
+				<form:label for="allergies" path="allergies" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.allergies" />
+				</form:label>
+				<form:checkbox path="allergies" /> <form:errors path="allergies" />
+			</p>
+			
+			<p>
+				<form:label for="previousAdmissions" path="previousAdmissions" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.previousAdmissions" />
+				</form:label>
+				<form:checkbox path="previousAdmissions" /> <form:errors path="previousAdmissions" />
+			</p>
+			
+			<p>
+				<form:label for="otherPatientDiseases" path="otherPatientDiseases" cssErrorClass="error">
+					<fmt:message key="pediatrician.form.otherPatientDiseases" />
+				</form:label>
+				<br />
+				<form:textarea path="otherPatientDiseases" /><form:errors path="otherPatientDiseases" />
+			</p>	
 		</div>
 		
 		<div id="tab-fab">
