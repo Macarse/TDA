@@ -43,6 +43,12 @@
 		</property>
 	</bean>
 
+	<bean id="nurseFormDAO" class="com.tda.persistence.dao.NurseFormDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="paginator" class="com.tda.persistence.paginator.Paginator">
 		<constructor-arg index="0" value="10" />
 	</bean>
