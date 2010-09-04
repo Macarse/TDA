@@ -135,6 +135,8 @@ public class PediatricianForm {
 
 	private boolean internment;
 
+	private String treatment;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
@@ -176,7 +178,7 @@ public class PediatricianForm {
 		this.birthPlace = birthPlace;
 	}
 
-	public boolean hasPatologyDuringBirth() {
+	public boolean isPatologyDuringBirth() {
 		return patologyDuringBirth;
 	}
 
@@ -261,7 +263,7 @@ public class PediatricianForm {
 		this.apgarReanimated = apgarReanimated;
 	}
 
-	public boolean hasMalformation() {
+	public boolean isMalformation() {
 		return malformation;
 	}
 
@@ -269,7 +271,7 @@ public class PediatricianForm {
 		this.malformation = malformation;
 	}
 
-	public boolean hasJaundice() {
+	public boolean isJaundice() {
 		return jaundice;
 	}
 
@@ -277,7 +279,7 @@ public class PediatricianForm {
 		this.jaundice = jaundice;
 	}
 
-	public boolean hasRespiratoryDisease() {
+	public boolean isRespiratoryDisease() {
 		return respiratoryDisease;
 	}
 
@@ -285,7 +287,7 @@ public class PediatricianForm {
 		this.respiratoryDisease = respiratoryDisease;
 	}
 
-	public boolean hasCongenitalInfection() {
+	public boolean isCongenitalInfection() {
 		return congenitalInfection;
 	}
 
@@ -293,7 +295,7 @@ public class PediatricianForm {
 		this.congenitalInfection = congenitalInfection;
 	}
 
-	public boolean hasNeurologicalProblems() {
+	public boolean isNeurologicalProblems() {
 		return neurologicalProblems;
 	}
 
@@ -301,7 +303,7 @@ public class PediatricianForm {
 		this.neurologicalProblems = neurologicalProblems;
 	}
 
-	public boolean hasAids() {
+	public boolean isAids() {
 		return aids;
 	}
 
@@ -309,7 +311,7 @@ public class PediatricianForm {
 		this.aids = aids;
 	}
 
-	public boolean hasAcquiredInfection() {
+	public boolean isAcquiredInfection() {
 		return acquiredInfection;
 	}
 
@@ -334,7 +336,7 @@ public class PediatricianForm {
 		this.exitStatus = exitStatus;
 	}
 
-	public boolean hasConsumedTobacco() {
+	public boolean isConsumedTobacco() {
 		return consumedTobacco;
 	}
 
@@ -342,7 +344,7 @@ public class PediatricianForm {
 		this.consumedTobacco = consumedTobacco;
 	}
 
-	public boolean hasConsumedAlcohol() {
+	public boolean isConsumedAlcohol() {
 		return consumedAlcohol;
 	}
 
@@ -358,7 +360,7 @@ public class PediatricianForm {
 		this.tattooed = tattooed;
 	}
 
-	public boolean hasInfectiousDiseases() {
+	public boolean isInfectiousDiseases() {
 		return infectiousDiseases;
 	}
 
@@ -374,7 +376,7 @@ public class PediatricianForm {
 		this.hemorrhagic = hemorrhagic;
 	}
 
-	public boolean hasTrauma() {
+	public boolean isTrauma() {
 		return trauma;
 	}
 
@@ -382,7 +384,7 @@ public class PediatricianForm {
 		this.trauma = trauma;
 	}
 
-	public boolean hasAllergies() {
+	public boolean isAllergies() {
 		return allergies;
 	}
 
@@ -390,7 +392,7 @@ public class PediatricianForm {
 		this.allergies = allergies;
 	}
 
-	public boolean hasPreviousAdmissions() {
+	public boolean isPreviousAdmissions() {
 		return previousAdmissions;
 	}
 
@@ -414,7 +416,7 @@ public class PediatricianForm {
 		this.cardiovascular = cardiovascular;
 	}
 
-	public boolean hasDbt() {
+	public boolean isDbt() {
 		return dbt;
 	}
 
@@ -422,7 +424,7 @@ public class PediatricianForm {
 		this.dbt = dbt;
 	}
 
-	public boolean hasHta() {
+	public boolean isHta() {
 		return hta;
 	}
 
@@ -430,7 +432,7 @@ public class PediatricianForm {
 		this.hta = hta;
 	}
 
-	public boolean hasAsthma() {
+	public boolean isAsthma() {
 		return asthma;
 	}
 
@@ -438,7 +440,7 @@ public class PediatricianForm {
 		this.asthma = asthma;
 	}
 
-	public boolean hasMentalDisorder() {
+	public boolean isMentalDisorder() {
 		return mentalDisorder;
 	}
 
@@ -446,7 +448,7 @@ public class PediatricianForm {
 		this.mentalDisorder = mentalDisorder;
 	}
 
-	public boolean hasFamilyAllergies() {
+	public boolean isFamilyAllergies() {
 		return familyAllergies;
 	}
 
@@ -454,7 +456,7 @@ public class PediatricianForm {
 		this.familyAllergies = familyAllergies;
 	}
 
-	public boolean hasAddictions() {
+	public boolean isAddictions() {
 		return addictions;
 	}
 
@@ -462,7 +464,7 @@ public class PediatricianForm {
 		this.addictions = addictions;
 	}
 
-	public boolean hasFamilyInfectiousDiseases() {
+	public boolean isFamilyInfectiousDiseases() {
 		return familyInfectiousDiseases;
 	}
 
@@ -470,7 +472,7 @@ public class PediatricianForm {
 		this.familyInfectiousDiseases = familyInfectiousDiseases;
 	}
 
-	public boolean hasFamilyHemorrhagic() {
+	public boolean isFamilyHemorrhagic() {
 		return familyHemorrhagic;
 	}
 
@@ -556,6 +558,14 @@ public class PediatricianForm {
 
 	public boolean isInternment() {
 		return internment;
+	}
+
+	public void setTreatment(String treatment) {
+		this.treatment = treatment;
+	}
+
+	public String getTreatment() {
+		return treatment;
 	}
 
 }
