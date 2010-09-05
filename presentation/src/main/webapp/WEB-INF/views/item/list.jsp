@@ -119,7 +119,7 @@
 				</form:form></td>
 				<td align="center"><form:form method="POST"
 					action="${deleteUrl}/${item.id}">
-						<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick button-icon"></span> Eliminar</button>
+						<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> Eliminar</button>
 				</form:form></td>
 			</tr>
 		</c:forEach>

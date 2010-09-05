@@ -121,7 +121,7 @@
 				</form:form></td>
 				<td><form:form method="POST"
 					action="${deleteUrl}/${patient.id}">
-					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick button-icon"></span> ${deleteLabel}</button>
+					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all  confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> ${deleteLabel}</button>
 				</form:form></td>
 			</tr>
 		</c:forEach>
