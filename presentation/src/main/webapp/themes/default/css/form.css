@@ -2,3 +2,17 @@
 
 div[class=filter-container]{
 }
+
+.socialworkerform table th{
+	font-weight: bold;
+	text-align: left;
+	border-bottom: solid 1px;
+	font-size: medium;
+	height: 30px;
+	width: 50%;
+}
+
+.socialworkerform textarea{
+	width: 100%;
+	height: 100px;
+}
