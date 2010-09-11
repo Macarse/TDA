@@ -4,10 +4,10 @@ div[class=filter-container]{
 }
 
 .socialworkerform table th, .pediatricianform table th{
-	font-weight: bold;
+	font-weight: bolder;
 	text-align: left;
 	border-bottom: solid 1px;
-	font-size: medium;
+	font-size: 11px;
 	height: 30px;
 	width: 50%;
 }

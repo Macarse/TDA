@@ -54,7 +54,7 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 		
 		<!-- PERINATAL BACKGROUND -->
 		<div id="tab-peb" class="pediatricianform">
-			<table>
+			<table width="100%">
 				<tr><th colspan="2">
 					<form:label for="birthPlace" path="birthPlace" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.birthPlace" />
