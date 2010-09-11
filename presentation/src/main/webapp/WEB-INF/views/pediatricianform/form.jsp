@@ -13,6 +13,9 @@
 //-->
 </script>
 
+<!-- aux variables -->
+<c:set var="count" value="0" />
+
 <c:choose>
 	<c:when test="${pediatricianForm.new}">
 		<c:set var="method" value="post"/>
@@ -50,444 +53,439 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 		</ul>
 		
 		<!-- PERINATAL BACKGROUND -->
-		<div id="tab-peb">
-			<p>
-				<form:label for="birthPlace" path="birthPlace" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.birthPlace" />
-				</form:label>
-				<br />
-				<c:forEach var="birthPlace" items="${birthPlace}">
-					<form:radiobutton path="birthPlace" value="${birthPlace}" /> ${birthPlace.description}
-					<br />
-				</c:forEach>
-				<form:errors path="birthPlace" />
-			</p>
-			
-			<p>
-				<form:label for="patologyDuringBirth" path="patologyDuringBirth" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.patologyDuringBirth" />
-				</form:label>
-				<form:checkbox path="patologyDuringBirth" /> <form:errors path="patologyDuringBirth" />
-			</p>
+		<div id="tab-peb" class="pediatricianform">
+			<table>
+				<tr><th colspan="2">
+					<form:label for="birthPlace" path="birthPlace" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.birthPlace" />
+					</form:label></th></tr>
+					
+					<c:forEach var="birthPlace" items="${birthPlace}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="birthPlace" value="${birthPlace}" /> ${birthPlace.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="birthPlace" /></td></tr>
 				
-			<p>
-				<form:label for="birthType" path="birthType" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.birthType" />
-				</form:label>
-				<br />
-				<c:forEach var="birthType" items="${birthType}">
-					<form:radiobutton path="birthType" value="${birthType}" /> ${birthType.description}
-					<br />
-				</c:forEach>
-				<form:errors path="birthType" />
-			</p>
+				<tr><th>
+					<form:label for="patologyDuringBirth" path="patologyDuringBirth" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.patologyDuringBirth" />
+					</form:label></th>
+					<td><form:checkbox path="patologyDuringBirth" /> <form:errors path="patologyDuringBirth" />
+				</td></tr>
+					
+				<tr><th colspan="2">
+					<form:label for="birthType" path="birthType" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.birthType" />
+					</form:label></th></tr>
+					
+					<c:set var="count" value="0" />
+					<c:forEach var="birthType" items="${birthType}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="birthType" value="${birthType}" /> ${birthType.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="birthType" /></td></tr>
+				
+				<tr><th colspan="2">
+					<form:label for="birthTypePresentation" path="birthTypePresentation" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.birthTypePresentation" />
+					</form:label></th></tr>
+					
+					<c:set var="count" value="0" />
+					<c:forEach var="birthTypePresentation" items="${birthTypePresentation}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="birthTypePresentation" value="${birthTypePresentation}" /> ${birthTypePresentation.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="birthTypePresentation" /></td></tr>
+					
+				<tr><th>
+					<form:label for="birthTypeTermination" path="birthTypeTermination" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.birthTypeTermination" />
+					</form:label>
+					</th></tr>
+					
+					<c:set var="count" value="0" />
+					<c:forEach var="birthTypeTermination" items="${birthTypeTermination}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="birthTypeTermination" value="${birthTypeTermination}" /> ${birthTypeTermination.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="birthTypeTermination" /></td></tr>
+	
+				<tr><th>
+					<form:label for="gestationalAge" path="gestationalAge" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.gestationalAge" />
+					</form:label></th>
+					<td><form:input path="gestationalAge" /></td></tr>
+					<tr><td><form:errors path="gestationalAge" /></td></tr>
+				
+				
+				<tr><th>
+					<form:label for="birthWeight" path="birthWeight" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.birthWeight" />
+					</form:label></th>
+					<td><form:input path="birthWeight" /></td></tr>
+					<tr><td><form:errors path="birthWeight" /></td></tr>
+				
+				<tr><th>
+					<form:label for="size" path="size" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.size" />
+					</form:label></th>
+					<td><form:input path="size" /></td></tr>
+					<tr><td><form:errors path="size" /></td></tr>
+				
+				<tr><th>
+					<form:label for="headCircumference" path="headCircumference" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.headCircumference" />
+					</form:label></th>
+					<td><form:input path="headCircumference" /></td></tr>
+					<tr><td><form:errors path="headCircumference" /></td></tr>
 			
-			<p>
-				<form:label for="birthTypePresentation" path="birthTypePresentation" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.birthTypePresentation" />
-				</form:label>
-				<br />
-				<c:forEach var="birthTypePresentation" items="${birthTypePresentation}">
-					<form:radiobutton path="birthTypePresentation" value="${birthTypePresentation}" /> ${birthTypePresentation.description}
-					<br />
-				</c:forEach>
-				<form:errors path="birthTypePresentation" />
-			</p>
-			
-			<p>
-				<form:label for="birthTypeTermination" path="birthTypeTermination" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.birthTypeTermination" />
-				</form:label>
-				<br />
-				<c:forEach var="birthTypeTermination" items="${birthTypeTermination}">
-					<form:radiobutton path="birthTypeTermination" value="${birthTypeTermination}" /> ${birthTypeTermination.description}
-					<br />
-				</c:forEach>
-				<form:errors path="birthTypeTermination" />
-			</p>
-			
-			<p>
-				<form:label for="gestationalAge" path="gestationalAge" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.gestationalAge" />
-				</form:label>
-				<br />
-				<form:input path="gestationalAge" />
-				<form:errors path="gestationalAge" />
-			</p>
-			
-			<p>
-				<form:label for="birthWeight" path="birthWeight" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.birthWeight" />
-				</form:label>
-				<br />
-				<form:input path="birthWeight" />
-				<form:errors path="birthWeight" />
-			</p>
-			
-			<p>
-				<form:label for="size" path="size" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.size" />
-				</form:label>
-				<br />
-				<form:input path="size" />
-				<form:errors path="size" />
-			</p>
-			
-			<p>
-				<form:label for="headCircumference" path="headCircumference" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.headCircumference" />
-				</form:label>
-				<br />
-				<form:input path="headCircumference" />
-				<form:errors path="headCircumference" />
-			</p>
-		
-			<p>
-				<form:label for="apgarDepressed" path="apgarDepressed" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.apgarDepressed" />
-				</form:label>
-				<form:checkbox path="apgarDepressed" /> <form:errors path="apgarDepressed" />
-			</p>
-			
-			<p>
-				<form:label for="apgarReanimated" path="apgarReanimated" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.apgarReanimated" />
-				</form:label>
-				<form:checkbox path="apgarReanimated" /> <form:errors path="apgarReanimated" />
-			</p>
-			
-			<p>
-				<form:label for="malformation" path="malformation" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.malformation" />
-				</form:label>
-				<form:checkbox path="malformation" /> <form:errors path="malformation" />
-			</p>
-			
-			<p>
-				<form:label for="jaundice" path="jaundice" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.jaundice" />
-				</form:label>
-				<form:checkbox path="jaundice" /> <form:errors path="jaundice" />
-			</p>
-			
-			<p>
-				<form:label for="respiratoryDisease" path="respiratoryDisease" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.respiratoryDisease" />
-				</form:label>
-				<form:checkbox path="respiratoryDisease" /> <form:errors path="respiratoryDisease" />
-			</p>
-			
-			<p>
-				<form:label for="congenitalInfection" path="congenitalInfection" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.congenitalInfection" />
-				</form:label>
-				<form:checkbox path="congenitalInfection" /> <form:errors path="congenitalInfection" />
-			</p>
-			
-			<p>
-				<form:label for="neurologicalProblems" path="neurologicalProblems" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.neurologicalProblems" />
-				</form:label>
-				<form:checkbox path="neurologicalProblems" /> <form:errors path="neurologicalProblems" />
-			</p>
-			
-			<p>
-				<form:label for="aids" path="aids" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.aids" />
-				</form:label>
-				<form:checkbox path="aids" /> <form:errors path="aids" />
-			</p>
-			
-			<p>
-				<form:label for="acquiredInfection" path="acquiredInfection" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.acquiredInfection" />
-				</form:label>
-				<form:checkbox path="acquiredInfection" /> <form:errors path="acquiredInfection" />
-			</p>
-			
-			<p>
-				<form:label for="otherPerinatalDiseases" path="otherPerinatalDiseases" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.otherPerinatalDiseases" />
-				</form:label>
-				<br />
-				<form:textarea path="otherPerinatalDiseases" />
-				<form:errors path="otherPerinatalDiseases" />
-			</p>
-			
-			<p>
-				<form:label for="exitStatus" path="exitStatus" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.exitStatus" />
-				</form:label>
-				<br />
-				<c:forEach var="exitStatus" items="${exitStatus}">
-					<form:radiobutton path="exitStatus" value="${exitStatus}" /> ${exitStatus.description}
-					<br />
-				</c:forEach>
-				<form:errors path="exitStatus" />
-			</p>
-
+				<tr><th>
+					<form:label for="apgarDepressed" path="apgarDepressed" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.apgarDepressed" />
+					</form:label></th>
+					<td><form:checkbox path="apgarDepressed" /></td></tr> 
+					<tr><td><form:errors path="apgarDepressed" /></td></tr>
+				
+				<tr><th>
+					<form:label for="apgarReanimated" path="apgarReanimated" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.apgarReanimated" />
+					</form:label></th>
+					<td><form:checkbox path="apgarReanimated" /></td></tr> 
+					<tr><td><form:errors path="apgarReanimated" /></td></tr>
+				
+				<tr><th>
+					<form:label for="malformation" path="malformation" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.malformation" />
+					</form:label></th>
+					<td><form:checkbox path="malformation" /></td></tr>
+					<tr><td><form:errors path="malformation" /></td></tr>
+				
+				<tr><th>
+					<form:label for="jaundice" path="jaundice" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.jaundice" />
+					</form:label></th>
+					<td><form:checkbox path="jaundice" /></td></tr> 
+					<tr><td><form:errors path="jaundice" /></td></tr>
+				
+				<tr><th>
+					<form:label for="respiratoryDisease" path="respiratoryDisease" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.respiratoryDisease" />
+					</form:label></th>
+					<td><form:checkbox path="respiratoryDisease" /></td></tr> 
+					<tr><td><form:errors path="respiratoryDisease" /></td></tr>
+				
+				<tr><th>
+					<form:label for="congenitalInfection" path="congenitalInfection" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.congenitalInfection" />
+					</form:label></th>
+					<td><form:checkbox path="congenitalInfection" /> </td></tr>
+					<tr><td><form:errors path="congenitalInfection" /></td></tr>
+				
+				<tr><th>
+					<form:label for="neurologicalProblems" path="neurologicalProblems" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.neurologicalProblems" />
+					</form:label></th>
+					<td><form:checkbox path="neurologicalProblems" /> </td></tr>
+					<tr><td><form:errors path="neurologicalProblems" /></td></tr>
+				
+				<tr><th>
+					<form:label for="aids" path="aids" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.aids" />
+					</form:label></th>
+					<td><form:checkbox path="aids" /></td></tr> 
+				<tr>
+					<td><form:errors path="aids" /></td></tr>
+				
+				<tr><th>
+					<form:label for="acquiredInfection" path="acquiredInfection" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.acquiredInfection" />
+					</form:label></th>
+					<td><form:checkbox path="acquiredInfection" /> </td></tr>
+				<tr>
+					<td><form:errors path="acquiredInfection" /> </td></tr>
+				
+				<tr><th colspan="2">
+					<form:label for="otherPerinatalDiseases" path="otherPerinatalDiseases" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.otherPerinatalDiseases" />
+					</form:label></th></tr>
+				<tr><td colspan="2">
+					<form:textarea path="otherPerinatalDiseases" /></td></tr>
+				<tr><td>
+					<form:errors path="otherPerinatalDiseases" /></td></tr>
+				
+				<tr><th colspan="2">
+					<form:label for="exitStatus" path="exitStatus" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.exitStatus" />
+					</form:label></th></tr>
+					
+					<c:forEach var="exitStatus" items="${exitStatus}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="exitStatus" value="${exitStatus}" /> ${exitStatus.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="exitStatus" /></td></tr>
+			</table>
 		</div>
 		
 		<!-- PATIENT BACKGROUND -->
-		<div id="tab-pab">
-			<p>
-				<form:label for="consumedTobacco" path="consumedTobacco" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.consumedTobacco" />
-				</form:label>
-				<form:checkbox path="consumedTobacco" /> <form:errors path="consumedTobacco" />
-			</p>
-			
-			<p>
-				<form:label for="consumedAlcohol" path="consumedAlcohol" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.consumedAlcohol" />
-				</form:label>
-				<form:checkbox path="consumedAlcohol" /> <form:errors path="consumedAlcohol" />
-			</p>
-			
-			<p>
-				<form:label for="tattooed" path="tattooed" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.tattooed" />
-				</form:label>
-				<form:checkbox path="tattooed" /> <form:errors path="tattooed" />
-			</p>
-			
-			<p>
-				<form:label for="infectiousDiseases" path="infectiousDiseases" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.infectiousDiseases" />
-				</form:label>
-				<form:checkbox path="infectiousDiseases" /> <form:errors path="infectiousDiseases" />
-			</p>
-			
-			<p>
-				<form:label for="hemorrhagic" path="hemorrhagic" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.hemorrhagic" />
-				</form:label>
-				<form:checkbox path="hemorrhagic" /> <form:errors path="hemorrhagic" />
-			</p>
-			
-			<p>
-				<form:label for="trauma" path="trauma" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.trauma" />
-				</form:label>
-				<form:checkbox path="trauma" /> <form:errors path="trauma" />
-			</p>
-			
-			<p>
-				<form:label for="allergies" path="allergies" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.allergies" />
-				</form:label>
-				<form:checkbox path="allergies" /> <form:errors path="allergies" />
-			</p>
-			
-			<p>
-				<form:label for="previousAdmissions" path="previousAdmissions" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.previousAdmissions" />
-				</form:label>
-				<form:checkbox path="previousAdmissions" /> <form:errors path="previousAdmissions" />
-			</p>
-			
-			<p>
-				<form:label for="otherPatientDiseases" path="otherPatientDiseases" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.otherPatientDiseases" />
-				</form:label>
-				<br />
-				<form:textarea path="otherPatientDiseases" /><form:errors path="otherPatientDiseases" />
-			</p>	
+		<div id="tab-pab" class="pediatricianform">
+		    <table>
+				<tr><th>
+					<form:label for="consumedTobacco" path="consumedTobacco" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.consumedTobacco" />
+					</form:label></th>
+					<td><form:checkbox path="consumedTobacco" /></td></tr> 
+				<tr><td><form:errors path="consumedTobacco" /></td></tr>
+				
+				<tr><th>
+					<form:label for="consumedAlcohol" path="consumedAlcohol" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.consumedAlcohol" />
+					</form:label></th>
+					<td><form:checkbox path="consumedAlcohol" /></td></tr> 
+				<tr><td><form:errors path="consumedAlcohol" /></td></tr>
+				
+				<tr><th>
+					<form:label for="tattooed" path="tattooed" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.tattooed" />
+					</form:label></th>
+					<td><form:checkbox path="tattooed" /></td></tr>
+				<tr><td><form:errors path="tattooed" /></td></tr>
+				
+				<tr><th>
+					<form:label for="infectiousDiseases" path="infectiousDiseases" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.infectiousDiseases" />
+					</form:label></th>
+					<td><form:checkbox path="infectiousDiseases" /></td></tr>
+				<tr><td><form:errors path="infectiousDiseases" /></td></tr>
+				
+				<tr><th>
+					<form:label for="hemorrhagic" path="hemorrhagic" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.hemorrhagic" />
+					</form:label></th>
+					<td><form:checkbox path="hemorrhagic" /></td></tr> 
+				<tr><td><form:errors path="hemorrhagic" /></td></tr>
+				
+				<tr><th>
+					<form:label for="trauma" path="trauma" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.trauma" />
+					</form:label></th>
+					<td><form:checkbox path="trauma" /></td></tr> 
+				<tr><td><form:errors path="trauma" /></td></tr>
+				
+				<tr><th>
+					<form:label for="allergies" path="allergies" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.allergies" />
+					</form:label></th>
+					<td><form:checkbox path="allergies" /></td></tr> 
+					<tr><td><form:errors path="allergies" /></td></tr>
+				
+				<tr><th>
+					<form:label for="previousAdmissions" path="previousAdmissions" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.previousAdmissions" />
+					</form:label></th>
+					<td><form:checkbox path="previousAdmissions" /></td></tr> 
+				<tr><td><form:errors path="previousAdmissions" /></td></tr>
+				
+				<tr><th colspan="2">
+					<form:label for="otherPatientDiseases" path="otherPatientDiseases" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.otherPatientDiseases" />
+					</form:label></th></tr>
+				<tr><td colspan="2">
+					<form:textarea path="otherPatientDiseases" /></td></tr>
+				<tr><td><form:errors path="otherPatientDiseases" /></td></tr>
+				
+			</table>
 		</div>
 		
 		<!-- FAMILY BACKGROUND -->
-		<div id="tab-fab">
-			<p>
-				<form:label for="cardiovascular" path="cardiovascular" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.cardiovascular" />
-				</form:label>
-				<form:checkbox path="cardiovascular" /> 
-				<form:errors path="cardiovascular" />
-			</p>
-			
-			<p>
-				<form:label for="dbt" path="dbt" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.dbt" />
-				</form:label>
-				<form:checkbox path="dbt" /> 
-				<form:errors path="dbt" />
-			</p>
-			
-			<p>
-				<form:label for="hta" path="hta" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.hta" />
-				</form:label>
-				<form:checkbox path="hta" /> 
-				<form:errors path="hta" />
-			</p>
-			
-			<p>
-				<form:label for="asthma" path="asthma" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.asthma" />
-				</form:label>
-				<form:checkbox path="asthma" /> 
-				<form:errors path="asthma" />
-			</p>
-			
-			<p>
-				<form:label for="mentalDisorder" path="mentalDisorder" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.mentalDisorder" />
-				</form:label>
-				<form:checkbox path="mentalDisorder" /> 
-				<form:errors path="mentalDisorder" />
-			</p>
-			
-			<p>
-				<form:label for="familyAllergies" path="familyAllergies" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.familyAllergies" />
-				</form:label>
-				<form:checkbox path="familyAllergies" /> 
-				<form:errors path="familyAllergies" />
-			</p>
-			
-			<p>
-				<form:label for="addictions" path="addictions" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.addictions" />
-				</form:label>
-				<form:checkbox path="addictions" /> 
-				<form:errors path="addictions" />
-			</p>
-			
-			<p>
-				<form:label for="familyInfectiousDiseases" path="familyInfectiousDiseases" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.familyInfectiousDiseases" />
-				</form:label>
-				<form:checkbox path="familyInfectiousDiseases" /> 
-				<form:errors path="familyInfectiousDiseases" />
-			</p>
-						
-			<p>
-				<form:label for="familyHemorrhagic" path="familyHemorrhagic" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.familyHemorrhagic" />
-				</form:label>
-				<form:checkbox path="familyHemorrhagic" /> 
-				<form:errors path="familyHemorrhagic" />
-			</p>
-			
-			<p>
-				<form:label for="otherFamilyDiaseases" path="otherFamilyDiaseases" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.otherFamilyDiaseases" />
-				</form:label>
-				<br />
-				<form:textarea path="otherFamilyDiaseases" /><form:errors path="otherFamilyDiaseases" />
-			</p>	
+		<div id="tab-fab" class="pediatricianform">
+			<table>
+				<tr><th>
+					<form:label for="cardiovascular" path="cardiovascular" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.cardiovascular" />
+					</form:label></th>
+					<td><form:checkbox path="cardiovascular" /></td></tr> 
+				<tr><td><form:errors path="cardiovascular" /></td></tr>
+				
+				<tr><th>
+					<form:label for="dbt" path="dbt" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.dbt" />
+					</form:label></th>
+					<td><form:checkbox path="dbt" /></td></tr> 
+				<tr><td><form:errors path="dbt" /></td></tr>
+				
+				<tr><th>
+					<form:label for="hta" path="hta" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.hta" />
+					</form:label></th>
+					<td><form:checkbox path="hta" /></td></tr>
+				<tr><td><form:errors path="hta" /></td></tr>
+				
+				<tr><th>
+					<form:label for="asthma" path="asthma" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.asthma" />
+					</form:label></th>
+					<td><form:checkbox path="asthma" /></td></tr> 
+				<tr><td><form:errors path="asthma" /></td></tr>
+				
+				<tr><th>
+					<form:label for="mentalDisorder" path="mentalDisorder" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.mentalDisorder" />
+					</form:label></th>
+					<td><form:checkbox path="mentalDisorder" /> </td></tr>
+				<tr><td><form:errors path="mentalDisorder" /></td></tr>
+				
+				<tr><th>
+					<form:label for="familyAllergies" path="familyAllergies" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.familyAllergies" />
+					</form:label></th>
+					<td><form:checkbox path="familyAllergies" /></td></tr> 
+				<tr><td><form:errors path="familyAllergies" /></td></tr>
+				
+				<tr><th>
+					<form:label for="addictions" path="addictions" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.addictions" />
+					</form:label></th>
+					<td><form:checkbox path="addictions" /></td></tr> 
+				<tr><td><form:errors path="addictions" /></td></tr>
+				
+				<tr><th>
+					<form:label for="familyInfectiousDiseases" path="familyInfectiousDiseases" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.familyInfectiousDiseases" />
+					</form:label></th>
+					<td><form:checkbox path="familyInfectiousDiseases" /></td></tr> 
+				<tr><td><form:errors path="familyInfectiousDiseases" /></td></tr>
+							
+				<tr><th>
+					<form:label for="familyHemorrhagic" path="familyHemorrhagic" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.familyHemorrhagic" />
+					</form:label></th>
+					<td><form:checkbox path="familyHemorrhagic" /></td></tr> 
+				<tr><td><form:errors path="familyHemorrhagic" /></td></tr>
+				
+				<tr><th colspan="2">
+					<form:label for="otherFamilyDiaseases" path="otherFamilyDiaseases" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.otherFamilyDiaseases" />
+					</form:label></th></tr>
+				<tr><td colspan="2">
+					<form:textarea path="otherFamilyDiaseases" /><form:errors path="otherFamilyDiaseases" />
+				</td></tr>	
+			</table>
 		</div>
 		
 		<!-- MATURATION AND DEVELOPMENT -->
-		<div id="tab-mat">
-			<p>
-				<form:label for="maturationAndDevelopment" path="maturationAndDevelopment" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.maturationAndDevelopment" />
-				</form:label>
-				<br />
-				<form:textarea path="maturationAndDevelopment" />
-				<form:errors path="maturationAndDevelopment" />
-			</p>	
+		<div id="tab-mat" class="pediatricianform">
+			<table>
+				<tr><th colspan="2">
+					<form:label for="maturationAndDevelopment" path="maturationAndDevelopment" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.maturationAndDevelopment" />
+					</form:label></th></tr>
+				<tr><td colspan="2"><form:textarea path="maturationAndDevelopment" /></td></tr>
+				<tr><td><form:errors path="maturationAndDevelopment" /></td></tr>	
+			</table>
 		</div>
 		
 		<!-- PHYSICAL EXAM -->
-		<div id="tab-phy">
-			<p>
-				<form:label for="symptoms" path="symptoms" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.symptoms" />
-				</form:label>
-				<br />
-				<form:textarea path="symptoms" />
-				<form:errors path="symptoms" />
-			</p>	
-			
-			<p>
-				<form:label for="pathologyFound" path="pathologyFound" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.pathologyFound" />
-				</form:label>
-				<br />
-				<form:textarea path="pathologyFound" />
-				<form:errors path="pathologyFound" />
-			</p>	
+		<div id="tab-phy" class="pediatricianform">
+			<table>
+				<tr><th colspan="2">
+					<form:label for="symptoms" path="symptoms" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.symptoms" />
+					</form:label></th></tr>
+				<tr><td colspan="2"><form:textarea path="symptoms" /></td></tr>
+				<tr><td><form:errors path="symptoms" /></td></tr>	
+				
+				<tr><th>
+					<form:label for="pathologyFound" path="pathologyFound" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.pathologyFound" />
+					</form:label></th></tr>
+				<tr><td colspan="2"><form:textarea path="pathologyFound" /></td></tr>
+				<tr><td><form:errors path="pathologyFound" /></td></tr>	
+			</table>
 		</div>
 		
 		<!-- LABORATORY -->
-		<div id="tab-lab">
+		<div id="tab-lab" class="pediatricianform">
 		</div>
 		
 		<!-- RADIOLOGY -->
-		<div id="tab-rad">
-			<p>
-				<form:label for="chest" path="chest" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.chest" />
-				</form:label>
-				<br />
-				<form:textarea path="chest" />
-				<form:errors path="chest" />
-			</p>
-			
-			<p>
-				<form:label for="bones" path="bones" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.bones" />
-				</form:label>
-				<br />
-				<form:textarea path="bones" />
-				<form:errors path="bones" />
-			</p>
-						
-			<p>
-				<form:label for="radiologyOther" path="radiologyOther" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.radiologyOther" />
-				</form:label>
-				<br />
-				<form:textarea path="radiologyOther" />
-				<form:errors path="radiologyOther" />
-			</p>
-									
-			<p>
-				<form:label for="radiologyComments" path="radiologyComments" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.radiologyComments" />
-				</form:label>
-				<br />
-				<form:textarea path="radiologyComments" />
-				<form:errors path="radiologyComments" />
-			</p>
+		<div id="tab-rad" class="pediatricianform">
+			<table>
+				<tr><th colspan="2">
+					<form:label for="chest" path="chest" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.chest" />
+					</form:label></th></tr>
+				<tr><td colspan="2"><form:textarea path="chest" /></td></tr>
+				<tr><td><form:errors path="chest" /></td></tr>
+				
+				<tr><th colspan="2">
+					<form:label for="bones" path="bones" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.bones" />
+					</form:label></th></tr>
+				<tr><td colspan="2"><form:textarea path="bones" /></td></tr>
+				<tr><td><form:errors path="bones" /></td></tr>
+							
+				<tr><th colspan="2">
+					<form:label for="radiologyOther" path="radiologyOther" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.radiologyOther" />
+					</form:label></th></tr>
+				<tr><td colspan="2"><form:textarea path="radiologyOther" /></td></tr>
+				<tr><td><form:errors path="radiologyOther" /></td></tr>
+										
+				<tr><th colspan="2">
+					<form:label for="radiologyComments" path="radiologyComments" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.radiologyComments" />
+					</form:label></th></tr>
+				<tr><td colspan="2"><form:textarea path="radiologyComments" /></td></tr>
+				<tr><td><form:errors path="radiologyComments" /></td></tr>
+			</table>
 		</div>
 		
 		<!-- DIAGNOSIS -->
-		<div id="tab-dia">
+		<div id="tab-dia" class="pediatricianform">
 		</div>
 		
 		<!-- INTERNMENT -->
-		<div id="tab-int">
-			<p>
-				<form:label for="interconsultation" path="interconsultation" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.interconsultation" />
-				</form:label>
-				<form:checkbox path="interconsultation" /> 
-				<form:errors path="interconsultation" />
-			</p>
-			
-			<p>
-				<form:label for="internment" path="internment" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.internment" />
-				</form:label>
-				<form:checkbox path="internment" /> 
-				<form:errors path="internment" />
-			</p>
-							
-			<p>
-				<form:label for="treatment" path="treatment" cssErrorClass="error">
-					<fmt:message key="pediatrician.form.treatment" />
-				</form:label>
-				<br />
-				<form:textarea path="treatment" />
-				<form:errors path="treatment" />
-			</p>
+		<div id="tab-int" class="pediatricianform">
+			<table>
+				<tr><th>
+					<form:label for="interconsultation" path="interconsultation" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.interconsultation" />
+					</form:label></th>
+					<td><form:checkbox path="interconsultation" /></td></tr> 
+				<tr><td><form:errors path="interconsultation" /></td></tr>
+				
+				<tr><th>
+					<form:label for="internment" path="internment" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.internment" />
+					</form:label></th>
+					<td><form:checkbox path="internment" /></td></tr> 
+				<tr><td><form:errors path="internment" /></td></tr>
+								
+				<tr><th colspan="2">
+					<form:label for="treatment" path="treatment" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.treatment" />
+					</form:label></th></tr>
+				<tr><td colspan="2">
+					<form:textarea path="treatment" /></td></tr>
+				<tr><td>
+					<form:errors path="treatment" /></td></tr>
+			</table>
 		</div>
-		
-		<p>
-			<input type="submit" />
-		</p>
+		<input type="submit" />
 	</div>
 </form:form>

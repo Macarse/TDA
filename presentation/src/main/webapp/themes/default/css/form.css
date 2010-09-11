@@ -3,7 +3,7 @@
 div[class=filter-container]{
 }
 
-.socialworkerform table th{
+.socialworkerform table th, .pediatricianform table th{
 	font-weight: bold;
 	text-align: left;
 	border-bottom: solid 1px;
@@ -12,7 +12,8 @@ div[class=filter-container]{
 	width: 50%;
 }
 
-.socialworkerform textarea{
+.socialworkerform textarea, .pediatricianform textarea{
 	width: 100%;
 	height: 100px;
 }
+
