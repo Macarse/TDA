@@ -4,5 +4,4 @@ import java.util.List;
 
 public interface RoleProvider {
 	List<String> getAllRoles();
-
 }

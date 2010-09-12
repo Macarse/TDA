@@ -52,7 +52,7 @@ public class NurseFormServiceImpl implements NurseFormService {
 		return nurseFormDAO.findByExample(nurseForm);
 	}
 
-	public void setPediatricianFormDAO(NurseFormDAO nurseFormDAO) {
+	public void setNurseFormDAO(NurseFormDAO nurseFormDAO) {
 		this.nurseFormDAO = nurseFormDAO;
 	}
 

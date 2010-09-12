@@ -3,14 +3,12 @@ package com.tda.model.nurse;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-import com.sun.tools.javac.util.List;
 import com.tda.model.patient.Patient;
 
 @Entity
@@ -31,16 +29,18 @@ public class NurseForm {
 
 	private Double percentile;
 
+	// TODO TA Control. temp and saturation
 	private Double TAmin;
-
 	private Double TAmax;
 
 	// TODO VACCINES
 
-	private List<NurseAction> nurseActions;
+	// Nurse Actions
+	// private Collection<NurseAction> nurseActions;
 
 	// TODO CURATION
 
+	// Observations
 	private String observations;
 
 	// TODO MALFORMATIONS TABLE
@@ -49,6 +49,7 @@ public class NurseForm {
 	private boolean interconsultation;
 	private boolean internment;
 
+	// Treatment
 	private String treatment;
 
 	@Id
@@ -129,15 +130,6 @@ public class NurseForm {
 
 	public void setTAmax(Double tAmax) {
 		TAmax = tAmax;
-	}
-
-	@Enumerated
-	public List<NurseAction> getNurseActions() {
-		return nurseActions;
-	}
-
-	public void setNurseActions(List<NurseAction> nurseActions) {
-		this.nurseActions = nurseActions;
 	}
 
 	public String getObservations() {
