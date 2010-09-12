@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,7 @@ public class Patient implements Serializable {
 
 	@NotNull
 	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date birthdate;
 
 	public Patient() {

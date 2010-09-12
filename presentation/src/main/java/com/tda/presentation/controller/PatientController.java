@@ -1,9 +1,5 @@
 package com.tda.presentation.controller;
 
-import java.beans.PropertyEditorSupport;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -12,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,10 +38,6 @@ public class PatientController {
 	private PatientService patientService;
 	private Paginator paginator;
 	private ParamContainer params;
-
-	// TODO should be localized?
-	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-			"dd/MM/yyyy");
 
 	public PatientController() {
 		params = new ParamContainer();
@@ -195,33 +185,4 @@ public class PatientController {
 
 		return modelAndView;
 	}
-
-	@InitBinder
-	public void initBinder(WebDataBinder b) {
-		b.registerCustomEditor(Date.class, new DateEditor());
-	}
-
-	private class DateEditor extends PropertyEditorSupport {
-
-		@Override
-		public void setAsText(String text) throws IllegalArgumentException {
-
-			try {
-				setValue(simpleDateFormat.parse(text));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		@Override
-		public String getAsText() {
-			// TODO why its entering here when getValue() == null?
-			if (getValue() == null)
-				return null;
-
-			return simpleDateFormat.format((Date) getValue());
-		}
-	}
-
 }
