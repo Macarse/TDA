@@ -17,7 +17,7 @@
 		<div class="filter-value">
 			<form:label for="myAuthorities" path="myAuthorities" cssErrorClass="error">
 			<fmt:message key="user.form.autorities" /></form:label>
-			<form:checkboxes items="${allAuthorities}" path="myAuthorities" itemLabel="name"/><form:errors path="myAuthorities" />
+			<form:checkboxes items="${allAuthorities}" path="myAuthorities" itemLabel="name" itemValue="authority"/><form:errors path="myAuthorities" />
 		</div>
 		
 		<input type="hidden" name="orderField" value="${orderField}" />

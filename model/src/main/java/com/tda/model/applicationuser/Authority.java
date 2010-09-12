@@ -55,4 +55,16 @@ public class Authority implements Comparable<Authority>, Serializable {
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Authority))
+			return false;
+
+		if (this.authority.equalsIgnoreCase(((Authority) obj).authority))
+			return true;
+
+		return false;
+	}
+
 }

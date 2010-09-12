@@ -1,5 +1,7 @@
 package com.tda.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -8,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.Authority;
 import com.tda.persistence.dao.ApplicationUserDAO;
 import com.tda.persistence.dao.AuthorityDAO;
 import com.tda.persistence.paginator.Paginator;
@@ -84,7 +87,9 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 
 	@Transactional(readOnly = true)
 	public List<ApplicationUser> findByExample(ApplicationUser exampleObject) {
-		return applicationUserDAO.findByExample(exampleObject);
+		List<ApplicationUser> list = applicationUserDAO
+				.findByExample(exampleObject);
+		return filterByAuthority(list, exampleObject.getMyAuthorities());
 	}
 
 	public List<ApplicationUser> findAllPaged(Paginator paginator) {
@@ -93,17 +98,49 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 
 	public List<ApplicationUser> findByExamplePaged(ApplicationUser example,
 			Paginator paginator) {
-		return applicationUserDAO.findByExamplePaged(example, paginator);
+		List<ApplicationUser> list = applicationUserDAO.findByExamplePaged(
+				example, paginator);
+
+		return filterByAuthority(list, example.getMyAuthorities());
 	}
 
 	public List<ApplicationUser> findByExample(ApplicationUser exampleObject,
 			List<String> excludedFields) {
-		return applicationUserDAO.findByExample(exampleObject, excludedFields);
+		List<ApplicationUser> list = applicationUserDAO.findByExample(
+				exampleObject, excludedFields);
+
+		return filterByAuthority(list, exampleObject.getMyAuthorities());
 	}
 
 	public List<ApplicationUser> findByExamplePaged(ApplicationUser example,
 			Paginator paginator, List<String> excludedFields) {
-		return applicationUserDAO.findByExamplePaged(example, paginator,
-				excludedFields);
+		List<ApplicationUser> list = applicationUserDAO.findByExamplePaged(
+				example, paginator, excludedFields);
+
+		return filterByAuthority(list, example.getMyAuthorities());
+
+	}
+
+	private List<ApplicationUser> filterByAuthority(
+			List<ApplicationUser> originalList,
+			Collection<Authority> authorityList) {
+
+		// TODO this method should be erased, the filter by authority should be
+		// done by
+		// hibernate in the findByExample
+
+		List<ApplicationUser> authorityFilteredList = new ArrayList<ApplicationUser>(
+				originalList);
+
+		if (authorityList != null && authorityList.size() != 0) {
+			for (ApplicationUser applicationUser : originalList) {
+				if (!applicationUser.getMyAuthorities().containsAll(
+						authorityList)) {
+					authorityFilteredList.remove(applicationUser);
+				}
+			}
+		}
+
+		return authorityFilteredList;
 	}
 }
