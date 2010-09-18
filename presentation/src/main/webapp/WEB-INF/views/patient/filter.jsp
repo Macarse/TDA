@@ -20,10 +20,15 @@
 			<form:input path="lastName" /> <form:errors path="lastName" />
 		</div>
 		
-		<div class="filter-value">
-			<form:label for="sex" path="sex" cssErrorClass="error">
-			<fmt:message key="patient.form.sex" /></form:label>
-			<form:input path="sex" /> <form:errors path="sex" />
+		<div class="form-value">
+			<form:label for="sex" path="sex"
+				cssErrorClass="error"><fmt:message key="patient.form.sex" /></form:label>
+			<form:select path="sex">
+				<form:option value=""> - </form:option>
+				<c:forEach var="sex" items="${sex}">
+				<form:option value="${sex}"> ${sex.description} </form:option>
+			</c:forEach>
+			</form:select><form:errors path="sex" />	
 		</div>
 		
 		<div class="filter-value">
