@@ -24,7 +24,7 @@
 			<form:label for="sex" path="sex"
 				cssErrorClass="error"><fmt:message key="patient.form.sex" /></form:label>
 			<form:select path="sex">
-				<form:option value=""> - </form:option>
+				<form:option value=""></form:option>
 				<c:forEach var="sex" items="${sex}">
 				<form:option value="${sex}"> ${sex.description} </form:option>
 			</c:forEach>
