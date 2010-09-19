@@ -110,7 +110,7 @@ public class WelcomeController {
 				.findByExample(aPatientInTrain);
 
 		/* The patient is already in the train. */
-		if (!patients.isEmpty()) {
+		if (patientInTrainService.isInTrain(aPatient) ) {
 			patientInTrainService.delete(patients.get(0));
 			return "Subir";
 		} else {
