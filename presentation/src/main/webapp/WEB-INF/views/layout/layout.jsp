@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
+<script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.base-var"/>"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.jquery"/>"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.jqueryui"/>"></script>
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="layout.css"/>' type="text/css"/>

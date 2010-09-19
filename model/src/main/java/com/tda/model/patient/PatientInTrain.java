@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Null;
 
 import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.dentist.DentistForm;
 import com.tda.model.nurse.NurseForm;
 import com.tda.model.pediatrician.PediatricianForm;
 import com.tda.model.socialworker.SocialWorkerForm;
@@ -23,8 +24,20 @@ public class PatientInTrain implements Serializable {
 	private SocialWorkerForm socialworkerform;
 	private PediatricianForm padiatricianform;
 	private NurseForm nurseform;
+	private DentistForm dentistform;
 	private ApplicationUser user;
 
+	@Null
+	@OneToOne
+	public DentistForm getDentistform() {
+		return dentistform;
+	}
+
+	public void setDentistform(DentistForm dentistform) {
+		this.dentistform = dentistform;
+	}
+
+	
 	@Null
 	@OneToOne
 	public ApplicationUser getUser() {

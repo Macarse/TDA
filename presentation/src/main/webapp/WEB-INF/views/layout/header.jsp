@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div style="float:left">
-<img src="${pageContext.request.contextPath}/themes/default/image/header.jpg" width="1000" />
+<a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/themes/default/image/header.jpg" width="1000" /></a>
 </div>
 <c:url value="${pageContext.request.contextPath}/j_spring_security_logout" var="logoutUrl"/>
 
