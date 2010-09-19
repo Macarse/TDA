@@ -11,8 +11,8 @@
 	</div>
 </c:if>
 
-<div class="filter-container">
-	<jsp:include page="/WEB-INF/views/patient/filter.jsp" flush="true"/>
+<div>
+Pacientes en el tren
 </div>
 
 <div class="table-container">
@@ -20,61 +20,34 @@
 	<thead>
 		<tr>
 			<th>
-				<a href="?orderField=firstName&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
-					<fmt:message key="patient.form.firstName" />
-				</a>
-				<c:if test="${paginator.orderField=='firstName'}">
-					<c:choose>
-						<c:when test="${paginator.orderAscending}">
-			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
-						</c:when>
-						<c:otherwise>
-			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+				<fmt:message key="welcome.name" />
 			</th>
 			<th>
-				<a href="?orderField=lastName&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
-					<fmt:message key="patient.form.lastName" />
-				</a>
-				<c:if test="${paginator.orderField=='lastName'}">
-					<c:choose>
-						<c:when test="${paginator.orderAscending}">
-			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
-						</c:when>
-						<c:otherwise>
-			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+				<fmt:message key="welcome.forms" />
 			</th>
 			<th>
-				<a href="?orderField=sex&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
-					<fmt:message key="patient.form.sex" />
-				</a>
-				<c:if test="${paginator.orderField=='sex'}">
-					<c:choose>
-						<c:when test="${paginator.orderAscending}">
-			  				<img src='${pageContext.request.contextPath}/<spring:theme code="uparrow.img"/>'>
-						</c:when>
-						<c:otherwise>
-			  				<img src='${pageContext.request.contextPath}/<spring:theme code="downarrow.img"/>'>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+				<fmt:message key="welcome.location" />
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-
-
-		<c:forEach items="${patientList}" var="patient">
+		<c:forEach items="${patientList}" var="patientintrain">
 			<tr>
-				<td>${patient.firstName}</td>
-				<td>${patient.lastName}</td>
-				<td>${patient.sex.description}</td>
-				<td><a href="${pageContext.request.contextPath}/patient/${patient.id}/socialworker/new">Formulario Trabajador Social</a></td>
+				<td>${patientintrain.patient.firstName} ${patientintrain.patient.lastName}</td>
+				<td>
+					<c:choose>
+						<c:when test="${patientintrain.socialworkerform != null}">
+							<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/${patientintrain.socialworkerform.id}/edit">Formulario Trabajador Social</a> <br/>
+						</c:when>
+						<c:otherwise>
+			  				<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Trabajador Social</a> <br/>
+						</c:otherwise>
+					</c:choose>
+					<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Pediatra</a> <br/>
+					<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Enfermero</a> <br/>
+					<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Dentista</a> <br/>
+					</td>
+				<td> </td>
 			</tr>
 		</c:forEach>
 	</tbody>

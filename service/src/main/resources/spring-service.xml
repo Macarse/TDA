@@ -23,6 +23,11 @@
 		<property name="patientDAO" ref="patientDAO" />
 	</bean>
 
+	<bean id="patientInTrainService" class="com.tda.service.impl.PatientInTrainServiceImpl">
+		<property name="patientInTrainDAO" ref="patientInTrainDAO" />
+	</bean>
+
+
 	<bean id="socialWorkerFormService" class="com.tda.service.impl.SocialWorkerFormServiceImpl">
 		<property name="socialWorkerFormDAO" ref="socialWorkerFormDAO" />
 	</bean>

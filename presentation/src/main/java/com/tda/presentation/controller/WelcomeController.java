@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tda.model.patient.Patient;
+import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
-import com.tda.service.api.PatientService;
+import com.tda.service.api.PatientInTrainService;
 
 @Controller
 @RequestMapping(value = "/")
@@ -34,7 +34,7 @@ public class WelcomeController {
 	private static final String LIST = "welcome/list";
 	private static final String LIST_SEARCH = "welcome/search";
 
-	private PatientService patientService;
+	private PatientInTrainService patientInTrainService;
 	private Paginator paginator;
 	private ParamContainer params;
 
@@ -58,8 +58,8 @@ public class WelcomeController {
 	}
 
 	@Autowired
-	public void setPatientService(PatientService patientService) {
-		this.patientService = patientService;
+	public void setPatientInTrainService(PatientInTrainService patientInTrainService) {
+		this.patientInTrainService = patientInTrainService;
 	}
 
 	@Autowired
@@ -76,15 +76,17 @@ public class WelcomeController {
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(LIST);
 
-		modelAndView = processRequest(modelAndView, new Patient(), pageNumber,
+		modelAndView = processRequest(modelAndView, new PatientInTrain(), pageNumber,
 				orderField, orderAscending);
+		
+		System.out.println("entro");
 
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public ModelAndView getList(
-			@ModelAttribute Patient aPatient,
+			@ModelAttribute PatientInTrain aPatient,
 			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
@@ -95,17 +97,17 @@ public class WelcomeController {
 		// set first page paginator
 		paginator.setPageIndex(1);
 
-		if (aPatient.getFirstName() != null)
-			params.setParam("firstName", aPatient.getFirstName());
-		if (aPatient.getLastName() != null)
-			params.setParam("lastName", aPatient.getLastName());
-		if (aPatient.getDni() != null)
-			params.setParam("dni", aPatient.getDni());
-		// TODO: birdhday format?
-		if (aPatient.getBirthdate() != null)
-			params.setParam("birthday", aPatient.getBirthdate().toString());
-		if (aPatient.getSex() != null)
-			params.setParam("sex", aPatient.getSex().toString());
+//		if (aPatient.getFirstName() != null)
+//			params.setParam("firstName", aPatient.getFirstName());
+//		if (aPatient.getLastName() != null)
+//			params.setParam("lastName", aPatient.getLastName());
+//		if (aPatient.getDni() != null)
+//			params.setParam("dni", aPatient.getDni());
+//		// TODO: birdhday format?
+//		if (aPatient.getBirthdate() != null)
+//			params.setParam("birthday", aPatient.getBirthdate().toString());
+//		if (aPatient.getSex() != null)
+//			params.setParam("sex", aPatient.getSex().toString());
 
 		modelAndView = processRequest(modelAndView, aPatient, pageNumber,
 				orderField, orderAscending);
@@ -114,9 +116,9 @@ public class WelcomeController {
 	}
 
 	private ModelAndView processRequest(ModelAndView modelAndView,
-			Patient aPatient, Integer pageNumber, String orderField,
+			PatientInTrain aPatient, Integer pageNumber, String orderField,
 			Boolean orderAscending) {
-		List<Patient> patientList = null;
+		List<PatientInTrain> patientList = null;
 
 		// Pagination
 		if (pageNumber != null) {
@@ -125,16 +127,16 @@ public class WelcomeController {
 
 		// Order
 		if (orderField == null || orderAscending == null) {
-			orderField = "firstName";
+			orderField = "id";
 			orderAscending = true;
 		}
 
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
 
-		patientList = patientService.findByExamplePaged(aPatient, paginator);
+		patientList = patientInTrainService.findByExamplePaged(aPatient, paginator);
 
-		modelAndView.addObject("patient", new Patient());
+		modelAndView.addObject("patient", new PatientInTrain());
 		modelAndView.addObject("patientList", patientList);
 		modelAndView.addObject("paginator", paginator);
 		modelAndView.addObject("params", params);

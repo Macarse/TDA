@@ -30,6 +30,12 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	<bean id="patientInTrainDAO" class="com.tda.persistence.dao.PatientInTrainDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 	<bean id="socialWorkerFormDAO" class="com.tda.persistence.dao.SocialWorkerFormDAO">
 		<property name="sessionFactory">
