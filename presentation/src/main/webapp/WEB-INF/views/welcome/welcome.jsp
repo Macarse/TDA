@@ -14,7 +14,9 @@
 <div>
 Buscar paciente
 </div>
-
+<div class="filter-container">
+	<jsp:include page="/WEB-INF/views/welcome/filter.jsp" flush="true"/>
+</div>
 
 
 <div>
@@ -81,7 +83,16 @@ Pacientes en el tren
 						</c:otherwise>
 					</c:choose>
 					</td>
-				<td> </td>
+				<td>
+					<c:choose>
+						<c:when test="${patientintrain.user != null}">
+							${patientintrain.user.username}
+						</c:when>
+						<c:otherwise>
+							<fmt:message key="welcome.state.waiting" />
+						</c:otherwise>
+					</c:choose>
+				</td>
 				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
 			</tr>
 		</c:forEach>
