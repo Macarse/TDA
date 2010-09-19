@@ -61,3 +61,7 @@ Pacientes en el tren
 	</tfoot>
 </table>
 </div>
+
+<div>
+Buscar paciente
+</div>

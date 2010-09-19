@@ -78,8 +78,6 @@ public class WelcomeController {
 		modelAndView = processRequest(modelAndView, new PatientInTrain(), pageNumber,
 				orderField, orderAscending);
 		
-		System.out.println("entro");
-
 		return modelAndView;
 	}
 
