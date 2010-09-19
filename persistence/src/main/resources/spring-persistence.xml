@@ -54,6 +54,12 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	<bean id="dentistFormDAO" class="com.tda.persistence.dao.DentistFormDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 	<bean id="paginator" class="com.tda.persistence.paginator.Paginator">
 		<constructor-arg index="0" value="10" />

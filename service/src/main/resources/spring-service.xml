@@ -39,6 +39,10 @@
 	<bean id="nurseFormService" class="com.tda.service.impl.NurseFormServiceImpl">
 		<property name="nurseFormDAO" ref="nurseFormDAO" />
 	</bean>
+	
+	<bean id="dentistFormService" class="com.tda.service.impl.DentistFormServiceImpl">
+		<property name="dentistFormDAO" ref="dentistFormDAO" />
+	</bean>
 
 	<bean id="authenticationService" class="com.tda.service.impl.AuthenticationServiceImpl">
 		<property name="authenticationManager"

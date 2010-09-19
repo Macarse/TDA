@@ -39,6 +39,8 @@
 				<value>com.tda.model.pediatrician.PediatricianForm</value>
 				<value>com.tda.model.nurse.NurseForm</value>
 				<value>com.tda.model.nurse.NurseAction</value>
+				<value>com.tda.model.dentist.DentistForm</value>
+				<value>com.tda.model.dentist.DentistAction</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

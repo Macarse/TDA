@@ -62,6 +62,12 @@
 		<put-attribute name="title" value="Nurse Form" />
 		<put-attribute name="body" value="/WEB-INF/views/nurseform/form.jsp" />
 	</definition>
+	
+	<!-- Dentist -->	
+	<definition name="dentistform/form" extends="base.definition">
+		<put-attribute name="title" value="Dentist Form" />
+		<put-attribute name="body" value="/WEB-INF/views/dentistform/form.jsp" />
+	</definition>
 
 	<!-- Patient -->
 	<definition name="patient/list" extends="base.definition">

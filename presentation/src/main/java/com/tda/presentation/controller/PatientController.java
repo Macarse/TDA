@@ -33,7 +33,6 @@ public class PatientController {
 	private static final String REDIRECT_TO_LIST = "redirect:/patient/";
 	private static final String CREATE_FORM = "patient/createForm";
 	private static final String LIST = "patient/list";
-	private static final String LIST_SEARCH = "patient/search";
 
 	private PatientService patientService;
 	private Paginator paginator;
