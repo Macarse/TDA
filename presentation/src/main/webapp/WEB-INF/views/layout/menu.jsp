@@ -8,3 +8,24 @@
 	</div>
 </div>
 
+<div id="queue">
+	<a href="#" onclick="loadQueue();">loadQueue</a>
+</div>
+
+<script language='javascript' type='text/javascript'> 
+
+var refreshId = setInterval(function()
+		{
+			$.get("/presentation/getUserQueue", function(data){
+		   		alert("Data Loaded: " + data);
+		 	});
+		}, 10000);
+
+
+function loadQueue() {
+	$.get("/presentation/getUserQueue", function(data){
+		   alert("Data Loaded: " + data);
+		 });
+}
+</script>
+
