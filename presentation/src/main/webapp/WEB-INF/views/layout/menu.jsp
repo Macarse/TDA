@@ -11,9 +11,7 @@
 <div id="queue" style="text-align:center; padding-top:20px;">
 	<img id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif' style="visibility:hidden;">
 	<table>
-		<tbody id="queueTable">
-			
-		</tbody>
+		<tbody id="queueTable"></tbody>
 	</table>
 </div>
 
@@ -21,7 +19,7 @@
 
 var refreshId = setInterval(function()
 		{
-			$.get("/presentation/getUserQueue", function(data){
+			$.get(contextPath + "/getUserQueue", function(data){
 				//Me llega la lista separada por &:
 		   		var parsedData = data.split('&');
 		   		var innerHtml = "";

@@ -18,11 +18,6 @@ Buscar paciente
 	<jsp:include page="/WEB-INF/views/welcome/filter.jsp" flush="true"/>
 </div>
 
-
-<div>
-Pacientes en el tren
-</div>
-
 <div class="table-container">
 	<table class="list-table">
 	<thead>
