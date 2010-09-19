@@ -28,11 +28,9 @@ import com.tda.service.api.PatientService;
 
 @Controller
 @RequestMapping(value = "/")
-@SessionAttributes({"patient", "user"})
+@SessionAttributes({ "patient", "user" })
 public class WelcomeController {
-	private static final String REDIRECT_TO_LIST = "redirect:/welcome/";
 	private static final String LIST = "welcome/list";
-	private static final String LIST_SEARCH = "welcome/search";
 
 	private PatientService patientService;
 	private Paginator paginator;
@@ -50,11 +48,12 @@ public class WelcomeController {
 	public Sex[] populateCategories() {
 		return Sex.values();
 	}
-	
+
 	@ModelAttribute("user")
 	public UserDetails getUser() {
-		Object aux = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return ((UserDetails)aux);
+		Object aux = SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		return ((UserDetails) aux);
 	}
 
 	@Autowired
