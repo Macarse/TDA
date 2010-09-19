@@ -104,7 +104,7 @@
 					</c:choose>
 				</c:if>
 			</th>
-			<th colspan="2"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></th>
+			<th colspan="3"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -125,6 +125,9 @@
 					action="${deleteUrl}/${patient.id}">
 					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all  confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> ${deleteLabel}</button>
 				</form:form></td>
+				<td>
+					<a onclick="swtichInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href=""><span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span> Subir</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>

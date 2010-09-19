@@ -12,6 +12,12 @@
 </c:if>
 
 <div>
+Buscar paciente
+</div>
+
+
+
+<div>
 Pacientes en el tren
 </div>
 
@@ -23,10 +29,17 @@ Pacientes en el tren
 				<fmt:message key="welcome.name" />
 			</th>
 			<th>
-				<fmt:message key="welcome.forms" />
+				<div class="welcome-forms">
+					<fmt:message key="welcome.forms" />
+				</div>
 			</th>
 			<th>
-				<fmt:message key="welcome.location" />
+				<div class="welcome-location">
+					<fmt:message key="welcome.location" />
+				</div>
+			</th>
+			<th>
+				<fmt:message key="welcome.options" />
 			</th>
 		</tr>
 	</thead>
@@ -37,24 +50,46 @@ Pacientes en el tren
 				<td>
 					<c:choose>
 						<c:when test="${patientintrain.socialworkerform != null}">
-							<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/${patientintrain.socialworkerform.id}/edit">Formulario Trabajador Social</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/${patientintrain.socialworkerform.id}/edit">Formulario Trabajador Social</a> <br/>
 						</c:when>
 						<c:otherwise>
-			  				<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Trabajador Social</a> <br/>
+			  				<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /><a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Trabajador Social</a> <br/>
 						</c:otherwise>
 					</c:choose>
-					<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Pediatra</a> <br/>
-					<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Enfermero</a> <br/>
-					<a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Dentista</a> <br/>
+					<c:choose>
+						<c:when test="${patientintrain.padiatricianform != null}">
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/${patientintrain.pediatricianform.id}/edit">Formulario Pediatra</a> <br/>
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/new">Formulario Pediatra</a> <br/>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${patientintrain.nurseform != null}">
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/${patientintrain.nurseform.id}/edit">Formulario Enfermero</a> <br/>
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/new">Formulario Enfermeno</a> <br/>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${patientintrain.dentistform != null}">
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/${patientintrain.dentistform.id}/edit">Formulario Dentista</a> <br/>
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/new">Formulario Dentista</a> <br/>
+						</c:otherwise>
+					</c:choose>
 					</td>
 				<td> </td>
+				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 
 	<tfoot>
 		<tr>
-		  <td colspan="2">
+		  <td colspan="3">
 			<jsp:include page="/WEB-INF/views/paginator/paginator.jsp" flush="true"/>
 		  </td>
 		</tr>

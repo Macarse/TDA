@@ -12,6 +12,8 @@
 /* header */
 .list-table thead th{
 	width: 150px;
+	border-bottom: solid 1px;
+	border-color:#AED0EA;
 }
 
 .list-table thead th > img{
@@ -33,3 +35,10 @@
 .body-container form fieldset{
 
 }
+
+
+/* welcome */
+
+.welcome-location{ }
+
+.welcome-forms{ width: 200px; }
