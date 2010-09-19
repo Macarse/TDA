@@ -6,9 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 import com.tda.model.applicationuser.ApplicationUser;
@@ -18,9 +16,9 @@ import com.tda.model.pediatrician.PediatricianForm;
 import com.tda.model.socialworker.SocialWorkerForm;
 
 @Entity
-public class PatientInTrain implements Serializable{
+public class PatientInTrain implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private Patient patient;
 	private SocialWorkerForm socialworkerform;
@@ -28,7 +26,7 @@ public class PatientInTrain implements Serializable{
 	private NurseForm nurseform;
 	private DentistForm dentistform;
 	private ApplicationUser user;
-	
+
 	@Null
 	@OneToOne
 	public DentistForm getDentistform() {
@@ -90,7 +88,6 @@ public class PatientInTrain implements Serializable{
 		this.id = id;
 	}
 
-
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
@@ -98,6 +95,36 @@ public class PatientInTrain implements Serializable{
 	@OneToOne
 	public Patient getPatient() {
 		return patient;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PatientInTrain other = (PatientInTrain) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return id.toString();
 	}
 
 }

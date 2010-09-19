@@ -7,9 +7,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -17,10 +20,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.patient.Patient;
+import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
@@ -58,7 +64,8 @@ public class WelcomeController {
 	}
 
 	@Autowired
-	public void setPatientInTrainService(PatientInTrainService patientInTrainService) {
+	public void setPatientInTrainService(
+			PatientInTrainService patientInTrainService) {
 		this.patientInTrainService = patientInTrainService;
 	}
 
@@ -76,9 +83,9 @@ public class WelcomeController {
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(LIST);
 
-		modelAndView = processRequest(modelAndView, new PatientInTrain(), pageNumber,
-				orderField, orderAscending);
-		
+		modelAndView = processRequest(modelAndView, new PatientInTrain(),
+				pageNumber, orderField, orderAscending);
+
 		return modelAndView;
 	}
 
@@ -95,17 +102,17 @@ public class WelcomeController {
 		// set first page paginator
 		paginator.setPageIndex(1);
 
-//		if (aPatient.getFirstName() != null)
-//			params.setParam("firstName", aPatient.getFirstName());
-//		if (aPatient.getLastName() != null)
-//			params.setParam("lastName", aPatient.getLastName());
-//		if (aPatient.getDni() != null)
-//			params.setParam("dni", aPatient.getDni());
-//		// TODO: birdhday format?
-//		if (aPatient.getBirthdate() != null)
-//			params.setParam("birthday", aPatient.getBirthdate().toString());
-//		if (aPatient.getSex() != null)
-//			params.setParam("sex", aPatient.getSex().toString());
+		// if (aPatient.getFirstName() != null)
+		// params.setParam("firstName", aPatient.getFirstName());
+		// if (aPatient.getLastName() != null)
+		// params.setParam("lastName", aPatient.getLastName());
+		// if (aPatient.getDni() != null)
+		// params.setParam("dni", aPatient.getDni());
+		// // TODO: birdhday format?
+		// if (aPatient.getBirthdate() != null)
+		// params.setParam("birthday", aPatient.getBirthdate().toString());
+		// if (aPatient.getSex() != null)
+		// params.setParam("sex", aPatient.getSex().toString());
 
 		modelAndView = processRequest(modelAndView, aPatient, pageNumber,
 				orderField, orderAscending);
@@ -132,7 +139,8 @@ public class WelcomeController {
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
 
-		patientList = patientInTrainService.findByExamplePaged(aPatient, paginator);
+		patientList = patientInTrainService.findByExamplePaged(aPatient,
+				paginator);
 
 		modelAndView.addObject("patient", new Patient());
 		modelAndView.addObject("patientList", patientList);
@@ -172,4 +180,23 @@ public class WelcomeController {
 		}
 	}
 
+	// Ajax method to get User Personal Queue
+	@RequestMapping(value = "/getUserQueue", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody
+	MultiValueMap<String, String> getUserQueue() {
+		PatientInTrain example = new PatientInTrain();
+		example.setUser((ApplicationUser) getUser());
+		List<PatientInTrain> list = patientInTrainService
+				.findByExample(example);
+
+		MultiValueMap<String, String> retList = new LinkedMultiValueMap<String, String>();
+
+		for (PatientInTrain pit : list) {
+			retList.add(pit.getPatient().getFirstName() + " "
+					+ pit.getPatient().getLastName(), pit.getId().toString());
+		}
+
+		return retList;
+	}
 }
