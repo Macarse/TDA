@@ -14,6 +14,8 @@
 <spring:url value="search" var="searchUrl" />
 <spring:message text="Editar" var="editLabel" />
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/switchInTrain.js"></script>
+
 <c:if test="${!empty param.message}">
 	<div class="message">
 		<fmt:message key="${param.message }" />
@@ -124,7 +126,7 @@
 					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all  confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> ${deleteLabel}</button>
 				</form:form></td>
 				<td>
-					<a onclick="swtichInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href=""><span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span> Subir</a>
+					<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href="#"><span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span> <span>Subir</span></a>
 				</td>
 			</tr>
 		</c:forEach>
