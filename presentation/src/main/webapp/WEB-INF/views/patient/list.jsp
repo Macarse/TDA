@@ -14,6 +14,8 @@
 <spring:url value="search" var="searchUrl" />
 <spring:message text="Editar" var="editLabel" />
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/switchInTrain.js"/>
+
 <c:if test="${!empty param.message}">
 	<div class="message">
 		<fmt:message key="${param.message }" />
