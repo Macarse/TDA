@@ -114,12 +114,11 @@ public class PatientInTrain implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		PatientInTrain other = (PatientInTrain) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		if( patient.getId() == other.getPatient().getId()) {
+			return true;			
+		}
+		
+		return false;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.tda.service.api;
 
 import java.util.List;
 
+import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
@@ -30,4 +31,5 @@ public interface PatientInTrainService {
 
 	List<PatientInTrain> findBySex(Sex sex);
 
+	boolean isInTrain(Patient patient);
 }

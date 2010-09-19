@@ -27,11 +27,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.patient.Patient;
 import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.PatientInTrainService;
+import com.tda.service.api.PatientService;
 
 @Controller
 @RequestMapping(value = "/")
@@ -40,6 +42,7 @@ public class WelcomeController {
 	private static final String LIST = "welcome/list";
 
 	private PatientInTrainService patientInTrainService;
+	private PatientService patientService;
 	private Paginator paginator;
 	private ParamContainer params;
 
@@ -70,6 +73,12 @@ public class WelcomeController {
 	}
 
 	@Autowired
+	public void setPatientService(
+			PatientService patientService) {
+		this.patientService = patientService;
+	}
+
+	@Autowired
 	public void setPaginator(Paginator paginator) {
 		this.paginator = paginator;
 		paginator.setOrderAscending(true);
@@ -87,6 +96,28 @@ public class WelcomeController {
 				pageNumber, orderField, orderAscending);
 
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/switchInTrain", method = RequestMethod.POST)
+	public @ResponseBody
+	String switchInTrain(@RequestParam Long patientId) {
+
+		/* TODO: Check if there is a better way to do this */
+		PatientInTrain aPatientInTrain = new PatientInTrain();
+		Patient aPatient = patientService.findById(patientId);
+		aPatientInTrain.setPatient(aPatient);
+
+		List<PatientInTrain> patients = patientInTrainService
+				.findByExample(aPatientInTrain);
+
+		/* The patient is already in the train. */
+		if (patientInTrainService.isInTrain(aPatient) ) {
+			patientInTrainService.delete(patients.get(0));
+			return "Subir";
+		} else {
+			patientInTrainService.save(aPatientInTrain);
+			return "Bajar";
+		}
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.GET)

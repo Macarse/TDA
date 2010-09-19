@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.dao.PatientInTrainDAO;
@@ -74,4 +75,7 @@ public class PatientInTrainServiceImpl implements PatientInTrainService {
 		return patientInTrainDAO.findByExamplePaged(example, paginator);
 	}
 
+	public boolean isInTrain(Patient patient) {
+		return patientInTrainDAO.isInTrain(patient);
+	}
 }
