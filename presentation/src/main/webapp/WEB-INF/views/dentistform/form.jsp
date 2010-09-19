@@ -29,10 +29,10 @@
 <form:form modelAttribute="dentistForm" method="post">
 	<div id="form-tabs">
 		<ul>
-			<li><a href="#tab-vitalChecks"><fmt:message key="nurse.form.vitalChecks" /></a></li>
+			<li><a href="#tab-vitalChecks"><fmt:message key="dentist.form.vitalChecks" /></a></li>
 		</ul>
 		
-	<div id="tab-vitalChecks" class="nurseform">
+	<div id="tab-vitalChecks" class="dentistform">
 		<table>
 
 			<tr>
