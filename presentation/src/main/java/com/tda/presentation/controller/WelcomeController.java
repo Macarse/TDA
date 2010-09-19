@@ -27,6 +27,7 @@ import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.PatientInTrainService;
+import com.tda.service.api.PatientService;
 
 @Controller
 @RequestMapping(value = "/")
@@ -35,6 +36,7 @@ public class WelcomeController {
 	private static final String LIST = "welcome/list";
 
 	private PatientInTrainService patientInTrainService;
+	private PatientService patientService;
 	private Paginator paginator;
 	private ParamContainer params;
 
@@ -65,6 +67,12 @@ public class WelcomeController {
 	}
 
 	@Autowired
+	public void setPatientService(
+			PatientService patientService) {
+		this.patientService = patientService;
+	}
+
+	@Autowired
 	public void setPaginator(Paginator paginator) {
 		this.paginator = paginator;
 		paginator.setOrderAscending(true);
@@ -86,23 +94,23 @@ public class WelcomeController {
 
 	@RequestMapping(value = "/switchInTrain", method = RequestMethod.POST)
 	public @ResponseBody
-	void switchInTrain(@RequestParam Long patientId) {
+	String switchInTrain(@RequestParam Long patientId) {
 
-		System.out.println("Called switchInTrain with par: " + patientId);
 		/* TODO: Check if there is a better way to do this */
-		PatientInTrain example = new PatientInTrain();
-		Patient patientExample = new Patient();
-		patientExample.setId(patientId);
-		example.setPatient(patientExample);
+		PatientInTrain aPatientInTrain = new PatientInTrain();
+		Patient aPatient = patientService.findById(patientId);
+		aPatientInTrain.setPatient(aPatient);
 
 		List<PatientInTrain> patients = patientInTrainService
-				.findByExample(example);
+				.findByExample(aPatientInTrain);
 
 		/* The patient is already in the train. */
 		if (!patients.isEmpty()) {
 			patientInTrainService.delete(patients.get(0));
+			return "Subir";
 		} else {
-			patientInTrainService.save(example);
+			patientInTrainService.save(aPatientInTrain);
+			return "Bajar";
 		}
 	}
 
