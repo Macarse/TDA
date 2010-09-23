@@ -40,7 +40,7 @@ public class EditDentistFormController extends BaseDentistFormController {
 		} else {
 			dentistFormService.update(dentistForm);
 			status.setComplete();
-			return "redirect:/patient/" + dentistForm.getPatient().getId();
+			return "redirect:/";
 		}
 	}
 

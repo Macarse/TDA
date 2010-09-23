@@ -43,7 +43,7 @@ public class EditPediatricianFormController extends
 		} else {
 			pediatricianFormService.update(pediatricianForm);
 			status.setComplete();
-			return "redirect:/patient/" + pediatricianForm.getPatient().getId();
+			return "redirect:/";
 		}
 	}
 

@@ -23,7 +23,7 @@ import com.tda.service.api.PatientService;
 @SessionAttributes("dentistForm")
 public class AddDentistFormController extends BaseDentistFormController {
 	private static final String DENTIST_ADD_FORM = "dentistform/form";
-	private static final String REDIRECT_AFTER_SAVE = "redirect:/welcome/";
+	private static final String REDIRECT_AFTER_SAVE = "redirect:/";
 
 	private DentistFormService DentistFormService;
 	private PatientService patientService;

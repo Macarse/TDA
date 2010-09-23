@@ -8,17 +8,19 @@
 	</div>
 </div>
 
-<div id="queue" style="text-align:center; padding-top:20px;">
-	<img id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif' style="visibility:hidden;">
-	<table>
-		<tbody id="queueTable"></tbody>
-	</table>
+<div style="text-align:center; padding-top:20px;">
+	<div>Pacientes actualmente en el tren</div>
+	<div id="queue" style="padding-top:20px;">
+		<img id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif'>
+		<div id="queueTable"></div>
+	</div>
 </div>
 
 <script language='javascript' type='text/javascript'> 
 
-var refreshId = setInterval(function()
-		{
+var refreshId = setInterval(function(){
+			$('#loadImage').show();
+			$('#queueTable').hide();
 			$.get(contextPath + "/getUserQueue", function(data){
 				//Me llega la lista separada por &:
 		   		var parsedData = data.split('&');
@@ -27,14 +29,15 @@ var refreshId = setInterval(function()
 		   		for(i in parsedData ) {
 		   	   		//Cada elemento esta separado por =:
 			   		var patientData = parsedData[i].split('=');
-					innerHtml += "<tr><td>"+patientData[0]+"</td></tr>";
+			   		var str = patientData[0];
+					innerHtml += "<div>" + str.replace('+',' ') + "</div>";
 		   		}
-		   		document.getElementById('loadImage').style.visibility = "hidden";
-		   		document.getElementById('queueTable').innerHTML = innerHtml;
+		   		
+		   		$('#loadImage').hide();
+		   		$('#queueTable').show();
+		   		$('#queueTable').html(innerHtml);
 		 	});
-		}, 10000);
-
-
+		}, 5000);
 /*
 function loadQueue() {
 	document.getElementById('loadImage').style.visibility = "visible";

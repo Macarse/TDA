@@ -24,7 +24,7 @@ import com.tda.service.api.SocialWorkerFormService;
 public class AddSocialWorkerFormController extends
 		BaseSocialWorkerFormController {
 	private static final String SOCIAL_WORKER_ADD_FORM = "socialworkerform/form";
-	private static final String REDIRECT_AFTER_SAVE = "redirect:/welcome/";
+	private static final String REDIRECT_AFTER_SAVE = "redirect:/";
 	
 	private SocialWorkerFormService socialWorkerFormService;
 	private PatientService patientService;

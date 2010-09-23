@@ -24,7 +24,7 @@ import com.tda.service.api.PediatricianFormService;
 public class AddPediatricianFormController extends
 		BasePediatricianFormController {
 	private static final String PEDIATRICIAN_ADD_FORM = "pediatricianform/form";
-	private static final String REDIRECT_AFTER_SAVE = "redirect:/welcome/";
+	private static final String REDIRECT_AFTER_SAVE = "redirect:/";
 
 	private PediatricianFormService pediatricianFormService;
 	private PatientService patientService;

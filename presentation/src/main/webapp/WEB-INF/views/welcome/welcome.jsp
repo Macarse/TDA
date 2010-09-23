@@ -71,10 +71,10 @@ Buscar paciente
 					</c:choose>
 					<c:choose>
 						<c:when test="${patientintrain.dentistform != null}">
-							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/${patientintrain.dentistform.id}/edit">Formulario Dentista</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/dentist/${patientintrain.dentistform.id}/edit">Formulario Dentista</a> <br/>
 						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/new">Formulario Dentista</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/dentist/new">Formulario Dentista</a> <br/>
 						</c:otherwise>
 					</c:choose>
 					</td>

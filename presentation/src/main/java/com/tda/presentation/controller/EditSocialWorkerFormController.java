@@ -43,7 +43,7 @@ public class EditSocialWorkerFormController extends
 		} else {
 			socialWorkerFormService.update(socialWorkerForm);
 			status.setComplete();
-			return "redirect:/patient/" + socialWorkerForm.getPatient().getId();
+			return "redirect:/";
 		}
 	}
 
