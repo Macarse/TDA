@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.tda.model.dentist.DentistAction;
+import com.tda.model.dentist.SeverityLevel;
 
 public class BaseDentistFormController {
 
@@ -14,7 +15,22 @@ public class BaseDentistFormController {
 	}
 
 	@ModelAttribute("dentistAction")
-	public DentistAction[] populateNurseAction() {
+	public DentistAction[] populateDentistAction() {
 		return DentistAction.values();
+	}
+
+	@ModelAttribute("periodontalDisease")
+	public SeverityLevel[] populatePeriodontalDisease() {
+		return SeverityLevel.values();
+	}
+
+	@ModelAttribute("gumDisease")
+	public SeverityLevel[] populateGumDisease() {
+		return SeverityLevel.values();
+	}
+
+	@ModelAttribute("toothMobility")
+	public SeverityLevel[] populateToothMobility() {
+		return SeverityLevel.values();
 	}
 }
