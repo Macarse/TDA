@@ -9,10 +9,16 @@ div[class=filter-container]{
 	border-bottom: solid 1px;
 	font-size: 11px;
 	height: 30px;
-	width: 50%;
 }
 
 .socialworkerform textarea, .pediatricianform textarea .dentistform textarea{
 	width: 100%;
 	height: 100px;
+}
+
+.title{
+	font-weight: bolder;
+	text-align: left;
+	font-size: 11px;
+	height: 30px;
 }
