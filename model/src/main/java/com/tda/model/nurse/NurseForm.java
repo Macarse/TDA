@@ -1,13 +1,26 @@
 package com.tda.model.nurse;
 
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.CollectionOfElements;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.ForeignKey;
 
 import com.tda.model.patient.Patient;
 
@@ -33,10 +46,11 @@ public class NurseForm {
 	private Double TAmin;
 	private Double TAmax;
 
-	// TODO VACCINES
+	// Vaxines
+	private Collection<Vaxine> vaxines;
 
 	// Nurse Actions
-	// private Collection<NurseAction> nurseActions;
+	private Collection<NurseAction> nurseActions;
 
 	// TODO CURATION
 
@@ -130,6 +144,29 @@ public class NurseForm {
 
 	public void setTAmax(Double tAmax) {
 		TAmax = tAmax;
+	}
+
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Vaxine.class)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@ForeignKey(name = "ID_NURSE_FORM", inverseName = "ID_VAXINE")
+	public Collection<Vaxine> getVaxines() {
+		return vaxines;
+	}
+
+	public void setVaxines(Collection<Vaxine> vaxines) {
+		this.vaxines = vaxines;
+	}
+
+	@CollectionOfElements(targetElement = NurseAction.class)
+	@JoinTable(name = "NURSE_ACTION", joinColumns = @JoinColumn(name = "NURSE_FORM_ID"))
+	@Column(name = "ACTIONS", nullable = true)
+	@Enumerated(EnumType.STRING)
+	public Collection<NurseAction> getNurseActions() {
+		return nurseActions;
+	}
+
+	public void setNurseActions(Collection<NurseAction> nurseActions) {
+		this.nurseActions = nurseActions;
 	}
 
 	public String getObservations() {

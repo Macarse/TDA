@@ -71,9 +71,19 @@
 	</div>
 
 	<div id="tab-vaccines" class="nurseform">
+	
+	<p><form:label for="vaxines" path="vaxines"
+		cssErrorClass="error"><fmt:message key="nurse.form.vaccines" /></form:label><br />
+	<form:checkboxes items="${allVaxines}" path="vaxines" itemLabel="name" itemValue="id"/><form:errors path="vaxines" /></p>
+	
 	</div>
 
 	<div id="tab-actions" class="nurseform">
+	
+	<p><form:label for="nurseActions" path="nurseActions"
+		cssErrorClass="error"><fmt:message key="nurse.form.vaccines" /></form:label><br />
+	<form:checkboxes items="${allNurseActions}" path="nurseActions" itemLabel="description"/><form:errors path="nurseActions" /></p>
+	
 	</div>
 
 	<div id="tab-curation" class="nurseform">

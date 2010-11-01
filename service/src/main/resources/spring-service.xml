@@ -48,6 +48,10 @@
 		<property name="authenticationManager"
 			ref="org.springframework.security.authenticationManager" />
 	</bean>
+	
+	<bean id="vaxineService" class="com.tda.service.impl.VaxineServiceImpl">
+		<property name="vaxineDAO" ref="vaxineDAO" />
+	</bean>
 
 	<bean id="userProvider" class="com.tda.service.provider.UserDefaultProvider"
 		init-method="init" depends-on="roleProvider">
@@ -71,4 +75,15 @@
 			<ref local="authorityService" />
 		</property>
 	</bean>
+	
+	<bean id="vaxineProvider" class="com.tda.service.provider.VaxineDefaultProvider"
+		init-method="init">
+		<property name="propertiesHolder">
+			<util:properties location="classpath:vaxines.properties" />
+		</property>
+		<property name="vaxineService">
+			<ref local="vaxineService" />
+		</property>
+	</bean>
+	
 </beans>
