@@ -16,7 +16,7 @@ div[class=filter-container]{
 	height: 100px;
 }
 
-.title{
+span.titleform{
 	font-weight: bolder;
 	text-align: left;
 	font-size: 11px;

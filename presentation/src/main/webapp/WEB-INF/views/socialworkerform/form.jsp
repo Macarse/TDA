@@ -104,7 +104,7 @@
 	<div id="tab-viv" class="socialworkerform">
 		<table>
 			<tr>
-				<td colspan="${fieldsPerRow}"><form:label for="roomsExcludingKitchenAndBathroom" path="roomsExcludingKitchenAndBathroom" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.roomsExcludingKitchenAndBathroom" /></span></form:label>
+				<td colspan="${fieldsPerRow}"><form:label for="roomsExcludingKitchenAndBathroom" path="roomsExcludingKitchenAndBathroom" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.roomsExcludingKitchenAndBathroom" /></span></form:label>
 				<form:input path="roomsExcludingKitchenAndBathroom" /> <form:errors path="roomsExcludingKitchenAndBathroom" /></td></tr>
 			<tr>
 				<th colspan="${fieldsPerRow}"><form:label for="interiorFloor" path="interiorFloor" cssErrorClass="error"><fmt:message key="socialworker.form.interiorFloor" /></form:label></th></tr>
@@ -131,7 +131,7 @@
 				<c:if test="${count%fieldsPerRow  != 0 }"></tr></c:if>
 				<tr><td><form:errors path="roofType" /></td></tr>
 			<tr>
-				<td colspan="${fieldsPerRow }"><form:label for="hasCeiling1" path="hasCeiling" cssErrorClass="error"> <span class="title"><fmt:message key="socialworker.form.hasCeiling" /></span></form:label>
+				<td colspan="${fieldsPerRow }"><form:label for="hasCeiling1" path="hasCeiling" cssErrorClass="error"> <span class="titleform"><fmt:message key="socialworker.form.hasCeiling" /></span></form:label>
 				<form:checkbox path="hasCeiling" /> <form:errors path="hasCeiling" /></td></tr>
 			<tr>
 				<th colspan="${fieldsPerRow}"><form:label for="waterSource" path="waterSource" cssErrorClass="error"><fmt:message key="socialworker.form.waterSource" /></form:label></th></tr>
@@ -158,10 +158,10 @@
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="waterSourceType" /></td></tr>
 			<tr>
-				<td><form:label for="hasBathroom1" path="hasBathroom" cssErrorClass="error"> <span class="title"><fmt:message key="socialworker.form.hasBathroom" /></span></form:label>
+				<td><form:label for="hasBathroom1" path="hasBathroom" cssErrorClass="error"> <span class="titleform"><fmt:message key="socialworker.form.hasBathroom" /></span></form:label>
 					<form:checkbox path="hasBathroom" /> <form:errors path="hasBathroom" /></td></tr>
 			<tr>
-				<td><form:label for="bathroomInside1" path="bathroomInside" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.bathroomInside" /> </span></form:label>
+				<td><form:label for="bathroomInside1" path="bathroomInside" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.bathroomInside" /> </span></form:label>
 					<form:checkbox path="bathroomInside" /> <form:errors path="bathroomInside" /></td></tr>
 			<tr>
 				<th colspan="${fieldsPerRow}"><form:label for="bathroomSewerType" path="bathroomSewerType" cssErrorClass="error"><fmt:message key="socialworker.form.bathroomSewerType" /></form:label></th></tr>
@@ -176,7 +176,7 @@
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="bathroomSewerType" /></td></tr>
 			<tr>
-				<td><form:label for="inSinkingZone1" path="inSinkingZone" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.isSinkingZone" /></span></form:label>
+				<td><form:label for="inSinkingZone1" path="inSinkingZone" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.isSinkingZone" /></span></form:label>
 				<form:checkbox path="inSinkingZone" /> <form:errors path="inSinkingZone" /></td></tr>
 			<tr>
 				<th colspan="${fieldsPerRow}"><form:label for="kitchenFuel" path="kitchenFuel" cssErrorClass="error"><fmt:message key="socialworker.form.kitchenFuel" /></form:label></th></tr>
@@ -209,10 +209,10 @@
 	<div id="tab-esc" class="socialworkerform">
 		<table>
 			<tr>
-				<td colspan="${fieldsPerRow}"><form:label for="knowsHowToReadAndWrite1" path="knowsHowToReadAndWrite" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.knowsHowToReadAndWrite" /></span></form:label>
+				<td colspan="${fieldsPerRow}"><form:label for="knowsHowToReadAndWrite1" path="knowsHowToReadAndWrite" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.knowsHowToReadAndWrite" /></span></form:label>
 					<form:checkbox path="knowsHowToReadAndWrite" /> <form:errors path="knowsHowToReadAndWrite" /></td></tr>
 			<tr>
-				<td colspan="${fieldsPerRow}"><form:label for="goingToSchool1" path="goingToSchool" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.goingToSchool" /></span></form:label>
+				<td colspan="${fieldsPerRow}"><form:label for="goingToSchool1" path="goingToSchool" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.goingToSchool" /></span></form:label>
 					<form:checkbox path="goingToSchool" /> <form:errors path="goingToSchool" /></td></tr>
 			<tr>
 				<th colspan="${fieldsPerRow}"><form:label for="scholarity" path="scholarity" cssErrorClass="error"><fmt:message key="socialworker.form.scholarity" /></form:label></th></tr>
@@ -257,7 +257,7 @@
 	<div id="tab-eco" class="socialworkerform">
 		<table>
 			<tr>
-				<td colspan="${fieldsPerRow}"><form:label for="workingPeople1" path="workingPeople" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.workingPeople" /></span></form:label>
+				<td colspan="${fieldsPerRow}"><form:label for="workingPeople1" path="workingPeople" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.workingPeople" /></span></form:label>
 					<form:input path="workingPeople" /> <form:errors path="workingPeople" /></td></tr>
 			<tr>
 				<th colspan="${fieldsPerRow}"><form:label for="adultEducationalLevel" path="adultEducationalLevel" cssErrorClass="error"><fmt:message key="socialworker.form.adultEducationalLevel" /></form:label></th></tr>
@@ -321,16 +321,16 @@
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="mistreatment" /></td></tr>
 			<tr>
-				<td colspan="${fieldsPerRow } }"><form:label for="hasProfessionalAssistanceForAddiction1" path="hasProfessionalAssistanceForAddiction" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.hasProfessionalAssistanceForAddiction" /></span></form:label>
+				<td colspan="${fieldsPerRow } }"><form:label for="hasProfessionalAssistanceForAddiction1" path="hasProfessionalAssistanceForAddiction" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasProfessionalAssistanceForAddiction" /></span></form:label>
 					<form:checkbox path="hasProfessionalAssistanceForAddiction" /> <form:errors path="hasProfessionalAssistanceForAddiction" /></td></tr>
 			<tr>
-				<td colspan="${fieldsPerRow}"><form:label for="hasHealthCare1" path="hasHealthCare" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.hasHealthCare" /></span></form:label>
+				<td colspan="${fieldsPerRow}"><form:label for="hasHealthCare1" path="hasHealthCare" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasHealthCare" /></span></form:label>
 					<form:checkbox path="hasHealthCare" /> <form:errors path="hasHealthCare" /></td></tr>
 			<tr>
-				<td colspan="${fieldsPerRow}"><form:label for="hasProfessionalAssistanceForMistreatment1" path="hasProfessionalAssistanceForMistreatment" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.hasProfessionalAssistanceForMistreatment" /></span></form:label>
+				<td colspan="${fieldsPerRow}"><form:label for="hasProfessionalAssistanceForMistreatment1" path="hasProfessionalAssistanceForMistreatment" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasProfessionalAssistanceForMistreatment" /></span></form:label>
 					<form:checkbox path="hasProfessionalAssistanceForMistreatment" /> <form:errors path="hasProfessionalAssistanceForMistreatment" /></td></tr>
 			<tr>
-				<td colspan="${fieldsPerRow}"><form:label for="hasBeenDerivedToOtherSocialServices1" path="hasBeenDerivedToOtherSocialServices" cssErrorClass="error"><span class="title"><fmt:message key="socialworker.form.hasBeenDerivedToOtherSocialServices" /></span></form:label>
+				<td colspan="${fieldsPerRow}"><form:label for="hasBeenDerivedToOtherSocialServices1" path="hasBeenDerivedToOtherSocialServices" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasBeenDerivedToOtherSocialServices" /></span></form:label>
 					<form:checkbox path="hasBeenDerivedToOtherSocialServices" /> <form:errors path="hasBeenDerivedToOtherSocialServices" /></td></tr>
 			<tr>
 				<th colspan="${fieldsPerRow}"><form:label for="diagnose" path="diagnose" cssErrorClass="error"><fmt:message key="socialworker.form.diagnose" /></form:label></th></tr>
