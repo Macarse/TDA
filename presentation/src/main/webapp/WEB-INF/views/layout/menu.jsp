@@ -11,8 +11,8 @@
 <div style="text-align:center; padding-top:20px;">
 	<div>Pacientes actualmente en el tren</div>
 	<div id="queue" style="padding-top:20px;">
-		<img id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif'>
 		<div id="queueTable"></div>
+		<img id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif'>
 	</div>
 </div>
 
@@ -20,7 +20,7 @@
 
 var refreshId = setInterval(function(){
 			$('#loadImage').show();
-			$('#queueTable').hide();
+
 			$.get(contextPath + "/getUserQueue", function(data){
 				//Me llega la lista separada por &:
 		   		var parsedData = data.split('&');
@@ -34,7 +34,6 @@ var refreshId = setInterval(function(){
 		   		}
 		   		
 		   		$('#loadImage').hide();
-		   		$('#queueTable').show();
 		   		$('#queueTable').html(innerHtml);
 		 	});
 		}, 5000);
