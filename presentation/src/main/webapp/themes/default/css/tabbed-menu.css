@@ -1,0 +1,28 @@
+#tabMenu {margin:0;padding:0 0 0 15px;list-style:none;}
+#tabMenu li {float:left;height:32px;width:39px;cursor:pointer;cursor:hand}
+
+li.comments {background:url('../image/tabComment.gif') no-repeat 0 -32px;}
+li.posts {background:url(../image/tabStar.gif) no-repeat 0 -32px;}
+li.category {background:url(../image/tabFolder.gif) no-repeat 0 -32px;}
+li.famous {background:url(../image/tabHeart.gif) no-repeat 0 -32px;}
+li.random {background:url(../image/tabRandom.gif) no-repeat 0 -32px;}
+
+li.mouseover {background-position:0 0;}
+li.mouseout {background-position:0 -32px;}
+li.selected {background-position:0 0;}
+
+.box {width:200px}
+.boxTop {background:url('../image/boxTop.gif') no-repeat;height:11px;clear:both}
+*html .boxTop {margin-bottom:-2px;}
+.boxBody {background-color:#282828;}
+.boxBottom {background:url('../image/boxBottom.gif') no-repeat;height:11px;}
+
+.boxBody div {display:none;}
+.boxBody div.show {display:block;}
+.boxBody #category a {display:block;}
+
+.boxBody div ul {margin:0 10px 0 25px;padding:0;width:160px;list-style-image:url(../image/arrow.gif)}
+*html .boxBody div ul {margin-left:10px;padding-left:15px;}
+.boxBody div li {border-bottom:1px dotted #8e8e8e; padding:4px 0;cursor:hand;cursor:pointer;}
+.boxBody div ul li.last {border-bottom:none}
+.boxBody div li span {font-size:8px;font-style:italic; color:#888;}
