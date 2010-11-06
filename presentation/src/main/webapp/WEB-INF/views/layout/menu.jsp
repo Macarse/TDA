@@ -87,25 +87,31 @@
 
 <script language='javascript' type='text/javascript'> 
 
-var refreshId = setInterval(function(){
-			$('#loadImage').show();
+var refreshId = setInterval(refreshPatients, 5000);
 
-			$.get(contextPath + "/getUserQueue", function(data){
-				//Me llega la lista separada por &:
-		   		var parsedData = data.split('&');
-		   		var innerHtml = "";
-		   		var i;
-		   		for(i in parsedData ) {
-		   	   		//Cada elemento esta separado por =:
-			   		var patientData = parsedData[i].split('=');
-			   		var str = patientData[0];
-					innerHtml += "<div>" + str.replace('+',' ') + "</div>";
-		   		}
-		   		
-		   		$('#loadImage').hide();
-		   		$('#queueTable').html(innerHtml);
-		 	});
-		}, 5000);
+function refreshPatients() {
+	clearInterval(refreshId);
+
+	$('#loadImage').show();
+
+	$.get(contextPath + "/getUserQueue", function(data){
+		//Me llega la lista separada por &:
+   		var parsedData = data.split('&');
+   		var innerHtml = "";
+   		var i;
+   		for(i in parsedData ) {
+   	   		//Cada elemento esta separado por =:
+	   		var patientData = parsedData[i].split('=');
+	   		var str = patientData[0];
+			innerHtml += "<div>" + str.replace('+',' ') + "</div>";
+   		}
+   		
+   		$('#loadImage').hide();
+   		$('#queueTable').html(innerHtml);
+ 	});
+
+	 refreshId = setInterval(refreshPatients, 5000)
+}
 /*
 function loadQueue() {
 	document.getElementById('loadImage').style.visibility = "visible";
