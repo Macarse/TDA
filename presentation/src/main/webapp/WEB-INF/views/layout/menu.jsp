@@ -46,7 +46,11 @@
 
 <script language='javascript' type='text/javascript'> 
 
-var refreshId = setInterval(refreshPatients, 335000);
+var refreshId;
+
+$(document).ready(function(){
+	refreshPatients();
+});
 
 function refreshPatients() {
 	clearInterval(refreshId);
