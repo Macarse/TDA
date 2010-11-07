@@ -11,10 +11,11 @@
 	</div>
 </c:if>
 
-<div>
-Buscar paciente
+<div id="search-button">
+	<a href="#" style="font-size: 16px;"><span class="ui-icon ui-icon-search button-icon"> </span> Buscar paciente</a>
 </div>
-<div class="filter-container">
+
+<div class="filter-container" style="display:none;" id="filter-containter">
 	<jsp:include page="/WEB-INF/views/welcome/filter.jsp" flush="true"/>
 </div>
 
@@ -102,3 +103,11 @@ Buscar paciente
 	</tfoot>
 </table>
 </div>
+
+<script language='javascript' type='text/javascript'>
+	$(document).ready(function(){
+		$("#search-button").click(function(){
+			$("#filter-containter").slideToggle('slow');
+		});
+	});
+</script>

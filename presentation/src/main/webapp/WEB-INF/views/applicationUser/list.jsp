@@ -22,7 +22,19 @@
 	</div>
 </c:if>
 
-<div class="filter-container">
+<script language='javascript' type='text/javascript'>
+	$(document).ready(function(){
+		$("#search-button").click(function(){
+			$("#filter-containter").slideToggle('slow');
+		});
+	});
+</script>
+
+<div id="search-button">
+	<a href="#" style="font-size: 14px;"><span class="ui-icon ui-icon-search button-icon"> </span> Buscar Usuario</a>
+</div>
+
+<div class="filter-container" style="display:none;" id="filter-containter">
 	<jsp:include page="/WEB-INF/views/applicationUser/filter.jsp" flush="true"/>
 </div>
 
