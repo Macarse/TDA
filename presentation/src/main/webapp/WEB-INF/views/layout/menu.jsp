@@ -49,19 +49,23 @@ function refreshPatients() {
 
 	$.get(contextPath + "/getUserQueue", function(data){
 		//Me llega la lista separada por &:
-   		var parsedData = data.split('&');
-   		var innerHtml = "";
-   		var i;
-   		//alert(parsedData.length);
-   		for(i in parsedData ) {
-   	   		//Cada elemento esta separado por =:
-	   		var patientData = parsedData[i].split('=');
-	   		var str = patientData[0];
-			innerHtml += "<li>" + str.replace('+',' ') + "</li>";
-   		}
-
-   		$('#m-pacients').html(parsedData.length);
-   		$('#menu-pacientsontrain').html('<ul>' + innerHtml + '</ul>');
+		if(data != ''){
+	   		var parsedData = data.split('&');
+	   		var innerHtml = "";
+	   		var i;
+	   		//alert(parsedData.length);
+	   		for(i in parsedData ) {
+	   	   		//Cada elemento esta separado por =:
+		   		var patientData = parsedData[i].split('=');
+		   		var str = patientData[0];
+				innerHtml += "<li>" + str.replace('+',' ') + "</li>";
+	   		}
+	
+	   		$('#m-pacients').html(parsedData.length);
+	   		$('#menu-pacientsontrain').html('<ul>' + innerHtml + '</ul>');
+		}else{
+			$('#m-pacients').html("0");
+		}
    		$('#loadImage').hide();
    		$('#menu-icon').show();
  	});
