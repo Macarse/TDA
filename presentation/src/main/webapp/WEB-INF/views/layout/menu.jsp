@@ -31,21 +31,10 @@
 	  
 	  <div id="category">
 	    <ul>
-	      <li><a href="http://www.queness.com/tag/ajax">ajax</a></li>
-	      <li><a href="http://www.queness.com/tag/css-html">css-html</a></li>
-	      <li><a href="http://www.queness.com/tag/freebies">freebies</a></li>
-	      <li><a href="http://www.queness.com/tag/icon">icon</a></li>
-	      <li><a href="http://www.queness.com/tag/inspiration">inspiration</a></li>
-	      <li><a href="http://www.queness.com/tag/javascript">javascript</a></li>
-	      <li><a href="http://www.queness.com/tag/logo">logo</a></li>
-	      <li><a href="http://www.queness.com/tag/photography">photography</a></li>
-	      <li><a href="http://www.queness.com/tag/photoshop">photoshop</a></li>
-	      <li><a href="http://www.queness.com/tag/php">php</a></li>
-	      <li><a href="http://www.queness.com/tag/seo">seo</a></li>
-	      <li><a href="http://www.queness.com/tag/tutorial">tutorial</a></li>
-	      <li><a href="http://www.queness.com/tag/usability">usability</a></li>
-	      <li><a href="http://www.queness.com/tag/wallpaper">wallpaper</a></li>
-	      <li class="last"><a href="http://www.queness.com/tag/wordpress">wordpress</a></li>
+	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('admin')">Admin</a></li>
+	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('social')">Social</a></li>
+	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('dentista')">dentista</a></li>
+   	      <li class="last"><a href="http://www.queness.com/tag/wordpress">wordpress</a></li>
 	    </ul>  
 	  </div>
 	</div>
@@ -57,7 +46,7 @@
 
 <script language='javascript' type='text/javascript'> 
 
-var refreshId = setInterval(refreshPatients, 5000);
+var refreshId = setInterval(refreshPatients, 335000);
 
 function refreshPatients() {
 	clearInterval(refreshId);
@@ -86,6 +75,7 @@ function refreshPatients() {
 
 	 refreshId = setInterval(refreshPatients, 5000)
 }
+
 /*
 function loadQueue() {
 	document.getElementById('loadImage').style.visibility = "visible";
