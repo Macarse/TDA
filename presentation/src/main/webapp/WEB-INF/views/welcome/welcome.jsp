@@ -55,7 +55,7 @@ Buscar paciente
 					</c:choose>
 					<c:choose>
 						<c:when test="${patientintrain.padiatricianform != null}">
-							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/${patientintrain.pediatricianform.id}/edit">Formulario Pediatra</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/${patientintrain.padiatricianform.id}/edit">Formulario Pediatra</a> <br/>
 						</c:when>
 						<c:otherwise>
 							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/new">Formulario Pediatra</a> <br/>
