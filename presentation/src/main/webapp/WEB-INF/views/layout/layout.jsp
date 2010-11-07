@@ -58,7 +58,9 @@
     $("#dialog").dialog({
       buttons : {
         "Aceptar" : function() {
-          window.location.href = targetUrl;
+          //window.location.href = targetUrl;
+          $(this).dialog("close");
+          e.srcElement.parentElement.submit()
         },
         "Cancelar" : function() {
           $(this).dialog("close");

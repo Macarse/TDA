@@ -6,11 +6,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-<!--
 	$(document).ready(function(){
 		$("#form-tabs").tabs();
+
+		if( document.getElementById('distosicRadioButton').checked )
+			$('.distosicHidden').show();
+		
 	});
-//-->
 </script>
 
 <!-- aux variables -->
@@ -80,14 +82,14 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					<form:label for="birthType" path="birthType" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.birthType" />
 					</form:label></th></tr>
-					
+
 					<c:set var="count" value="0" />
 					<c:forEach var="birthType" items="${birthType}">
 						<c:if test="${count%2 == 0 }"><tr></c:if>
 							<td>
 							<c:choose>
 							<c:when test="${birthType.description == 'Dist√≥cico'}">
-								<form:radiobutton path="birthType" value="${birthType}" onclick="$('.distosicHidden').show()"/> ${birthType.description}
+								<form:radiobutton id="distosicRadioButton" path="birthType" value="${birthType}" onclick="$('.distosicHidden').show()"/> ${birthType.description}
 							</c:when>
 							<c:otherwise>
 								<form:radiobutton path="birthType" value="${birthType}" onclick="$('.distosicHidden').hide()"/> ${birthType.description}

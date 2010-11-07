@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -421,7 +422,7 @@ public class SocialWorkerForm {
 		this.hasHealthCare = hasHealthCare;
 	}
 
-	@CollectionOfElements(targetElement = NBI.class)
+	@CollectionOfElements(targetElement = NBI.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "NBI", joinColumns = @JoinColumn(name = "SOCIAL_WORKER_ID"))
 	@Column(name = "NBI", nullable = true)
 	@Enumerated(EnumType.STRING)
