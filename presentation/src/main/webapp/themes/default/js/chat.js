@@ -238,7 +238,7 @@ function closeChatBox(chatboxtitle) {
 	$('#chatbox_'+chatboxtitle).css('display','none');
 	restructureChatBoxes();
 
-	$.post("chat.php?action=closechat", { chatbox: chatboxtitle} , function(data){	
+	$.post(contextPath + "/chat/close", { chatbox: chatboxtitle} , function(data){	
 	});
 
 }
@@ -284,7 +284,12 @@ function toggleChatBoxGrowth(chatboxtitle) {
 }
 
 function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
-	 
+
+	if(event.keyCode == 27) {
+		closeChatBox(chatboxtitle);
+		return;
+	}
+
 	if(event.keyCode == 13 && event.shiftKey == 0)  {
 		message = $(chatboxtextarea).val();
 		message = message.replace(/^\s+|\s+$/g,"");

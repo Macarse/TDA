@@ -1,18 +1,19 @@
 package com.tda.presentation.session;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.tda.model.chat.ChatMessage;
 
-public class ChatSession {
+public class ChatSession implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String username;
-	private LinkedList<String> openChatBoxes;
 	private LinkedHashMap<String, LinkedList<ChatMessage>> msgs = new LinkedHashMap<String, LinkedList<ChatMessage>>();
 	
 	public ChatSession() {
-		openChatBoxes = new LinkedList<String>();
 	}
 
 	public String getUsername() {
@@ -21,6 +22,13 @@ public class ChatSession {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public void removeMessages(String from){
+		if (msgs.containsKey(from)){
+			LinkedList<ChatMessage> list = msgs.get(from);
+			list.clear();
+		}
 	}
 	
 	public void addMessage(String from, String toWhom, String message){
