@@ -94,7 +94,7 @@ public class ApplicationUserController {
 		if (!applicationUser.getPassword().equals(
 				applicationUser.getConfirmPassword())) {
 			result.addError(new FieldError("applicationUser",
-					"confirmPassword", "Las contraseñas no son iguales"));
+					"confirmPassword", "Las contrase√±as no son iguales"));
 		}
 	}
 
