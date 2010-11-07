@@ -507,6 +507,206 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 		
 		<!-- LABORATORY -->
 		<div id="tab-lab" class="pediatricianform">
+			<table>
+				<tr><th>
+					<form:label for="hematrocito" path="hematrocito" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.hematocrito" />
+					</form:label></th>
+					<td><form:input path="hematrocito" /></td></tr>
+					<tr><td><form:errors path="hematrocito" /></td></tr>
+					
+				<tr><th>
+					<form:label for="globulosBlancos" path="globulosBlancos" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.globulosBlancos" />
+					</form:label></th>
+					<td><form:input path="globulosBlancos" /></td></tr>
+					<tr><td><form:errors path="globulosBlancos" /></td></tr>
+					
+				<tr><th>
+					<form:label for="leucocitaria" path="leucocitaria" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.leucocitaria" />
+					</form:label></th>
+					<td><form:input path="leucocitaria" /></td></tr>
+					<tr><td><form:errors path="leucocitaria" /></td></tr>
+					
+				<tr><th>
+					<form:label for="plaquetas" path="plaquetas" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.plaquetas" />
+					</form:label></th>
+					<td><form:input path="plaquetas" /></td></tr>
+					<tr><td><form:errors path="plaquetas" /></td></tr>
+					
+				<tr><th>
+					<form:label for="eritrosedimentacion" path="eritrosedimentacion" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.eritrosedimentacion" />
+					</form:label></th>
+					<td><form:input path="eritrosedimentacion" /></td></tr>
+					<tr><td><form:errors path="eritrosedimentacion" /></td></tr>
+					
+				<tr><th>
+					<form:label for="tiempoSangria" path="tiempoSangria" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.sangria" />
+					</form:label></th>
+					<td><form:input path="tiempoSangria" /></td></tr>
+					<tr><td><form:errors path="tiempoSangria" /></td></tr>
+					
+					
+				<tr><th colspan="2">
+					<form:label for="suero" path="suero" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.suero" />
+					</form:label></th></tr>
+					
+					<c:forEach var="suero" items="${suero}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="suero" value="${suero}" /> ${suero.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="suero" /></td></tr>
+					
+				<tr><th>
+					<form:label for="glucosa" path="glucosa" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.glucosa" />
+					</form:label></th>
+					<td><form:input path="glucosa" /></td></tr>
+					<tr><td><form:errors path="glucosa" /></td></tr>
+					
+				<tr><th>
+					<form:label for="urea" path="urea" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.urea" />
+					</form:label></th>
+					<td><form:input path="urea" /></td></tr>
+					<tr><td><form:errors path="urea" /></td></tr>
+					
+				<tr><th>
+					<form:label for="got" path="got" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.got" />
+					</form:label></th>
+					<td><form:input path="got" /></td></tr>
+					<tr><td><form:errors path="got" /></td></tr>
+					
+				<tr><th>
+					<form:label for="gpt" path="gpt" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.gpt" />
+					</form:label></th>
+					<td><form:input path="gpt" /></td></tr>
+					<tr><td><form:errors path="gpt" /></td></tr>
+					
+				<tr><th>
+					<form:label for="colesterol" path="colesterol" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.colesterol" />
+					</form:label></th>
+					<td><form:input path="colesterol" /></td></tr>
+					<tr><td><form:errors path="colesterol" /></td></tr>
+					
+										
+				<tr><th>
+					<form:label for="proteinas" path="proteinas" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.proteinas" />
+					</form:label></th>
+					<td><form:input path="proteinas" /></td></tr>
+					<tr><td><form:errors path="proteinas" /></td></tr>
+					
+				<tr><th>
+					<form:label for="albumina" path="albumina" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.albumina" />
+					</form:label></th>
+					<td><form:input path="albumina" /></td></tr>
+					<tr><td><form:errors path="albumina" /></td></tr>
+					
+				<tr><th>
+					<form:label for="orina" path="orina" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.orina" />
+					</form:label></th>
+					<td><form:input path="orina" /></td></tr>
+					<tr><td><form:errors path="orina" /></td></tr>
+					
+										
+				<tr><th>
+					<form:label for="anticuerpos" path="anticuerpos" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.anticuerpos" />
+					</form:label></th>
+					<td><form:input path="anticuerpos" /></td></tr>
+					<tr><td><form:errors path="anticuerpos" /></td></tr>
+					
+				<tr><th>
+					<form:label for="reumatoideo" path="reumatoideo" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.reumatoideo" />
+					</form:label></th>
+					<td><form:input path="reumatoideo" /></td></tr>
+					<tr><td><form:errors path="reumatoideo" /></td></tr>
+					
+				<tr><th colspan="2">
+					<form:label for="testEmbarazo" path="testEmbarazo" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.embarazo" />
+					</form:label></th></tr>
+					
+					<c:forEach var="testEmbarazo" items="${testEmbarazo}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="testEmbarazo" value="${testEmbarazo}" /> ${testEmbarazo.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="testEmbarazo" /></td></tr>
+					
+				<tr><th colspan="2">
+					<form:label for="streptococos" path="streptococos" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.streptococos" />
+					</form:label></th></tr>
+					
+					<c:forEach var="streptococos" items="${streptococos}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="streptococos" value="${streptococos}" /> ${streptococos.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="streptococos" /></td></tr>
+					
+				<tr><th>
+					<form:label for="vdrl" path="vdrl" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.vdrl" />
+					</form:label></th>
+					<td><form:input path="vdrl" /></td></tr>
+					<tr><td><form:errors path="vdrl" /></td></tr>
+										
+				<tr><th>
+					<form:label for="parasitologico" path="parasitologico" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.parasitologico" />
+					</form:label></th>
+					<td><form:input path="parasitologico" /></td></tr>
+					<tr><td><form:errors path="parasitologico" /></td></tr>
+
+				<tr><th colspan="2">
+					<form:label for="testGraham" path="testGraham" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.graham" />
+					</form:label></th></tr>
+					
+					<c:forEach var="testGraham" items="${testGraham}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="testGraham" value="${testGraham}" /> ${testGraham.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="testGraham" /></td></tr>
+					
+				<tr><th colspan="2">
+					<form:label for="chagas" path="chagas" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.chagas" />
+					</form:label></th></tr>
+					
+					<c:forEach var="chagas" items="${chagas}">
+						<c:if test="${count%2 == 0 }"><tr></c:if>
+							<td><form:radiobutton path="chagas" value="${chagas}" /> ${chagas.description}</td>
+						<c:if test="${count%2 == 1 }"></tr></c:if>
+					    <c:set var="count" value="${count+1}" />
+					</c:forEach>
+					<c:if test="${count%2 == 1 }"></tr></c:if>
+					<tr><td><form:errors path="chagas" /></td></tr>
+			</table>
 		</div>
 		
 		<!-- RADIOLOGY -->

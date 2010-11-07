@@ -9,6 +9,9 @@ import com.tda.model.pediatrician.BirthType;
 import com.tda.model.pediatrician.BirthTypePresentation;
 import com.tda.model.pediatrician.BirthTypeTermination;
 import com.tda.model.pediatrician.ExitStatus;
+import com.tda.model.pediatrician.PositiveNegativeOrUndefined;
+import com.tda.model.pediatrician.PositiveOrNegative;
+import com.tda.model.pediatrician.SueroType;
 
 public class BasePediatricianFormController {
 	@InitBinder
@@ -19,6 +22,31 @@ public class BasePediatricianFormController {
 	@ModelAttribute("birthPlace")
 	public BirthPlace[] populateBirthPlace() {
 		return BirthPlace.values();
+	}
+
+	@ModelAttribute("testEmbarazo")
+	public PositiveOrNegative[] populateTestEmbarazo() {
+		return PositiveOrNegative.values();
+	}
+
+	@ModelAttribute("streptococos")
+	public PositiveOrNegative[] populateStreptococos() {
+		return PositiveOrNegative.values();
+	}
+
+	@ModelAttribute("testGraham")
+	public PositiveOrNegative[] populateTestGraham() {
+		return PositiveOrNegative.values();
+	}
+
+	@ModelAttribute("chagas")
+	public PositiveNegativeOrUndefined[] populateChagas() {
+		return PositiveNegativeOrUndefined.values();
+	}
+
+	@ModelAttribute("suero")
+	public SueroType[] populateSueroType() {
+		return SueroType.values();
 	}
 
 	@ModelAttribute("birthType")

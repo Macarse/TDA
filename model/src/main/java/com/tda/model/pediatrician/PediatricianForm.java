@@ -114,13 +114,57 @@ public class PediatricianForm {
 
 	// PHYSICAL EXAM
 
-	// TODO Some things are filled in Nursing and have to be shown up here.
-
 	private String symptoms;
 
 	private String pathologyFound;
 
-	// TODO LABORATORY
+	// LABORATORY
+
+	private Integer hematrocito;
+
+	private Integer globulosBlancos;
+
+	private String leucocitaria;
+
+	private Integer plaquetas;
+
+	private Integer eritrosedimentacion;
+
+	private Integer tiempoSangria;
+
+	private SueroType suero;
+
+	private Integer glucosa;
+
+	private Integer urea;
+
+	private Integer got;
+
+	private Integer gpt;
+
+	private Integer colesterol;
+
+	private Double proteinas;
+
+	private Double albumina;
+
+	private String orina;
+
+	private Integer anticuerpos;
+
+	private Integer reumatoideo;
+
+	private PositiveOrNegative testEmbarazo;
+
+	private PositiveOrNegative streptococos;
+
+	private Integer vdrl;
+
+	private String parasitologico;
+
+	private PositiveOrNegative testGraham;
+
+	private PositiveNegativeOrUndefined chagas;
 
 	// RADIOLOGY
 
@@ -572,4 +616,194 @@ public class PediatricianForm {
 	public String getTreatment() {
 		return treatment;
 	}
+
+	public Integer getHematrocito() {
+		return hematrocito;
+	}
+
+	public void setHematrocito(Integer hematrocito) {
+		this.hematrocito = hematrocito;
+	}
+
+	public Integer getGlobulosBlancos() {
+		return globulosBlancos;
+	}
+
+	public void setGlobulosBlancos(Integer globulosBlancos) {
+		this.globulosBlancos = globulosBlancos;
+	}
+
+	public String getLeucocitaria() {
+		return leucocitaria;
+	}
+
+	public void setLeucocitaria(String leucocitaria) {
+		this.leucocitaria = leucocitaria;
+	}
+
+	public Integer getPlaquetas() {
+		return plaquetas;
+	}
+
+	public void setPlaquetas(Integer plaquetas) {
+		this.plaquetas = plaquetas;
+	}
+
+	public Integer getEritrosedimentacion() {
+		return eritrosedimentacion;
+	}
+
+	public void setEritrosedimentacion(Integer eritrosedimentacion) {
+		this.eritrosedimentacion = eritrosedimentacion;
+	}
+
+	public Integer getTiempoSangria() {
+		return tiempoSangria;
+	}
+
+	public void setTiempoSangria(Integer tiempoSangria) {
+		this.tiempoSangria = tiempoSangria;
+	}
+
+	@Enumerated
+	public SueroType getSuero() {
+		return suero;
+	}
+
+	public void setSuero(SueroType suero) {
+		this.suero = suero;
+	}
+
+	public Integer getGlucosa() {
+		return glucosa;
+	}
+
+	public void setGlucosa(Integer glucosa) {
+		this.glucosa = glucosa;
+	}
+
+	public Integer getUrea() {
+		return urea;
+	}
+
+	public void setUrea(Integer urea) {
+		this.urea = urea;
+	}
+
+	public Integer getGot() {
+		return got;
+	}
+
+	public void setGot(Integer got) {
+		this.got = got;
+	}
+
+	public Integer getGpt() {
+		return gpt;
+	}
+
+	public void setGpt(Integer gpt) {
+		this.gpt = gpt;
+	}
+
+	public Integer getColesterol() {
+		return colesterol;
+	}
+
+	public void setColesterol(Integer colesterol) {
+		this.colesterol = colesterol;
+	}
+
+	public Double getProteinas() {
+		return proteinas;
+	}
+
+	public void setProteinas(Double proteinas) {
+		this.proteinas = proteinas;
+	}
+
+	public Double getAlbumina() {
+		return albumina;
+	}
+
+	public void setAlbumina(Double albumina) {
+		this.albumina = albumina;
+	}
+
+	public String getOrina() {
+		return orina;
+	}
+
+	public void setOrina(String orina) {
+		this.orina = orina;
+	}
+
+	public Integer getAnticuerpos() {
+		return anticuerpos;
+	}
+
+	public void setAnticuerpos(Integer anticuerpos) {
+		this.anticuerpos = anticuerpos;
+	}
+
+	public Integer getReumatoideo() {
+		return reumatoideo;
+	}
+
+	public void setReumatoideo(Integer reumatoideo) {
+		this.reumatoideo = reumatoideo;
+	}
+
+	@Enumerated
+	public PositiveOrNegative getTestEmbarazo() {
+		return testEmbarazo;
+	}
+
+	public void setTestEmbarazo(PositiveOrNegative testEmbarazo) {
+		this.testEmbarazo = testEmbarazo;
+	}
+
+	@Enumerated
+	public PositiveOrNegative getStreptococos() {
+		return streptococos;
+	}
+
+	public void setStreptococos(PositiveOrNegative streptococos) {
+		this.streptococos = streptococos;
+	}
+
+	public Integer getVdrl() {
+		return vdrl;
+	}
+
+	public void setVdrl(Integer vdrl) {
+		this.vdrl = vdrl;
+	}
+
+	public String getParasitologico() {
+		return parasitologico;
+	}
+
+	public void setParasitologico(String parasitologico) {
+		this.parasitologico = parasitologico;
+	}
+
+	@Enumerated
+	public PositiveOrNegative getTestGraham() {
+		return testGraham;
+	}
+
+	public void setTestGraham(PositiveOrNegative testGraham) {
+		this.testGraham = testGraham;
+	}
+
+	@Enumerated
+	public PositiveNegativeOrUndefined getChagas() {
+		return chagas;
+	}
+
+	public void setChagas(PositiveNegativeOrUndefined chagas) {
+		this.chagas = chagas;
+	}
+
 }
