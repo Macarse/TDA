@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.tda.model.applicationuser.ApplicationUser;
+import com.tda.model.applicationuser.OnlineUser;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
@@ -115,8 +116,19 @@ public class WelcomeController {
 	String getOnlineUsers() {
 
 		Gson gson = new Gson();
+		List<OnlineUser> users = onlineUserService.getOnlineUsers();
+		OnlineUser me = new OnlineUser();
+		me.setUsername(getUser().getUsername());
+		
+		users.remove(me);
+		
+		return gson.toJson(users);
+	}
 
-		return gson.toJson(onlineUserService.getOnlineUsers());
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout() {
+		onlineUserService.setOffline(getUser().getUsername());
+		return "redirect:/j_spring_security_logout";
 	}
 
 	@RequestMapping(value = "/switchInTrain", method = RequestMethod.POST)

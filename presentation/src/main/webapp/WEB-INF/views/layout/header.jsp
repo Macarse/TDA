@@ -6,7 +6,7 @@
 		<a href="${pageContext.request.contextPath}">Principal</a> | <a href="${pageContext.request.contextPath}/applicationUser/"><span>Usuarios</span></a> | <a href="${pageContext.request.contextPath}/patient/"><span>Pacientes</span></a> | <a href="${pageContext.request.contextPath}/item/"><span>Items</span></a>
 	</div>
 </div>
-<c:url value="${pageContext.request.contextPath}/j_spring_security_logout" var="logoutUrl"/>
+<c:url value="/logout" var="logoutUrl"/>
 
 <div class="fg-buttonset fg-buttonset-multi" style="position:absolute; top:1px; right:20%;">
 	<a class="fg-button button-text ui-state-default ui-corner-left" href="#">Bienvenido <i><c:out value="${user.username}" /></i></a>

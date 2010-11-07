@@ -25,11 +25,6 @@
 	  </div>
 	  
 	  <div id="category">
-<!--	    <ul>-->
-<!--	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('admin')">Admin</a></li>-->
-<!--	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('social')">Social</a></li>-->
-<!--	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('dentista')">dentista</a></li>-->
-<!--	    </ul>  -->
 	  </div>
 	</div>
 	
