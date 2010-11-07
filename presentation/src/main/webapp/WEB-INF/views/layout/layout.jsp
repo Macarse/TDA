@@ -14,6 +14,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.jquery"/>"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.jqueryui"/>"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.tabbed-menu"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.tabbed-menu"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.chat"/>"></script>
+
+<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="css.chat"/>' type="text/css"/>
+<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="css.screen"/>' type="text/css"/>
+<!--[if lte IE 7]>
+<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="css.screen_ie"/>' type="text/css"/>
+<![endif]-->
+
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="layout.css"/>' type="text/css"/>
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="list.css"/>' type="text/css"/>
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="paginator.css"/>' type="text/css"/>	
@@ -70,5 +79,6 @@
   });
 </script>
 
+<a href="javascript:void(0)" onclick="javascript:chatWith('johndoe')">Chat With John Doe</a>
 </body>
 </html>

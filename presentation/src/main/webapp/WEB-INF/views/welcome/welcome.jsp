@@ -88,7 +88,7 @@ Buscar paciente
 						</c:otherwise>
 					</c:choose>
 				</td>
-				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
+				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#" onClick="refreshPatients()"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
 			</tr>
 		</c:forEach>
 	</tbody>

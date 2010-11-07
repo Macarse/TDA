@@ -57,7 +57,7 @@
 
 <script language='javascript' type='text/javascript'> 
 
-var refreshId = setInterval(refreshPatients, 5000);
+var refreshId = setInterval(refreshPatients, 335000);
 
 function refreshPatients() {
 	clearInterval(refreshId);
@@ -86,6 +86,7 @@ function refreshPatients() {
 
 	 refreshId = setInterval(refreshPatients, 5000)
 }
+
 /*
 function loadQueue() {
 	document.getElementById('loadImage').style.visibility = "visible";
