@@ -1,89 +1,59 @@
-<div class="menu-items-container">
-	<div>
-		<ul class="menu">
-		  <li><a href="${pageContext.request.contextPath}/applicationUser/"><span>Usuarios</span></a></li>
-		  <li><a href="${pageContext.request.contextPath}/patient/"><span>Pacientes</span></a></li>
-		  <li><a href="${pageContext.request.contextPath}/item/"><span>Items</span></a></li>
-		</ul>
-	</div>
-</div>
-
-<div style="text-align:center; padding-top:20px;">
-	<div>Pacientes actualmente en el tren</div>
-	<div id="queue" style="padding-top:20px;">
-		<div id="queueTable"></div>
-		<img id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif'>
-	</div>
-</div>
-
 <div class="box">
-<ul id="tabMenu">
-  <li class="posts selected"></li>
-  <li class="comments"></li>
-  <li class="category"></li>
-  <li class="famous"></li>
-</ul>
-<div class="boxTop"></div>
+	<ul id="tabMenu">
+	  <li class="menu-pacientsontrain selected">
+	  	<div class="menu-badge"> <div id="m-pacients" class="menu-pacientsontrain"></div> </div>
+  		<img class="menu-loading" id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif' />
+  		<img class="menu-icon-badge hide" id="menu-icon" src='${pageContext.request.contextPath}/themes/default/image/patient-icon.gif' />
+	  </li>
+	  <li class="menu-queue">
+  		<img class="menu-icon-queue" id="menu-icon-queue" src='${pageContext.request.contextPath}/themes/default/image/queue-icon.gif' />
+	  </li>
+	  <li class="menu-chat">
+  		<img class="menu-icon-chat" id="menu-icon-chat" src='${pageContext.request.contextPath}/themes/default/image/chat-icon.png' />
+	  </li>
+	</ul>
+	<div class="boxTop"></div>
 
-<div class="boxBody">
-  
-  <div id="posts" class="show">
-    <ul>
-      <li>Create a Simple CSS + Javascript Tooltip with jQuery.</li>
-      <li>Simple JQuery Modal Window Tutorial.</li>
-      <li>Navigation List menu + Jquery Animate Effect Tutorial.</li>
-      <li>Exclusive RSS Icons from Queness.</li>
-      <li>50 Monochromatic Website Designs.</li>
-      <li>Food Plates and Creative Dishware Designs.</li>
-      <li>Breadcrumbs In Web Design: Examples And Best Practices.</li>
-      <li class="last">New Smashing Freebies For Designers and Bloggers.</li>
-    </ul>  
-  </div>  
-  
-  <div id="comments">
-    <ul>
-      <li><a>jQuery Tabbed Navigation Menu. <span> - kevin</span></a></li>
-      <li><a>You can add links in here! <span> - kevin</span></a></li>
-      <li><a>It's easy to understand. Though it's not the best, but hell yeah it works. <span> - kevin</span></a></li>
-      <li><a>I hope you will like it. <span> - kevin</span></a></li>
-      <li><a>My next tutorial will be jQuery-based Accordion. <span> - kevin</span></a></li>
-      <li class="last"><a>And, I'm working on a free wordpress template as well : ) <span> - kevin</span></a></li>
-    </ul>
-  </div>
-  
-  <div id="category">
-    <ul>
-      <li><a href="http://www.queness.com/tag/ajax">ajax</a></li>
-      <li><a href="http://www.queness.com/tag/css-html">css-html</a></li>
-      <li><a href="http://www.queness.com/tag/freebies">freebies</a></li>
-      <li><a href="http://www.queness.com/tag/icon">icon</a></li>
-      <li><a href="http://www.queness.com/tag/inspiration">inspiration</a></li>
-      <li><a href="http://www.queness.com/tag/javascript">javascript</a></li>
-      <li><a href="http://www.queness.com/tag/logo">logo</a></li>
-      <li><a href="http://www.queness.com/tag/photography">photography</a></li>
-      <li><a href="http://www.queness.com/tag/photoshop">photoshop</a></li>
-      <li><a href="http://www.queness.com/tag/php">php</a></li>
-      <li><a href="http://www.queness.com/tag/seo">seo</a></li>
-      <li><a href="http://www.queness.com/tag/tutorial">tutorial</a></li>
-      <li><a href="http://www.queness.com/tag/usability">usability</a></li>
-      <li><a href="http://www.queness.com/tag/wallpaper">wallpaper</a></li>
-      <li class="last"><a href="http://www.queness.com/tag/wordpress">wordpress</a></li>
-    </ul>  
-  </div>
-  
-  <div id="famous">
-    <ul>
-      <li>Simple JQuery Modal Window Tutorial.</li>
-      <li>Create a Simple CSS + Javascript Tooltip with jQuery.</li>
-      <li>Navigation List menu + Jquery Animate Effect Tutorial.</li>
-      <li class="last">Exclusive RSS Icons from Queness.</li>
-    </ul>  
-  </div>
+	<div class="boxBody">
+	  <div id="menu-pacientsontrain" class="show">  
+	  </div>  
+	  
+	  <div id="comments">
+	    <ul>
+	      <li><a>jQuery Tabbed Navigation Menu. <span> - kevin</span></a></li>
+	      <li><a>You can add links in here! <span> - kevin</span></a></li>
+	      <li><a>It's easy to understand. Though it's not the best, but hell yeah it works. <span> - kevin</span></a></li>
+	      <li><a>I hope you will like it. <span> - kevin</span></a></li>
+	      <li><a>My next tutorial will be jQuery-based Accordion. <span> - kevin</span></a></li>
+	      <li class="last"><a>And, I'm working on a free wordpress template as well : ) <span> - kevin</span></a></li>
+	    </ul>
+	  </div>
+	  
+	  <div id="category">
+	    <ul>
+	      <li><a href="http://www.queness.com/tag/ajax">ajax</a></li>
+	      <li><a href="http://www.queness.com/tag/css-html">css-html</a></li>
+	      <li><a href="http://www.queness.com/tag/freebies">freebies</a></li>
+	      <li><a href="http://www.queness.com/tag/icon">icon</a></li>
+	      <li><a href="http://www.queness.com/tag/inspiration">inspiration</a></li>
+	      <li><a href="http://www.queness.com/tag/javascript">javascript</a></li>
+	      <li><a href="http://www.queness.com/tag/logo">logo</a></li>
+	      <li><a href="http://www.queness.com/tag/photography">photography</a></li>
+	      <li><a href="http://www.queness.com/tag/photoshop">photoshop</a></li>
+	      <li><a href="http://www.queness.com/tag/php">php</a></li>
+	      <li><a href="http://www.queness.com/tag/seo">seo</a></li>
+	      <li><a href="http://www.queness.com/tag/tutorial">tutorial</a></li>
+	      <li><a href="http://www.queness.com/tag/usability">usability</a></li>
+	      <li><a href="http://www.queness.com/tag/wallpaper">wallpaper</a></li>
+	      <li class="last"><a href="http://www.queness.com/tag/wordpress">wordpress</a></li>
+	    </ul>  
+	  </div>
+	</div>
+	
+	<div class="boxBottom"></div>
+	
 </div>
 
-<div class="boxBottom"></div>
-
-</div>
 
 <script language='javascript' type='text/javascript'> 
 
@@ -93,21 +63,25 @@ function refreshPatients() {
 	clearInterval(refreshId);
 
 	$('#loadImage').show();
+	$('#menu-icon').hide();
 
 	$.get(contextPath + "/getUserQueue", function(data){
 		//Me llega la lista separada por &:
    		var parsedData = data.split('&');
    		var innerHtml = "";
    		var i;
+   		//alert(parsedData.length);
    		for(i in parsedData ) {
    	   		//Cada elemento esta separado por =:
 	   		var patientData = parsedData[i].split('=');
 	   		var str = patientData[0];
-			innerHtml += "<div>" + str.replace('+',' ') + "</div>";
+			innerHtml += "<li>" + str.replace('+',' ') + "</li>";
    		}
-   		
+
+   		$('#m-pacients').html(parsedData.length);
+   		$('#menu-pacientsontrain').html('<ul>' + innerHtml + '</ul>');
    		$('#loadImage').hide();
-   		$('#queueTable').html(innerHtml);
+   		$('#menu-icon').show();
  	});
 
 	 refreshId = setInterval(refreshPatients, 5000)
