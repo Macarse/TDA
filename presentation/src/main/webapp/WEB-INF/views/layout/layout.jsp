@@ -78,7 +78,5 @@
     $("#dialog").dialog("open");
   });
 </script>
-
-<a href="javascript:void(0)" onclick="javascript:chatWith('johndoe')">Chat With John Doe</a>
 </body>
 </html>

@@ -28,6 +28,14 @@ public class ChatMessage implements Serializable {
 
 	public ChatMessage() {
 	}
+	
+	public ChatMessage(String fromWhom, String toWhom, String message){
+		setFromWhom(fromWhom);
+		setToWhom(toWhom);
+		setMessage(message);
+		setRecd(0);
+		setSent(new Date());
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -19,7 +19,16 @@ public class ChatServiceImpl implements ChatService {
 		ChatMessage exampleObject = new ChatMessage();
 		exampleObject.setToWhom(username);
 		exampleObject.setRecd(0);
-		return chatDAO.findByExample(exampleObject);
+		List<ChatMessage> msgs = chatDAO.findByExample(exampleObject);
+		
+		//update read
+		for (ChatMessage chatMessage : msgs) {
+			chatMessage.setRecd(1);
+			chatDAO.save(chatMessage);
+		}
+		
+		
+		return msgs;
 	}
 
 	public void send(String from, String to, String message) {
@@ -33,6 +42,15 @@ public class ChatServiceImpl implements ChatService {
 		System.out.println(msg);
 
 		chatDAO.save(msg);
+	}
+	
+	public List<ChatMessage> startSession(String username) {
+		ChatMessage exampleObject = new ChatMessage();
+		exampleObject.setToWhom(username);
+		exampleObject.setRecd(1);
+		List<ChatMessage> msgs = chatDAO.findByExample(exampleObject);
+		
+		return msgs;
 	}
 
 }
