@@ -74,8 +74,7 @@ public class WelcomeController {
 	}
 
 	@Autowired
-	public void setPatientService(
-			PatientService patientService) {
+	public void setPatientService(PatientService patientService) {
 		this.patientService = patientService;
 	}
 
@@ -108,10 +107,10 @@ public class WelcomeController {
 		LinkedList<String> ret = new LinkedList<String>();
 		ret.add("hola");
 		ret.add("chau");
-		
+
 		return gson.toJson(ret);
 	}
-	
+
 	@RequestMapping(value = "/switchInTrain", method = RequestMethod.POST)
 	public @ResponseBody
 	String switchInTrain(@RequestParam Long patientId) {
@@ -125,7 +124,7 @@ public class WelcomeController {
 				.findByExample(aPatientInTrain);
 
 		/* The patient is already in the train. */
-		if (patientInTrainService.isInTrain(aPatient) ) {
+		if (patientInTrainService.isInTrain(aPatient)) {
 			patientInTrainService.delete(patients.get(0));
 			return "Subir";
 		} else {
