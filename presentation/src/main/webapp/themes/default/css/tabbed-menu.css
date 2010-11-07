@@ -1,21 +1,27 @@
 #tabMenu {margin:0;padding:0 0 0 15px;list-style:none;}
-#tabMenu li {float:left;height:32px;width:39px;cursor:pointer;cursor:hand}
+#tabMenu li {float:left;height:32px;width:50px;cursor:pointer;cursor:hand; margin-right: 2px;}
 
-li.comments {background:url('../image/tabComment.gif') no-repeat 0 -32px;}
-li.posts {background:url(../image/tabStar.gif) no-repeat 0 -32px;}
-li.category {background:url(../image/tabFolder.gif) no-repeat 0 -32px;}
-li.famous {background:url(../image/tabHeart.gif) no-repeat 0 -32px;}
-li.random {background:url(../image/tabRandom.gif) no-repeat 0 -32px;}
+.hide{ display: none;}
+img.menu-loading{position: relative; top: 8px; left: -12px; z-index: 1}
+div.menu-badge{float: left; position: relative; top: -4px; left:-10px; background:url('../image/cloud2.gif') no-repeat; width: 30px; height: 16px; text-align: center; z-index: 1}
+div.menu-pacientsontrain { position: relative; top: 2px;}
+img.menu-icon-badge{position: relative; width: 39px; height: 28px; top: -13px; left: 8px; z-index: 0;}
+img.menu-icon-chat{position: relative; width: 34px; height: 28px; z-index: 0; left: 8px; top: 2px;}
+img.menu-icon-queue{position: relative; width: 39px; height: 28px; z-index: 0; left: 8px; top: 2px;}
+
+li.menu-pacientsontrain { background:url(../image/tabbed-menu.gif) no-repeat 0 -32px; width: 30px;}
+li.menu-chat { background:url(../image/tabbed-menu.gif) no-repeat 0 -32px; width: 30px;}
+li.menu-queue { background:url(../image/tabbed-menu.gif) no-repeat 0 -32px; width: 30px;}
 
 li.mouseover {background-position:0 0;}
 li.mouseout {background-position:0 -32px;}
 li.selected {background-position:0 0;}
 
 .box {width:200px}
-.boxTop {background:url('../image/boxTop.gif') no-repeat;height:11px;clear:both}
+.boxTop {background:url('../image/box-border.gif') no-repeat;height:2px;clear:both}
 *html .boxTop {margin-bottom:-2px;}
-.boxBody {background-color:#282828;}
-.boxBottom {background:url('../image/boxBottom.gif') no-repeat;height:11px;}
+.boxBody {}
+.boxBottom {background:url('../image/box-border.gif') no-repeat;height:2px;}
 
 .boxBody div {display:none;}
 .boxBody div.show {display:block;}
@@ -23,6 +29,6 @@ li.selected {background-position:0 0;}
 
 .boxBody div ul {margin:0 10px 0 25px;padding:0;width:160px;list-style-image:url(../image/arrow.gif)}
 *html .boxBody div ul {margin-left:10px;padding-left:15px;}
-.boxBody div li {border-bottom:1px dotted #8e8e8e; padding:4px 0;cursor:hand;cursor:pointer;}
+.boxBody div li {border-bottom:1px dotted #8e8e8e; padding:4px 0;cursor:hand;cursor:pointer; }
 .boxBody div ul li.last {border-bottom:none}
 .boxBody div li span {font-size:8px;font-style:italic; color:#888;}
