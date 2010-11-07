@@ -4,7 +4,6 @@ import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,7 @@ import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
+import com.tda.service.api.OnlineUserService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
 
@@ -50,6 +50,8 @@ public class WelcomeController {
 	// TODO should be localized?
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 			"dd/MM/yyyy");
+
+	private OnlineUserService onlineUserService;
 
 	public WelcomeController() {
 		params = new ParamContainer();
@@ -71,6 +73,12 @@ public class WelcomeController {
 	public void setPatientInTrainService(
 			PatientInTrainService patientInTrainService) {
 		this.patientInTrainService = patientInTrainService;
+	}
+
+	@Autowired
+	public void setOnlineUserService(
+			OnlineUserService onlineUserService) {
+		this.onlineUserService = onlineUserService;
 	}
 
 	@Autowired
@@ -96,20 +104,22 @@ public class WelcomeController {
 		modelAndView = processRequest(modelAndView, new PatientInTrain(),
 				pageNumber, orderField, orderAscending);
 
+		/*Set user online.
+		 * TODO: This should be done with a spring security hook */
+		onlineUserService.setOnline(getUser().getUsername());
+
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/chat", method = RequestMethod.GET)
+	@RequestMapping(value = "/getOnlineUsers", method = RequestMethod.GET)
 	public @ResponseBody
-	String chat(@RequestParam Long patientId) {
+	String getOnlineUsers() {
 
-		System.out.println("Testing");
 		Gson gson = new Gson();
-		LinkedList<String> ret = new LinkedList<String>();
-		ret.add("hola");
-		ret.add("chau");
+		String a = gson.toJson(onlineUserService.getOnlineUsers());
+		System.out.println(a);
 		
-		return gson.toJson(ret);
+		return a;
 	}
 	
 	@RequestMapping(value = "/switchInTrain", method = RequestMethod.POST)

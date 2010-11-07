@@ -20,22 +20,16 @@
 	  
 	  <div id="comments">
 	    <ul>
-	      <li><a>jQuery Tabbed Navigation Menu. <span> - kevin</span></a></li>
-	      <li><a>You can add links in here! <span> - kevin</span></a></li>
-	      <li><a>It's easy to understand. Though it's not the best, but hell yeah it works. <span> - kevin</span></a></li>
-	      <li><a>I hope you will like it. <span> - kevin</span></a></li>
-	      <li><a>My next tutorial will be jQuery-based Accordion. <span> - kevin</span></a></li>
-	      <li class="last"><a>And, I'm working on a free wordpress template as well : ) <span> - kevin</span></a></li>
+	      <li><a>Listado</a></li>
 	    </ul>
 	  </div>
 	  
 	  <div id="category">
-	    <ul>
-	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('admin')">Admin</a></li>
-	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('social')">Social</a></li>
-	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('dentista')">dentista</a></li>
-   	      <li class="last"><a href="http://www.queness.com/tag/wordpress">wordpress</a></li>
-	    </ul>  
+<!--	    <ul>-->
+<!--	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('admin')">Admin</a></li>-->
+<!--	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('social')">Social</a></li>-->
+<!--	      <li><a href="javascript:void(0)" onclick="javascript:chatWith('dentista')">dentista</a></li>-->
+<!--	    </ul>  -->
 	  </div>
 	</div>
 	

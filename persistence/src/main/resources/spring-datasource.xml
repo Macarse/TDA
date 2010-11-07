@@ -33,6 +33,7 @@
 				<value>com.tda.model.item.Item</value>
 				<value>com.tda.model.applicationuser.ApplicationUser</value>
 				<value>com.tda.model.applicationuser.Authority</value>
+				<value>com.tda.model.applicationuser.OnlineUser</value>
 				<value>com.tda.model.patient.Patient</value>
 				<value>com.tda.model.patient.PatientInTrain</value>
 				<value>com.tda.model.socialworker.SocialWorkerForm</value>

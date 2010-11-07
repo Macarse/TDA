@@ -31,6 +31,10 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 		return (T) getHibernateTemplate().get(this.persistentClass, id);
 	}
 
+	public T findById(final String id) {
+		return (T) getHibernateTemplate().get(this.persistentClass, id);
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		return getHibernateTemplate().find(
@@ -38,6 +42,11 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 	}
 
 	public void deleteById(final Long id) {
+		T obj = this.findById(id);
+		getHibernateTemplate().delete(obj);
+	}
+
+	public void deleteById(final String id) {
 		T obj = this.findById(id);
 		getHibernateTemplate().delete(obj);
 	}
