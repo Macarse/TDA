@@ -53,6 +53,12 @@ public class ChatController {
 		chatService.send(chatSession.getUsername(), to, message);
 		chatSession.addMessage(chatSession.getUsername(), to, message);
 	}
+	
+	@RequestMapping(value = "/close", method = RequestMethod.POST)
+	public @ResponseBody
+	void send(@RequestParam String chatbox) {
+		chatSession.removeMessages(chatbox);
+	}
 
 	@RequestMapping(value = "/startchatsession", method = RequestMethod.GET)
 	public @ResponseBody

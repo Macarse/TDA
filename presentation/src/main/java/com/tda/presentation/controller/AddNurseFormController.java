@@ -1,5 +1,7 @@
 package com.tda.presentation.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.tda.model.nurse.NurseForm;
 import com.tda.model.patient.Patient;
+import com.tda.model.patient.PatientInTrain;
 import com.tda.service.api.NurseFormService;
+import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
 
 @Controller
@@ -27,6 +31,7 @@ public class AddNurseFormController extends BaseNurseFormController {
 
 	private NurseFormService nurseFormService;
 	private PatientService patientService;
+	private PatientInTrainService patientInTrainService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(@PathVariable("patientId") long patientId,
@@ -48,6 +53,16 @@ public class AddNurseFormController extends BaseNurseFormController {
 			return NURSE_ADD_FORM;
 		} else {
 			nurseFormService.save(nurseForm);
+
+			Patient patient = nurseForm.getPatient();
+			List<PatientInTrain> patientInTrain = patientInTrainService
+					.findByDni(patient.getDni());
+
+			if (patientInTrain != null && patientInTrain.size() == 1) {
+				patientInTrain.get(0).setNurseform(nurseForm);
+				patientInTrainService.save(patientInTrain.get(0));
+			}
+
 			status.setComplete();
 			return REDIRECT_AFTER_SAVE;
 		}
@@ -61,5 +76,11 @@ public class AddNurseFormController extends BaseNurseFormController {
 	@Autowired
 	public void setPatientService(PatientService patientService) {
 		this.patientService = patientService;
+	}
+
+	@Autowired
+	public void setPatientInTrainService(
+			PatientInTrainService patientInTrainService) {
+		this.patientInTrainService = patientInTrainService;
 	}
 }

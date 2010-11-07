@@ -1,5 +1,7 @@
 package com.tda.presentation.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.tda.model.patient.Patient;
+import com.tda.model.patient.PatientInTrain;
 import com.tda.model.socialworker.SocialWorkerForm;
+import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
 import com.tda.service.api.SocialWorkerFormService;
 
@@ -25,9 +29,10 @@ public class AddSocialWorkerFormController extends
 		BaseSocialWorkerFormController {
 	private static final String SOCIAL_WORKER_ADD_FORM = "socialworkerform/form";
 	private static final String REDIRECT_AFTER_SAVE = "redirect:/";
-	
+
 	private SocialWorkerFormService socialWorkerFormService;
 	private PatientService patientService;
+	private PatientInTrainService patientInTrainService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(@PathVariable("patientId") long patientId,
@@ -48,8 +53,19 @@ public class AddSocialWorkerFormController extends
 			return SOCIAL_WORKER_ADD_FORM;
 		} else {
 			socialWorkerFormService.save(socialWorkerForm);
+
+			Patient patient = socialWorkerForm.getPatient();
+			List<PatientInTrain> patientInTrain = patientInTrainService
+					.findByDni(patient.getDni());
+
+			if (patientInTrain != null && patientInTrain.size() == 1) {
+				patientInTrain.get(0).setSocialworkerform(socialWorkerForm);
+				patientInTrainService.save(patientInTrain.get(0));
+			}
+
 			status.setComplete();
-//			return "redirect:/patient/" + socialWorkerForm.getPatient().getId();
+			// return "redirect:/patient/" +
+			// socialWorkerForm.getPatient().getId();
 			return REDIRECT_AFTER_SAVE;
 		}
 	}
@@ -63,5 +79,11 @@ public class AddSocialWorkerFormController extends
 	@Autowired
 	public void setPatientService(PatientService patientService) {
 		this.patientService = patientService;
+	}
+
+	@Autowired
+	public void setPatientInTrainService(
+			PatientInTrainService patientInTrainService) {
+		this.patientInTrainService = patientInTrainService;
 	}
 }

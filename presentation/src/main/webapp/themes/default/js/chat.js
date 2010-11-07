@@ -238,7 +238,7 @@ function closeChatBox(chatboxtitle) {
 	$('#chatbox_'+chatboxtitle).css('display','none');
 	restructureChatBoxes();
 
-	$.post("chat.php?action=closechat", { chatbox: chatboxtitle} , function(data){	
+	$.post(contextPath + "/chat/close", { chatbox: chatboxtitle} , function(data){	
 	});
 
 }

@@ -55,7 +55,7 @@ Buscar paciente
 					</c:choose>
 					<c:choose>
 						<c:when test="${patientintrain.padiatricianform != null}">
-							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/${patientintrain.pediatricianform.id}/edit">Formulario Pediatra</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/${patientintrain.padiatricianform.id}/edit">Formulario Pediatra</a> <br/>
 						</c:when>
 						<c:otherwise>
 							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/new">Formulario Pediatra</a> <br/>
@@ -88,7 +88,7 @@ Buscar paciente
 						</c:otherwise>
 					</c:choose>
 				</td>
-				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#" onClick="refreshPatients()"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
+				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#" onClick="switchInTrain(${patientintrain.patient.id}); window.location.reload();"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
