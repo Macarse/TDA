@@ -4,6 +4,7 @@ import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tda.model.patient.Patient;
+import com.google.gson.Gson;
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
@@ -98,6 +99,19 @@ public class WelcomeController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/chat", method = RequestMethod.GET)
+	public @ResponseBody
+	String chat(@RequestParam Long patientId) {
+
+		System.out.println("Testing");
+		Gson gson = new Gson();
+		LinkedList<String> ret = new LinkedList<String>();
+		ret.add("hola");
+		ret.add("chau");
+		
+		return gson.toJson(ret);
+	}
+	
 	@RequestMapping(value = "/switchInTrain", method = RequestMethod.POST)
 	public @ResponseBody
 	String switchInTrain(@RequestParam Long patientId) {

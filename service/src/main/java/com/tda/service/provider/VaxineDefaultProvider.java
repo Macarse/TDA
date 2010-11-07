@@ -38,6 +38,7 @@ public class VaxineDefaultProvider implements VaxineProvider {
 			List<Vaxine> vaxines = null;
 			Vaxine example = new Vaxine();
 			example.setName(name);
+			example.setOptative(Boolean.parseBoolean(isOptative));
 			vaxines = vaxineService.findByExample(example);
 			if (vaxines.size() == 0) {
 				Vaxine vaxine = new Vaxine();

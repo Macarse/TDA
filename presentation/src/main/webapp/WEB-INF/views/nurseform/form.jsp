@@ -15,6 +15,7 @@
 
 <!-- aux variables -->
 <c:set var="count" value="0" />
+<c:set var="fieldsPerRow" value="3" />
 
 <c:choose>
 	<c:when test="${nurseForm.new}"><c:set var="method" value="post"/></c:when>
@@ -81,37 +82,20 @@
 	<table>
 			<tr>
 			<td>
-				<fmt:message key="nurse.form.vaccinesOb" />
-			</td>
-			</tr>
-	
-			<c:forEach var="vaxine" items="${allVaxines}">
-			<c:if test="${!vaxine.optative}">
-			<tr>
-				<td>
-				<form:checkbox path="vaxines" value="${vaxine}" />
-				<form:label path="vaxines" for="vaxines">${vaxine.name}</form:label>
-				</td>
-			</tr>
-			</c:if>
-			</c:forEach>
-			
-			<tr>
-			<td>
-				<fmt:message key="nurse.form.vaccinesOp" />
+				<form:checkboxes items="${allVaxines}" path="vaxines" itemLabel="name" itemValue="id"/>
 			</td>
 			</tr>
 			
-			<c:forEach var="vaxine" items="${allVaxines}">
-			<c:if test="${vaxine.optative}">
-			<tr>
-				<td>
-				<form:checkbox path="vaxines" value="${vaxine}" />
-				<form:label path="vaxines" for="vaxines">${vaxine.name}</form:label>
-				</td>
-			</tr>
-			</c:if>
-			</c:forEach>
+<!--			<c:forEach var="vaxine" items="${allVaxines}">-->
+<!--			<c:if test="${vaxine.optative}">-->
+<!--			<tr>-->
+<!--				<td>-->
+<!--				<form:checkbox path="vaxines" value="${vaxine.id}" />-->
+<!--				<form:label path="vaxines" for="vaxines">${vaxine.name}</form:label>-->
+<!--				</td>-->
+<!--			</tr> -->
+<!--			</c:if>-->
+<!--			</c:forEach>-->
 	</table>
 	</div>
 

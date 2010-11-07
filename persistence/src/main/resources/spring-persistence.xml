@@ -13,6 +13,12 @@
 		</property>
 	</bean>
 
+	<bean id="chatDAO" class="com.tda.persistence.dao.ChatDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="applicationUserDAO" class="com.tda.persistence.dao.ApplicationUserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />

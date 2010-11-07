@@ -2,10 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 
 	<context:component-scan base-package="com.tda.presentation" />
@@ -19,6 +21,12 @@
 
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
+
+	<!-- a HTTP Session-scoped bean exposed as a proxy -->
+    <bean id="chatSession" class="com.tda.presentation.session.ChatSession" scope="session">
+          <!-- this next element effects the proxying of the surrounding bean -->
+          <aop:scoped-proxy/>
+    </bean>
 
 	<!-- Forwards requests to the "/" resource to the "welcome" view -->
 	<mvc:view-controller path="/" view-name="welcome/list" />

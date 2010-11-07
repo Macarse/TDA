@@ -33,8 +33,6 @@ public class NurseForm {
 
 	private Date fillingDate;
 
-	// Vital Checks
-	/* TODO: Ask if this size is footSize. */
 	private Double size;
 
 	private Double weight;
@@ -43,7 +41,6 @@ public class NurseForm {
 
 	private Double percentile;
 
-	// TODO TA Control. temp and saturation
 	private Double TAmin;
 	private Double TAmax;
 
@@ -144,7 +141,7 @@ public class NurseForm {
 		TAmax = tAmax;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Vaxine.class)
+	@ManyToMany(targetEntity = Vaxine.class, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	@ForeignKey(name = "ID_NURSE_FORM", inverseName = "ID_VAXINE")
 	public Collection<Vaxine> getVaxines() {
@@ -155,10 +152,11 @@ public class NurseForm {
 		this.vaxines = vaxines;
 	}
 
-	@CollectionOfElements(targetElement = NurseAction.class)
+	@CollectionOfElements(targetElement = NurseAction.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "NURSE_ACTION", joinColumns = @JoinColumn(name = "NURSE_FORM_ID"))
-	@Column(name = "ACTIONS", nullable = true)
+	@Column(name = "NURSE_ACTION", nullable = true)
 	@Enumerated(EnumType.STRING)
+	@Fetch(value = FetchMode.SELECT)
 	public Collection<NurseAction> getNurseActions() {
 		return nurseActions;
 	}
