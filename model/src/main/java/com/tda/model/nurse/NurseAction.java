@@ -1,6 +1,5 @@
 package com.tda.model.nurse;
 
-import javax.persistence.Transient;
 
 public enum NurseAction {
 	GIVE_MEDICINE("Entrega de medicamentos"), PERFORM_CURATION("Curaci—n"), PERFORM_SUTURE(
@@ -17,7 +16,6 @@ public enum NurseAction {
 		this.description = description;
 	}
 
-	@Transient
 	public String getDescription() {
 		return description;
 	}
