@@ -53,6 +53,7 @@
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
+		<property name="patientDAO" ref="patientDAO" />
 	</bean>
 	
 	<bean id="dentistFormDAO" class="com.tda.persistence.dao.DentistFormDAO">

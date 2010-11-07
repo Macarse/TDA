@@ -14,7 +14,7 @@ public class Vaxine implements Comparable<Vaxine>, Serializable {
 
 	private Long id;
 	private String name;
-	private Boolean isOptative;
+	private boolean isOptative;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +36,11 @@ public class Vaxine implements Comparable<Vaxine>, Serializable {
 	}
 
 	@Basic
-	public Boolean getIsOptative() {
+	public boolean isOptative() {
 		return isOptative;
 	}
 
-	public void setIsOptative(Boolean isOptative) {
+	public void setOptative(boolean isOptative) {
 		this.isOptative = isOptative;
 	}
 

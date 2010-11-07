@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
 
 import org.hibernate.annotations.CollectionOfElements;
 import org.hibernate.annotations.Fetch;
@@ -46,6 +47,12 @@ public class NurseForm {
 	private Double TAmin;
 	private Double TAmax;
 
+	private Double TempMin;
+	private Double TempMax;
+
+	@Digits(fraction = 0, integer = 4)
+	private Integer saturation;
+
 	// Vaxines
 	private Collection<Vaxine> vaxines;
 
@@ -56,15 +63,6 @@ public class NurseForm {
 
 	// Observations
 	private String observations;
-
-	// TODO MALFORMATIONS TABLE
-
-	// INTERNMENT
-	private boolean interconsultation;
-	private boolean internment;
-
-	// Treatment
-	private String treatment;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -177,28 +175,27 @@ public class NurseForm {
 		this.observations = observations;
 	}
 
-	public boolean isInterconsultation() {
-		return interconsultation;
+	public Double getTempMin() {
+		return TempMin;
 	}
 
-	public void setInterconsultation(boolean interconsultation) {
-		this.interconsultation = interconsultation;
+	public void setTempMin(Double tempMin) {
+		TempMin = tempMin;
 	}
 
-	public boolean isInternment() {
-		return internment;
+	public Double getTempMax() {
+		return TempMax;
 	}
 
-	public void setInternment(boolean internment) {
-		this.internment = internment;
+	public void setTempMax(Double tempMax) {
+		TempMax = tempMax;
 	}
 
-	public String getTreatment() {
-		return treatment;
+	public Integer getSaturation() {
+		return saturation;
 	}
 
-	public void setTreatment(String treatment) {
-		this.treatment = treatment;
+	public void setSaturation(Integer saturation) {
+		this.saturation = saturation;
 	}
-
 }

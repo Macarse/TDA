@@ -1,6 +1,7 @@
 package com.tda.model.patient;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -131,11 +133,35 @@ public class Patient implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Patient other = (Patient) obj;
-		
-		if( id == other.id )
+
+		if (id == other.id)
 			return true;
-		
+
 		return false;
 	}
 
+	@Transient
+	public Integer getAge() {
+		Calendar now = Calendar.getInstance();
+		Calendar dob = Calendar.getInstance();
+		dob.setTime(this.birthdate);
+		if (dob.after(now)) {
+			throw new IllegalArgumentException("Can't be born in the future");
+		}
+		int year1 = now.get(Calendar.YEAR);
+		int year2 = dob.get(Calendar.YEAR);
+		int age = year1 - year2;
+		int month1 = now.get(Calendar.MONTH);
+		int month2 = dob.get(Calendar.MONTH);
+		if (month2 > month1) {
+			age--;
+		} else if (month1 == month2) {
+			int day1 = now.get(Calendar.DAY_OF_MONTH);
+			int day2 = dob.get(Calendar.DAY_OF_MONTH);
+			if (day2 > day1) {
+				age--;
+			}
+		}
+		return age;
+	}
 }

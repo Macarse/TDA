@@ -84,29 +84,38 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					<c:set var="count" value="0" />
 					<c:forEach var="birthType" items="${birthType}">
 						<c:if test="${count%2 == 0 }"><tr></c:if>
-							<td><form:radiobutton path="birthType" value="${birthType}" /> ${birthType.description}</td>
+							<td>
+							<c:choose>
+							<c:when test="${birthType.description == 'Dist√≥cico'}">
+								<form:radiobutton path="birthType" value="${birthType}" onclick="$('.distosicHidden').show()"/> ${birthType.description}
+							</c:when>
+							<c:otherwise>
+								<form:radiobutton path="birthType" value="${birthType}" onclick="$('.distosicHidden').hide()"/> ${birthType.description}
+							</c:otherwise>
+							</c:choose>
+							</td>
 						<c:if test="${count%2 == 1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
 					<c:if test="${count%2 == 1 }"></tr></c:if>
 					<tr><td><form:errors path="birthType" /></td></tr>
 				
-				<tr><th colspan="2">
+				<tr class="distosicHidden"><th colspan="2">
 					<form:label for="birthTypePresentation" path="birthTypePresentation" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.birthTypePresentation" />
 					</form:label></th></tr>
 					
 					<c:set var="count" value="0" />
 					<c:forEach var="birthTypePresentation" items="${birthTypePresentation}">
-						<c:if test="${count%2 == 0 }"><tr></c:if>
+						<c:if test="${count%2 == 0 }"><tr class="distosicHidden"></c:if>
 							<td><form:radiobutton path="birthTypePresentation" value="${birthTypePresentation}" /> ${birthTypePresentation.description}</td>
 						<c:if test="${count%2 == 1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
 					<c:if test="${count%2 == 1 }"></tr></c:if>
-					<tr><td><form:errors path="birthTypePresentation" /></td></tr>
+					<tr class="distosicHidden"><td><form:errors path="birthTypePresentation" /></td></tr>
 					
-				<tr><th>
+				<tr class="distosicHidden"><th>
 					<form:label for="birthTypeTermination" path="birthTypeTermination" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.birthTypeTermination" />
 					</form:label>
@@ -114,14 +123,14 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					
 					<c:set var="count" value="0" />
 					<c:forEach var="birthTypeTermination" items="${birthTypeTermination}">
-						<c:if test="${count%2 == 0 }"><tr></c:if>
+						<c:if test="${count%2 == 0 }"><tr class="distosicHidden"></c:if>
 							<td><form:radiobutton path="birthTypeTermination" value="${birthTypeTermination}" /> ${birthTypeTermination.description}</td>
 						<c:if test="${count%2 == 1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
 					<c:if test="${count%2 == 1 }"></tr></c:if>
-					<tr><td><form:errors path="birthTypeTermination" /></td></tr>
-	
+					<tr class="distosicHidden"><td><form:errors path="birthTypeTermination" /></td></tr>
+
 				<tr><th>
 					<form:label for="gestationalAge" path="gestationalAge" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.gestationalAge" />
@@ -402,6 +411,81 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 		<!-- PHYSICAL EXAM -->
 		<div id="tab-phy" class="pediatricianform">
 			<table>
+				
+				<c:choose>
+				<c:when test="${nurseForm != null}">
+				
+				<tr><th colspan="2">
+						<fmt:message key="socialworker.form.fatherAge" />
+				</th></tr>
+				<tr><td colspan="2">
+
+				<fmt:formatNumber maxFractionDigits="2"><c:out value="${pediatricianForm.patient.age}"></c:out></fmt:formatNumber>
+				</td></tr>
+				
+				<tr><th colspan="2">
+						<fmt:message key="nurse.form.weight" />
+				</th></tr>
+				<tr><td colspan="2">
+
+				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight}"></c:out></fmt:formatNumber>
+				</td></tr>
+				
+				<tr><th colspan="2">
+						<fmt:message key="nurse.form.size" />
+				</th></tr>
+				<tr><td colspan="2">
+
+				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.size}"></c:out></fmt:formatNumber>
+				</td></tr>
+
+				<tr><th colspan="2">
+						<fmt:message key="nurse.form.headCircumference" />
+				</th></tr>
+				<tr><td colspan="2">
+
+				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.headCircumference}"></c:out></fmt:formatNumber>
+				</td></tr>		
+				
+				
+				<tr><th colspan="2">
+						<fmt:message key="pediatrician.form.PPE" />
+				</th></tr>
+				<tr><td colspan="2">
+
+				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
+				</td></tr>
+				
+				<tr><th colspan="2">
+						<fmt:message key="pediatrician.form.PTE" />
+				</th></tr>
+				<tr><td colspan="2">
+			
+				
+				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
+				
+				</td></tr>
+				
+				<tr><th colspan="2">
+						<fmt:message key="pediatrician.form.PIMC" />
+				</th></tr>
+				<tr><td colspan="2">
+						
+				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
+				</td></tr>
+				
+				</c:when>
+				<c:otherwise>
+				<tr><th colspan="2">
+						<fmt:message key="pediatrician.form.missingNurseData" />
+						<a href="${pageContext.request.contextPath}/patient/${pediatricianForm.patient.id}/nurse/new">
+							<fmt:message key="pediatrician.form.missingNurseDataLink" />
+						</a>
+				</th></tr>
+				<tr><td colspan="2">
+				</c:otherwise>
+				</c:choose>
+				
 				<tr><th colspan="2">
 					<form:label for="symptoms" path="symptoms" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.symptoms" />
@@ -415,6 +499,7 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					</form:label></th></tr>
 				<tr><td colspan="2"><form:textarea path="pathologyFound" /></td></tr>
 				<tr><td><form:errors path="pathologyFound" /></td></tr>	
+				
 			</table>
 		</div>
 		

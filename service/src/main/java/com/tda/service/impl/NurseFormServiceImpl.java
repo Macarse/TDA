@@ -56,4 +56,8 @@ public class NurseFormServiceImpl implements NurseFormService {
 		this.nurseFormDAO = nurseFormDAO;
 	}
 
+	@Transactional(readOnly = true)
+	public NurseForm findByPatientIdForDate(Long patientId, Date date) {
+		return nurseFormDAO.findByPatientIdForDate(patientId, date);
+	}
 }

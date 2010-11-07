@@ -42,7 +42,7 @@ public class VaxineDefaultProvider implements VaxineProvider {
 			if (vaxines.size() == 0) {
 				Vaxine vaxine = new Vaxine();
 				vaxine.setName(name);
-				vaxine.setIsOptative(Boolean.parseBoolean(isOptative));
+				vaxine.setOptative(Boolean.parseBoolean(isOptative));
 				vaxineService.save(vaxine);
 			}
 		}

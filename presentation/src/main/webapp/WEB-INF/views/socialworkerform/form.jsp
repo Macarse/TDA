@@ -284,12 +284,12 @@
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="mainIncome" /></td></tr>
 			<tr>
-				<th colspan="${fieldsPerRow}"><!-- TODO: esto deberia ser multiple.. hay que modificar el modelo -->
+				<th colspan="${fieldsPerRow}">
 					<form:label for="nbi" path="nbi" cssErrorClass="error"><fmt:message key="socialworker.form.nbi" /></form:label></th></tr>
 				<c:set var="count" value="0" />
 				<c:forEach var="nbi" items="${nbi}">
 					<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-						<td><form:radiobutton path="nbi" value="${nbi}" />
+						<td><form:checkbox path="nbi" value="${nbi}" />
 						<form:label path="nbi" for="nbi${count+1 }">${nbi.description}</form:label></td>
 					<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 				    <c:set var="count" value="${count+1}" />
@@ -308,6 +308,10 @@
 				</c:forEach>
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="addiction" /></td></tr>
+				<tr>
+				<td colspan="${fieldsPerRow } }"><form:label for="hasProfessionalAssistanceForAddiction1" path="hasProfessionalAssistanceForAddiction" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasProfessionalAssistanceForAddiction" /></span></form:label>
+					<form:checkbox path="hasProfessionalAssistanceForAddiction" /> <form:errors path="hasProfessionalAssistanceForAddiction" /></td></tr>
+			
 			<tr>
 				<th colspan="${fieldsPerRow}"><form:label for="mistreatment" path="mistreatment" cssErrorClass="error"><fmt:message key="socialworker.form.mistreatment" /></form:label></th></tr>
 				<c:set var="count" value="0" />
@@ -321,15 +325,14 @@
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="mistreatment" /></td></tr>
 			<tr>
-				<td colspan="${fieldsPerRow } }"><form:label for="hasProfessionalAssistanceForAddiction1" path="hasProfessionalAssistanceForAddiction" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasProfessionalAssistanceForAddiction" /></span></form:label>
-					<form:checkbox path="hasProfessionalAssistanceForAddiction" /> <form:errors path="hasProfessionalAssistanceForAddiction" /></td></tr>
-			<tr>
-				<td colspan="${fieldsPerRow}"><form:label for="hasHealthCare1" path="hasHealthCare" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasHealthCare" /></span></form:label>
-					<form:checkbox path="hasHealthCare" /> <form:errors path="hasHealthCare" /></td></tr>
-			<tr>
 				<td colspan="${fieldsPerRow}"><form:label for="hasProfessionalAssistanceForMistreatment1" path="hasProfessionalAssistanceForMistreatment" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasProfessionalAssistanceForMistreatment" /></span></form:label>
 					<form:checkbox path="hasProfessionalAssistanceForMistreatment" /> <form:errors path="hasProfessionalAssistanceForMistreatment" /></td></tr>
 			<tr>
+				<td colspan="${fieldsPerRow}"><form:label for="hasHealthCare1" path="hasHealthCare" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasHealthCare" /></span></form:label>
+					<form:checkbox path="hasHealthCare" /> <form:errors path="hasHealthCare" /></td></tr>
+			
+			<tr>
+			
 				<td colspan="${fieldsPerRow}"><form:label for="hasBeenDerivedToOtherSocialServices1" path="hasBeenDerivedToOtherSocialServices" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.hasBeenDerivedToOtherSocialServices" /></span></form:label>
 					<form:checkbox path="hasBeenDerivedToOtherSocialServices" /> <form:errors path="hasBeenDerivedToOtherSocialServices" /></td></tr>
 			<tr>

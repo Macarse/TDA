@@ -33,11 +33,6 @@
 			<li><a href="#tab-taControl"><fmt:message key="nurse.form.taControl" /></a></li>
 			<li><a href="#tab-vaccines"><fmt:message key="nurse.form.vaccines" /></a></li>
 			<li><a href="#tab-actions"><fmt:message key="nurse.form.actions" /></a></li>
-			<li><a href="#tab-curation"><fmt:message key="nurse.form.curation" /></a></li>
-			<li><a href="#tab-observations"><fmt:message key="nurse.form.observations" /></a></li>
-			<li><a href="#tab-malformations"><fmt:message key="nurse.form.malformations" /></a></li>
-			<li><a href="#tab-internment"><fmt:message key="nurse.form.internment" /></a></li>
-			<li><a href="#tab-treatment"><fmt:message key="nurse.form.treatment" /></a></li>
 		</ul>
 		
 	<div id="tab-vitalChecks" class="nurseform">
@@ -65,59 +60,73 @@
 				<th><form:label for="TAmin" path="TAmin" cssErrorClass="error"><fmt:message key="nurse.form.TAmin" /></form:label></th> 
 				<td><form:input path="TAmin" /> <form:errors path="TAmin" /></td></tr>
 			<tr>
-				<th><form:label for="TAmax" path="weight" cssErrorClass="error"><fmt:message key="nurse.form.TAmax" /></form:label></th>
+				<th><form:label for="TAmax" path="TAmax" cssErrorClass="error"><fmt:message key="nurse.form.TAmax" /></form:label></th>
 				<td><form:input path="TAmax" /> <form:errors path="TAmax" /></td></tr>
+				
+			<tr>
+				<th><form:label for="TempMin" path="TempMin" cssErrorClass="error"><fmt:message key="nurse.form.TempMin" /></form:label></th>
+				<td><form:input path="TempMin" /> <form:errors path="TempMin" /></td></tr>
+				
+			<tr>
+				<th><form:label for="TempMax" path="TempMax" cssErrorClass="error"><fmt:message key="nurse.form.TempMax" /></form:label></th>
+				<td><form:input path="TempMax" /> <form:errors path="TempMax" /></td></tr>
+				
+			<tr>
+				<th><form:label for="saturation" path="saturation" cssErrorClass="error"><fmt:message key="nurse.form.saturation" /></form:label></th>
+				<td><form:input path="saturation" /> <form:errors path="saturation" /></td></tr>
 		</table>
 	</div>
 
 	<div id="tab-vaccines" class="nurseform">
+	<table>
+			<tr>
+			<td>
+				<fmt:message key="nurse.form.vaccinesOb" />
+			</td>
+			</tr>
 	
-	<p><form:label for="vaxines" path="vaxines"
-		cssErrorClass="error"><fmt:message key="nurse.form.vaccines" /></form:label><br />
-	<form:checkboxes items="${allVaxines}" path="vaxines" itemLabel="name" itemValue="id"/><form:errors path="vaxines" /></p>
-	
+			<c:forEach var="vaxine" items="${allVaxines}">
+			<c:if test="${!vaxine.optative}">
+			<tr>
+				<td>
+				<form:checkbox path="vaxines" value="${vaxine}" />
+				<form:label path="vaxines" for="vaxines">${vaxine.name}</form:label>
+				</td>
+			</tr>
+			</c:if>
+			</c:forEach>
+			
+			<tr>
+			<td>
+				<fmt:message key="nurse.form.vaccinesOp" />
+			</td>
+			</tr>
+			
+			<c:forEach var="vaxine" items="${allVaxines}">
+			<c:if test="${vaxine.optative}">
+			<tr>
+				<td>
+				<form:checkbox path="vaxines" value="${vaxine}" />
+				<form:label path="vaxines" for="vaxines">${vaxine.name}</form:label>
+				</td>
+			</tr>
+			</c:if>
+			</c:forEach>
+	</table>
 	</div>
 
 	<div id="tab-actions" class="nurseform">
 	
 	<p><form:label for="nurseActions" path="nurseActions"
-		cssErrorClass="error"><fmt:message key="nurse.form.vaccines" /></form:label><br />
+		cssErrorClass="error"><fmt:message key="nurse.form.actions" /></form:label><br />
 	<form:checkboxes items="${allNurseActions}" path="nurseActions" itemLabel="description"/><form:errors path="nurseActions" /></p>
 	
-	</div>
-
-	<div id="tab-curation" class="nurseform">
-	</div>
-
-	<div id="tab-observations" class="nurseform">
 		<table>
 			<tr>
 				<th><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="nurse.form.observations" /></form:label></th> 
 				<td><form:textarea path="observations" /> <form:errors path="observations" /></td></tr>
 		</table>
-	</div>
-
-	<div id="tab-malformations" class="nurseform">
-	</div>
-
-	<div id="tab-internment" class="nurseform">
-		<table>
-			<tr>
-				<th><form:label for="interconsultation" path="interconsultation" cssErrorClass="error"><fmt:message key="nurse.form.interconsultation" /></form:label></th>
-				<td><form:checkbox path="interconsultation" /> <form:errors path="interconsultation" /></td></tr>
-
-			<tr>
-				<th><form:label for="internment" path="internment" cssErrorClass="error"><fmt:message key="nurse.form.internment" /></form:label></th>
-				<td><form:checkbox path="internment" /> <form:errors path="internment" /></td></tr>
-		</table>
-	</div>
-
-	<div id="tab-treatment" class="nurseform">
-		<table>
-			<tr>
-			<th><form:label for="treatment" path="treatment" cssErrorClass="error"><fmt:message key="nurse.form.treatment" /></form:label></th> 
-			<td><form:textarea path="treatment" /> <form:errors path="treatment" /></td></tr>
-		</table>
+	
 	</div>
 	
 	<input type="submit" />

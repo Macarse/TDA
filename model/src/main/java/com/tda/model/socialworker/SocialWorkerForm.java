@@ -1,14 +1,21 @@
 package com.tda.model.socialworker;
 
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.CollectionOfElements;
 
 import com.tda.model.patient.Patient;
 
@@ -94,7 +101,7 @@ public class SocialWorkerForm {
 
 	private boolean hasHealthCare;
 
-	private NBI nbi;
+	private Collection<NBI> nbi;
 
 	private Addiction addiction;
 
@@ -414,12 +421,15 @@ public class SocialWorkerForm {
 		this.hasHealthCare = hasHealthCare;
 	}
 
-	@Enumerated
-	public NBI getNbi() {
+	@CollectionOfElements(targetElement = NBI.class)
+	@JoinTable(name = "NBI", joinColumns = @JoinColumn(name = "SOCIAL_WORKER_ID"))
+	@Column(name = "NBI", nullable = true)
+	@Enumerated(EnumType.STRING)
+	public Collection<NBI> getNbi() {
 		return nbi;
 	}
 
-	public void setNbi(NBI nbi) {
+	public void setNbi(Collection<NBI> nbi) {
 		this.nbi = nbi;
 	}
 

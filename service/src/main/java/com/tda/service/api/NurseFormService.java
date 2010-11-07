@@ -1,5 +1,6 @@
 package com.tda.service.api;
 
+import java.util.Date;
 import java.util.List;
 
 import com.tda.model.nurse.NurseForm;
@@ -19,4 +20,6 @@ public interface NurseFormService {
 	List<NurseForm> findAllPaged(Paginator paginator);
 
 	List<NurseForm> findByExample(NurseForm nurseForm);
+
+	NurseForm findByPatientIdForDate(Long patientId, Date date);
 }

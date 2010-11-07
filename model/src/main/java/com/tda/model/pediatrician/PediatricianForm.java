@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
 
 import com.tda.model.patient.Patient;
 
@@ -31,12 +32,16 @@ public class PediatricianForm {
 
 	private BirthTypeTermination birthTypeTermination;
 
+	@Digits(fraction = 0, integer = 2)
 	private Integer gestationalAge;
 
+	@Digits(fraction = 0, integer = 4)
 	private Double birthWeight;
 
+	@Digits(fraction = 2, integer = 2)
 	private Double size;
 
+	@Digits(fraction = 2, integer = 2)
 	private Double headCircumference;
 
 	private boolean apgarDepressed;
@@ -567,5 +572,4 @@ public class PediatricianForm {
 	public String getTreatment() {
 		return treatment;
 	}
-
 }
