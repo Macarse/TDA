@@ -284,7 +284,12 @@ function toggleChatBoxGrowth(chatboxtitle) {
 }
 
 function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
-	 
+
+	if(event.keyCode == 27) {
+		closeChatBox(chatboxtitle);
+		return;
+	}
+
 	if(event.keyCode == 13 && event.shiftKey == 0)  {
 		message = $(chatboxtextarea).val();
 		message = message.replace(/^\s+|\s+$/g,"");
