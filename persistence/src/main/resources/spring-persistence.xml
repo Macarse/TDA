@@ -19,6 +19,11 @@
 		</property>
 	</bean>
 
+	<bean id="onlineUserDAO" class="com.tda.persistence.dao.OnlineUserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	<bean id="applicationUserDAO" class="com.tda.persistence.dao.ApplicationUserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />

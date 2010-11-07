@@ -16,6 +16,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.tabbed-menu"/>"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.tabbed-menu"/>"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.chat"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.getOnlineUsers"/>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/<spring:theme code="js.switchInTrain"/>"></script>
 
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="css.chat"/>' type="text/css"/>
 <!--[if lte IE 7]>

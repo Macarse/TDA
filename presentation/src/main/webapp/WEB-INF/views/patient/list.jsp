@@ -113,8 +113,7 @@
 	</thead>
 	<tbody>
 
-
-		<c:forEach items="${patientList}" var="patient">
+		<c:forEach items="${patientList}" var="patient" varStatus="indexStatus">
 			<tr>
 				<td>${patient.firstName}</td>
 				<td>${patient.lastName}</td>
@@ -130,7 +129,19 @@
 					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all  confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> ${deleteLabel}</button>
 				</form:form></td>
 				<td>
-					<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href="#"><span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span> <span>Subir</span></a>
+					<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href="#">
+					
+						<c:choose>
+							<c:when test="${patientInTrainArray[indexStatus.index]}">
+								<span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span>
+								<span>Bajar</span>
+							</c:when>
+							<c:otherwise>
+								<span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span>
+								<span>Subir</span>
+							</c:otherwise>
+						</c:choose>
+					</a>
 				</td>
 			</tr>
 		</c:forEach>

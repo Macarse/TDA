@@ -20,6 +20,7 @@ import com.tda.model.patient.Patient;
 import com.tda.model.patient.Sex;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
+import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
 
 @Controller
@@ -35,8 +36,15 @@ public class PatientController {
 	private static final String LIST = "patient/list";
 
 	private PatientService patientService;
+	private PatientInTrainService patientInTrainService;
 	private Paginator paginator;
 	private ParamContainer params;
+
+	@Autowired
+	public void setPatientInTrainService(
+			PatientInTrainService patientInTrainService) {
+		this.patientInTrainService = patientInTrainService;
+	}
 
 	public PatientController() {
 		params = new ParamContainer();
@@ -174,6 +182,13 @@ public class PatientController {
 		paginator.setOrderField(orderField);
 
 		patientList = patientService.findByExamplePaged(aPatient, paginator);
+
+		boolean[] patientInTrainArray = new boolean[patientList.size()];
+		int i = 0;
+		for (Patient patient : patientList)
+			patientInTrainArray[i++] = patientInTrainService.isInTrain(patient);
+
+		modelAndView.addObject("patientInTrainArray", patientInTrainArray);
 
 		modelAndView.addObject("patient", new Patient());
 		modelAndView.addObject("patientList", patientList);

@@ -16,6 +16,10 @@
 		<property name="chatDAO" ref="chatDAO" />
 	</bean>
 
+	<bean id="onlineUserService" class="com.tda.service.impl.OnlineUserServiceImpl">
+		<property name="onlineUserDAO" ref="onlineUserDAO" />
+	</bean>
+
 	<bean id="applicationUserService" class="com.tda.service.impl.ApplicationUserServiceImpl">
 		<property name="applicationUserDAO" ref="applicationUserDAO" />
 		<property name="authorityDAO" ref="authorityDAO" />
