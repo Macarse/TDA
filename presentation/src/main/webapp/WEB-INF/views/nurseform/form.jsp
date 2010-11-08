@@ -40,16 +40,16 @@
 		<table>
 
 			<tr>
-				<th><form:label for="size" path="size" cssErrorClass="error"><fmt:message key="nurse.form.size" /></form:label></th> 
+				<td><form:label for="size" path="size" cssErrorClass="error"><fmt:message key="nurse.form.size" /></form:label></td> 
 				<td><form:input path="size" /> <form:errors path="size" /></td></tr>
 			<tr>
-				<th><form:label for="weight" path="weight" cssErrorClass="error"><fmt:message key="nurse.form.weight" /></form:label></th>
+				<td><form:label for="weight" path="weight" cssErrorClass="error"><fmt:message key="nurse.form.weight" /></form:label></td>
 				<td><form:input path="weight" /> <form:errors path="weight" /></td></tr>
 			<tr>
-				<th><form:label for="headCircumference" path="headCircumference" cssErrorClass="error"><fmt:message key="nurse.form.headCircumference" /></form:label></th>
+				<td><form:label for="headCircumference" path="headCircumference" cssErrorClass="error"><fmt:message key="nurse.form.headCircumference" /></form:label></td>
 				<td><form:input path="headCircumference" /> <form:errors path="headCircumference" /></td></tr>
 			<tr>
-				<th><form:label for="percentile" path="percentile" cssErrorClass="error"><fmt:message key="nurse.form.percentile" /></form:label></th>
+				<td><form:label for="percentile" path="percentile" cssErrorClass="error"><fmt:message key="nurse.form.percentile" /></form:label></td>
 				<td><form:input path="percentile" /> <form:errors path="percentile" /></td></tr>
 		</table>
 	</div>
@@ -58,56 +58,48 @@
 		<table>
 
 			<tr>
-				<th><form:label for="TAmin" path="TAmin" cssErrorClass="error"><fmt:message key="nurse.form.TAmin" /></form:label></th> 
+				<td><form:label for="TAmin" path="TAmin" cssErrorClass="error"><fmt:message key="nurse.form.TAmin" /></form:label></td> 
 				<td><form:input path="TAmin" /> <form:errors path="TAmin" /></td></tr>
 			<tr>
-				<th><form:label for="TAmax" path="TAmax" cssErrorClass="error"><fmt:message key="nurse.form.TAmax" /></form:label></th>
+				<td><form:label for="TAmax" path="TAmax" cssErrorClass="error"><fmt:message key="nurse.form.TAmax" /></form:label></td>
 				<td><form:input path="TAmax" /> <form:errors path="TAmax" /></td></tr>
 				
 			<tr>
-				<th><form:label for="TempMin" path="TempMin" cssErrorClass="error"><fmt:message key="nurse.form.TempMin" /></form:label></th>
+				<td><form:label for="TempMin" path="TempMin" cssErrorClass="error"><fmt:message key="nurse.form.TempMin" /></form:label></td>
 				<td><form:input path="TempMin" /> <form:errors path="TempMin" /></td></tr>
 				
 			<tr>
-				<th><form:label for="TempMax" path="TempMax" cssErrorClass="error"><fmt:message key="nurse.form.TempMax" /></form:label></th>
+				<td><form:label for="TempMax" path="TempMax" cssErrorClass="error"><fmt:message key="nurse.form.TempMax" /></form:label></td>
 				<td><form:input path="TempMax" /> <form:errors path="TempMax" /></td></tr>
 				
 			<tr>
-				<th><form:label for="saturation" path="saturation" cssErrorClass="error"><fmt:message key="nurse.form.saturation" /></form:label></th>
+				<td><form:label for="saturation" path="saturation" cssErrorClass="error"><fmt:message key="nurse.form.saturation" /></form:label></td>
 				<td><form:input path="saturation" /> <form:errors path="saturation" /></td></tr>
 		</table>
 	</div>
 
 	<div id="tab-vaccines" class="nurseform">
 	<table>
-			<tr>
-			<td>
-				<form:checkboxes items="${allVaxines}" path="vaxines" itemLabel="name" itemValue="id"/>
-			</td>
-			</tr>
-			
-<!--			<c:forEach var="vaxine" items="${allVaxines}">-->
-<!--			<c:if test="${vaxine.optative}">-->
-<!--			<tr>-->
-<!--				<td>-->
-<!--				<form:checkbox path="vaxines" value="${vaxine.id}" />-->
-<!--				<form:label path="vaxines" for="vaxines">${vaxine.name}</form:label>-->
-<!--				</td>-->
-<!--			</tr> -->
-<!--			</c:if>-->
-<!--			</c:forEach>-->
+			<c:forEach var="vaxine" items="${allVaxines}">
+				<c:if test="${count%2 == 0 }"><tr></c:if>
+					<td><form:checkbox path="vaxines" value="${vaxine.id}" /> ${vaxine.name}</td>
+				<c:if test="${count%2 == 1 }"></tr></c:if>
+			    <c:set var="count" value="${count+1}" />
+			</c:forEach>
+			<c:if test="${count%2 == 1 }"></tr></c:if>
+			<tr><td><form:errors path="vaxines" /></td></tr>
 	</table>
 	</div>
 
 	<div id="tab-actions" class="nurseform">
-	
-	<p><form:label for="nurseActions" path="nurseActions"
-		cssErrorClass="error"><fmt:message key="nurse.form.actions" /></form:label><br />
-	<form:checkboxes items="${allNurseActions}" path="nurseActions" itemLabel="description"/><form:errors path="nurseActions" /></p>
-	
-		<table>
+		<table width="100%">
 			<tr>
-				<th><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="nurse.form.observations" /></form:label></th> 
+				<th><form:label for="nurseActions" path="nurseActions"
+					cssErrorClass="error"><fmt:message key="nurse.form.actions" /></form:label></th></tr>
+			<tr><td><form:checkboxes items="${allNurseActions}" path="nurseActions" itemLabel="description"/><form:errors path="nurseActions" /></td></tr>
+			<tr>
+				<th><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="nurse.form.observations" /></form:label></th></tr>
+			<tr> 
 				<td><form:textarea path="observations" /> <form:errors path="observations" /></td></tr>
 		</table>
 	

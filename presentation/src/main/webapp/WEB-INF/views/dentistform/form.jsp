@@ -37,62 +37,63 @@
 	<div id="tab-history" class="dentistform">
 		<table>
 		
-			<tr><th>
+			<tr><td>
 				<form:label for="receivedAttentionInTrain" path="receivedAttentionInTrain" cssErrorClass="error">
 					<fmt:message key="dentist.form.receivedAttentionInTrain" />
-				</form:label></th>
+				</form:label></td>
 				<td><form:checkbox path="receivedAttentionInTrain" /> <form:errors path="receivedAttentionInTrain" />
 			</td></tr>
 			
-			<tr><th>
+			<tr><td>
 				<form:label for="receivedAttentionOutsideTrain" path="receivedAttentionInTrain" cssErrorClass="error">
 					<fmt:message key="dentist.form.receivedAttentionOutsideTrain" />
-				</form:label></th>
+				</form:label></td>
 				<td><form:checkbox path="receivedAttentionOutsideTrain" /> <form:errors path="receivedAttentionOutsideTrain" />
 			</td></tr>
 			
-			<tr><th>
+			<tr><td>
 				<form:label for="receivedAnesthesia" path="receivedAnesthesia" cssErrorClass="error">
 					<fmt:message key="dentist.form.receivedAnesthesia" />
-				</form:label></th>
+				</form:label></td>
 				<td><form:checkbox path="receivedAnesthesia" /> <form:errors path="receivedAnesthesia" />
 			</td></tr>
 			
-			<tr><th>
+			<tr><td>
 				<form:label for="haemorrhage" path="haemorrhage" cssErrorClass="error">
 					<fmt:message key="dentist.form.haemorrhage" />
-				</form:label></th>
+				</form:label></td>
 				<td><form:checkbox path="haemorrhage" /> <form:errors path="haemorrhage" />
 			</td></tr>
 			
-			<tr><th>
+			<tr><td>
 				<form:label for="medicineAllergic" path="medicineAllergic" cssErrorClass="error">
 					<fmt:message key="dentist.form.medicineAllergic" />
-				</form:label></th>
+				</form:label></td>
 				<td><form:checkbox path="medicineAllergic" /> <form:errors path="medicineAllergic" />
 			</td></tr>
 			
-			<tr><th>
+			<tr><td>
 				<form:label for="yodoAllergic" path="yodoAllergic" cssErrorClass="error">
 					<fmt:message key="dentist.form.yodoAllergic" />
-				</form:label></th>
+				</form:label></td>
 				<td><form:checkbox path="yodoAllergic" /> <form:errors path="yodoAllergic" />
 			</td></tr>
 			
 			<tr>
-				<th><form:label for="comment" path="comment" cssErrorClass="error"><fmt:message key="dentist.form.comment" /></form:label></th> 
-				<td><form:textarea path="comment" /> <form:errors path="comment" /></td></tr>
+				<th colspan="2"><form:label for="comment" path="comment" cssErrorClass="error"><fmt:message key="dentist.form.comment" /></form:label></th></tr>
+			<tr>
+				<td colspan="2"><form:textarea path="comment" /> <form:errors path="comment" /></td></tr>
 		</table>
 	</div>
 	
 	<div id="tab-odontogram" class="dentistform">
 		<table>
 			<tr>
-				<th>
+				<td>
 					<form:label for="cpod" path="cpod" cssErrorClass="error">
 						<fmt:message key="dentist.form.cpod" />
 					</form:label>
-				</th>
+				</td>
 				<td>
 					<form:input path="cpod" />
 				</td>
@@ -104,11 +105,11 @@
 			</tr>
 			
 			<tr>
-				<th>
+				<td>
 					<form:label for="cpos" path="cpos" cssErrorClass="error">
 						<fmt:message key="dentist.form.cpos" />
 					</form:label>
-				</th>
+				</td>
 				<td>
 					<form:input path="cpos" />
 				</td>
@@ -120,11 +121,11 @@
 			</tr>
 			
 			<tr>
-				<th>
+				<td>
 					<form:label for="ceod" path="ceod" cssErrorClass="error">
 						<fmt:message key="dentist.form.ceod" />
 					</form:label>
-				</th>
+				</td>
 				<td>
 					<form:input path="ceod" />
 				</td>
@@ -136,11 +137,11 @@
 			</tr>
 			
 			<tr>
-				<th>
+				<td>
 					<form:label for="ceos" path="ceos" cssErrorClass="error">
 						<fmt:message key="dentist.form.ceos" />
 					</form:label>
-				</th>
+				</td>
 				<td>
 					<form:input path="ceos" />
 				</td>
@@ -154,14 +155,15 @@
 	</div>
 	
 	<div id="tab-inspection" class="dentistform">
-		<table>
+		<table width="100%">
 			<tr>
-				<th>
+				<th colspan="2">
 					<form:label for="stains" path="stains" cssErrorClass="error">
 						<fmt:message key="dentist.form.stains" />
 					</form:label>
-				</th>
-				<td>
+				</th></tr>
+			<tr>
+				<td colspan="2">
 					<form:textarea path="stains" />
 				</td>
 			</tr>
@@ -171,23 +173,24 @@
 				</td>
 			</tr>
 			
-			<tr><th>
+			<tr><td>
 				<form:label for="cleftPalate" path="cleftPalate" cssErrorClass="error">
 					<fmt:message key="dentist.form.cleftPalate" />
-				</form:label></th>
+				</form:label></td>
 				<td><form:checkbox path="cleftPalate" /> <form:errors path="cleftPalate" />
 			</td></tr>
 			
-			<tr><th>
+			<tr><td>
 				<form:label for="cleftLip" path="cleftLip" cssErrorClass="error">
 					<fmt:message key="dentist.form.cleftLip" />
-				</form:label></th>
+				</form:label></td>
 				<td><form:checkbox path="cleftLip" /> <form:errors path="cleftLip" />
 			</td></tr>
 			
 			<tr>
-				<th><form:label for="cleftComments" path="cleftComments" cssErrorClass="error"><fmt:message key="dentist.form.cleftComments" /></form:label></th> 
-				<td><form:textarea path="cleftComments" /> <form:errors path="cleftComments" /></td></tr>
+				<th colspan="2"><form:label for="cleftComments" path="cleftComments" cssErrorClass="error"><fmt:message key="dentist.form.cleftComments" /></form:label></th></tr>
+			<tr> 
+				<td colspan="2"><form:textarea path="cleftComments" /> <form:errors path="cleftComments" /></td></tr>
 				
 			<tr><th colspan="2">
 					<form:label for="gumDisease" path="gumDisease" cssErrorClass="error">
@@ -238,9 +241,9 @@
 			</tr>
 			
 			<tr>
-				<th><form:label for="severityLevelComments" path="severityLevelComments" cssErrorClass="error"><fmt:message key="dentist.form.severityLevelComments" /></form:label></th> 
-				<td><form:textarea path="severityLevelComments" /> <form:errors path="severityLevelComments" /></td>
-			</tr>
+				<th colspan="2"><form:label for="severityLevelComments" path="severityLevelComments" cssErrorClass="error"><fmt:message key="dentist.form.severityLevelComments" /></form:label></th></tr>
+			<tr>
+				<td><form:textarea path="severityLevelComments" /> <form:errors path="severityLevelComments" /></td></tr>
 		</table>
 	</div>
 	
