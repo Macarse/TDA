@@ -11,6 +11,12 @@ div[class=filter-container]{
 	height: 30px;
 }
 
+.socialworkerform table td, .pediatricianform table td, .dentistform table td, .nurseform table td{
+	font-weight: bolder;
+	text-align: left;
+	font-size: 11px;
+}
+
 .socialworkerform textarea, .pediatricianform textarea, .dentistform textarea, .nurseform textarea{
 	width: 100%;
 	height: 100px;
