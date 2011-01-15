@@ -774,6 +774,6 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					<form:errors path="treatment" /></td></tr>
 			</table>
 		</div>
-		<input type="submit" />
+		<input type="submit" value="Finalizar" />
 	</div>
 </form:form>

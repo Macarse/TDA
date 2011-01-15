@@ -343,11 +343,9 @@
 				<th colspan="${fieldsPerRow}"><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="socialworker.form.observations" /></form:label></th></tr>
 			<tr>	
 				<td colspan="${fieldsPerRow}"><form:textarea path="observations" /><form:errors path="observations" /></td></tr>
-			<tr>
-				<td><input type="submit" /></td>
-				<td> </td></tr>
 		</table>
 	</div>
+	<input type="submit" value="Finalizar" />
 	</div>
 </form:form>
 <hr>
