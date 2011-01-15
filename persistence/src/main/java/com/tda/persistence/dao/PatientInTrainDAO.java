@@ -11,14 +11,23 @@ public class PatientInTrainDAO extends GenericDAOImpl<PatientInTrain> {
 	protected Class<PatientInTrain> getDomainClass() {
 		return PatientInTrain.class;
 	}
-	
-	public boolean isInTrain(Patient patient)
-	{
-		@SuppressWarnings("rawtypes")
-		List list = getHibernateTemplate().find("from PatientInTrain as pit,Patient as p where p.id=pit.patient.id and p.id="+patient.getId());
-		if( list.size() != 0)
+
+	public boolean isInTrain(Patient patient) {
+		if (findByPatient(patient) != null)
 			return true;
-		
+
 		return false;
+	}
+
+	public PatientInTrain findByPatient(Patient patient) {
+		@SuppressWarnings("unchecked")
+		List<PatientInTrain> list = getHibernateTemplate().find(
+				"from PatientInTrain as pit where pit.patient.id="
+						+ patient.getId());
+
+		if (list == null || list.size() <= 0)
+			return null;
+
+		return list.get(0);
 	}
 }

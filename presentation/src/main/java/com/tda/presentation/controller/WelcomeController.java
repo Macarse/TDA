@@ -77,8 +77,7 @@ public class WelcomeController {
 	}
 
 	@Autowired
-	public void setOnlineUserService(
-			OnlineUserService onlineUserService) {
+	public void setOnlineUserService(OnlineUserService onlineUserService) {
 		this.onlineUserService = onlineUserService;
 	}
 
@@ -104,8 +103,10 @@ public class WelcomeController {
 		modelAndView = processRequest(modelAndView, new PatientInTrain(),
 				pageNumber, orderField, orderAscending);
 
-		/*Set user online.
-		 * TODO: This should be done with a spring security hook */
+		/*
+		 * Set user online. TODO: This should be done with a spring security
+		 * hook
+		 */
 		onlineUserService.setOnline(getUser().getUsername());
 
 		return modelAndView;
@@ -119,9 +120,9 @@ public class WelcomeController {
 		List<OnlineUser> users = onlineUserService.getOnlineUsers();
 		OnlineUser me = new OnlineUser();
 		me.setUsername(getUser().getUsername());
-		
+
 		users.remove(me);
-		
+
 		return gson.toJson(users);
 	}
 
@@ -135,19 +136,17 @@ public class WelcomeController {
 	public @ResponseBody
 	String switchInTrain(@RequestParam Long patientId) {
 
-		/* TODO: Check if there is a better way to do this */
-		PatientInTrain aPatientInTrain = new PatientInTrain();
 		Patient aPatient = patientService.findById(patientId);
-		aPatientInTrain.setPatient(aPatient);
-
-		List<PatientInTrain> patients = patientInTrainService
-				.findByExample(aPatientInTrain);
+		PatientInTrain aPatientInTrain = patientInTrainService
+				.findByPatient(aPatient);
 
 		/* The patient is already in the train. */
-		if (patientInTrainService.isInTrain(aPatient)) {
-			patientInTrainService.delete(patients.get(0));
+		if (aPatientInTrain != null) {
+			patientInTrainService.delete(aPatientInTrain);
 			return "Subir";
 		} else {
+			aPatientInTrain = new PatientInTrain();
+			aPatientInTrain.setPatient(aPatient);
 			patientInTrainService.save(aPatientInTrain);
 			return "Bajar";
 		}
