@@ -64,7 +64,7 @@ public class PatientServiceImpl implements PatientService {
 	@Transactional(readOnly = true)
 	public List<Patient> findByDni(String dni) {
 		Patient example = PatientBuilder.createPatient().withDni(dni).build();
-		return patientDAO.findByExample(example);
+		return patientDAO.findByExample(example, true);
 	}
 
 	@Transactional(readOnly = true)
