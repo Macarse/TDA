@@ -59,10 +59,18 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 		return count.intValue();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<T> findByExample(final T exampleObject) {
+		return findByExample(exampleObject, false);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> findByExample(final T exampleObject, boolean exact) {
 		Example example = Example.create(exampleObject);
-		example.enableLike(MatchMode.ANYWHERE);
+		if ( exact ) {
+			example.enableLike(MatchMode.EXACT);
+		} else {
+			example.enableLike(MatchMode.ANYWHERE);
+		}
 		example.ignoreCase();
 
 		DetachedCriteria c = DetachedCriteria.forClass(persistentClass).add(

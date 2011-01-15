@@ -24,7 +24,7 @@ public class Patient implements Serializable {
 
 	private Long id;
 
-	@Size(min = 0, max = 10)
+	@Size(min = 8, max = 12)
 	@Digits(fraction = 0, integer = 10)
 	private String dni;
 
