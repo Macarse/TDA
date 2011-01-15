@@ -25,11 +25,14 @@ public interface PatientInTrainService {
 
 	List<PatientInTrain> findByExample(PatientInTrain example);
 
-	List<PatientInTrain> findByExamplePaged(PatientInTrain example, Paginator paginator);
+	List<PatientInTrain> findByExamplePaged(PatientInTrain example,
+			Paginator paginator);
 
 	List<PatientInTrain> findByDni(String dni);
 
 	List<PatientInTrain> findBySex(Sex sex);
 
 	boolean isInTrain(Patient patient);
+
+	PatientInTrain findByPatient(Patient patient);
 }

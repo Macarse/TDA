@@ -71,11 +71,16 @@ public class PatientInTrainServiceImpl implements PatientInTrainService {
 		return patientInTrainDAO.findAllPaged(paginator);
 	}
 
-	public List<PatientInTrain> findByExamplePaged(PatientInTrain example, Paginator paginator) {
+	public List<PatientInTrain> findByExamplePaged(PatientInTrain example,
+			Paginator paginator) {
 		return patientInTrainDAO.findByExamplePaged(example, paginator);
 	}
 
 	public boolean isInTrain(Patient patient) {
 		return patientInTrainDAO.isInTrain(patient);
+	}
+
+	public PatientInTrain findByPatient(Patient patient) {
+		return patientInTrainDAO.findByPatient(patient);
 	}
 }
