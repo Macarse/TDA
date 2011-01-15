@@ -9,7 +9,7 @@ $(document).ready(function() {
     $(this).addClass('selected');
     
     //Hide all the DIV in .boxBody
-    $('.boxBody div').slideUp('1500');
+    $('.boxBody div').hide();//slideUp('1500');
     
     //Look for the right DIV in boxBody according to the Navigation UL index, therefore, the arrangement is very important.
     $('.boxBody div:eq(' + $('#tabMenu > li').index(this) + ')').slideDown('1500');
