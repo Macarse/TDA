@@ -86,4 +86,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/welcome/welcome.jsp" />
 	</definition>
 
+ 	<definition name="404" extends="base.definition">
+ 		<put-attribute name="title" value="Página no encontrada" />
+        <put-attribute name="body" value="/WEB-INF/views/error/404.jsp" />
+    </definition>
+    
+   	<definition name="403" template="/WEB-INF/views/layout/layout-simple.jsp">
+ 		<put-attribute name="title" value="Acceso inválido" />
+        <put-attribute name="body" value="/WEB-INF/views/error/403.jsp" />
+    </definition>
+
 </tiles-definitions>
