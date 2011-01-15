@@ -63,11 +63,14 @@ public class UserDefaultProvider implements UserProvider {
 			authorities.add(authority);
 		}
 
-		return ApplicationUserBuilder.createApplicationUser()
+		ApplicationUser user = ApplicationUserBuilder.createApplicationUser()
 				.withUsername(username).withPassword(password)
 				.withAccountNonExpired().withAccountNonLocked()
 				.withCredentialsNonExpired().withAuthorities(authorities)
 				.enabled().build();
+
+		user.setConfirmPassword(password);
+		return user;
 	}
 
 	public void setApplicationUserService(

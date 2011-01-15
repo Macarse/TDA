@@ -39,7 +39,7 @@ public class ApplicationUser implements UserDetails {
 	private String confirmPassword;
 
 	@NotNull
-	@Size(min = 6, max = 12)
+	@Size(min = 5, max = 12)
 	private String username;
 
 	private Collection<Authority> myAuthorities;
