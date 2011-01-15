@@ -105,7 +105,7 @@
 	
 	</div>
 	
-	<input type="submit" />
+	<input type="submit" value="Finalizar"/>
   </div>
 </form:form>
 <hr>

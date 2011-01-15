@@ -15,74 +15,74 @@
 
 	<!-- Item -->
 	<definition name="item/list" extends="base.definition">
-		<put-attribute name="title" value="Item List" />
+		<put-attribute name="title" value="Inventario de ítems" />
 		<put-attribute name="body" value="/WEB-INF/views/item/list.jsp" />
 	</definition>
 	
 	<definition name="item/createForm" extends="base.definition">
-		<put-attribute name="title" value="New Item" />
+		<put-attribute name="title" value="Nuevo ítem" />
 		<put-attribute name="body" value="/WEB-INF/views/item/createForm.jsp" />
 	</definition>
 	
 	<!-- ApplicationUser -->
 	<definition name="applicationUser/list" extends="base.definition">
-		<put-attribute name="title" value="User List" />
+		<put-attribute name="title" value="Lista de usuarios" />
 		<put-attribute name="body" value="/WEB-INF/views/applicationUser/list.jsp" />
 	</definition>
 	
 	<definition name="applicationUser/createForm" extends="base.definition">
-		<put-attribute name="title" value="New User" />
+		<put-attribute name="title" value="Nuevo usuario" />
 		<put-attribute name="body" value="/WEB-INF/views/applicationUser/createForm.jsp" />
 	</definition>
 	
 	<definition name="applicationUser/editForm" extends="base.definition">
-		<put-attribute name="title" value="Edit User" />
+		<put-attribute name="title" value="Editar usuario" />
 		<put-attribute name="body" value="/WEB-INF/views/applicationUser/editForm.jsp" />
 	</definition>
 
 	<definition name="applicationUser/passwordForm" extends="base.definition">
-		<put-attribute name="title" value="Editar Contraseña" />
+		<put-attribute name="title" value="Editar contraseña" />
 		<put-attribute name="body" value="/WEB-INF/views/applicationUser/passwordForm.jsp" />
 	</definition>
 
 	<!-- SocialWorker -->	
 	<definition name="socialworkerform/form" extends="base.definition">
-		<put-attribute name="title" value="Social Worker Form" />
+		<put-attribute name="title" value="Formulario de trabajo social" />
 		<put-attribute name="body" value="/WEB-INF/views/socialworkerform/form.jsp" />
 	</definition>
 	
 	<!-- Pediatrician -->	
 	<definition name="pediatricianform/form" extends="base.definition">
-		<put-attribute name="title" value="Pediatrician Form" />
+		<put-attribute name="title" value="Formulario de pediatría" />
 		<put-attribute name="body" value="/WEB-INF/views/pediatricianform/form.jsp" />
 	</definition>
 
 	<!-- Nurse -->	
 	<definition name="nurseform/form" extends="base.definition">
-		<put-attribute name="title" value="Nurse Form" />
+		<put-attribute name="title" value="Formulario de enfermería" />
 		<put-attribute name="body" value="/WEB-INF/views/nurseform/form.jsp" />
 	</definition>
 	
 	<!-- Dentist -->	
 	<definition name="dentistform/form" extends="base.definition">
-		<put-attribute name="title" value="Dentist Form" />
+		<put-attribute name="title" value="Formulario de odontología" />
 		<put-attribute name="body" value="/WEB-INF/views/dentistform/form.jsp" />
 	</definition>
 
 	<!-- Patient -->
 	<definition name="patient/list" extends="base.definition">
-		<put-attribute name="title" value="Patient List" />
+		<put-attribute name="title" value="Lista de pacientes" />
 		<put-attribute name="body" value="/WEB-INF/views/patient/list.jsp" />
 	</definition>
 	
 	<definition name="patient/createForm" extends="base.definition">
-		<put-attribute name="title" value="New Patient" />
+		<put-attribute name="title" value="Nuevo paciente" />
 		<put-attribute name="body" value="/WEB-INF/views/patient/createForm.jsp" />
 	</definition>
 	
 	<!-- Welcome -->
 	<definition name="welcome/list" extends="base.definition">
-		<put-attribute name="title" value="Patient List" />
+		<put-attribute name="title" value="Lista de pacientes" />
 		<put-attribute name="body" value="/WEB-INF/views/welcome/welcome.jsp" />
 	</definition>
 

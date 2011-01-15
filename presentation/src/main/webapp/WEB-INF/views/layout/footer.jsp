@@ -1,1 +1,1 @@
-<p>footer</p>
+<p>© 2011 - Tren Del Alma</p>

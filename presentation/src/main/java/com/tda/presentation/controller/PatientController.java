@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -123,14 +124,26 @@ public class PatientController {
 			@Valid @ModelAttribute Patient aPatient, BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 
+		/* Check DNI uniqueness */
+		List<Patient> patientsWithSameDni = patientService.findByDni(aPatient
+				.getDni());
+
+		if (!patientsWithSameDni.isEmpty()) {
+			FieldError error = new FieldError("patient", "dni", aPatient.getDni(),
+					false, new String[] { "error.dni.duplicated" },
+					new Object[] { "DNI duplicado" }, "DNI duplicado");
+			result.addError(error);
+		}
+
 		// TODO if we're editing and not adding a new item the message
 		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors()) {
 			modelAndView.setViewName(CREATE_FORM);
 		} else {
+			patientService.save(aPatient);
 			modelAndView.setViewName(REDIRECT_TO_LIST);
 			modelAndView.addObject(FORM_MESSAGE, FORM_ADD_SUCCESSFUL);
-			patientService.save(aPatient);
+
 		}
 
 		return modelAndView;
