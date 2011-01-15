@@ -53,3 +53,16 @@
 		
 	</form:form>
 </div>
+
+<script>
+	$(function() {
+		$( "#birthdate" ).datepicker(
+			{ dateFormat: 'dd/mm/yy',
+			  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			  dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa']
+			   }
+		);
+	});
+</script>
+
+
