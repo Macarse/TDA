@@ -261,7 +261,7 @@ function toggleChatBoxGrowth(chatboxtitle) {
 		$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','block');
 		$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
 		
-		$.post(contextPath + "/chat/minimize", { to: chatboxtitle} , null);
+		$.post(contextPath + "/chat/open", { to: chatboxtitle} , null);
 	} else {
 		
 		var newCookie = chatboxtitle;
