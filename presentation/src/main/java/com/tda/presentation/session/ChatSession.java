@@ -12,7 +12,7 @@ public class ChatSession implements Serializable {
 
 	private String username;
 	private LinkedHashMap<String, LinkedList<ChatMessage>> msgs = new LinkedHashMap<String, LinkedList<ChatMessage>>();
-	
+
 	public ChatSession() {
 	}
 

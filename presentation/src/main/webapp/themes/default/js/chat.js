@@ -61,11 +61,12 @@ function restructureChatBoxes() {
 }
 
 function chatWith(chatuser) {
+	$.post(contextPath + "/chat/open", { to: chatuser} , function(){});
 	createChatBox(chatuser);
 	$("#chatbox_"+chatuser+" .chatboxtextarea").focus();
 }
 
-function createChatBox(chatboxtitle,minimizeChatBox) {
+function createChatBox(chatboxtitle,statusChatBox) {
 	if ($("#chatbox_"+chatboxtitle).length > 0) {
 		if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
 			$("#chatbox_"+chatboxtitle).css('display','block');
@@ -99,25 +100,6 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 	
 	chatBoxes.push(chatboxtitle);
 
-	if (minimizeChatBox == 1) {
-		minimizedChatBoxes = new Array();
-
-		if ($.cookie('chatbox_minimized')) {
-			minimizedChatBoxes = $.cookie('chatbox_minimized').split(/\|/);
-		}
-		minimize = 0;
-		for (j=0;j<minimizedChatBoxes.length;j++) {
-			if (minimizedChatBoxes[j] == chatboxtitle) {
-				minimize = 1;
-			}
-		}
-
-		if (minimize == 1) {
-			$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','none');
-			$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','none');
-		}
-	}
-
 	chatboxFocus[chatboxtitle] = false;
 
 	$("#chatbox_"+chatboxtitle+" .chatboxtextarea").blur(function(){
@@ -135,10 +117,21 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 			$("#chatbox_"+chatboxtitle+" .chatboxtextarea").focus();
 		}
 	});
-
-	$("#chatbox_"+chatboxtitle).show();
 }
 
+function renderChat(statusChatBox, chatboxtitle){
+	switch(statusChatBox){
+		case 0:
+			break;
+		case 1:
+			toggleChatBoxGrowth(chatboxtitle);
+			$("#chatbox_"+chatboxtitle).show();
+			break;
+		case 2:
+			$("#chatbox_"+chatboxtitle).show();
+			break;
+	}
+}
 
 function chatHeartbeat(){
 
@@ -214,9 +207,10 @@ function chatHeartbeat(){
 
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
 				itemsfound += 1;
+				
 			}
 		});
-
+		
 		chatHeartbeatCount++;
 
 		if (itemsfound > 0) {
@@ -238,8 +232,7 @@ function closeChatBox(chatboxtitle) {
 	$('#chatbox_'+chatboxtitle).css('display','none');
 	restructureChatBoxes();
 
-	$.post(contextPath + "/chat/close", { chatbox: chatboxtitle} , function(data){	
-	});
+	$.post(contextPath + "/chat/close", { chatbox: chatboxtitle} , function(data){});
 
 }
 
@@ -267,6 +260,8 @@ function toggleChatBoxGrowth(chatboxtitle) {
 		$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','block');
 		$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','block');
 		$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+		
+		$.post(contextPath + "/chat/minimize", { to: chatboxtitle} , null);
 	} else {
 		
 		var newCookie = chatboxtitle;
@@ -279,6 +274,8 @@ function toggleChatBoxGrowth(chatboxtitle) {
 		$.cookie('chatbox_minimized',newCookie);
 		$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','none');
 		$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','none');
+		
+		$.post(contextPath + "/chat/minimize", { to: chatboxtitle} , null);
 	}
 	
 }
@@ -339,8 +336,9 @@ function startChatSession(){
 
 				chatboxtitle = item.f;
 
+				//status: 0 close, 1 minimized, 2 open
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
-					createChatBox(chatboxtitle,1);
+					createChatBox(chatboxtitle);
 				}
 				
 				if (item.s == 1) {
@@ -352,13 +350,17 @@ function startChatSession(){
 				} else {
 					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div>');
 				}
+				
 			}
 		});
+		
 		
 		for (i=0;i<chatBoxes.length;i++) {
 			chatboxtitle = chatBoxes[i];
 			$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
 			setTimeout('$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);', 100); // yet another strange ie bug
+			status = eval("data.windowStatus." + chatboxtitle);
+			renderChat(status, chatboxtitle)
 		}
 	
 	setTimeout('chatHeartbeat();',chatHeartbeatTime);
