@@ -6,11 +6,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-<!--
 	$(document).ready(function(){
 		$("#form-tabs").tabs();
 	});
-//-->
+
+	window.onbeforeunload = nextTabUnload;
+	var _isDirty = true;
 </script>
 
 <!-- aux variables -->
@@ -83,6 +84,14 @@
 				<th colspan="2"><form:label for="comment" path="comment" cssErrorClass="error"><fmt:message key="dentist.form.comment" /></form:label></th></tr>
 			<tr>
 				<td colspan="2"><form:textarea path="comment" /> <form:errors path="comment" /></td></tr>
+		
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+		
 		</table>
 	</div>
 	
@@ -151,6 +160,14 @@
 					<form:errors path="ceos" />
 				</td>
 			</tr>
+			
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+			
 		</table>
 	</div>
 	
@@ -244,10 +261,17 @@
 				<th colspan="2"><form:label for="severityLevelComments" path="severityLevelComments" cssErrorClass="error"><fmt:message key="dentist.form.severityLevelComments" /></form:label></th></tr>
 			<tr>
 				<td><form:textarea path="severityLevelComments" /> <form:errors path="severityLevelComments" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<input type="submit" value="Guardar" onClick="_isDirty = false;"/>
+		</td>
+		</tr>	
+			
+			
 		</table>
 	</div>
-	
-	<input type="submit" value="Finalizar" />
   </div>
 </form:form>
 <hr>
