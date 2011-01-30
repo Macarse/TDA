@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.tda.model.chat.ChatMessage;
+import com.tda.model.chat.ChatWindowStatus;
 import com.tda.model.chat.HeartbeatResponse;
 import com.tda.model.chat.Item;
 import com.tda.model.chat.StartSessionResponse2;
@@ -29,6 +30,7 @@ public class ChatController {
 
 	private ChatService chatService;
 	private ChatSession chatSession;
+	private ChatWindowStatus chatWStatus = new ChatWindowStatus();
 	
 	@ModelAttribute("user")
 	public UserDetails getUser() {
@@ -57,7 +59,19 @@ public class ChatController {
 	@RequestMapping(value = "/close", method = RequestMethod.POST)
 	public @ResponseBody
 	void send(@RequestParam String chatbox) {
-		chatSession.removeMessages(chatbox);
+		chatWStatus.setStatus(chatbox, 0);
+	}
+	
+	@RequestMapping(value = "/minimize", method = RequestMethod.POST)
+	public @ResponseBody
+	void minimize(@RequestParam String to) {
+		chatWStatus.setStatus(to, 1);
+	}
+	
+	@RequestMapping(value = "/open", method = RequestMethod.POST)
+	public @ResponseBody
+	void open(@RequestParam String to) {
+		chatWStatus.setStatus(to, 2);
 	}
 
 	@RequestMapping(value = "/startchatsession", method = RequestMethod.GET)
@@ -86,8 +100,7 @@ public class ChatController {
 		StartSessionResponse2 ret = new StartSessionResponse2();
 		ret.setUsername(chatSession.getUsername());
 		ret.setItems(items);
-		
-		System.out.println(ret.getUsername());
+		ret.setWindowStatus(chatWStatus.getList());
 
 		return gson.toJson(ret);
 	}

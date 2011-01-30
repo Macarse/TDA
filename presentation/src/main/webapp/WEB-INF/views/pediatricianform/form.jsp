@@ -11,8 +11,10 @@
 
 		if( document.getElementById('distosicRadioButton').checked )
 			$('.distosicHidden').show();
-		
 	});
+
+	window.onbeforeunload = nextTabUnload;
+	var _isDirty = true;
 </script>
 
 <!-- aux variables -->
@@ -250,6 +252,14 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					</c:forEach>
 					<c:if test="${count%2 == 1 }"></tr></c:if>
 					<tr><td><form:errors path="exitStatus" /></td></tr>
+					
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+					
 			</table>
 		</div>
 		
@@ -319,6 +329,13 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 				<tr><td colspan="${fieldsPerRow}">
 					<form:textarea path="otherPatientDiseases" /></td></tr>
 				<tr><td><form:errors path="otherPatientDiseases" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
 				
 			</table>
 		</div>
@@ -396,6 +413,14 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 				<tr><td colspan="${fieldsPerRow}">
 					<form:textarea path="otherFamilyDiaseases" /><form:errors path="otherFamilyDiaseases" />
 				</td></tr>	
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+				
 			</table>
 		</div>
 		
@@ -407,7 +432,15 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 						<fmt:message key="pediatrician.form.maturationAndDevelopment" />
 					</form:label></th></tr>
 				<tr><td colspan="${fieldsPerRow}"><form:textarea path="maturationAndDevelopment" /></td></tr>
-				<tr><td><form:errors path="maturationAndDevelopment" /></td></tr>	
+				<tr><td><form:errors path="maturationAndDevelopment" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+					
 			</table>
 		</div>
 		
@@ -502,6 +535,13 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					</form:label></th></tr>
 				<tr><td colspan="${fieldsPerRow}"><form:textarea path="pathologyFound" /></td></tr>
 				<tr><td><form:errors path="pathologyFound" /></td></tr>	
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
 				
 			</table>
 		</div>
@@ -707,6 +747,14 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					</c:forEach>
 					<c:if test="${count%2 == 1 }"></tr></c:if>
 					<tr><td><form:errors path="chagas" /></td></tr>
+					
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+					
 			</table>
 		</div>
 		
@@ -740,11 +788,27 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					</form:label></th></tr>
 				<tr><td colspan="${fieldsPerRow}"><form:textarea path="radiologyComments" /></td></tr>
 				<tr><td><form:errors path="radiologyComments" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+				
 			</table>
 		</div>
 		
 		<!-- DIAGNOSIS -->
 		<div id="tab-dia" class="pediatricianform">
+		<table>
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+		</table>
 		</div>
 		
 		<!-- INTERNMENT -->
@@ -772,8 +836,15 @@ ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 					<form:textarea path="treatment" /></td></tr>
 				<tr><td>
 					<form:errors path="treatment" /></td></tr>
+					
+		<tr>
+		<td>
+		<br/><br/>
+		<input type="submit" value="Guardar" onClick="_isDirty = false;"/>
+		</td>
+		</tr>
+					
 			</table>
 		</div>
-		<input type="submit" value="Finalizar" />
 	</div>
 </form:form>

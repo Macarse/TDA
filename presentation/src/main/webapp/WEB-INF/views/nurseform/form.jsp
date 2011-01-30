@@ -6,11 +6,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-<!--
 	$(document).ready(function(){
 		$("#form-tabs").tabs();
 	});
-//-->
+
+	window.onbeforeunload = nextTabUnload;
+	var _isDirty = true;
 </script>
 
 <!-- aux variables -->
@@ -51,6 +52,14 @@
 			<tr>
 				<td><form:label for="percentile" path="percentile" cssErrorClass="error"><fmt:message key="nurse.form.percentile" /></form:label></td>
 				<td><form:input path="percentile" /> <form:errors path="percentile" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+				
 		</table>
 	</div>
 
@@ -75,6 +84,14 @@
 			<tr>
 				<td><form:label for="saturation" path="saturation" cssErrorClass="error"><fmt:message key="nurse.form.saturation" /></form:label></td>
 				<td><form:input path="saturation" /> <form:errors path="saturation" /></td></tr>
+		
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+		
 		</table>
 	</div>
 
@@ -88,6 +105,14 @@
 			</c:forEach>
 			<c:if test="${count%2 == 1 }"></tr></c:if>
 			<tr><td><form:errors path="vaxines" /></td></tr>
+			
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+			
 	</table>
 	</div>
 
@@ -101,11 +126,17 @@
 				<th><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="nurse.form.observations" /></form:label></th></tr>
 			<tr> 
 				<td><form:textarea path="observations" /> <form:errors path="observations" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<input type="submit" value="Guardar" onClick="_isDirty = false;"/>
+		</td>
+		</tr>
+				
 		</table>
 	
 	</div>
-	
-	<input type="submit" value="Finalizar"/>
   </div>
 </form:form>
 <hr>

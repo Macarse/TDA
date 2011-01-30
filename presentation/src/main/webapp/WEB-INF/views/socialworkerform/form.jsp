@@ -6,11 +6,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-<!--
 	$(document).ready(function(){
 		$("#form-tabs").tabs();
 	});
-//-->
+
+	window.onbeforeunload = nextTabUnload;
+	var _isDirty = true;
 </script>
 
 <!-- aux variables -->
@@ -97,6 +98,13 @@
 				<td colspan="${fieldsPerRow}">
 					<form:label for="peopleAtHomeUnderTen" path="peopleAtHomeUnderTen" cssErrorClass="error"><fmt:message key="socialworker.form.peopleAtHomeUnderTen" /></form:label>
 					<form:input path="peopleAtHomeUnderTen" /> <form:errors path="peopleAtHomeUnderTen" /></td></tr>
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+		
 		</table>
 	</div>	
 		
@@ -202,7 +210,16 @@
 				</c:forEach>
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="electricity" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+				
 		</table>
+		
 	</div>
 		
 	<!-- Aca empieza la seccion de Escolaridad -->
@@ -250,7 +267,16 @@
 				</c:forEach>
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="schoolService" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+				
 		</table>
+		
 	</div>
 	
 	<!-- Aca empieza la seccion de Datos socioeconomicos del grupo familiar -->
@@ -343,9 +369,16 @@
 				<th colspan="${fieldsPerRow}"><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="socialworker.form.observations" /></form:label></th></tr>
 			<tr>	
 				<td colspan="${fieldsPerRow}"><form:textarea path="observations" /><form:errors path="observations" /></td></tr>
+		
+		<tr>
+		<td>
+		<br/><br/>
+		<input type="submit" value="Guardar" onClick="_isDirty = false;"/>
+		</td>
+		</tr>
+		
 		</table>
 	</div>
-	<input type="submit" value="Finalizar" />
 	</div>
 </form:form>
 <hr>

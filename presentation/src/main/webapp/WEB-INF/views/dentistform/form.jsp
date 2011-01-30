@@ -12,23 +12,30 @@
 		$('#tooth1').svg({onLoad: loadTooth1});
 	});
 
-	function tuvieja() {
-	      var svg = $('#tooth1').svg('get');
-	      var tooth_up = svg.getElementById("tooth_up");
-	      var tooth_down = svg.getElementById("tooth_down");
-	      var tooth_center = svg.getElementById("tooth_center");
-	      var tooth_left = svg.getElementById("tooth_left");
-	      var tooth_down = svg.getElementById("tooth_down");
-		alert("ToothUp: " + tooth_up.getAttribute("fill") + 
-				" ToothDown: " + tooth_down.getAttribute("fill") +
-				" ToothCenter: " + tooth_center.getAttribute("fill") +
-				" ToothLeft: " + tooth_left.getAttribute("fill") +
-				" ToothDown: " + tooth_down.getAttribute("fill")
-				);
-	}
-
 	function loadTooth1(svg) {
 		svg = svg.load('${pageContext.request.contextPath}/themes/default/image/tooth.svg', true);
+	}
+
+	window.onbeforeunload = nextTabUnload;
+	var _isDirty = true;
+
+	function submitForm() {
+	 _isDirty = false;
+
+      var svg = $('#tooth1').svg('get');
+      var tooth_up = svg.getElementById("tooth_up");
+      var tooth_down = svg.getElementById("tooth_down");
+      var tooth_center = svg.getElementById("tooth_center");
+      var tooth_left = svg.getElementById("tooth_left");
+      var tooth_down = svg.getElementById("tooth_down");
+	alert("ToothUp: " + tooth_up.getAttribute("fill") + 
+			" ToothDown: " + tooth_down.getAttribute("fill") +
+			" ToothCenter: " + tooth_center.getAttribute("fill") +
+			" ToothLeft: " + tooth_left.getAttribute("fill") +
+			" ToothDown: " + tooth_down.getAttribute("fill")
+			);
+	$('tooths').val('tuvieja');
+	
 	}
 </script>
 
@@ -102,6 +109,14 @@
 				<th colspan="2"><form:label for="comment" path="comment" cssErrorClass="error"><fmt:message key="dentist.form.comment" /></form:label></th></tr>
 			<tr>
 				<td colspan="2"><form:textarea path="comment" /> <form:errors path="comment" /></td></tr>
+		
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+		
 		</table>
 	</div>
 	
@@ -170,8 +185,19 @@
 					<form:errors path="ceos" />
 				</td>
 			</tr>
+			
+		<tr>
+		<td>
+		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		</td>
+		</tr>
+			
 		</table>
 
+	<p><form:label for="tooths" path="tooths"
+		cssErrorClass="error"><fmt:message key="user.form.tooths" /></form:label><br />
+		<form:input path="tooths" /> <form:errors path="tooths" />
 		<div id="tooth1" style="z-index:999;"></div>
 	</div>
 
@@ -266,10 +292,17 @@
 				<th colspan="2"><form:label for="severityLevelComments" path="severityLevelComments" cssErrorClass="error"><fmt:message key="dentist.form.severityLevelComments" /></form:label></th></tr>
 			<tr>
 				<td><form:textarea path="severityLevelComments" /> <form:errors path="severityLevelComments" /></td></tr>
+				
+		<tr>
+		<td>
+		<br/><br/>
+		<input type="submit" value="Guardar" onClick="submitForm()"/>
+		</td>
+		</tr>	
+			
+			
 		</table>
 	</div>
-	
-	<input type="submit" value="Finalizar" />
   </div>
 </form:form>
 <hr>

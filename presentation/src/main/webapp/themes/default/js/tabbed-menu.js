@@ -51,3 +51,15 @@ $(document).ready(function() {
   });  	
 	
 });
+
+function nextTab( tabName ) {
+	var $tabs = $(tabName).tabs();
+	var selected = $tabs.tabs('option', 'selected'); // => 0
+	$(tabName).tabs('select', selected+1);
+	return false;
+}
+
+function nextTabUnload() {
+	if( _isDirty )
+  		return 'Hubo cambios que no fueron guardados, seguro que desea salir?';
+}
