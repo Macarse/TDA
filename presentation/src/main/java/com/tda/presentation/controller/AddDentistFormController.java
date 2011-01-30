@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.tda.model.dentist.DentistForm;
+import com.tda.model.dentist.Tooth;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
+import com.tda.model.patient.Sex;
 import com.tda.service.api.DentistFormService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
@@ -42,6 +44,11 @@ public class AddDentistFormController extends BaseDentistFormController {
 		model.addAttribute("dentistForm", dentistForm);
 
 		return DENTIST_ADD_FORM;
+	}
+
+	@ModelAttribute("tooths")
+	public Tooth[] populateTooths() {
+		return null;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

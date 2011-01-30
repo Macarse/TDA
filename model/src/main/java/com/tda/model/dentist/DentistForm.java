@@ -1,15 +1,23 @@
 package com.tda.model.dentist;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.ForeignKey;
+
+import com.tda.model.applicationuser.Authority;
 import com.tda.model.patient.Patient;
 
 @Entity
@@ -43,6 +51,8 @@ public class DentistForm {
 	private Double ceod;
 
 	private Double ceos;
+
+	private Collection<Tooth> tooths;
 
 	// TODO falta odontograma
 
@@ -252,5 +262,16 @@ public class DentistForm {
 
 	public void setSeverityLevelComments(String severityLevelComments) {
 		this.severityLevelComments = severityLevelComments;
+	}
+
+	public void setTooths(Collection<Tooth> tooths) {
+		this.tooths = tooths;
+	}
+
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tooth.class)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@ForeignKey(name = "ID_USER", inverseName = "ID_TOOTH")
+	public Collection<Tooth> getTooths() {
+		return tooths;
 	}
 }

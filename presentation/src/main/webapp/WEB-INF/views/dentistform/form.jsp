@@ -6,11 +6,30 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-<!--
+
 	$(document).ready(function(){
 		$("#form-tabs").tabs();
+		$('#tooth1').svg({onLoad: loadTooth1});
 	});
-//-->
+
+	function tuvieja() {
+	      var svg = $('#tooth1').svg('get');
+	      var tooth_up = svg.getElementById("tooth_up");
+	      var tooth_down = svg.getElementById("tooth_down");
+	      var tooth_center = svg.getElementById("tooth_center");
+	      var tooth_left = svg.getElementById("tooth_left");
+	      var tooth_down = svg.getElementById("tooth_down");
+		alert("ToothUp: " + tooth_up.getAttribute("fill") + 
+				" ToothDown: " + tooth_down.getAttribute("fill") +
+				" ToothCenter: " + tooth_center.getAttribute("fill") +
+				" ToothLeft: " + tooth_left.getAttribute("fill") +
+				" ToothDown: " + tooth_down.getAttribute("fill")
+				);
+	}
+
+	function loadTooth1(svg) {
+		svg = svg.load('${pageContext.request.contextPath}/themes/default/image/tooth.svg', true);
+	}
 </script>
 
 <!-- aux variables -->
@@ -152,8 +171,11 @@
 				</td>
 			</tr>
 		</table>
+
+		<div id="tooth1" style="z-index:999;"></div>
 	</div>
-	
+
+
 	<div id="tab-inspection" class="dentistform">
 		<table width="100%">
 			<tr>
