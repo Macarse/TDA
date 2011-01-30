@@ -1,5 +1,6 @@
 package com.tda.presentation.controller;
 
+import java.beans.PropertyEditorSupport;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.tda.model.applicationuser.Authority;
 import com.tda.model.dentist.DentistForm;
 import com.tda.model.dentist.Tooth;
 import com.tda.model.patient.Patient;
@@ -23,6 +27,8 @@ import com.tda.model.patient.Sex;
 import com.tda.service.api.DentistFormService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
+import com.tda.service.exception.NoDataFoundException;
+import com.tda.service.exception.SingleResultExpectedException;
 
 @Controller
 @RequestMapping(value = "/patient/{patientId}/dentist/new")
@@ -56,6 +62,7 @@ public class AddDentistFormController extends BaseDentistFormController {
 			@Valid @ModelAttribute("dentistForm") DentistForm dentistForm,
 			BindingResult result, SessionStatus status) {
 
+		System.out.println("CALLATE PABLO!!!");
 		if (result.hasErrors()) {
 			return DENTIST_ADD_FORM;
 		} else {
@@ -90,4 +97,27 @@ public class AddDentistFormController extends BaseDentistFormController {
 			PatientInTrainService patientInTrainService) {
 		this.patientInTrainService = patientInTrainService;
 	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder b) {
+		b.registerCustomEditor(Tooth.class, new ToothEditor());
+	}
+
+	private class ToothEditor extends PropertyEditorSupport {
+
+		@Override
+		public void setAsText(String text) throws IllegalArgumentException {
+			Tooth tooth = new Tooth();
+			tooth.setNumber(1);
+			tooth.setCenter("center");
+			setValue(tooth);
+		}
+
+		@Override
+		public String getAsText() {
+			Tooth t = new Tooth();
+			return t.toString();
+		}
+	}
+
 }

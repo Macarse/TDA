@@ -3,6 +3,7 @@ package com.tda.model.dentist;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -17,7 +18,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ForeignKey;
 
-import com.tda.model.applicationuser.Authority;
 import com.tda.model.patient.Patient;
 
 @Entity
@@ -268,9 +268,10 @@ public class DentistForm {
 		this.tooths = tooths;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tooth.class)
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tooth.class, cascade=CascadeType.ALL)
 	@Fetch(value = FetchMode.SUBSELECT)
 	@ForeignKey(name = "ID_USER", inverseName = "ID_TOOTH")
+	
 	public Collection<Tooth> getTooths() {
 		return tooths;
 	}

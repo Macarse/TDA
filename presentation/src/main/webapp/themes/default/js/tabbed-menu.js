@@ -61,5 +61,5 @@ function nextTab( tabName ) {
 
 function nextTabUnload() {
 	if( _isDirty )
-  		return 'Hubo cambios que no fueron guardados, seguro que desea salir?';
+  		return 'Hubo cambios que no fueron guardados, Àseguro que desea salir?';
 }

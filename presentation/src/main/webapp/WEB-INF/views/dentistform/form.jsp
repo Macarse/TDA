@@ -34,8 +34,17 @@
 			" ToothLeft: " + tooth_left.getAttribute("fill") +
 			" ToothDown: " + tooth_down.getAttribute("fill")
 			);
-	$('tooths').val('tuvieja');
 	
+	var tooth = new Object();
+	tooth.number = 1;
+	tooth.north = "north";
+	tooth.south = "south";
+	tooth.east = "east";
+	tooth.west = "west";
+	tooth.center = "center";
+	var tooths_array = new Array();
+	tooths_array[0] = tooth;
+	$('tooths').val(tooths_array);
 	}
 </script>
 
@@ -59,7 +68,6 @@
 			<li><a href="#tab-odontogram"><fmt:message key="dentist.form.odontogram" /></a></li>
 			<li><a href="#tab-inspection"><fmt:message key="dentist.form.inspection" /></a></li>
 		</ul>
-		
 	<div id="tab-history" class="dentistform">
 		<table>
 		
@@ -189,18 +197,17 @@
 		<tr>
 		<td>
 		<br/><br/>
+		<p><form:label for="tooths" path="tooths"
+		cssErrorClass="error"><fmt:message key="user.form.tooths" /></form:label><br />
+		<form:input path="tooths" cssStyle="display:none;" /> <form:errors path="tooths" />
+		<div id="tooth1" style="z-index:999;"></div>
+
 		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 			
 		</table>
-
-	<p><form:label for="tooths" path="tooths"
-		cssErrorClass="error"><fmt:message key="user.form.tooths" /></form:label><br />
-		<form:input path="tooths" /> <form:errors path="tooths" />
-		<div id="tooth1" style="z-index:999;"></div>
 	</div>
-
 
 	<div id="tab-inspection" class="dentistform">
 		<table width="100%">
