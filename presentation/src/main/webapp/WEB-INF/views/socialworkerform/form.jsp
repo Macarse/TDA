@@ -8,10 +8,14 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#form-tabs").tabs();
+		
+		$("#myform").change(function() {
+			_isDirty = true;
+		});
 	});
 
 	window.onbeforeunload = nextTabUnload;
-	var _isDirty = true;
+	var _isDirty = false;
 </script>
 
 <!-- aux variables -->
@@ -28,7 +32,7 @@
 <b><fmt:message key="socialworker.form.patient" /></b> ${socialWorkerForm.patient.firstName} ${socialWorkerForm.patient.lastName}
 <br/>
 
-<form:form modelAttribute="socialWorkerForm" method="post">
+<form:form modelAttribute="socialWorkerForm" method="post" id="myform">
 	<div id="form-tabs">
 		<ul>
 			<li><a href="#tab-gf"><fmt:message key="socialworker.form.familyGroup" /></a></li>

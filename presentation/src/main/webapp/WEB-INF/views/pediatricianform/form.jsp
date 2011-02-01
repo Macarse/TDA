@@ -11,10 +11,14 @@
 
 		if( document.getElementById('distosicRadioButton').checked )
 			$('.distosicHidden').show();
+
+		$("#myform").change(function() {
+			_isDirty = true;
+		});
 	});
 
 	window.onbeforeunload = nextTabUnload;
-	var _isDirty = true;
+	var _isDirty = false;
 </script>
 
 <!-- aux variables -->
@@ -43,7 +47,7 @@
 ${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
 <br/>
 
-<form:form modelAttribute="pediatricianForm" method="post">
+<form:form modelAttribute="pediatricianForm" method="post" id="myform">
 	<div id="form-tabs">
 		<ul>
 			<li><a href="#tab-peb"><fmt:message key="pediatrician.form.perinatalBackground" /></a></li>

@@ -58,7 +58,7 @@ function refreshPatients() {
 	   	   		//Cada elemento esta separado por =:
 		   		var patientData = parsedData[i].split('=');
 		   		var str = patientData[0];
-				innerHtml += "<li>" + str.replace('+',' ') + "</li>";
+				innerHtml += "<li>" + replaceAll(str,'+',' ') + "</li>";
 	   		}
 	
 	   		$('#m-pacients').html(parsedData.length);
@@ -71,6 +71,13 @@ function refreshPatients() {
  	});
 
 	 refreshId = setInterval(refreshPatients, 5000)
+}
+
+function replaceAll( text, busca, reemplaza ){
+    while (text.toString().indexOf(busca) != -1){
+        text = text.toString().replace(busca,reemplaza);
+    }
+    return text;
 }
 
 /*

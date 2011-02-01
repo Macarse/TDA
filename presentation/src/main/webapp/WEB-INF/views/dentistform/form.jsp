@@ -9,6 +9,11 @@
 
 	$(document).ready(function(){
 		$("#form-tabs").tabs();
+		
+		$("#myform").change(function() {
+			_isDirty = true;
+		});
+		
 		$('#tooth1').svg({onLoad: loadTooth1});
 	});
 
@@ -17,7 +22,7 @@
 	}
 
 	window.onbeforeunload = nextTabUnload;
-	var _isDirty = true;
+	var _isDirty = false;
 
 	function submitForm() {
 	 _isDirty = false;
@@ -61,7 +66,7 @@
 <b><fmt:message key="dentist.form.patient" /></b> ${dentistForm.patient.firstName} ${dentistForm.patient.lastName}
 <br/>
 
-<form:form modelAttribute="dentistForm" method="post">
+<form:form modelAttribute="dentistForm" method="post" id="myform">
 	<div id="form-tabs">
 		<ul>
 			<li><a href="#tab-history"><fmt:message key="dentist.form.history" /></a></li>
