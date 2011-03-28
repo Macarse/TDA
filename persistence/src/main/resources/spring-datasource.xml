@@ -9,16 +9,16 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName">
-			<value>org.postgresql.Driver</value>
+			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:postgresql://localhost/tda</value>
+			<value>jdbc:mysql://localhost:8889/tda</value>
 		</property>
 		<property name="username">
-			<value>postgres</value>
+			<value>root</value>
 		</property>
 		<property name="password">
-			<value>1234</value>
+			<value>root</value>
 		</property>
 	</bean>
 
@@ -49,7 +49,7 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.max_fetch_depth">2</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>

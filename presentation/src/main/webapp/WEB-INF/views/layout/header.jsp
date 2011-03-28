@@ -7,8 +7,10 @@
 	</div>
 </div>
 <c:url value="/logout" var="logoutUrl"/>
+<c:url value="/sync/do" var="syncUrl"/>
 
 <div class="fg-buttonset fg-buttonset-multi" style="position:absolute; top:1px; right:20%;">
 	<a class="fg-button button-text ui-state-default ui-corner-left" href="#">Bienvenido <i><c:out value="${user.username}" /></i></a>
 	<a class="fg-button button-text ui-state-default ui-corner-right" href="${logoutUrl}">salir</a>
+	<a class="fg-button button-text ui-state-default ui-corner-right" href="${syncUrl}">SyncIt</a>
 </div>
