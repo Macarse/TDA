@@ -8,7 +8,7 @@
 <spring:url value="/sync/do" var="syncdo" />
 
 <div class="filter-container">
-	<form:form modelAttribute="configSync" action="${syncdo}" method="get" onsubmit="$('#syncLoadImage').show();">
+	<form:form modelAttribute="configSync" action="${syncdo}" method="get" onsubmit="$('#syncLoadImage').show(); $('#respMsg').hide();">
 		<table>
 			<tbody>
 				<tr>
@@ -32,7 +32,7 @@
 		</table>
 	</form:form>
 	<c:if test="${!empty resultMessage}">
-	<div style="height:30px; font-size:15px;">
+	<div id="respMsg" style="height:30px; font-size:15px;">
 		<c:out value="${resultMessage}"></c:out>
 	</div>
 </c:if>
