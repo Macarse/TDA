@@ -101,15 +101,15 @@
 
 	<div id="tab-vaccines" class="nurseform">
 	<table>
+			<c:set var="count" value="0" />
 			<c:forEach var="vaxine" items="${allVaxines}">
-				<c:if test="${count%2 == 0 }"><tr></c:if>
+				<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
 					<td><form:checkbox path="vaxines" value="${vaxine.id}" /> ${vaxine.name}</td>
-				<c:if test="${count%2 == 1 }"></tr></c:if>
+				<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 			    <c:set var="count" value="${count+1}" />
 			</c:forEach>
-			<c:if test="${count%2 == 1 }"></tr></c:if>
+			<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 			<tr><td><form:errors path="vaxines" /></td></tr>
-			
 		<tr>
 		<td>
 		<br/><br/>
@@ -123,13 +123,22 @@
 	<div id="tab-actions" class="nurseform">
 		<table width="100%">
 			<tr>
-				<th><form:label for="nurseActions" path="nurseActions"
+				<th colspan="${fieldsPerRow }"><form:label for="nurseActions" path="nurseActions"
 					cssErrorClass="error"><fmt:message key="nurse.form.actions" /></form:label></th></tr>
-			<tr><td><form:checkboxes items="${allNurseActions}" path="nurseActions" itemLabel="description"/><form:errors path="nurseActions" /></td></tr>
+			<c:set var="count" value="0" />
+			<c:forEach var="nurseAction" items="${allNurseActions}">
+				<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
+					<td><form:checkbox path="nurseActions" value="${nurseAction.description}" /> ${nurseAction.description}</td>
+				<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
+			    <c:set var="count" value="${count+1}" />
+			</c:forEach>
+			<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
+			<tr><td><form:errors path="nurseActions" /></td></tr>
+		
 			<tr>
-				<th><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="nurse.form.observations" /></form:label></th></tr>
+				<th colspan="${fieldsPerRow }"><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="nurse.form.observations" /></form:label></th></tr>
 			<tr> 
-				<td><form:textarea path="observations" /> <form:errors path="observations" /></td></tr>
+				<th colspan="${fieldsPerRow }"><form:textarea path="observations" /> <form:errors path="observations" /></td></tr>
 				
 		<tr>
 		<td>
