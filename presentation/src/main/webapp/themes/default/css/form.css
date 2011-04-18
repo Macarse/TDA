@@ -32,3 +32,8 @@ span.titleform{
 .distosicHidden{
 	display:none;	
 }
+
+.form-input{
+	float: left;
+	width: 300px;
+}
