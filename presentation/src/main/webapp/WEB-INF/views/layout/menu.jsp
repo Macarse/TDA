@@ -65,6 +65,7 @@ function refreshPatients() {
 	   		$('#menu-pacientsontrain').html('<ul>' + innerHtml + '</ul>');
 		}else{
 			$('#m-pacients').html("0");
+			$('#menu-pacientsontrain').html('<ul><i>No hay pacientes</i></ul>');
 		}
    		$('#loadImage').hide();
    		$('#menu-icon').show();

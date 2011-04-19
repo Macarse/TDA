@@ -13,7 +13,11 @@ function refreshOnlineUsers() {
 				  	item.username +"')\">" + item.username +"</a></li>";
 			  });
 	       htmlUsers += "</ul>";
-	       $("#category").html(htmlUsers);
+	       
+	       if(data != '')
+	    	   $("#category").html(htmlUsers);
+	       else
+	    	   $('#category').html('<ul><i>No hay conectados</i></ul>');
 
 		  }
 	});

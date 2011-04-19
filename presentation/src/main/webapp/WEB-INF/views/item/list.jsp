@@ -28,6 +28,11 @@
 	});
 </script>
 
+<c:choose>
+<c:when test="${paginator.totalResultsCount<=0}">
+	<div>No se encontraron registros</div>
+</c:when>
+<c:otherwise>
 <div id="search-button">
 	<a href="#" style="font-size: 14px;"><span class="ui-icon ui-icon-search button-icon"> </span> Buscar Item</a>
 </div>
@@ -138,10 +143,12 @@
 
 	<tfoot>
 		<tr>
-			<td><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></td>
 		  	<td colspan="2">
 				<jsp:include page="/WEB-INF/views/paginator/paginator.jsp" flush="true"/>
 		  	</td>
 		</tr>
 	</tfoot>
 </table>
+</c:otherwise>
+</c:choose>
+<div class="newBtn"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></div>

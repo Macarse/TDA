@@ -22,6 +22,12 @@
 	</div>
 </c:if>
 
+<c:choose>
+<c:when test="${paginator.totalResultsCount<=0}">
+	<div>No se encontraron registros</div>
+</c:when>
+<c:otherwise>
+
 <div id="search-button">
 	<a href="#" style="font-size: 14px;"><span class="ui-icon ui-icon-search button-icon"> </span> Buscar paciente</a>
 </div>
@@ -108,7 +114,6 @@
 					</c:choose>
 				</c:if>
 			</th>
-			<th colspan="3"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -155,6 +160,10 @@
 		</tr>
 	</tfoot>
 </table>
+</c:otherwise>
+</c:choose>
+<div class="newBtn"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></div>
+
 
 <script language='javascript' type='text/javascript'>
 	$(document).ready(function(){
