@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,8 @@ import com.tda.persistence.dao.AuthorityDAO;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.ApplicationUserService;
 
-public class ApplicationUserServiceImpl implements ApplicationUserService {
+public class ApplicationUserServiceImpl implements ApplicationUserService,
+		UserDetailsService {
 	private ApplicationUserDAO applicationUserDAO;
 	private AuthorityDAO authorityDAO;
 
@@ -36,22 +38,13 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		this.authorityDAO = authorityDAO;
 	}
 
-	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException, DataAccessException {
-
-		List<ApplicationUser> usersFound = applicationUserDAO
-				.findByUsername(username);
-
-		if (usersFound.size() == 0)
-			throw new UsernameNotFoundException("User: " + username
-					+ " not found");
-
-		return usersFound.get(0);
-	}
-
 	@Transactional
 	public void save(ApplicationUser applicationUser) {
+		// En el save hasheo
+		applicationUser.setPassword(HashService.getHash(applicationUser
+				.getPassword()));
+		applicationUser.setConfirmPassword(HashService.getHash(applicationUser
+				.getConfirmPassword()));
 		applicationUserDAO.save(applicationUser);
 	}
 
@@ -62,6 +55,14 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 
 	@Transactional
 	public void update(ApplicationUser applicationUser) {
+		// En el update hasheo, pero tengo que asegurarme que se cambio
+		// la pwd, que no es el hash, sino texto plano
+		if (applicationUser.getPassword().length() > 8) {
+			applicationUser.setPassword(HashService.getHash(applicationUser
+					.getPassword()));
+			applicationUser.setConfirmPassword(HashService
+					.getHash(applicationUser.getConfirmPassword()));
+		}
 		applicationUserDAO.update(applicationUser);
 	}
 
@@ -142,5 +143,19 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		}
 
 		return authorityFilteredList;
+	}
+
+	@Transactional(readOnly = true)
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException, DataAccessException {
+
+		List<ApplicationUser> usersFound = applicationUserDAO
+				.findByUsername(username);
+
+		if (usersFound.size() == 0)
+			throw new UsernameNotFoundException("User: " + username
+					+ " not found");
+
+		return usersFound.get(0);
 	}
 }

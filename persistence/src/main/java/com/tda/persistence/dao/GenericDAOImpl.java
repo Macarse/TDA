@@ -66,7 +66,7 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 	@SuppressWarnings("unchecked")
 	public List<T> findByExample(final T exampleObject, boolean exact) {
 		Example example = Example.create(exampleObject);
-		if ( exact ) {
+		if (exact) {
 			example.enableLike(MatchMode.EXACT);
 		} else {
 			example.enableLike(MatchMode.ANYWHERE);

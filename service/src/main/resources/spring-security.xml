@@ -14,20 +14,12 @@
 		<security:intercept-url pattern="/login/*" filters="none"/>
 		<security:form-login login-page="/login/login.html" default-target-url="/" always-use-default-target="true" authentication-failure-url="/login/badlogin.html"/>
     </security:http>
-    
-	<bean id="org.springframework.security.authenticationManager"
-		class="org.springframework.security.authentication.ProviderManager">
-		<property name="providers">
-			<list>
-				<ref local="daoAuthenticationProvider" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="daoAuthenticationProvider"
-		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-		<property name="userDetailsService" ref="applicationUserService" />
-	</bean>
+	
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider user-service-ref="applicationUserService">
+			<security:password-encoder hash="md5"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 	<security:global-method-security
 		secured-annotations="enabled" jsr250-annotations="disabled" />

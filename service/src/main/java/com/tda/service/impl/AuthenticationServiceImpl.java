@@ -13,7 +13,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	public boolean authenticate(String username, String password) {
 		boolean authenticated = false;
-
+		password = HashService.getHash(password);
 		try {
 			Authentication authentication = getAuthenticationManager()
 					.authenticate(
