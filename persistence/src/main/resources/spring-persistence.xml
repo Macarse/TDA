@@ -13,6 +13,12 @@
 		</property>
 	</bean>
 
+	<bean id="itineraryDAO" class="com.tda.persistence.dao.ItineraryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="chatDAO" class="com.tda.persistence.dao.ChatDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -41,7 +47,7 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
+
 	<bean id="patientInTrainDAO" class="com.tda.persistence.dao.PatientInTrainDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -66,13 +72,13 @@
 		</property>
 		<property name="patientDAO" ref="patientDAO" />
 	</bean>
-	
+
 	<bean id="dentistFormDAO" class="com.tda.persistence.dao.DentistFormDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
+
 	<bean id="vaxineDAO" class="com.tda.persistence.dao.VaxineDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
