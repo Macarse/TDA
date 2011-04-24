@@ -2,14 +2,48 @@ package com.tda.model.itinerary;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.validator.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
 public class Place {
+	private Long id;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date arrivalDate;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date departureDate;
+
+	@Size(max = 200)
 	private String country;
+
+	@Size(max = 200)
 	private String province;
+
+	@Size(max = 200)
 	private String city;
+
+	@Size(max = 200)
 	private String neighbourhood;
+
+	@Size(max = 200)
 	private String additionalInfo;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Date getArrivalDate() {
 		return arrivalDate;
@@ -66,5 +100,4 @@ public class Place {
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
 	}
-
 }

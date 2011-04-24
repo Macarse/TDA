@@ -30,12 +30,8 @@ public class Itinerary {
 	@Size(max = 200)
 	private String description;
 
-	@NotNull
-	@OneToMany
 	private List<Place> places;
 
-	@NotNull
-	@OneToMany
 	private List<ApplicationUser> personnel;
 
 	@Size(max = 200)
@@ -86,6 +82,7 @@ public class Itinerary {
 		this.description = description;
 	}
 
+	@OneToMany
 	public List<Place> getPlaces() {
 		return places;
 	}
@@ -94,6 +91,7 @@ public class Itinerary {
 		this.places = places;
 	}
 
+	@OneToMany
 	public List<ApplicationUser> getPersonnel() {
 		return personnel;
 	}
