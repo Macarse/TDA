@@ -46,6 +46,8 @@
 				<value>com.tda.model.dentist.DentistAction</value>
 				<value>com.tda.model.nurse.Vaxine</value>
 				<value>com.tda.model.dentist.Tooth</value>
+				<value>com.tda.model.itinerary.Itinerary</value>
+				<value>com.tda.model.itinerary.Place</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
