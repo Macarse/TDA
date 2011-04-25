@@ -39,8 +39,6 @@ public class ChatServiceImpl implements ChatService {
 		msg.setSent(new Date());
 		msg.setRecd(0);
 
-		System.out.println(msg);
-
 		chatDAO.save(msg);
 	}
 	
