@@ -35,11 +35,19 @@
 				<value>com.tda.model.applicationuser.Authority</value>
 				<value>com.tda.model.applicationuser.OnlineUser</value>
 				<value>com.tda.model.patient.Patient</value>
+				<value>com.tda.model.patient.PatientInTrain</value>
 				<value>com.tda.model.socialworker.SocialWorkerForm</value>
 				<value>com.tda.model.pediatrician.PediatricianForm</value>
 				<value>com.tda.model.nurse.NurseForm</value>
+				<value>com.tda.model.chat.ChatMessage</value>
+				<value>com.tda.model.patientqueue.PatientQueue</value>
 				<value>com.tda.model.nurse.NurseAction</value>
+				<value>com.tda.model.dentist.DentistForm</value>
+				<value>com.tda.model.dentist.DentistAction</value>
 				<value>com.tda.model.nurse.Vaxine</value>
+				<value>com.tda.model.dentist.Tooth</value>
+				<value>com.tda.model.itinerary.Itinerary</value>
+				<value>com.tda.model.itinerary.Place</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
