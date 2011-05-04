@@ -2,15 +2,18 @@ package com.tda.model.itinerary;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.validator.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "PLACE")
 public class Place {
 	private Long id;
 
@@ -37,6 +40,7 @@ public class Place {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PLACE_ID")
 	public Long getId() {
 		return id;
 	}

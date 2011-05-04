@@ -3,11 +3,14 @@ package com.tda.model.itinerary;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Size;
@@ -16,6 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.tda.model.applicationuser.ApplicationUser;
 
 @Entity
+@Table(name = "ITINERARY")
 public class Itinerary {
 	private Long id;
 
@@ -37,24 +41,14 @@ public class Itinerary {
 	@Size(max = 200)
 	private String additionalInfo;
 
-	public Itinerary(Date beginningDate, Date endDate, String description,
-			List<Place> places, List<ApplicationUser> personnel,
-			String additionalInfo) {
-		this.beginningDate = beginningDate;
-		this.endDate = endDate;
-		this.description = description;
-		this.places = places;
-		this.personnel = personnel;
-		this.additionalInfo = additionalInfo;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getId() {
+	@Column(name = "ITINERARY_ID")
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -82,7 +76,7 @@ public class Itinerary {
 		this.description = description;
 	}
 
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	public List<Place> getPlaces() {
 		return places;
 	}
@@ -91,7 +85,7 @@ public class Itinerary {
 		this.places = places;
 	}
 
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	public List<ApplicationUser> getPersonnel() {
 		return personnel;
 	}
