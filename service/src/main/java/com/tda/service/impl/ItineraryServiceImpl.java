@@ -1,6 +1,7 @@
 package com.tda.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +39,11 @@ public class ItineraryServiceImpl implements ItineraryService {
 	public Itinerary getForSpecificDate(Date date) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Itinerary> getAll() {
+		return itineraryDAO.findAll();
 	}
 
 	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
