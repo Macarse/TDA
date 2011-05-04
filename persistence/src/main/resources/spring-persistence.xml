@@ -12,6 +12,12 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	<bean id="patientQueueDAO" class="com.tda.persistence.dao.PatientQueueDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 	<bean id="itineraryDAO" class="com.tda.persistence.dao.ItineraryDAO">
 		<property name="sessionFactory">

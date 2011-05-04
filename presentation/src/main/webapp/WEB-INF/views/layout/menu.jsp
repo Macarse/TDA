@@ -18,11 +18,7 @@
 	  <div id="menu-pacientsontrain" class="show">  
 	  </div>  
 	  
-	  <div id="comments">
-	    <ul>
-	      <li><a>Listado</a></li>
-	    </ul>
-	  </div>
+	  <div id="menu-patientqueue"></div>
 	  
 	  <div id="category">
 	  </div>
@@ -66,6 +62,28 @@ function refreshPatients() {
 		}else{
 			$('#m-pacients').html("0");
 			$('#menu-pacientsontrain').html('<ul><i>No hay pacientes</i></ul>');
+		}
+   		$('#loadImage').hide();
+   		$('#menu-icon').show();
+ 	});
+
+	$.get(contextPath + "/patientqueue/get", function(data){
+		//Me llega la lista separada por &:
+		if(data != ''){
+	   		var patients = eval(data);
+	   		var innerHtml = "";
+	   		var i;
+	   		//alert(parsedData.length);
+	   		for(i=0; i<patients.length; i++ ) {
+	   	   		//Cada elemento esta separado por =:
+				innerHtml += "<li>" + patients[i].firstName + ' ' + patients[i].lastName + "</li>";
+	   		}
+	
+	   		//$('#m-pacients').html(parsedData.length);
+	   		$('#menu-patientqueue').html('<ul>' + innerHtml + '</ul>');
+		}else{
+			//$('#m-pacients').html("0");
+			$('#menu-patientqueue').html('<ul><i>No tiene pacientes en cola</i></ul>');
 		}
    		$('#loadImage').hide();
    		$('#menu-icon').show();
