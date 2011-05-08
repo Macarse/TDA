@@ -72,6 +72,8 @@ public class SyncController {
 							break;
 						case 3:
 							respMessage = "Hubo cambios pero termino con error";
+						default:
+							respMessage = "Error desconocido";
 						}
 					else
 						respMessage = "Timeout: intente mas tarde";
