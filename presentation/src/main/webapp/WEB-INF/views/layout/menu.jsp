@@ -40,6 +40,19 @@
 	</div>
 </div>
 
+<div id="patientlist-dialog" title="Seleccione una Opcion">
+	<div>Ir a </div>
+	<div>
+		<div id='queuemenu-socialform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
+		<div id='queuemenu-pediaform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
+		<div id='queuemenu-nurseform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
+		<div id='queuemenu-dentform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
+	</div>
+	<div>Enviar a </div>
+	<div id='patientlist-usersonline'>
+	</div>
+</div>
+
 
 <script language='javascript' type='text/javascript'> 
 	var refreshId;
@@ -51,32 +64,30 @@
 		$('#loadImage').show();
 		$('#menu-icon').hide();
 	
-		$.get(contextPath + "/getUserQueue", function(data){
+		$.get(contextPath + "/getPatientsInTrain", function(data){
 			//Me llega la lista separada por &:
 			if(data != ''){
-		   		var parsedData = data.split('&');
+		   		var patients = eval(data);
 		   		var innerHtml = "";
 		   		var i;
-		   		//alert(parsedData.length);
-		   		for(i in parsedData ) {
-		   	   		//Cada elemento esta separado por =:
-			   		var patientData = parsedData[i].split('=');
-			   		var str = patientData[0];
-					innerHtml += "<li>" + replaceAll(str,'+',' ') + "</li>";
-		   		}
+
+		   		if(patients.length > 0){
+			   		for(i=0; i<patients.length; i++ ) {
+			   	   		//Cada elemento esta separado por =:
+						innerHtml += "<li onclick='showPatientMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
+			   		}
+				}else{
+					innerHtml = '<li><i>No hay Pacientes</i></li>';
+				}
 		
-		   		$('#m-pacients').html(parsedData.length);
+		   		$('#m-pacients').html(patients.length);
 		   		$('#menu-pacientsontrain').html('<ul>' + innerHtml + '</ul>');
-			}else{
-				$('#m-pacients').html("0");
-				$('#menu-pacientsontrain').html('<ul><i>No hay pacientes</i></ul>');
 			}
 	   		$('#loadImage').hide();
 	   		$('#menu-icon').show();
 	 	});
 	
 		$.get(contextPath + "/patientqueue/get", function(data){
-			//Me llega la lista separada por &:
 			if(data != ''){
 		   		var patients = eval(data);
 		   		var innerHtml = "";
@@ -113,6 +124,11 @@
 		$("#queue-dialog").dialog('open');
 	}
 
+	function showPatientMenu(id){
+		selectedId = id;
+		$("#patientlist-dialog").dialog('open');
+	}
+
 	function refreshOnlineUsers() {
 		$.ajax({
 			  url: contextPath + "/getOnlineUsers",
@@ -121,6 +137,7 @@
 			  success: function(data) {
 				  var htmlUsers = "";
 				  var queueUsers = "";
+				  var listUsers = "<a href=\"#\" onclick=\"sendTo2('${user.username}');\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">Cargar en Cola</a>";
 				  var aux;
 				  
 				  $.each(data, function(i,item) {
@@ -129,6 +146,7 @@
 
 					  	aux = "'" + item.username + "'";
 					    queueUsers += "<a href=\"#\" onclick=\"sendTo(" + aux + ");\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">" + item.username + "</a>";
+					    listUsers += "<a href=\"#\" onclick=\"sendTo2(" + aux + ");\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">" + item.username + "</a>";
 				  });
 		       
 		       if(data != ''){
@@ -137,9 +155,17 @@
 		       }else{
 		    	   $('#onlineusers').html('<ul><i>No hay conectados</i></ul>');
 		       }
+		       
+			   $("#patientlist-usersonline").html(listUsers);
 
 			  }
 		});
+	}
+
+	function sendTo2(username){
+		$.get(contextPath + "/patientqueue/assigntos?patient=" + selectedId + "&medic=" + username, function(){
+		});
+		$("#patientlist-dialog").dialog('close');
 	}
 
 	function sendTo(username){
@@ -152,6 +178,13 @@
 		refreshPatients();
 
 		$("#queue-dialog").dialog({ 
+			autoOpen: false,
+			modal: true,
+			resizable: false,
+			buttons: { "Cerrar": function() { $(this).dialog("close"); } }
+			 });
+
+		$("#patientlist-dialog").dialog({ 
 			autoOpen: false,
 			modal: true,
 			resizable: false,

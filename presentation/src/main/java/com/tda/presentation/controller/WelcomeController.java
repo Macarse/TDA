@@ -4,6 +4,7 @@ import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -261,5 +262,21 @@ public class WelcomeController {
 		}
 
 		return retList;
+	}
+	
+	// Ajax method to get User Personal Queue
+	@RequestMapping(value = "/getPatientsInTrain", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody
+	String getPatientsInTrain() {
+		Gson gson = new Gson();
+		
+		LinkedList<Patient> patients = new LinkedList<Patient>();
+		
+		for (PatientInTrain patient : patientInTrainService.findAll()) {
+			patients.add(patient.getPatient());
+		}
+
+		return gson.toJson(patients);
 	}
 }
