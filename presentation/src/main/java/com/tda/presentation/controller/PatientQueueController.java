@@ -60,4 +60,10 @@ public class PatientQueueController {
 		patientQueueService.assignTo(patient, medic);
 	}
 	
+	@RequestMapping(value = "/assigntos", method = RequestMethod.GET)
+	public @ResponseBody
+	void assignto(@RequestParam long patient, @RequestParam String medic) {
+		patientQueueService.assignToS(patient, medic);
+	}
+	
 }

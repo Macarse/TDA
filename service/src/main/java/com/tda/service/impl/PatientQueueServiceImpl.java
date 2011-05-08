@@ -40,14 +40,36 @@ public class PatientQueueServiceImpl implements PatientQueueService {
 		Patient pPatient = patientDAO.findById(patientId);
 		// Search for the user
 		ApplicationUser pUser = applicationUserDAO.findById(applicationUserId);
+		
+		if(pPatient != null && pUser != null){
+			// assing
+			PatientQueue queue = new PatientQueue();
+			queue.setPatient(pPatient);
+			queue.setUser(pUser);
+			queue.setTime(new Date());
+	
+			// persist
+			patientQueueDAO.save(queue);
+		}
+	}
+	
+	@Transactional
+	public void assignToS(Long patientId, String applicationUserUserName) {
+		// Search for the patient
+		Patient pPatient = patientDAO.findById(patientId);
+		// Search for the user
+		List<ApplicationUser> pUsers = applicationUserDAO.findByUsername(applicationUserUserName);
 		// assing
-		PatientQueue queue = new PatientQueue();
-		queue.setPatient(pPatient);
-		queue.setUser(pUser);
-		queue.setTime(new Date());
-
-		// persist
-		patientQueueDAO.save(queue);
+		
+		if(pPatient != null && pUsers.size() > 0){
+			PatientQueue queue = new PatientQueue();
+			queue.setPatient(pPatient);
+			queue.setUser(pUsers.get(0));
+			queue.setTime(new Date());
+	
+			// persist
+			patientQueueDAO.save(queue);
+		}
 
 	}
 

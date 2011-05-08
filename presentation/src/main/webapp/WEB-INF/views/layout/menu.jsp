@@ -30,16 +30,13 @@
 <div id="queue-dialog" title="Seleccione una Opcion">
 	<div>Ir a </div>
 	<div>
-		<div id='queuemenu-socialform'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
-		<div id='queuemenu-pediaform'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
-		<div id='queuemenu-nurseform'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
-		<div id='queuemenu-dentform'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
+		<div id='queuemenu-socialform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
+		<div id='queuemenu-pediaform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
+		<div id='queuemenu-nurseform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
+		<div id='queuemenu-dentform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
 	</div>
 	<div>Enviar a </div>
 	<div id='queuemenu-usersonline'>
-		<a href='#' class='button-text button-search fg-button ui-state-default ui-corner-all'>Pedro</a>
-		<a href='#' class='button-text button-search fg-button ui-state-default ui-corner-all'>Pedro</a>
-		<a href='#' class='button-text button-search fg-button ui-state-default ui-corner-all'>Pedro</a>
 	</div>
 </div>
 
@@ -124,12 +121,14 @@
 			  success: function(data) {
 				  var htmlUsers = "";
 				  var queueUsers = "";
+				  var aux;
 				  
 				  $.each(data, function(i,item) {
 					  htmlUsers += "<li><a href=\"javascript:void(0)\" onclick=\"javascript:chatWith('" +
 					  	item.username +"')\">" + item.username +"</a></li>";
 
-					  queueUsers += "<a href='#' class='button-text button-search fg-button ui-state-default ui-corner-all'>" + item.username + "</a>";
+					  	aux = "'" + item.username + "'";
+					    queueUsers += "<a href=\"#\" onclick=\"sendTo(" + aux + ");\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">" + item.username + "</a>";
 				  });
 		       
 		       if(data != ''){
@@ -141,6 +140,12 @@
 
 			  }
 		});
+	}
+
+	function sendTo(username){
+		$.get(contextPath + "/patientqueue/assigntos?patient=" + selectedId + "&medic=" + username, function(){
+		});
+		$("#queue-dialog").dialog('close');
 	}
 
 	$(document).ready(function(){
