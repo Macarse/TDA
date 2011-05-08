@@ -14,6 +14,9 @@
 	
 	<bean id="patientQueueService" class="com.tda.service.impl.PatientQueueServiceImpl">
 		<property name="patientQueueDAO" ref="patientQueueDAO" />
+		<property name="patientDAO" ref="patientDAO" />
+		<property name="applicationUserDAO" ref="applicationUserDAO" />
+		
 	</bean>
 	
 	<bean id="itineraryService" class="com.tda.service.impl.ItineraryServiceImpl">

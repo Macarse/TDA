@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.patient.Patient;
@@ -32,6 +34,7 @@ public class PatientQueueServiceImpl implements PatientQueueService {
 		this.applicationUserDAO = applicationUserDAO;
 	}
 
+	@Transactional
 	public void assignTo(Long patientId, Long applicationUserId) {
 		// Search for the patient
 		Patient pPatient = patientDAO.findById(patientId);
@@ -48,6 +51,7 @@ public class PatientQueueServiceImpl implements PatientQueueService {
 
 	}
 
+	@Transactional
 	public List<Patient> getPatients(Long applicationUserId) {
 		// TODO Auto-generated method stub
 		List<Patient> patients = new ArrayList<Patient>();
@@ -55,10 +59,14 @@ public class PatientQueueServiceImpl implements PatientQueueService {
 		// for (PatientQueue patientQueue : patientQueueDAO.findAll()) {
 		Long currentUserId = ((ApplicationUser) SecurityContextHolder
 				.getContext().getAuthentication().getPrincipal()).getId();
-		for (PatientQueue patientQueue : patientQueueDAO
-				.findPatientsByApplicationUserId(currentUserId)) {
-			patients.add(patientQueue.getPatient());
-		}
+		
+		List<PatientQueue> patientList = patientQueueDAO
+			.findPatientsByApplicationUserId(currentUserId);
+		
+		if(patientList != null)
+			for (PatientQueue patientQueue : patientList) {
+				patients.add(patientQueue.getPatient());
+			}
 
 		return patients;
 

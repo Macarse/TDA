@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -40,7 +41,6 @@ public class PatientQueueController {
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public @ResponseBody
 	String get() {
-		System.out.println("entro");
 		ApplicationUser user = (ApplicationUser)this.getUser();
 		long applicationUserId = user.getId();
 		Gson gson = new Gson();
@@ -52,6 +52,12 @@ public class PatientQueueController {
 		}
 
 		return gson.toJson(patients);
+	}
+	
+	@RequestMapping(value = "/assignto", method = RequestMethod.GET)
+	public @ResponseBody
+	void assignto(@RequestParam long patient, @RequestParam long medic) {
+		patientQueueService.assignTo(patient, medic);
 	}
 	
 }
