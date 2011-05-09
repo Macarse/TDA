@@ -263,20 +263,46 @@ public class WelcomeController {
 
 		return retList;
 	}
-	
+
 	// Ajax method to get User Personal Queue
 	@RequestMapping(value = "/getPatientsInTrain", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody
 	String getPatientsInTrain() {
 		Gson gson = new Gson();
-		
+
 		LinkedList<Patient> patients = new LinkedList<Patient>();
-		
+
 		for (PatientInTrain patient : patientInTrainService.findAll()) {
 			patients.add(patient.getPatient());
 		}
 
 		return gson.toJson(patients);
+	}
+
+	@RequestMapping(value = "/getPatientForms", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody
+	String getPatientsForms(@RequestParam Long patientId) {
+		Gson gson = new Gson();
+
+		LinkedList<Long> forms = new LinkedList<Long>();
+
+		Patient patient = patientService.findById(patientId);
+
+		if (patient != null) {
+			PatientInTrain pit = patientInTrainService.findByPatient(patient);
+
+			forms.add(pit.getSocialworkerform() != null ? pit
+					.getSocialworkerform().getId() : null);
+			forms.add(pit.getPadiatricianform() != null ? pit
+					.getPadiatricianform().getId() : null);
+			forms.add(pit.getNurseform() != null ? pit.getNurseform().getId()
+					: null);
+			forms.add(pit.getDentistform() != null ? pit.getDentistform()
+					.getId() : null);
+		}
+
+		return gson.toJson(forms);
 	}
 }

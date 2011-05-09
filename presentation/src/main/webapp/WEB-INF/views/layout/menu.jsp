@@ -30,10 +30,10 @@
 <div id="queue-dialog" title="Seleccione una Opcion">
 	<div>Ir a </div>
 	<div>
-		<div id='queuemenu-socialform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
-		<div id='queuemenu-pediaform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
-		<div id='queuemenu-nurseform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
-		<div id='queuemenu-dentform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
+		<div id='queuemenu-socialform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
+		<div id='queuemenu-pediaform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
+		<div id='queuemenu-nurseform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
+		<div id='queuemenu-dentform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
 	</div>
 	<div>Enviar a </div>
 	<div id='queuemenu-usersonline'>
@@ -43,10 +43,10 @@
 <div id="patientlist-dialog" title="Seleccione una Opcion">
 	<div>Ir a </div>
 	<div>
-		<div id='queuemenu-socialform' class='queuemenu-button' onclick="redirectTo(contextPath + '/patient/' + selectedId + '/socialworker/new');"><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
-		<div id='queuemenu-pediaform' class='queuemenu-button' onclick="redirectTo(contextPath + '/patient/' + selectedId + '/pediatrician/new');"><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
-		<div id='queuemenu-nurseform' class='queuemenu-button' onclick="redirectTo(contextPath + '/patient/' + selectedId + '/nurse/new');"><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
-		<div id='queuemenu-dentform' class='queuemenu-button' onclick="redirectTo(contextPath + '/patient/' + selectedId + '/dentist/new');"><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
+		<div id='queuemenu-socialform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
+		<div id='queuemenu-pediaform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
+		<div id='queuemenu-nurseform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
+		<div id='queuemenu-dentform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
 	</div>
 	<div>Enviar a </div>
 	<div id='patientlist-usersonline'>
@@ -108,8 +108,8 @@
 	   		$('#loadImage').hide();
 	   		$('#menu-icon').show();
 	 	});
-			
-		 refreshId = setInterval(refreshPatients, 5000);
+		
+		refreshId = setInterval(refreshPatients, 5000);
 	}
 	
 	function replaceAll( text, busca, reemplaza ){
@@ -121,12 +121,79 @@
 	
 	function showQueueMenu(id){
 		selectedId = id;
+		refreshPopupLinks();
 		$("#queue-dialog").dialog('open');
 	}
 
 	function showPatientMenu(id){
 		selectedId = id;
+		refreshPopupLinks();
 		$("#patientlist-dialog").dialog('open');
+	}
+
+	function refreshPopupLinks(){
+		$.get(contextPath + "/getPatientForms?patientId="+selectedId, function(data){
+			if(data != ''){
+		   		var forms = eval(data);
+		   		
+		   		if(forms.length > 0){
+			   		 document.getElementById('queuemenu-socialform1').onclick = function() {
+				   		 if( forms[0] == null )
+				   		 	window.location.href = contextPath + '/patient/' + selectedId + '/socialworker/new';
+						else
+							window.location.href = contextPath + '/patient/' + selectedId + '/socialworker/'+ forms[0] +'/edit';
+			   		 }
+			   		document.getElementById('queuemenu-socialform2').onclick = function() {
+			   			if( forms[0] == null )
+				   		 	window.location.href = contextPath + '/patient/' + selectedId + '/socialworker/new';
+						else
+							window.location.href = contextPath + '/patient/' + selectedId + '/socialworker/'+ forms[0] +'/edit';
+			   		 }
+
+					 document.getElementById('queuemenu-pediaform1').onclick = function() {
+						 if( forms[1] == null )
+					   		 	window.location.href = contextPath + '/patient/' + selectedId + '/pediatrician/new';
+							else
+								window.location.href = contextPath + '/patient/' + selectedId + '/pediatrician/'+ forms[1] +'/edit';
+					 }
+					 document.getElementById('queuemenu-pediaform2').onclick = function() {
+						 if( forms[1] == null )
+					   		 	window.location.href = contextPath + '/patient/' + selectedId + '/pediatrician/new';
+							else
+								window.location.href = contextPath + '/patient/' + selectedId + '/pediatrician/'+ forms[1] +'/edit';
+					 }
+
+					 document.getElementById('queuemenu-nurseform1').onclick = function() {
+						 if( forms[2] == null )
+					   		 	window.location.href = contextPath + '/patient/' + selectedId + '/nurse/new';
+							else
+								window.location.href = contextPath + '/patient/' + selectedId + '/nurse/'+ forms[2] +'/edit';
+					 }
+					 document.getElementById('queuemenu-nurseform2').onclick = function() {
+						 if( forms[2] == null )
+					   		 	window.location.href = contextPath + '/patient/' + selectedId + '/nurse/new';
+							else
+								window.location.href = contextPath + '/patient/' + selectedId + '/nurse/'+ forms[2] +'/edit';
+					 }
+
+					 document.getElementById('queuemenu-dentform1').onclick = function() {
+						 if( forms[3] == null )
+					   		 	window.location.href = contextPath + '/patient/' + selectedId + '/dentist/new';
+							else
+								window.location.href = contextPath + '/patient/' + selectedId + '/dentist/'+ forms[3] +'/edit';
+					 }
+					 document.getElementById('queuemenu-dentform2').onclick = function() {
+						 if( forms[3] == null )
+					   		 	window.location.href = contextPath + '/patient/' + selectedId + '/dentist/new';
+							else
+								window.location.href = contextPath + '/patient/' + selectedId + '/dentist/'+ forms[3] +'/edit';
+					 }
+				}
+	 	}});
+	}
+
+	function redirect2(url){
+		window.location.href = url;
 	}
 
 	function refreshOnlineUsers() {
@@ -194,7 +261,6 @@
 			resizable: false,
 			buttons: { "Cerrar": function() { $(this).dialog("close"); } }
 			 });
-
 		/*
 		 $("#queuemenu-socialform").click(function(){
 			 window.location.href = contextPath + '/patient/' + selectedId + '/socialworker/new';
