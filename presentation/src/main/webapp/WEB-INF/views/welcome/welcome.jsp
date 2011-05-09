@@ -102,9 +102,7 @@
 		</tr>
 	</tfoot>
 </table>
-<div id="tooth1" style="z-index:999;">
-</div>
-<button id="meta">Enviar</button>
+
 </div>
 <script language='javascript' type='text/javascript'>
 	$(document).ready(function(){

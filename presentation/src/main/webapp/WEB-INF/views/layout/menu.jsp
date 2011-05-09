@@ -43,10 +43,10 @@
 <div id="patientlist-dialog" title="Seleccione una Opcion">
 	<div>Ir a </div>
 	<div>
-		<div id='queuemenu-socialform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
-		<div id='queuemenu-pediaform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
-		<div id='queuemenu-nurseform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
-		<div id='queuemenu-dentform' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
+		<div id='queuemenu-socialform' class='queuemenu-button' onclick="redirectTo(contextPath + '/patient/' + selectedId + '/socialworker/new');"><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
+		<div id='queuemenu-pediaform' class='queuemenu-button' onclick="redirectTo(contextPath + '/patient/' + selectedId + '/pediatrician/new');"><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
+		<div id='queuemenu-nurseform' class='queuemenu-button' onclick="redirectTo(contextPath + '/patient/' + selectedId + '/nurse/new');"><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
+		<div id='queuemenu-dentform' class='queuemenu-button' onclick="redirectTo(contextPath + '/patient/' + selectedId + '/dentist/new');"><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
 	</div>
 	<div>Enviar a </div>
 	<div id='patientlist-usersonline'>
@@ -174,6 +174,10 @@
 		$("#queue-dialog").dialog('close');
 	}
 
+	function redirectTo(url){
+		window.location.href = url;
+	}
+
 	$(document).ready(function(){
 		refreshPatients();
 
@@ -191,6 +195,7 @@
 			buttons: { "Cerrar": function() { $(this).dialog("close"); } }
 			 });
 
+		/*
 		 $("#queuemenu-socialform").click(function(){
 			 window.location.href = contextPath + '/patient/' + selectedId + '/socialworker/new';
 		 });
@@ -206,7 +211,7 @@
 		 $("#queuemenu-dentform").click(function(){
 			 window.location.href = contextPath + '/patient/' + selectedId + '/dentist/new';
 		 });
-
+		*/
 		 refreshOnlineUsers();
 		 var refreshOnlineUsersTimer = setInterval(refreshOnlineUsers, 5000);
 	});
