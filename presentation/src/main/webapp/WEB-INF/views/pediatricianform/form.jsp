@@ -37,15 +37,8 @@
 <h2>
 	<c:if test="${pediatricianForm.new}">
 		<fmt:message key="pediatrician.form.new" />
-	</c:if>
-	<fmt:message key="pediatrician.form.form" />
+	</c:if>	<fmt:message key="pediatrician.form.form" /> de '<i>${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}</i>'
 </h2>
-
-<b>
-	<fmt:message key="pediatrician.form.patient" />
-</b> 
-${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}
-<br/>
 
 <form:form modelAttribute="pediatricianForm" method="post" id="myform">
 	<div id="form-tabs">

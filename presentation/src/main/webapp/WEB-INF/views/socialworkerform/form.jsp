@@ -27,10 +27,7 @@
 	<c:otherwise><c:set var="method" value="put"/></c:otherwise>
 </c:choose>
 
-<h2><c:if test="${socialWorkerForm.new}"><fmt:message key="socialworker.form.new" /></c:if><fmt:message key="socialworker.form.form" /></h2>
-
-<b><fmt:message key="socialworker.form.patient" /></b> ${socialWorkerForm.patient.firstName} ${socialWorkerForm.patient.lastName}
-<br/>
+<h2><c:if test="${socialWorkerForm.new}"> <fmt:message key="socialworker.form.new" /></c:if> <fmt:message key="socialworker.form.form" /> de '<i>${socialWorkerForm.patient.firstName} ${socialWorkerForm.patient.lastName}</i>'</h2>
 
 <form:form modelAttribute="socialWorkerForm" method="post" id="myform">
 	<div id="form-tabs">

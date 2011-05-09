@@ -27,10 +27,7 @@
 	<c:otherwise><c:set var="method" value="put"/></c:otherwise>
 </c:choose>
 
-<h2><c:if test="${NurseForm.new}"><fmt:message key="nurse.form.new" /></c:if><fmt:message key="nurse.form.form" /></h2>
-
-<b><fmt:message key="nurse.form.patient" /></b> ${nurseForm.patient.firstName} ${nurseForm.patient.lastName}
-<br/>
+<h2><c:if test="${NurseForm.new}"><fmt:message key="nurse.form.new" /></c:if> <fmt:message key="nurse.form.form" /> de '<i>${nurseForm.patient.firstName} ${nurseForm.patient.lastName}</i>'</h2>
 
 <form:form modelAttribute="nurseForm" method="post" id="myform">
 	<div id="form-tabs">

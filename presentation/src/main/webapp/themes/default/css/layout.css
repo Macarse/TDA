@@ -137,3 +137,12 @@ a.button-text{  }
  .queuemenu-userbutton{
  	margin: 5px 5px 0 0;
  }
+ 
+ .menu-body-container{
+ 	min-height: 600px;
+ }
+ 
+ .menu-container{
+ 	position: relative;
+ 	top: 10px;
+ }

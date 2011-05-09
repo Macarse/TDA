@@ -61,10 +61,7 @@
 	<c:otherwise><c:set var="method" value="put"/></c:otherwise>
 </c:choose>
 
-<h2><c:if test="${dentistForm.new}"><fmt:message key="dentist.form.new" /></c:if><fmt:message key="dentist.form.form" /></h2>
-
-<b><fmt:message key="dentist.form.patient" /></b> ${dentistForm.patient.firstName} ${dentistForm.patient.lastName}
-<br/>
+<h2><c:if test="${dentistForm.new}"><fmt:message key="dentist.form.new" /></c:if><fmt:message key="dentist.form.form" /> de '<i>${dentistForm.patient.firstName} ${dentistForm.patient.lastName}</i>'</h2>
 
 <form:form modelAttribute="dentistForm" method="post" id="myform">
 	<div id="form-tabs">
