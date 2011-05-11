@@ -8,7 +8,7 @@ function switchInTrain(patientId) {
 			    	//text.text(data);
 			    	//var span = $("#switchbutton" + patientId + " > span:first-child");
 			    	//span.toggleClass("ui-icon-arrowreturnthick-1-s", "ui-icon-arrowreturnthick-1-n");
-			    	setTimeout("window.location.reload();", 1000);
+			    	window.location.reload();
 			    }
 	    	});
 		buttonEnabled = false;
