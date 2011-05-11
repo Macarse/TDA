@@ -71,7 +71,12 @@
 		$( "#birthdate" ).datepicker(
 			{ dateFormat: 'dd/mm/yy',
 			  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-			  dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa']
+			  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+			  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			  changeYear: true,
+			  changeMonth: true,
+			  yearRange: 'c-100,c+00',
+			  defaultDate: -3650
 		    }
 		);
 	});
