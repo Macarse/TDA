@@ -89,7 +89,7 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
-				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#" onClick="switchInTrain(${patientintrain.patient.id}); window.location.reload();"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
+				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#" onClick="confirmDownInTrain(${patientintrain.patient.id});"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -102,12 +102,3 @@
 		</tr>
 	</tfoot>
 </table>
-
-</div>
-<script language='javascript' type='text/javascript'>
-	$(document).ready(function(){
-		$("#search-button").click(function(){
-			$("#filter-containter").slideToggle('slow');
-		});
-	});
-</script>

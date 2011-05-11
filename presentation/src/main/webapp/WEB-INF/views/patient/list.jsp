@@ -134,19 +134,20 @@
 					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all  confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> ${deleteLabel}</button>
 				</form:form></td>
 				<td>
-					<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href="#">
-					
 						<c:choose>
 							<c:when test="${patientInTrainArray[indexStatus.index]}">
+								<a id="switchbutton${patient.id}" onclick="confirmDownInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href="#">
 								<span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span>
 								<span>Bajar</span>
+								</a>
 							</c:when>
 							<c:otherwise>
+								<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href="#">
 								<span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span>
 								<span>Subir</span>
+								</a>
 							</c:otherwise>
 						</c:choose>
-					</a>
 				</td>
 			</tr>
 		</c:forEach>

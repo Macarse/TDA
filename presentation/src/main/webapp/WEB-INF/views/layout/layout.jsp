@@ -83,5 +83,39 @@
     $("#dialog").dialog("open");
   });
 </script>
+
+<div id="confirmDown" title="Confirmacion">
+  Al bajar un paciente del tren sus formularios se guardaran asociados con esta visita, si lo vuelve a subir, tendra formularios nuevos asociados con la visita nueva. Seguro que el paciente termino con su visita al tren?
+</div>
+
+<script language='javascript' type='text/javascript'>
+	$(document).ready(function(){
+		$("#search-button").click(function(){
+			$("#filter-containter").slideToggle('slow');
+		});
+
+		$("#confirmDown").dialog({
+		      autoOpen: false,
+		      modal: true
+		    });
+	});
+
+	function confirmDownInTrain(pid){
+	    $("#confirmDown").dialog({
+	        buttons : {
+	          "Aceptar" : function() {
+	            switchInTrain(pid);
+	            setTimeout("window.location.reload();", 1000);
+	            $(this).dialog("close");
+	          },
+	          "Cancelar" : function() {
+	            $(this).dialog("close");
+	          }
+	        }
+	      });
+	    $("#confirmDown").dialog("open");
+	}
+</script>
+
 </body>
 </html>
