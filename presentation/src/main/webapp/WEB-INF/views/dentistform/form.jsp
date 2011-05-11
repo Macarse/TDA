@@ -15,6 +15,8 @@
 		});
 		
 		$('#tooth1').svg({onLoad: loadTooth1});
+
+		setInterval(autoSubmitFormAjax,30*1000);
 	});
 
 	function loadTooth1(svg) {
@@ -62,6 +64,7 @@
 </c:choose>
 
 <h2><c:if test="${dentistForm.new}"><fmt:message key="dentist.form.new" /></c:if><fmt:message key="dentist.form.form" /> de '<i>${dentistForm.patient.firstName} ${dentistForm.patient.lastName}</i>'</h2>
+<button id="ajaxSave" type="button" onclick="submitFormAjax()">Guardar</button>
 
 <form:form modelAttribute="dentistForm" method="post" id="myform">
 	<div id="form-tabs">

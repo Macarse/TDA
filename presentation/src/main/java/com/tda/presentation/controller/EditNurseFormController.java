@@ -39,7 +39,7 @@ public class EditNurseFormController extends BaseNurseFormController {
 			return NURSE_FORM;
 		} else {
 			nurseFormService.update(nurseForm);
-			status.setComplete();
+			// status.setComplete();
 			return "redirect:/";
 		}
 	}

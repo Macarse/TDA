@@ -12,6 +12,12 @@
 		$("#myform").change(function() {
 			_isDirty = true;
 		});
+
+		// bind 'myForm' and provide a simple callback function 
+        //$('#myform').ajaxForm(function() { 
+          //  alert("Thank you for your comment!"); 
+        //});
+        setInterval(autoSubmitFormAjax,30*1000);
 	});
 
 	window.onbeforeunload = nextTabUnload;
@@ -28,6 +34,7 @@
 </c:choose>
 
 <h2><c:if test="${socialWorkerForm.new}"> <fmt:message key="socialworker.form.new" /></c:if> <fmt:message key="socialworker.form.form" /> de '<i>${socialWorkerForm.patient.firstName} ${socialWorkerForm.patient.lastName}</i>'</h2>
+<button id="ajaxSave" type="button" onclick="submitFormAjax()">Guardar</button>
 
 <form:form modelAttribute="socialWorkerForm" method="post" id="myform">
 	<div id="form-tabs">

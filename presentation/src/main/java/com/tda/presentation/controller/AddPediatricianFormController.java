@@ -74,7 +74,7 @@ public class AddPediatricianFormController extends
 				patientInTrainService.save(patientInTrain.get(0));
 			}
 
-			status.setComplete();
+			// status.setComplete();
 			return REDIRECT_AFTER_SAVE;
 		}
 	}

@@ -18,17 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.tda.model.applicationuser.Authority;
 import com.tda.model.dentist.DentistForm;
 import com.tda.model.dentist.Tooth;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
-import com.tda.model.patient.Sex;
 import com.tda.service.api.DentistFormService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
-import com.tda.service.exception.NoDataFoundException;
-import com.tda.service.exception.SingleResultExpectedException;
 
 @Controller
 @RequestMapping(value = "/patient/{patientId}/dentist/new")
@@ -77,7 +73,7 @@ public class AddDentistFormController extends BaseDentistFormController {
 				patientInTrainService.save(patientInTrain.get(0));
 			}
 
-			status.setComplete();
+			// status.setComplete();
 			return REDIRECT_AFTER_SAVE;
 		}
 	}
@@ -97,7 +93,7 @@ public class AddDentistFormController extends BaseDentistFormController {
 			PatientInTrainService patientInTrainService) {
 		this.patientInTrainService = patientInTrainService;
 	}
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder b) {
 		b.registerCustomEditor(Tooth.class, new ToothEditor());

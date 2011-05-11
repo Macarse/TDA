@@ -42,7 +42,7 @@ public class EditPediatricianFormController extends
 			return PEDIATRICIAN_FORM;
 		} else {
 			pediatricianFormService.update(pediatricianForm);
-			status.setComplete();
+			// status.setComplete();
 			return "redirect:/";
 		}
 	}

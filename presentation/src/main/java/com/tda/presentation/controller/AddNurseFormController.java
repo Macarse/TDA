@@ -63,7 +63,7 @@ public class AddNurseFormController extends BaseNurseFormController {
 				patientInTrainService.save(patientInTrain.get(0));
 			}
 
-			status.setComplete();
+			// status.setComplete();
 			return REDIRECT_AFTER_SAVE;
 		}
 	}

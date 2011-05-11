@@ -42,9 +42,10 @@ public class EditSocialWorkerFormController extends
 			return SOCIAL_WORKER_FORM;
 		} else {
 			socialWorkerFormService.update(socialWorkerForm);
-			status.setComplete();
+			// status.setComplete();
 			return "redirect:/";
 		}
+		// model.addAttribute("socialWorkerForm", socialWorkerForm);
 	}
 
 	@Autowired

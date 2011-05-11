@@ -63,7 +63,7 @@ public class AddSocialWorkerFormController extends
 				patientInTrainService.save(patientInTrain.get(0));
 			}
 
-			status.setComplete();
+			// status.setComplete();
 			// return "redirect:/patient/" +
 			// socialWorkerForm.getPatient().getId();
 			return REDIRECT_AFTER_SAVE;

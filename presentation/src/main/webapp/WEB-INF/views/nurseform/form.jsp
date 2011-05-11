@@ -11,11 +11,12 @@
 		$("#myform").change(function() {
 			_isDirty = true;
 		});
+
+		setInterval(autoSubmitFormAjax,30*1000);
 	});
 
 	window.onbeforeunload = nextTabUnload;
 	var _isDirty = false;
-	
 </script>
 
 <!-- aux variables -->
@@ -28,6 +29,7 @@
 </c:choose>
 
 <h2><c:if test="${NurseForm.new}"><fmt:message key="nurse.form.new" /></c:if> <fmt:message key="nurse.form.form" /> de '<i>${nurseForm.patient.firstName} ${nurseForm.patient.lastName}</i>'</h2>
+<button id="ajaxSave" type="button" onclick="submitFormAjax()">Guardar</button>
 
 <form:form modelAttribute="nurseForm" method="post" id="myform">
 	<div id="form-tabs">

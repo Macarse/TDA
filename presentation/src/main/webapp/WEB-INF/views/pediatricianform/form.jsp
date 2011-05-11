@@ -8,13 +8,14 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#form-tabs").tabs();
-
-		if( document.getElementById('distosicRadioButton').checked )
-			$('.distosicHidden').show();
-
 		$("#myform").change(function() {
 			_isDirty = true;
 		});
+
+		//if( document.getElementById('distosicRadioButton').checked )
+			//$('.distosicHidden').show();
+
+		setInterval(autoSubmitFormAjax,30*1000);
 	});
 
 	window.onbeforeunload = nextTabUnload;
@@ -39,6 +40,7 @@
 		<fmt:message key="pediatrician.form.new" />
 	</c:if>	<fmt:message key="pediatrician.form.form" /> de '<i>${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}</i>'
 </h2>
+<button id="ajaxSave" type="button" onclick="submitFormAjax()">Guardar</button>
 
 <form:form modelAttribute="pediatricianForm" method="post" id="myform">
 	<div id="form-tabs">
@@ -84,10 +86,10 @@
 							<td>
 							<c:choose>
 							<c:when test="${birthType.description == 'Distócico'}">
-								<form:radiobutton id="distosicRadioButton" path="birthType" value="${birthType}" onclick="$('.distosicHidden').show()"/> ${birthType.description}
+								<form:radiobutton id="distosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
 							</c:when>
 							<c:otherwise>
-								<form:radiobutton path="birthType" value="${birthType}" onclick="$('.distosicHidden').hide()"/> ${birthType.description}
+								<form:radiobutton path="birthType" value="${birthType}"/> ${birthType.description}
 							</c:otherwise>
 							</c:choose>
 							</td>
