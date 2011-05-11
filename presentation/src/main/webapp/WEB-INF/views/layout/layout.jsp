@@ -107,7 +107,7 @@
 	        buttons : {
 	          "Aceptar" : function() {
 	            switchInTrain(pid);
-	            window.location.reload();
+	            setTimeout("window.location.reload()", 1000);
 	            $(this).dialog("close");
 	          },
 	          "Cancelar" : function() {
