@@ -146,3 +146,25 @@ a.button-text{  }
  	position: relative;
  	top: 10px;
  }
+ 
+.tinyTip{
+	width: 325px;
+	padding: 17px 0px 0px 0px;
+	display: block;
+	background: url('/presentation/themes/default/image/tinyTip-top.png') 0px 0px no-repeat;
+}
+
+.tinyTip .content{
+	padding: 0px 15px 0px 15px;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	color: #010101;
+	background: url('/presentation/themes/default/image/tinyTip-content.png') 0px 0px repeat-y;
+}
+
+.tinyTip .bottom{
+	height: 47px;
+	background: url('/presentation/themes/default/image/tinyTip-bottom.png') 0px 0px no-repeat;
+	font: 0px/0px sans-serif;
+}

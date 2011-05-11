@@ -1,15 +1,15 @@
 <div class="box">
 	<ul id="tabMenu">
-	  <li class="menu-pacientsontrain selected">
+	  <li class="menu-pacientsontrain selected" title="Pacientes en el tren">
 	  	<div class="menu-badge"> <div id="m-pacients" class="menu-pacientsontrain"></div> </div>
   		<img class="menu-loading" id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif' />
   		<img class="menu-icon-badge hide" id="menu-icon" src='${pageContext.request.contextPath}/themes/default/image/patient-icon.gif' />
 	  </li>
-	  <li class="menu-queue">
-  		<img class="menu-icon-queue" id="menu-icon-queue" src='${pageContext.request.contextPath}/themes/default/image/queue-icon.gif' />
+	  <li class="menu-queue" title="Pacientes en mi cola">
+  		<img class="menu-icon-queue" id="menu-icon-queue" src='${pageContext.request.contextPath}/themes/default/image/queue-icon.gif'/>
 	  </li>
-	  <li class="menu-chat">
-  		<img class="menu-icon-chat" id="menu-icon-chat" src='${pageContext.request.contextPath}/themes/default/image/chat-icon.png' />
+	  <li class="menu-chat" title="Chat Usuarios Conectados">
+  		<img class="menu-icon-chat" id="menu-icon-chat" src='${pageContext.request.contextPath}/themes/default/image/chat-icon.png'/>
 	  </li>
 	</ul>
 	<div class="boxTop"></div>
@@ -280,6 +280,11 @@
 		*/
 		 refreshOnlineUsers();
 		 var refreshOnlineUsersTimer = setInterval(refreshOnlineUsers, 5000);
+
+
+		 $('li.menu-pacientsontrain').tinyTips('title');
+		 $('li.menu-queue').tinyTips('title');
+		 $('li.menu-chat').tinyTips('title');
 	});
 </script>
 
