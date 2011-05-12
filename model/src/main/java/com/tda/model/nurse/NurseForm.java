@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,9 +18,9 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
 
 import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.tda.model.patient.Patient;
 
@@ -141,8 +140,8 @@ public class NurseForm {
 		TAmax = tAmax;
 	}
 
-	@ManyToMany(targetEntity = Vaxine.class, fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
+	@ManyToMany(targetEntity = Vaxine.class)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ForeignKey(name = "ID_NURSE_FORM", inverseName = "ID_VAXINE")
 	public Collection<Vaxine> getVaxines() {
 		return vaxines;
@@ -152,7 +151,8 @@ public class NurseForm {
 		this.vaxines = vaxines;
 	}
 
-	@CollectionOfElements(targetElement = NurseAction.class, fetch = FetchType.EAGER)
+	@CollectionOfElements(targetElement = NurseAction.class)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "NURSE_ACTION", joinColumns = @JoinColumn(name = "NURSE_FORM_ID"))
 	@Column(name = "NURSE_ACTION", nullable = true)
 	@Enumerated(EnumType.STRING)

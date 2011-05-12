@@ -103,7 +103,7 @@
 			<c:set var="count" value="0" />
 			<c:forEach var="vaxine" items="${allVaxines}">
 				<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-					<td><form:checkbox path="vaxines" value="${vaxine.id}" /> ${vaxine.name}</td>
+					<td><form:checkbox path="vaxines" value="${vaxine}" /> ${vaxine.name}</td>
 				<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 			    <c:set var="count" value="${count+1}" />
 			</c:forEach>
