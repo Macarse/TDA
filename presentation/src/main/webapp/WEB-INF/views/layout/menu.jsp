@@ -77,7 +77,7 @@
 						innerHtml += "<li onclick='showPatientMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
 			   		}
 				}else{
-					innerHtml = '<li><i>No hay Pacientes</i></li>';
+					innerHtml = '<i>No hay Pacientes en el tren</i>';
 				}
 		
 		   		$('#m-pacients').html(patients.length);
@@ -99,7 +99,7 @@
 						innerHtml += "<li onclick='showQueueMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
 			   		}
 				}else{
-					innerHtml = '<li><i>No tiene pacientes en cola</i></li>';
+					innerHtml = '<i>No tiene pacientes en cola</i>';
 				}
 		
 		   		//$('#m-pacients').html(parsedData.length);
@@ -220,7 +220,7 @@
 		    	   $("#onlineusers").html('<ul>' + htmlUsers + '</ul>');
 				   $("#queuemenu-usersonline").html(queueUsers);
 		       }else{
-		    	   $('#onlineusers').html('<ul><i>No hay conectados</i></ul>');
+		    	   $('#onlineusers').html('<ul><i>No hay usuarios conectados</i></ul>');
 		       }
 		       
 			   $("#patientlist-usersonline").html(listUsers);

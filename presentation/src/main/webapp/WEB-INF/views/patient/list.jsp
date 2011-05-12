@@ -22,7 +22,7 @@
 
 <c:choose>
 <c:when test="${paginator.totalResultsCount<=0}">
-	<div>No se encontraron registros</div>
+	<div style="font-size: 15px;">No se encontraron registros</div>
 </c:when>
 <c:otherwise>
 
@@ -112,6 +112,7 @@
 					</c:choose>
 				</c:if>
 			</th>
+			<th colspan="3"></th>
 		</tr>
 	</thead>
 	<tbody>

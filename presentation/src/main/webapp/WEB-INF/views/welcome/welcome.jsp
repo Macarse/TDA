@@ -12,7 +12,7 @@
 </c:if>
 
 <div id="search-button">
-	<a href="#" style="font-size: 16px;"><span class="ui-icon ui-icon-search button-icon"> </span> Buscar paciente</a>
+	<a href="#" style="font-size: 14px;"><span class="ui-icon ui-icon-search button-icon"> </span> Buscar paciente</a>
 </div>
 
 <div class="filter-container" style="display:none;" id="filter-containter">

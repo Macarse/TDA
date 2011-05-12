@@ -8,6 +8,10 @@
 <spring:url value="/sync/do" var="syncdo" />
 
 <div class="filter-container">
+
+	<span style="font-size:15px;">Backup de datos al servidor:
+	</span>
+
 	<form:form modelAttribute="configSync" action="${syncdo}" method="get" onsubmit="$('#syncLoadImage').show(); $('#respMsg').hide();">
 		<table>
 			<tbody>
