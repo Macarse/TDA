@@ -76,7 +76,7 @@ public class Itinerary {
 		this.description = description;
 	}
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<Place> getPlaces() {
 		return places;
 	}
@@ -85,7 +85,7 @@ public class Itinerary {
 		this.places = places;
 	}
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<ApplicationUser> getPersonnel() {
 		return personnel;
 	}

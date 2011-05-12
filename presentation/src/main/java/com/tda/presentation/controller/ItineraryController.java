@@ -2,6 +2,7 @@ package com.tda.presentation.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,10 +16,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.itinerary.Itinerary;
 import com.tda.model.itinerary.Place;
+import com.tda.service.api.ItineraryService;
 
 @Controller
 @RequestMapping(value = "/itinerary")
 public class ItineraryController {
+	private ItineraryService itineraryService;
+
+	@Autowired
+	public void setItineraryService(ItineraryService itineraryService) {
+		this.itineraryService = itineraryService;
+	}
 
 	@ModelAttribute("itineraryForm")
 	public Itinerary getItineraryCommand(Model model) {
@@ -50,6 +58,7 @@ public class ItineraryController {
 		} else {
 			modelAndView.setViewName("itinerary/resultForm");
 			modelAndView.addObject("savedClass", itineraryForm);
+			itineraryService.save(itineraryForm);
 		}
 
 		return modelAndView;
