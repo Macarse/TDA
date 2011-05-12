@@ -103,10 +103,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/itinerary/resultForm.jsp"/>
 	</definition>
 	
-	<definition name="itinerary/addPlace" extends="base.definition">
-		<put-attribute name="footer" value="" />
-		<put-attribute name="menu" value="" />
-		<put-attribute name="header" value="" />
+	<definition name="itinerary/addPlace" template="/WEB-INF/views/layout/layout-plain.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="body" value="/WEB-INF/views/itinerary/addPlace.jsp" />
 	</definition>

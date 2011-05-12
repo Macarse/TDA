@@ -58,11 +58,10 @@ $(document).ready(function() {
 	<table>
 		<tr id="submitRow">
 			<td>&nbsp;</td>
+			<td>		
+				<input type="submit" value="Crear itinerario"/>
+			</td>
 		</tr>
 	</table>
-	
-	<p>
-		<input type="submit" value="Crear itinerario"/>
-	</p>
 	</fieldset>
 </form:form>
