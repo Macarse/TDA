@@ -11,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 

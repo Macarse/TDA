@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tda.model.itinerary.ItineraryForm;
+import com.tda.model.itinerary.Itinerary;
 import com.tda.model.itinerary.Place;
 
 @Controller
@@ -21,8 +21,8 @@ import com.tda.model.itinerary.Place;
 public class ItineraryController {
 
 	@ModelAttribute("itineraryForm")
-	public ItineraryForm getItineraryCommand(Model model) {
-		ItineraryForm itineraryForm = new ItineraryForm();
+	public Itinerary getItineraryCommand(Model model) {
+		Itinerary itineraryForm = new Itinerary();
 		itineraryForm.setPlaces(new AutoPopulatingList<Place>(Place.class));
 		return itineraryForm;
 	}
@@ -41,7 +41,7 @@ public class ItineraryController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "add")
 	protected ModelAndView create(Model model,
-			@Valid @ModelAttribute ItineraryForm itineraryForm,
+			@Valid @ModelAttribute("itineraryForm") Itinerary itineraryForm,
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 

@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 </script>
 
-<form:form action="add" method="post" commandName="itineraryForm">
+<form:form action="add" method="post" modelAttribute="itineraryForm">
 	<fieldset>
 	
 	<legend>Crear itinerario</legend>
@@ -52,7 +52,7 @@ $(document).ready(function() {
 		<spring:bind path="places[0].city">
 			<form:input path="${status.expression}" size="30"/>
 		</spring:bind>
-		<input type="button" id="addPlaceButton" value="Add"  />
+		<input type="button" id="addPlaceButton" value="Agregar otro destino"  />
 	</p>
 	
 	<table>
