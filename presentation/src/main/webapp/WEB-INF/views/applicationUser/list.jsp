@@ -22,14 +22,6 @@
 	</div>
 </c:if>
 
-<script language='javascript' type='text/javascript'>
-	$(document).ready(function(){
-		$("#search-button").click(function(){
-			$("#filter-containter").slideToggle('slow');
-		});
-	});
-</script>
-
 <div id="search-button">
 	<a href="#" style="font-size: 14px;"><span class="ui-icon ui-icon-search button-icon"> </span> Buscar Usuario</a>
 </div>

@@ -20,14 +20,6 @@
 	</div>
 </c:if>
 
-<script language='javascript' type='text/javascript'>
-	$(document).ready(function(){
-		$("#search-button").click(function(){
-			$("#filter-containter").slideToggle('slow');
-		});
-	});
-</script>
-
 <c:choose>
 <c:when test="${paginator.totalResultsCount<=0}">
 	<div>No se encontraron registros</div>

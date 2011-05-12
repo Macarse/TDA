@@ -162,12 +162,3 @@
 </c:otherwise>
 </c:choose>
 <div class="newBtn"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></div>
-
-
-<script language='javascript' type='text/javascript'>
-	$(document).ready(function(){
-		$("#search-button").click(function(){
-			$("#filter-containter").slideToggle('slow');
-		});
-	});
-</script>
