@@ -57,7 +57,7 @@ public class VaxineServiceImpl implements VaxineService {
 		Vaxine vaxine = new Vaxine();
 		vaxine.setName(name);
 
-		List<Vaxine> founded = vaxineDAO.findByExample(vaxine);
+		List<Vaxine> founded = vaxineDAO.findByExample(vaxine, false);
 
 		if (founded.size() == 0)
 			throw new NoDataFoundException("No vaxine found with name "
