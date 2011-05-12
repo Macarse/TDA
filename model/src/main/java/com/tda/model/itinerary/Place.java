@@ -24,9 +24,6 @@ public class Place {
 	private Date departureDate;
 
 	@Size(max = 200)
-	private String country;
-
-	@Size(max = 200)
 	private String province;
 
 	@Size(max = 200)
@@ -63,14 +60,6 @@ public class Place {
 
 	public void setDepartureDate(Date departureDate) {
 		this.departureDate = departureDate;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
 	public String getProvince() {

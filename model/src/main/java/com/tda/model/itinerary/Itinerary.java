@@ -11,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -76,7 +76,7 @@ public class Itinerary {
 		this.description = description;
 	}
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<Place> getPlaces() {
 		return places;
 	}
@@ -85,7 +85,7 @@ public class Itinerary {
 		this.places = places;
 	}
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<ApplicationUser> getPersonnel() {
 		return personnel;
 	}
