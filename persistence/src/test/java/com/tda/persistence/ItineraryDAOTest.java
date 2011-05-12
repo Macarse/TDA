@@ -34,7 +34,6 @@ public class ItineraryDAOTest {
 		Place somePlace = new Place();
 		somePlace.setArrivalDate(new Date(12000));
 		somePlace.setCity("A city");
-		somePlace.setDepartureDate(new Date(15000));
 		places.add(somePlace);
 
 		Itinerary itinerary = new Itinerary();
@@ -46,6 +45,20 @@ public class ItineraryDAOTest {
 		anotherItinerary.setBeginningDate(new Date(100000));
 		anotherItinerary.setEndDate(new Date(150000));
 		itineraryDAO.save(anotherItinerary);
+	}
+
+	@Test
+	public void findForValidDate() {
+		List<Itinerary> itineraries = itineraryDAO
+				.findItineraryForDate(new Date(20000));
+		assertEquals(1, itineraries.size());
+	}
+
+	@Test
+	public void findForInvalidDate() {
+		List<Itinerary> itineraries = itineraryDAO
+				.findItineraryForDate(new Date());
+		assertEquals(0, itineraries.size());
 	}
 
 	@Test
