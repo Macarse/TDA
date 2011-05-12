@@ -156,7 +156,6 @@ public class NurseForm {
 	@JoinTable(name = "NURSE_ACTION", joinColumns = @JoinColumn(name = "NURSE_FORM_ID"))
 	@Column(name = "NURSE_ACTION", nullable = true)
 	@Enumerated(EnumType.STRING)
-	@Fetch(value = FetchMode.SELECT)
 	public Collection<NurseAction> getNurseActions() {
 		return nurseActions;
 	}
