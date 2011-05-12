@@ -74,7 +74,7 @@ $(document).ready(function() {
 	<p>
 		<form:label for="places" path="places[0].arrivalDate" cssErrorClass="error">Fecha de llegada</form:label>
 		<spring:bind path="places[0].arrivalDate">
-			<form:input path="${status.expression}" size="30"/>
+			<form:input id="itinerary-arrival-date" path="${status.expression}" size="30"/>
 		</spring:bind>
 	</p>
 	
@@ -88,3 +88,38 @@ $(document).ready(function() {
 	</table>
 	</fieldset>
 </form:form>
+
+<script>
+	$(function() {
+		$( "#itinerary-arrival-date" ).datepicker(
+			{ dateFormat: 'dd/mm/yy',
+			  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+			  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			  changeYear: true,
+			  changeMonth: true,
+			  yearRange: 'c-100,c+00'
+		    }
+		);
+		$( "#beginningDate" ).datepicker(
+				{ dateFormat: 'dd/mm/yy',
+				  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+				  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+				  changeYear: true,
+				  changeMonth: true,
+				  yearRange: 'c-100,c+00'
+			    }
+			);
+		$( "#endDate" ).datepicker(
+				{ dateFormat: 'dd/mm/yy',
+				  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+				  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+				  changeYear: true,
+				  changeMonth: true,
+				  yearRange: 'c-100,c+00'
+			    }
+			);
+	});
+</script>
