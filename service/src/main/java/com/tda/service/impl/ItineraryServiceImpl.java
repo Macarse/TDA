@@ -37,8 +37,12 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 	@Transactional(readOnly = true)
 	public Itinerary getForSpecificDate(Date date) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Itinerary> itineraries = itineraryDAO.findItineraryForDate(date);
+		if (itineraries != null && itineraries.size() > 0) {
+			return itineraries.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	@Transactional(readOnly = true)
@@ -46,12 +50,17 @@ public class ItineraryServiceImpl implements ItineraryService {
 		return itineraryDAO.findAll();
 	}
 
-	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
-		this.itineraryDAO = itineraryDAO;
+	@Transactional(readOnly = true)
+	public Itinerary getNext() {
+		return itineraryDAO.findNextItinerary();
 	}
 
 	public ItineraryDAO getItineraryDAO() {
 		return itineraryDAO;
+	}
+
+	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
+		this.itineraryDAO = itineraryDAO;
 	}
 
 }
