@@ -102,4 +102,12 @@ public class Itinerary {
 		this.additionalInfo = additionalInfo;
 	}
 
+	@Override
+	public String toString() {
+		return "Itinerary [id=" + id + ", beginningDate=" + beginningDate
+				+ ", endDate=" + endDate + ", description=" + description
+				+ ", places=" + places + ", personnel=" + personnel
+				+ ", additionalInfo=" + additionalInfo + "]";
+	}
+
 }

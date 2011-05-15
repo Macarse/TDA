@@ -82,4 +82,13 @@ public class Place {
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
 	}
+
+	@Override
+	public String toString() {
+		return "Place [id=" + id + ", arrivalDate=" + arrivalDate
+				+ ", province=" + province + ", city=" + city
+				+ ", neighbourhood=" + neighbourhood + ", additionalInfo="
+				+ additionalInfo + "]";
+	}
+
 }
