@@ -1,5 +1,6 @@
 package com.tda.presentation.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.itinerary.Itinerary;
@@ -20,6 +22,7 @@ import com.tda.service.api.ItineraryService;
 
 @Controller
 @RequestMapping(value = "/itinerary")
+@SessionAttributes({ "currentItinerary" })
 public class ItineraryController {
 	private ItineraryService itineraryService;
 
@@ -33,6 +36,11 @@ public class ItineraryController {
 		Itinerary itineraryForm = new Itinerary();
 		itineraryForm.setPlaces(new AutoPopulatingList<Place>(Place.class));
 		return itineraryForm;
+	}
+
+	@ModelAttribute("currentItinerary")
+	public Itinerary getCurrent() {
+		return itineraryService.getNext();
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.GET)
@@ -50,15 +58,16 @@ public class ItineraryController {
 	@RequestMapping(method = RequestMethod.POST, value = "add")
 	protected ModelAndView create(Model model,
 			@Valid @ModelAttribute("itineraryForm") Itinerary itineraryForm,
-			BindingResult result) {
+			@ModelAttribute("currentItinerary") Itinerary currentItinerary,
+			BindingResult result, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (result.hasErrors()) {
 			modelAndView.setViewName("itinerary/createForm");
 		} else {
+			itineraryService.save(itineraryForm);
 			modelAndView.setViewName("itinerary/resultForm");
 			modelAndView.addObject("savedClass", itineraryForm);
-			itineraryService.save(itineraryForm);
 		}
 
 		return modelAndView;
