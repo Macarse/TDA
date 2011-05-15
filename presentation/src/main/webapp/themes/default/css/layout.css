@@ -58,6 +58,8 @@ html,body{
 .footer-container{
 	width: 1000px;
 	clear: both;
+	margin: 0 auto;
+	text-align: center;
 	border-style: solid;
 	border-width: 1px;
 	background-color: white;
