@@ -4,6 +4,7 @@
 <div style="float:left; background-image:url('${pageContext.request.contextPath}/themes/default/image/header.jpg'); width:1000px; height:94px">
 	<div style="position: relative; font-size: 14px; top: 73px; left: 5px;">
 		<a href="${pageContext.request.contextPath}">Principal</a> | <a href="${pageContext.request.contextPath}/applicationUser/"><span>Usuarios</span></a> | <a href="${pageContext.request.contextPath}/patient/"><span>Pacientes</span></a> | <a href="${pageContext.request.contextPath}/item/"><span>Inventario</span></a> | <a href="${pageContext.request.contextPath}/sync/main"><span>Sincronización</span></a>
+		| Acá van los mensajes de itinerario
 	</div>
 </div>
 <c:url value="/logout" var="logoutUrl"/>

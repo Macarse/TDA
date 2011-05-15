@@ -27,7 +27,7 @@
 	<div class="boxBottom"></div>
 </div>
 
-<div id="queue-dialog" title="Seleccione una Opcion">
+<div id="queue-dialog" style="display: none" "title="Seleccione una Opcion">
 	<div>Ir a </div>
 	<div>
 		<div id='queuemenu-socialform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
@@ -40,7 +40,7 @@
 	</div>
 </div>
 
-<div id="patientlist-dialog" title="Seleccione una Opcion">
+<div id="patientlist-dialog" style="display: none" title="Seleccione una Opcion">
 	<div>Ir a </div>
 	<div>
 		<div id='queuemenu-socialform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
