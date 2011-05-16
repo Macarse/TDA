@@ -87,7 +87,7 @@
 </script>
 
 <div id="confirmDown" title="Confirmacion">
-  Al bajar un paciente del tren sus formularios se guardaran asociados con esta visita, si lo vuelve a subir, tendra formularios nuevos asociados con la visita nueva. Seguro que el paciente termino con su visita al tren?
+	Si baja al usuario del tren no podrá modificar los formularios de esta visita y deberá crear nuevos si lo vuelve a subir. ¿Está seguro?
 </div>
 
 <script language='javascript' type='text/javascript'>

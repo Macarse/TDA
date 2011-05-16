@@ -5,10 +5,10 @@
   		<img class="menu-loading" id="loadImage" src='${pageContext.request.contextPath}/themes/default/image/ajax-loader.gif' />
   		<img class="menu-icon-badge hide" id="menu-icon" src='${pageContext.request.contextPath}/themes/default/image/patient-icon.gif' />
 	  </li>
-	  <li class="menu-queue" title="Pacientes en mi cola">
+	  <li class="menu-queue" title="Mi cola de pacientes">
   		<img class="menu-icon-queue" id="menu-icon-queue" src='${pageContext.request.contextPath}/themes/default/image/queue-icon.gif'/>
 	  </li>
-	  <li class="menu-chat" title="Chat Usuarios Conectados">
+	  <li class="menu-chat" title="Chat">
   		<img class="menu-icon-chat" id="menu-icon-chat" src='${pageContext.request.contextPath}/themes/default/image/chat-icon.png'/>
 	  </li>
 	</ul>
@@ -27,7 +27,7 @@
 	<div class="boxBottom"></div>
 </div>
 
-<div id="queue-dialog" title="Seleccione una Opcion">
+<div id="queue-dialog" style="display: none" "title="Seleccione una Opcion">
 	<div>Ir a </div>
 	<div>
 		<div id='queuemenu-socialform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
@@ -40,7 +40,7 @@
 	</div>
 </div>
 
-<div id="patientlist-dialog" title="Seleccione una Opcion">
+<div id="patientlist-dialog" style="display: none" title="Seleccione una Opcion">
 	<div>Ir a </div>
 	<div>
 		<div id='queuemenu-socialform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
@@ -77,7 +77,11 @@
 						innerHtml += "<li onclick='showPatientMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
 			   		}
 				}else{
+<<<<<<< HEAD
 					innerHtml = '<i>No hay Pacientes en el tren</i>';
+=======
+					innerHtml = '<li><i>No hay pacientes</i></li>';
+>>>>>>> 2eb87613de360feb69733407c2fabbc441709860
 				}
 		
 		   		$('#m-pacients').html(patients.length);
@@ -99,7 +103,11 @@
 						innerHtml += "<li onclick='showQueueMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
 			   		}
 				}else{
+<<<<<<< HEAD
 					innerHtml = '<i>No tiene pacientes en cola</i>';
+=======
+					innerHtml = '<li><i>No hay pacientes en la cola</i></li>';
+>>>>>>> 2eb87613de360feb69733407c2fabbc441709860
 				}
 		
 		   		//$('#m-pacients').html(parsedData.length);

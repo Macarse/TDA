@@ -27,14 +27,14 @@ $(document).ready(function() {
 	
 	<!-- FECHA DE INICIO -->
 	<p>
-		<form:label for="beginningDate" path="beginningDate" cssErrorClass="error">Fecha de salida</form:label>
+		<form:label for="beginningDate" path="beginningDate" cssErrorClass="error">Fecha en que salimos</form:label>
 		<form:input path="beginningDate"/>
 		<form:errors path="beginningDate" />
 	</p>
 
 	<!-- FECHA DE FIN -->
 	<p>
-		<form:label for="endDate" path="endDate" cssErrorClass="error">Fecha de fin</form:label>
+		<form:label for="endDate" path="endDate" cssErrorClass="error">Fecha en que volvemos</form:label>
 		<form:input path="endDate"/>
 		<form:errors path="endDate" />
 	</p>	
@@ -47,12 +47,35 @@ $(document).ready(function() {
 	</p>
 	
 	<!-- LUGARES -->
+
+	Destino #1
+	<p>
+		<form:label for="places" path="places[0].province" cssErrorClass="error">Provincia</form:label>
+		<spring:bind path="places[0].province">
+			<form:input path="${status.expression}" size="30"/>
+		</spring:bind>
+		<input type="button" id="addPlaceButton" value="Agregar otro destino"  />
+	</p>
+	
 	<p>
 		<form:label for="places" path="places[0].city" cssErrorClass="error">Ciudad</form:label>
 		<spring:bind path="places[0].city">
 			<form:input path="${status.expression}" size="30"/>
 		</spring:bind>
-		<input type="button" id="addPlaceButton" value="Agregar otro destino"  />
+	</p>
+	
+	<p>
+		<form:label for="places" path="places[0].neighbourhood" cssErrorClass="error">Localidad</form:label>
+		<spring:bind path="places[0].neighbourhood">
+			<form:input path="${status.expression}" size="30"/>
+		</spring:bind>
+	</p>
+	
+	<p>
+		<form:label for="places" path="places[0].arrivalDate" cssErrorClass="error">Fecha de llegada</form:label>
+		<spring:bind path="places[0].arrivalDate">
+			<form:input id="itinerary-arrival-date" path="${status.expression}" size="30"/>
+		</spring:bind>
 	</p>
 	
 	<table>
@@ -65,3 +88,38 @@ $(document).ready(function() {
 	</table>
 	</fieldset>
 </form:form>
+
+<script>
+	$(function() {
+		$( "#itinerary-arrival-date" ).datepicker(
+			{ dateFormat: 'dd/mm/yy',
+			  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+			  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			  changeYear: true,
+			  changeMonth: true,
+			  yearRange: 'c-100,c+00'
+		    }
+		);
+		$( "#beginningDate" ).datepicker(
+				{ dateFormat: 'dd/mm/yy',
+				  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+				  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+				  changeYear: true,
+				  changeMonth: true,
+				  yearRange: 'c-100,c+00'
+			    }
+			);
+		$( "#endDate" ).datepicker(
+				{ dateFormat: 'dd/mm/yy',
+				  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+				  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+				  changeYear: true,
+				  changeMonth: true,
+				  yearRange: 'c-100,c+00'
+			    }
+			);
+	});
+</script>

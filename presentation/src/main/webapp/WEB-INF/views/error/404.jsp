@@ -7,6 +7,6 @@
 <title>Página no encontrada</title>
 </head>
 <body>
-Página no encontrada
+<span style="font-size:15px;">Página no encontrada</span>
 </body>
 </html>

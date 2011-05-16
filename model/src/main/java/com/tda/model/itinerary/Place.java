@@ -20,9 +20,6 @@ public class Place {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date arrivalDate;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date departureDate;
-
 	@Size(max = 200)
 	private String province;
 
@@ -52,14 +49,6 @@ public class Place {
 
 	public void setArrivalDate(Date arrivalDate) {
 		this.arrivalDate = arrivalDate;
-	}
-
-	public Date getDepartureDate() {
-		return departureDate;
-	}
-
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
 	}
 
 	public String getProvince() {
@@ -93,4 +82,13 @@ public class Place {
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
 	}
+
+	@Override
+	public String toString() {
+		return "Place [id=" + id + ", arrivalDate=" + arrivalDate
+				+ ", province=" + province + ", city=" + city
+				+ ", neighbourhood=" + neighbourhood + ", additionalInfo="
+				+ additionalInfo + "]";
+	}
+
 }

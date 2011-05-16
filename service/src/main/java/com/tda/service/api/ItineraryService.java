@@ -17,4 +17,6 @@ public interface ItineraryService {
 	Itinerary getCurrent();
 
 	Itinerary getForSpecificDate(Date date);
+
+	Itinerary getNext();
 }

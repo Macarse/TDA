@@ -29,9 +29,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.OnlineUser;
+import com.tda.model.itinerary.Itinerary;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
+import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.OnlineUserService;
@@ -40,7 +42,7 @@ import com.tda.service.api.PatientService;
 
 @Controller
 @RequestMapping(value = "/")
-@SessionAttributes({ "patient", "user" })
+@SessionAttributes({ "patient", "user", "currentItinerary" })
 public class WelcomeController {
 	private static final String LIST = "welcome/list";
 
@@ -52,8 +54,8 @@ public class WelcomeController {
 	// TODO should be localized?
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 			"dd/MM/yyyy");
-
 	private OnlineUserService onlineUserService;
+	private ItineraryDAO itineraryDAO;
 
 	public WelcomeController() {
 		params = new ParamContainer();
@@ -64,34 +66,22 @@ public class WelcomeController {
 		return Sex.values();
 	}
 
+	@ModelAttribute("currentItinerary")
+	public Itinerary getCurrentItinerary() {
+		Itinerary itinerary = itineraryDAO.findNextItinerary();
+
+		if (itinerary == null) {
+			return new Itinerary();
+		} else {
+			return itinerary;
+		}
+	}
+
 	@ModelAttribute("user")
 	public UserDetails getUser() {
 		Object aux = SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 		return ((UserDetails) aux);
-	}
-
-	@Autowired
-	public void setPatientInTrainService(
-			PatientInTrainService patientInTrainService) {
-		this.patientInTrainService = patientInTrainService;
-	}
-
-	@Autowired
-	public void setOnlineUserService(OnlineUserService onlineUserService) {
-		this.onlineUserService = onlineUserService;
-	}
-
-	@Autowired
-	public void setPatientService(PatientService patientService) {
-		this.patientService = patientService;
-	}
-
-	@Autowired
-	public void setPaginator(Paginator paginator) {
-		this.paginator = paginator;
-		paginator.setOrderAscending(true);
-		paginator.setOrderField("id");
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -305,4 +295,33 @@ public class WelcomeController {
 
 		return gson.toJson(forms);
 	}
+
+	@Autowired
+	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
+		this.itineraryDAO = itineraryDAO;
+	}
+
+	@Autowired
+	public void setPatientInTrainService(
+			PatientInTrainService patientInTrainService) {
+		this.patientInTrainService = patientInTrainService;
+	}
+
+	@Autowired
+	public void setOnlineUserService(OnlineUserService onlineUserService) {
+		this.onlineUserService = onlineUserService;
+	}
+
+	@Autowired
+	public void setPatientService(PatientService patientService) {
+		this.patientService = patientService;
+	}
+
+	@Autowired
+	public void setPaginator(Paginator paginator) {
+		this.paginator = paginator;
+		paginator.setOrderAscending(true);
+		paginator.setOrderField("id");
+	}
+
 }
