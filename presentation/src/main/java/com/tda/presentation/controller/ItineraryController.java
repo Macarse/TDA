@@ -42,9 +42,16 @@ public class ItineraryController {
 	@RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
 	public String getEditForm(@PathVariable Long id, Model model) {
 		Itinerary itinerary = itineraryService.getById(id);
-		itinerary.setPlaces(new AutoPopulatingList<Place>(
-				itinerary.getPlaces(), Place.class));
-		model.addAttribute("itineraryForm", itinerary);
+
+		if (itinerary != null) {
+			model.addAttribute("placeSize", itinerary.getPlaces().size());
+			itinerary.setPlaces(new AutoPopulatingList<Place>(itinerary
+					.getPlaces(), Place.class));
+			model.addAttribute("itineraryForm", itinerary);
+		} else {
+			model.addAttribute("placeSize", 0);
+			model.addAttribute("itineraryForm", new Itinerary());
+		}
 		return "itinerary/createForm";
 	}
 
@@ -58,13 +65,18 @@ public class ItineraryController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "add")
 	protected ModelAndView create(Model model,
-			@Valid @ModelAttribute("itineraryForm") Itinerary itineraryForm,
 			@ModelAttribute("currentItinerary") Itinerary currentItinerary,
+			@Valid @ModelAttribute("itineraryForm") Itinerary itineraryForm,
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (result.hasErrors()) {
 			modelAndView.setViewName("itinerary/createForm");
+
+			if (itineraryForm != null && itineraryForm.getPlaces() != null) {
+				modelAndView.addObject("placeSize", itineraryForm.getPlaces()
+						.size());
+			}
 		} else {
 			itineraryService.save(itineraryForm);
 			modelAndView.setViewName("itinerary/resultForm");

@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	var placePosition = 0;
+	var placePosition = ${placeSize - 1};
 	$("#addPlaceButton").click(function() {
 		placePosition++;
  
@@ -52,36 +52,42 @@ $(document).ready(function() {
 
 
 	<input type="button" id="addPlaceButton" value="Agregar otro destino"  />
-	<c:forEach var="place" items="places" varStatus="rowCounter">
+	<br />
 	
-	Destino <c:out value="${rowCounter.count }"></c:out>
+	<c:forEach var="i" begin="1" end="${placeSize }">
+	
+	Destino <c:out value="${i}"></c:out>
 
 	<p>
-		<form:label for="places" path="places[${rowCounter.count - 1 }].province" cssErrorClass="error">Provincia</form:label>
-		<spring:bind path="places[${rowCounter.count - 1 }].province">
+		<form:label for="places" path="places[${i - 1}].province" cssErrorClass="error">Provincia</form:label>
+		<spring:bind path="places[${i - 1}].province">
 			<form:input path="${status.expression}" size="30"/>
+        <form:errors path="${status.expression }" />
 		</spring:bind>
 	</p>
 	
 	<p>
-		<form:label for="places" path="places[${rowCounter.count - 1 }].city" cssErrorClass="error">Ciudad</form:label>
-		<spring:bind path="places[${rowCounter.count - 1 }].city">
+		<form:label for="places" path="places[${i - 1}].city" cssErrorClass="error">Ciudad</form:label>
+		<spring:bind path="places[${i - 1}].city">
 			<form:input path="${status.expression}" size="30"/>
 		</spring:bind>
+		<form:errors path="places[${i - 1}].city" />
 	</p>
 	
 	<p>
-		<form:label for="places" path="places[${rowCounter.count - 1 }].neighbourhood" cssErrorClass="error">Localidad</form:label>
-		<spring:bind path="places[${rowCounter.count - 1 }].neighbourhood">
+		<form:label for="places" path="places[${i - 1}].neighbourhood" cssErrorClass="error">Localidad</form:label>
+		<spring:bind path="places[${i - 1}].neighbourhood">
 			<form:input path="${status.expression}" size="30"/>
 		</spring:bind>
+		<form:errors path="places[${i - 1}].neighbourhood" />
 	</p>
 	
 	<p>
-		<form:label for="places" path="places[${rowCounter.count - 1 }].arrivalDate" cssErrorClass="error">Fecha de llegada</form:label>
-		<spring:bind path="places[${rowCounter.count - 1 }].arrivalDate">
+		<form:label for="places" path="places[${i - 1}].arrivalDate" cssErrorClass="error">Fecha de llegada</form:label>
+		<spring:bind path="places[${i - 1}].arrivalDate">
 			<form:input id="itinerary-arrival-date" path="${status.expression}" size="30"/>
 		</spring:bind>
+		<form:errors path="places[${i - 1}].arrivalDate" />
 	</p>
 	
 	</c:forEach>
