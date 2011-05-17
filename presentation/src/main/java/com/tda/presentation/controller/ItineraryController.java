@@ -40,7 +40,12 @@ public class ItineraryController {
 
 	@ModelAttribute("currentItinerary")
 	public Itinerary getCurrent() {
-		return itineraryService.getNext();
+		Itinerary current = itineraryService.getNext();
+		if (current == null) {
+			return new Itinerary();
+		} else {
+			return current;
+		}
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.GET)
