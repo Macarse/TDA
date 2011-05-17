@@ -65,7 +65,6 @@ public class ItineraryController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "add")
 	protected ModelAndView create(Model model,
-			@ModelAttribute("currentItinerary") Itinerary currentItinerary,
 			@Valid @ModelAttribute("itineraryForm") Itinerary itineraryForm,
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -82,7 +81,7 @@ public class ItineraryController {
 			modelAndView.setViewName("itinerary/resultForm");
 			modelAndView.addObject("savedClass", itineraryForm);
 
-			currentItinerary = updateCurrentItinerary(modelAndView);
+			updateCurrentItinerary(modelAndView);
 		}
 
 		return modelAndView;

@@ -11,6 +11,7 @@
 	</td>
 	<td>
 		<form:input path="itineraryPlace.places[${placeNumber }].province" size="30" />
+		<form:errors path="itineraryPlace.places[${placeNumber }].province" />
 	</td>
 	<td>&nbsp;</td>
 </tr>
@@ -23,6 +24,7 @@
 	</td>
 	<td>
 		<form:input path="itineraryPlace.places[${placeNumber }].city" size="30" />
+		<form:errors path="itineraryPlace.places[${placeNumber }].city" />
 	</td>
 	<td>&nbsp;</td>
 </tr>
@@ -35,6 +37,7 @@
 	</td>
 	<td>
 		<form:input path="itineraryPlace.places[${placeNumber }].neighbourhood" size="30" />
+		<form:errors path="itineraryPlace.places[${placeNumber }].neighbourhood" />
 	</td>
 	<td>&nbsp;</td>
 </tr>
@@ -47,6 +50,7 @@
 	</td>
 	<td>
 		<form:input path="itineraryPlace.places[${placeNumber }].arrivalDate" size="30" />
+		<form:errors path="itineraryPlace.places[${placeNumber }].arrivalDate" />
 	</td>
 	<td>&nbsp;</td>
 </tr>
