@@ -10,7 +10,8 @@
 				No se ha definido el itinerario. Click <a href="${pageContext.request.contextPath }/itinerary/add">aquí</a> para hacerlo
 			</c:when>
 			<c:otherwise>
-				El próximo viaje es desde el <c:out value="${currentItinerary.beginningDate }" />  hasta el <c:out value="${currentItinerary.endDate}" />
+				El próximo viaje es desde el <c:out value="${currentItinerary.beginningDate }" />  hasta el <c:out value="${currentItinerary.endDate}" />.
+				 <a href="${pageContext.request.contextPath }/itinerary/edit/${currentItinerary.id}">Cambiarlo</a>
 			</c:otherwise>
 		</c:choose>
 	</div>

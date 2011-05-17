@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.AutoPopulatingList;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,25 +32,19 @@ public class ItineraryController {
 		this.itineraryService = itineraryService;
 	}
 
-	@ModelAttribute("itineraryForm")
-	public Itinerary getItineraryCommand(Model model) {
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public String getForm(Model model) {
 		Itinerary itineraryForm = new Itinerary();
 		itineraryForm.setPlaces(new AutoPopulatingList<Place>(Place.class));
-		return itineraryForm;
+		model.addAttribute("itineraryForm", itineraryForm);
+		return "itinerary/createForm";
 	}
-
-	@ModelAttribute("currentItinerary")
-	public Itinerary getCurrent() {
-		Itinerary current = itineraryService.getNext();
-		if (current == null) {
-			return new Itinerary();
-		} else {
-			return current;
-		}
-	}
-
-	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public String getForm() {
+	
+	@RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+	public String getEditForm(@PathVariable Long id, Model model) {
+		Itinerary itinerary = itineraryService.getById(id);
+		itinerary.setPlaces(new AutoPopulatingList<Place>(itinerary.getPlaces(), Place.class));
+		model.addAttribute("itineraryForm", itinerary);
 		return "itinerary/createForm";
 	}
 
@@ -73,6 +68,7 @@ public class ItineraryController {
 			itineraryService.save(itineraryForm);
 			modelAndView.setViewName("itinerary/resultForm");
 			modelAndView.addObject("savedClass", itineraryForm);
+			modelAndView.addObject("currentItinerary", itineraryForm);
 		}
 
 		return modelAndView;

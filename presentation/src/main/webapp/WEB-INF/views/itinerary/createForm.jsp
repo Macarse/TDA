@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 </script>
 
-<form:form action="add" method="post" modelAttribute="itineraryForm">
+<form:form action="${pageContext.request.contextPath }/itinerary/add" method="post" modelAttribute="itineraryForm">
 	<fieldset>
 	
 	<legend>Crear itinerario</legend>
