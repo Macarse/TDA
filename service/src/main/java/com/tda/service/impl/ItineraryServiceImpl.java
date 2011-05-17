@@ -55,6 +55,11 @@ public class ItineraryServiceImpl implements ItineraryService {
 		return itineraryDAO.findNextItinerary();
 	}
 
+	@Transactional(readOnly = true)
+	public Itinerary getById(Long id) {
+		return itineraryDAO.findById(id);
+	}
+
 	public ItineraryDAO getItineraryDAO() {
 		return itineraryDAO;
 	}
@@ -62,5 +67,6 @@ public class ItineraryServiceImpl implements ItineraryService {
 	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
 		this.itineraryDAO = itineraryDAO;
 	}
+
 
 }
