@@ -50,41 +50,47 @@ $(document).ready(function() {
 	
 	<!-- LUGARES -->
 
-	Destino #1
-	<p>
-		<form:label for="places" path="places[0].province" cssErrorClass="error">Provincia</form:label>
-		<spring:bind path="places[0].province">
-			<form:input path="${status.expression}" size="30"/>
-		</spring:bind>
-		<input type="button" id="addPlaceButton" value="Agregar otro destino"  />
-	</p>
+
+	<input type="button" id="addPlaceButton" value="Agregar otro destino"  />
+	<c:forEach var="place" items="places" varStatus="rowCounter">
 	
+	Destino <c:out value="${rowCounter.count }"></c:out>
+
 	<p>
-		<form:label for="places" path="places[0].city" cssErrorClass="error">Ciudad</form:label>
-		<spring:bind path="places[0].city">
+		<form:label for="places" path="places[${rowCounter.count - 1 }].province" cssErrorClass="error">Provincia</form:label>
+		<spring:bind path="places[${rowCounter.count - 1 }].province">
 			<form:input path="${status.expression}" size="30"/>
 		</spring:bind>
 	</p>
 	
 	<p>
-		<form:label for="places" path="places[0].neighbourhood" cssErrorClass="error">Localidad</form:label>
-		<spring:bind path="places[0].neighbourhood">
+		<form:label for="places" path="places[${rowCounter.count - 1 }].city" cssErrorClass="error">Ciudad</form:label>
+		<spring:bind path="places[${rowCounter.count - 1 }].city">
 			<form:input path="${status.expression}" size="30"/>
 		</spring:bind>
 	</p>
 	
 	<p>
-		<form:label for="places" path="places[0].arrivalDate" cssErrorClass="error">Fecha de llegada</form:label>
-		<spring:bind path="places[0].arrivalDate">
+		<form:label for="places" path="places[${rowCounter.count - 1 }].neighbourhood" cssErrorClass="error">Localidad</form:label>
+		<spring:bind path="places[${rowCounter.count - 1 }].neighbourhood">
+			<form:input path="${status.expression}" size="30"/>
+		</spring:bind>
+	</p>
+	
+	<p>
+		<form:label for="places" path="places[${rowCounter.count - 1 }].arrivalDate" cssErrorClass="error">Fecha de llegada</form:label>
+		<spring:bind path="places[${rowCounter.count - 1 }].arrivalDate">
 			<form:input id="itinerary-arrival-date" path="${status.expression}" size="30"/>
 		</spring:bind>
 	</p>
+	
+	</c:forEach>
 	
 	<table>
 		<tr id="submitRow">
 			<td>&nbsp;</td>
 			<td>		
-				<input type="submit" value="Crear itinerario"/>
+				<input type="submit" value="Guardar"/>
 			</td>
 		</tr>
 	</table>

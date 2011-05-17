@@ -1,7 +1,5 @@
 package com.tda.presentation.controller;
 
-import java.util.Date;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +52,7 @@ public class ItineraryController {
 	protected String appendPlaceField(@RequestParam Integer fieldId,
 			ModelMap model) {
 		model.addAttribute("placeNumber", fieldId);
+		model.addAttribute("itineraryPlace", new Itinerary());
 		return "itinerary/addPlace";
 	}
 
