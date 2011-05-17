@@ -1,6 +1,7 @@
 package com.tda.presentation.controller;
 
-import javax.servlet.http.HttpSession;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +40,12 @@ public class ItineraryController {
 		model.addAttribute("itineraryForm", itineraryForm);
 		return "itinerary/createForm";
 	}
-	
+
 	@RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
 	public String getEditForm(@PathVariable Long id, Model model) {
 		Itinerary itinerary = itineraryService.getById(id);
-		itinerary.setPlaces(new AutoPopulatingList<Place>(itinerary.getPlaces(), Place.class));
+		itinerary.setPlaces(new AutoPopulatingList<Place>(
+				itinerary.getPlaces(), Place.class));
 		model.addAttribute("itineraryForm", itinerary);
 		return "itinerary/createForm";
 	}
@@ -59,7 +61,7 @@ public class ItineraryController {
 	protected ModelAndView create(Model model,
 			@Valid @ModelAttribute("itineraryForm") Itinerary itineraryForm,
 			@ModelAttribute("currentItinerary") Itinerary currentItinerary,
-			BindingResult result, HttpSession session) {
+			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (result.hasErrors()) {
@@ -68,9 +70,18 @@ public class ItineraryController {
 			itineraryService.save(itineraryForm);
 			modelAndView.setViewName("itinerary/resultForm");
 			modelAndView.addObject("savedClass", itineraryForm);
-			modelAndView.addObject("currentItinerary", itineraryForm);
+
+			currentItinerary = updateCurrentItinerary(modelAndView);
 		}
 
 		return modelAndView;
 	}
+
+	private Itinerary updateCurrentItinerary(ModelAndView modelAndView) {
+		Itinerary currentItinerary = itineraryService.getNext();
+		modelAndView.addObject("currentItinerary", currentItinerary);
+
+		return currentItinerary;
+	}
+
 }

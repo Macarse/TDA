@@ -25,6 +25,8 @@ $(document).ready(function() {
 	
 	<legend>Crear itinerario</legend>
 	
+	<form:hidden path="id" />
+	
 	<!-- FECHA DE INICIO -->
 	<p>
 		<form:label for="beginningDate" path="beginningDate" cssErrorClass="error">Fecha en que salimos</form:label>
