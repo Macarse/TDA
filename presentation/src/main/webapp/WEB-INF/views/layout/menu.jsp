@@ -77,11 +77,7 @@
 						innerHtml += "<li onclick='showPatientMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
 			   		}
 				}else{
-<<<<<<< HEAD
 					innerHtml = '<i>No hay Pacientes en el tren</i>';
-=======
-					innerHtml = '<li><i>No hay pacientes</i></li>';
->>>>>>> 2eb87613de360feb69733407c2fabbc441709860
 				}
 		
 		   		$('#m-pacients').html(patients.length);
@@ -103,11 +99,7 @@
 						innerHtml += "<li onclick='showQueueMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
 			   		}
 				}else{
-<<<<<<< HEAD
 					innerHtml = '<i>No tiene pacientes en cola</i>';
-=======
-					innerHtml = '<li><i>No hay pacientes en la cola</i></li>';
->>>>>>> 2eb87613de360feb69733407c2fabbc441709860
 				}
 		
 		   		//$('#m-pacients').html(parsedData.length);
