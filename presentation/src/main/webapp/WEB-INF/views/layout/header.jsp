@@ -1,16 +1,17 @@
 <%@ page session="true"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div style="float:left; background-image:url('${pageContext.request.contextPath}/themes/default/image/header.jpg'); width:1000px; height:94px">
 	<div style="position: relative; font-size: 14px; top: 73px; left: 5px;">
-		<a href="${pageContext.request.contextPath}">Principal</a> | <a href="${pageContext.request.contextPath}/applicationUser/"><span>Usuarios</span></a> | <a href="${pageContext.request.contextPath}/patient/"><span>Pacientes</span></a> | <a href="${pageContext.request.contextPath}/item/"><span>Inventario</span></a> | <a href="${pageContext.request.contextPath}/sync/main"><span>Sincronización</span></a>
+		<a href="${pageContext.request.contextPath}">Principal</a> | <a href="${pageContext.request.contextPath}/applicationUser/"><span>Usuarios</span></a> | <a href="${pageContext.request.contextPath}/patient/"><span>Pacientes</span></a> | <a href="${pageContext.request.contextPath}/item/"><span>Inventario</span></a> | <a href="${pageContext.request.contextPath}/sync/main"><span>Sincronización</span></a> | <a href="${pageContext.request.contextPath}/report/list"><span>Reportes</span></a>
 		
 		<c:choose>
 			<c:when test="${empty currentItinerary.beginningDate }">
 				No se ha definido el itinerario. Click <a href="${pageContext.request.contextPath }/itinerary/add">aquí</a> para hacerlo
 			</c:when>
 			<c:otherwise>
-				El próximo viaje es desde el <c:out value="${currentItinerary.beginningDate }" />  hasta el <c:out value="${currentItinerary.endDate}" />.
+				El próximo viaje es desde el <fmt:formatDate value="${currentItinerary.beginningDate }" pattern="dd/MM/yyyy"/>  hasta el <fmt:formatDate value="${currentItinerary.endDate}" pattern="dd/MM/yyyy"/>
 				 <a href="${pageContext.request.contextPath }/itinerary/edit/${currentItinerary.id}">Cambiarlo</a>
 			</c:otherwise>
 		</c:choose>

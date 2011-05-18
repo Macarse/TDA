@@ -92,6 +92,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/welcome/sync.jsp" />
 	</definition>
 	
+	<!-- ReportPage -->
+	<definition name="report/list" extends="base.definition">
+		<put-attribute name="title" value="Reportes" />
+		<put-attribute name="body" value="/WEB-INF/views/report/list.jsp" />
+	</definition>
+	
 	<!-- Itinerary -->
 	<definition name="itinerary/createForm" extends="base.definition">
 		<put-attribute name="title" value="Nuevo itinerario" />
