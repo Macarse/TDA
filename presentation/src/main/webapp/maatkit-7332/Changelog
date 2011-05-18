@@ -1,0 +1,3688 @@
+
+Changelog for mk-archiver:
+
+2010-12-11: version 1.0.26
+
+   * Added -q short form for --quiet option.
+
+2010-11-08: version 1.0.25
+
+   * Removed LIMIT 1 from DELETE only when index is unique (issue 1166).
+   * Added --[no]bulk-delete-limit option (issue 1170).
+
+2010-09-11: version 1.0.24
+
+   * The DSN documentation was ambiguous and redundant.
+   * Added filename argument to before_bulk_insert() and custom_sth_bulk().
+
+2010-06-08: version 1.0.23
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.0.22
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.0.21
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+   * Added --check-interval, --check-slave-lag and --max-lag (issue 758).
+
+2009-10-30: version 1.0.20
+
+   * Added --sleep-coef (issue 540).
+   * --primary-key-only on table without a primary key caused error (issue 655).
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-08-31: version 1.0.19
+
+   * --dest did not inherit password from --source (issue 460).
+   * Added standard connection options like --host, --port, etc.(issue 248).
+
+2009-07-31: version 1.0.18
+
+   * Added RISKS section to POD (issue 538).
+   * --dry-run did not respect --no-delete (issue 524).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-06-30: version 1.0.17
+
+   * Removed the --test long option.  Use --dry-run instead.
+   * Removed the --time long option.  Use --run-time instead.
+   * Removed the --ascendfirst long option.  Use --ascend-first instead.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --bulkdel long option.  Use --bulk-delete instead.
+   * Removed the --bulkins long option.  Use --bulk-insert instead.
+   * Removed the --[no]chkcols long option.  Use --[no]check-columns instead.
+   * Removed the --delayedins long option.  Use --delayed-insert instead.
+   * Removed the --forupdate long option.  Use --for-update instead.
+   * Removed the --hpselect long option.  Use --high-priority-select instead.
+   * Removed the --lpdel long option.  Use --low-priority-delete instead.
+   * Removed the --lpins long option.  Use --low-priority-insert instead.
+   * Removed the --noascend long option.  Use --no-ascend instead.
+   * Removed the --nodelete long option.  Use --no-delete instead.
+   * Removed the --pkonly long option.  Use --primary-key-only.
+   * Removed the --quickdel long option.  Use --quick-delete instead.
+   * Removed the --[no]safeautoinc long option.  Use --[no]safe-auto-increment.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --sharelock long option.  Use --share-lock instead.
+   * Removed the --skipfkchk long option.  Use --skip-foreign-key-checks.
+   * Removed the --whyquit long option.  Use --why-quit instead.
+   * Removed the --txnsize long option.  Use --txn-size instead.
+   * Removed the -Z short option.  Use --analyze instead.
+   * Removed the -b short option.  Use --buffer instead.
+   * Removed the -C short option.  Use --[no]check-columns instead.
+   * Removed the -d short option.  Use --dest instead.
+   * Removed the -f short option.  Use --file instead.
+   * Removed the -h short option.  Use --header instead.
+   * Removed the -i short option.  Use --ignore instead.
+   * Removed the -l short option.  Use --limit instead.
+   * Removed the -L short option.  Use --local instead.
+   * Removed the -O short option.  Use --optimize instead.
+   * Removed the -k short option.  Use --primary-key-only instead.
+   * Removed the -P short option.  Use --progress instead.
+   * Removed the -p short option.  Use --purge instead.
+   * Removed the -r short option.  Use --replace instead.
+   * Removed the -R short option.  Use --retries instead.
+   * Removed the -S short option.  Use --sentinel instead.
+   * Removed the -K short option.  Use --skip-foreign-key-checks instead.
+   * Removed the -e short option.  Use --sleep instead.
+   * Removed the -s short option.  Use --source instead.
+   * Removed the -t short option.  Use --dry-run instead.
+   * Removed the -m short option.  Use --run-time instead.
+   * Removed the -z short option.  Use --txn-size instead.
+   * Removed the -W short option.  Use --where instead.
+   * Removed the -q short option.  Use --why-quit instead.
+   * Converted script to runnable module (issue 315).
+   * Updates to shared code.
+
+2009-06-02: version 1.0.16
+
+   * Added --pid option to make script die if PID file exists (issue 391).
+
+2009-05-03: version 1.0.15
+
+   * Added the --config option for issue 231.
+   * Added the --help and --verbose options for issue 318.
+   * Updates to shared code.
+
+2009-03-31: version 1.0.14
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308)
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-02-01: version 1.0.13
+
+   * Fixed insert on destination table with different column order (issue 131).
+   * Updates to shared code.
+   * Fixed and updated POD.
+
+2008-12-01: version 1.0.12
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.11
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.10
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * Added more information to --statistics and changed --whyquit slightly.
+
+2008-06-02: version 1.0.9
+
+   * Updated common code.
+
+2008-03-16: version 1.0.8
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+   * Changed short form of --analyze to -Z to avoid conflict with --charset.
+
+2008-01-24: version 1.0.7
+
+   * Added --quiet option.
+   * Added --plugin option.  The plugin interface is not backwards compatible.
+   * Added --bulkins option.
+   * Added --bulkdel option.
+   * Added --nodelete option.
+   * Changed negatable --ascend option to --noascend.
+
+2008-01-05: version 1.0.6
+
+   * Made suffixes for time options optional (bug #1858696).
+
+2007-12-16: version 1.0.5
+
+   * Updated common code.
+
+2007-12-07: version 1.0.4
+
+   * Updated common code.
+
+2007-11-12: version 1.0.3
+
+   * The --no-ascend option caused too many bind variables to be used.
+
+2007-11-04: version 1.0.2
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+   * You can control binary logging with the 'a' and 'b' options in a DSN.
+   * Destination plugins can now rewrite the INSERT statement.
+
+2007-08-23: version 1.0.1
+
+   * MySQL socket connection option didn't work.
+   * Added --askpass option.
+
+2007-07-26: version 1.0.0
+
+   * Added --safeautoinc option, enabled by default, to protect against re-using
+     auto-increment values.
+
+2007-07-20: version 0.9.4
+
+   * Made --time suffix optional.
+   * Added --statistics option to gather and print timing statistics.
+   * Added signal handling so mk-archiver exits cleanly when it can.
+   * Changed exit status to 0 when --help is given.
+   * Out-of-column-order primary keys were not ascended correctly.
+
+2007-06-22: version 0.9.3
+
+   Changes:
+   * Added more hooks for plugins before and after archiving.
+   * Documentation.
+   * Made --time suffix optional.
+
+   Bugs fixed:
+   * mk-archiver could crash on a lock wait timeout when --txnsize was not set
+
+2007-06-09: version 0.9.2
+
+   Changes:
+   * Added --stop option.
+   * Added standard --version command-line option.
+   * Added --skipfkchk.
+   * Added a plugin mechanism to give arbitrary Perl code hooks into the archiving process.
+
+   Bugs fixed:
+   * Old versions of DBD::mysql do not quote identifiers correctly.
+   * Old versions of Perl cannot handle the syntax "print $file func()".
+   * Indexes on column prefixes were not parsed correctly.
+
+2007-06-06: version 0.9.1
+
+   Changes:
+   * --where is now a required option.
+   * Command-line parsing is strict to help catch mis-quoted --where.
+   * Added --commit-each, --ascend and --ascendfirst options.
+
+   Bugs fixed:
+   * WHERE clause was not isolated in parentheses.
+   * The ascending index WHERE clause was not properly parenthesized.
+   * Rows could be skipped while ascending a multi-column primary key.
+
+2007-06-06: version 0.9.0
+
+   * Initial release
+
+Changelog for mk-deadlock-logger:
+
+2010-06-08: version 1.0.21
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.0.20
+
+   * The same deadlock was reprinted with --interval (issue 943).
+   * --clear-deadlocks did not work with --interval (issue 942).
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.0.19
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.0.18
+
+   * Added --create-dest-table (issue 386).
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 1.0.17
+
+   * Added --pid (issue 391).
+
+2009-07-31: version 1.0.16
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-06-02: version 1.0.15
+
+   * Sorted options alphabetically in the POD.
+   * Script did not die if --pid file already existed (issue 383).
+   * Removed the --source option; source DSN or --host, etc. is required.
+   * Made --print default unless --dest or --print is explicitly given.
+   * 'h' DSN part is no longer required (this prevented use of 'S').
+   * Changed the --time option to --run-time.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --numip long option.  Use --numeric-ip instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the -c short option.  Use --collapse instead.
+   * Removed the -C short option.  Use --columns instead.
+   * Removed the -d short option.  Use --dest instead.
+   * Removed the -i short option.  Use --interval instead.
+   * Removed the -n short option.  Use --numeric-ip instead.
+   * Removed the -p short option.  Use --print instead.
+   * Removed the -s short option.  Use --source instead.
+   * Removed the -t short option.  Use --tab instead.
+   * Removed the -m short option.  Use --run-time instead.
+   * Added the --config option for issue 231.
+   * Added the --log option for issue 241.
+   * Added the --clear-deadlocks option (issue 75).
+   * Added the following options for issue 248:
+   *    --charset (-A)
+   *    --defaults-file (-F)
+   *    --host (-h)
+   *    --password (-p)
+   *    --port (-P)
+   *    --socket (-S)
+   *    --user (-u)
+   * Converted script to runnable module (issue 315).
+   * Updated and corrected POD.
+
+2009-03-31: version 1.0.14
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2008-12-01: version 1.0.13
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.12
+
+   * Added --pid option.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.11
+
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 1.0.10
+
+   * Generate command-line options from POD.
+
+2008-03-16: version 1.0.9
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added 'A' part to DSNs (bug #1877548).
+
+2008-01-05: version 1.0.8
+
+   * Made suffixes for time options optional (bug #1858696).
+
+2007-12-16: version 1.0.7
+
+   * Updated common code.
+
+2007-12-07: version 1.0.6
+
+   * Updated common code.
+
+2007-11-04: version 1.0.5
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-09-20: version 1.0.4
+
+   * Added --interval, --time, and --daemonize options, and signal handling.
+   * --askpass did not allow different passwords on --source and --dest.
+
+2007-08-23: version 1.0.3
+
+   * MySQL socket connection option didn't work.
+   * Added --askpass option.
+   * Truncated output could crash on an undefined regex result.
+   * Made --source and --dest accept bareword hostnames.
+   * Made DBI errors only print once.
+
+2007-06-22: version 1.0.2
+
+   Incompatible changes:
+   * Changed the format of the --source and --dest options.
+
+   Changes:
+   * Documentation.
+
+2007-06-10: version 1.0.1
+
+   * MySQL 5.1 shows tables in db.tbl format, not db/tbl in record locks.
+   * Added --defaults-file option.
+   * Added standard --version command-line option.
+
+2007-03-25: version 1.0.0
+
+   * Rewrite the GetOpt::Long code and rely on DBD to read MySQL option files.
+
+2007-03-13: version 0.9.0
+
+   * Fix a couple spots where InnoDB output parsing failed and caused a crash.
+
+2007-03-08: version 0.8.0
+
+   * Initial release
+
+Changelog for mk-duplicate-key-checker:
+
+2011-01-06: version 1.2.14
+
+   * Uppercase index names caused incorrect ALTER TABLE (issue 1192).
+   * Made performance_schema an always ignored database (issue 1193).
+
+2010-06-08: version 1.2.13
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.2.12
+
+   * Added ability to specify a DSN on the command line.
+   * Added DSN OPTIONS section to POD (issue 55).
+   * Stopped caching SHOW CREATE TABLE info.
+
+2010-03-01: version 1.2.11
+
+   * Duplicate clustered index names were not preserved (issue 901).
+   * Multi-column clustered indexes were not handled correctly (issue 904).
+
+2010-01-06: version 1.2.10
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-12-02: version 1.2.9
+
+   * Added key definitions to report (issue 693).
+
+2009-10-30: version 1.2.8
+
+   * Printing duplicate key with prefixed column caused crash (issue 663).
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-08-31: version 1.2.7
+
+   * "DROP FOREIGN KEY" was not printed for foreign keys (issue 548).
+   * Enhanced rules for clustered keys (issue 295).
+   * Changed "key" to "index" in output where appropriate (issue 548).
+
+2009-07-31: version 1.2.6
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-06-30: version 1.2.5
+
+   * --ask-pass did not work (issue 453).
+   * Key size for uppercase keys caused crash in certain cases (issue 364).
+   * Updates to shared code.
+
+2009-06-02: version 1.2.4
+
+   * Sorted options alphabetically in the POD.
+
+2009-05-03: version 1.2.3
+
+   * Columns with backticks in comments caused a crash (issue 330).
+   * Changed the --allstruct option to --all-structs.
+   * Changed the --askpass option to --ask-pass.
+   * Changed the --engine option to --engines.
+   * Changed the --fuction option to --key-types.
+   * Changed the --ignoredb option to --ignore-databases.
+   * Changed the --ignoreengine option to --ignore-engines.
+   * Changed the --ignoreorder option to --ignore-order.
+   * Changed the --ignoretbl option to --ignore-tables.
+   * Changed the --setvars option to --set-vars.
+   * Removed the -a short option.  Use --all-struct instead.
+   * Removed the -c short option.  Use --[no]clustered instead.
+   * Removed the -f short option.  Use --key-types instead.
+   * Removed the -g short option.  Use --ignore-databases instead.
+   * Removed the -E short option.  Use --ignore-engines instead.
+   * Removed the -n short option.  Use --ignore-tables instead.
+   * Added config file handling and --config (issue 231).
+   * Converted script to runnable module (issue 315).
+
+2009-03-31: version 1.2.2
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Crashed getting size of foreign keys (issue 331).
+   * Uppercase column names crashed the tool (issue 306).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-03-01: version 1.2.1
+
+   * Enabled --clustered by default.
+   * Some special cases with unique/primary keys weren't handled (issue 9).
+   * Improved duplicate key finding (issue 269).
+
+2009-02-01: version 1.2.0
+
+   * Changed output from tabular to human-readable (issue 196).
+   * Improved duplicate key finding (issue 9).
+   * Added DROP KEY statement to output for each duplicate key (issue 82).
+   * -- commented all output lines except SQL statements (issue 82).
+   * Added --[no]sql option (issue 82).
+   * Added summary of keys to end of output (182).
+   * Removed --allatonce option.
+   * Updated documentation and shared code.
+
+2008-12-01: version 1.1.9
+
+   * Updates to shared code.
+   * Updated documentation and shared code.
+
+2008-09-19: version 1.1.8
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.1.7
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * Full-text indexes were not treated specially (issue 10).
+
+2008-06-02: version 1.1.6
+
+   * Updated common code.
+
+2008-03-16: version 1.1.5
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+
+2007-12-16: version 1.1.4
+
+   * --tables and --ignoretables now accept names in the form db.tbl.
+
+2007-12-07: version 1.1.3
+
+   * Updated common code.
+   * Corrected documentation.
+   * Added --engine and --ignoreengine options.
+
+2007-11-04: version 1.1.2
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-09-20: version 1.1.1
+
+   * Exit code wasn't always defined.
+
+2007-09-01: version 1.1.0
+
+   * Column printout was misaligned one space.
+   * Refactored into a runnable module and added tests.
+   * Redundant indexes were only detected if the shorter index was first.
+   * Redundant foreign keys sometimes weren't detected.
+   * All indexes on MEMORY tables were reported as HASH.
+   * Added --clustered option to report appended PK columns as dupes for InnoDB and solidDB.
+
+2007-08-23: version 1.0.5
+
+   * MySQL socket connection option didn't work.
+   * Added --askpass option.
+
+2007-06-22: version 1.0.4
+
+   * Documentation.
+
+2007-06-10: version 1.0.3
+
+   * Added --defaults-file option.
+   * Added standard --version command-line option.
+
+2007-03-25: version 1.0.2
+
+   * Rewrite the GetOpt::Long code and rely on DBD to read MySQL option files.
+   * Error handling if there aren't permissions to run SHOW CREATE TABLE on a
+     view.
+   * Documentation copy/paste error.
+
+2007-03-02: version 1.0.1
+
+   * Fixed several small bugs with quoting
+   * Fixed bugs with index types (FULLTEXT, HASH etc)
+   * Add --allatonce option
+
+2007-03-01: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-error-log:
+
+2010-05-03: version 1.0.3
+
+   * Extended Message column to 78 character line width.
+
+2010-04-01: version 1.0.2
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-03-01: version 1.0.1
+
+   * Added --resume (issue 841).
+
+2010-02-01: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-fifo-split:
+
+2010-01-06: version 1.0.7
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.0.6
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-07-31: version 1.0.5
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-06-02: version 1.0.4
+
+   * Sorted options alphabetically in the POD.
+   * Removed -f short option; use --fifo instead.
+   * Removed -l short option; use --lines instead.
+   * Removed -F short option; use --force instead.
+   * Removed -O short option; use --offset instead.
+   * Removed -S short option; use --statistics instead.
+   * Removed string interpolation from debugging calls (issue 308).
+   * Added the --config option (issue 231).
+   * Converted to a runnable module (issue 315).
+   * Updates to shared code.
+
+2008-12-01: version 1.0.3
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.2
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.1
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * Added --offset option.
+   * --statistics didn't calculate lines/sec properly.
+   * Removed --sleep; EOF doesn't mean anything to a non-terminal.
+
+2008-06-28: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-find:
+
+2010-06-08: version 0.9.23
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 0.9.22
+
+   * Added --column-type test (issue 25).
+   * Added ability to test for NULL size (issue 344).
+   * --ask-pass didn't work if --password was specified.
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 0.9.21
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 0.9.20
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-08-31: version 0.9.19
+
+   * No tables were printed if no tests were given (issue 549).
+
+2009-07-31: version 0.9.18
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * Added tests --column-name, --view, --procedure, --function, --trigger
+     and --trigger-table.
+   * Converted script to runnable module (issue 315).
+
+2009-06-30: version 0.9.17
+
+   * Updates to shared code.
+
+2009-06-02: version 0.9.16
+
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --daystart long option.  Use --day-start instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --pid long option.  Use --connection-id instead.
+   * Removed the --sid long option.  Use --session-id instead.
+   * Removed the --exec_dsn long option.  Use --exec-dsn instead.
+   * Removed the --exec_plus long option.  Use --exec-plus instead.
+   * Updates to shared code.
+
+2009-03-31: version 0.9.15
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2008-12-01: version 0.9.14
+
+   * Updates to shared code.
+
+2008-09-19: version 0.9.13
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 0.9.12
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * Added --exec_dsn so you can execute SQL on a different server.
+
+2008-06-02: version 0.9.11
+
+   * Updated common code.
+
+2008-03-16: version 0.9.10
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+
+2007-12-16: version 0.9.9
+
+   * Updated common code.
+
+2007-12-07: version 0.9.8
+
+   * Updated common code.
+
+2007-11-25: version 0.9.7
+
+   * Added --sid option.
+
+2007-11-04: version 0.9.6
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-10-03: version 0.9.5
+
+   * The --dbregex parameter didn't work right.
+
+2007-08-23: version 0.9.4
+
+   * MySQL socket connection option didn't work.
+   * Added --askpass option.
+
+2007-06-22: version 0.9.3
+
+   * Documentation.
+
+2007-06-10: version 0.9.2
+
+   * --pid had a race condition.
+   * Unrecognized --sprintf directives could cause crashes.
+   * Added --defaults-file option.
+   * Added standard --version command-line option.
+
+2007-05-09: version 0.9.1
+
+   * Added --host command-line option.  Oops.
+
+2007-05-08: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-heartbeat:
+
+2010-06-08: version 1.0.22
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.0.21
+
+   * Added ability to specify DSN on the command line.
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.0.20
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.0.19
+
+   * Removed the --time long option.  Use --run-time instead.
+   * --set-vars did not work (issue 597).
+
+2009-09-30: version 1.0.18
+
+   * Added --pid (issue 391).
+
+2009-08-31: version 1.0.17
+
+   * --ask-pass did not work.
+
+2009-07-31: version 1.0.16
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * Added --recursion-method option (issue 181).
+
+2009-06-30: version 1.0.15
+
+   * Updates to shared code.
+
+2009-06-02: version 1.0.14
+
+   * Script did not die if --pid file already existed (issue 383).
+   * Sorted options alphabetically in the POD.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --dbidriver long option.  Use --dbi-driver instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the -i short option.  Use --interval instead.
+   * Removed the -r short option.  Use --replace instead.
+   * Removed the -k short option.  Use --skew instead.
+   * Removed the -t short option.  Use --table instead.
+   * Removed the -m short option.  Use --time instead.
+   * Added port to --check output (issue 352).
+   * Added --create-table (issue 353).
+   * Added the --config option for issue 231.
+   * Added the --log option for issue 241.
+   * Converted script to runnable module (issue 315).
+   * Added the --help and --verbose options for issue 318.
+
+2009-03-31: version 1.0.13
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308)
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2008-12-01: version 1.0.12
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.11
+
+   * Dies if heartbeat table does not have at least one row (issue 45).
+   * Added --pid option.
+   * Using debug (MKDEBUG=1) and --daemonize now causes script to die.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.10
+
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 1.0.9
+
+   * Get command-line options from POD.
+   * --check output contained leading whitespace which broke Cacti.
+
+2008-03-16: version 1.0.8
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+
+2008-02-10: version 1.0.7
+
+   * Added --recurse option to check slaves to any depth.
+   * Made mk-heartbeat explicitly close DB connection when done.
+
+2008-01-05: version 1.0.6
+
+   * Made suffixes for time options optional (bug #1858696).
+
+2007-12-27: version 1.0.5
+
+   * Added --stop, --sentinel, and --quiet options.
+   * Added --replace option.
+
+2007-12-16: version 1.0.4
+
+   * Updated common code, added debugging.
+
+2007-12-07: version 1.0.3
+
+   * Updated common code.
+   * Added --time, --interval and --skew options.
+   * The combination of sleep() and alarm() did not work on some systems.
+
+2007-11-04: version 1.0.2
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Added support for PostgreSQL with the --dbidriver option.
+   * Replaced some code with modules.
+
+2007-10-03: version 1.0.1
+
+   * --check hung forever.
+
+2007-09-20: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-index-usage:
+
+2011-01-06: version 0.9.4
+
+   * Made performance_schema an always ignored database (issue 1193).
+
+2010-11-08: version 0.9.3
+
+   * Changed --save-results to save results at end of run.
+   * Added progress reports to the schema & table inventory (issue 1174).
+
+2010-10-09: version 0.9.2
+
+   * Added --save-results-database option (issue 1015).
+   * Added --create-save-results-database option (issue 1015).
+   * Added --empty-save-results-tables option (issue 1015).
+   * Added --[no]report option (issue 1015).
+   * Added --report-format option (issue 1015).
+   * Added standard schema object filter options (--databases, --tables, etc).
+
+2010-09-11: version 0.9.1
+
+   * Default database was changed by iterating schema (issue 1140).
+   * Added --database (-D) option (issue 1118).
+   * UPDATE LOW_PRIORITY was not parsed correctly (issue 1111).
+
+2010-06-08: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-kill:
+
+2011-02-09: version 0.9.9
+
+   * Removed option --[no]only-oldest (issue 1221).
+   * Removed option --all-but-oldest (issue 1221).
+   * Changed option --all to --match-all (issue 1221).
+   * Added option --victims (issue 1221).
+   * Added option --any-busy-time.
+   * Group and matching logic was incorrect (issue 1221).
+   * Tool crashed if connection to be killed was already gone.
+
+2010-12-11: version 0.9.8
+
+   * Removed --iterations option.
+   * Changed --run-time behavior to match other tools.
+   * Added options --sentinel and --stop.
+   * Added more --heartbeat messages.
+
+2010-09-11: version 0.9.7
+
+   * Slave replication threads in "init" or "end" state were killed (issue 1121)
+
+2010-06-08: version 0.9.6
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-05-03: version 0.9.5
+
+   * Replication threads were allowed to match by default (issue 853).
+   * Added --replication-threads (issue 853).
+   * Added --all (issue 853).
+
+2010-04-01: version 0.9.4
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-02-01: version 0.9.3
+
+   * Added --kill-query (issue 750).
+
+2010-01-06: version 0.9.2
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 0.9.1
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-loadavg:
+
+2010-12-11: version 0.9.7
+
+   * Added short form -w for option --wait.
+
+2010-06-08: version 0.9.6
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 0.9.5
+
+   * Added ability to specify a DSN on the command line.
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-02-01: version 0.9.4
+
+   * Using non-integer --wait value caused a crash (issue 803).
+   * Undefined Time value from processlist caused a crash (issue 777).
+
+2010-01-06: version 0.9.3
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-12-02: version 0.9.2
+
+   * The script did not attempt to reconnect to MySQL (issue 692).
+   * Added --wait for attempts to reconnect to MySQL (issue 692).
+
+2009-10-30: version 0.9.1
+
+   * --watch Processlist did not work.
+   * Changed --sleep to --interval.
+   * --execute-command created zombies/defunct processes (issue 643).
+   * --set-vars did not work (issue 597).
+   * Actions were not triggered properly (issue 621).
+   * A database connection was required when not need (issue 622).
+   * Changed default vmstat command to "vmstat 1 2" (issue 621).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-log-player:
+
+2010-12-11: version 1.0.9
+
+   * --charset (-A) did not work (issue 1177).
+   * Added -q short form for --quiet option.
+
+2010-06-08: version 1.0.8
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.0.7
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-03-01: version 1.0.6
+
+   * --only-select did not handle leading /* comments */ (issue 903).
+   * Not all sessions were assigned/played in some cases.
+   * Added --dry-run.
+   * Made --quiet disable --verbose.
+
+2010-02-01: version 1.0.5
+
+   * Added --split-random (issue 798).
+   * Added --[no]results.
+
+2010-01-06: version 1.0.4
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-12-02: version 1.0.3
+
+   * Added general log splitting; --type genlog (issue 172).
+
+2009-10-30: version 1.0.2
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-08-31: version 1.0.1
+
+   * Added --filter for --split (issue 571).
+   * Added support for splitting binary logs; --type binlog (issue 570).
+   * Added --type option (issue 570).
+
+2009-07-31: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-parallel-dump:
+
+2011-02-09: version 1.0.28
+
+   * Officially deprecated this tool and noted that in the documentation.
+
+2011-01-06: version 1.0.27
+
+   * Made performance_schema an always ignored database (issue 1193).
+
+2010-07-01: version 1.0.26
+
+   * The tool crashed if only empty databases were dumped (issue 1034).
+   * Added --[no]zero-chunk (issue 941).
+
+2010-06-08: version 1.0.25
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-05-03: version 1.0.24
+
+   * Added ability to specify a DSN on the command line.
+
+2010-04-01: version 1.0.23
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-03-01: version 1.0.22
+
+   * Added --client-side-buffering (issue 837).
+   * Enabled mysql_use_result by default (issue 837).
+
+2010-02-01: version 1.0.21
+
+   * Database-qualified --tables filters did not work (issue 806).
+   * Added --[no]gzip (issue 814).
+   * Removed shell calls to mysqldump.
+
+2010-01-06: version 1.0.20
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-12-02: version 1.0.19
+
+   * Tables were not dumped on MySQL 4.
+   * Added --ignore-tables-regex (issue 152).
+   * Added --ignore-databases-regex (issue 152).
+
+2009-10-30: version 1.0.18
+
+   * Removed sets and all set-related options (issue 637).
+   * Removed --since (issue 636).
+   * Removed dump file compression and --[no]gzip (issue 639).
+   * Removed ability to "write your own command line" (issue 638).
+   * Removed ability to dump triggers and views (issue 316).
+   * Removed all statements except CREATE TABLE and INSERT from dump files.
+   * Did not dump tables with spaces in their names (issue 446).
+   * Added --[no]resume (issue 495).
+   * Added --mysqldump.
+   * --progress did not respect --ignore-engines (issue 573).
+   * --progress was incorrect with --chunk-size (issue 642).
+   * --set-vars did not work (issue 597).
+   * Changed output format of --verbose and --progress.
+   * Command line options did not override config file options (issue 617).
+
+2009-07-31: version 1.0.17
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * --threads was ignored if /proc/cpuinfo could be read (issue 534).
+   * --default-set with --sets did not work properly (issue 527).
+   * Script died on broken tables (issue 170).
+
+2009-06-02: version 1.0.16
+
+   * Standardized options.
+   * Removed the --age long option.  Use --since instead.
+   * Removed the --numthreads long option.  Use --threads instead.
+   * Removed the --test long option.  Use --dry-run instead.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --basedir long option.  Use --base-dir instead.
+   * Removed the --[no]biggestfirst option.  Use --[no]biggest-first instead.
+   * Removed the --[no]binlogpos option.  Use --[no]bin-log-position instead.
+   * Removed the --chunksize long option.  Use --chunk-size instead.
+   * Removed the --dbregex long option.  Use --databases-regex instead.
+   * Removed the --[no]defaultset long option.  Use --[no]default-set instead.
+   * Removed the --[no]flushlock long option.  Use --[no]flush-lock instead.
+   * Removed the --flushlog long option.  Use --flush-log instead.
+   * Removed the --ignoredb long option.  Use --ignore-databases instead.
+   * Removed the --ignoreengine long option.  Use --ignore-engines instead.
+   * Removed the --ignoretbl long option.  Use --ignore-tables instead.
+   * Removed the --locktables long option.  Use --lock-tables instead.
+   * Removed the --losslessfp long option.  Use --lossless-floats instead.
+   * Removed the --setperdb long option.  Use --set-per-database instead.
+   * Removed the --settable long option.  Use --set-table instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --stopslave long option.  Use --stop-slave instead.
+   * Removed the --tblregex long option.  Use --tables-regex instead.
+   * Removed the -b short option.  Use --[no]bin-log-position instead.
+   * Removed the -C short option.  Use --chunk-size instead.
+   * Removed the -k short option.  Use --[no]flush-lock instead.
+   * Removed the -g short option.  Use --ignore-databases.
+   * Removed the -E short option.  Use --ignore-engines instead.
+   * Removed the -n short option.  Use --ignore-tables instead.
+   * Removed the -L short option.  Use --lossless-floats instead.
+   * Removed the -m short option.  Use --threads instead.
+   * Removed the -T short option.  Use --tab instead.
+   * Added the --config option for issue 231.
+   * Added the --help and --verbose options for issue 318.
+   * Converted script to runnable module (issue 315).
+
+2009-05-03: version 1.0.15
+
+   * Columns with backticks in comments caused a crash (issue 330)
+
+2009-03-31: version 1.0.14
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308)
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-03-01: version 1.0.13
+
+   * --chunksize did not work properly with --csv (issue 275).
+
+2009-02-01: version 1.0.12
+
+   * CREATE TRIGGER defs were wrongly included in chunk files (issue 223).
+
+2008-12-01: version 1.0.11
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.10
+
+   * Added option --biggestfirst which is enabled by default (issue 31).
+   * --noflushlock and --nolocktables caused a global flush and lock (issue 12).
+   * Made debugging code more efficient in non-debug mode.
+   * Fixed various bugs in shared code.
+   * Moved all command-line documentation to POD.
+
+2008-08-11: version 1.0.9
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * Added --progress option.
+   * CHANGE MASTER TO in 00_master_data.sql used the I/O thread position.
+   * Added features to permit resuming of dumps.
+   * --age without --sets did the opposite of what it should (isssue 7)
+   * --stopslave died after complaining the slave was not running.
+
+2008-06-02: version 1.0.8
+
+   * System commands did not use double quotes on Windows (bug #1949922).
+   * Added --stopslave to run STOP SLAVE during the dump (bug #1923627).
+   * --ignoreengine worked only when --tab was specified (bug #1851461).
+
+2008-03-16: version 1.0.7
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+   * A global database connection was re-used by children, causing a hang.
+
+2008-02-10: version 1.0.6
+
+   * Added the --losslessfp option.
+   * Fixed child process exit status on Solaris (bug #1886444).
+
+2008-01-24: version 1.0.5
+
+   * The fix for bug #1863949 added an invalid argument to gzip (bug #1866137)
+   * --quiet caused a crash.
+
+2008-01-05: version 1.0.4
+
+   * Second and later chunks had DROP/CREATE TABLE (bug #1863949).
+   * Made suffixes for time options optional (bug #1858696).
+   * --locktables didn't disable --flushlock.
+
+2007-12-27: version 1.0.3
+
+   * Views with functions caused a crash (bug #1850998, MySQL bug #29408).
+   * --ignoreengine was ignored (bug #1851461).
+
+2007-12-16: version 1.0.2
+
+   * Added debugging.
+   * Updated common code.
+   * --tables and --ignoretables now accept names in the form db.tbl.
+
+2007-12-07: version 1.0.1
+
+   * Updated common code.
+
+2007-11-12: version 1.0.0
+
+   * Dump views when --tab is given.
+   * Use a module to find databases and tables.
+   * Do not shell out to mysqldump for --tab.
+   * Removed the --opt option.
+   * Check for valid options to mysqldump.
+   * Dump table definition and triggers separately for --tab.
+
+2007-11-04: version 0.9.11
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+   * Added --ignoreengine command-line option.
+   * Do not dump data for Federated or Merge tables by default.
+   * Some versions of mysqldump tried to do LOCK TABLES and hung.
+
+2007-10-15: version 0.9.10
+
+   * ANSI_QUOTES SQL_MODE or SQL_QUOTE_SHOW_CREATE0= could cause an error.
+   * Disabled --flushlog by default so error log doesn't get trashed.
+
+2007-10-09: version 0.9.9
+
+   * Table and database names were not quoted in arguments to mysqldump.
+   * LOCK TABLES not inside transaction caused infinite wait (see http://bugs.mysql.com/31479)
+   * Made exit status 1 if any errors, 0 if successful.
+
+2007-10-05: version 0.9.8
+
+   * Added --setperdb option.
+   * Print each chunk's details to 00_master_data.sql file.
+   * Do locking and list-building as late as possible for efficiency.
+   * Error handling.
+
+2007-10-03: version 0.9.6
+
+   * Arguments to external program weren't honored.
+   * System exit codes were lost, so errors weren't reported.
+   * Added chunking.
+   * Modularized and tested.
+   * Added documentation.
+   * Made --locktables negatable.
+   * Changed default output to be less verbose and added --verbose option.
+   * Added summary output.
+
+2007-10-01: version 0.9.5
+
+   * Initial release.
+
+Changelog for mk-parallel-restore:
+
+2011-02-09: version 1.0.24
+
+   * Officially deprecated this tool and noted that in the documentation.
+
+2010-06-08: version 1.0.23
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-05-03: version 1.0.22
+
+   * Added ability to specify a DSN on the command line.
+
+2010-04-01: version 1.0.21
+
+   * --fast-index was case-sensitive (issue 956).
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-03-01: version 1.0.20
+
+   * --fast-index failed to restore some keys (issue 833).
+
+2010-01-06: version 1.0.19
+
+   * DELETE statements replicated despite --no-bin-log (issue 726).
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-12-02: version 1.0.18
+
+   * Failed to restore InnoDB tables (issue 683).
+   * Failed to restore tables with foreign key constraints (issue 703).
+   * --fast-index caused an error with two or more indexes.
+   * Changed --commit to --[no]commit, enabled by default.
+
+2009-10-30: version 1.0.17
+
+   * Removed ability to restore triggers and views (issue 316).
+   * Older versions of mysqldump caused "Query was empty" errors (issue 625).
+   * Tool caused a slave error in some cases (issue 506).
+   * --create-databases did not respect --no-bin-log.
+   * --set-vars did not work (issue 597).
+   * --databases did not work with --database (issue 624).
+   * Added --fast-index for fast InnoDB index creation.
+   * Added --only-empty-databases (issue 300).
+   * Added --[no]create-tables.
+   * Added --[no]drop-tables.
+   * SQL_MODE=\"NO_AUTO_VALUE_ON_ZERO\" was not set by default.
+   * Tables were not explicitly unlocked.
+   * Command line options did not override config file options (issue 617).
+
+2009-07-31: version 1.0.16
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * --threads was ignored if /proc/cpuinfo could be read (issue 534).
+
+2009-06-30: version 1.0.15
+
+   * Tool died trying to restore already fully restored tables (issue 406).
+   * Updates to shared code.
+
+2009-06-02: version 1.0.14
+
+   * Removed the --test long option.  Use --dry-run instead.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --[no]atomicresume long option.  Use --[no]atomic-resume.
+   * Removed the --basedir long option.  Use --base-dir instead.
+   * Removed the --[no]biggestfirst long option.  Use --[no]biggest-first.
+   * Removed the --bulkinsbufsize long option.  Use --bulk-insert-buffer-size.
+   * Removed the --createdb long option.  Use --create-databases instead.
+   * Removed the --dbregex long option.  Use --databases-regex instead.
+   * Removed the --[no]disablekeys long option.  Use --[no]disable-keys instead.
+   * Removed the --ignoredb long option.  Use --ignore-databases instead.
+   * Removed the --ignoretbl long option.  Use --ignore-tables instead.
+   * Removed the --[no]locktables long option.  Use --[no]lock-tables instead.
+   * Removed the --[no]noautovalon0 long option.  Use --[no]auto-value-on-0.
+   * Removed the --binlog long option.  Use --[no]bin-log instead.
+   * Removed the --[no]noforeignkeys long option.  Use --[no]foreign-key-checks.
+   * Removed the --noresume long option.  Use --[no]resume instead.
+   * Removed the --[no]nouniquechecks long option.  Use --[no]unique-checks.
+   * Removed the --numthread long option.  Use --threads instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --tblregex long option.  Use --tables-regex instead.
+   * Removed the -i short option.  Use --ignore instead.
+   * Removed the -g short option.  Use --ignore-databases instead.
+   * Removed the -n short option.  Use --ignore-tables instead.
+   * Removed the -L short option.  Use --local instead.
+   * Removed the -m short option.  Use --threads instead.
+   * Removed the -r short option.  Use --replace instead.
+   * Removed the -T short option.  Use --tab instead.
+   * Added the --config option for issue 231.
+   * Added the --help and --verbose options for issue 318.
+   * Converted script to runnable module (issue 315).
+
+2009-03-31: version 1.0.13
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308)
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-03-01: version 1.0.12
+
+   * Changed --nobinlog to --binlog 0|1 (default 1).
+   * --nobinlog did not work (issue issue 57, issue 264).
+   * Added --decompress option for portability (issue 274).
+
+2009-02-01: version 1.0.11
+
+   * Resume died if the table did not exist (issue 221).
+
+2008-12-01: version 1.0.10
+
+   * Updates to shared code.
+
+2008-09-17: version 1.0.9
+
+   * Made restores resume by default if possible (issue 30).
+   * Added --noresume option (issue 30).
+   * Added --[no]atomicresume option (issue 30).
+   * --progress is reported by bytes instead of chunk count (issue 32).
+   * --progress counting and prediction was improved.
+   * LOAD DATA queries show bytes done and db.tbl name in SQL comment.
+   * CHARACTER SET was declared in the wrong place for csv LOAD DATA query.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.8
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * Added --progress option.
+
+2008-06-02: version 1.0.7
+
+   * .trg files were sometimes rejected from loading.
+   * Command-line options are generated from the POD.
+
+2008-03-16: version 1.0.6
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Changed --charset to be compatible with other tools (bug #1877548).
+
+2008-02-10: version 1.0.5
+
+   * Fixed forking issues with File::Find on Solaris (bug #1887102).
+   * Fixed child process exit status on Solaris (bug #1886444).
+   * The --defaults-file option caused a mysql error (bug #1886866).
+
+2008-01-24: version 1.0.4
+
+   * The -D option was used as a default DB for the connection (bug #1870415).
+
+2008-01-05: version 1.0.3
+
+   * Made suffixes for time options optional (bug #1858696).
+   * --ignoretables was ignored.
+
+2007-12-16: version 1.0.2
+
+   * Updated common code.
+
+2007-12-07: version 1.0.1
+
+   * Updated common code.
+
+2007-11-12: version 1.0.0
+
+   * Removed the --sql option, as sort order is implied when --tab is given.
+   * Added code to load .trg files (triggers) and load 00_views files.
+   * Print out files that are not loaded.
+
+2007-11-04: version 0.9.1
+
+   * Made command-line help easier to use.
+   * Optimized the calls to CREATE DATABASE with the --createdb argument.
+   * Removed the dependency on Term::ReadKey.
+   * CHARACTER SET was added to LOAD DATA INFILE even before MySQL 5.0.38.
+   * Replaced some code with modules that are unit-tested.
+   * Fixed documentation formatting errors.
+
+2007-10-15: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-purge-logs:
+
+2010-07-01: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-query-advisor:
+
+2011-01-06: version 1.0.4
+
+   * Added --group-by and changed default to rule_id (issue 1156).
+   * Added profile to output (issue 1156).
+
+2010-12-11: version 1.0.3
+
+   * Fixed false-positive ARG.001 matches (issue 1163).
+   * Added rule CLA.007 to detect different ORDER BY directions (issue 1158).
+
+2010-11-08: version 1.0.2
+
+   * Added rule CLA.006 to detect mixed table GROUP/ORDER BY (issue 1137).
+
+2010-09-11: version 1.0.1
+
+   * Add rules JOI.003 and JOI.004 (issue 950).
+   * Added --[no]show-create-table (issue 950).
+   * Added --database (issue 950).
+
+2010-08-01: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-query-digest:
+
+2011-03-12: version 0.9.27
+
+   * --processlist did not work well (issue 1252).
+   * Certain keywords were incorrectly distilled (issue 1176).
+
+2011-02-09: version 0.9.26
+
+   * --interval did not always work (issue 1186).
+   * Added --run-time-mode option (issue 1150).
+   * Added --variations option (issue 511).
+
+2011-01-06: version 0.9.25
+
+   * EXPLAIN sparklines sometimes didn't work or caused errors (issue 1196).
+   * Item column in profile was incorrectly truncated to "It" (issue 1196).
+
+2010-12-11: version 0.9.24
+
+   * Added sparkline of --report-histogram (issue 1141).
+   * Added EXPLAIN sparkline (issue 1141).
+
+2010-11-08: version 0.9.23
+
+   * Rearranged and regrouped query event output (issue 696).
+   * Added variance-to-mean ratio (V/M) to output (issue 1124).
+   * Added --apdex-threshold option and Apdex score to output (issue 1054).
+
+2010-10-09: version 0.9.22
+
+   * Added extended slowlog attribs to query review history table (issue 1149).
+
+2010-09-11: version 0.9.21
+
+   * Empty Schema attribute was not parsed correctly in some cases (issue 1104).
+   * Added /*!50100 PARTITIONS*/ to EXPLAIN line (issue 1114).
+   * Added hostname to --report-format (issue 1117).
+   * Added MySQL error messages from tcpdump events (issue 670).
+
+2010-08-01: version 0.9.20
+
+   * --outliers did not work (issue 1087).
+   * Profile did not show actual query ranks (issue 1087).
+   * Made header and query_report outputs easier to read (issue 699).
+   * Certain queries with subqueries were converted incorrectly (issue 347).
+
+2010-07-01: version 0.9.19
+
+   * Profile response time % did not match query pct (issue 1073).
+   * Added --progress (169).
+   * ORDER BY with ASC fingerprinted differently than without ASC (issue 1030).
+   * Added MISC items to profile report (issue 1043).
+
+2010-06-08: version 0.9.18
+
+   * Connections did not preserve server SQL modes (issue 801).
+   * Added percent of class count to string attribute values (issue 1026).
+
+2010-05-03: version 0.9.17
+
+   * Made --report-format order configurable (issue 990).
+   * Changed order of --report-format (issue 935).
+   * Added "files" to --report-format (issue 955).
+   * Added "date" to --report-format (issue 756).
+   * Added --save-results and --[no]gzip (issue 990).
+   * --order-by changed the Query_time distribution graph (issue 984).
+   * Added --report-histogram (issue 984).
+   * Tool crashed immediately on some older versions of Perl (issue 957).
+
+2010-04-01: version 0.9.16
+
+   * Admin commands were not always distilled (issue 676).
+   * Admin commands were not fingerprinted correctly (issue 676).
+   * General log parsing failed sometimes (issue 926).
+   * Some general log timestamps were not parsed (issue 972).
+   * IP addresses were truncated (issue 744).
+   * Some options could fail to parse (issue 940).
+   * InnoDB_*_wait attributes were not formatted as times (issue 948).
+   * Added --show-all (issue 744).
+   * Added DSN OPTIONS section to POD (issue 55).
+   * Fixed performance regression introduced in v0.9.12/r5240 (issue 954).
+   * Queries with tables in parentheses did not distill correctly (issue 781).
+
+2010-03-01: version 0.9.15
+
+   * --explain did not report failures.
+   * --ask-pass did not work (issue 795).
+   * Made D part of --execute DSN as default database (issue 727).
+   * --tcpdump didn't work if dumped packet header had extra info (issue 906).
+   * Added --type pglog for parsing Postgres logs (issue 535).
+
+2010-02-01: version 0.9.14
+
+   * memcached replace commands were not handled (issue 818).
+   * Not all SHOW statements were distilled correctly (issue 735).
+   * Tcpdump parsing crashed on certain fragmented queries (issue 832).
+
+2010-01-06: version 0.9.13
+
+   * Missing packets caused mutant queries (issue 761).
+   * Tcpdump parsing did not always get the complete query (issue 760).
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+   * Added support for prepared statements (issue 740).
+   * Added "prepared" report to default --report-format (issue 740).
+   * Added --read-time (issue 226).
+   * Error_no attribute was not numeric (issue 669).
+
+2009-12-02: version 0.9.12
+
+   * Certain very large queries segfaulted (issue 687).
+   * Removed --unique-table-access (issue 675).
+   * Added general log parsing; --type genlog (issue 172).
+   * Added HTTP protocol parsing; --type http (issue 679).
+   * memcached queries were not distilled.
+   * DBI was required when not needed (issue 148).
+   * Profile report was misaligned.
+   * Added --execute-throttle (issue 702).
+   * Added --statistics.
+   * Added --pipeline-profile.
+
+2009-10-30: version 0.9.11
+
+   * Gathering RSS and VSZ didn't work on Solaris (issue 619).
+   * Tool died on unknown binary log event types (issue 606).
+   * Binlogs could cause "unintended interpolation of string" error (issue 607).
+   * --set-vars did not work (issue 597).
+   * Added /*!50100 PARTITIONS */ for --explain (issue 611).
+   * Added --table-access (issue 661).
+   * Added --unique-table-access (issue 661).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 0.9.10
+
+   * Added --pid (issue 391).
+
+2009-08-31: version 0.9.9
+
+   * LOCK and UNLOCK TABLES were not distilled (issue 563).
+   * Large MySQL packets were not handled.
+   * The script crashed on queries with MySQL reserved words as column names.
+   * The script crashed on empty input to --type tcpdump|memcached (issue 564).
+   * --filter did not always compile correctly (issue 565).
+   * Added standard connection options like --host, --port, etc.(issue 248).
+   * --processlist didn't set first_seen and last_seen for --review (issue 360).
+   * --daemonize caused --processlist to fail with "server has gone away".
+   * Could not parse vebose tcpdump output with ASCII dump (issue 544).
+   * Changed --[no]zero-bool to --zero-bool.
+   * Added --inherit-attirbutes (issue 479).
+   * Changed the --report option to only control if report is printed.
+   * Removed string attributes from global report header (issue 478).
+
+2009-07-31: version 0.9.8
+
+   * Added RISKS section to POD (issue 538).
+   * Added --since, --until and --aux-dsn (issue 154).
+   * Added binary log parsing; --type binlog (issue 476).
+   * The script crashed immediately on Windows (issue 531).
+   * The rusage report crashed on Windows (issue 531).
+   * Added memcached parsing; --type memcached (issue 525).
+   * Some boolean attributes didn't print correctly in the report.
+   * Added --[no]zero-bool option to suppress 0% bool vals.
+   * Improved tcpdump/MySQL protocol parsing (--type tcpdump).
+   * Made --continue-on-error negatable and on by default.
+   * Changed --attribute-limit to --attribute-value-limit.
+   * Added --check-attributes-limit (issue 514).
+
+2009-06-30: version 0.9.7
+
+   * Added all auto-detected event attributes to report.
+   * --report '' --print --sample 1 didn't work (issue 470).
+   * Added --sample option (issue 462).
+   * Added --tcpdump-errors option.
+   * Added --continue-on-error option.
+   * Added --attribute-aliases option.
+   * Added --ignore-attributes option.
+   * QPS and concurrency were wrong with microsecond timestamps (issue 398).
+
+2009-06-02: version 0.9.6
+
+   * Script did not die if --pid file already existed (issue 383).
+   * Removed the --tcpdump long option.  Use --watch-server instead.
+   * Made --type=tcpdump auto-detect the server and host to watch.
+   * The tool tried to parse database/table names inside quoted strings.
+   * Removed the --header long option.  Use --report-format instead.
+   * Removed the --rusage long option.  Use --report-format instead.
+   * Removed the --attriblimit long option.  Use --attribute-limit instead.
+   * Removed the --createreview long option.  Use --create-review-table instead.
+   * Removed the --create-review-history long option.  Use
+     --create-review-history-table instead.
+   * Removed the --embeddedattr long option.  Use --embedded-attributes instead.
+   * Removed the --embeddedattrcapt long option.  Use --embedded--atributes.
+   * Removed the --expectedrange long option.  Use --expected-range instead.
+   * Removed the --[no]forexplain long option.  Use --[no]for-explain instead.
+   * Removed the --groupby long option.  Use --group-by instead.
+   * Removed the --orderby long option.  Use --order-by instead.
+   * Removed the --reportall long option.  Use --report-all instead.
+   * Removed the --[no]zeroadmin long option.  Use --[no]zero-admin instead.
+   * Removed the -f short option.  Use --fingerprints instead.
+   * Removed the -i short option.  Use --interval instead.
+   * Removed the -R short option.  Use --review instead.
+   * Added --report-format option.
+   * Added a response-time profile (issue 381).
+   * Added --iterations and --run-time (issue 173, issue 361).
+   * Converted script to runnable module (issue 315).
+
+2009-05-03: version 0.9.5
+
+   * The query report printed duplicate table names (issue 337).
+   * Print a message and exit early if there's an error (issue 190).
+   * Added the --config option for issue 231.
+   * Added the --log option for issue 241.
+   * Added the --help and --verbose options for issue 318.
+   * Fixed another crash when sqrt() of a negative number (issue 332).
+   * Fixed a division by zero when a query has zero exec time.
+   * Added --print to print query events in slow-log format.
+   * Added --type to specify the type of log file (default slowlog).
+   * Added --tcpdump to permit parsing output of tcpdump (issue 228).
+   * The --shorten option was implemented badly and was slow (issue 336).
+   * The report's per-class QPS was calculated incorrectly (issue 326).
+   * Updates to shared code.
+
+2009-03-31: version 0.9.4
+
+   * Send debugging output to STDERR (issue 308).
+   * Crashed trying to take square root of negative number (issue 332).
+   * --review-history did not store timestamps correctly (issue 329).
+   * --shorten discarded too much information (issue 320).
+   * No results when --orderby contained a nonexistent attribute (issue 244).
+   * Added --review-history and --create-review-history (issue 194).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Standard deviation was not for all values (issue 321).
+   * Attributes with mostly zero values caused an infinite loop (issue 321).
+   * Very large INSERT or REPLACE VALUES() segfaulted (issue 322).
+   * Empty Schema attribute was not handled properly (issue 323).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-03-01: version 0.9.3
+
+   * Added --createreview option to create the --review table (issue 266).
+   * Database wasn't printed in SHOW CREATE TABLE/SHOW TABLE STATUS (issue 290).
+   * "--report tables" will now print "SHOW CREATE..." etc (issue 287).
+   * Some long queries were not shortened (issue 292).
+   * INSERT/ON DUPLICATE KEY UPDATE caused extra tables to be found (issue 291).
+   * Changed the --truncateinsert option to --shorten (issue 292).
+   * Added --explain to print the EXPLAIN in the report (issue 199).
+   * Added 'bytes' property to log events (issue 247).
+   * Some INSERT/REPLACE queries were not truncated (issue 216).
+   * INSERT/REPLACE were needlessly converted for EXPLAIN (issue 283).
+   * SELECTs starting with a comment were converted for EXPLAIN (issue 252).
+   * Added informational text to show why items are reported on (issue 282).
+   * IN() lists were parsed as table names (issue 277).
+   * The parser crashed on some logs from Windows servers (issue 267).
+   * Added the ability to parse embedded attributes (issue 177).
+   * Log entries without a Time property crashed --review (issue 263).
+   * All-zero timestamps displayed in unwanted places (issue 202).
+
+2009-02-01: version 0.9.2
+
+   * Renamed from mk-log-parser to mk-query-digest.
+   * Added the --timeline option (issue 254).
+   * Added the ability to analyze with --groupby distill (issue 254).
+   * Added the ability to analyze with --groupby tables (issue 230).
+   * Table names with reserved words weren't recognized (issue 209).
+   * Changed the names of options --top, --analyze, --worst, etc.
+   * Added the ability to aggregate the log multiple ways (issue 176).
+   * Rewrote internals to aid in other projects (partial work on issue 242).
+   * Made the SHOW CREATE/SHOW STATUS have the sample query's DB (issue 213).
+   * Added more information to the global header (issue 200).
+   * Reformatted the query report header (issue 205).
+   * Added the --outliers option (issue 171).
+   * Added the --mirror option (issue 236).
+   * Made --execute reconnect when the server goes away (issue 237).
+   * Made --processlist reconnect when the server goes away (issue 237).
+   * Added --daemonize and --pid (issue 235).
+   * Buggy log output for administrator commands skewed results (issue 239).
+   * Switched to logarithmic buckets to save memory (issue 224).
+   * Trimmed mysqldump insert samples (issue 216).
+   * Enhanced the query fingerprinting (issue 220).
+   * Query_time with two decimal points caused a crash (issue 234).
+   * Very large INSERT statements from mysqldump segfaulted on older Perl.
+   * Very large attribute values in slowlogs caused a crash (issue 197).
+   * Added the ability to watch the processlist with --processlist (issue 151).
+   * Added --execute and --filter options (issue 207).
+   * Fixed and updated POD.
+
+2008-12-29: version 0.9.1
+
+   * Added --analyze option to combine analysis and --review (issue 162).
+   * Added --fingerprints (-f) option (issue 160).
+   * Trying to take log of 0 caused a crash (issue 141).
+   * Improved performance of log parsing and fingerprinting about 2x (issue 137).
+   * Slow log parsing was buggy (issue 136 and many smaller issues discovered).
+   * Converted a lot of hardcoded things into dynamically built functions.
+   * Added more information to the default output and reformatted it.
+   * Incompatible changes to fingerprint; old reviews will lost their history.
+   * Much enhanced --review functionality.
+   * Default --top to 95% to analyze the top 95% of the load (issue 171).
+
+2008-12-01: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-query-profiler and mk-profile-compact:
+
+2010-06-08: version 1.1.22
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.1.21
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.1.20
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.1.19
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-07-31: version 1.1.18
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-06-30: version 1.1.17
+
+   * Updates to shared code.
+
+2009-06-02: version 1.1.16
+
+   * Standardized options.
+
+2009-05-03: version 1.1.15
+
+   * Added the --config option for issue 231.
+   * Converted script to runnable module (issue 315). 
+   * mk-query-profiler only:
+   *    Removed the --allowcache long option.  Use --allow-cache instead.
+   *    Removed the --askpass long option.  Use --ask-pass instead.
+   *    Removed the --setvars long option.  Use --set-vars instead.
+   *    Removed the -a short option.  Use --allow-cache instead.
+   *    Removed the -c short option.  Use --calibrate instead.
+   *    Removed the -e short option.  Use --external instead.
+   *    Removed the -f short option.  Use --flush instead.
+   *    Removed the -i short option.  Use --innodb instead.
+   *    Removed the -n short option.  Use --only instead.
+   *    Removed the -s short option.  Use --separate instead.
+   *    Removed the -t short option.  Use --tab instead.
+   *    Removed the -r short option.  Use --verify instead.
+   * mk-profile-compact only:
+   *    Removed the -q short option.  Use --queries instead.
+   *    Removed the -m short option.  Use --mode instead.
+   *    Removed the -h short option.  Use --headers instead.
+
+2009-03-31: version 1.1.14
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2008-12-01: version 1.1.13
+
+   * Updates to shared code.
+
+2008-09-19: version 1.1.12
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.1.11
+
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 1.1.10
+
+   * Generate command-line options from POD.
+
+2008-03-16: version 1.1.9
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+
+2007-12-16: version 1.1.8
+
+   * Updated common code, added debugging.
+
+2007-12-07: version 1.1.7
+
+   * Updated common code.
+   * Added --session command-line option.
+   * Servers without session variables crashed the tool (bug #1840320).
+   * The meaning of --innodb was reversed.
+
+2007-11-04: version 1.1.6
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-09-20: version 1.1.5
+
+   * Documentation didn't specify how queries in FILE are separated.
+
+2007-09-01: version 1.1.4
+
+   * SHOW STATUS inconsistencies after a FLUSH were skewing status.
+
+2007-08-23: version 1.1.3
+
+   * MySQL socket connection option didn't work.
+   * Large queries overflowed the formatting room available.
+
+2007-06-22: version 1.1.2
+
+   * Documentation
+
+2007-06-10: version 1.1.1
+
+   * Added --defaults-file option.
+   * Added standard --version command-line option.
+   * Added --defaults-file option.
+
+2007-04-05: version 1.1.0
+
+   * Profile "Potential filesorts".
+   * Allow to read STDIN, many files possible.
+   * Allow to execute other programs in --external mode.
+   * Make columns always have headings for consistency and scriptability.
+   * Add mk-profile-compact helper tool.
+
+2007-04-01: version 1.0.3
+
+   * Profile Bytes_received and Bytes_sent.
+   * Add --external option so you can profile another program without running its queries.
+   * Fix commandline options: change --flush and --verbose, and change --debug to --verify.
+   * Fix behavior of --calibrate.  It was not calibrating by default.  This was
+     making things look too expensive.
+   * More documentation.
+
+2007-03-25: version 1.0.2
+
+   * Rewrite the GetOpt::Long code and rely on DBD to read MySQL option files.
+   * Documentation.
+
+2007-03-02: version 1.0.1
+
+   * Fix prompting
+
+2007-03-01: version 1.0.0
+
+   * Initial re-release on Sourceforge.
+   * A lot of improvements as I've learned more about coding :-)
+
+Changelog for mk-show-grants:
+
+2010-06-08: version 1.0.23
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.0.22
+
+   * Added ability to specify a DSN on the command line.
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.0.21
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.0.20
+
+   * Added ability to do --only foo for foo grants on all hosts (issue 551).
+   * Added --[no]header.
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-08-31: version 1.0.19
+
+   * --ask-pass did not work.
+
+2009-07-31: version 1.0.18
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-06-30: version 1.0.17
+
+   * The tool crashed on anonymous user ''@'' (issue 445).
+   * Updates to shared code.
+
+2009-06-02: version 1.0.16
+
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the -d short option.  Use --drop instead.
+   * Removed the -f short option.  Use --flush instead.
+   * Removed the -i short option.  Use --ignore instead.
+   * Removed the -o short option.  Use --only instead.
+   * Removed the -r short option.  Use --revoke instead.
+   * Removed the -s short option.  Use --separate instead.
+   * Removed the -t short option.  Use --[no]timestamp instead.
+   * Added the --config option for issue 231.
+   * Converted script to runnable module (issue 315).
+   * Added the --help and --verbose options for issue 318.
+   * Updated order of POD sections.
+
+2009-05-03: version 1.0.15
+
+   * The tool crashed when there were no users (issue 359).
+
+2009-03-31: version 1.0.14
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2008-12-01: version 1.0.13
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.12
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.11
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * Anonymous users were not permitted (issue 28).
+
+2008-06-02: version 1.0.10
+
+   * Create command-line options from POD.
+
+2008-03-16: version 1.0.9
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+
+2008-02-10: version 1.0.8
+
+   * Added --timestamp option.
+
+2007-12-16: version 1.0.7
+
+   * Updated common code, added debugging.
+
+2007-12-07: version 1.0.6
+
+   * Updated common code.
+
+2007-11-25: version 1.0.5
+
+   * --askpass ignored the entered password (bug #1838131).
+
+2007-11-04: version 1.0.4
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-08-23: version 1.0.3
+
+   * MySQL socket connection option didn't work.
+   * Added --askpass option.
+
+2007-06-22: version 1.0.2
+
+   * Documentation.
+
+2007-06-10: version 1.0.1
+
+   * Added --defaults-file option.
+   * Added standard --version command-line option.
+   * Added --defaults-file option.
+
+2007-03-25: version 1.0.0
+
+   * Rewrite the GetOpt::Long code and rely on DBD to read MySQL option files.
+   * Fix the --revoke and --separate options so revokes are not separate unless
+     specified.  Add REVOKE GRANT OPTION when the user has it.
+
+2007-03-19: version 0.9.1
+
+   * Added --separate, --drop, --revoke and --flush options.
+
+2007-03-17: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-slave-delay:
+
+2010-12-11: version 1.0.23
+
+   * The tool ran even if the SQL thread was not running (issue 1169).
+
+2010-08-01: version 1.0.22
+
+   * The tool did not reconnect to the slave (issue 991).
+
+2010-06-08: version 1.0.21
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.0.20
+
+   * Privileges needed for operation weren't documented (issue 939).
+   * --ask-pass crashed if h DSN part wasn't specified (issue 949).
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.0.19
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.0.18
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 1.0.17
+
+   * Added --pid (issue 391).
+
+2009-07-31: version 1.0.16
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-06-30: version 1.0.15
+
+   * Updates to shared code.
+
+2009-06-02: version 1.0.14
+
+   * Standardized options.
+   * Script did not die if --pid file already existed (issue 383).
+
+2009-05-03: version 1.0.13
+
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --usemaster long option.  Use --use-master instead.
+   * Removed the -d short option.  Use --delay instead.
+   * Removed the -c short option.  Use --continue instead.
+   * Removed the -q short option.  Use --quiet instead.
+   * Removed the -t short option.  Use --run-time instead.
+   * Removed the --time long option.  Use --run-time instead.
+   * Removed the -u short option.  Use --use-master instead.
+   * Removed the -i short option.  Use --interval instead.
+   * Added the -q short option for --quiet.
+   * Added the --config option for issue 231.
+   * Added the --log option for issue 241.
+   * Added the following options for issue 248:
+   *    --charset (-A)
+   *    --defaults-file (-F)
+   *    --host (-h)
+   *    --password (-p)
+   *    --port (-P)
+   *    --socket (-S)
+   *    --user (-u)
+   * Converted script to runnable module (issue 315).
+
+2009-03-31: version 1.0.12
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308)
+   * A MASTER-HOST without binary logging enabled caused a crash (issue 215).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-02-01: version 1.0.11
+
+   * h DSN part was required even if an S part was given (issue 149).
+
+2008-12-01: version 1.0.10
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.9
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.8
+
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 1.0.7
+
+   * Updated the documentation to use POD.
+   * The slave could wait forever if the I/O thread was stopped.
+   * The slave could wait forever on the master's last event (bug #1959496).
+
+2008-03-16: version 1.0.6
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added 'A' part to DSNs (bug #1877548).
+
+2008-01-05: version 1.0.5
+
+   * Made suffixes for time options optional (bug #1858696).
+   * The program was ignoring some connection parameters.
+   * Made the program use master when the I/O thread waits for relay log space.
+
+2007-12-16: version 1.0.4
+
+   * Updated common code, added debugging.
+
+2007-12-07: version 1.0.3
+
+   * Updated common code.
+
+2007-11-04: version 1.0.2
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-09-20: version 1.0.1
+
+   * Added a --daemonize option to detach from the shell and run in the background.
+
+2007-08-23: version 1.0.0
+
+   * MySQL socket connection option didn't work.
+   * Added a check that the server is a slave.
+
+2007-08-04: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-slave-find:
+
+2010-12-11: version 1.0.15
+
+   * --database option did not work.
+
+2010-09-11: version 1.0.14
+
+   * Added "is [not] read_only" to summary report format (issue 1132).
+
+2010-08-01: version 1.0.13
+
+   * Added "InnoDB version" to summary report format (issue 1079).
+
+2010-06-08: version 1.0.12
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.0.11
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.0.10
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.0.9
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-07-31: version 1.0.8
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * Added --recursion-method option (issue 181).
+
+2009-06-30: version 1.0.7
+
+   * Updates to shared code.
+
+2009-05-03: version 1.0.6
+
+   * Removed the --print long option; replication hierarchy tree always printed.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the -r short option.  Use --recurse instead.
+   * Added the --config option for issue 231.
+   * Converted script to runnable module (issue 315).
+   * Defaults files were not read properly.
+   * Added ability to specify master host with DSN.
+   * Updated POD to describe what script actually does.
+   * Updates to shared code.
+
+2009-03-31: version 1.0.5
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2008-12-01: version 1.0.4
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.3
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.2
+
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 1.0.1
+
+   * Updated common code.
+
+2008-03-16: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-slave-move:
+
+2010-06-08: version 0.9.12
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 0.9.11
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 0.9.10
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 0.9.9
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-07-31: version 0.9.8
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-05-03: version 0.9.7
+
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the -m short option.  Use --timeout instead. 
+   * Added the --config option for issue 231.
+   * Added the following options for issue 248:
+   *    --charset (-A)
+   *    --defaults-file (-F)
+   *    --host (-h)
+   *    --password (-p)
+   *    --port (-P)
+   *    --socket (-S)
+   *    --user (-u)
+   * Converted script to runnable module (issue 315).
+   * Updates to shared code.
+
+2009-03-31: version 0.9.6
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-02-01: version 0.9.5
+
+   * Fixed and updated POD.
+
+2008-12-01: version 0.9.4
+
+   * Updates to shared code.
+
+2008-09-19: version 0.9.3
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 0.9.2
+
+   * The -m option was not recognized as an alias for --timeout.
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 0.9.1
+
+   * Command-line parsing was removing an expected DSN (bug #1960142).
+   * The slave was not stopped before CHANGE MASTER TO (bug #1960142).
+   * DSNs without a port caused a crash (bug #1960142).
+   * Converted to use POD for command-line options.
+
+2008-03-16: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-slave-prefetch:
+
+2011-01-06: version 1.0.21
+
+   * --secondary-indexes did not work for some converted DELETE statements.
+
+2010-08-01: version 1.0.20
+
+   * mysqlbinlog was not killed before closing relay log file.
+   * Tool crashed if server did not have query cache (issue 992).
+
+2010-07-01: version 1.0.19
+
+   * Relay log file changes could cause tool to wait forever (issue 1075).
+
+2010-06-08: version 1.0.18
+
+   * Connections did not preserve server SQL modes (issue 801).
+   * Added --[no]inject-columns (issue 1003).
+   * Added --relay-log-dir (issue 288).
+   * Added --sleep.
+
+2010-05-03: version 1.0.17
+
+   * Made --secondary-indexes use --database db if necessary (issue 998).
+
+2010-04-01: version 1.0.16
+
+   * --secondary-indexes did not work (issue 932).
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-02-01: version 1.0.15
+
+   * --secondary-indexes queries did not use current database (issue 844).
+   * Thread failed to start (issue 680).
+
+2010-01-06: version 1.0.14
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.0.13
+
+   * Tool died on unknown binary log event types (issue 606).
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 1.0.12
+
+   * Added --pid (issue 391).
+
+2009-08-31: version 1.0.11
+
+   * --ask-pass did not work.
+
+2009-07-31: version 1.0.10
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * Updates to shared code.
+
+2009-06-30: version 1.0.9
+
+   * Fixed "Option io-log does not exist" error (issue 414).
+   * Updates to shared code.
+
+2009-06-02: version 1.0.8
+
+   * Script did not die if --pid file already existed (issue 383).
+
+2009-05-03: version 1.0.7
+
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --checkint long option. Use --check-interval instead.
+   * Removed the --iolag long option.  Use --io-lag instead.
+   * Removed the --maxquerytime option.  Use --max-query-time instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --numprefix long option.  Use --num-prefix instead.
+   * Removed the --permitregexp long option.  Use --permit-regexp instead.
+   * Removed the --printnonrewritten long option.  Use --print-nonrewritten
+     instead.
+   * Removed the --querysampsize long option.  Use --query-sample-size instead.
+   * Removed the --rejectregexp long option.  Use --reject-regexp instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the -i short option.  Use --check-interval instead.
+   * Removed the -x short option.  Use --execute instead.
+   * Removed the -l short option.  Use --io-lag instead.
+   * Removed the -q short option.  Use --max-query-time instead.
+   * Removed the -o short option.  Use --offset instead.
+   * Removed the -t short option.  Use --run-time instead.
+   * Removed the --time long option.  Use --run-time instead.
+   * Removed the -w short option.  Use --window instead.
+   * Added the --config option for issue 231.
+   * Added the --log option for issue 241.
+   * --errors did not work properly.
+   * Converted script to runnable module (issue 315).
+   * --print and --daemonize are no longer mutually exclusive.
+
+2009-03-31: version 1.0.6
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308)
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2008-12-01: version 1.0.5
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.4
+
+   * Added --pid option.
+   * Using debug (MKDEBUG=1) and --daemonize now causes script to die.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.3
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * Added the --numprefix option for use in sharded data stores.
+   * The Rotate binary log event type was not handled.
+
+2008-06-02: version 1.0.2
+
+   * Add the --progress option.
+   * Add more error reporting and the --errors option.
+   * Abstract USE queries when fingerprinting them.
+   * mysqlbinlog errors were not detected.
+   * Handle queries of the form INSERT ... VALUE().
+   * Strip comments from queries when normalizing them.
+
+2008-03-16: version 1.0.1
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+
+2008-01-24: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-slave-restart:
+
+2010-06-08: version 1.0.22
+
+   * Connections did not preserve server SQL modes (issue 801).
+   * Sleep time reported by --verbose might have been incorrect.
+
+2010-04-01: version 1.0.21
+
+   * Added ability to specify a DSN on the command line.
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.0.20
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-12-02: version 1.0.19
+
+   * --quiet caused a "Use of uninitialized value" error (issue 673).
+
+2009-10-30: version 1.0.18
+
+   * --monitor --stop caused error Option maxlength does not exist (issue 662).
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 1.0.17
+
+   * Added --pid (issue 391).
+
+2009-07-31: version 1.0.16
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * Added --recursion-method option (issue 181).
+
+2009-06-30: version 1.0.15
+
+   * --error-text did not work (issue 459).
+
+2009-06-02: version 1.0.14
+
+   * Standardized options.
+   * Script did not die if --pid file already existed (issue 383).
+
+2009-05-03: version 1.0.13
+
+   * Added the --log option for issue 241.
+   * Added the --config option for issue 231.
+   * Added the --help and --verbose options for issue 318.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the -L short option.  Use --error-length instead.
+   * Removed the -E short option.  Use --error-text instead.
+   * Removed the -M short option.  Use --max-sleep instead.
+   * Removed the --maxsleep long option.  Use --max-sleep instead.
+   * Removed the -m short option.  Use --min-sleep instead.
+   * Removed the --minsleep long option.  Use --min-sleep instead.
+   * Removed the -r short option.  Use --recurse instead.
+   * Removed the -k short option.  Use --skip-count instead.
+   * Removed the --skipcount long option.  Use --skip-count instead.
+   * Removed the -s short option.  Use --sleep instead.
+   * Removed the -t short option.  Use --run-time instead.
+   * Removed the --time long option.  Use --run-time instead.
+   * Removed the --untilmaster long option.  Use --until-master instead.
+   * Removed the --untilrelay long option.  Use --until-relay instead.
+   * Removed the -v short option.  Use --verbose instead.
+   * Converted script to runnable module (issue 315).
+
+2009-03-31: version 1.0.12
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308)
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-02-01: version 1.0.11
+
+   * --error-numbers did not work (issue 118).
+
+2008-12-01: version 1.0.10
+
+   * Updates to shared code.
+
+2008-09-19: version 1.0.9
+
+   * Added --pid option (issue 18).
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.8
+
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 1.0.7
+
+   * Updated common code.
+
+2008-03-16: version 1.0.6
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+   * Added logic to repair tables, and rewrote a lot of code.
+   * Added --always option, disabled by default.  Not backwards compatible.
+   * --daemonize did not work.
+   * --quiet caused an undefined variable error.
+
+2008-01-05: version 1.0.5
+
+   * Made suffixes for time options optional (bug #1858696).
+   * Added logic to discard corrupt relay logs.
+   * Added --monitor, --sentinel, and --stop.
+   * Added --quiet and changed --verbose to 1 by default.
+   * Added the ability to monitor many servers with --recurse.
+
+2007-12-16: version 1.0.4
+
+   * Updated common code, added debugging.
+
+2007-12-07: version 1.0.3
+
+   * Updated common code.
+
+2007-11-04: version 1.0.2
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-09-20: version 1.0.1
+
+   * Added a --daemonize option to detach from the shell and run in the background.
+
+2007-08-23: version 1.0.0
+
+   * MySQL socket connection option didn't work.
+   * Added --askpass option.
+
+2007-08-04: version 0.9.3
+
+   * Fixed a crash caused by omitting --verbose.
+   * Changed exit status to 0 when --help is given.
+
+2007-07-05: version 0.9.2
+
+   * Initial release.
+
+Changelog for mk-table-checksum and mk-checksum-filter:
+
+2011-01-06: version 1.2.20
+
+   * Character-based columns were not chunkable (issue 568).
+   * Added --chunk-range option (issue 1182).
+   * Made performance_schema an always ignored database (issue 1193).
+
+2010-12-11: version 1.2.19
+
+   * Added --progress option (1151).
+   * Added short form -c for option --columns.
+
+2010-09-11: version 1.2.18
+
+   * Existing checksums were deleted before resuming (issue 304).
+   * Lock timeouts were not retried (issue 345).
+   * Added --databases-regex (issue 1112).
+   * Added --tables-regex (issue 1112).
+   * Added --ignore-databases-regex (issue 1112).
+   * Added --ignore-tables-regex (issue 1112).
+
+2010-08-01: version 1.2.17
+
+   * Added --chunk-size-limit (issue 796).
+   * Added --unchunkable-tables (issue 796).
+   * Use optimizer preferred index as --chunk-index for --where (issue 378).
+
+2010-07-01: version 1.2.16
+
+   * Changed --no-use-index to --[no]use-index.
+   * --schema did not allow --[no]check-replication-filters (issue 1060).
+   * --chunk-index is only used if a chunkable column uses it (issue 519).
+   * Added --[no]zero-chunk (issue 941).
+
+2010-06-08: version 1.2.15
+
+   * Chunking did not work with invalid dates (issue 602).
+   * --replicate with InnoDB checksum table didn't work with --wait (issue 51).
+   * Connections did not preserve server SQL modes (issue 801).
+   * --empty-replicate-table did not work with replication filters (issue 982).
+   * --replicate-check=0 did not skip the checksumming step (issue 1020).
+   * MySQL 5.1 and --replicate need REPEATABLE READ isolation level (issue 720).
+   * The --replicate table was not required to specify a database (issue 982).
+   * Added --[no]check-replication-filters for --replicate sanity (issue 993).
+   * Added --replicate-database to select a single default database (issue 982).
+   * Added --chunk-column and --chunk-index (issue 519).
+
+2010-05-03: version 1.2.14
+
+   * Added --throttle-method, permit throttling by lag of all slaves (issue 67).
+   * Checksum queries still caused fatal warnings on MySQL 5.1 (issue 186).
+
+2010-04-01: version 1.2.13
+
+   * Checksum queries caused fatal warnings on MySQL 5.1 (issue 186).
+   * Added DSN OPTIONS section to POD (issue 55).
+   * Tool crashed if no DSN h part was specified (issue 947).
+
+2010-03-01: version 1.2.12
+
+   * --engines did not work (issue 891).
+   * Index names with commas caused a crash (issue 388).
+
+2010-01-06: version 1.2.11
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-12-02: version 1.2.10
+
+   * Removed REPLACE INTO for checking replicate table (issue 365).
+
+2009-10-30: version 1.2.9
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-08-31: version 1.2.8
+
+   * --arg-table was not used to determine algorithm (issue 509).
+
+2009-07-31: version 1.2.7
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * Added --recursion-method option (issue 181).
+   * Added modulo and offset to list of overridable arguments (issue 467).
+
+2009-06-02: version 1.2.6
+
+   * Options not allowed with --schema are no longer silently ignored.
+   * Organized options into groups (see --help output).
+   * Removed the --argtable long option.  Use --arg-table instead.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --chunksize long option.  Use --chunk-size instead.
+   * Removed the --createreplicate option.  Use --create-replicate-table.
+   * Removed the --emptyrepltbl option.  Use --empty-replicate-table.
+   * Removed the --engine option.  Use --engines.
+   * Removed the --explainhosts option.  Use --explain-hosts.
+   * Removed the --ignorecols option.  Use --ignore-columns.
+   * Removed the --ignoredbs option.  Use --ignore-databases.
+   * Removed the --ignoreengine option.  Use --ignore-engines.
+   * Removed the --ignoretbl option.  Use --ignore-tables.
+   * Removed the --maxlag option.  Use --max-lag instead.
+   * Removed the --nouseindex option.  Use --no-use-index instead.
+   * Removed the --[no]optxor option.  Use --[no]optimize-xor instead.
+   * Removed the --replcheck option.  Use --replicate-check instead.
+   * Removed the --savesince option.  Use --save-since instead.
+   * Removed the --setvars option.  Use --set-vars instead.
+   * Removed the --sincecolumn option.  Use --since-column instead.
+   * Removed the --singlechunk option.  Use --single-chunk instead.
+   * Removed the --slavelag option.  Use --slave-lag instead.
+   * Removed the -a short option.  Use --algorithm instead.
+   * Removed the -C short option.  Use --chunk-size instead.
+   * Removed the -r short option.  Use --[no]count instead.
+   * Removed the -c short option.  Use --[no]crc instead.
+   * Removed the -f short option.  Use --function instead.
+   * Removed the -g short option.  Use --ignore-databases instead.
+   * Removed the -E short option.  Use --ignore-engines instead.
+   * Removed the -n short option.  Use --ignore-tables instead.
+   * Removed the -k short option.  Use --lock instead.
+   * Removed the -M short option.  Use --modulo instead.
+   * Removed the -O short option.  Use --offset instead.
+   * Removed the -o short option.  Use --[no]optimize-xor.
+   * Removed the -R short option.  Use --replicate instead.
+   * Removed the -s short option.  Use --separator instead.
+   * Removed the -l short option.  Use --slave-lag instead.
+   * Removed the -b short option.  Use --tab instead.
+   * Removed the -v short option.  Use --[no]verify instead.
+   * Removed the -W short option.  Use --where instead.
+   * Added the --config option for issue 231.
+   * Added the --help and --verbose options for issue 318.
+   * Converted script to runnable module (issue 315).
+   * mk-checksum-filter:
+   *    Removed the --equaldbs long option.  Use --equal-databases instead.
+   *    Removed the --ignoredb long option.  Use --ignore-databases instead.
+   *    Removed the -d short option.  Use --equal-databases instead.
+   *    Removed the -h short option.  Use --header instead.
+   *    Removed the -i short option.  Use --ignore-databases instead.
+   *    Removed the -m short option.  Use --master instead.
+   *    Removed the -u short option.  Use --unique instead.
+   *    Added the --help and --verbose options for issue 318.
+
+2009-05-03: version 1.2.5
+
+   * Columns with backticks in comments caused a crash (issue 330)
+
+2009-03-31: version 1.2.4
+
+   * Send debugging output to STDERR (issue 308).
+   * --schema was sensitive to the table's AUTO_INCREMENT value (issue 328).
+   * Removed string interpolation from debugging calls (issue 308)
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2009-02-01: version 1.2.3
+
+   * Fixed and updated POD.
+
+2008-12-28: version 1.2.2
+
+   * Updates to shared code.
+
+2008-12-01: version 1.2.1
+
+   * Updates to shared code.
+   * --since did not work correctly in some cases (issue 121).
+   * --savesince did not work correctly in some cases (issue 122).
+   * --schema --checksum didn't produce terse output (issue 103).
+   * Filters on objects weren't applied as early as possible (issue 99).
+
+2008-10-17: version 1.2.0
+
+   * Added --recheck (issue 69).
+   * Added --ignorecols (issue 94).
+   * Added --createreplicate (issue 77).
+   * Added --resume and --resume-replicate (issue 36).
+   * --since crashed on blackhole tables (issue 64).
+   * Added --singlechunk and --savesince (issue 53).
+   * --replicate with large WHERE did not fit in boundaries column (issue 81).
+
+2008-09-19: version 1.1.29
+
+   * Added --argtable, --offset and --modulo for issue 53.
+   * Added --nouseindex option (issue 8).
+   * Fixed processing of column options (issue 4, patch by Travis Whitton)
+   * Changed --emptyrepltbl to always completely empty the table (issue 21).
+   * Added --schema option for issue 5.
+   * Added --since and --sincecolumn options for issue 53.
+   * Added --probability option for issue 53.
+   * A missing table caused a crash (issue 35).
+   * Functions specified with --function were not optimized (issue 43).
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.1.28
+
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 1.1.27
+
+   * Update documentation, generate command-line options from POD.
+   * Added --trim to compare pre-5.0 and 5.0+ VARCHAR values consistently.
+
+2008-03-16: version 1.1.26
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added 'A' part to DSNs (bug #1877548).
+   * Added --unique option to mk-checksum-filter.
+   * The exit status from mk-checksum-filter was always 0.
+   * mk-table-checksum now prefers to discover slaves via SHOW PROCESSLIST.
+
+2008-02-10: version 1.1.25
+
+   * The --lock option did not work correctly (bug #1884712).
+
+2008-01-05: version 1.1.24
+
+   * Added support for the FNV_64 UDF, which is distributed with Maatkit.
+   * --emptyrepltbl didn't Do The Right Thing by default.
+   * --explain didn't disable --emptyrepltbl
+   * Made suffixes for time options optional (bug #1858696).
+   * The --float-precision option was ignored.
+   * (mk-checksum-filter) -i, -d options worked only on multiple files.
+
+2007-12-27: version 1.1.23
+
+   * Updated documentation about version compatibility.
+   * Updated documentation for --replcheck.
+
+2007-12-16: version 1.1.22
+
+   * --replicate did not store chunk boundaries correctly (bug #1850243).
+   * --tables and --ignoretables now accept names in the form db.tbl.
+
+2007-12-07: version 1.1.21
+
+   * Updated common code.
+   * --chunksize was broken when no suffix given (bug #1845018).
+   * --replcheck replaces the --recursecheck option (bug #1841407).
+
+2007-11-25: version 1.1.20
+
+   * --replcheck didn't recurse; it should recurse one level (to slaves).
+
+2007-11-18: version 1.1.19
+
+   * Check for needed privileges on --replicate table before beginning.
+   * Made some error messages more informative.
+   * Fixed child process exit status with 8-bit right-shift.
+   * Improved checksumming code auto-detects best algorithm and function.
+   * Added --ignoreengine option; ignores federated and merge by default.
+   * Added --columns and --checksum options.
+   * Removed --chunkcol, --chunksize-exact, --index options.
+   * --chunksize can be specified as a data size now.
+   * Improved chunking algorithm handles more cases and uses fewer chunks.
+   * Do not print --replcheck results for servers that are not slaves.
+   * Create only one DB connection for each host, not one per host/tbl/chunk.
+   * Code assumed backtick quoting, broke on SQL_MODE=ANSI (bug #1813030).
+   * There were many potential bugs with database and table name quoting.
+   * Child exit status errors could be masked by subsequent successes.
+
+2007-11-12: version 1.1.18
+
+   * DSN Parsing was broken.
+
+2007-11-04: version 1.1.17
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-10-01: version 1.1.16
+
+   * Made mk-checksum-filter able to compare tables in different databases.
+
+2007-09-20: version 1.1.15
+
+   * The CHECKSUM strategy was always disabled.
+
+2007-09-01: version 1.1.14
+
+   * Added documentation about the storage engine for the checksum table.
+   * The --replcheck option now checks the server and its slaves.
+
+2007-08-23: version 1.1.13
+
+   * MySQL socket connection option didn't work.
+   * Added --askpass option.
+
+2007-07-26: version 1.1.12
+
+   * mk-table-checksum could crash when it tried to checksum on a table that
+     was removed.
+
+2007-07-20: version 1.1.11
+
+   * Added --replcheck option to check --replicate results on slaves.
+   * Added --recursecheck option to do --replcheck recursively.
+
+2007-07-10: version 1.1.10
+
+   * Handle malformed values that will return undef start and end points in
+     chunking.
+   * Updated documentation's example query to be run on the slave.
+
+2007-07-10: version 1.1.9
+
+   Changes:
+   * Enabled chunking on FLOAT, DOUBLE and DECIMAL columns.
+
+   Bugs fixed:
+   * mk-table-checksum crashed when EXPLAIN said an empty table had rows.
+   * mk-table-checksum failed to find rows on slaves that didn't exist
+     on the master.
+   * Changed from BETWEEN to WHERE clauses.
+
+2007-06-22: version 1.1.8
+
+   Changes:
+   * Documentation.
+   * Support complex host definitions.
+   * Added --explainhosts option to debug host definitions.
+   * Added --explain option.
+   * When exact chunking is impossible, mk-table-checksum will use approximate.
+
+   Incompatible changes:
+   * Added required 'boundaries' column to checksum table for --replicate.
+
+   Bugs fixed:
+   * Chunking on temporal types defeated indexes.
+
+2007-06-10: version 1.1.7
+
+   * Added --defaults-file option.
+   * Added standard --version command-line option.
+
+2007-06-03: version 1.1.6
+
+   Incompatible changes:
+   * The chunking functionality no longer guarantees chunks will be no larger
+     than the specified size.  Use --chunksize-exact for that.  Note that the
+     chunking functionality is still experimental and likely to change further.
+
+   Changes:
+   * Chunking now works with multiple-column indexes.
+   * Added --quiet option, useful for cron jobs with --replicate.
+   * Added --float-precision option; works around different floating-point formats.
+   * Added --sleep-coef option; sleeps a multiple of the time the last checksum took.
+   * Added error handling for tables that are dropped during checksumming.
+   * Added documentation on the finer points of --replicate-do and --binlog-do.
+
+   Bugs fixed:
+   * There was a race condition between listing and checksumming tables.
+   * Perl's auto-vivify hashes could cause all tables to be skipped after the
+     first VIEW.
+   * Some DBIs did not consider ? inside a comment to be a placeholder.
+   * Systems that return nothing from CHECKSUM TABLE crashed mk-table-checksum.
+   * --askpass did not print a newline after reading password.
+   * Different TIMESTAMP display formatting could cause spurious checksum differences.
+   * Checksumming by chunks did not work when the chunk column contained NULL.
+   * --replicate did not always work correctly with binlog_do_db.
+
+2007-05-16: version 1.1.5
+
+   Incompatible changes:
+   * Output includes a new CHUNK column.
+   * When using --replicate, the specified table structure needs a new 'chunk' column.
+
+   Changes:
+   * Added --chunksize and --chunkcol options to checksum tables in chunks.
+   * Added --sleep option to pause between checksum queries.
+   * Added --emptyrepltbl option to empty --replicate table before starting work.
+   * Added --defaults-file option to read a given MySQL options file.
+   * Check for existence of --replicate table before starting work.
+   * Updated mk-checksum-filter to handle the new CHUNK column in the output.
+   * More documentation.
+   * More tests in the test suite.
+
+   Bugs fixed:
+   * The output in --replicate mode had an empty string in CHECKSUM when the
+     table had no rows (bad for scriptability).
+   * The --optxor optimization was broken and always disabled itself.
+
+2007-05-05: version 1.1.0
+
+   * Added a way to do checksums on slaves via replication.
+   * Added a row-order-independent BIT_XOR checksum algorithm.
+   * Much better documentation, which reflects more logically designed program.
+   * Added compatibility options for MySQL 3.23.58 through 6.0 alpha.
+   * Added a test suite.
+   * As per Heikki Tuuri, InnoDB and other engines can do CHECKSUM TABLE since 4.1.1
+   * Made existing ACCUM user-variable algorithm work with SELECT and INSERT.
+   * Changed default behavior for --count to avoid extra COUNT(*) query.
+   * Added --algorithm, --askpass, --defaults-file, --index, --replicate, and --separator options.
+   * Added warnings if the cmdline options are wrong.
+   * Don't fork when there is only one host.
+   * Speed and query optimizations.
+
+2007-04-05: version 1.0.4
+
+   * Verify servers have compatible MySQL version so checksums are valid.
+   * Documentation.
+
+2007-03-25: version 1.0.3
+
+   * Rewrite the GetOpt::Long code and rely on DBD to read MySQL option files.
+   * Make the exit code behave as expected.
+   * Handle errors from tables that have gone away or can't be read.
+   * Change command-line option names.
+
+2007-03-06: version 1.0.2
+
+   * Fix more quoting
+   * Fix an off-by-one error in mk-checksum-filter
+
+2007-03-02: version 1.0.1
+
+   * Fix quoting and skip lost+found database
+   * Add documentation
+
+2007-02-26: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-table-sync:
+
+2011-01-06: version 1.0.31
+
+   * Made performance_schema an always ignored database (issue 1193).
+   * Added START and END times to verbose output (issue 377).
+   * Added CURRENT_USER() to insufficient privileges error message (issue 1167).
+
+2010-08-01: version 1.0.30
+
+   * The tool did not retry MASTER_POS_WAIT for --wait (issue 748).
+
+2010-07-01: version 1.0.29
+
+   * Empty result set with MySQL 4.0 could caused a crash (issue 672).
+   * Added trace messages to write statements (issue 387).
+   * --algorithms was case-sensitive (issue 1065).
+   * Hex-like stings were not quoted (issue 1019).
+   * The tool didn't set its transaction isolation level (issue 652).
+   * Added --[no]zero-chunk (issue 941).
+
+2010-06-08: version 1.0.28
+
+   * Chunking failed on invalid dates (issue 602).
+   * --replicate caused chunking parameters to be ignored (issue 996).
+   * "0x" was used instead of "" for empty blob and text values (issue 1052).
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-05-03: version 1.0.27
+
+   * Added --[no]hex-blob to HEX() BLOB data by default (issue 641).
+   * Tool crashed on MySQL 4.0 due to "SHOW GRANTS" (issue 285).
+
+2010-04-01: version 1.0.26
+
+   * --trim caused impossible WHERE and invalid SQL (issue 965).
+   * Tool crashed using --ask-pass if no DSN h part was specified (issue 947).
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-03-01: version 1.0.25
+
+   * Row-based replication prevented some changes (issue 95).
+   * Added --bidirectional (issue 464).
+   * Added --conflict-column for bidirectional sync (issue 464).
+   * Added --conflict-comparison for bidirectional sync (issue 464).
+   * Added --conflict-value for bidirectional sync (issue 464).
+   * Added --conflict-threshold for bidirectional sync (issue 464).
+   * Added --conflict-error for bidirectional sync (issue 464).
+
+2010-02-01: version 1.0.24
+
+   * Nibble did not case-insensitively check its index (issue 804).
+
+2010-01-06: version 1.0.23
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-12-02: version 1.0.22
+
+   * Added note to output when using --dry-run (issue 691).
+
+2009-10-30: version 1.0.21
+
+   * Fixed an infinite loop with the Nibble algorithm (issue 644).
+   * Nibble could fail to sync small tables (issue 634).
+   * --set-vars did not work (issue 597).
+   * Column order was not preserved in SQL statments (issue 371).
+   * GroupBy and Stream algorithms did not reset after first table (issue 631).
+   * Command line options did not override config file options (issue 617).
+
+2009-10-01: version 1.0.20
+
+   * --replicate did not work.
+
+2009-09-30: version 1.0.19
+
+   * Fixed an infinite loop with the Nibble algorithm (issue 96).
+   * Fixed incorrect INSERT values (issue 616).
+   * Changed --algorithm to --algorithms and changed what it does.
+   * Changed --[no]slave-check to --[no]check-slave.
+   * Changed --with-triggers to --[no]check-triggers.
+   * Changed --buffer-results to --[no]buffer-to-client.
+   * Changed --no-use-index to --[no]index-hint.
+   * Added --[no]check-privileges.
+   * Added --chunk-index.
+   * Added --chunk-column.
+   * Added --float-precision (issue 410).
+   * Made --verbose cumulative.
+   * Master-master sync did not require --no-slave-check.
+
+2009-08-31: version 1.0.18
+
+   * Added --[no]check-master (issue 110).
+   * --lock 3 did not work (issue 86).
+   * The script did not work with MySQL replicate-do-db (issue 533).
+   * Removed --[no]utf8.  Pass the C<A> option in a DSN instead.
+   * Added standard connection options like --host, --port, etc.(issue 248).
+   * --databases was not honored when using --replicate (issue 367).
+
+2009-07-31: version 1.0.17
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+   * Added --recursion-method option (issue 181).
+   * Could not sync table to different db or table on different host (issue 40).
+   * Script needlessly checked for triggers on servers <5.0.2 (issue 294).
+
+2009-06-02: version 1.0.16
+
+   * Added --pid option to make script die if PID file exists (issue 391).
+   * Missing --databases on destination hosts caused crash (issue 408).
+   * Removed the --test long option.  Use --dry-run instead.
+   * Removed the --askpass long option.  Use --ask-pass instead.
+   * Removed the --bufferresults long option.  Use --buffer-results instead.
+   * Removed the --bufferinmysql long option.  Use --buffer-in-mysql instead.
+   * Removed the --chunksize long option.  Use --chunk-size instead.
+   * Removed the --engine long option.  Use --engines instead.
+   * Removed the --explainhosts long option.  Use --explain-hosts instead.
+   * Removed the --ignoredb long option.  Use --ignore-databases instead.
+   * Removed the --ignoreengine long option.  Use --ignore-engines instead.
+   * Removed the --ignoretbl long option.  Use --ignore-tables instead.
+   * Removed the --ignore-trigger long option.  Use --with-triggers instead.
+   * Removed the --nouseindex long option.  Use --no-use-index instead.
+   * Removed the --setvars long option.  Use --set-vars instead.
+   * Removed the --skipbinlog long option.  Use --[no]bin-log instead.
+   * Removed the --skipforeignkey long option.  Use --[no]foreign-key-checks.
+   * Removed the --skipslavecheck long option.  Use --[no]slave-check instead.
+   * Removed the --skipuniquekey long option.  Use --[no]unique-checks.
+   * Removed the --synctomaster long option.  Use --sync-to-master instead.
+   * Removed the --timeoutok long option.  Use --timeout-ok instead.
+   * Removed the -a short option.  Use --algorithm instead.
+   * Removed the -x short option.  Use --execute instead.
+   * Removed the -f short option.  Use --function instead.
+   * Removed the -g short option.  Use --ignore-databases.
+   * Removed the -E short option.  Use --ignore-engines instead.
+   * Removed the -n short option.  Use --ignore-tables instead.
+   * Removed the -k short option.  Use --lock instead.
+   * Removed the -p short option.  Use --print instead.
+   * Removed the -r short option.  Use --replace instead.
+   * Removed the -R short option.  Use --replicate instead.
+   * Removed the -K short option.  Use --[no]foreign-key-checks.
+   * Removed the -s short option.  Use --sync-to-master instead.
+   * Removed the -W short option.  Use --where instead.
+   * Added the --config option for issue 231.
+   * Added the --help and --verbose options for issue 318.
+   * Converted script to runnable module (issue 315).
+
+2009-05-03: version 1.0.15
+
+   * Columns with backticks in comments caused a crash (issue 330)
+   * Added --lock-and-rename (issue 363).
+
+2009-03-31: version 1.0.14
+
+   * Send debugging output to STDERR (issue 308).
+   * Added --ignore-columns option (issue 313).
+   * Two NULL column values didn't compare properly w/ Stream/GroupBy (issue 218).
+   * Removed string interpolation from debugging calls (issue 308)
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Made --where and --replicate mutually exclusive (issue 302).
+   * Updates to shared code.
+
+2009-03-01: version 1.0.13
+
+   * Added --explainhosts option (issue 293).
+   * Throw an error when trying to use D= to restrict syncing to one database.
+   * Checking tables for triggers caused a crash (issue 262).
+   * Database or table names with spaces caused a crash (issue 262).
+
+2009-02-01: version 1.0.12
+
+   * An older DBD library caused an infinite loop (issue 11).
+   * Updated common modules.
+
+2008-12-01: version 1.0.11
+
+   * Updates to shared code.
+   * The tool now requires at least --print, --execute or --test (issue 111).
+   * --askpass and a bareword host in the DSN caused a crash (issue 108).
+   * Filters on objects weren't applied as early as possible (issue 99).
+
+2008-10-17: version 1.0.10
+
+   * --tables was not honored when using --replicate (issue 79).
+   * Updated documentation (issue 85).
+   * --replicate failed cryptically on truncated boundaries column (issue 81).
+
+2008-09-19: version 1.0.9
+
+   * Added --nouseindex option (issue 8).
+   * Dies if any dest table has triggers unless --ignore-triggers (issue 37).
+   * Added better support for CRC32 (issue 43).
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.8
+
+   * Files downloaded directly from SVN crashed due to version information.
+   * --synctomaster did not abort when unable to discover the master.
+   * An error waiting for the master to catch up caused other tables to fail.
+   * Added --bufferinmysql to help make GroupBy algorithm more efficient.
+   * Added safety checks to prevent changing data on a slave server.
+   * Added --skipslavecheck to prevent safety checks on destination server.
+   * Made the GroupBy algorithm the default replacement for Stream.
+   * Added the GroupBy algorithm, which can sync tables without unique keys.
+   * Syncing could stop and leave a row to delete in the destination.
+   * Generate command-line help from the POD.
+
+2008-06-02: version 1.0.7
+
+   * Added NO_AUTO_VALUE_ON_ZERO to @@SQL_MODE (bug #1919897).
+   * Added --trim to compare pre-5.0 and 5.0+ VARCHAR values consistently.
+
+2008-03-16: version 1.0.6
+
+   * --chunksize was not being converted to rowcount (bug #1902341).
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Deprecated the --utf8 option in favor of the A part in DSNs.
+   * Mixed-case identifiers caused case-sensitivity issues (bug #1910276).
+   * Prefer SHOW PROCESSLIST when looking for slaves of a server.
+
+2008-02-10: version 1.0.5
+
+   * The Stream algorithm wasn't chosen when a table had no key.
+   * Numeric strings beginning with 0 weren't quoted (bug #1883019).
+
+2008-01-24: version 1.0.4
+
+   * Made the --algorithm option case-insensitive (bug #1873152).
+   * Fixed a quoting bug.
+   * Made the UTF-8 options configurable.
+
+2008-01-05: version 1.0.3
+
+   * Added the --function command-line option.
+   * Added support for the FNV_64 hash function (see mk-table-checksum).
+   * Made suffixes for time options optional (bug #1858696).
+   * InnoDB tables use --transaction unless it's explicitly specified.
+
+2007-12-27: version 1.0.2
+
+   * Syncing via replication did not use REPLACE on the master.
+   * --transaction disabled waiting for a slave to catch up.
+   * Allow one DSN without --replicate, as long as --synctomaster is given.
+   * Added the Nibble sync algorithm.
+   * MASTER_POS_WAIT() failed when the server was not a master (bug #1855480).
+   * DBD::mysql died after 'commands out of sync' error (bug #1856046).
+
+2007-12-16: version 1.0.1
+
+   * Empty strings were not quoted (bug #1848431).
+   * --tables and --ignoretables now accept names in the form db.tbl.
+
+2007-12-07: version 1.0.0
+
+   * Complete rewrite.
+   * Syncs multiple tables and servers
+   * Has no top-down or bottom-up algorithms
+   * Integrates with mk-table-checksum results
+   * Fixes many bugs, probably introduces new ones
+
+2007-11-12: version 0.9.9
+
+   * DSN parsing was broken when --synctomaster was given with one DSN.
+   * Changed --replicate to --synctomaster option.
+   * Errors were being hidden in an EVAL when --execute was specified (bug #1819744).
+
+2007-11-04: version 0.9.8
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-10-01: version 0.9.7
+
+   * The special command-line syntax didn't allow a bare hostname.
+   * Added an informative printout of what is being synced.
+
+2007-08-23: version 0.9.6
+
+   * Added --askpass option.
+   * Changed --replicate option to --synctomaster.
+   * Fixed the MySQL socket option.
+   * Made --synctomaster able to connect to the master from SHOW SLAVE STATUS.
+   * MySQL socket connection option didn't work.
+   * Suppress duplicated error messages from MySQL.
+   * Changed DSN from URL-ish format to key=value format.
+   * Generated WHERE clauses weren't properly isolated in parentheses.
+   * Changed exit status to 0 when --help is given.
+   * Made --replicate imply --wait 60.
+
+2007-06-22: version 0.9.5
+
+   * Documentation.
+
+2007-06-10: version 0.9.4
+
+   * Added --defaults-file option.
+   * Added standard --version command-line option.
+
+2007-05-17: version 0.9.3
+
+   New features:
+
+   * Added --where option to limit syncing to part of a table.
+   * Added --defaults-file option to mimic MySQL's tools better.
+   * Added --skipforeignkey option to disable foreign key checks.
+
+   Bug fixes:
+   * Server-side STRCMP comparisons were being done on an in-use connection.
+
+2007-04-12: version 0.9.2
+
+   * Documentation (added OPTIONS section to perldoc).
+   * Bug fix: get a row at a time from the server by default.
+   * Bug fix: when the user specifies --columns, ignore other columns.
+   * Bug fix: make sure fetch handle is active before trying to fetch a row.
+
+2007-04-05: version 0.9.1
+
+   * Documentation.
+   * Fix order of drilldown groupings in topdown algorithm.
+   * Fix logarithmic math for bottomup algorithm (determining size from level).
+   * Add --queries option.  Add SQL comments to some queries.
+   * Add --singletxn option.
+   * Fix key comparison to match MySQL's sort order.
+   * Re-order statements to DELETE, UPDATE, INSERT.
+   * Add --deleteinsert option.
+   * Verify CONCAT_WS is compatible on both servers.
+   * Add test script.
+
+2007-03-25: version 0.9.0
+
+   * Rewrite the GetOpt::Long code and rely on DBD to read MySQL option files.
+   * Change some parsing of DSNs.
+   * Handle UPDATE statements correctly in handle_data_change.
+   * Handle some special cases in locking for consistency.
+
+2007-03-18: version 0.8.0
+
+   * Initial release.
+
+Changelog for mk-upgrade:
+
+2010-06-08: version 0.9.8
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-05-03: version 0.9.7
+
+   * Shortened hostname column headers.
+
+2010-04-01: version 0.9.6
+
+   * --compare-results-method=rows did not use default database (issue 951).
+   * --compare-results-method=rows did not use --temp-database (issue 951).
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 0.9.5
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+   * Changed output to print sample query instead of fingerprints.
+   * Added --fingerprints.
+   * Added --convert-to-select (issue 747).
+   * Added --shorten.
+   * Script crashed when subreport query IDs were too long.
+
+2009-12-02: version 0.9.4
+
+   * Completely redesigned the tool.
+
+2009-10-30: version 0.9.3
+
+   * Added --[no]compare-query-times.
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 0.9.2
+
+   * Tables from some multi-line queries could not be parsed.
+   * CHECKSUM TABLE did not always work.
+   * Added --single-host.
+   * Added --only-failed-queries.
+   * Added --pid (issue 391).
+
+2009-08-31: version 0.9.1
+
+   * The printed value for Host2_Query_time was incorrect.
+   * Added "rows" compare results method.
+   * Added --max-differences.
+   * Added --float-precision.
+   * Added --all-errors.
+   * Added --[no]errors.
+   * Added --[no]reasons.
+   * Added --tmp-table-database
+   * Added --compare-results-method.
+   * Added --[no]compare-warnings.
+
+2009-07-31: version 0.9.0
+
+   * Initial release.
+
+Changelog for mk-variable-advisor:
+
+2011-02-09: version 1.0.2
+
+   * The tool did not prompt for a password with --ask-pass (issue 1243).
+
+2010-09-11: version 1.0.1
+
+   * The --source-of-variables filename was made lowercase (issue 1115).
+   * Parsing tab-separated output failed (issue 1116).
+
+2010-08-01: version 1.0.0
+
+   * Initial release.
+
+Changelog for mk-visual-explain:
+
+2010-06-08: version 1.0.22
+
+   * Connections did not preserve server SQL modes (issue 801).
+
+2010-04-01: version 1.0.21
+
+   * Added DSN OPTIONS section to POD (issue 55).
+
+2010-01-06: version 1.0.20
+
+   * The script crashed immediately on some OS or versions of Perl (issue 733).
+
+2009-10-30: version 1.0.19
+
+   * --set-vars did not work (issue 597).
+   * Command line options did not override config file options (issue 617).
+
+2009-09-30: version 1.0.18
+
+   * Added --pid (issue 391).
+
+2009-07-31: version 1.0.17
+
+   * Added RISKS section to POD (issue 538).
+   * The script crashed immediately on Windows (issue 531).
+
+2009-06-30: version 1.0.16
+
+   * --ask-pass did not work (issue 453).
+   * --format dump did not work (issue 393).
+   * Updates to shared code.
+
+2009-06-02: version 1.0.15
+
+   * Optional input files were not read (issue 394).
+
+2009-05-03: version 1.0.14
+
+   * Changed the --askpass option to --ask-pass.
+   * Changed the --clusterpk option to --clustered-pk.
+   * Changed the --setvars option to --set-vars.
+   * Removed the -C short option.  Use --clustered-pk instead.
+   * Removed the -c short option.  Use --connect instead.
+   * Removed the -f short option.  Use --format instead.
+   * Added config file handling and --config (issue 231).
+   * Converted script to runnable module (issue 315).
+
+2009-03-31: version 1.0.13
+
+   * Send debugging output to STDERR (issue 308).
+   * Removed string interpolation from debugging calls (issue 308).
+   * Connection options were not read from the [client] section (issue 249).
+   * Set connection options immediately after connecting (issue 286).
+   * Updates to shared code.
+
+2008-12-01: version 1.0.12
+
+   * Updates to shared code.
+
+2008-10-17: version 1.0.11
+
+   * There was a Perl compilation error on Perl 5.10 (issue 90).
+
+2008-09-19: version 1.0.10
+
+   * Updates to shared code.
+   * Made debugging code more efficient in non-debug mode.
+
+2008-08-11: version 1.0.9
+
+   * Files downloaded directly from SVN crashed due to version information.
+
+2008-06-02: version 1.0.8
+
+   * Updated common code.
+
+2008-03-16: version 1.0.7
+
+   * Added --setvars option (bug #1904689, bug #1911371).
+   * Added --charset option (bug #1877548).
+
+2007-12-16: version 1.0.6
+
+   * Updated common code, added debugging.
+
+2007-12-07: version 1.0.5
+
+   * Updated common code.
+   * Queries of the form "... FROM (SELECT 1) AS X" crashed the tool.
+
+2007-11-04: version 1.0.4
+
+   * Made command-line help easier to use.
+   * Removed the dependency on Term::ReadKey.
+   * Replaced some code with modules that are unit-tested.
+
+2007-09-20: version 1.0.3
+
+   * filesort wasn't applied to the first non-constant table.
+
+2007-09-01: version 1.0.2
+
+   * FULLTEXT indexes were not recognized (type=fulltext in EXPLAIN).
+   * Temporary/filesort were not added to the right node in the tree.
+   * Added a new node type for "Range checked for each record."
+
+2007-08-23: version 1.0.1
+
+   * MySQL socket connection option didn't work.
+   * Added --askpass option.
+   * UNIONs inside a SUBQUERY weren't correctly nested.
+   * Some types of impossible queries weren't handled.
+
+2007-07-28: version 1.0.0
+
+   * Initial release.

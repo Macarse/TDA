@@ -1,0 +1,433 @@
+package maatkit;
+
+our $VERSION = '7332';
+
+1;
+
+=pod
+
+=head1 NAME
+
+maatkit - Essential command-line utilities for MySQL.
+
+=head1 DESCRIPTION
+
+Maatkit is a collection of command-line utilities that provide missing
+functionality for MySQL.  Some of the tools implement lacking server
+functionality, such as online consistency checks for master/slave replication;
+others are client-side utilities such as a query profiler.
+
+The following tools are included:
+
+   $Revision: 7332 $
+mk-archiver 1.0.26
+mk-deadlock-logger 1.0.21
+mk-duplicate-key-checker 1.2.14
+mk-error-log 1.0.3
+mk-fifo-split 1.0.7
+mk-find 0.9.23
+mk-heartbeat 1.0.22
+mk-index-usage 0.9.4
+mk-kill 0.9.9
+mk-loadavg 0.9.7
+mk-log-player 1.0.9
+mk-parallel-dump 1.0.28
+mk-parallel-restore 1.0.24
+mk-purge-logs 0.9.0
+mk-query-advisor 1.0.4
+mk-query-digest 0.9.27
+mk-query-profiler 1.1.22
+mk-show-grants 1.0.23
+mk-slave-delay 1.0.23
+mk-slave-find 1.0.15
+mk-slave-move 0.9.12
+mk-slave-prefetch 1.0.21
+mk-slave-restart 1.0.22
+mk-table-checksum 1.2.20
+mk-table-sync 1.0.31
+mk-upgrade 0.9.8
+mk-variable-advisor 1.0.2
+mk-visual-explain 1.0.22
+
+=over
+
+
+=item mk-archiver
+
+Archive rows from a MySQL table into another table or a file. See L<mk-archiver>.
+
+=item mk-checksum-filter
+
+Filter checksums from mk-table-checksum. See L<mk-checksum-filter>.
+
+=item mk-deadlock-logger
+
+Extract and log MySQL deadlock information. See L<mk-deadlock-logger>.
+
+=item mk-duplicate-key-checker
+
+Find duplicate indexes and foreign keys on MySQL tables. See L<mk-duplicate-key-checker>.
+
+=item mk-error-log
+
+Find new and different MySQL error log entries. See L<mk-error-log>.
+
+=item mk-fifo-split
+
+Split files and pipe lines to a fifo without really splitting. See L<mk-fifo-split>.
+
+=item mk-find
+
+Find MySQL tables and execute actions, like GNU find. See L<mk-find>.
+
+=item mk-heartbeat
+
+Monitor MySQL replication delay. See L<mk-heartbeat>.
+
+=item mk-index-usage
+
+Read queries from a log and analyze how they use indexes. See L<mk-index-usage>.
+
+=item mk-kill
+
+Kill MySQL queries that match certain criteria. See L<mk-kill>.
+
+=item mk-loadavg
+
+Watch MySQL load and take action when it gets too high. See L<mk-loadavg>.
+
+=item mk-log-player
+
+Replay MySQL query logs. See L<mk-log-player>.
+
+=item mk-merge-mqd-results
+
+Merge multiple mk-query-digest reports into one. See L<mk-merge-mqd-results>.
+
+=item mk-parallel-dump
+
+(DEPRECATED) Dump MySQL tables in parallel. See L<mk-parallel-dump>.
+
+=item mk-parallel-restore
+
+(DEPRECATED) Load files into MySQL in parallel. See L<mk-parallel-restore>.
+
+=item mk-profile-compact
+
+Compact the output from mk-query-profiler. See L<mk-profile-compact>.
+
+=item mk-purge-logs
+
+Purge binary logs on a master based on purge rules. See L<mk-purge-logs>.
+
+=item mk-query-advisor
+
+Analyze queries and advise on possible problems. See L<mk-query-advisor>.
+
+=item mk-query-digest
+
+Analyze query execution logs and generate a query report,
+filter, replay, or transform queries for MySQL, PostgreSQL, memcached, and more. See L<mk-query-digest>.
+
+=item mk-query-profiler
+
+Execute SQL statements and print statistics, or measure
+activity caused by other processes. See L<mk-query-profiler>.
+
+=item mk-show-grants
+
+Canonicalize and print MySQL grants so you can effectively
+replicate, compare and version-control them. See L<mk-show-grants>.
+
+=item mk-slave-delay
+
+Make a MySQL slave server lag behind its master. See L<mk-slave-delay>.
+
+=item mk-slave-find
+
+Find and print replication hierarchy tree of MySQL slaves. See L<mk-slave-find>.
+
+=item mk-slave-move
+
+Move a MySQL slave around in the replication hierarchy. See L<mk-slave-move>.
+
+=item mk-slave-prefetch
+
+Pipeline relay logs on a MySQL slave to pre-warm caches. See L<mk-slave-prefetch>.
+
+=item mk-slave-restart
+
+Watch and restart MySQL replication after errors. See L<mk-slave-restart>.
+
+=item mk-table-checksum
+
+Perform an online replication consistency check, or
+checksum MySQL tables efficiently on one or many servers. See L<mk-table-checksum>.
+
+=item mk-table-sync
+
+Synchronize MySQL table data efficiently. See L<mk-table-sync>.
+
+=item mk-upgrade
+
+Execute queries on multiple servers and check for differences. See L<mk-upgrade>.
+
+=item mk-variable-advisor
+
+Analyze MySQL variables and advise on possible problems. See L<mk-variable-advisor>.
+
+=item mk-visual-explain
+
+Format EXPLAIN output as a tree. See L<mk-visual-explain>.
+
+=back
+
+=head1 INSTALLATION
+
+Strictly speaking these tools require no installation; you should be able to
+run them stand-alone.  However, on UNIX-ish systems you can use the standard
+Perl installation sequence:
+
+   cd <package directory>
+   perl Makefile.PL
+   make install
+
+=head1 CONFIGURATION
+
+Maatkit tools can read options from configuration files.  The configuration file
+syntax is simple and direct, and bears some resemblances to the MySQL
+command-line client tools.  The configuration files all follow the same
+conventions.
+
+Internally, what actually happens is that the lines are read from the file and
+then added as command-line options and arguments to the Maatkit tool, so just
+think of the configuration files as a way to write your command lines.
+
+=head2 SYNTAX
+
+The syntax of the files is as follows:
+
+=over
+
+=item *
+
+Whitespace followed by a hash (#) sign signifies that the rest of the line is a
+comment.  This is deleted.
+
+=item *
+
+Whitespace is stripped from the beginning and end of all lines.
+
+=item *
+
+Empty lines are ignored.
+
+=item *
+
+Each line is permitted to be in either of the following formats:
+
+  option
+  option=value
+
+Whitespace around the equals sign is deleted during processing.
+
+=item *
+
+Only long options are recognized.
+
+=item *
+
+A line containing only two hyphens signals the end of option parsing.  Any
+further lines are interpreted as additional arguments (not options) to the
+program.
+
+=back
+
+=head2 FILES
+
+The tools read several configuration files in order:
+
+=over
+
+=item 1.
+
+The global Maatkit configuration file, /etc/maatkit/maatkit.conf.  All tools
+read this file, so you should only add options to it that you want to apply to
+all Maatkit tools.
+
+=item 2.
+
+The global tool configuration file, /etc/maatkit/[toolname].conf.  This file is
+named after the specific tool you're using, so you can add options that apply
+only to that tool.
+
+=item 3.
+
+The user's own Maatkit configuration file, $HOME/.maatkit.conf.  All tools read
+this file, so you should only add options to it that you want to apply to all
+Maatkit tools.
+
+=item 4.
+
+The user's tool configuration file, $HOME/.[toolname].conf.  This file is named
+after the specific tool you're using, so you can add options that apply only to
+that tool.
+
+=back
+
+=head2 SPECIFYING CONFIGURATION FILES
+
+There is a special --config option, which lets you specify which configuration
+files Maatkit should read.  You specify a comma-separated list of files.
+However, its behavior is not like other command-line options.  It must be given
+B<first> on the command line, before any other options.  If you try to specify
+it anywhere else, it will cause an error.  Also, you cannot specify
+--config=/path/to/file; you must specify the option and the path to the file(s)
+separated by whitespace, without an equals-sign between them, e.g.
+
+  --config /path/to/file
+
+If you don't want any configuration files at all, specify C<--config ''> to
+provide an empty list of files.
+
+=head1 DSN (DATA SOURCE NAME) SPECIFICATIONS
+
+Maatkit uses DSNs to specify how to create a DBD connection to a MySQL server.
+The maatkit tools that have command-line arguments such as -u or -p use them to
+create a DSN behind the scenes, then use the DSN to connect to MySQL.
+
+A DSN is a string of key=value parts separated by commas.  The possible keys are
+shown later in this document.  You can also get a quick synopsis from the --help
+output of many of the maatkit tools.
+
+=head2 PARTS
+
+Many of the tools add more parts to DSNs for special purposes, and sometimes
+override parts to make them do something slightly different.  However, all the
+tools support at least the following:
+
+=over
+
+=item A
+
+Specifies the default character set for the connection.
+
+Enables character set settings in Perl and MySQL.  If the value is C<utf8>, sets
+Perl's binmode on STDOUT to utf8, passes the C<mysql_enable_utf8> option to
+DBD::mysql, and runs C<SET NAMES UTF8> after connecting to MySQL.  Any other
+value sets binmode on STDOUT without the utf8 layer, and runs C<SET NAMES> after
+connecting to MySQL.
+
+Unfortunately, there is no way from within Perl itself to specify the client
+library's character set.  C<SET NAMES> only affects the server; if the client
+library's settings don't match, there could be problems.  You can use the
+defaults file to specify the client library's character set, however.  See the
+description of the F part below.
+
+=item D
+
+Specifies the connection's default database.
+
+=item F
+
+Specifies a defaults file the mysql client library (the C client library used by
+DBD::mysql, I<not maatkit itself>) should read.  The maatkit tools all read the
+[client] section within the defaults file.  If you omit this, the standard
+defaults files will be read in the usual order.  "Standard" varies from system
+to system, because the filenames to read are compiled into the client library.
+On Debian systems, for example, it's usually /etc/mysql/my.cnf then ~/.my.cnf.
+If you place the following into ~/.my.cnf, maatkit will Do The Right Thing:
+
+ [client]
+ user=your_user_name
+ pass=secret
+
+Omitting the F part is usually the right thing to do.  As long as you have
+configured your ~/.my.cnf correctly, that will result in maatkit connecting
+automatically without needing a username or password.
+
+You can also specify a default character set in the defaults file.  Unlike the
+L<"A"> part described above, this will actually instruct the client library
+(DBD::mysql) to change the character set it uses internally, which cannot be
+accomplished any other way as far as I know, except for C<utf8>.
+
+=item P
+
+Port number to use for the connection.  Note that the usual special-case
+behaviors apply: if you specify C<localhost> as your hostname on Unix systems,
+the connection actually uses a socket file, not a TCP/IP connection, and thus
+ignores the port.
+
+=item S
+
+Socket file to use for the connection (on Unix systems).
+
+=item h
+
+Hostname or IP address for the connection.
+
+=item p
+
+Password to use when connecting.
+
+=item u
+
+User for login if not current user.
+
+=back
+
+=head2 BAREWORD
+
+Many of the tools will let you specify a DSN as a single word, without any
+key=value syntax.  This is called a 'bareword'.  How this is handled is
+tool-specific, but it is usually interpreted as the L<"h"> part.  The tool's
+--help output will tell you the behavior for that tool.
+
+=head2 DEFAULT PROPAGATION
+
+Many tools will let you propagate values from one DSN to the next, so you don't
+have to specify all the parts for each DSN.  For example, if you want to specify
+a username and password for each DSN, you can connect to three hosts as follows:
+
+ h=host1,u=fred,p=wilma host2 host3
+
+This is tool-specific.
+
+=head1 SYSTEM REQUIREMENTS
+
+You need Perl, DBI, DBD::mysql, and some core packages that ought to be
+installed in any reasonably new version of Perl.
+
+=head1 BUGS
+
+If you find bugs, need features, etc please use the bug tracker, forums, and
+mailing lists at http://code.google.com/p/maatkit/
+
+=head1 COPYRIGHT, LICENSE AND WARRANTY
+
+This program is copyright (c) 2007 Baron Schwartz and others.  Feedback and
+improvements are welcome.
+
+THIS PROGRAM IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, version 2; OR the Perl Artistic License.  On UNIX and similar
+systems, you can issue `man perlgpl' or `man perlartistic' to read these
+licenses.
+
+You should have received a copy of the GNU General Public License along with
+this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+Place, Suite 330, Boston, MA  02111-1307  USA.
+
+=head1 AUTHOR
+
+See the individual program's documentation for details.
+
+=head1 VERSION
+
+This manual page documents Distrib 7332 $Revision: 534 $.
+
+=cut

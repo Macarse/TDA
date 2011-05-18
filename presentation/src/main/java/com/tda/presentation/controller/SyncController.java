@@ -1,5 +1,7 @@
 package com.tda.presentation.controller;
 
+import java.io.File;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -27,63 +29,84 @@ public class SyncController {
 	@RequestMapping(value = "/do", method = RequestMethod.GET)
 	public ModelAndView sync(@Valid @ModelAttribute ConfigSync configSync,
 			BindingResult result) {
-		String respMessage = "";
 		// Variables a parametrizas
-		String maatkitDir = "/Users/iandrono/Documents/ITBA/PF/maatkit-7332";
+
+		String maatkitDir = "/Users/iandrono/Documents/ITBA/PF/TDA/presentation/src/main/webapp/maatkit-7332";
+		// String maatkitDir = System.getProperty("user.dir") + "/maatkit-7332";
 		String localPort = "8889";
 		String bothDBUser = "root";
 		String bothDBpass = "root";
+		String respMessage = "";
 
 		ModelAndView model = new ModelAndView(MAIN);
 
 		if (result.hasErrors()) {
+			// Primero valido el formulario
 			model.addObject("configSync", configSync);
 		} else {
-
-			try {
-
+			// 1 check que esta la lib de sync:
+			File file = new File(maatkitDir + "/bin/mk-table-sync");
+			if (!file.exists())
+				respMessage = "Error: libreria de sincronizacion no encontrada";
+			else {
+				// 2 check si tenemos perl:
 				Runtime runtime = Runtime.getRuntime();
-				Process process = runtime.exec("perl " + maatkitDir
-						+ "/bin/mk-table-sync --execute h=localhost:"
-						+ localPort + ",u=" + bothDBUser + ",p=" + bothDBpass
-						+ " --databases tda h=" + configSync.getIp() + ":"
-						+ configSync.getPort() + " --verbose --wait 0");
-
-				Worker worker = new Worker(process);
-				worker.start();
+				boolean hasPerl = true;
+				Process p;
 				try {
-					worker.join(10000);
-					if (worker.exit != null)
-						/*
-						 * STATUS MEANING ======
-						 * ================================
-						 * ======================= 0 Success. 1 Internal error.
-						 * 2 At least one table differed on the destination. 3
-						 * Combination of 1 and 2.
-						 */
-						switch (worker.exit) {
-						case 0:
-							respMessage = "No hubia cambios pendientes";
-							break;
-						case 1:
-							respMessage = "Sincronizacion abortada por error interno";
-						case 2:
-							respMessage = "Cambios sincronizados!";
-							break;
-						case 3:
-							respMessage = "Hubo cambios pero termino con error";
-						default:
-							respMessage = "Error desconocido";
-						}
-					else
-						respMessage = "Timeout: intente mas tarde";
-				} catch (InterruptedException ex) {
-					worker.interrupt();
-				} finally {
-					process.destroy();
+					p = runtime.exec("perl --version");
+					p.waitFor();
+				} catch (Exception e1) {
+					hasPerl = false;
+					respMessage = "Error: perl no esta instalado";
 				}
-			} catch (Exception e) {
-				System.out.println("Exception: " + e.toString());
+
+				if (hasPerl) {
+					try {
+						Process process = runtime.exec("perl " + maatkitDir
+								+ "/bin/mk-table-sync --execute h=localhost:"
+								+ localPort + ",u=" + bothDBUser + ",p="
+								+ bothDBpass + " --databases tda h="
+								+ configSync.getIp() + ":"
+								+ configSync.getPort() + " --verbose --wait 0");
+
+						Worker worker = new Worker(process);
+						worker.start();
+						try {
+							worker.join(10000);
+							if (worker.exit != null)
+								/*
+								 * STATUS MEANING ======
+								 * ================================
+								 * ======================= 0 Success. 1 Internal
+								 * error. 2 At least one table differed on the
+								 * destination. 3 Combination of 1 and 2.
+								 */
+								switch (worker.exit) {
+								case 0:
+									respMessage = "No hubia cambios pendientes";
+									break;
+								case 1:
+									respMessage = "Sincronizacion abortada por error interno";
+								case 2:
+									respMessage = "Cambios sincronizados!";
+									break;
+								case 3:
+									respMessage = "Hubo cambios pero termino con error";
+								default:
+									respMessage = "Error desconocido";
+								}
+							else
+								respMessage = "Timeout: intente mas tarde";
+						} catch (InterruptedException ex) {
+							worker.interrupt();
+						} finally {
+							process.destroy();
+						}
+					} catch (Exception e) {
+						System.out.println("Exception: " + e.toString());
+					}
+				}
 			}
 			model.addObject("resultMessage", respMessage);
 		}

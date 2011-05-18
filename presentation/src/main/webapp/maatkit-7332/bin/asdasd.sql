@@ -1,0 +1,20 @@
+# Syncing h=172.16.248.201,p=...,u=root
+# DELETE REPLACE INSERT UPDATE ALGORITHM START    END      EXIT DATABASE.TABLE
+#      1       0      0      0 Chunk     21:00:15 21:00:15 2    tda.ApplicationUser
+#      0       0      0      0 GroupBy   21:00:15 21:00:15 0    tda.ApplicationUser_Authority
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.Authority
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.ChatMessage
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.DentistForm
+#      0       0      0      0 GroupBy   21:00:15 21:00:15 0    tda.DentistForm_Tooth
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.Item
+#      0       0      0      0 GroupBy   21:00:15 21:00:15 0    tda.NBI
+#      0       0      0      0 GroupBy   21:00:15 21:00:15 0    tda.NURSE_ACTION
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.NurseForm
+#      0       0      0      0 GroupBy   21:00:15 21:00:15 0    tda.NurseForm_Vaxine
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.OnlineUser
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.Patient
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.PatientInTrain
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.PediatricianForm
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.SocialWorkerForm
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.Tooth
+#      0       0      0      0 Chunk     21:00:15 21:00:15 0    tda.Vaxine
