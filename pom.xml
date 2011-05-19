@@ -77,6 +77,21 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.0.2.GA</version>
 		</dependency>
+		<dependency>
+			<groupId>ar.com.fdvs</groupId>
+			<artifactId>DynamicJasper</artifactId>
+			<version>3.0.13</version>
+		</dependency>
+		<dependency>  
+          <groupId>jasperreports</groupId>  
+          <artifactId>jasperreports</artifactId>  
+          <version>3.5.0</version>  
+        </dependency>
+		<dependency>  
+          <groupId>org.apache.poi</groupId>  
+          <artifactId>poi</artifactId>  
+          <version>3.2-FINAL</version> 
+        </dependency>
 	</dependencies>
 	<repositories>
 		<!-- For Hibernate Validator -->

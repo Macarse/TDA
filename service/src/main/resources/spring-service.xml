@@ -16,11 +16,14 @@
 		<property name="patientQueueDAO" ref="patientQueueDAO" />
 		<property name="patientDAO" ref="patientDAO" />
 		<property name="applicationUserDAO" ref="applicationUserDAO" />
-		
 	</bean>
 	
 	<bean id="itineraryService" class="com.tda.service.impl.ItineraryServiceImpl">
 		<property name="itineraryDAO" ref="itineraryDAO" />
+	</bean>
+	
+	<bean id="reportService" class="com.tda.service.report.ReportService">
+		<property name="patientDAO" ref="patientDAO" />
 	</bean>
 
 	<bean id="chatService" class="com.tda.service.impl.ChatServiceImpl">

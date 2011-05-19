@@ -11,7 +11,14 @@
 
 	<span style="font-size:15px;">Reportes disponibles:
 	</span>
-
+	
+	<table>
+		<tr>
+			<td>
+				<a href="${pageContext.request.contextPath}/report/patientReport"><span>de Pacientes</span></a>
+			</td>
+		</tr>
+	</table>
 
 	<c:if test="${!empty resultMessage}">
 	<div id="respMsg" style="height:30px; font-size:15px;">
