@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+.tooltipMenu {
+	display:none;
+	background:transparent url(/presentation/themes/default/image/tooltip/white_arrow.png);
+	font-size:20px;
+	text-align: center;
+	height:70px;
+	width:160px;
+	padding:25px;
+	color: black;	
+}
+
+.tooltip {
+	background-color:#fff;
+	border:1px solid grey;
+	padding:10px 15px;
+	width:200px;
+	display:none;
+	color:#000;
+	text-align:left;
+	font-size:12px;
+
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow:0 0 10px #fff;
+	-webkit-box-shadow:0 0 10px #fff;	
+}

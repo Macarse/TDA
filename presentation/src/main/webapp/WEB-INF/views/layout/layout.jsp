@@ -34,6 +34,7 @@
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="form.css"/>' type="text/css"/>
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="jqueryui.css"/>' type="text/css"/>
 <link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="tabbed-menu.css"/>' type="text/css"/>
+<link  rel="stylesheet" href='${pageContext.request.contextPath}/<spring:theme code="css.tooltip"/>' type="text/css"/>
 </head>
 <body>
 <div class="main-container ">

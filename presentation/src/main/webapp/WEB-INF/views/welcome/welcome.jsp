@@ -48,18 +48,18 @@
 				<td>
 					<c:choose>
 						<c:when test="${patientintrain.socialworkerform != null}">
-							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/${patientintrain.socialworkerform.id}/edit">Formulario Trabajador Social</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/${patientintrain.socialworkerform.id}/edit" class="trigger">Formulario Trabajador Social</a> <div class="tooltip">Editar Formulario de Trabajador Social</div> <br/>
 						</c:when>
 						<c:otherwise>
-			  				<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /><a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new">Formulario Trabajador Social</a> <br/>
+			  				<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /><a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/socialworker/new" class="trigger">Formulario Trabajador Social</a> <span class="tooltip">Cargar Formulario de Trabajador Social</span> <br/>
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
 						<c:when test="${patientintrain.padiatricianform != null}">
-							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/${patientintrain.padiatricianform.id}/edit">Formulario Pediatra</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/${patientintrain.padiatricianform.id}/edit" class="trigger">Formulario Pediatra</a> <span class="tooltip">Editar Formulario de Pediatra</span>  <br/>
 						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/new">Formulario Pediatra</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/pediatrician/new" class="trigger">Formulario Pediatra</a>  <span class="tooltip">Cargar Formulario de Pediatra</span>  <br/>
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
@@ -102,3 +102,21 @@
 		</tr>
 	</tfoot>
 </table>
+
+<script language='javascript' type='text/javascript'>
+	$(document).ready(function(){
+		$('.trigger').tooltip({
+			// place tooltip on the right edge
+			position: "center right",
+	
+			// a little tweaking of the position
+			//offset: [-2, 10],
+	
+			// use the built-in fadeIn/fadeOut effect
+			effect: "fade",
+	
+			// custom opacity setting
+			opacity: 0.7
+		});
+	});
+</script>

@@ -282,9 +282,9 @@
 		 var refreshOnlineUsersTimer = setInterval(refreshOnlineUsers, 5000);
 
 
-		 $('li.menu-pacientsontrain').tinyTips('title');
-		 $('li.menu-queue').tinyTips('title');
-		 $('li.menu-chat').tinyTips('title');
+		 $("[title]").tooltip({
+			tipClass: 'tooltipMenu',
+		 });
 	});
 </script>
 
