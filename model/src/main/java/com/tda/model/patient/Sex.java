@@ -1,6 +1,5 @@
 package com.tda.model.patient;
 
-
 public enum Sex {
 	male("Masculino"), female("Femenino");
 

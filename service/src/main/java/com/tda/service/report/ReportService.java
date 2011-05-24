@@ -20,6 +20,7 @@ import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
+import com.tda.model.utils.ConfigReport;
 import com.tda.model.utils.ExportFormat;
 import com.tda.persistence.dao.PatientDAO;
 
@@ -39,8 +40,8 @@ public class ReportService {
 	}
 
 	public void downloadPatientReport(HttpServletResponse response,
-			ExportFormat format) throws ColumnBuilderException,
-			ClassNotFoundException, JRException {
+			ExportFormat format, ConfigReport configReport)
+			throws ColumnBuilderException, ClassNotFoundException, JRException {
 
 		// Retrieve our data source
 		JRDataSource ds = new JRBeanCollectionDataSource(patientDAO.findAll());

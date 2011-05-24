@@ -41,7 +41,7 @@ public class PatientReportLayout {
 				.addColumn("DNI", "dni", String.class.getName(), 50)
 				.addColumn("Nombre", "firstName", String.class.getName(), 50)
 				.addColumn("Apellido", "lastName", String.class.getName(), 50)
-				// .addColumn("Sexo", "sex", Integer.class.getName(), 50)
+				.addColumn("Sexo", "sexString", String.class.getName(), 50)
 				.addColumn("Fecha de nacimiento", "birthdate",
 						Date.class.getName(), 50).setPrintColumnNames(true)
 

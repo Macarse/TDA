@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
@@ -49,8 +50,15 @@ public class ReportController {
 			throws ServletException, IOException, ClassNotFoundException,
 			SQLException, ColumnBuilderException, JRException {
 
-		// Call DownloadService to do the actual report processing
-		reportService.downloadPatientReport(response, configReport.getFormat());
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadPatientReport(response,
+					configReport.getFormat(), configReport);
+		}
 	}
 
 	@RequestMapping(value = "/patientReportDate", method = RequestMethod.GET)
@@ -60,7 +68,14 @@ public class ReportController {
 			throws ServletException, IOException, ClassNotFoundException,
 			SQLException, ColumnBuilderException, JRException {
 
-		// Call DownloadService to do the actual report processing
-		reportService.downloadPatientReport(response, configReport.getFormat());
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadPatientReport(response,
+					configReport.getFormat(), configReport);
+		}
 	}
 }

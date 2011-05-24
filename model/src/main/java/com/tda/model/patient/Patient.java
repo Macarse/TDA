@@ -164,4 +164,9 @@ public class Patient implements Serializable {
 		}
 		return age;
 	}
+
+	@Transient
+	public String getSexString() {
+		return this.getSex().getDescription();
+	}
 }
