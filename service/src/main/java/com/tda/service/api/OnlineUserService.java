@@ -9,4 +9,5 @@ public interface OnlineUserService {
 	void setOnline(String username);
 	void setOffline(String username);
 	List<OnlineUser> getOnlineUsers();
+	void clearOffline();
 }

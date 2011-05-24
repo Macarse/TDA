@@ -94,21 +94,22 @@ public class WelcomeController {
 		modelAndView = processRequest(modelAndView, new PatientInTrain(),
 				pageNumber, orderField, orderAscending);
 
-		/*
-		 * Set user online. TODO: This should be done with a spring security
-		 * hook
-		 */
-		onlineUserService.setOnline(getUser().getUsername());
-
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/getOnlineUsers", method = RequestMethod.GET)
 	public @ResponseBody
 	String getOnlineUsers() {
-
+		//clear offline users
+		onlineUserService.clearOffline();
+		
+		//update timeout
+		onlineUserService.setOnline(getUser().getUsername());
+		
+		//return online users
 		Gson gson = new Gson();
 		List<OnlineUser> users = onlineUserService.getOnlineUsers();
+		//remove me from the list
 		OnlineUser me = new OnlineUser();
 		me.setUsername(getUser().getUsername());
 

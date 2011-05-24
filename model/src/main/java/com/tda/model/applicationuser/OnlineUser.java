@@ -1,11 +1,22 @@
 package com.tda.model.applicationuser;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class OnlineUser {
 	String username;
+	Date timeout;
+
+	public Date getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(Date timeout) {
+		this.timeout = timeout;
+	}
 
 	public OnlineUser() {
 		
