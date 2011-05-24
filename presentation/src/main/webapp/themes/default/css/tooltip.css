@@ -12,16 +12,13 @@
 }
 
 .tooltip {
-	background-color:#fff;
-	border:1px solid grey;
-	padding:10px 15px;
-	width:200px;
 	display:none;
-	color:#000;
-	text-align:left;
-	font-size:12px;
+	background:transparent url(/presentation/themes/default/image/tooltip/white.png);
+	font-size:14px;
+	text-align: center;
+	height:60px;
+	width:160px;
+	padding:25px;
+	color: black;	
 
-	/* outline radius for mozilla/firefox only */
-	-moz-box-shadow:0 0 10px #fff;
-	-webkit-box-shadow:0 0 10px #fff;	
 }
