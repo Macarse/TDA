@@ -5,8 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<spring:url value="/sync/do" var="syncdo" />
-
 <div class="filter-container">
 
 	<span style="font-size:15px;"><fmt:message key="report.availables" /></span>

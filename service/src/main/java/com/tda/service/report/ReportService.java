@@ -44,7 +44,16 @@ public class ReportService {
 			throws ColumnBuilderException, ClassNotFoundException, JRException {
 
 		// Retrieve our data source
-		JRDataSource ds = new JRBeanCollectionDataSource(patientDAO.findAll());
+		JRDataSource ds = null;
+
+		if (configReport.getDateFrom() != null
+				|| configReport.getDateTo() != null)
+			ds = new JRBeanCollectionDataSource(
+					patientDAO.findPatientsAttendedByDate(
+							configReport.getDateFrom(),
+							configReport.getDateTo()));
+		else
+			ds = new JRBeanCollectionDataSource(patientDAO.findAll());
 
 		// Create our report layout
 		// We delegate the reporting layout to a custom ReportLayout instance
