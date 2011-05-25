@@ -20,6 +20,7 @@ import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
+import com.tda.model.utils.ExportFormat;
 import com.tda.persistence.dao.PatientDAO;
 
 /**
@@ -37,8 +38,9 @@ public class ReportService {
 		this.patientDAO = patientDAO;
 	}
 
-	public void downloadXLS(HttpServletResponse response)
-			throws ColumnBuilderException, ClassNotFoundException, JRException {
+	public void downloadPatientReport(HttpServletResponse response,
+			ExportFormat format) throws ColumnBuilderException,
+			ClassNotFoundException, JRException {
 
 		// Retrieve our data source
 		JRDataSource ds = new JRBeanCollectionDataSource(patientDAO.findAll());
@@ -47,12 +49,13 @@ public class ReportService {
 		// We delegate the reporting layout to a custom ReportLayout instance
 		// The ReportLayout is a wrapper class I made. Feel free to remove or
 		// modify it
-		ReportLayout layout = new ReportLayout();
+		PatientReportLayout layout = new PatientReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
 
 		// params is used for passing extra parameters like when passing
 		// a custom datasource, such as Hibernate datasource
 		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
 		HashMap params = new HashMap();
 
 		// Compile our report layout
@@ -73,16 +76,25 @@ public class ReportService {
 		// The Exporter is a wrapper class I made. Feel free to remove or modify
 		// it
 		Exporter exporter = new Exporter();
-		exporter.export(jp, baos);
 
-		// Set our response properties
-		// Here you can declare a custom filename
-		String fileName = "PatientReport.xls";
+		String fileName = "PatientReport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		}
+
 		response.setHeader("Content-Disposition", "inline; filename="
 				+ fileName);
-		// Make sure to set the correct content type
-		// Each format has its own content type
-		response.setContentType("application/vnd.ms-excel");
+
 		response.setContentLength(baos.size());
 
 		// Write to reponse stream

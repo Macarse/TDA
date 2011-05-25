@@ -170,3 +170,8 @@ a.button-text{  }
 	background: url('/presentation/themes/default/image/tinyTip-bottom.png') 0px 0px no-repeat;
 	font: 0px/0px sans-serif;
 }
+
+.reportRow{
+	border-style: solid;
+	padding: 10px;	
+}

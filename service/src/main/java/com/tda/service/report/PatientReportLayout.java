@@ -14,7 +14,7 @@ import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
  * Builds the report layout, the template, the design, the pattern or whatever
  * synonym you may want to call it.
  */
-public class ReportLayout {
+public class PatientReportLayout {
 
 	/**
 	 * Builds the report layout. This doesn't have any data yet. This is your
