@@ -16,7 +16,7 @@
 			<table>
 				<thead>
 					<tr>
-						<th>
+						<th colspan="2">
 							<fmt:message key="report.patientReport" />
 						</th>
 					</tr>
@@ -29,7 +29,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="2">
+						<td>
 						<div class="filter-submit">	
 							<button type="submit" class="button-text fg-button ui-state-default ui-corner-all"><span class="ui-icon button-icon"></span> <fmt:message key="report.export" /></button>
 						</div>
@@ -45,7 +45,7 @@
 			<table>
 			<thead>
 					<tr>
-						<th colspan="3">
+						<th colspan="2">
 							<fmt:message key="report.patientReportDate" />
 						</th>
 					</tr>
@@ -68,7 +68,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="2">
+						<td>
 						<div class="filter-submit">	
 							<button type="submit" class="button-text fg-button ui-state-default ui-corner-all"><span class="ui-icon button-icon"></span> <fmt:message key="report.export" /></button>
 						</div>
