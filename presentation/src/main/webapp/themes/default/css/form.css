@@ -36,3 +36,74 @@ span.titleform{
 	float: left;
 	width: 300px;
 }
+
+.itinerary-form fieldset{
+	border: 2px solid #6699FF;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+
+.itinerary-journey{
+	margin-top: 14px;
+}
+
+.itinerary-journey fieldset {
+	
+}
+
+.itinerary-form fieldset ol {
+	position: relative;
+	top: -0.8em;
+	left: -20px;
+	list-style: none;
+}
+
+.itinerary-form fieldset label {
+	display: block;
+	float: left; 
+	width: 150px;
+	font-size: 12px;
+	position: relative;
+	top: 5px;
+}
+
+.itinerary-journey fieldset > legend{
+	font-weight: bold;
+	font-size: 14px;
+	
+	border: 2px solid #6699FF;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	
+	padding: 2px 4px 2px 4px;
+	
+	position: relative;
+	top: -12px;
+}
+
+.itinerary-journey fieldset{
+	border: 2px solid #0099FF;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background-color: #CCFFFF;
+}
+
+.itinerary-place{
+	margin-bottom: 10px;
+}
+
+.itinerary-place fieldset {
+	border: 2px solid #00CCFF;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background: url(fieldsetbg.jpg) no-repeat left top;
+}
+
+.itinerary-place fieldset legend{
+	font-size: 14px;
+	font-weight: bold;
+}
