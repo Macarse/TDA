@@ -11,6 +11,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.tda.model.itinerary.Itinerary;
+import com.tda.model.itinerary.Place;
 import com.tda.model.patient.Patient;
 import com.tda.model.report.ItineraryForReport;
 
@@ -64,6 +65,11 @@ public class ItineraryDAO extends GenericDAOImpl<Itinerary> {
 			anIt.setId(itinerary.getId());
 			anIt.setPersonnel(itinerary.getPersonnel());
 			anIt.setPlaces(itinerary.getPlaces());
+
+			anIt.setPlacesStr("");
+			for (Place place : itinerary.getPlaces()) {
+				anIt.setPlacesStr(anIt.getPlacesStr() + place.getCity() + ", ");
+			}
 
 			List<Patient> list = getHibernateTemplate()
 					.find("from Patient WHERE id in (select patient.id from SocialWorkerForm where fillingDate > '"

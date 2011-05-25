@@ -31,6 +31,8 @@ public class ItineraryReportLayout {
 				.addColumn("Fecha inicio", "beginningDate",
 						Date.class.getName(), 50)
 				.addColumn("Fecha fin", "endDate", Date.class.getName(), 50)
+				.addColumn("Ciudades visitados", "placesStr",
+						String.class.getName(), 50)
 				.addColumn("Cantidad de pacientes atendidos",
 						"attendedPatients", Integer.class.getName(), 50)
 				.setPrintColumnNames(true)

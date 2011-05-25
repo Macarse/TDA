@@ -16,6 +16,7 @@ public class ItineraryForReport {
 	private List<ApplicationUser> personnel;
 	private String additionalInfo;
 	private Integer attendedPatients;
+	private String placesStr;
 
 	public Long getId() {
 		return id;
@@ -79,6 +80,14 @@ public class ItineraryForReport {
 
 	public void setAttendedPatients(Integer attendedPatients) {
 		this.attendedPatients = attendedPatients;
+	}
+
+	public String getPlacesStr() {
+		return placesStr;
+	}
+
+	public void setPlacesStr(String placesStr) {
+		this.placesStr = placesStr;
 	}
 
 	@Override
