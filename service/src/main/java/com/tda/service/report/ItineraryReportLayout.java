@@ -14,7 +14,7 @@ import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
  * Builds the report layout, the template, the design, the pattern or whatever
  * synonym you may want to call it.
  */
-public class PatientReportLayout {
+public class ItineraryReportLayout {
 
 	/**
 	 * Builds the report layout. This doesn't have any data yet. This is your
@@ -28,12 +28,12 @@ public class PatientReportLayout {
 		FastReportBuilder drb = new FastReportBuilder();
 
 		drb.addColumn("Id", "id", Long.class.getName(), 50)
-				.addColumn("DNI", "dni", String.class.getName(), 50)
-				.addColumn("Nombre", "firstName", String.class.getName(), 50)
-				.addColumn("Apellido", "lastName", String.class.getName(), 50)
-				.addColumn("Sexo", "sexString", String.class.getName(), 50)
-				.addColumn("Fecha de nacimiento", "birthdate",
-						Date.class.getName(), 50).setPrintColumnNames(true)
+				.addColumn("Fecha inicio", "beginningDate",
+						Date.class.getName(), 50)
+				.addColumn("Fecha fin", "endDate", Date.class.getName(), 50)
+				.addColumn("Cantidad de pacientes atendidos",
+						"attendedPatients", Integer.class.getName(), 50)
+				.setPrintColumnNames(true)
 
 				// Disables pagination
 				.setIgnorePagination(true)
@@ -42,7 +42,7 @@ public class PatientReportLayout {
 				.setMargins(0, 0, 0, 0)
 
 				// Set the title shown inside the Excel file
-				.setTitle("Reporte de pacientes")
+				.setTitle("Reporte de itinerarios")
 
 				// Set the subtitle shown inside the Excel file
 				.setSubtitle("Este reporte fue generado en " + new Date())
@@ -53,7 +53,7 @@ public class PatientReportLayout {
 				.setUseFullPageWidth(true);
 
 		// Set the name of the file
-		drb.setReportName("Reporte de Pacientes");
+		drb.setReportName("Reporte de itinerarios");
 
 		// Build the report layout
 		// Note this just the layout. It doesn't have any data yet!

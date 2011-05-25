@@ -3,27 +3,15 @@ package com.tda.service.report;
 import java.util.Date;
 
 import ar.com.fdvs.dj.domain.DynamicReport;
+import ar.com.fdvs.dj.domain.builders.ChartBuilderException;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
 
-/**
- * Everything under the package org.krams.tutorial.dynamicjasper are settings
- * imposed by DynamicJasper (not Jasper)
- * <p>
- * 
- * Builds the report layout, the template, the design, the pattern or whatever
- * synonym you may want to call it.
- */
-public class PatientReportLayout {
+public class SexGraphReportLayout {
 
-	/**
-	 * Builds the report layout. This doesn't have any data yet. This is your
-	 * template.
-	 * 
-	 * @return the layout
-	 */
+	@SuppressWarnings({ "deprecation" })
 	public DynamicReport buildReportLayout() throws ColumnBuilderException,
-			ClassNotFoundException {
+			ClassNotFoundException, ChartBuilderException {
 
 		FastReportBuilder drb = new FastReportBuilder();
 

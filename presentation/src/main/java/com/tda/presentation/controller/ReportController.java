@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.com.fdvs.dj.domain.builders.ChartBuilderException;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
 import com.tda.model.utils.ConfigReport;
@@ -75,6 +76,44 @@ public class ReportController {
 			model.addObject("configReport", configReport);
 		} else {
 			reportService.downloadPatientReport(response,
+					configReport.getFormat(), configReport);
+		}
+	}
+
+	@RequestMapping(value = "/sexGraphReport", method = RequestMethod.GET)
+	public void doSexGraphReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response)
+			throws ServletException, IOException, ClassNotFoundException,
+			SQLException, ColumnBuilderException, JRException,
+			ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadSexGraphReport(response,
+					configReport.getFormat(), configReport);
+		}
+	}
+
+	@RequestMapping(value = "/itineraryReport", method = RequestMethod.GET)
+	public void doItineraryReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response)
+			throws ServletException, IOException, ClassNotFoundException,
+			SQLException, ColumnBuilderException, JRException,
+			ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadItineraryReport(response,
 					configReport.getFormat(), configReport);
 		}
 	}

@@ -24,6 +24,8 @@
 	
 	<bean id="reportService" class="com.tda.service.report.ReportService">
 		<property name="patientDAO" ref="patientDAO" />
+		<property name="placeDAO" ref="placeDAO" />
+		<property name="itineraryDAO" ref="itineraryDAO" />
 	</bean>
 
 	<bean id="chatService" class="com.tda.service.impl.ChatServiceImpl">
