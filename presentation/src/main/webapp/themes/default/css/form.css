@@ -102,3 +102,8 @@ span.titleform{
 	-moz-border-radius: 8px;
 	background: url(fieldsetbg.jpg) no-repeat left top;
 }
+
+.itinerary-place fieldset legend{
+	font-size: 14px;
+	font-weight: bold;
+}
