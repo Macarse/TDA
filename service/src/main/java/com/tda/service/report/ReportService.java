@@ -1,6 +1,8 @@
 package com.tda.service.report;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.servlet.ServletOutputStream;
@@ -21,6 +23,8 @@ import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.builders.ChartBuilderException;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
+import com.tda.model.patient.Patient;
+import com.tda.model.report.SexForReport;
 import com.tda.model.utils.ConfigReport;
 import com.tda.model.utils.ExportFormat;
 import com.tda.persistence.dao.ItineraryDAO;
@@ -37,6 +41,7 @@ import com.tda.persistence.dao.PlaceDAO;
 public class ReportService {
 
 	private PatientDAO patientDAO;
+	@SuppressWarnings("unused")
 	private PlaceDAO placeDAO;
 	private ItineraryDAO itineraryDAO;
 
@@ -157,9 +162,33 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		// Creates the JasperPrint object
-		// It needs a JasperReport layout and a datasource
-		JRDataSource ds = new JRBeanCollectionDataSource(patientDAO.findAll());
+		Collection<Patient> allPatients = patientDAO.findAll();
+		Collection<SexForReport> allPatientsSex = new ArrayList<SexForReport>();
+
+		SexForReport male = new SexForReport();
+		male.setSexId(0);
+		male.setSexName("Masculino");
+		male.setQuantity(0);
+		SexForReport female = new SexForReport();
+		female.setSexId(1);
+		female.setSexName("Femenino");
+		female.setQuantity(0);
+
+		for (Patient pat : allPatients) {
+			switch (pat.getSex()) {
+			case female:
+				female.setQuantity(1 + female.getQuantity());
+				break;
+			case male:
+				male.setQuantity(1 + male.getQuantity());
+				break;
+			}
+		}
+
+		allPatientsSex.add(male);
+		allPatientsSex.add(female);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(allPatientsSex);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
 
 		// Create our output byte stream
@@ -173,7 +202,7 @@ public class ReportService {
 		// it
 		Exporter exporter = new Exporter();
 
-		String fileName = "PatientReport.";
+		String fileName = "SexGraphReport.";
 
 		switch (format) {
 		case XLS:
@@ -232,7 +261,7 @@ public class ReportService {
 		// it
 		Exporter exporter = new Exporter();
 
-		String fileName = "PlacesReport.";
+		String fileName = "ItineraryReport.";
 
 		switch (format) {
 		case XLS:
