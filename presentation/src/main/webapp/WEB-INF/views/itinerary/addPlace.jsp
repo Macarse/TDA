@@ -33,7 +33,7 @@
 			<form:label for="places" path="itineraryPlace.places[${placeNumber }].arrivalDate" cssErrorClass="error">
 				Fecha de llegada
 			</form:label>
-			<form:input path="itineraryPlace.places[${placeNumber }].arrivalDate" size="30" />
+			<form:input id="itinerary-place-date${placeNumber }" path="itineraryPlace.places[${placeNumber }].arrivalDate" size="30" />
 			<form:errors path="itineraryPlace.places[${placeNumber }].arrivalDate" />
 		</li>
 	</ol>

@@ -7,8 +7,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-function reloadDatepickers(){
-	$( "[name*='Date']" ).datepicker(
+function initialDatePickers(placePosition){
+	$( ".datePicker" ).datepicker(
 			{ dateFormat: 'dd/mm/yy',
 			  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 			  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
@@ -18,7 +18,24 @@ function reloadDatepickers(){
 			  yearRange: 'c-100,c+00'
 		    }
 		);
+	for (i=0; i <= placePosition; i++) {
+		addPickerToNewContent(i);
+	}
 }
+
+function addPickerToNewContent(position){
+    $( "#itinerary-place-date" + position).datepicker(
+            { dateFormat: 'dd/mm/yy',
+              monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+              monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+              dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+              changeYear: true,
+              changeMonth: true,
+              yearRange: 'c-100,c+00'
+            }
+        );
+}
+
 
 $(document).ready(function() {
 	var placePosition = ${placeSize - 1};
@@ -28,11 +45,11 @@ $(document).ready(function() {
 		$.get("<%=request.getContextPath()%>/itinerary/appendPlace", { fieldId: placePosition},
 			function(data){
 				$("#submitRow").before(data);
-				reloadDatepickers();
+				addPickerToNewContent(placePosition);
 		});
 	});
 
-	reloadDatepickers();
+	initialDatePickers(placePosition);
 });
 </script>
 
@@ -49,14 +66,14 @@ $(document).ready(function() {
 			<!-- FECHA DE INICIO -->
 			<li>
 				<form:label for="beginningDate" path="beginningDate" cssErrorClass="error">Fecha en que salimos</form:label>
-				<form:input path="beginningDate"/>
+				<form:input class="datePicker" path="beginningDate"/>
 				<form:errors path="beginningDate" />
 			</li>
 		
 			<!-- FECHA DE FIN -->
 			<li>
 				<form:label for="endDate" path="endDate" cssErrorClass="error">Fecha en que volvemos</form:label>
-				<form:input path="endDate"/>
+				<form:input class="datePicker" path="endDate"/>
 				<form:errors path="endDate" />
 			</li>	
 			
@@ -110,7 +127,7 @@ $(document).ready(function() {
 		<li>
 			<form:label for="places" path="places[${i - 1}].arrivalDate" cssErrorClass="error">Fecha de llegada</form:label>
 			<spring:bind path="places[${i - 1}].arrivalDate">
-				<form:input id="itinerary-arrival-date" path="${status.expression}" size="30"/>
+				<form:input id="itinerary-place-date${i - 1 }" path="${status.expression}" size="30"/>
 			</spring:bind>
 			<form:errors path="places[${i - 1}].arrivalDate" />
 		</li>
