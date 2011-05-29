@@ -117,4 +117,41 @@ public class ReportController {
 					configReport.getFormat(), configReport);
 		}
 	}
+
+	@RequestMapping(value = "/patientReportAge", method = RequestMethod.GET)
+	public void doPatientReportAge(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response)
+			throws ServletException, IOException, ClassNotFoundException,
+			SQLException, ColumnBuilderException, JRException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadPatientReport(response,
+					configReport.getFormat(), configReport);
+		}
+	}
+
+	@RequestMapping(value = "/ageGraphReport", method = RequestMethod.GET)
+	public void doAgeGraphReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response)
+			throws ServletException, IOException, ClassNotFoundException,
+			SQLException, ColumnBuilderException, JRException,
+			ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadAgeGraphReport(response,
+					configReport.getFormat(), configReport);
+		}
+	}
 }

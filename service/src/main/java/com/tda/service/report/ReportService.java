@@ -1,6 +1,7 @@
 package com.tda.service.report;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import ar.com.fdvs.dj.domain.builders.ChartBuilderException;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
 import com.tda.model.patient.Patient;
+import com.tda.model.report.AgeForReport;
 import com.tda.model.report.SexForReport;
 import com.tda.model.utils.ConfigReport;
 import com.tda.model.utils.ExportFormat;
@@ -63,22 +65,42 @@ public class ReportService {
 
 		// Retrieve our data source
 		JRDataSource ds = null;
+		String fileName;
+		String reportTitle;
+
+		String DATE_FORMAT = "dd/MM/yyyy";
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
 		if (configReport.getDateFrom() != null
-				|| configReport.getDateTo() != null)
+				|| configReport.getDateTo() != null) {
 			ds = new JRBeanCollectionDataSource(
 					patientDAO.findPatientsAttendedByDate(
 							configReport.getDateFrom(),
 							configReport.getDateTo()));
-		else
+			fileName = "PatientReportDate.";
+			reportTitle = "Pacientes atendidos entre "
+					+ sdf.format(configReport.getDateFrom()) + " y "
+					+ sdf.format(configReport.getDateTo());
+		} else if (configReport.getAgeFrom() != null
+				|| configReport.getAgeTo() != null) {
+			ds = new JRBeanCollectionDataSource(
+					patientDAO.findPatientsBetweenAges(
+							configReport.getAgeFrom(), configReport.getAgeTo()));
+			fileName = "PatientReportAge.";
+			reportTitle = "Pacientes entre " + configReport.getAgeFrom()
+					+ " y " + configReport.getAgeTo() + " a–os";
+		} else {
 			ds = new JRBeanCollectionDataSource(patientDAO.findAll());
+			fileName = "PatientReport.";
+			reportTitle = "Pacientes registrados";
+		}
 
 		// Create our report layout
 		// We delegate the reporting layout to a custom ReportLayout instance
 		// The ReportLayout is a wrapper class I made. Feel free to remove or
 		// modify it
 		PatientReportLayout layout = new PatientReportLayout();
-		DynamicReport dr = layout.buildReportLayout();
+		DynamicReport dr = layout.buildReportLayout(reportTitle);
 
 		// params is used for passing extra parameters like when passing
 		// a custom datasource, such as Hibernate datasource
@@ -104,8 +126,6 @@ public class ReportService {
 		// The Exporter is a wrapper class I made. Feel free to remove or modify
 		// it
 		Exporter exporter = new Exporter();
-
-		String fileName = "PatientReport.";
 
 		switch (format) {
 		case XLS:
@@ -262,6 +282,63 @@ public class ReportService {
 		Exporter exporter = new Exporter();
 
 		String fileName = "ItineraryReport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
+	}
+
+	public void downloadAgeGraphReport(HttpServletResponse response,
+			ExportFormat format, ConfigReport configReport)
+			throws ColumnBuilderException, ClassNotFoundException, JRException,
+			ChartBuilderException {
+
+		AgeGraphReportLayout layout = new AgeGraphReportLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<AgeForReport> groupedAge = patientDAO.findGroupedAge();
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedAge);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "SexGraphReport.";
 
 		switch (format) {
 		case XLS:

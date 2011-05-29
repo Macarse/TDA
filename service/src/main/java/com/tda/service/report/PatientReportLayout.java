@@ -22,8 +22,8 @@ public class PatientReportLayout {
 	 * 
 	 * @return the layout
 	 */
-	public DynamicReport buildReportLayout() throws ColumnBuilderException,
-			ClassNotFoundException {
+	public DynamicReport buildReportLayout(String reportTitle)
+			throws ColumnBuilderException, ClassNotFoundException {
 
 		FastReportBuilder drb = new FastReportBuilder();
 
@@ -42,7 +42,7 @@ public class PatientReportLayout {
 				.setMargins(0, 0, 0, 0)
 
 				// Set the title shown inside the Excel file
-				.setTitle("Reporte de pacientes")
+				.setTitle(reportTitle)
 
 				// Set the subtitle shown inside the Excel file
 				.setSubtitle("Este reporte fue generado en " + new Date())
@@ -53,7 +53,7 @@ public class PatientReportLayout {
 				.setUseFullPageWidth(true);
 
 		// Set the name of the file
-		drb.setReportName("Reporte de Pacientes");
+		drb.setReportName(reportTitle);
 
 		// Build the report layout
 		// Note this just the layout. It doesn't have any data yet!

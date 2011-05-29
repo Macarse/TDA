@@ -142,6 +142,82 @@
 			</table>
 		</form:form>
 	</div>
+	
+	<br></br>
+	
+	<div class="reportRow">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReportAge" method="get">
+			<table>
+			<thead>
+					<tr>
+						<th colspan="2">
+							<fmt:message key="report.patientReportAge" />
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+	
+					<tr>
+						<td><form:label for="ageFrom" path="ageFrom" cssErrorClass="error">
+							<fmt:message key="report.ageFrom" /></form:label></td>
+						<td><form:input path="ageFrom" /> <form:errors path="ageFrom" /></td></tr>
+					<tr>
+						<td><form:label for="ageTo" path="ageTo" cssErrorClass="error">
+							<fmt:message key="report.ageTo" /></form:label></td>
+						<td><form:input path="ageTo" /> <form:errors path="ageTo" /></td></tr>
+						
+	
+					<tr>
+						<td><form:label for="format" path="format" cssErrorClass="error">
+							<fmt:message key="report.format" /></form:label></td>
+						<td><form:select path="format" items="${allFormat}"/> <form:errors path="format" /></td></tr>
+						
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>
+						<div class="filter-submit">	
+							<button type="submit" class="button-text fg-button ui-state-default ui-corner-all"><span class="ui-icon button-icon"></span> <fmt:message key="report.export" /></button>
+						</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</form:form>
+	</div>
+	
+		<br></br>
+	
+	<div class="reportRow">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/ageGraphReport" method="get">
+			<table>
+			<thead>
+					<tr>
+						<th colspan="2">
+							<fmt:message key="report.ageGraphReport" />
+						</th>
+					</tr>
+				</thead>
+				<tbody>	
+	
+					<tr>
+						<td><form:label for="format" path="format" cssErrorClass="error">
+							<fmt:message key="report.format" /></form:label></td>
+						<td><form:select path="format" items="${allFormat}"/> <form:errors path="format" /></td></tr>
+						
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>
+						<div class="filter-submit">	
+							<button type="submit" class="button-text fg-button ui-state-default ui-corner-all"><span class="ui-icon button-icon"></span> <fmt:message key="report.export" /></button>
+						</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</form:form>
+	</div>
 
 <script>
 	$(function() {

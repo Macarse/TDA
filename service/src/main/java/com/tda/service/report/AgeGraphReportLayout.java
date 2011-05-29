@@ -28,9 +28,9 @@ import ar.com.fdvs.dj.domain.entities.DJGroup;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn;
 
-public class SexGraphReportLayout {
+public class AgeGraphReportLayout {
 
-	@SuppressWarnings({ "rawtypes", "unchecked", "unused", "serial" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	public DynamicReport buildReportLayout() throws ColumnBuilderException,
 			ClassNotFoundException, ChartBuilderException {
 
@@ -48,23 +48,19 @@ public class SexGraphReportLayout {
 		AbstractColumn columnQuantity = ColumnBuilder.getNew()
 				.setColumnProperty("quantity", Integer.class.getName())
 				.setTitle("Cantidad").setWidth(new Integer(85)).build();
-		AbstractColumn columnSex = ColumnBuilder.getNew()
-				.setColumnProperty("sexId", Integer.class.getName())
-				.setTitle("Id").setWidth(new Integer(85)).build();
-		AbstractColumn columnSexName = ColumnBuilder.getNew()
-				.setColumnProperty("sexName", String.class.getName())
-				.setTitle("Sexo").setWidth(new Integer(85)).build();
+		AbstractColumn columnAge = ColumnBuilder.getNew()
+				.setColumnProperty("age", String.class.getName())
+				.setTitle("Edad").setWidth(new Integer(85)).build();
 
-		// drb.addColumn(columnSex);
-		drb.addColumn(columnSexName);
+		drb.addColumn(columnAge);
 		drb.addColumn(columnQuantity);
 
-		drb.setTitle("Estadisticas de sexo")
+		drb.setTitle("Estadisticas de edad")
 				.setSubtitle("Este reporte fue generado en " + new Date())
 				.setUseFullPageWidth(true);
 
 		GroupBuilder gb1 = new GroupBuilder();
-		DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnSexName)
+		DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnAge)
 		// .addFooterVariable(columnSexName, DJCalculation.NOTHING)
 		// .addVariable("group_sex_name", columnSexName,
 		// DJCalculation.)
@@ -80,9 +76,9 @@ public class SexGraphReportLayout {
 				.setCentered(false).setBackColor(Color.LIGHT_GRAY)
 				.setShowLegend(false)
 				.setPosition(DJChartOptions.POSITION_FOOTER)
-				.setTitle("Reporte de sexos").setTitleColor(Color.DARK_GRAY)
+				.setTitle("Reporte de edades").setTitleColor(Color.DARK_GRAY)
 				.setTitleFont(Font.ARIAL_BIG_BOLD)
-				.setSubtitle("Distribucion de sexos de pacientes")
+				.setSubtitle("Distribucion de edades de pacientes")
 				.setSubtitleColor(Color.DARK_GRAY)
 				.setSubtitleFont(Font.COURIER_NEW_BIG_BOLD)
 				.setLegendColor(Color.DARK_GRAY)
@@ -93,8 +89,7 @@ public class SexGraphReportLayout {
 				.setLineStyle(DJChartOptions.LINE_STYLE_DOTTED).setLineWidth(1)
 				.setLineColor(Color.DARK_GRAY).setPadding(5)
 				// dataset
-				.setKey((PropertyColumn) columnSexName)
-				.addSerie(columnQuantity)
+				.setKey((PropertyColumn) columnAge).addSerie(columnQuantity)
 				// plot
 				.setDepthFactor(0.1).setCircular(true).build();
 
