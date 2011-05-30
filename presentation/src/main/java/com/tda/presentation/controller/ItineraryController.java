@@ -88,7 +88,7 @@ public class ItineraryController {
 			}
 		} else {
 			itineraryService.save(itineraryForm);
-			modelAndView.setViewName("welcome/list");
+			modelAndView.setViewName("redirect:/");
 			updateCurrentItinerary(modelAndView);
 		}
 

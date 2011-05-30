@@ -14,25 +14,6 @@
 	<a class="fg-button button-text ui-state-default ui-corner-right" href="${logoutUrl}">salir</a>
 </div>
 
-<div style="margin: 10px 10px 10px 10px;" class="msg-info">
-	<div class="ui-widget" style="float: left; font-size: 12px; width: 100%;">
-		<div class="ui-state-highlight ui-corner-all" style="margin-top: 10px; padding: 0 .7em;"> 
-			<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
-			<strong>Itinerario:</strong>
-			<c:choose>
-				<c:when test="${empty currentItinerary.beginningDate }">
-					No se ha definido el itinerario. Click <a href="${pageContext.request.contextPath }/itinerary/add">aquí</a> para hacerlo.
-				</c:when>
-				<c:otherwise>
-					El próximo viaje es desde el <b><fmt:formatDate value="${currentItinerary.beginningDate }" pattern="dd/MM/yyyy"/></b>  hasta el <b><fmt:formatDate value="${currentItinerary.endDate}" pattern="dd/MM/yyyy"/></b>.
-					 Haga click <a href="${pageContext.request.contextPath }/itinerary/edit/${currentItinerary.id}">aquí</a> para cambiarlo.
-				</c:otherwise>
-			</c:choose>
-			</p>
-		</div>
-	</div>
-</div>
-
 <script language='javascript' type='text/javascript'> 
 	$(document).ready(function(){
 	    setTimeout("slide()",5000);
