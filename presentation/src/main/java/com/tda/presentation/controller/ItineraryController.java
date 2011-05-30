@@ -78,9 +78,7 @@ public class ItineraryController {
 			}
 		} else {
 			itineraryService.save(itineraryForm);
-			modelAndView.setViewName("itinerary/resultForm");
-			modelAndView.addObject("savedClass", itineraryForm);
-
+			modelAndView.setViewName("welcome/list");
 			updateCurrentItinerary(modelAndView);
 		}
 
@@ -89,7 +87,10 @@ public class ItineraryController {
 
 	private Itinerary updateCurrentItinerary(ModelAndView modelAndView) {
 		Itinerary currentItinerary = itineraryService.getNext();
-		modelAndView.addObject("currentItinerary", currentItinerary);
+		
+		if (currentItinerary != null) {
+			modelAndView.addObject("currentItinerary", currentItinerary);
+		}
 
 		return currentItinerary;
 	}

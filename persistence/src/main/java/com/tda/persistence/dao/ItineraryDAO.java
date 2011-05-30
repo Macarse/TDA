@@ -63,7 +63,6 @@ public class ItineraryDAO extends GenericDAOImpl<Itinerary> {
 			anIt.setDescription(itinerary.getDescription());
 			anIt.setEndDate(itinerary.getEndDate());
 			anIt.setId(itinerary.getId());
-			anIt.setPersonnel(itinerary.getPersonnel());
 			anIt.setPlaces(itinerary.getPlaces());
 
 			anIt.setPlacesStr("");
