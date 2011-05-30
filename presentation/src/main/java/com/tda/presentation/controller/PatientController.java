@@ -128,9 +128,11 @@ public class PatientController {
 		List<Patient> patientsWithSameDni = patientService.findByDni(aPatient
 				.getDni());
 
-		if (!patientsWithSameDni.isEmpty()) {
-			FieldError error = new FieldError("patient", "dni", aPatient.getDni(),
-					false, new String[] { "error.dni.duplicated" },
+		if (!patientsWithSameDni.isEmpty()
+				&& !patientsWithSameDni.get(0).getId().equals(aPatient.getId())) {
+			FieldError error = new FieldError("patient", "dni",
+					aPatient.getDni(), false,
+					new String[] { "error.dni.duplicated" },
 					new Object[] { "DNI duplicado" }, "DNI duplicado");
 			result.addError(error);
 		}

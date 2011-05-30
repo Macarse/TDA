@@ -218,6 +218,8 @@
 			</table>
 		</form:form>
 	</div>
+	
+	<br></br>
 
 <script>
 	$(function() {
