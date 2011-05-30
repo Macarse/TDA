@@ -86,7 +86,7 @@ public class PatientDAO extends GenericDAOImpl<Patient> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Collection<AgeForReport> findGroupedAge() {
 
-		Collection<AgeForReport> list = getHibernateTemplate().execute(
+		Collection<AgeForReport> list = (Collection<AgeForReport>) getHibernateTemplate().execute(
 				new HibernateCallback() {
 					@SuppressWarnings("deprecation")
 					public Object doInHibernate(Session session)
