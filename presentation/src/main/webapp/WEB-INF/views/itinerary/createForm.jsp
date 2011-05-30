@@ -23,7 +23,7 @@ function initialDatePickers(placePosition){
 	}
 }
 
-function addPickerToNewContent(position){
+function addPickerToNewContent(position) {
     $( "#itinerary-place-date" + position).datepicker(
             { dateFormat: 'dd/mm/yy',
               monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -36,6 +36,20 @@ function addPickerToNewContent(position){
         );
 }
 
+function setupRemoveHandlers(placePosition) {
+	for (i = 0; i <= placePosition; i++) {
+		removeHandlerForNewContent(i);
+	}
+}
+
+function removeHandlerForNewContent(position) {
+	$("#itinerary-place-remove" + position).click(function() {
+        $.get("<%=request.getContextPath()%>/itinerary/removePlace", { fieldId: position},
+       	    function (data) {
+        	   $("#itinerary-place-container" + position).hide(); 
+        });
+    });
+}
 
 $(document).ready(function() {
 	var placePosition = ${placeSize - 1};
@@ -46,9 +60,11 @@ $(document).ready(function() {
 			function(data){
 				$("#submitRow").before(data);
 				addPickerToNewContent(placePosition);
+				removeHandlerForNewContent(placePosition);
 		});
 	});
-
+	
+	setupRemoveHandlers(placePosition);
 	initialDatePickers(placePosition);
 });
 </script>
@@ -95,7 +111,7 @@ $(document).ready(function() {
 	
 	<c:forEach var="i" begin="1" end="${placeSize }">
 	
-	<div class="itinerary-place">
+	<div id="itinerary-place-container${i-1 }" class="itinerary-place">
 	<fieldset>
 		<legend> Destino #<c:out value="${i}" /></legend>
 	
@@ -131,6 +147,11 @@ $(document).ready(function() {
 			</spring:bind>
 			<form:errors path="places[${i - 1}].arrivalDate" />
 		</li>
+
+        <li>
+            <input type="button" id="itinerary-place-remove${i - 1 }" value="Eliminar"  />
+        </li>
+		</ol>
 	</fieldset>
 	</div>
 	</c:forEach>

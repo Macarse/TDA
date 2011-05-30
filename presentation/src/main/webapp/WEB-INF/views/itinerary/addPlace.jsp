@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<div class="itinerary-place">
+<div id="itinerary-place-container${placeNumber }" class="itinerary-place">
 <fieldset>
 	<legend>Destino #${placeNumber + 1 }</legend>
 	
@@ -36,6 +36,8 @@
 			<form:input id="itinerary-place-date${placeNumber }" path="itineraryPlace.places[${placeNumber }].arrivalDate" size="30" />
 			<form:errors path="itineraryPlace.places[${placeNumber }].arrivalDate" />
 		</li>
+		
+        <li><input type="button" id="itinerary-place-remove${placeNumber }" value="Eliminar"  /></li>
 	</ol>
 </fieldset>
 </div>

@@ -1,5 +1,8 @@
 package com.tda.presentation.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,7 @@ import com.tda.service.api.ItineraryService;
 @SessionAttributes({ "currentItinerary" })
 public class ItineraryController {
 	private ItineraryService itineraryService;
+	private List<Integer> removedIndexes = new ArrayList<Integer>();
 
 	@Autowired
 	public void setItineraryService(ItineraryService itineraryService) {
@@ -62,6 +66,11 @@ public class ItineraryController {
 		model.addAttribute("itineraryPlace", new Itinerary());
 		return "itinerary/addPlace";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "removePlace")
+	protected void removePlaceField(@RequestParam Integer fieldId) {
+		removedIndexes.add(fieldId);
+	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "add")
 	protected ModelAndView create(Model model,
@@ -69,6 +78,7 @@ public class ItineraryController {
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 
+		clearRemovedPlaces(itineraryForm);
 		if (result.hasErrors()) {
 			modelAndView.setViewName("itinerary/createForm");
 
@@ -83,6 +93,24 @@ public class ItineraryController {
 		}
 
 		return modelAndView;
+	}
+
+	private void clearRemovedPlaces(Itinerary itineraryForm) {
+		List<Place> originalPlaces = itineraryForm.getPlaces();
+		
+		if (originalPlaces == null || originalPlaces.size() == 0) {
+			return;
+		}
+		
+		AutoPopulatingList<Place> cleanPlaces = new AutoPopulatingList<Place>(Place.class);
+		
+		for (int i = 0; i < originalPlaces.size(); i++) {
+			if (! removedIndexes.contains(i)) {
+				cleanPlaces.add(originalPlaces.get(i));
+			} 
+		}
+		removedIndexes.clear();
+		itineraryForm.setPlaces(cleanPlaces);
 	}
 
 	private Itinerary updateCurrentItinerary(ModelAndView modelAndView) {
