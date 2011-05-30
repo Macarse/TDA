@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -17,15 +19,19 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Place {
 	private Long id;
 
+	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date arrivalDate;
 
+	@NotEmpty(message = "Debe ingresar la provincia")
 	@Size(max = 200)
 	private String province;
 
+	@NotEmpty(message = "Debe ingresar la ciudad")
 	@Size(max = 200)
 	private String city;
 
+	@NotEmpty(message = "Debe ingresar la localidad o barrio")
 	@Size(max = 200)
 	private String neighbourhood;
 

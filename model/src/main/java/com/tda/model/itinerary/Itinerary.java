@@ -10,14 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.Size;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.tda.model.applicationuser.ApplicationUser;
 
 @Entity
 @Table(name = "ITINERARY")
@@ -36,8 +35,6 @@ public class Itinerary {
 	private String description;
 
 	private List<Place> places;
-
-	private List<ApplicationUser> personnel;
 
 	@Size(max = 200)
 	private String additionalInfo;
@@ -77,22 +74,14 @@ public class Itinerary {
 		this.description = description;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Valid
 	public List<Place> getPlaces() {
 		return places;
 	}
 
 	public void setPlaces(List<Place> places) {
 		this.places = places;
-	}
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	public List<ApplicationUser> getPersonnel() {
-		return personnel;
-	}
-
-	public void setPersonnel(List<ApplicationUser> personnel) {
-		this.personnel = personnel;
 	}
 
 	public String getAdditionalInfo() {
@@ -107,8 +96,7 @@ public class Itinerary {
 	public String toString() {
 		return "Itinerary [id=" + id + ", beginningDate=" + beginningDate
 				+ ", endDate=" + endDate + ", description=" + description
-				+ ", places=" + places + ", personnel=" + personnel
-				+ ", additionalInfo=" + additionalInfo + "]";
+				+ ", places=" + places + ", additionalInfo=" + additionalInfo
+				+ "]";
 	}
-
 }
