@@ -40,7 +40,7 @@
 		<fmt:message key="pediatrician.form.new" />
 	</c:if>	<fmt:message key="pediatrician.form.form" /> de '<i>${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}</i>'
 </h2>
-<button id="ajaxSave" type="button" onclick="submitFormAjax()">Guardar</button>
+<button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="pediatricianForm" method="post" id="myform">
 	<div id="form-tabs">
@@ -59,6 +59,13 @@
 		<!-- PERINATAL BACKGROUND -->
 		<div id="tab-peb" class="pediatricianform">
 			<table width="100%">
+			
+						<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+			
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="birthPlace" path="birthPlace" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.birthPlace" />
@@ -263,6 +270,11 @@
 		<!-- PATIENT BACKGROUND -->
 		<div id="tab-pab" class="pediatricianform">
 		    <table width="100%">
+		    						<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="consumedTobacco1" path="consumedTobacco" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.consumedTobacco" />
@@ -322,7 +334,7 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 				
@@ -332,6 +344,13 @@
 		<!-- FAMILY BACKGROUND -->
 		<div id="tab-fab" class="pediatricianform">
 			<table width="100%">
+			
+			<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+			
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="cardiovascular1" path="cardiovascular" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.cardiovascular" />
@@ -397,7 +416,7 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 				
@@ -407,6 +426,13 @@
 		<!-- MATURATION AND DEVELOPMENT -->
 		<div id="tab-mat" class="pediatricianform">
 			<table width="100%">
+			
+			<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+			
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="maturationAndDevelopment" path="maturationAndDevelopment" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.maturationAndDevelopment" />
@@ -417,7 +443,7 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 					
@@ -427,6 +453,12 @@
 		<!-- PHYSICAL EXAM -->
 		<div id="tab-phy" class="pediatricianform">
 			<table width="100%">
+				
+				<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
 				
 				<c:choose>
 				<c:when test="${nurseForm != null}">
@@ -518,7 +550,7 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 				
@@ -528,6 +560,13 @@
 		<!-- LABORATORY -->
 		<div id="tab-lab" class="pediatricianform">
 			<table width="100%">
+			
+			<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+			
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="hematrocito" path="hematrocito" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.hematocrito" />
@@ -715,7 +754,7 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 					
@@ -725,6 +764,13 @@
 		<!-- RADIOLOGY -->
 		<div id="tab-rad" class="pediatricianform">
 			<table width="100%">
+			
+			<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+			
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="chest" path="chest" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.chest" />
@@ -756,7 +802,7 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 				
@@ -766,10 +812,17 @@
 		<!-- DIAGNOSIS -->
 		<div id="tab-dia" class="pediatricianform">
 		<table width="100%">
+		
+		<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+		
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 		</table>
@@ -778,6 +831,13 @@
 		<!-- INTERNMENT -->
 		<div id="tab-int" class="pediatricianform">
 			<table width="100%">
+			
+			<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+			</td>
+		</tr>
+			
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="interconsultation" path="interconsultation" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.interconsultation" />
@@ -802,7 +862,8 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<input type="submit" value="Guardar" onClick="_isDirty = false;"/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+		<input id="formSubmitBtn" type="submit" value="Guardar" onClick="_isDirty = false;" style="display:none;"/>
 		</td>
 		</tr>
 					

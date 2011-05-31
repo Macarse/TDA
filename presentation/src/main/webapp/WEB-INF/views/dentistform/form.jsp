@@ -64,7 +64,7 @@
 </c:choose>
 
 <h2><c:if test="${dentistForm.new}"><fmt:message key="dentist.form.new" /></c:if><fmt:message key="dentist.form.form" /> de '<i>${dentistForm.patient.firstName} ${dentistForm.patient.lastName}</i>'</h2>
-<button id="ajaxSave" type="button" onclick="submitFormAjax()">Guardar</button>
+<button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="dentistForm" method="post" id="myform">
 	<div id="form-tabs">
@@ -75,6 +75,12 @@
 		</ul>
 	<div id="tab-history" class="dentistform">
 		<table>
+		
+		<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
 		
 			<tr><td>
 				<form:label for="receivedAttentionInTrain" path="receivedAttentionInTrain" cssErrorClass="error">
@@ -135,6 +141,13 @@
 	
 	<div id="tab-odontogram" class="dentistform">
 		<table>
+		
+				<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+		
 			<tr>
 				<td>
 					<form:label for="cpod" path="cpod" cssErrorClass="error">
@@ -207,7 +220,7 @@
 		<form:input path="tooths" cssStyle="display:none;" /> <form:errors path="tooths" />
 		<div id="tooth1" style="z-index:999;"></div>
 
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 			
@@ -216,6 +229,13 @@
 
 	<div id="tab-inspection" class="dentistform">
 		<table width="100%">
+		
+						<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+			</td>
+		</tr>
+		
 			<tr>
 				<th colspan="2">
 					<form:label for="stains" path="stains" cssErrorClass="error">
@@ -308,7 +328,8 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<input type="submit" value="Guardar" onClick="submitForm()"/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+		<input id="formSubmitBtn" type="submit" value="Guardar" onClick="submitForm()" style="display:none;"/>
 		</td>
 		</tr>	
 			

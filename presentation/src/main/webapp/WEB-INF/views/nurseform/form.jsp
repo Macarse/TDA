@@ -29,7 +29,7 @@
 </c:choose>
 
 <h2><c:if test="${NurseForm.new}"><fmt:message key="nurse.form.new" /></c:if> <fmt:message key="nurse.form.form" /> de '<i>${nurseForm.patient.firstName} ${nurseForm.patient.lastName}</i>'</h2>
-<button id="ajaxSave" type="button" onclick="submitFormAjax()">Guardar</button>
+<button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="nurseForm" method="post" id="myform">
 	<div id="form-tabs">
@@ -42,6 +42,12 @@
 		
 	<div id="tab-vitalChecks" class="nurseform">
 		<table>
+		
+		<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
 
 			<tr>
 				<td><form:label for="size" path="size" cssErrorClass="error"><fmt:message key="nurse.form.size" /></form:label></td> 
@@ -69,6 +75,12 @@
 	<div id="tab-taControl" class="nurseform">
 		<table>
 
+					<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+
 			<tr>
 				<td><form:label for="TAmin" path="TAmin" cssErrorClass="error"><fmt:message key="nurse.form.TAmin" /></form:label></td> 
 				<td><form:input path="TAmin" /> <form:errors path="TAmin" /></td></tr>
@@ -91,7 +103,7 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 		
@@ -100,6 +112,12 @@
 
 	<div id="tab-vaccines" class="nurseform">
 	<table>
+						<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+	
 			<c:set var="count" value="0" />
 			<c:forEach var="vaxine" items="${allVaxines}">
 				<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
@@ -112,7 +130,7 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
 			
@@ -121,6 +139,13 @@
 
 	<div id="tab-actions" class="nurseform">
 		<table width="100%">
+		
+		<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+			</td>
+		</tr>
+		
 			<tr>
 				<th colspan="${fieldsPerRow }"><form:label for="nurseActions" path="nurseActions"
 					cssErrorClass="error"><fmt:message key="nurse.form.actions" /></form:label></th></tr>
@@ -142,7 +167,8 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<input type="submit" value="Guardar" onClick="_isDirty = false;"/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+		<input id="formSubmitBtn" type="submit" value="Guardar" onClick="_isDirty = false;" style="display:none;"/>
 		</td>
 		</tr>
 				

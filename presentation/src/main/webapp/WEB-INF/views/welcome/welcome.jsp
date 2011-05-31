@@ -40,6 +40,12 @@
 	</div>
 </c:if>
 
+<c:choose>
+<c:when test="${paginator.totalResultsCount<=0}">
+	<div style="font-size: 15px;">No hay pacientes en el tren</div>
+</c:when>
+<c:otherwise>
+
 <div id="search-button">
 	<a href="#" style="font-size: 14px;"><span class="ui-icon ui-icon-search button-icon"> </span> Buscar paciente</a>
 </div>
@@ -132,3 +138,5 @@
 	</tfoot>
 </table>
 </div>
+</c:otherwise>
+</c:choose>

@@ -34,7 +34,9 @@
 </c:choose>
 
 <h2><c:if test="${socialWorkerForm.new}"> <fmt:message key="socialworker.form.new" /></c:if> <fmt:message key="socialworker.form.form" /> de '<i>${socialWorkerForm.patient.firstName} ${socialWorkerForm.patient.lastName}</i>'</h2>
-<button id="ajaxSave" type="button" onclick="submitFormAjax()">Guardar</button>
+<button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
+<br></br>
+<br></br>
 
 <form:form modelAttribute="socialWorkerForm" method="post" id="myform">
 	<div id="form-tabs">
@@ -48,10 +50,17 @@
 	<!-- Aca empieza la seccion de Grupo Familiar -->
 	<div id="tab-gf" class="socialworkerform">
 		<table width="100%">
+		
+		<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+
 			<tr>
 				<th colspan="${fieldsPerRow}"><fmt:message key="socialworker.form.fatherTitle" /></th></tr>
 				<tr>
-					<td><form:label for="fatherFirstName" path="fatherFirstName" cssErrorClass="error" title="sarasa"><fmt:message key="socialworker.form.fatherFirstName" /></form:label>
+					<td><form:label for="fatherFirstName" path="fatherFirstName" cssErrorClass="error"><fmt:message key="socialworker.form.fatherFirstName" /></form:label>
 						<form:input path="fatherFirstName" /> <form:errors path="fatherFirstName" /></td>
 					<td><form:label for="fatherLastName" path="fatherLastName" cssErrorClass="error"><fmt:message key="socialworker.form.fatherLastName" /></form:label>
 						<form:input path="fatherLastName" /> <form:errors path="fatherLastName" /></td>
@@ -119,6 +128,13 @@
 	<!-- Aca empieza la seccion de Vivienda -->
 	<div id="tab-viv" class="socialworkerform">
 		<table>
+		
+		<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+		
 			<tr>
 				<td colspan="${fieldsPerRow}"><form:label for="roomsExcludingKitchenAndBathroom" path="roomsExcludingKitchenAndBathroom" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.roomsExcludingKitchenAndBathroom" /></span></form:label>
 				<form:input path="roomsExcludingKitchenAndBathroom" /> <form:errors path="roomsExcludingKitchenAndBathroom" /></td></tr>
@@ -222,6 +238,7 @@
 		<tr>
 		<td>
 		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
 		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
@@ -233,6 +250,13 @@
 	<!-- Aca empieza la seccion de Escolaridad -->
 	<div id="tab-esc" class="socialworkerform">
 		<table>
+		
+		<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			</td>
+		</tr>
+		
 			<tr>
 				<td colspan="${fieldsPerRow}"><form:label for="knowsHowToReadAndWrite1" path="knowsHowToReadAndWrite" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.knowsHowToReadAndWrite" /></span></form:label>
 					<form:checkbox path="knowsHowToReadAndWrite" /> <form:errors path="knowsHowToReadAndWrite" /></td></tr>
@@ -279,6 +303,7 @@
 		<tr>
 		<td>
 		<br/><br/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
 		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
 		</td>
 		</tr>
@@ -290,6 +315,13 @@
 	<!-- Aca empieza la seccion de Datos socioeconomicos del grupo familiar -->
 	<div id="tab-eco" class="socialworkerform">
 		<table>
+		
+		<tr>
+			<td>
+				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+			</td>
+		</tr>
+		
 			<tr>
 				<td colspan="${fieldsPerRow}"><form:label for="workingPeople1" path="workingPeople" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.workingPeople" /></span></form:label>
 					<form:input path="workingPeople" /> <form:errors path="workingPeople" /></td></tr>
@@ -381,7 +413,8 @@
 		<tr>
 		<td>
 		<br/><br/>
-		<input type="submit" value="Guardar" onClick="_isDirty = false;"/>
+		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+		<input id="formSubmitBtn" type="submit" value="Guardar" onClick="_isDirty = false;" style="display:none;"/>
 		</td>
 		</tr>
 		
