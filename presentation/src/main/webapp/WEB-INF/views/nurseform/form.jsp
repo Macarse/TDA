@@ -44,8 +44,8 @@
 		<table>
 		
 		<tr>
-			<td>
-				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			<td colspan="${fieldsPerRow}">
+				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 			</td>
 		</tr>
 
@@ -63,9 +63,9 @@
 				<td><form:input path="percentile" /> <form:errors path="percentile" /></td></tr>
 				
 		<tr>
-		<td>
+		<td colspan="${fieldsPerRow }">
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 		</td>
 		</tr>
 				
@@ -75,9 +75,10 @@
 	<div id="tab-taControl" class="nurseform">
 		<table>
 
-					<tr>
-			<td>
-				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			<tr>
+			<td colspan="${fieldsPerRow }">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 			</td>
 		</tr>
 
@@ -101,9 +102,10 @@
 				<td><form:input path="saturation" /> <form:errors path="saturation" /></td></tr>
 		
 		<tr>
-		<td>
+		<td colspan="${fieldsPerRow }">
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 		</td>
 		</tr>
 		
@@ -113,8 +115,9 @@
 	<div id="tab-vaccines" class="nurseform">
 	<table>
 						<tr>
-			<td>
-				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+			<td colspan="${fieldsPerRow }">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 			</td>
 		</tr>
 	
@@ -128,9 +131,10 @@
 			<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 			<tr><td><form:errors path="vaxines" /></td></tr>
 		<tr>
-		<td>
+		<td colspan="${fieldsPerRow }">
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+		<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 		</td>
 		</tr>
 			
@@ -141,8 +145,8 @@
 		<table width="100%">
 		
 		<tr>
-			<td>
-				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+			<td colspan="${fieldsPerRow }">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
 			</td>
 		</tr>
 		
@@ -165,9 +169,9 @@
 				<th colspan="${fieldsPerRow }"><form:textarea path="observations" /> <form:errors path="observations" /></td></tr>
 				
 		<tr>
-		<td>
+		<td colspan="${fieldsPerRow }">
 		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
+		<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
 		<input id="formSubmitBtn" type="submit" value="Guardar" onClick="_isDirty = false;" style="display:none;"/>
 		</td>
 		</tr>

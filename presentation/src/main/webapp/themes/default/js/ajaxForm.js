@@ -1,6 +1,6 @@
 function autoSubmitFormAjax(){
-		$('#ajaxSave').click();
-		_isDirty = false;
+		//$('#ajaxSave').click();
+		//_isDirty = false;
 	}
 
 function submitFormAjax(){
