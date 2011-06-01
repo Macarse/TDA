@@ -6,6 +6,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="paginator">
 	<ul id="pagination-digg">
+	<c:if test="${paginator.pageCount > 1}"> 
+	
 		<c:if test="${!paginator.firstPage}">
 			<li class="previous"><a href="?page=<c:out value="${paginator.previousPage}&orderField=${orderField}&orderAscending=${orderAscending}&${params}"/>"> <B>&lt;&lt; Anterior</B></a></li>
 		</c:if>
@@ -30,6 +32,8 @@
 		<c:if test="${paginator.lastPage}">
 			<li class="next-off"><B>Siguiente &gt;&gt;</B></li>
 		</c:if>
+		
+	</c:if>
 	</ul>
 </div>
 <br/>
