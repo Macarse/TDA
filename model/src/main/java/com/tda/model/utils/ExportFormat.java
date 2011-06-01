@@ -1,7 +1,7 @@
 package com.tda.model.utils;
 
 public enum ExportFormat {
-	PDF("PDF"), XLS("XLS"), HTML("HTML");
+	HTML("HTML"), PDF("PDF"), XLS("XLS");
 
 	private String description;
 
