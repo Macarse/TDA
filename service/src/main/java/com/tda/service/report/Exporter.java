@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRHtmlExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
@@ -61,6 +62,19 @@ public class Exporter {
 			throws JRException {
 		// Create a JRXlsExporter instance
 		JRPdfExporter exporter = new JRPdfExporter();
+
+		// Here we assign the parameters jp and baos to the exporter
+		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
+		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, baos);
+
+		// Retrieve the exported report in XLS format
+		exporter.exportReport();
+	}
+
+	public void exportHTML(JasperPrint jp, ByteArrayOutputStream baos)
+			throws JRException {
+		// Create a JRXlsExporter instance
+		JRHtmlExporter exporter = new JRHtmlExporter();
 
 		// Here we assign the parameters jp and baos to the exporter
 		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);

@@ -138,6 +138,11 @@ public class ReportService {
 			fileName += "pdf";
 			response.setContentType("application/pdf");
 			break;
+		case HTML:
+			exporter.exportHTML(jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
 		}
 
 		response.setHeader("Content-Disposition", "inline; filename="
@@ -235,6 +240,11 @@ public class ReportService {
 			fileName += "pdf";
 			response.setContentType("application/pdf");
 			break;
+		case HTML:
+			exporter.exportHTML(jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
 		}
 
 		response.setHeader("Content-Disposition", "inline; filename="
@@ -294,6 +304,11 @@ public class ReportService {
 			fileName += "pdf";
 			response.setContentType("application/pdf");
 			break;
+		case HTML:
+			exporter.exportHTML(jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
 		}
 
 		response.setHeader("Content-Disposition", "inline; filename="
@@ -350,6 +365,11 @@ public class ReportService {
 			exporter.exportPDF(jp, baos);
 			fileName += "pdf";
 			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
 			break;
 		}
 
