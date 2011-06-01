@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -47,9 +48,10 @@ public class ReportController {
 	@RequestMapping(value = "/patientReport", method = RequestMethod.GET)
 	public void doPatientReport(
 			@Valid @ModelAttribute ConfigReport configReport,
-			BindingResult result, HttpServletResponse response)
-			throws ServletException, IOException, ClassNotFoundException,
-			SQLException, ColumnBuilderException, JRException {
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException {
 
 		ModelAndView model = new ModelAndView(LIST);
 
@@ -57,7 +59,7 @@ public class ReportController {
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadPatientReport(response,
+			reportService.downloadPatientReport(request, response,
 					configReport.getFormat(), configReport);
 		}
 	}
@@ -65,9 +67,10 @@ public class ReportController {
 	@RequestMapping(value = "/patientReportDate", method = RequestMethod.GET)
 	public void doPatientReportDate(
 			@Valid @ModelAttribute ConfigReport configReport,
-			BindingResult result, HttpServletResponse response)
-			throws ServletException, IOException, ClassNotFoundException,
-			SQLException, ColumnBuilderException, JRException {
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException {
 
 		ModelAndView model = new ModelAndView(LIST);
 
@@ -75,7 +78,7 @@ public class ReportController {
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadPatientReport(response,
+			reportService.downloadPatientReport(request, response,
 					configReport.getFormat(), configReport);
 		}
 	}
@@ -83,10 +86,10 @@ public class ReportController {
 	@RequestMapping(value = "/sexGraphReport", method = RequestMethod.GET)
 	public void doSexGraphReport(
 			@Valid @ModelAttribute ConfigReport configReport,
-			BindingResult result, HttpServletResponse response)
-			throws ServletException, IOException, ClassNotFoundException,
-			SQLException, ColumnBuilderException, JRException,
-			ChartBuilderException {
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
 
 		ModelAndView model = new ModelAndView(LIST);
 
@@ -94,7 +97,7 @@ public class ReportController {
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadSexGraphReport(response,
+			reportService.downloadSexGraphReport(request, response,
 					configReport.getFormat(), configReport);
 		}
 	}
@@ -102,10 +105,10 @@ public class ReportController {
 	@RequestMapping(value = "/itineraryReport", method = RequestMethod.GET)
 	public void doItineraryReport(
 			@Valid @ModelAttribute ConfigReport configReport,
-			BindingResult result, HttpServletResponse response)
-			throws ServletException, IOException, ClassNotFoundException,
-			SQLException, ColumnBuilderException, JRException,
-			ChartBuilderException {
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
 
 		ModelAndView model = new ModelAndView(LIST);
 
@@ -113,7 +116,7 @@ public class ReportController {
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadItineraryReport(response,
+			reportService.downloadItineraryReport(request, response,
 					configReport.getFormat(), configReport);
 		}
 	}
@@ -121,9 +124,10 @@ public class ReportController {
 	@RequestMapping(value = "/patientReportAge", method = RequestMethod.GET)
 	public void doPatientReportAge(
 			@Valid @ModelAttribute ConfigReport configReport,
-			BindingResult result, HttpServletResponse response)
-			throws ServletException, IOException, ClassNotFoundException,
-			SQLException, ColumnBuilderException, JRException {
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException {
 
 		ModelAndView model = new ModelAndView(LIST);
 
@@ -131,7 +135,7 @@ public class ReportController {
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadPatientReport(response,
+			reportService.downloadPatientReport(request, response,
 					configReport.getFormat(), configReport);
 		}
 	}
@@ -139,10 +143,10 @@ public class ReportController {
 	@RequestMapping(value = "/ageGraphReport", method = RequestMethod.GET)
 	public void doAgeGraphReport(
 			@Valid @ModelAttribute ConfigReport configReport,
-			BindingResult result, HttpServletResponse response)
-			throws ServletException, IOException, ClassNotFoundException,
-			SQLException, ColumnBuilderException, JRException,
-			ChartBuilderException {
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
 
 		ModelAndView model = new ModelAndView(LIST);
 
@@ -150,7 +154,7 @@ public class ReportController {
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadAgeGraphReport(response,
+			reportService.downloadAgeGraphReport(request, response,
 					configReport.getFormat(), configReport);
 		}
 	}

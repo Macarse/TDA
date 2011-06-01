@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRDataSource;
@@ -59,9 +60,10 @@ public class ReportService {
 		this.itineraryDAO = itineraryDAO;
 	}
 
-	public void downloadPatientReport(HttpServletResponse response,
-			ExportFormat format, ConfigReport configReport)
-			throws ColumnBuilderException, ClassNotFoundException, JRException {
+	public void downloadPatientReport(HttpServletRequest request,
+			HttpServletResponse response, ExportFormat format,
+			ConfigReport configReport) throws ColumnBuilderException,
+			ClassNotFoundException, JRException {
 
 		// Retrieve our data source
 		JRDataSource ds = null;
@@ -139,7 +141,7 @@ public class ReportService {
 			response.setContentType("application/pdf");
 			break;
 		case HTML:
-			exporter.exportHTML(jp, baos);
+			exporter.exportHTML(request, jp, baos);
 			fileName += "html";
 			response.setContentType("text/html");
 			break;
@@ -169,10 +171,10 @@ public class ReportService {
 		}
 	}
 
-	public void downloadSexGraphReport(HttpServletResponse response,
-			ExportFormat format, ConfigReport configReport)
-			throws ColumnBuilderException, ClassNotFoundException, JRException,
-			ChartBuilderException {
+	public void downloadSexGraphReport(HttpServletRequest request,
+			HttpServletResponse response, ExportFormat format,
+			ConfigReport configReport) throws ColumnBuilderException,
+			ClassNotFoundException, JRException, ChartBuilderException {
 
 		SexGraphReportLayout layout = new SexGraphReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -241,7 +243,7 @@ public class ReportService {
 			response.setContentType("application/pdf");
 			break;
 		case HTML:
-			exporter.exportHTML(jp, baos);
+			exporter.exportHTML(request, jp, baos);
 			fileName += "html";
 			response.setContentType("text/html");
 			break;
@@ -256,10 +258,10 @@ public class ReportService {
 		writeReportToResponseStream(response, baos);
 	}
 
-	public void downloadItineraryReport(HttpServletResponse response,
-			ExportFormat format, ConfigReport configReport)
-			throws ColumnBuilderException, ClassNotFoundException, JRException,
-			ChartBuilderException {
+	public void downloadItineraryReport(HttpServletRequest request,
+			HttpServletResponse response, ExportFormat format,
+			ConfigReport configReport) throws ColumnBuilderException,
+			ClassNotFoundException, JRException, ChartBuilderException {
 
 		ItineraryReportLayout layout = new ItineraryReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -305,7 +307,7 @@ public class ReportService {
 			response.setContentType("application/pdf");
 			break;
 		case HTML:
-			exporter.exportHTML(jp, baos);
+			exporter.exportHTML(request, jp, baos);
 			fileName += "html";
 			response.setContentType("text/html");
 			break;
@@ -320,10 +322,10 @@ public class ReportService {
 		writeReportToResponseStream(response, baos);
 	}
 
-	public void downloadAgeGraphReport(HttpServletResponse response,
-			ExportFormat format, ConfigReport configReport)
-			throws ColumnBuilderException, ClassNotFoundException, JRException,
-			ChartBuilderException {
+	public void downloadAgeGraphReport(HttpServletRequest request,
+			HttpServletResponse response, ExportFormat format,
+			ConfigReport configReport) throws ColumnBuilderException,
+			ClassNotFoundException, JRException, ChartBuilderException {
 
 		AgeGraphReportLayout layout = new AgeGraphReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -367,7 +369,7 @@ public class ReportService {
 			response.setContentType("application/pdf");
 			break;
 		case HTML:
-			exporter.exportHTML(jp, baos);
+			exporter.exportHTML(request, jp, baos);
 			fileName += "html";
 			response.setContentType("text/html");
 			break;

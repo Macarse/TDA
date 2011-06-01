@@ -1,14 +1,19 @@
 package com.tda.service.report;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRHtmlExporter;
+import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.j2ee.servlets.ImageServlet;
 
 /**
  * Everything under the package org.krams.tutorial.jasper are settings imposed
@@ -71,14 +76,24 @@ public class Exporter {
 		exporter.exportReport();
 	}
 
-	public void exportHTML(JasperPrint jp, ByteArrayOutputStream baos)
-			throws JRException {
+	public void exportHTML(HttpServletRequest request, JasperPrint jp,
+			ByteArrayOutputStream baos) throws JRException {
 		// Create a JRXlsExporter instance
 		JRHtmlExporter exporter = new JRHtmlExporter();
 
-		// Here we assign the parameters jp and baos to the exporter
+		request.getSession().setAttribute(
+				ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jp);
+
+		Random rnd = new Random();
+		String imgExtension = String.valueOf(rnd.nextInt());
+		exporter = new JRHtmlExporter();
 		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
 		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, baos);
+		exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI,
+				request.getContextPath() + "/reportImage?rnd=" + imgExtension
+						+ "&image=");
+		// exporter.setParameter(JRHtmlExporterParameter.IS_OUTPUT_IMAGES_TO_DIR,
+		// Boolean.FALSE);
 
 		// Retrieve the exported report in XLS format
 		exporter.exportReport();
