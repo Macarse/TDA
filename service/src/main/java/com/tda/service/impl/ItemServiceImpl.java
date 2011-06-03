@@ -94,4 +94,9 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findByExamplePaged(Item example, Paginator paginator) {
 		return itemDAO.findByExamplePaged(example, paginator);
 	}
+
+	@Transactional(readOnly = true)
+	public List<Item> findByExactName(String name) {
+		return itemDAO.findByExactName(name);
+	}
 }

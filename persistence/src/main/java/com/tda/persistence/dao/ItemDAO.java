@@ -18,6 +18,11 @@ public class ItemDAO extends GenericDAOImpl<Item> {
 		Item exampleObject = ItemBuilder.createItem().withName(name).build();
 		return this.findByExample(exampleObject);
 	}
+	
+	public List<Item> findByExactName(String name) {
+		Item exampleObject = ItemBuilder.createItem().withName(name).build();
+		return findByExample(exampleObject, true);
+	}
 
 	public List<Item> findByDescriptionContaining(String description) {
 		Item exampleObject = ItemBuilder.createItem()

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,6 +78,14 @@ public class ItemController {
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 
+		// Check for name uniqueness
+		List<Item> itemsWithName = itemService.findByExactName(anItem.getName());
+		if (!itemsWithName.isEmpty() && !itemsWithName.get(0).getId().equals(anItem.getId())) {
+			FieldError uniquenessError = new FieldError("item", "name", anItem.getName(), false, 
+					new String[] {"error.item.duplicated"}, new Object[] {"El item ya existe"}, "El item ya existe");
+			result.addError(uniquenessError);
+		}
+		
 		// TODO if we're editing and not adding a new item the message
 		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors()) {

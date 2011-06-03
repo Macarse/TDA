@@ -22,6 +22,8 @@ public interface ItemService {
 	List<Item> findAllPaged(Paginator paginator);
 
 	List<Item> findByName(String name);
+	
+	List<Item> findByExactName(String name);
 
 	List<Item> findByExample(Item example);
 

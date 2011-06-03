@@ -3,6 +3,7 @@ package com.tda.model.item;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -57,7 +58,7 @@ public class Item implements Serializable {
 		this.id = id;
 	}
 
-	@Basic
+	@Column(unique = true)
 	public String getName() {
 		return name;
 	}
