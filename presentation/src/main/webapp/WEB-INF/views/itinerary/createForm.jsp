@@ -66,6 +66,10 @@ $(document).ready(function() {
 	
 	setupRemoveHandlers(placePosition);
 	initialDatePickers(placePosition);
+	
+	if (placePosition < 0) {
+		document.getElementById('addPlaceButton').click();
+	}
 });
 </script>
 
