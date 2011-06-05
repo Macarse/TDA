@@ -119,7 +119,7 @@
 			<tr>
 				<td>${item.name}</td>
 				<td>${item.description}</td>
-				<td>${item.quantity}</td>
+				<td><div class='editable' id='${item.id }'>${item.quantity}</div></td>
 				<td>${item.category.description}</td>
 				<td>${item.measureUnit.description}</td>
 				<td><form:form method="GET"
@@ -145,3 +145,9 @@
 </c:otherwise>
 </c:choose>
 <div class="newBtn"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></div>
+
+<script language='javascript' type='text/javascript'>
+	$(document).ready(function(){
+		$('.editable').editable(contextPath + "/item/edit");
+	});
+</script>
