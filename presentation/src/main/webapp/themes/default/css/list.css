@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+.edit-item form > input{
+	width: 20px;
+}
+
 /* buttons and icons */
 .list-table{
 	width: 760px;

@@ -148,6 +148,45 @@
 
 <script language='javascript' type='text/javascript'>
 	$(document).ready(function(){
-		$('.editable').editable(contextPath + "/item/edit");
+		$.editable.addInputType('updown',{
+			element: function(settings, original){
+				var input = $("<input id='inline-value' type='text' style='width: 30px;' />");
+				var hidden = $("<input id='inline-hidden' type='hidden' />");
+				var up = $("<input id='inline-up' type='button' value='+' />");
+				var down = $("<input id='inline-down' type='button' value='-' />");
+
+
+				$(this).append(hidden);
+				$(this).append(input);
+				$(this).append(up);
+				$(this).append(down);
+				
+				$("#inline-up", this).click(function(){
+					var inp = $("#inline-value");
+					inp.val(parseInt(inp.val()) + 1);
+				});
+
+				$("#inline-down", this).click(function(){
+					var inp = $("#inline-value");
+					inp.val(parseInt(inp.val()) - 1);
+				});
+				
+				return hidden;
+			},
+			submit: function (settings, original){
+				var value = $("#inline-value", this).val();
+				$("#inline-hidden", this).val(value);	
+			},
+			content: function(string, settings, original){
+				$("#inline-value", this).val(string);
+			}
+		});
+		
+		$('.editable').editable(contextPath + "/item/edit", {
+			indicator: 'Guardando...',
+			tooltip: 'Click para editar',
+			submit: 'Ok',
+			type: 'updown'
+		});
 	});
 </script>
