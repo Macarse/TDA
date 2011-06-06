@@ -102,7 +102,7 @@
 							<img src="${pageContext.request.contextPath}/themes/default/image/ok.png" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/${patientintrain.nurseform.id}/edit">Formulario Enfermero</a> <br/>
 						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/new">Formulario Enfermeno</a> <br/>
+							<img src="${pageContext.request.contextPath}/themes/default/image/edit.gif" /> <a href="${pageContext.request.contextPath}/patient/${patientintrain.patient.id}/nurse/new">Formulario Enfermería</a> <br/>
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
