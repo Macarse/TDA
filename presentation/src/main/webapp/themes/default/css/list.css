@@ -4,6 +4,22 @@
 	width: 20px;
 }
 
+.inline-up{
+	position: relative;
+	top: -7px;
+	left: 5px;
+}
+
+.inline-submit{
+	top: 2px;
+}
+
+.inline-down{
+	position: relative;
+	top: 2px;
+	left: -5px;
+}
+
 /* buttons and icons */
 .list-table{
 	width: 760px;

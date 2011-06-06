@@ -152,14 +152,15 @@
 			element: function(settings, original){
 				var input = $("<input id='inline-value' type='text' style='width: 30px;' />");
 				var hidden = $("<input id='inline-hidden' type='hidden' />");
-				var up = $("<input id='inline-up' type='button' value='+' />");
-				var down = $("<input id='inline-down' type='button' value='-' />");
-
+				var up = $("<a href='#'><img id='inline-up' src='" + contextPath + "/themes/default/image/arrow_order_up.gif' alt='sumar' class='inline-up' /></a>");
+				var down = $("<a href='#'><img id='inline-down' src='" + contextPath + "/themes/default/image/arrow_order_down.gif' alt='restar' class='inline-down' /></a>");
+				var submit = $("<input type='image' id='inline-submit' src='" + contextPath + "/themes/default/image/ok.png' alt='enviar' class='inline-submit' /></a>");
 
 				$(this).append(hidden);
 				$(this).append(input);
 				$(this).append(up);
 				$(this).append(down);
+				$(this).append(submit);
 				
 				$("#inline-up", this).click(function(){
 					var inp = $("#inline-value");
@@ -185,7 +186,6 @@
 		$('.editable').editable(contextPath + "/item/edit", {
 			indicator: 'Guardando...',
 			tooltip: 'Click para editar',
-			submit: 'Ok',
 			type: 'updown'
 		});
 	});
