@@ -41,13 +41,12 @@
 		</ul>
 		
 	<div id="tab-vitalChecks" class="nurseform">
-		<table>
-		
-		<tr>
-			<td colspan="${fieldsPerRow}">
+		<table width="100%">
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
 				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-			</td>
-		</tr>
+				</td>
+			</tr>
 
 			<tr>
 				<td><form:label for="size" path="size" cssErrorClass="error"><fmt:message key="nurse.form.size" /></form:label></td> 
@@ -62,25 +61,24 @@
 				<td><form:label for="percentile" path="percentile" cssErrorClass="error"><fmt:message key="nurse.form.percentile" /></form:label></td>
 				<td><form:input path="percentile" /> <form:errors path="percentile" /></td></tr>
 				
-		<tr>
-		<td colspan="${fieldsPerRow }">
-		<br/><br/>
-		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-		</td>
-		</tr>
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
+				</td>
+			</tr>
 				
 		</table>
 	</div>
 
 	<div id="tab-taControl" class="nurseform">
-		<table>
+		<table width="100%">
 
 			<tr>
-			<td colspan="${fieldsPerRow }">
+				<td colspan="${fieldsPerRow}" class="doubleband">
 				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
 				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-			</td>
-		</tr>
+				</td>
+			</tr>
 
 			<tr>
 				<td><form:label for="TAmin" path="TAmin" cssErrorClass="error"><fmt:message key="nurse.form.TAmin" /></form:label></td> 
@@ -101,23 +99,22 @@
 				<td><form:label for="saturation" path="saturation" cssErrorClass="error"><fmt:message key="nurse.form.saturation" /></form:label></td>
 				<td><form:input path="saturation" /> <form:errors path="saturation" /></td></tr>
 		
-		<tr>
-		<td colspan="${fieldsPerRow }">
-		<br/><br/>
-		<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-		</td>
-		</tr>
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
+				</td>
+			</tr>
 		
 		</table>
 	</div>
 
 	<div id="tab-vaccines" class="nurseform">
-	<table>
-						<tr>
-			<td colspan="${fieldsPerRow }">
-				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
+	<table width="100%">
+		<tr>
+			<td colspan="${fieldsPerRow}" class="doubleband">
+			<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+			<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 			</td>
 		</tr>
 	
@@ -131,11 +128,10 @@
 			<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 			<tr><td><form:errors path="vaxines" /></td></tr>
 		<tr>
-		<td colspan="${fieldsPerRow }">
-		<br/><br/>
-		<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-		</td>
+			<td colspan="${fieldsPerRow}" class="doubleband">
+			<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+			<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
+			</td>
 		</tr>
 			
 	</table>
@@ -143,12 +139,11 @@
 
 	<div id="tab-actions" class="nurseform">
 		<table width="100%">
-		
-		<tr>
-			<td colspan="${fieldsPerRow }">
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
 				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-			</td>
-		</tr>
+				</td>
+			</tr>
 		
 			<tr>
 				<th colspan="${fieldsPerRow }"><form:label for="nurseActions" path="nurseActions"
@@ -168,13 +163,11 @@
 			<tr> 
 				<th colspan="${fieldsPerRow }"><form:textarea path="observations" /> <form:errors path="observations" /></td></tr>
 				
-		<tr>
-		<td colspan="${fieldsPerRow }">
-		<br/><br/>
-		<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-		<input id="formSubmitBtn" type="submit" value="Guardar" onClick="_isDirty = false;" style="display:none;"/>
-		</td>
-		</tr>
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+				</td>
+			</tr>
 				
 		</table>
 	
