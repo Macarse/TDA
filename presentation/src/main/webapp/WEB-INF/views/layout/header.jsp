@@ -14,7 +14,8 @@
 	<a class="fg-button button-text ui-state-default ui-corner-right" href="${logoutUrl}">salir</a>
 </div>
 
-<script language='javascript' type='text/javascript'> 
+<script language='javascript' type='text/javascript'>
+/*
 	$(document).ready(function(){
 	    setTimeout("slide()",5000);
 	});
@@ -24,5 +25,5 @@
 	      $('.msg-info').slideUp('slow', function() {});
 	  }
 	}
- 
+ */
 </script>

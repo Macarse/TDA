@@ -9,14 +9,14 @@
     $(document).ready(function(){
         $("#close-itinerary-banner").click(
         		function () {
-        			$("#welcome-banner").hide();
+        			$('#welcome-banner').slideUp('slow', function() {});
         		});
     }); 
 </script>
 
 <div id="welcome-banner" style="margin: 10px 10px 10px 10px;">
     <div class="ui-widget" style="float: left; font-size: 12px; width: 100%;">
-        <div class="ui-state-highlight ui-corner-all" style="margin-top: 10px; padding: 0 .7em;"> 
+        <div class="ui-state-highlight ui-corner-all" style="margin-bottom: 10px; padding: 0 .7em;"> 
             <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
             <strong>Itinerario:</strong>
             <c:choose>
