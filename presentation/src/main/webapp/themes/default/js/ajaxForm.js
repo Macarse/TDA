@@ -5,15 +5,15 @@ function autoSubmitFormAjax(){
 
 function submitFormAjax(){
 	//Pongo el boton disabled y con otro texto:
-	$('#ajaxSave').attr("disabled", "true");
-	$('#ajaxSave').html("Guardando...");
+	$('#formSubmitBtn').attr("disabled", "true");
+	$('#formSubmitBtn').html("Guardando...");
 
     var options = { 
             //target:        '#output2',   // target element(s) to be updated with server response 
             //beforeSubmit:  showRequest,  // pre-submit callback 
             success: function() {
-            	$('#ajaxSave').removeAttr('disabled');
-    	    	$('#ajaxSave').html("Guardar");
+            	$('#formSubmitBtn').removeAttr('disabled');
+    	    	$('#formSubmitBtn').html("Guardar Formulario");
             },
             // other available options: 
             //url:       url         // override for form's 'action' attribute 

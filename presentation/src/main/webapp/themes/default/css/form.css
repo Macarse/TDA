@@ -3,6 +3,20 @@
 div[class=filter-container]{
 }
 
+
+.doubleband{
+	border-bottom: solid 1px;
+	border-top: solid 1px;
+	padding: 5px;
+}
+
+.form-save-button{
+	float: right;
+	margin-bottom: 15px;
+	position: relative;
+	right: 10px;
+}
+
 .socialworkerform table th, .pediatricianform table th, .dentistform table th, .nurseform table th{
 	font-weight: bolder;
 	text-align: left;

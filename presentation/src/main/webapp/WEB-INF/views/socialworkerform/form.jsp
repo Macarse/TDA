@@ -17,7 +17,7 @@
         //$('#myform').ajaxForm(function() { 
           //  alert("Thank you for your comment!"); 
         //});
-        setInterval(autoSubmitFormAjax,30*1000);
+        setInterval(autoSubmitFormAjax,1000);
 	});
 
 	window.onbeforeunload = nextTabUnload;
@@ -34,9 +34,6 @@
 </c:choose>
 
 <h2><c:if test="${socialWorkerForm.new}"> <fmt:message key="socialworker.form.new" /></c:if> <fmt:message key="socialworker.form.form" /> de '<i>${socialWorkerForm.patient.firstName} ${socialWorkerForm.patient.lastName}</i>'</h2>
-<button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
-<br></br>
-<br></br>
 
 <form:form modelAttribute="socialWorkerForm" method="post" id="myform">
 	<div id="form-tabs">
@@ -51,13 +48,13 @@
 	<div id="tab-gf" class="socialworkerform">
 		<table width="100%">
 		
-		<tr>
-			<td colspan="${fieldsPerRow}">
-			<div style="float:right;">
-				<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
-			</div>
-			</td>
-		</tr>
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:right;">
+					<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+				</div>
+				</td>
+			</tr>
 
 			<tr>
 				<th colspan="${fieldsPerRow}"><fmt:message key="socialworker.form.fatherTitle" /></th></tr>
@@ -117,12 +114,14 @@
 				<td colspan="${fieldsPerRow}">
 					<form:label for="peopleAtHomeUnderTen" path="peopleAtHomeUnderTen" cssErrorClass="error"><fmt:message key="socialworker.form.peopleAtHomeUnderTen" /></form:label>
 					<form:input path="peopleAtHomeUnderTen" /> <form:errors path="peopleAtHomeUnderTen" /></td></tr>
-		<tr>
-		<td colspan="${fieldsPerRow}">
-		<br/><br/>
-		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-		</td>
-		</tr>
+		
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:right;">
+					<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a>
+				</div>
+				</td>
+			</tr>
 		
 		</table>
 	</div>	
@@ -130,13 +129,12 @@
 	<!-- Aca empieza la seccion de Vivienda -->
 	<div id="tab-viv" class="socialworkerform">
 		<table>
-		
-		<tr>
-			<td colspan="${fieldsPerRow}">
-			<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-			<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-			</td>
-		</tr>
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
+				</td>
+			</tr>
 		
 			<tr>
 				<td colspan="${fieldsPerRow}"><form:label for="roomsExcludingKitchenAndBathroom" path="roomsExcludingKitchenAndBathroom" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.roomsExcludingKitchenAndBathroom" /></span></form:label>
@@ -238,13 +236,12 @@
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="electricity" /></td></tr>
 				
-		<tr>
-		<td colspan="${fieldsPerRow}">
-		<br/><br/>
-		<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-		</td>
-		</tr>
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
+				</td>
+			</tr>
 				
 		</table>
 		
@@ -252,14 +249,13 @@
 		
 	<!-- Aca empieza la seccion de Escolaridad -->
 	<div id="tab-esc" class="socialworkerform">
-		<table>
-		
-		<tr>
-			<td colspan="${fieldsPerRow}">
+		<table width="100%">
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
 				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
 				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-			</td>
-		</tr>
+				</td>
+			</tr>
 		
 			<tr>
 				<td colspan="${fieldsPerRow}"><form:label for="knowsHowToReadAndWrite1" path="knowsHowToReadAndWrite" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.knowsHowToReadAndWrite" /></span></form:label>
@@ -304,14 +300,12 @@
 				<c:if test="${count%fieldsPerRow != 0 }"></tr></c:if>
 				<tr><td><form:errors path="schoolService" /></td></tr>
 				
-		<tr>
-		<td colspan="${fieldsPerRow}">
-		<br/><br/>
-		<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-		<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
-		</td>
-		</tr>
-				
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
+				</td>
+			</tr>
 		</table>
 		
 	</div>
@@ -319,13 +313,11 @@
 	<!-- Aca empieza la seccion de Datos socioeconomicos del grupo familiar -->
 	<div id="tab-eco" class="socialworkerform">
 		<table>
-		
-		<tr>
-			<td colspan="${fieldsPerRow}">
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
 				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
-			</td>
-		</tr>
-		
+				</td>
+			</tr>
 			<tr>
 				<td colspan="${fieldsPerRow}"><form:label for="workingPeople1" path="workingPeople" cssErrorClass="error"><span class="titleform"><fmt:message key="socialworker.form.workingPeople" /></span></form:label>
 					<form:input path="workingPeople" /> <form:errors path="workingPeople" /></td></tr>
@@ -414,16 +406,19 @@
 			<tr>	
 				<td colspan="${fieldsPerRow}"><form:textarea path="observations" /><form:errors path="observations" /></td></tr>
 		
-		<tr>
-		<td>
-		<br/><br/>
-		<a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a>
-		<input id="formSubmitBtn" type="submit" value="Guardar" onClick="_isDirty = false;" style="display:none;"/>
-		</td>
-		</tr>
+			<tr>
+				<td colspan="${fieldsPerRow}" class="doubleband">
+				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
+				</td>
+			</tr>
 		
 		</table>
 	</div>
+	<div class="form-save-button">
+		<input id="formSubmitBtn" type="submit" value="Guardar Formulario" onClick="_isDirty = false;"/>
+	</div>
+	<div style="clear: both">
+		<hr>
+	</div>
 	</div>
 </form:form>
-<hr>
