@@ -53,6 +53,9 @@ public class ItineraryController {
 					.getPlaces(), Place.class));
 			model.addAttribute("itineraryForm", itinerary);
 		} else {
+			ArrayList<Place> list = new ArrayList<Place>();
+			list.add(new Place());
+			itinerary.setPlaces(new AutoPopulatingList<Place>(list , Place.class));
 			model.addAttribute("placeSize", 0);
 			model.addAttribute("itineraryForm", new Itinerary());
 		}

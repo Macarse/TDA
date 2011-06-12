@@ -28,7 +28,7 @@
                      Haga click <a href="${pageContext.request.contextPath }/itinerary/edit/${currentItinerary.id}">aquí</a> para cambiarlo.
                 </c:otherwise>
             </c:choose>
-            <span id="close-itinerary-banner"><strong>[x]</strong></span>
+            <span id="close-itinerary-banner"><strong><a href="#">[x]</a></strong></span>
             </p>
         </div>
     </div>
