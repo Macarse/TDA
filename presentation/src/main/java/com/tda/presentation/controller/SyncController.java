@@ -2,6 +2,8 @@ package com.tda.presentation.controller;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -16,8 +18,12 @@ import com.tda.model.utils.ConfigSync;
 
 @Controller
 @RequestMapping(value = "/sync")
-public class SyncController {
+public class SyncController extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static String MAIN = "sync/main";
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -28,10 +34,14 @@ public class SyncController {
 
 	@RequestMapping(value = "/do", method = RequestMethod.GET)
 	public ModelAndView sync(@Valid @ModelAttribute ConfigSync configSync,
-			BindingResult result) {
+			BindingResult result, HttpServletRequest request) {
 		// Variables a parametrizas
 
-		String maatkitDir = "/Users/iandrono/Documents/ITBA/PF/TDA/presentation/src/main/webapp/maatkit-7332";
+		String maatkitDir = request.getSession().getServletContext()
+				.getRealPath("WEB-INF/maatkit-7332");
+
+		// String maatkitDir =
+		// "/Users/iandrono/Documents/ITBA/PF/TDA/presentation/src/main/webapp/maatkit-7332";
 		// String maatkitDir = System.getProperty("user.dir") + "/maatkit-7332";
 		String localPort = "8889";
 		String bothDBUser = "root";
