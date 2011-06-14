@@ -13,6 +13,9 @@
 		});
 
 		setInterval(autoSubmitFormAjax,30*1000);
+
+        if( ('<c:out value="${editable}"></c:out>') == 'false' )
+        	$('input, select').attr('disabled', 'disabled');
 	});
 
 	window.onbeforeunload = nextTabUnload;
@@ -29,6 +32,10 @@
 </c:choose>
 
 <h2><c:if test="${NurseForm.new}"><fmt:message key="nurse.form.new" /></c:if> <fmt:message key="nurse.form.form" /> de '<i>${nurseForm.patient.firstName} ${nurseForm.patient.lastName}</i>'</h2>
+<c:if test="${editable != null && !editable}">
+	<h3>Version Final - No editable - Fecha <fmt:formatDate value="${NurseForm.fillingDate}" pattern="dd/MM/yyyy"/></h3>
+</c:if>
+
 <button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="nurseForm" method="post" id="myform">

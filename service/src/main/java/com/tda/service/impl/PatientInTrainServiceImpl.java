@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
+import com.tda.model.utils.FormType;
 import com.tda.persistence.dao.PatientInTrainDAO;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.PatientInTrainService;
@@ -82,5 +83,9 @@ public class PatientInTrainServiceImpl implements PatientInTrainService {
 
 	public PatientInTrain findByPatient(Patient patient) {
 		return patientInTrainDAO.findByPatient(patient);
+	}
+
+	public boolean isActiveForm(Long formId, FormType formType) {
+		return patientInTrainDAO.isActiveForm(formId, formType);
 	}
 }

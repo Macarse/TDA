@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.tda.model.pediatrician.PediatricianForm;
+import com.tda.model.utils.FormType;
+import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PediatricianFormService;
 
 @Controller
@@ -23,6 +25,13 @@ public class EditPediatricianFormController extends
 		BasePediatricianFormController {
 	private static final String PEDIATRICIAN_FORM = "pediatricianform/form";
 	private PediatricianFormService pediatricianFormService;
+	private PatientInTrainService patientInTrainService;
+
+	@Autowired
+	public void setPatientInTrainService(
+			PatientInTrainService patientInTrainService) {
+		this.patientInTrainService = patientInTrainService;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(
@@ -31,6 +40,12 @@ public class EditPediatricianFormController extends
 		PediatricianForm pediatricianForm = pediatricianFormService
 				.findById(pediatricianFormId);
 		model.addAttribute("pediatricianForm", pediatricianForm);
+
+		boolean editable = patientInTrainService.isActiveForm(
+				pediatricianFormId, FormType.pediatrician);
+
+		model.addAttribute("editable", editable);
+
 		return PEDIATRICIAN_FORM;
 	}
 

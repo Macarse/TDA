@@ -16,6 +16,9 @@
 			//$('.distosicHidden').show();
 
 		setInterval(autoSubmitFormAjax,30*1000);
+
+        if( ('<c:out value="${editable}"></c:out>') == 'false' )
+        	$('input, select').attr('disabled', 'disabled');
 	});
 
 	window.onbeforeunload = nextTabUnload;
@@ -40,6 +43,10 @@
 		<fmt:message key="pediatrician.form.new" />
 	</c:if>	<fmt:message key="pediatrician.form.form" /> de '<i>${pediatricianForm.patient.firstName} ${pediatricianForm.patient.lastName}</i>'
 </h2>
+<c:if test="${editable != null && !editable}">
+	<h3>Version Final - No editable - Fecha <fmt:formatDate value="${pediatricianForm.fillingDate}" pattern="dd/MM/yyyy"/></h3>
+</c:if>
+
 <button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="pediatricianForm" method="post" id="myform">

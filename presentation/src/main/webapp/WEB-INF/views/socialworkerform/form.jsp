@@ -18,6 +18,9 @@
           //  alert("Thank you for your comment!"); 
         //});
         setInterval(autoSubmitFormAjax,1000);
+
+        if( ('<c:out value="${editable}"></c:out>') == 'false' )
+        	$('input, select').attr('disabled', 'disabled');
 	});
 
 	window.onbeforeunload = nextTabUnload;
@@ -34,6 +37,9 @@
 </c:choose>
 
 <h2><c:if test="${socialWorkerForm.new}"> <fmt:message key="socialworker.form.new" /></c:if> <fmt:message key="socialworker.form.form" /> de '<i>${socialWorkerForm.patient.firstName} ${socialWorkerForm.patient.lastName}</i>'</h2>
+<c:if test="${editable != null && !editable}">
+	<h3>Version Final - No editable - Fecha <fmt:formatDate value="${socialWorkerForm.fillingDate}" pattern="dd/MM/yyyy"/></h3>
+</c:if>
 
 <form:form modelAttribute="socialWorkerForm" method="post" id="myform">
 	<div id="form-tabs">

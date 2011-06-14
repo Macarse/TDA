@@ -5,6 +5,7 @@ import java.util.List;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
+import com.tda.model.utils.FormType;
 import com.tda.persistence.paginator.Paginator;
 
 public interface PatientInTrainService {
@@ -35,4 +36,6 @@ public interface PatientInTrainService {
 	boolean isInTrain(Patient patient);
 
 	PatientInTrain findByPatient(Patient patient);
+
+	boolean isActiveForm(Long formId, FormType formType);
 }

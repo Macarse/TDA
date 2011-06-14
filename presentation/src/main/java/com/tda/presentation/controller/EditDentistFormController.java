@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.tda.model.dentist.DentistForm;
+import com.tda.model.utils.FormType;
 import com.tda.service.api.DentistFormService;
+import com.tda.service.api.PatientInTrainService;
 
 @Controller
 @RequestMapping("/patient/*/dentist/{dentistFormId}/edit")
@@ -22,12 +24,25 @@ import com.tda.service.api.DentistFormService;
 public class EditDentistFormController extends BaseDentistFormController {
 	private static final String NURSE_FORM = "dentistform/form";
 	private DentistFormService dentistFormService;
+	private PatientInTrainService patientInTrainService;
+
+	@Autowired
+	public void setPatientInTrainService(
+			PatientInTrainService patientInTrainService) {
+		this.patientInTrainService = patientInTrainService;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(@PathVariable("dentistFormId") long dentistFormId,
 			Model model) {
 		DentistForm dentistForm = dentistFormService.findById(dentistFormId);
 		model.addAttribute("dentistForm", dentistForm);
+
+		boolean editable = patientInTrainService.isActiveForm(dentistFormId,
+				FormType.dentist);
+
+		model.addAttribute("editable", editable);
+
 		return NURSE_FORM;
 	}
 

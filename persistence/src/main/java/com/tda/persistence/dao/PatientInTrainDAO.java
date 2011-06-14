@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
+import com.tda.model.utils.FormType;
 
 public class PatientInTrainDAO extends GenericDAOImpl<PatientInTrain> {
 
@@ -29,5 +30,34 @@ public class PatientInTrainDAO extends GenericDAOImpl<PatientInTrain> {
 			return null;
 
 		return list.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean isActiveForm(Long formId, FormType formType) {
+		String whereQuery = "";
+
+		switch (formType) {
+		case dentist:
+			whereQuery = "dentistform.id";
+			break;
+		case nurse:
+			whereQuery = "nurseform.id";
+			break;
+		case pediatrician:
+			whereQuery = "pediatricianform.id";
+			break;
+		case socialworker:
+			whereQuery = "socialworkerform.id";
+			break;
+		}
+
+		List<PatientInTrain> list = getHibernateTemplate().find(
+				"from PatientInTrain as pit where pit." + whereQuery + "="
+						+ formId);
+
+		if (list == null || list.size() <= 0)
+			return false;
+
+		return true;
 	}
 }

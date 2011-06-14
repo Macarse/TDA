@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.tda.model.socialworker.SocialWorkerForm;
+import com.tda.model.utils.FormType;
+import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.SocialWorkerFormService;
 
 @Controller
@@ -23,6 +25,13 @@ public class EditSocialWorkerFormController extends
 		BaseSocialWorkerFormController {
 	private static final String SOCIAL_WORKER_FORM = "socialworkerform/form";
 	private SocialWorkerFormService socialWorkerFormService;
+	private PatientInTrainService patientInTrainService;
+
+	@Autowired
+	public void setPatientInTrainService(
+			PatientInTrainService patientInTrainService) {
+		this.patientInTrainService = patientInTrainService;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(
@@ -31,6 +40,12 @@ public class EditSocialWorkerFormController extends
 		SocialWorkerForm socialWorkerForm = socialWorkerFormService
 				.findById(socialWorkerFormId);
 		model.addAttribute("socialWorkerForm", socialWorkerForm);
+
+		boolean editable = patientInTrainService.isActiveForm(
+				socialWorkerFormId, FormType.socialworker);
+
+		model.addAttribute("editable", editable);
+
 		return SOCIAL_WORKER_FORM;
 	}
 

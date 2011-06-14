@@ -17,6 +17,9 @@
 		$('#tooth1').svg({onLoad: loadTooth1});
 
 		setInterval(autoSubmitFormAjax,30*1000);
+
+        if( ('<c:out value="${editable}"></c:out>') == 'false' )
+        	$('input, select').attr('disabled', 'disabled');
 	});
 
 	function loadTooth1(svg) {
@@ -65,6 +68,10 @@
 </c:choose>
 
 <h2><c:if test="${dentistForm.new}"><fmt:message key="dentist.form.new" /></c:if><fmt:message key="dentist.form.form" /> de '<i>${dentistForm.patient.firstName} ${dentistForm.patient.lastName}</i>'</h2>
+<c:if test="${editable != null && !editable}">
+	<h3>Version Final - No editable - Fecha <fmt:formatDate value="${dentistForm.fillingDate}" pattern="dd/MM/yyyy"/></h3>
+</c:if>
+
 <button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="dentistForm" method="post" id="myform">
