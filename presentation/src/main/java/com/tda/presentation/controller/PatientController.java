@@ -43,7 +43,6 @@ public class PatientController {
 	private PatientInTrainService patientInTrainService;
 	private FormContainerService formContainerService;
 	private Paginator paginator;
-	private Paginator paginatorHistory;
 	private ParamContainer params;
 
 	@Autowired
@@ -77,12 +76,6 @@ public class PatientController {
 		this.paginator = paginator;
 		paginator.setOrderAscending(true);
 		paginator.setOrderField("id");
-
-		this.paginatorHistory = new Paginator(paginator.getResultsPerPage());
-		this.paginatorHistory.setOrderAscending(true);
-		this.paginatorHistory.setOrderField("fillingDate");
-		this.paginatorHistory.setPageIndex(paginator.getPageIndex());
-		this.paginatorHistory.setTotalResultsCount(0);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -90,6 +83,23 @@ public class PatientController {
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
+
+		// Pagination
+		if (pageNumber != null) {
+			paginator.setPageIndex(pageNumber);
+		} else {
+			paginator.setPageIndex(1);
+		}
+
+		// Order
+		if (orderField == null || orderAscending == null) {
+			orderField = "id";
+			orderAscending = true;
+		}
+
+		paginator.setOrderAscending(orderAscending);
+		paginator.setOrderField(orderField);
+
 		ModelAndView modelAndView = new ModelAndView(LIST);
 
 		modelAndView = processRequest(modelAndView, new Patient(), pageNumber,
@@ -189,9 +199,9 @@ public class PatientController {
 
 		// Pagination
 		if (pageNumber != null) {
-			paginatorHistory.setPageIndex(pageNumber);
+			paginator.setPageIndex(pageNumber);
 		} else {
-			paginatorHistory.setPageIndex(1);
+			paginator.setPageIndex(1);
 		}
 
 		// Order
@@ -200,17 +210,17 @@ public class PatientController {
 			orderAscending = true;
 		}
 
-		paginatorHistory.setOrderAscending(orderAscending);
-		paginatorHistory.setOrderField(orderField);
+		paginator.setOrderAscending(orderAscending);
+		paginator.setOrderField(orderField);
 
 		FormContainer example = new FormContainer();
 		example.setPatient(patient);
 		List<FormContainer> patientforms = formContainerService
-				.findByExamplePaged(example, paginatorHistory);
+				.findByExamplePaged(example, paginator);
 
 		ModelAndView modelAndView = new ModelAndView(HISTORY_LIST);
 		modelAndView.addObject("formlist", patientforms);
-		modelAndView.addObject("paginator", paginatorHistory);
+		modelAndView.addObject("paginator", paginator);
 		modelAndView.addObject("params", params);
 		modelAndView.addObject("orderField", orderField);
 		modelAndView.addObject("orderAscending", orderAscending.toString());
