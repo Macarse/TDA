@@ -10,9 +10,11 @@
 <spring:url value="delete" var="deleteUrl" />
 <spring:message text="Eliminar" var="deleteLabel" />
 <spring:url value="edit" var="editUrl" />
+<spring:url value="history" var="historyUrl" />
 <spring:url value="add" var="addUrl" />
 <spring:url value="search" var="searchUrl" />
 <spring:message text="Editar" var="editLabel" />
+<spring:message text="Historia" var="historyLabel" />
 
 <c:if test="${!empty param.message}">
 	<div class="message">
@@ -112,7 +114,7 @@
 					</c:choose>
 				</c:if>
 			</th>
-			<th colspan="3"></th>
+			<th colspan="4"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -148,6 +150,10 @@
 							</c:otherwise>
 						</c:choose>
 				</td>
+				<td><form:form method="GET"
+					action="${historyUrl}/${patient.id}">
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> ${historyLabel}</button>
+				</form:form></td>
 			</tr>
 		</c:forEach>
 	</tbody>

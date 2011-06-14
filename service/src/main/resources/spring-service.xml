@@ -18,6 +18,10 @@
 		<property name="applicationUserDAO" ref="applicationUserDAO" />
 	</bean>
 	
+	<bean id="formContainerService" class="com.tda.service.impl.FormContainerServiceImpl">
+		<property name="formContainerDAO" ref="formContainerDAO" />
+	</bean>
+	
 	<bean id="itineraryService" class="com.tda.service.impl.ItineraryServiceImpl">
 		<property name="itineraryDAO" ref="itineraryDAO" />
 	</bean>

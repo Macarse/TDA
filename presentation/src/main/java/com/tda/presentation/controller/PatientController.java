@@ -19,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.Sex;
+import com.tda.model.utils.FormContainer;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
+import com.tda.service.api.FormContainerService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
 
@@ -35,16 +37,25 @@ public class PatientController {
 	private static final String REDIRECT_TO_LIST = "redirect:/patient/";
 	private static final String CREATE_FORM = "patient/createForm";
 	private static final String LIST = "patient/list";
+	private static final String HISTORY_LIST = "patient/historylist";
 
 	private PatientService patientService;
 	private PatientInTrainService patientInTrainService;
+	private FormContainerService formContainerService;
 	private Paginator paginator;
+	private Paginator paginatorHistory;
 	private ParamContainer params;
 
 	@Autowired
 	public void setPatientInTrainService(
 			PatientInTrainService patientInTrainService) {
 		this.patientInTrainService = patientInTrainService;
+	}
+
+	@Autowired
+	public void setFormContainerService(
+			FormContainerService formContainerService) {
+		this.formContainerService = formContainerService;
 	}
 
 	public PatientController() {
@@ -66,6 +77,12 @@ public class PatientController {
 		this.paginator = paginator;
 		paginator.setOrderAscending(true);
 		paginator.setOrderField("id");
+
+		this.paginatorHistory = new Paginator(paginator.getResultsPerPage());
+		this.paginatorHistory.setOrderAscending(true);
+		this.paginatorHistory.setOrderField("fillingDate");
+		this.paginatorHistory.setPageIndex(paginator.getPageIndex());
+		this.paginatorHistory.setTotalResultsCount(0);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -157,6 +174,49 @@ public class PatientController {
 		model.addAttribute("patient", patient);
 
 		return CREATE_FORM;
+	}
+
+	@RequestMapping(value = "/history/{id}", method = RequestMethod.GET)
+	public ModelAndView getPatientHistory(
+			@PathVariable Long id,
+			Model model,
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
+
+		// getPatient
+		Patient patient = patientService.findById(id);
+
+		// Pagination
+		if (pageNumber != null) {
+			paginatorHistory.setPageIndex(pageNumber);
+		} else {
+			paginatorHistory.setPageIndex(1);
+		}
+
+		// Order
+		if (orderField == null || orderAscending == null) {
+			orderField = "fillingDate";
+			orderAscending = true;
+		}
+
+		paginatorHistory.setOrderAscending(orderAscending);
+		paginatorHistory.setOrderField(orderField);
+
+		FormContainer example = new FormContainer();
+		example.setPatient(patient);
+		List<FormContainer> patientforms = formContainerService
+				.findByExamplePaged(example, paginatorHistory);
+
+		ModelAndView modelAndView = new ModelAndView(HISTORY_LIST);
+		modelAndView.addObject("formlist", patientforms);
+		modelAndView.addObject("paginator", paginatorHistory);
+		modelAndView.addObject("params", params);
+		modelAndView.addObject("orderField", orderField);
+		modelAndView.addObject("orderAscending", orderAscending.toString());
+		modelAndView.addObject("patient", patient);
+
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)

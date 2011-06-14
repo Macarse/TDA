@@ -74,6 +74,11 @@
 		<put-attribute name="title" value="Lista de pacientes" />
 		<put-attribute name="body" value="/WEB-INF/views/patient/list.jsp" />
 	</definition>
+
+	<definition name="patient/historylist" extends="base.definition">
+		<put-attribute name="title" value="Historia del paciente" />
+		<put-attribute name="body" value="/WEB-INF/views/patient/historyList.jsp" />
+	</definition>
 	
 	<definition name="patient/createForm" extends="base.definition">
 		<put-attribute name="title" value="Nuevo paciente" />

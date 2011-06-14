@@ -96,9 +96,15 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	<bean id="formContainerDAO" class="com.tda.persistence.dao.FormContainerDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 	<bean id="paginator" class="com.tda.persistence.paginator.Paginator">
-		<constructor-arg index="0" value="10" />
+		<constructor-arg index="0" value="1" />
 	</bean>
 
 	<bean id="transactionManager"
