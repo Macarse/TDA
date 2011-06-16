@@ -5,6 +5,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+
+<c:if test="${!empty param.message}">
+	<div class="message">
+		<fmt:message key="${param.message }" />
+	</div>
+</c:if>
+
 Historia de formularios de <c:out value="${patient.firstName}"/> <c:out value="${patient.lastName}"/>
 
 <c:choose>
@@ -48,6 +55,8 @@ Historia de formularios de <c:out value="${patient.firstName}"/> <c:out value="$
 			</th>
 			<th>
 			</th>
+			<th>
+			</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -59,6 +68,12 @@ Historia de formularios de <c:out value="${patient.firstName}"/> <c:out value="$
 						action="${pageContext.request.contextPath}/patient/${patient.id}/${oneForm.formType}/${oneForm.id}/edit">
 						<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> Ver</button>
 					</form:form>
+				</td>
+				<td>
+					<form:form method="POST"
+					action="${pageContext.request.contextPath}/patient/delete/${patient.id}/${oneForm.formType}/${oneForm.id}">
+					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all  confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> Eliminar</button>
+				</form:form>
 				</td>
 			</tr>
 		</c:forEach>

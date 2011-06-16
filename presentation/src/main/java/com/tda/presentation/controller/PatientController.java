@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.patient.Patient;
+import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.model.utils.FormContainer;
+import com.tda.model.utils.FormType;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.FormContainerService;
@@ -244,6 +246,55 @@ public class PatientController {
 				modelAndView.addObject(FORM_MESSAGE, FORM_DELETE_ERROR);
 			}
 		}
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/delete/{patient_id}/{formType}/{id}", method = RequestMethod.POST)
+	public ModelAndView deleteForm(@PathVariable Long patient_id,
+			@PathVariable FormType formType, @PathVariable Long id) {
+		ModelAndView modelAndView = new ModelAndView(
+				"redirect:/patient/history/" + patient_id + "?");
+
+		try {
+			Patient aPatient = patientService.findById(patient_id);
+
+			if (aPatient == null) {
+				modelAndView.addObject(FORM_MESSAGE, FORM_NOT_FOUND);
+			} else {
+				PatientInTrain pit = patientInTrainService
+						.findByPatient(aPatient);
+				if (pit != null) {
+					switch (formType) {
+					case dentist:
+						if (pit.getDentistform() != null
+								&& pit.getDentistform().getId().equals(id))
+							pit.setDentistform(null);
+						break;
+					case nurse:
+						if (pit.getNurseform() != null
+								&& pit.getNurseform().getId().equals(id))
+							pit.setNurseform(null);
+						break;
+					case pediatrician:
+						if (pit.getPadiatricianform() != null
+								&& pit.getPadiatricianform().getId().equals(id))
+							pit.setPadiatricianform(null);
+						break;
+					case socialworker:
+						if (pit.getSocialworkerform() != null
+								&& pit.getSocialworkerform().getId().equals(id))
+							pit.setSocialworkerform(null);
+						break;
+					}
+					patientInTrainService.update(pit);
+				}
+			}
+
+			formContainerService.delete(formType, id);
+		} catch (Exception e) {
+			modelAndView.addObject(FORM_MESSAGE, FORM_NOT_FOUND);
+		}
+
 		return modelAndView;
 	}
 

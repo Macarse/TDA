@@ -20,6 +20,11 @@
 	
 	<bean id="formContainerService" class="com.tda.service.impl.FormContainerServiceImpl">
 		<property name="formContainerDAO" ref="formContainerDAO" />
+		<property name="pediatricianFormDAO" ref="pediatricianFormDAO" />
+		<property name="nurseFormDAO" ref="nurseFormDAO" />
+		<property name="dentistFormDAO" ref="dentistFormDAO" />
+		<property name="socialWorkerFormDAO" ref="socialWorkerFormDAO" />
+		<property name="patientInTrainDAO" ref="patientInTrainDAO" />
 	</bean>
 	
 	<bean id="itineraryService" class="com.tda.service.impl.ItineraryServiceImpl">
