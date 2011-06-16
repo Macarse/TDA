@@ -68,22 +68,24 @@
 	</thead>
 	
 	<tbody>
-		<c:forEach items="${applicationUserList}" var="user">
+		<c:forEach items="${applicationUserList}" var="oneuser">
 		<tr>
-			<td>${user.username}</td>
-			<td width="400">${user.myAuthorities}</td>
+			<td>${oneuser.username}</td>
+			<td width="400">${oneuser.myAuthorities}</td>
 			<td width="100">
-				<form:form method="GET" action="${editUrl}/${user.id}" >
+				<form:form method="GET" action="${editUrl}/${oneuser.id}" >
 					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> <c:out value="${editLabel}" /> </button>
 				</form:form>
 			</td>
 			<td>
-				<form:form method="POST" action="${deleteUrl}/${user.id}">
+			<c:if test="${user.admin}">
+				<form:form method="POST" action="${deleteUrl}/${oneuser.id}">
 					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span>  <c:out value="${deleteLabel}" /> </button>
 				</form:form>
+			</c:if>
 			</td>
 			<td>
-				<form:form method="GET" action="${passwordEditUrl}/${user.id}" >
+				<form:form method="GET" action="${passwordEditUrl}/${oneuser.id}" >
 					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span>  <c:out value="${passwordEditLabel}" /> </button>
 				</form:form>
 			</td>

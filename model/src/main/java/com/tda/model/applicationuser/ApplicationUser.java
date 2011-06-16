@@ -218,4 +218,13 @@ public class ApplicationUser implements UserDetails {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+
+	@Transient
+	public boolean isAdmin() {
+		for (Authority authority : myAuthorities) {
+			if (authority.getId() == 1)
+				return true;
+		}
+		return false;
+	}
 }

@@ -70,10 +70,12 @@ Historia de formularios de <c:out value="${patient.firstName}"/> <c:out value="$
 					</form:form>
 				</td>
 				<td>
+				<c:if test="${user.admin}">
 					<form:form method="POST"
 					action="${pageContext.request.contextPath}/patient/delete/${patient.id}/${oneForm.formType}/${oneForm.id}">
 					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all  confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> Eliminar</button>
 				</form:form>
+				</c:if>
 				</td>
 			</tr>
 		</c:forEach>
