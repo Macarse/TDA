@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.itinerary.Itinerary;
 import com.tda.model.itinerary.Place;
+import com.tda.model.itinerary.PlaceDataProvider;
 import com.tda.service.api.ItineraryService;
 
 @Controller
@@ -54,12 +55,18 @@ public class ItineraryController {
 			model.addAttribute("itineraryForm", itinerary);
 		} else {
 			ArrayList<Place> list = new ArrayList<Place>();
+			Itinerary newItinerary = new Itinerary();
 			list.add(new Place());
-			itinerary.setPlaces(new AutoPopulatingList<Place>(list , Place.class));
+			newItinerary.setPlaces(new AutoPopulatingList<Place>(list , Place.class));
 			model.addAttribute("placeSize", 0);
-			model.addAttribute("itineraryForm", new Itinerary());
+			model.addAttribute("itineraryForm", newItinerary);
 		}
 		return "itinerary/createForm";
+	}
+	
+	@ModelAttribute("provinces")
+	public String[] getProvinces() {
+		return PlaceDataProvider.getProvinces();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "appendPlace")

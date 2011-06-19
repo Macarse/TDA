@@ -1,15 +1,21 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div id="itinerary-place-container${placeNumber }" class="itinerary-place">
 <fieldset>
 	<legend>Destino #${placeNumber + 1 }</legend>
 	
 	<ol>
-		<li><form:input path="itineraryPlace.places[${placeNumber }].province" size="30" />
+		<li>
 			<form:label for="places" path="itineraryPlace.places[${placeNumber }].province" cssErrorClass="error">
 			Provincia
 			</form:label>
+			<form:select path="itineraryPlace.places[${placeNumber }].province">
+			     <c:forEach var="province" items="${provinces}">
+                    <form:option value="${province}"> ${province} </form:option>
+                 </c:forEach>
+			</form:select>
 			<form:errors path="itineraryPlace.places[${placeNumber }].province" />
 		</li>
 		

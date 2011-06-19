@@ -123,7 +123,9 @@ $(document).ready(function() {
 		<li>
 			<form:label for="places" path="places[${i - 1}].province" cssErrorClass="error">Provincia</form:label>
 			<spring:bind path="places[${i - 1}].province">
-				<form:input path="${status.expression}" size="30"/>
+				<form:select path="${status.expression}">
+				    <form:options items="${provinces}" />
+				</form:select>
 	        <form:errors path="${status.expression }" />
 			</spring:bind>
 		</li>
