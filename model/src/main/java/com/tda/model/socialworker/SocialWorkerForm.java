@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CollectionOfElements;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.tda.model.patient.Patient;
 
@@ -104,11 +106,11 @@ public class SocialWorkerForm {
 
 	private Collection<NBI> nbi;
 
-	private Addiction addiction;
+	private Collection<Addiction> addiction;
 
 	private boolean hasProfessionalAssistanceForAddiction;
 
-	private Mistreatment mistreatment;
+	private Collection<Mistreatment> mistreatment;
 
 	private boolean hasProfessionalAssistanceForMistreatment;
 
@@ -434,12 +436,16 @@ public class SocialWorkerForm {
 		this.nbi = nbi;
 	}
 
-	@Enumerated
-	public Addiction getAddiction() {
+	@CollectionOfElements(targetElement = Addiction.class)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "ADDICTION", joinColumns = @JoinColumn(name = "SOCIAL_WORKER_ID"))
+	@Column(name = "ADDICTION", nullable = true)
+	@Enumerated(EnumType.STRING)
+	public Collection<Addiction> getAddiction() {
 		return addiction;
 	}
 
-	public void setAddiction(Addiction addiction) {
+	public void setAddiction(Collection<Addiction> addiction) {
 		this.addiction = addiction;
 	}
 
@@ -452,12 +458,16 @@ public class SocialWorkerForm {
 		this.hasProfessionalAssistanceForAddiction = hasProfessionalAssistanceForAddiction;
 	}
 
-	@Enumerated
-	public Mistreatment getMistreatment() {
+	@CollectionOfElements(targetElement = Mistreatment.class)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "MISTREATMENT", joinColumns = @JoinColumn(name = "SOCIAL_WORKER_ID"))
+	@Column(name = "MISTREATMENT", nullable = true)
+	@Enumerated(EnumType.STRING)
+	public Collection<Mistreatment> getMistreatment() {
 		return mistreatment;
 	}
 
-	public void setMistreatment(Mistreatment mistreatment) {
+	public void setMistreatment(Collection<Mistreatment> mistreatment) {
 		this.mistreatment = mistreatment;
 	}
 
