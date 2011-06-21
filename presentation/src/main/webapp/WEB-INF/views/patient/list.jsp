@@ -150,9 +150,11 @@
 								</a>
 							</c:when>
 							<c:otherwise>
+							<c:if test="${user.social}">
 								<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button ui-state-default ui-corner-all" href="#" title="Subir">
 								<span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span>
 								</a>
+							</c:if>
 							</c:otherwise>
 						</c:choose>
 				</td>
