@@ -124,7 +124,7 @@
 
 		<c:forEach items="${patientList}" var="patient" varStatus="indexStatus">
 			<tr>
-				<td><a href='/presentation/patient/takePicture/${patient.id }'><img src='/presentation/patient/getPicture/${patient.id }' width="80" height="80" /></a></td>
+				<td><a href='/presentation/patient/takePicture/${patient.id }'><img src='/presentation/patient/getPicture/${patient.id }' width="80" height="60" /></a></td>
 				<td>${patient.firstName}</td>
 				<td>${patient.lastName}</td>
 				<td>${patient.sex.description}</td>
