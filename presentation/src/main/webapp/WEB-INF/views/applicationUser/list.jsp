@@ -71,22 +71,22 @@
 		<c:forEach items="${applicationUserList}" var="oneuser">
 		<tr>
 			<td>${oneuser.username}</td>
-			<td width="400">${oneuser.myAuthorities}</td>
-			<td width="100">
+			<td width="500">${oneuser.myAuthorities}</td>
+			<td>
 				<form:form method="GET" action="${editUrl}/${oneuser.id}" >
-					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> <c:out value="${editLabel}" /> </button>
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span></button>
 				</form:form>
 			</td>
 			<td>
 			<c:if test="${user.admin}">
 				<form:form method="POST" action="${deleteUrl}/${oneuser.id}">
-					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span>  <c:out value="${deleteLabel}" /> </button>
+					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all confirmLink" title="Eliminar"><span class="ui-icon ui-icon-closethick button-icon"></span></button>
 				</form:form>
 			</c:if>
 			</td>
 			<td>
 				<form:form method="GET" action="${passwordEditUrl}/${oneuser.id}" >
-					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span>  <c:out value="${passwordEditLabel}" /> </button>
+					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all" title="Cambiar Password"><span class="ui-icon ui-icon-locked button-icon"></span></button>
 				</form:form>
 			</td>
 		</tr>

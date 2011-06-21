@@ -72,7 +72,7 @@
 				</div>
 			</th>
 			<th>
-				<fmt:message key="welcome.options" />
+				
 			</th>
 		</tr>
 	</thead>
@@ -124,7 +124,7 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
-				<td align="center"><a class="button-text fg-button button-add ui-state-default ui-corner-all" href="#" onClick="confirmDownInTrain(${patientintrain.patient.id});"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span> Bajar </a></td>
+				<td align="center"><a class="button-text fg-button ui-state-default ui-corner-all" href="#" onClick="confirmDownInTrain(${patientintrain.patient.id});" title="Bajar"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span></a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
