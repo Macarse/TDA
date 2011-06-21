@@ -124,7 +124,7 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
-				<td align="center"><a class="button-text fg-button ui-state-default ui-corner-all" href="#" onClick="confirmDownInTrain(${patientintrain.patient.id});" title="Bajar"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span></a></td>
+				<td align="center"><a class="button-text button-edit fg-button ui-state-default ui-corner-all" href="#" onClick="confirmDownInTrain(${patientintrain.patient.id});"><span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span>Bajar</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>

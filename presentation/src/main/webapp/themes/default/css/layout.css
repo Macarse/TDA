@@ -112,9 +112,9 @@ a.fg-button {
 .button-icon{ float: left;}
 .button-text{ font-size: 12px; }
 a.button-text{  }
-.button-edit{ width: 23px; }
+.button-edit{ width: 80px; }
 .button-add{ width: 80px; }
-.button-delete{ width: 23px; }
+.button-delete{ width: 80px; }
 
 	
 .fg-button-icon-left { padding-left: 2.1em; }
