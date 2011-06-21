@@ -227,4 +227,13 @@ public class ApplicationUser implements UserDetails {
 		}
 		return false;
 	}
+
+	@Transient
+	public boolean isSocial() {
+		for (Authority authority : myAuthorities) {
+			if (authority.getId() == 4)
+				return true;
+		}
+		return false;
+	}
 }

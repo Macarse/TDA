@@ -1,8 +1,12 @@
 package com.tda.presentation.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -347,22 +351,33 @@ public class PatientController {
 	}
 	
 	@RequestMapping(value = "/getPicture/{id}", method = RequestMethod.GET)
-	public String getPicture(@PathVariable long id, HttpServletResponse response){
+	public String getPicture(@PathVariable long id, HttpServletResponse response, HttpServletRequest request){
 		Patient aPatient = patientService.findById(id);
+		
+		String photoPath = request.getSession().getServletContext()
+			.getRealPath("themes/default/image/img-not-found.jpg");
 		
 		try{
 			response.setContentType("image/jpeg");
 			OutputStream os = response.getOutputStream();
 			if (aPatient.getImage() == null){
+				BufferedInputStream is = new BufferedInputStream(new FileInputStream(new File(photoPath)));
+				int read = 0;
+				byte[] buffer = new byte[8192];
+				
+				while ((read = is.read(buffer, 0 , 8192)) != -1) {
+					os.write(buffer,0, read);
+  		        }
+				
+				is.close();
 			}else{
 				os.write(aPatient.getImage());
 			}
 			os.flush();
 			os.close();
-			
-			
 		}catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e);
 		}
 		
 		return null;

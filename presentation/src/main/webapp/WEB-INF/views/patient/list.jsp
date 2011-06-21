@@ -117,7 +117,14 @@
 					</c:choose>
 				</c:if>
 			</th>
-			<th colspan="4"></th>
+			<c:choose>
+				<c:when test="${user.admin}">
+					<th colspan="4"></th>
+				</c:when>
+				<c:otherwise>
+					<th colspan="3"></th>
+				</c:otherwise>
+			</c:choose>
 		</tr>
 	</thead>
 	<tbody>
@@ -125,6 +132,7 @@
 		<c:forEach items="${patientList}" var="patient" varStatus="indexStatus">
 			<tr>
 				<td><a href='/presentation/patient/takePicture/${patient.id }'><img src='/presentation/patient/getPicture/${patient.id }' width="80" height="60" /></a></td>
+				<td align="center"><a href='/presentation/patient/takePicture/${patient.id }'><img src='/presentation/patient/getPicture/${patient.id }' width="80px" height="60px" /></a></td>
 				<td>${patient.firstName}</td>
 				<td>${patient.lastName}</td>
 				<td>${patient.sex.description}</td>
@@ -132,35 +140,35 @@
 				<td>${patient.dni}</td>
 				<td><form:form method="GET"
 					action="${editUrl}/${patient.id}">
-					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> ${editLabel}</button>
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span></button>
 				</form:form></td>
-				<td>
 				<c:if test="${user.admin}">
+				<td>
 				<form:form method="POST"
 					action="${deleteUrl}/${patient.id}">
-					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all  confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span> ${deleteLabel}</button>
+					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all confirmLink" title="Eliminar"><span class="ui-icon ui-icon-closethick button-icon"></span></button>
 				</form:form>
-				</c:if>
 				</td>
+				</c:if>
 				<td>
 						<c:choose>
 							<c:when test="${patientInTrainArray[indexStatus.index]}">
-								<a id="switchbutton${patient.id}" onclick="confirmDownInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href="#">
+								<a id="switchbutton${patient.id}" onclick="confirmDownInTrain(${patient.id})" class="button-text fg-button ui-state-default ui-corner-all" href="#" title="Bajar">
 								<span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span>
-								<span>Bajar</span>
 								</a>
 							</c:when>
 							<c:otherwise>
-								<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button button-add ui-state-default ui-corner-all" href="#">
+							<c:if test="${user.social}">
+								<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button ui-state-default ui-corner-all" href="#" title="Subir">
 								<span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span>
-								<span>Subir</span>
 								</a>
+							</c:if>
 							</c:otherwise>
 						</c:choose>
 				</td>
 				<td><form:form method="GET"
 					action="${historyUrl}/${patient.id}">
-					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> ${historyLabel}</button>
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all" title="Historia"><span class="ui-icon ui-icon-contact button-icon"></span></button>
 				</form:form></td>
 			</tr>
 		</c:forEach>
