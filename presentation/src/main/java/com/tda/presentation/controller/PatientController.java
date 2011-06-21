@@ -353,7 +353,11 @@ public class PatientController {
 		try{
 			response.setContentType("image/jpeg");
 			OutputStream os = response.getOutputStream();
-			os.write(aPatient.getImage());
+			if (aPatient.getImage() == null){
+				
+			}else{
+				os.write(aPatient.getImage());
+			}
 			os.flush();
 			os.close();
 			

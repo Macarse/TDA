@@ -1,22 +1,16 @@
 package com.tda.model.patient;
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.imageio.ImageIO;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -52,7 +46,6 @@ public class Patient implements Serializable {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date birthdate;
 	
-	@Null
 	private byte[] image;
 
 	public Patient() {
@@ -78,6 +71,7 @@ public class Patient implements Serializable {
 		this.id = id;
 	}
 	
+	@Lob
 	public byte[] getImage() {
 		return this.image;
     }
