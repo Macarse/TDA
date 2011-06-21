@@ -2,8 +2,7 @@ package com.tda.model.socialworker;
 
 public enum Addiction {
 	ALCOHOLISM("Alcoholismo"), SMOKING("Tabaquismo"), LEGAL_DRUGS(
-			"Drogas legales"), ILLEGAL_DRUGS("Drogas ilegales"), NO_RESPONSE(
-			"Ns/Nr");
+			"Drogas legales"), ILLEGAL_DRUGS("Drogas ilegales");
 
 	private String description;
 

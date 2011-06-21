@@ -369,7 +369,7 @@
 				<c:set var="count" value="0" />
 				<c:forEach var="addiction" items="${addiction}">
 					<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-						<td><form:radiobutton path="addiction" value="${addiction}" />
+						<td><form:checkbox path="addiction" value="${addiction}" />
 						<form:label path="addiction" for="addiction${count+1 }">${addiction.description}</form:label></td>
 					<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 				    <c:set var="count" value="${count+1}" />
@@ -385,7 +385,7 @@
 				<c:set var="count" value="0" />
 				<c:forEach var="mistreatment" items="${mistreatment}">
 					<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-						<td><form:radiobutton path="mistreatment" value="${mistreatment}" />
+						<td><form:checkbox path="mistreatment" value="${mistreatment}" />
 						<form:label path="mistreatment" for="mistreatment${count+1 }">${mistreatment.description}</form:label></td>
 					<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 				    <c:set var="count" value="${count+1}" />
