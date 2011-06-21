@@ -40,6 +40,9 @@
 	<thead>
 		<tr>
 			<th>
+				Imagen
+			</th>
+			<th>
 				<a href="?orderField=firstName&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
 					<fmt:message key="patient.form.firstName" />
 				</a>
@@ -121,6 +124,7 @@
 
 		<c:forEach items="${patientList}" var="patient" varStatus="indexStatus">
 			<tr>
+				<td><img src='/presentation/patient/getPicture/${patient.id }' width="80" height="80" /></td>
 				<td>${patient.firstName}</td>
 				<td>${patient.lastName}</td>
 				<td>${patient.sex.description}</td>

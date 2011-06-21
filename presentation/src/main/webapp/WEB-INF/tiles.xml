@@ -3,6 +3,12 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
+	<!--  Empty Layout -->
+	<definition name="empty.definition"
+		template="/WEB-INF/views/layout/layout-jpg.jsp">
+		<put-attribute name="body" value="" />
+	</definition>
+	
 	<!-- Base -->
 	<definition name="base.definition"
 		template="/WEB-INF/views/layout/layout.jsp">
@@ -83,6 +89,15 @@
 	<definition name="patient/createForm" extends="base.definition">
 		<put-attribute name="title" value="Nuevo paciente" />
 		<put-attribute name="body" value="/WEB-INF/views/patient/createForm.jsp" />
+	</definition>
+	
+	<definition name="patient/takePicture" extends="base.definition">
+		<put-attribute name="title" value="Sacar foto" />
+		<put-attribute name="body" value="/WEB-INF/views/patient/takePicture.jsp" />
+	</definition>
+	
+	<definition name="patient/showPicture" extends="empty.definition">
+		<put-attribute name="body" value="/WEB-INF/views/patient/getPicture.jsp" />
 	</definition>
 	
 	<!-- Welcome -->

@@ -1,7 +1,16 @@
 package com.tda.presentation.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -335,4 +345,67 @@ public class PatientController {
 
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/getPicture/{id}", method = RequestMethod.GET)
+	public String getPicture(@PathVariable long id, HttpServletResponse response){
+		Patient aPatient = patientService.findById(id);
+		
+		try{
+			response.setContentType("image/jpeg");
+			OutputStream os = response.getOutputStream();
+			os.write(aPatient.getImage());
+			os.flush();
+			os.close();
+			
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return null;
+	}
+	
+	@RequestMapping(value = "/takePicture/{id}", method = RequestMethod.GET)
+	public ModelAndView takePicture(@PathVariable long id){
+		ModelAndView modelAndView = new ModelAndView("patient/takePicture");
+		
+		Patient aPatient = patientService.findById(id);
+
+		if (aPatient == null) {
+			modelAndView.addObject(FORM_MESSAGE, FORM_NOT_FOUND);
+		} else {
+			modelAndView.addObject("patient", aPatient);
+		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/takePicture", method = RequestMethod.POST)
+	public @ResponseBody
+	String takePicture(HttpServletRequest request){
+		try {
+			InputStream inputStream = request.getInputStream();
+			
+			int readBytes = 0;
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			byte[] buffer = new byte[8192];
+			int pos = 0;
+			
+			long patientId = Long.parseLong(request.getParameter("id"));
+			while ((readBytes = inputStream.read(buffer, 0, 8192)) != -1) {
+				out.write(buffer,0,readBytes);
+				pos += readBytes;
+			}
+			
+			Patient aPatient = patientService.findById((long)patientId);
+			aPatient.setImage(out.toByteArray());
+			patientService.save(aPatient);
+			
+			inputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "";
+	}
+	
 }
