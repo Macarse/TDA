@@ -23,6 +23,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.tda.model.utils.FormType;
+
 @Entity
 public class ApplicationUser implements UserDetails {
 
@@ -229,11 +231,53 @@ public class ApplicationUser implements UserDetails {
 	}
 
 	@Transient
+	public boolean isDentist() {
+		for (Authority authority : myAuthorities) {
+			if (authority.getId() == 2)
+				return true;
+		}
+		return false;
+	}
+
+	@Transient
 	public boolean isSocial() {
 		for (Authority authority : myAuthorities) {
 			if (authority.getId() == 4)
 				return true;
 		}
 		return false;
+	}
+
+	@Transient
+	public boolean isNurse() {
+		for (Authority authority : myAuthorities) {
+			if (authority.getId() == 5)
+				return true;
+		}
+		return false;
+	}
+
+	@Transient
+	public boolean isPediatrician() {
+		for (Authority authority : myAuthorities) {
+			if (authority.getId() == 6)
+				return true;
+		}
+		return false;
+	}
+
+	@Transient
+	public FormType getCurrRole() {
+		for (Authority authority : myAuthorities) {
+			if (authority.getId() == 2)
+				return FormType.dentist;
+			if (authority.getId() == 4)
+				return FormType.socialworker;
+			if (authority.getId() == 5)
+				return FormType.nurse;
+			if (authority.getId() == 6)
+				return FormType.pediatrician;
+		}
+		return FormType.socialworker;
 	}
 }

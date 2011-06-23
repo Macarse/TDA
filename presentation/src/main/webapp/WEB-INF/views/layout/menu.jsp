@@ -57,7 +57,7 @@
 <script language='javascript' type='text/javascript'> 
 	var refreshId;
 	var selectedId;
-	var userType = "socialworker";
+	var userType = '${user.currRole}';
 	
 	function refreshPatients() {
 		clearInterval(refreshId);
