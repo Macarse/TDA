@@ -70,11 +70,12 @@
 		   		var patients = eval(data);
 		   		var innerHtml = "";
 		   		var i;
+		   		var userType = "socialworker";
 
 		   		if(patients.length > 0){
 			   		for(i=0; i<patients.length; i++ ) {
 			   	   		//Cada elemento esta separado por =:
-						innerHtml += "<li onclick='showPatientMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
+						innerHtml += "<li>" + patients[i].firstName + ' ' + patients[i].lastName +  " <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif'/></a> <a href='#' onclick='showPatientMenu(" + patients[i].id + ")'> <img src='" + contextPath + "/themes/default/image/refresh.png'/> </a></li>";
 			   		}
 				}else{
 					innerHtml = '<i>No hay Pacientes en el tren</i>';

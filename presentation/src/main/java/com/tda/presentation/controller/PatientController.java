@@ -201,7 +201,7 @@ public class PatientController {
 
 		return CREATE_FORM;
 	}
-
+	
 	@RequestMapping(value = "/history/{id}", method = RequestMethod.GET)
 	public ModelAndView getPatientHistory(
 			@PathVariable Long id,
@@ -305,6 +305,64 @@ public class PatientController {
 			}
 
 			formContainerService.delete(formType, id);
+		} catch (Exception e) {
+			modelAndView.addObject(FORM_MESSAGE, FORM_NOT_FOUND);
+		}
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/getform/{patient_id}/{formType}", method = RequestMethod.GET)
+	public ModelAndView getform(@PathVariable Long patient_id,
+			@PathVariable FormType formType) {
+		
+		String model = "redirect:/patient/" + patient_id + "/" + formType.toString();
+		
+		ModelAndView modelAndView = new ModelAndView("redirect:/patient/");
+		long formId = -1;
+
+		try {
+			Patient aPatient = patientService.findById(patient_id);
+
+			if (aPatient == null) {
+				modelAndView.addObject(FORM_MESSAGE, FORM_NOT_FOUND);
+			} else {
+				PatientInTrain pit = patientInTrainService
+						.findByPatient(aPatient);
+				if (pit != null) {
+					switch (formType) {
+					case dentist:
+						if (pit.getDentistform() != null){
+							formId = pit.getDentistform().getId();  
+						}
+						break;
+					case nurse:
+						if (pit.getNurseform() != null){
+							formId = pit.getNurseform().getId();  
+						}
+						break;
+					case pediatrician:
+						if (pit.getPadiatricianform() != null){
+							formId = pit.getPadiatricianform().getId();  
+						}
+						break;
+					case socialworker:
+						if (pit.getSocialworkerform() != null){
+							formId = pit.getSocialworkerform().getId();  
+						}
+						break;
+					}
+					
+					if(formId > 0){
+						model += "/" + formId + "/edit";
+					}else{
+						model += "/new";
+					}
+					
+					modelAndView = new ModelAndView(model);
+				}
+			}
+
 		} catch (Exception e) {
 			modelAndView.addObject(FORM_MESSAGE, FORM_NOT_FOUND);
 		}
