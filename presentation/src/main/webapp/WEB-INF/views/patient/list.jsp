@@ -139,27 +139,29 @@
 				<td>${patient.dni}</td>
 				<td><form:form method="GET"
 					action="${editUrl}/${patient.id}">
-					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all" title="Editar"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span></button>
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span>Editar</button>
 				</form:form></td>
 				<c:if test="${user.admin}">
 				<td>
 				<form:form method="POST"
 					action="${deleteUrl}/${patient.id}">
-					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all confirmLink" title="Eliminar"><span class="ui-icon ui-icon-closethick button-icon"></span></button>
+					<button type="submit" class="button-text button-delete fg-button ui-state-default ui-corner-all confirmLink"><span class="ui-icon ui-icon-closethick button-icon"></span>Eliminar</button>
 				</form:form>
 				</td>
 				</c:if>
 				<td>
 						<c:choose>
 							<c:when test="${patientInTrainArray[indexStatus.index]}">
-								<a id="switchbutton${patient.id}" onclick="confirmDownInTrain(${patient.id})" class="button-text fg-button ui-state-default ui-corner-all" href="#" title="Bajar">
+								<a id="switchbutton${patient.id}" onclick="confirmDownInTrain(${patient.id})" class="button-text button-edit fg-button ui-state-default ui-corner-all" href="#">
 								<span class="ui-icon ui-icon-arrowreturnthick-1-s button-icon"></span>
+								Bajar
 								</a>
 							</c:when>
 							<c:otherwise>
 							<c:if test="${user.social}">
-								<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text fg-button ui-state-default ui-corner-all" href="#" title="Subir">
+								<a id="switchbutton${patient.id}" onclick="switchInTrain(${patient.id})" class="button-text button-edit fg-button ui-state-default ui-corner-all" href="#">
 								<span class="ui-icon ui-icon-arrowreturnthick-1-n button-icon"></span>
+								Subir
 								</a>
 							</c:if>
 							</c:otherwise>
@@ -167,7 +169,7 @@
 				</td>
 				<td><form:form method="GET"
 					action="${historyUrl}/${patient.id}">
-					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all" title="Historia"><span class="ui-icon ui-icon-contact button-icon"></span></button>
+					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-contact button-icon"></span>Historia</button>
 				</form:form></td>
 			</tr>
 		</c:forEach>
