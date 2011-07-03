@@ -42,7 +42,7 @@
 </c:if>
 
 <form:form modelAttribute="socialWorkerForm" method="post" id="myform">
-	<div id="form-tabs">
+	<div id="form-tabs" class="form-tabs">
 		<ul>
 			<li><a href="#tab-gf"><fmt:message key="socialworker.form.familyGroup" /></a></li>
 			<li><a href="#tab-viv"><fmt:message key="socialworker.form.livingPlace" /></a></li>

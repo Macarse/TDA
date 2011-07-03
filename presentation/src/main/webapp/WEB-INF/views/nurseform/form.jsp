@@ -39,7 +39,7 @@
 <button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="nurseForm" method="post" id="myform">
-	<div id="form-tabs">
+	<div id="form-tabs" class="form-tabs">
 		<ul>
 			<li><a href="#tab-vitalChecks"><fmt:message key="nurse.form.vitalChecks" /></a></li>
 			<li><a href="#tab-taControl"><fmt:message key="nurse.form.taControl" /></a></li>

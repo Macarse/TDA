@@ -50,7 +50,7 @@
 <button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="pediatricianForm" method="post" id="myform">
-	<div id="form-tabs">
+	<div id="form-tabs" class="form-tabs">
 		<ul>
 			<li><a href="#tab-peb"><fmt:message key="pediatrician.form.perinatalBackground" /></a></li>
 			<li><a href="#tab-pab"><fmt:message key="pediatrician.form.patientBackground" /></a></li>

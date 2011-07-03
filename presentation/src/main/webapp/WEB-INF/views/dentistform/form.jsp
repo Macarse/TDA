@@ -75,7 +75,7 @@
 <button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="dentistForm" method="post" id="myform">
-	<div id="form-tabs">
+	<div id="form-tabs" class="form-tabs">
 		<ul>
 			<li><a href="#tab-history"><fmt:message key="dentist.form.history" /></a></li>
 			<li><a href="#tab-odontogram"><fmt:message key="dentist.form.odontogram" /></a></li>
