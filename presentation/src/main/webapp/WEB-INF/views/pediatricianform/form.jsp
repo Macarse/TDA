@@ -20,18 +20,36 @@
         if( ('<c:out value="${editable}"></c:out>') == 'false' )
         	$('input, select').attr('disabled', 'disabled');
 
+        $( "#diagnosisId" )
+        // don't navigate away from the field on tab when selecting an item
+        .bind( "keydown", function( event ) {
+            if ( event.keyCode === $.ui.keyCode.TAB &&
+                    $( this ).data( "autocomplete" ).menu.active ) {
+                event.preventDefault();
+            }
+        })
+        
         $("#diagnosisId").autocomplete({
+        	focus: function() {
+            // prevent value inserted on focus
+            return false;
+        	},
             source: function( request, response ) {
-            $.get(contextPath + "/getDiagnosis?q="+request.term, function(data) {
-                var data = eval(data);
-            	response( $.map( data, function( item ) {
-                    return {
-                        label: item.name,
-                        value: item.name
-                    }
-                }));
+	            request.term = extractLast( request.term );
+	            $.get(contextPath + "/getDiagnosis?q="+request.term, function(data) {
+	                var data = eval(data);
+	                
+	                var availableTags = $.map( data, function( item ) {
+	                    return item.name;
+	                        //label: item.name,
+	                        //value: item.name
+	                    });
+	                
+	                // delegate back to autocomplete, but extract the last term
+	                response( availableTags );
     	 	});
         },
+        cacheLength: 1,
         minLength: 2,
         multiple: true,
         select: function( event, ui ) {
@@ -45,17 +63,27 @@
 			this.value = terms.join( ", " );
 			return false;
         },
+        /*
         open: function() {
             $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
         },
         close: function() {
             $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
+        */
     	});
 	});
 
 	window.onbeforeunload = nextTabUnload;
 	var _isDirty = false;
+
+    function split( val ) {
+        return val.split( /,\s*/ );
+    }
+    function extractLast( term ) {
+        return split( term ).pop();
+    }
+	
 </script>
 
 <!-- aux variables -->

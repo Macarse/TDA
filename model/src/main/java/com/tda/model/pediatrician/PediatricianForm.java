@@ -1,23 +1,15 @@
 package com.tda.model.pediatrician;
 
-import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
-
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import com.tda.model.patient.Patient;
 
@@ -185,7 +177,7 @@ public class PediatricianForm {
 	private String radiologyComments;
 
 	// TODO DIAGNOSIS
-	private Collection<PediatricianDiagnosis> diagnosis;
+	private String diagnosis;
 
 	// INTERNMENT
 
@@ -815,15 +807,11 @@ public class PediatricianForm {
 		this.chagas = chagas;
 	}
 
-	@CollectionOfElements(targetElement = PediatricianDiagnosis.class)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "DIAGNOSIS", joinColumns = @JoinColumn(name = "PEDIATRICIAN_ID"))
-	@Column(name = "DIAGNOSIS", nullable = true)
-	public Collection<PediatricianDiagnosis> getDiagnosis() {
+	public String getDiagnosis() {
 		return diagnosis;
 	}
 
-	public void setDiagnosis(Collection<PediatricianDiagnosis> diagnosis) {
+	public void setDiagnosis(String diagnosis) {
 		this.diagnosis = diagnosis;
 	}
 }
