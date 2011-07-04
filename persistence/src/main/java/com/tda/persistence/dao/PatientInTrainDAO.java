@@ -44,7 +44,7 @@ public class PatientInTrainDAO extends GenericDAOImpl<PatientInTrain> {
 			whereQuery = "nurseform.id";
 			break;
 		case pediatrician:
-			whereQuery = "pediatricianform.id";
+			whereQuery = "padiatricianform.id";
 			break;
 		case socialworker:
 			whereQuery = "socialworkerform.id";
