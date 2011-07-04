@@ -17,6 +17,10 @@ div[class=filter-container]{
 	right: 10px;
 }
 
+.form-tabs a{
+	font-size: 10px;
+}
+
 .socialworkerform table th, .pediatricianform table th, .dentistform table th, .nurseform table th{
 	font-weight: bolder;
 	text-align: left;
