@@ -87,6 +87,10 @@
 	<bean id="vaxineService" class="com.tda.service.impl.VaxineServiceImpl">
 		<property name="vaxineDAO" ref="vaxineDAO" />
 	</bean>
+	
+	<bean id="pediatricianDiagnosisService" class="com.tda.service.impl.PediatricianDiagnosisServiceImpl">
+		<property name="pediatricianDiagnosisDAO" ref="pediatricianDiagnosisDAO" />
+	</bean>
 
 	<bean id="userProvider" class="com.tda.service.provider.UserDefaultProvider"
 		init-method="init" depends-on="roleProvider">

@@ -19,6 +19,39 @@
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' )
         	$('input, select').attr('disabled', 'disabled');
+
+        $("#diagnosisId").autocomplete({
+            source: function( request, response ) {
+            $.get(contextPath + "/getDiagnosis?q="+request.term, function(data) {
+                var data = eval(data);
+            	response( $.map( data, function( item ) {
+                    return {
+                        label: item.name,
+                        value: item.name
+                    }
+                }));
+    	 	});
+        },
+        minLength: 2,
+        multiple: true,
+        select: function( event, ui ) {
+        	var terms = split( this.value );
+			// remove the current input
+			terms.pop();
+			// add the selected item
+			terms.push( ui.item.value );
+			// add placeholder to get the comma-and-space at the end
+			terms.push( "" );
+			this.value = terms.join( ", " );
+			return false;
+        },
+        open: function() {
+            $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        },
+        close: function() {
+            $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        }
+    	});
 	});
 
 	window.onbeforeunload = nextTabUnload;
@@ -834,6 +867,19 @@
 			<td colspan="${fieldsPerRow}" class="doubleband">
 			<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
 			<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="${fieldsPerRow}">
+				<div class="form-input">
+					<form:label for="diagnosis" path="diagnosis" cssErrorClass="error">
+						<fmt:message key="pediatrician.form.diagnosis" />
+					</form:label>
+				</div>
+				<div class="form-input"><form:textarea path="diagnosis" id="diagnosisId"/>
+					<form:errors path="diagnosis" />
+				</div>
 			</td>
 		</tr>
 		

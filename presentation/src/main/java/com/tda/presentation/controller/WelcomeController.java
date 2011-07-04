@@ -3,6 +3,7 @@ package com.tda.presentation.controller;
 import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,12 +34,14 @@ import com.tda.model.itinerary.Itinerary;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
+import com.tda.model.pediatrician.PediatricianDiagnosis;
 import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.OnlineUserService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
+import com.tda.service.api.PediatricianDiagnosisService;
 
 @Controller
 @RequestMapping(value = "/")
@@ -48,6 +51,7 @@ public class WelcomeController {
 
 	private PatientInTrainService patientInTrainService;
 	private PatientService patientService;
+	private PediatricianDiagnosisService pediatricianDiagnosisService;
 	private Paginator paginator;
 	private ParamContainer params;
 
@@ -100,16 +104,16 @@ public class WelcomeController {
 	@RequestMapping(value = "/getOnlineUsers", method = RequestMethod.GET)
 	public @ResponseBody
 	String getOnlineUsers() {
-		//clear offline users
+		// clear offline users
 		onlineUserService.clearOffline();
-		
-		//update timeout
+
+		// update timeout
 		onlineUserService.setOnline(getUser().getUsername());
-		
-		//return online users
+
+		// return online users
 		Gson gson = new Gson();
 		List<OnlineUser> users = onlineUserService.getOnlineUsers();
-		//remove me from the list
+		// remove me from the list
 		OnlineUser me = new OnlineUser();
 		me.setUsername(getUser().getUsername());
 
@@ -210,6 +214,8 @@ public class WelcomeController {
 	@InitBinder
 	public void initBinder(WebDataBinder b) {
 		b.registerCustomEditor(Date.class, new DateEditor());
+		b.registerCustomEditor(PediatricianDiagnosis.class,
+				new PediatricianDiagnosisEditor());
 	}
 
 	private class DateEditor extends PropertyEditorSupport {
@@ -223,6 +229,23 @@ public class WelcomeController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+
+		@Override
+		public String getAsText() {
+			// TODO why its entering here when getValue() == null?
+			if (getValue() == null)
+				return null;
+
+			return simpleDateFormat.format((Date) getValue());
+		}
+	}
+
+	private class PediatricianDiagnosisEditor extends PropertyEditorSupport {
+
+		@Override
+		public void setAsText(String text) throws IllegalArgumentException {
+			setValue(text);
 		}
 
 		@Override
@@ -297,6 +320,29 @@ public class WelcomeController {
 		return gson.toJson(forms);
 	}
 
+	@RequestMapping(value = "/getDiagnosis", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody
+	String getDiagnosis(@RequestParam String q) {
+		// http://localhost:8081/presentation/getDiagnosis?q=q&limit=150&timestamp=1309723047867
+		Gson gson = new Gson();
+
+		PediatricianDiagnosis pd = new PediatricianDiagnosis();
+		pd.setName(q);
+
+		Collection<PediatricianDiagnosis> found = pediatricianDiagnosisService
+				.findByExample(pd);
+
+		LinkedList<PediatricianDiagnosis> allDiagnosis = new LinkedList<PediatricianDiagnosis>();
+
+		for (PediatricianDiagnosis oneDiag : found)
+			allDiagnosis.add(oneDiag);
+
+		// gson.
+		return gson.toJson(allDiagnosis);
+		// return resultset;
+	}
+
 	@Autowired
 	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
 		this.itineraryDAO = itineraryDAO;
@@ -306,6 +352,12 @@ public class WelcomeController {
 	public void setPatientInTrainService(
 			PatientInTrainService patientInTrainService) {
 		this.patientInTrainService = patientInTrainService;
+	}
+
+	@Autowired
+	public void setPediatricianDiagnosisService(
+			PediatricianDiagnosisService pediatricianDiagnosisService) {
+		this.pediatricianDiagnosisService = pediatricianDiagnosisService;
 	}
 
 	@Autowired

@@ -91,6 +91,12 @@
 		</property>
 	</bean>
 	
+	<bean id="pediatricianDiagnosisDAO" class="com.tda.persistence.dao.PediatricianDiagnosisDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
 	<bean id="placeDAO" class="com.tda.persistence.dao.PlaceDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
