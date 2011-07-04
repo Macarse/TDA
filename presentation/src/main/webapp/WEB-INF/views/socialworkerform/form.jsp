@@ -17,7 +17,7 @@
         //$('#myform').ajaxForm(function() { 
           //  alert("Thank you for your comment!"); 
         //});
-        setInterval(autoSubmitFormAjax,1000);
+        //setInterval(autoSubmitFormAjax,1000);
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' )
         	$('input, select').attr('disabled', 'disabled');

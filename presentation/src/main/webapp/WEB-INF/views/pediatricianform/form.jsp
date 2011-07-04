@@ -15,7 +15,7 @@
 		//if( document.getElementById('distosicRadioButton').checked )
 			//$('.distosicHidden').show();
 
-		setInterval(autoSubmitFormAjax,30*1000);
+		//setInterval(autoSubmitFormAjax,30*1000);
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' )
         	$('input, select').attr('disabled', 'disabled');
@@ -107,8 +107,6 @@
 <c:if test="${editable != null && !editable}">
 	<h3>Version Final - No editable - Fecha <fmt:formatDate value="${pediatricianForm.fillingDate}" pattern="dd/MM/yyyy"/></h3>
 </c:if>
-
-<button id="ajaxSave" type="button" onclick="$('#formSubmitBtn').click();">Guardar Formulario</button>
 
 <form:form modelAttribute="pediatricianForm" method="post" id="myform">
 	<div id="form-tabs" class="form-tabs">
@@ -959,5 +957,11 @@
 					
 			</table>
 		</div>
+		<div class="form-save-button">
+		<input id="formSubmitBtn" type="submit" value="Guardar Formulario" onClick="_isDirty = false;"/>
+	</div>
+	<div style="clear: both">
+		<hr>
+	</div>
 	</div>
 </form:form>
