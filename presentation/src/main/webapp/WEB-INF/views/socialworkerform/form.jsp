@@ -18,8 +18,7 @@
           //  alert("Thank you for your comment!"); 
         //});
         //setInterval(autoSubmitFormAjax,1000);
-
-        if( ('<c:out value="${editable}"></c:out>') == 'false' )
+        if( ('<c:out value="${editable}"></c:out>') == 'false' || userType != "socialworker")
         	$('input, select').attr('disabled', 'disabled');
 	});
 
@@ -40,6 +39,11 @@
 <c:if test="${editable != null && !editable}">
 	<h3>Version Final - No editable - Fecha <fmt:formatDate value="${socialWorkerForm.fillingDate}" pattern="dd/MM/yyyy"/></h3>
 </c:if>
+
+<script type="text/javascript">
+	if( userType != "socialworker" )
+		document.write("<h3>Este formulario no pertenece a su rol</h3>");
+</script>
 
 <form:form modelAttribute="socialWorkerForm" method="post" id="myform">
 	<div id="form-tabs" class="form-tabs">

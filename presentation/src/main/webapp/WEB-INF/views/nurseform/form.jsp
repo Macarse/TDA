@@ -14,7 +14,7 @@
 
 		//setInterval(autoSubmitFormAjax,30*1000);
 
-        if( ('<c:out value="${editable}"></c:out>') == 'false' )
+        if( ('<c:out value="${editable}"></c:out>') == 'false' || userType != "nurse" )
         	$('input, select').attr('disabled', 'disabled');
 	});
 
@@ -35,6 +35,11 @@
 <c:if test="${editable != null && !editable}">
 	<h3>Version Final - No editable - Fecha <fmt:formatDate value="${NurseForm.fillingDate}" pattern="dd/MM/yyyy"/></h3>
 </c:if>
+
+<script type="text/javascript">
+	if( userType != "nurse" )
+		document.write("<h3>Este formulario no pertenece a su rol</h3>");
+</script>
 
 <form:form modelAttribute="nurseForm" method="post" id="myform">
 	<div id="form-tabs" class="form-tabs">

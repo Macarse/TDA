@@ -58,7 +58,7 @@
 	var refreshId;
 	var selectedId;
 	var userType = '${user.currRole}';
-	
+
 	function refreshPatients() {
 		clearInterval(refreshId);
 	
