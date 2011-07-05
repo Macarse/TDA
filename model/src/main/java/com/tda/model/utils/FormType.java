@@ -2,7 +2,7 @@ package com.tda.model.utils;
 
 public enum FormType {
 	pediatrician("Pediatra"), socialworker("TrabajadorSocial"), nurse(
-			"Enfermero"), dentist("Dentista");
+			"Enfermero"), dentist("Dentista"), admin("Admin");
 
 	private String description;
 

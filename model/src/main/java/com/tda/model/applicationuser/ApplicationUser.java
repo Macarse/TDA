@@ -278,6 +278,6 @@ public class ApplicationUser implements UserDetails {
 			if (authority.getId() == 6)
 				return FormType.pediatrician;
 		}
-		return FormType.socialworker;
+		return FormType.admin;
 	}
 }

@@ -59,6 +59,9 @@
 	var selectedId;
 	var userType = '${user.currRole}';
 
+	if( userType == "admin" )
+		userType = "socialworker";
+
 	function refreshPatients() {
 		clearInterval(refreshId);
 	
