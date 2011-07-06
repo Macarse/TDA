@@ -14,7 +14,6 @@ import javax.persistence.Lob;
 import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -45,7 +44,7 @@ public class Patient implements Serializable {
 	@Past
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date birthdate;
-	
+
 	private byte[] image;
 
 	public Patient() {
@@ -70,16 +69,16 @@ public class Patient implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@Lob
+	@Column(length = 5000000)
 	public byte[] getImage() {
 		return this.image;
-    }
+	}
 
-    public void setImage(byte[] image) {
-    	this.image = image;
-    }
-
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
 	@Column(unique = true)
 	public String getDni() {
