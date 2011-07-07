@@ -18,7 +18,8 @@
           //  alert("Thank you for your comment!"); 
         //});
         //setInterval(autoSubmitFormAjax,1000);
-        if( ('<c:out value="${editable}"></c:out>') == 'false' || userType != "socialworker")
+
+        if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "socialworker")
         	$('input, select').attr('disabled', 'disabled');
 	});
 
@@ -41,7 +42,7 @@
 </c:if>
 
 <script type="text/javascript">
-	if( userType != "socialworker" )
+	if( userRole != "socialworker" )
 		document.write("<h3>Este formulario no pertenece a su rol</h3>");
 </script>
 

@@ -125,4 +125,14 @@
 		</property>
 	</bean>
 	
+	<bean id="pediatricianDiagnosisProvider" class="com.tda.service.provider.PediatricianDiagnosisDefaultProvider"
+		init-method="init">
+		<property name="propertiesHolder">
+			<util:properties location="classpath:pediatricianDiagnosis.properties" />
+		</property>
+		<property name="pediatricianDiagnosisService">
+			<ref local="pediatricianDiagnosisService" />
+		</property>
+	</bean>
+	
 </beans>

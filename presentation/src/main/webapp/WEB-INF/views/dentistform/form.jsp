@@ -16,7 +16,7 @@
 
 		//setInterval(autoSubmitFormAjax,30*1000);
 
-        if( ('<c:out value="${editable}"></c:out>') == 'false' || userType != "dentist")
+        if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "dentist")
         	$('input, select').attr('disabled', 'disabled');
 	});
 
@@ -44,7 +44,7 @@
 </c:if>
 
 <script type="text/javascript">
-	if( userType != "dentist" )
+	if( userRole != "dentist" )
 		document.write("<h3>Este formulario no pertenece a su rol</h3>");
 </script>
 

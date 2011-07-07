@@ -58,6 +58,7 @@
 	var refreshId;
 	var selectedId;
 	var userType = '${user.currRole}';
+	var userRole = '${user.currRole}';
 
 	if( userType == "admin" )
 		userType = "socialworker";
