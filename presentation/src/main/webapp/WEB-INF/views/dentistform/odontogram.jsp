@@ -11,129 +11,125 @@ div, p {
 	padding:0;
 }
 
-#box {
-    width: 20px;
-    height: 50px;
-}
 .left{
-    border-top:15px solid transparent;
-    border-bottom:15px solid transparent;
-    border-left: 15px solid #fff;
-    height:50px;
+    border-top:7.5px solid transparent;
+    border-bottom:7.5px solid transparent;
+    border-left: 7.5px solid #fff;
+    height:25px;
     position:absolute;top:0;left:0;
 }
 .right{
-    border-top:15px solid transparent;
-    border-bottom:15px solid transparent;
-    border-right: 15px solid #fff;
-    height:50px;
+    border-top:7.5px solid transparent;
+    border-bottom:7.5px solid transparent;
+    border-right: 7.5px solid #fff;
+    height:25px;
     position:absolute;top:0;right:0;
 }
 .bottom {
-    border-bottom:15px solid #fff;
-    border-right:15px solid transparent;
-    border-left: 15px solid transparent;
+    border-bottom:7.5px solid #fff;
+    border-right:7.5px solid transparent;
+    border-left: 7.5px solid transparent;
     position:absolute;bottom:0;left:0;
-    width:20px;
+    width:10px;
 }
 
 .top{
-    border-top:15px solid #fff;
-    border-right:15px solid transparent;
-    border-left: 15px solid transparent;
+    border-top:7.5px solid #fff;
+    border-right:7.5px solid transparent;
+    border-left: 7.5px solid transparent;
     position:absolute;top:0;left:0;
-    width:20px;
+    width:10px;
 }
 
 .center{
     background:#fff;
-    height:50px;
-    position:absolute;top:15px;left:15px;
-    width:20px;
+    height:25px;
+    position:absolute;top:7.5px;left:7.5px;
+    width:10px;
 }
 .diente{
     float:left;
-    height:80px;
-    margin: 0 10px 10px 0;
+    height:40px;
+    margin: 0 5px 5px 0;
     position:relative;
-    width:50px;
+    width:25px;
 }
 .marco{
     background-image:url('/presentation/themes/default/image/diente.png');
-    height:80px;
+    height:40px;
     pointer-events:none;
     position:absolute;top:0;left:0;
-    width:50px;
+    width:25px;
 }
 #fila1_izq_mandibula8{
     overflow:hidden;
-    width:500px;
+    width:250px;
     float:left;
 }
 #fila1_der_mandibula8{
     overflow:hidden;
-    width:500px;
+    width:250px;
     float:right;
 }
 
 #fila2_izq_mandibula8{
     overflow:hidden;
-    width:500px;
+    width:250px;
     float:left;
 }
 #fila2_der_mandibula8{
     overflow:hidden;
-    width:500px;
+    width:250px;
     float:right;
 }
 
 #fila3_izq_mandibula5{
     overflow:hidden;
-    width:300px;
+    width:150px;
     float: left;
 }
 
 #fila3_der_mandibula5{
     overflow:hidden;
-    width:300px;
+    width:150px;
     float: left;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 
 #fila4_izq_mandibula5{
     overflow:hidden;
-    width:300px;
+    width:150px;
     float: left;
 }
 
 #fila4_der_mandibula5{
     overflow:hidden;
-    width:300px;
+    width:150px;
     float: left;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 
 #fila1{
     overflow:hidden;
-    width:1020px;
+    width:510px;
 }
 
 #fila2{
     overflow:hidden;
-    width:1020px;
+    width:510px;
 }
 
 #fila3{
     overflow:hidden;
-    width: 1020px;
-    margin-left: 180px;
-    margin-top: 20px;
+    width: 510px;
+    margin-left: 90px;
+    margin-top: 10px;
 }
 
 #fila4{
     overflow:hidden;
-    width: 1020px;
-    margin-left: 180px;
+    width: 510px;
+    margin-left: 90px;
 }
 
 </style>
