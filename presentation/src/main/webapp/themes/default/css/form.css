@@ -24,13 +24,13 @@ div[class=filter-container]{
 .socialworkerform table th, .pediatricianform table th, .dentistform table th, .nurseform table th{
 	font-weight: bolder;
 	text-align: left;
-	border-bottom: solid 1px;
-	font-size: 11px;
+	border-top: solid 1px;
+	font-size: 12px;
 	height: 30px;
 }
 
 .socialworkerform table td, .pediatricianform table td, .dentistform table td, .nurseform table td{
-	font-weight: bolder;
+	/*font-weight: bolder;*/
 	text-align: left;
 	font-size: 11px;
 }
@@ -53,6 +53,10 @@ span.titleform{
 .form-input{
 	float: left;
 	width: 300px;
+}
+
+.form-input > label {
+	font-weight: bolder;
 }
 
 .itinerary-form fieldset{
