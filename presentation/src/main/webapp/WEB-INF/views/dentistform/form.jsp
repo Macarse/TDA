@@ -13,8 +13,6 @@
 		$("#myform").change(function() {
 			_isDirty = true;
 		});
-		
-		$('#tooth1').svg({onLoad: loadTooth1});
 
 		//setInterval(autoSubmitFormAjax,30*1000);
 
@@ -22,40 +20,13 @@
         	$('input, select').attr('disabled', 'disabled');
 	});
 
-	function loadTooth1(svg) {
-		svg = svg.load('${pageContext.request.contextPath}/themes/default/image/tooth.svg', true);
-	}
-
 	window.onbeforeunload = nextTabUnload;
 	var _isDirty = false;
 
 	function submitForm() {
 	 _isDirty = false;
-
-      var svg = $('#tooth1').svg('get');
-      var tooth_up = svg.getElementById("tooth_up");
-      var tooth_down = svg.getElementById("tooth_down");
-      var tooth_center = svg.getElementById("tooth_center");
-      var tooth_left = svg.getElementById("tooth_left");
-      var tooth_down = svg.getElementById("tooth_down");
-	alert("ToothUp: " + tooth_up.getAttribute("fill") + 
-			" ToothDown: " + tooth_down.getAttribute("fill") +
-			" ToothCenter: " + tooth_center.getAttribute("fill") +
-			" ToothLeft: " + tooth_left.getAttribute("fill") +
-			" ToothDown: " + tooth_down.getAttribute("fill")
-			);
-	
-	var tooth = new Object();
-	tooth.number = 1;
-	tooth.north = "north";
-	tooth.south = "south";
-	tooth.east = "east";
-	tooth.west = "west";
-	tooth.center = "center";
-	var tooths_array = new Array();
-	tooths_array[0] = tooth;
-	$('tooths').val(tooths_array);
 	}
+
 </script>
 
 <!-- aux variables -->
@@ -226,10 +197,15 @@
 		<tr>
 		<td colspan="2">
 		<br/><br/>
-		<p><form:label for="tooths" path="tooths"
-		cssErrorClass="error"><fmt:message key="user.form.tooths" /></form:label><br />
-		<form:input path="tooths" cssStyle="display:none;" /> <form:errors path="tooths" />
-		<div id="tooth1" style="z-index:999;"></div>
+		<p>
+<%-- 		<form:label for="tooths" path="tooths" --%>
+<%-- 		cssErrorClass="error"><fmt:message key="user.form.tooths" /></form:label><br /> --%>
+<%-- 		<form:input path="tooths" cssStyle="display:none;" /> <form:errors path="tooths" /> --%>
+		<div id="odontogram">
+			<jsp:include flush="true" page="odontogram.jsp">
+ 				<jsp:param name="abc" value="xyz" />
+			</jsp:include>
+		</div>
 		</td>
 		</tr>
 		
