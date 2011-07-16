@@ -13,6 +13,39 @@
 			_isDirty = true;
 		});
 
+		$("#peopleAtHomeUnderTen").keypress(function(e){
+			changeTab(e);
+			$("#roomsExcludingKitchenAndBathroom").focus();
+		});
+		
+		$("#electricity1").keypress(function(e){
+			changeTab(e);
+			$("#knowsHowToReadAndWrite1").focus();
+		});
+		$("#electricity2").keypress(function(e){
+			changeTab(e);
+			$("#knowsHowToReadAndWrite1").focus();
+		});
+		$("#electricity3").keypress(function(e){
+			changeTab(e);
+			$("#knowsHowToReadAndWrite1").focus();
+		});
+
+		$("#schoolService1").keypress(function(e){
+			changeTab(e);
+			$("#workingPeople").focus();
+		});
+		$("#schoolService2").keypress(function(e){
+			changeTab(e);
+			$("#workingPeople").focus();
+		});
+		$("#schoolService3").keypress(function(e){
+			changeTab(e);
+			$("#workingPeople").focus();
+		});
+
+		$("#fatherFirstName").focus();
+
 		// bind 'myForm' and provide a simple callback function 
         //$('#myform').ajaxForm(function() { 
           //  alert("Thank you for your comment!"); 
@@ -22,6 +55,13 @@
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "socialworker")
         	$('input, select').attr('disabled', 'disabled');
 	});
+
+	function changeTab(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 9){
+			nextTab('#form-tabs');
+		}
+	}
 
 	window.onbeforeunload = nextTabUnload;
 	var _isDirty = false;
@@ -73,7 +113,7 @@
 				<th colspan="${fieldsPerRow}"><fmt:message key="socialworker.form.fatherTitle" /></th></tr>
 				<tr>
 					<td><form:label for="fatherFirstName" path="fatherFirstName" cssErrorClass="error"><fmt:message key="socialworker.form.fatherFirstName" /></form:label>
-						<form:input path="fatherFirstName" /> <form:errors path="fatherFirstName" /></td>
+						<form:input path="fatherFirstName" tabindex="" /> <form:errors path="fatherFirstName" /></td>
 					<td><form:label for="fatherLastName" path="fatherLastName" cssErrorClass="error"><fmt:message key="socialworker.form.fatherLastName" /></form:label>
 						<form:input path="fatherLastName" /> <form:errors path="fatherLastName" /></td>
 					<td><form:label for="fatherAge" path="fatherAge" cssErrorClass="error"><fmt:message key="socialworker.form.fatherAge" /></form:label>
