@@ -1,6 +1,5 @@
 package com.tda.presentation.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.tda.model.nurse.NurseForm;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.pediatrician.PediatricianForm;
-import com.tda.service.api.NurseFormService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
 import com.tda.service.api.PediatricianFormService;
@@ -35,7 +32,6 @@ public class AddPediatricianFormController extends
 
 	private PediatricianFormService pediatricianFormService;
 	private PatientService patientService;
-	private NurseFormService nurseFormService;
 	private PatientInTrainService patientInTrainService;
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -46,11 +42,10 @@ public class AddPediatricianFormController extends
 		pediatricianForm.setPatient(patient);
 		model.addAttribute("pediatricianForm", pediatricianForm);
 
-		NurseForm nurseForm = nurseFormService.findByPatientIdForDate(
-				patientId, new Date());
+		PatientInTrain pit = patientInTrainService.findByPatient(patient);
 
-		if (nurseForm != null)
-			model.addAttribute("nurseForm", nurseForm);
+		if (pit.getNurseform() != null)
+			model.addAttribute("nurseForm", pit.getNurseform());
 
 		return PEDIATRICIAN_ADD_FORM;
 	}
@@ -88,11 +83,6 @@ public class AddPediatricianFormController extends
 	@Autowired
 	public void setPatientService(PatientService patientService) {
 		this.patientService = patientService;
-	}
-
-	@Autowired
-	public void setNurseFormService(NurseFormService nurseFormService) {
-		this.nurseFormService = nurseFormService;
 	}
 
 	@Autowired

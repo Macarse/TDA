@@ -12,8 +12,19 @@
 			_isDirty = true;
 		});
 
-		//if( document.getElementById('distosicRadioButton').checked )
-			//$('.distosicHidden').show();
+		$("#distosicRadioButton").click(function() {
+			$('.distosicHidden').show();
+		});
+
+		$("#nondistosicRadioButton").click(function() {
+			$('.distosicHidden').hide();
+		});
+
+		$(".distosicHidden").hide();
+		
+		if( document.getElementById('distosicRadioButton').checked )
+			$('.distosicHidden').show();
+
 
 		//setInterval(autoSubmitFormAjax,30*1000);
 
@@ -139,7 +150,7 @@
 					</td>
 				</tr>
 			
-				<tr><th colspan="${fieldsPerRow}">
+				<tr><th colspan="${fieldsPerRow}" class="firstTH">
 					<form:label for="birthPlace" path="birthPlace" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.birthPlace" />
 					</form:label></th></tr>
@@ -165,12 +176,12 @@
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
 							<td>
 							<c:choose>
-							<c:when test="${birthType.description == 'Distócico'}">
-								<form:radiobutton id="distosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
-							</c:when>
-							<c:otherwise>
-								<form:radiobutton path="birthType" value="${birthType}"/> ${birthType.description}
-							</c:otherwise>
+								<c:when test="${birthType == 'DYSTOCIC'}">
+									<form:radiobutton id="distosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
+								</c:when>
+								<c:otherwise>
+									<form:radiobutton id="nondistosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
+								</c:otherwise>
 							</c:choose>
 							</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
@@ -511,7 +522,7 @@
 				</td>
 			</tr>
 			
-			<tr><th colspan="${fieldsPerRow}">
+			<tr><th colspan="${fieldsPerRow}" class="firstTH">
 				<form:label for="maturationAndDevelopment" path="maturationAndDevelopment" cssErrorClass="error">
 					<fmt:message key="pediatrician.form.maturationAndDevelopment" />
 				</form:label></th></tr>
@@ -542,12 +553,17 @@
 				<c:choose>
 				<c:when test="${nurseForm != null}">
 				
-				<tr><th colspan="${fieldsPerRow}">
+				<tr><th colspan="${fieldsPerRow}" class="firstTH">
 						<fmt:message key="socialworker.form.fatherAge" />
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
-				<fmt:formatNumber maxFractionDigits="2"><c:out value="${pediatricianForm.patient.age}"></c:out></fmt:formatNumber>
+				<c:if test="${pediatricianForm.patient.age != null}">
+					<fmt:formatNumber maxFractionDigits="2">
+						<c:out value="${pediatricianForm.patient.age}"></c:out>
+					</fmt:formatNumber>
+				</c:if>
+				
 				</td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
@@ -555,7 +571,9 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
+				<c:if test="${nurseForm.weight != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
@@ -563,7 +581,9 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
+				<c:if test="${nurseForm.size != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.size}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>
 
 				<tr><th colspan="${fieldsPerRow}">
@@ -571,7 +591,9 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
+				<c:if test="${nurseForm.headCircumference != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.headCircumference}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>		
 				
 				
@@ -580,7 +602,9 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
+				<c:if test="${nurseForm.weight != null && nurseForm.size != null && nurseForm.size != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
@@ -588,26 +612,25 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 			
-				
+				<c:if test="${nurseForm.weight != null && nurseForm.size != null && nurseForm.size != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
-				
+				</c:if>
 				</td></tr>
-				
+
 				<tr><th colspan="${fieldsPerRow}">
 						<fmt:message key="pediatrician.form.PIMC" />
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 						
+				<c:if test="${nurseForm.weight != null && nurseForm.size != null && nurseForm.size != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>
 				
 				</c:when>
 				<c:otherwise>
-				<tr><th colspan="${fieldsPerRow}">
+				<tr><th colspan="${fieldsPerRow}" class="firstTH">
 						<fmt:message key="pediatrician.form.missingNurseData" />
-						<a href="${pageContext.request.contextPath}/patient/${pediatricianForm.patient.id}/nurse/new">
-							<fmt:message key="pediatrician.form.missingNurseDataLink" />
-						</a>
 				</th></tr>
 				</c:otherwise>
 				</c:choose>
@@ -852,7 +875,7 @@
 				</td>
 			</tr>
 			
-				<tr><th colspan="${fieldsPerRow}">
+				<tr><th colspan="${fieldsPerRow}" class="firstTH">
 					<form:label for="chest" path="chest" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.chest" />
 					</form:label></th></tr>
