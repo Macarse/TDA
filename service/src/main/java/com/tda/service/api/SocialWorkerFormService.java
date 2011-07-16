@@ -20,4 +20,6 @@ public interface SocialWorkerFormService {
 
 	List<SocialWorkerForm> findByExample(SocialWorkerForm socialWorkerForm);
 
+	SocialWorkerForm findLastByPatientId(Long id);
+
 }

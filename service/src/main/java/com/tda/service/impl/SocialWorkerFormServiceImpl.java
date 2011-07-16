@@ -15,9 +15,9 @@ public class SocialWorkerFormServiceImpl implements SocialWorkerFormService {
 
 	@Transactional
 	public void save(SocialWorkerForm socialWorkerForm) {
-		if (socialWorkerForm.getFillingDate() == null) {
-			socialWorkerForm.setFillingDate(new Date());
-		}
+		// if (socialWorkerForm.getFillingDate() == null) {
+		socialWorkerForm.setFillingDate(new Date());
+		// }
 		socialWorkerFormDAO.save(socialWorkerForm);
 	}
 
@@ -55,6 +55,10 @@ public class SocialWorkerFormServiceImpl implements SocialWorkerFormService {
 
 	public void setSocialWorkerFormDAO(SocialWorkerFormDAO socialWorkerFormDAO) {
 		this.socialWorkerFormDAO = socialWorkerFormDAO;
+	}
+
+	public SocialWorkerForm findLastByPatientId(Long id) {
+		return socialWorkerFormDAO.findLastByPatientId(id);
 	}
 
 }
