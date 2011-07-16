@@ -44,7 +44,6 @@ public class AddDentistFormController extends BaseDentistFormController {
 		DentistForm dentistForm = new DentistForm();
 		dentistForm.setPatient(patient);
 		model.addAttribute("dentistForm", dentistForm);
-
 		return DENTIST_ADD_FORM;
 	}
 

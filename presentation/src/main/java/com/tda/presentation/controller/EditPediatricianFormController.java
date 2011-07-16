@@ -52,7 +52,6 @@ public class EditPediatricianFormController extends
 				pediatricianFormId, FormType.pediatrician);
 
 		model.addAttribute("editable", editable);
-
 		return PEDIATRICIAN_FORM;
 	}
 

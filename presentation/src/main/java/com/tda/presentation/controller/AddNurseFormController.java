@@ -40,7 +40,6 @@ public class AddNurseFormController extends BaseNurseFormController {
 		NurseForm nurseForm = new NurseForm();
 		nurseForm.setPatient(patient);
 		model.addAttribute("nurseForm", nurseForm);
-
 		return NURSE_ADD_FORM;
 	}
 
