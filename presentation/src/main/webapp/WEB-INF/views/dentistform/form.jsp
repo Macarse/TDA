@@ -21,22 +21,22 @@
 		return true;
 	});
 
-		function changeTab(e){
-			var code = (e.keyCode ? e.keyCode : e.which);
-			if(code == 9){
-				nextTab('#form-tabs');
-			}
+	function changeTab(e, did){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 9){
+			nextTab('#form-tabs');
+			$("#" + did).focus();
 		}
+	}
 
-		$("#receivedAttentionInTrain1").focus();
+	$("#receivedAttentionInTrain1").focus();
 
-		$("#comment").keypress(function(e){
-			changeTab(e);
-			$("#cpod").focus();
-		});
+	$("#comment").keypress(function(e){
+		changeTab(e,'cpod');
+	});
 
-        if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "dentist")
-        	$('input, select').attr('disabled', 'disabled');
+     if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "dentist")
+     	$('input, select').attr('disabled', 'disabled');
 	});
 
 	window.onbeforeunload = nextTabUnload;

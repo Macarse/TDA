@@ -14,30 +14,27 @@
 
 		//setInterval(autoSubmitFormAjax,30*1000);
 		
-		function changeTab(e){
+		function changeTab(e, did){
 			var code = (e.keyCode ? e.keyCode : e.which);
 			if(code == 9){
 				nextTab('#form-tabs');
+				$("#" + did).focus();
 			}
 		}
 		
 		$("#size").focus();
 
 		$("#percentile").keypress(function(e){
-			changeTab(e);
-			$("#TAmin").focus();
+			changeTab(e, 'TAmin');
 		});
 
 		$("#saturation").keypress(function(e){
-			changeTab(e);
-			$("#vaxines1").focus();
+			changeTab(e,'vaxines1');
 		});
 
 		$("#vaxines12").keypress(function(e){
-			changeTab(e);
-			$("#nurseActions1").focus();
+			changeTab(e,'nurseActions1');
 		});
-		
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "nurse" )
         	$('input, select').attr('disabled', 'disabled');
