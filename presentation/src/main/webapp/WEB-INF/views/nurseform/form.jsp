@@ -13,6 +13,31 @@
 		});
 
 		//setInterval(autoSubmitFormAjax,30*1000);
+		
+		function changeTab(e){
+			var code = (e.keyCode ? e.keyCode : e.which);
+			if(code == 9){
+				nextTab('#form-tabs');
+			}
+		}
+		
+		$("#size").focus();
+
+		$("#percentile").keypress(function(e){
+			changeTab(e);
+			$("#TAmin").focus();
+		});
+
+		$("#saturation").keypress(function(e){
+			changeTab(e);
+			$("#vaxines1").focus();
+		});
+
+		$("#vaxines12").keypress(function(e){
+			changeTab(e);
+			$("#nurseActions1").focus();
+		});
+		
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "nurse" )
         	$('input, select').attr('disabled', 'disabled');
