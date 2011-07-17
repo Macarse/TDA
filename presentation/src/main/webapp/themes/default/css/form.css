@@ -3,6 +3,10 @@
 div[class=filter-container]{
 }
 
+span[id*=".errors"]{
+	color: red;
+	font-weight: bold;
+}
 
 .doubleband{
 	border-bottom: solid 1px;

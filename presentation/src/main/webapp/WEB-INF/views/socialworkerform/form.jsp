@@ -14,34 +14,27 @@
 		});
 
 		$("#peopleAtHomeUnderTen").keypress(function(e){
-			changeTab(e);
-			$("#roomsExcludingKitchenAndBathroom").focus();
+			changeTab(e,'roomsExcludingKitchenAndBathroom');
 		});
 		
 		$("#electricity1").keypress(function(e){
-			changeTab(e);
-			$("#knowsHowToReadAndWrite1").focus();
+			changeTab(e,'knowsHowToReadAndWrite1');
 		});
 		$("#electricity2").keypress(function(e){
-			changeTab(e);
-			$("#knowsHowToReadAndWrite1").focus();
+			changeTab(e,'knowsHowToReadAndWrite1');
 		});
 		$("#electricity3").keypress(function(e){
-			changeTab(e);
-			$("#knowsHowToReadAndWrite1").focus();
+			changeTab(e,'knowsHowToReadAndWrite1');
 		});
 
 		$("#schoolService1").keypress(function(e){
-			changeTab(e);
-			$("#workingPeople").focus();
+			changeTab(e,'workingPeople');
 		});
 		$("#schoolService2").keypress(function(e){
-			changeTab(e);
-			$("#workingPeople").focus();
+			changeTab(e,'workingPeople');
 		});
 		$("#schoolService3").keypress(function(e){
-			changeTab(e);
-			$("#workingPeople").focus();
+			changeTab(e,'workingPeople');
 		});
 
 		$("#fatherFirstName").focus();
@@ -56,10 +49,11 @@
         	$('input, select').attr('disabled', 'disabled');
 	});
 
-	function changeTab(e){
+	function changeTab(e, did){
 		var code = (e.keyCode ? e.keyCode : e.which);
 		if(code == 9){
 			nextTab('#form-tabs');
+			$("#" + did).focus();
 		}
 	}
 
