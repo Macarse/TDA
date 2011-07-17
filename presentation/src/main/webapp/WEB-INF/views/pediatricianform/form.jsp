@@ -26,8 +26,6 @@
 			$('.distosicHidden').show();
 
 
-		//setInterval(autoSubmitFormAjax,30*1000);
-
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "pediatrician" )
         	$('input, select').attr('disabled', 'disabled');
 
@@ -84,60 +82,45 @@
         */
     	});
 
-        function changeTab(e){
-			var code = (e.keyCode ? e.keyCode : e.which);
-			if(code == 9){
-				nextTab('#form-tabs');
-			}
-		}
-
-        $("#birthPlace1").focus();
+        if (!checkTabErrors('#form-tabs', ["tab-peb","tab-pab", "tab-fab", "tab-mat", "tab-phy", "tab-lab", "tab-rad", "tab-dia", "tab-int"])){
+        	$("#birthPlace1").focus();
+         }
 
         for(i=1;i<=2;i++){
 	        $("#exitStatus" + i).keypress(function(e){
-				changeTab(e);
-				$("#takesMedicine").focus();
+				changeTab(e,'takesMedicine');
 			});
         }
         
         $("#otherPatientDiseases").keypress(function(e){
-			changeTab(e);
-			$("#cardiovascular1").focus();
+			changeTab(e,'cardiovascular1');
 		});
 
         $("#otherFamilyDiaseases").keypress(function(e){
-			changeTab(e);
-			$("#maturationAndDevelopment").focus();
+			changeTab(e,'maturationAndDevelopment');
 		});
 
         $("#maturationAndDevelopment").keypress(function(e){
-			changeTab(e);
-			$("#symptoms").focus();
+			changeTab(e,'symptoms');
 		});
 
         $("#pathologyFound").keypress(function(e){
-			changeTab(e);
-			$("#hematrocito").focus();
+			changeTab(e,'hematrocito');
 		});
-
 
         for(i=1;i<=3;i++){
 	        $("#chagas" + i).keypress(function(e){
-				changeTab(e);
-				$("#chest").focus();
+				changeTab(e,'chest');
 			});
         }
         
         $("#radiologyComments").keypress(function(e){
-			changeTab(e);
-			$("#diagnosisId").focus();
+			changeTab(e,'diagnosisId');
 		});
 
         $("#diagnosisId").keypress(function(e){
-			changeTab(e);
-			$("#interconsultation1").focus();
+			changeTab(e,'interconsultation1');
 		});
-		
 	});
 
 	window.onbeforeunload = nextTabUnload;

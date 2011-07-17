@@ -14,54 +14,36 @@
 		});
 
 		$("#peopleAtHomeUnderTen").keypress(function(e){
-			changeTab(e);
-			$("#roomsExcludingKitchenAndBathroom").focus();
+			changeTab(e,'roomsExcludingKitchenAndBathroom');
 		});
 		
 		$("#electricity1").keypress(function(e){
-			changeTab(e);
-			$("#knowsHowToReadAndWrite1").focus();
+			changeTab(e,'knowsHowToReadAndWrite1');
 		});
 		$("#electricity2").keypress(function(e){
-			changeTab(e);
-			$("#knowsHowToReadAndWrite1").focus();
+			changeTab(e,'knowsHowToReadAndWrite1');
 		});
 		$("#electricity3").keypress(function(e){
-			changeTab(e);
-			$("#knowsHowToReadAndWrite1").focus();
+			changeTab(e,'knowsHowToReadAndWrite1');
 		});
 
 		$("#schoolService1").keypress(function(e){
-			changeTab(e);
-			$("#workingPeople").focus();
+			changeTab(e,'workingPeople');
 		});
 		$("#schoolService2").keypress(function(e){
-			changeTab(e);
-			$("#workingPeople").focus();
+			changeTab(e,'workingPeople');
 		});
 		$("#schoolService3").keypress(function(e){
-			changeTab(e);
-			$("#workingPeople").focus();
+			changeTab(e,'workingPeople');
 		});
-
-		$("#fatherFirstName").focus();
-
-		// bind 'myForm' and provide a simple callback function 
-        //$('#myform').ajaxForm(function() { 
-          //  alert("Thank you for your comment!"); 
-        //});
-        //setInterval(autoSubmitFormAjax,1000);
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "socialworker")
         	$('input, select').attr('disabled', 'disabled');
-	});
 
-	function changeTab(e){
-		var code = (e.keyCode ? e.keyCode : e.which);
-		if(code == 9){
-			nextTab('#form-tabs');
-		}
-	}
+        if (!checkTabErrors('#form-tabs', ["tab-gf","tab-viv", "tab-esc", "tab-eco"])){
+        	$("#fatherFirstName").focus();
+        }
+	});
 
 	window.onbeforeunload = nextTabUnload;
 	var _isDirty = false;
@@ -100,7 +82,6 @@
 	<!-- Aca empieza la seccion de Grupo Familiar -->
 	<div id="tab-gf" class="socialworkerform">
 		<table width="100%">
-		
 			<tr>
 				<td colspan="${fieldsPerRow}" class="doubleband">
 				<div style="float:right;">
