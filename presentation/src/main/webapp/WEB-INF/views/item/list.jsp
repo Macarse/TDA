@@ -122,10 +122,14 @@
 				<td><div class='editable' id='${item.id }'>${item.quantity}</div></td>
 				<td>${item.category}</td>
 				<td>${item.measureUnit.description}</td>
-				<td><form:form method="GET"
+				<td>
+				<c:if test="${user.admin}">
+				<form:form method="GET"
 					action="${editUrl}/${item.id}">
 					<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span>Editar</button>
-				</form:form></td>
+				</form:form>
+				</c:if>
+				</td>
 				<td align="center">
 				<c:if test="${user.admin}">
 					<form:form method="POST"
@@ -148,7 +152,10 @@
 </table>
 </c:otherwise>
 </c:choose>
-<div class="newBtn"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></div>
+
+<c:if test="${user.admin}">
+	<div class="newBtn"><a class="button-text fg-button  button-add ui-state-default ui-corner-all" href="${addUrl}"><span class="ui-icon ui-icon-circle-plus button-icon"></span> Agregar</a></div>
+</c:if>
 
 <script language='javascript' type='text/javascript'>
 	$(document).ready(function(){

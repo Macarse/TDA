@@ -69,7 +69,7 @@ public class PediatricianForm {
 	// PATIENT BACKGROUND
 
 	private String takesMedicine;
-	
+
 	private boolean consumedTobacco;
 
 	private boolean consumedAlcohol;
@@ -431,8 +431,6 @@ public class PediatricianForm {
 		this.tattooed = tattooed;
 	}
 
-
-
 	public void setInfectiousDiseases(String infectiousDiseases) {
 		this.infectiousDiseases = infectiousDiseases;
 	}
@@ -444,7 +442,7 @@ public class PediatricianForm {
 	public void setTrauma(String trauma) {
 		this.trauma = trauma;
 	}
-	
+
 	public void setAllergies(String allergies) {
 		this.allergies = allergies;
 	}

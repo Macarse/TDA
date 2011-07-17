@@ -38,8 +38,10 @@ public class AddPediatricianFormController extends
 	public String setupForm(@PathVariable("patientId") long patientId,
 			Model model) {
 		Patient patient = patientService.findById(patientId);
+
 		PediatricianForm pediatricianForm = new PediatricianForm();
 		pediatricianForm.setPatient(patient);
+
 		model.addAttribute("pediatricianForm", pediatricianForm);
 
 		PatientInTrain pit = patientInTrainService.findByPatient(patient);

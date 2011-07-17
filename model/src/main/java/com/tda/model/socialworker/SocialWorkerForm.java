@@ -1,5 +1,6 @@
 package com.tda.model.socialworker;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -518,5 +519,60 @@ public class SocialWorkerForm {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
+	}
+
+	public void copyFrom(SocialWorkerForm last) {
+		this.addiction = new ArrayList<Addiction>();
+		this.addiction.addAll(last.addiction);
+
+		this.adultEducationalLevel = last.adultEducationalLevel;
+		this.bathroomSewerType = last.bathroomSewerType;
+		this.diagnose = last.diagnose;
+		this.electricity = last.electricity;
+		this.fatherAge = last.fatherAge;
+		this.fatherFirstName = last.fatherFirstName;
+		this.fatherLastName = last.fatherLastName;
+		this.fillingDate = last.fillingDate;
+		this.hasBathroom = last.hasBathroom;
+		this.hasBeenDerivedToOtherSocialServices = last.hasBeenDerivedToOtherSocialServices;
+		this.hasCeiling = last.hasCeiling;
+		this.hasHealthCare = last.hasHealthCare;
+		this.hasProfessionalAssistanceForAddiction = last.hasProfessionalAssistanceForAddiction;
+		this.hasCeiling = last.hasCeiling;
+		this.hasHealthCare = last.hasHealthCare;
+		this.hasProfessionalAssistanceForAddiction = last.hasProfessionalAssistanceForAddiction;
+		this.hasProfessionalAssistanceForMistreatment = last.hasProfessionalAssistanceForMistreatment;
+		this.interiorFloor = last.interiorFloor;
+		this.isBathroomInside = last.isBathroomInside;
+		this.isGoingToSchool = last.isGoingToSchool;
+		this.isInSinkingZone = last.isInSinkingZone;
+		this.kitchenFuel = last.kitchenFuel;
+		this.knowsHowToReadAndWrite = last.knowsHowToReadAndWrite;
+		this.livesWith = last.livesWith;
+		this.mainIncome = last.mainIncome;
+		this.mistreatment = last.mistreatment;
+		this.motherAge = last.motherAge;
+		this.motherFirstName = last.motherFirstName;
+		this.motherLastName = last.motherLastName;
+
+		this.nbi = new ArrayList<NBI>();
+		this.nbi.addAll(last.nbi);
+
+		this.observations = last.observations;
+		this.patient = last.patient;
+		this.peopleAtHome = last.peopleAtHome;
+		this.peopleAtHomeOverTen = last.peopleAtHomeOverTen;
+		this.peopleAtHomeUnderTen = last.peopleAtHomeUnderTen;
+		this.roofType = last.roofType;
+		this.roomsExcludingKitchenAndBathroom = last.roomsExcludingKitchenAndBathroom;
+		this.scholarity = last.scholarity;
+		this.schoolHours = last.schoolHours;
+		this.schoolService = last.schoolService;
+		this.tutorAge = last.tutorAge;
+		this.tutorFirstName = last.tutorFirstName;
+		this.tutorLastName = last.tutorLastName;
+		this.waterSource = last.waterSource;
+		this.waterSourceType = last.waterSourceType;
+		this.workingPeople = last.workingPeople;
 	}
 }

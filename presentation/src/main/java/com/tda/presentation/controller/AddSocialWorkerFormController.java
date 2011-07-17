@@ -40,6 +40,15 @@ public class AddSocialWorkerFormController extends
 		Patient patient = patientService.findById(patientId);
 		SocialWorkerForm socialWorkerForm = new SocialWorkerForm();
 		socialWorkerForm.setPatient(patient);
+
+		SocialWorkerForm last = socialWorkerFormService
+				.findLastByPatientId(patient.getId());
+
+		if (last != null) {
+			// si hay uno viejo, precargo todo:
+			socialWorkerForm.copyFrom(last);
+		}
+
 		model.addAttribute("socialWorkerForm", socialWorkerForm);
 		return SOCIAL_WORKER_ADD_FORM;
 	}

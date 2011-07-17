@@ -42,7 +42,6 @@ public class EditDentistFormController extends BaseDentistFormController {
 				FormType.dentist);
 
 		model.addAttribute("editable", editable);
-
 		return NURSE_FORM;
 	}
 
