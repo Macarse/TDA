@@ -28,28 +28,26 @@
 </div>
 
 <div id="queue-dialog" style="display: none" "title="Seleccione una Opcion">
-	<div>Ir a </div>
+	<div style="clear: both;">Enviar a </div>
+	<div id='queuemenu-usersonline'></div>
+	<div style="clear: both;">Ir a </div>
 	<div>
 		<div id='queuemenu-socialform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
 		<div id='queuemenu-pediaform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
 		<div id='queuemenu-nurseform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
 		<div id='queuemenu-dentform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
 	</div>
-	<div>Enviar a </div>
-	<div id='queuemenu-usersonline'>
-	</div>
 </div>
 
 <div id="patientlist-dialog" style="display: none" title="Seleccione una Opcion">
-	<div>Ir a </div>
+	<div style="clear: both;">Enviar a </div>
+	<div id='patientlist-usersonline'></div>
+	<div style="clear: both;">Ir a </div>
 	<div>
 		<div id='queuemenu-socialform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
 		<div id='queuemenu-pediaform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
 		<div id='queuemenu-nurseform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
 		<div id='queuemenu-dentform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
-	</div>
-	<div>Enviar a </div>
-	<div id='patientlist-usersonline'>
 	</div>
 </div>
 
@@ -196,6 +194,7 @@
 				   $("#queuemenu-usersonline").html(queueUsers);
 		       }else{
 		    	   $('#onlineusers').html('<ul><i>No hay usuarios conectados</i></ul>');
+		    	   $("#queuemenu-usersonline").html("No hay usuarios conectados.");
 		       }
 		       
 			   $("#patientlist-usersonline").html(listUsers);
