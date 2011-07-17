@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.ItemBuilder;
 import com.tda.model.item.MeasureUnit;
@@ -73,11 +72,6 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findByDescription(String description) {
 		Item example = ItemBuilder.createItem().withDescription(description)
 				.build();
-		return itemDAO.findByExample(example);
-	}
-
-	public List<Item> findByCategory(Category category) {
-		Item example = ItemBuilder.createItem().withCategory(category).build();
 		return itemDAO.findByExample(example);
 	}
 

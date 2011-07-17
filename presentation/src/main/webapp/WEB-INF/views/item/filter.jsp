@@ -26,12 +26,7 @@
 				<tr>
 					<td><form:label for="category" path="category" cssErrorClass="error">
 			<fmt:message key="item.form.category" /></form:label></td>
-					<td><form:select path="category">
-				<form:option value=""></form:option>
-				<c:forEach var="category" items="${categories}">
-					<form:option value="${category}"> ${category.description} </form:option>
-				</c:forEach>
-			</form:select><form:errors path="category" /></td></tr>
+					<td><form:input path="category" /><form:errors path="category" /></td></tr>
 				<tr>
 					<td><form:label for="measureUnit" path="measureUnit"
 				cssErrorClass="error"><fmt:message key="item.form.measureUnit" /></form:label></td>

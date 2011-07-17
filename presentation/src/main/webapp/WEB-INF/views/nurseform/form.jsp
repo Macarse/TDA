@@ -13,6 +13,31 @@
 		});
 
 		//setInterval(autoSubmitFormAjax,30*1000);
+		
+		function changeTab(e){
+			var code = (e.keyCode ? e.keyCode : e.which);
+			if(code == 9){
+				nextTab('#form-tabs');
+			}
+		}
+		
+		$("#size").focus();
+
+		$("#percentile").keypress(function(e){
+			changeTab(e);
+			$("#TAmin").focus();
+		});
+
+		$("#saturation").keypress(function(e){
+			changeTab(e);
+			$("#vaxines1").focus();
+		});
+
+		$("#vaxines12").keypress(function(e){
+			changeTab(e);
+			$("#nurseActions1").focus();
+		});
+		
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "nurse" )
         	$('input, select').attr('disabled', 'disabled');
@@ -40,6 +65,8 @@
 	if( userRole != "nurse" )
 		document.write("<h3>Este formulario no pertenece a su rol</h3>");
 </script>
+
+<button type="submit" style="width:200px;" onclick="window.open( contextPath + '/patient/history/<c:out value="${nurseForm.patient.id}"></c:out>' )" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-arrow-1-n button-icon"></span>Abrir Historia del paciente</button>
 
 <form:form modelAttribute="nurseForm" method="post" id="myform">
 	<div id="form-tabs" class="form-tabs">

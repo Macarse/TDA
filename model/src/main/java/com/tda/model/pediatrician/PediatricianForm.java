@@ -24,7 +24,7 @@ public class PediatricianForm {
 	// PERINATAL BACKGROUND
 	private BirthPlace birthPlace;
 
-	private boolean patologyDuringBirth;
+	private String patologyDuringBirth;
 
 	private BirthType birthType;
 
@@ -68,21 +68,23 @@ public class PediatricianForm {
 
 	// PATIENT BACKGROUND
 
+	private String takesMedicine;
+
 	private boolean consumedTobacco;
 
 	private boolean consumedAlcohol;
 
 	private boolean tattooed;
 
-	private boolean infectiousDiseases;
+	private String infectiousDiseases;
 
-	private boolean hemorrhagic;
+	private String hemorrhagic;
 
-	private boolean trauma;
+	private String trauma;
 
-	private boolean allergies;
+	private String allergies;
 
-	private boolean previousAdmissions;
+	private String previousAdmissions;
 
 	private String otherPatientDiseases;
 
@@ -176,7 +178,6 @@ public class PediatricianForm {
 
 	private String radiologyComments;
 
-	// TODO DIAGNOSIS
 	private String diagnosis;
 
 	// INTERNMENT
@@ -228,11 +229,11 @@ public class PediatricianForm {
 		this.birthPlace = birthPlace;
 	}
 
-	public boolean isPatologyDuringBirth() {
+	public String getPatologyDuringBirth() {
 		return patologyDuringBirth;
 	}
 
-	public void setPatologyDuringBirth(boolean patologyDuringBirth) {
+	public void setPatologyDuringBirth(String patologyDuringBirth) {
 		this.patologyDuringBirth = patologyDuringBirth;
 	}
 
@@ -349,6 +350,26 @@ public class PediatricianForm {
 		return neurologicalProblems;
 	}
 
+	public String getInfectiousDiseases() {
+		return infectiousDiseases;
+	}
+
+	public String getHemorrhagic() {
+		return hemorrhagic;
+	}
+
+	public String getTrauma() {
+		return trauma;
+	}
+
+	public String getAllergies() {
+		return allergies;
+	}
+
+	public String getPreviousAdmissions() {
+		return previousAdmissions;
+	}
+
 	public void setNeurologicalProblems(boolean neurologicalProblems) {
 		this.neurologicalProblems = neurologicalProblems;
 	}
@@ -410,43 +431,23 @@ public class PediatricianForm {
 		this.tattooed = tattooed;
 	}
 
-	public boolean isInfectiousDiseases() {
-		return infectiousDiseases;
-	}
-
-	public void setInfectiousDiseases(boolean infectiousDiseases) {
+	public void setInfectiousDiseases(String infectiousDiseases) {
 		this.infectiousDiseases = infectiousDiseases;
 	}
 
-	public boolean isHemorrhagic() {
-		return hemorrhagic;
-	}
-
-	public void setHemorrhagic(boolean hemorrhagic) {
+	public void setHemorrhagic(String hemorrhagic) {
 		this.hemorrhagic = hemorrhagic;
 	}
 
-	public boolean isTrauma() {
-		return trauma;
-	}
-
-	public void setTrauma(boolean trauma) {
+	public void setTrauma(String trauma) {
 		this.trauma = trauma;
 	}
 
-	public boolean isAllergies() {
-		return allergies;
-	}
-
-	public void setAllergies(boolean allergies) {
+	public void setAllergies(String allergies) {
 		this.allergies = allergies;
 	}
 
-	public boolean isPreviousAdmissions() {
-		return previousAdmissions;
-	}
-
-	public void setPreviousAdmissions(boolean previousAdmissions) {
+	public void setPreviousAdmissions(String previousAdmissions) {
 		this.previousAdmissions = previousAdmissions;
 	}
 
@@ -813,5 +814,13 @@ public class PediatricianForm {
 
 	public void setDiagnosis(String diagnosis) {
 		this.diagnosis = diagnosis;
+	}
+
+	public void setTakesMedicine(String takesMedicine) {
+		this.takesMedicine = takesMedicine;
+	}
+
+	public String getTakesMedicine() {
+		return takesMedicine;
 	}
 }

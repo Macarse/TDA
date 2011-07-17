@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tda.model.item.Category;
 import com.tda.model.item.Item;
 import com.tda.model.item.MeasureUnit;
 import com.tda.persistence.paginator.Paginator;
@@ -55,11 +54,6 @@ public class ItemController {
 		this.paginator = paginator;
 		paginator.setOrderAscending(true);
 		paginator.setOrderField("id");
-	}
-
-	@ModelAttribute("categories")
-	public Category[] populateCategories() {
-		return Category.values();
 	}
 
 	@ModelAttribute("measureUnits")

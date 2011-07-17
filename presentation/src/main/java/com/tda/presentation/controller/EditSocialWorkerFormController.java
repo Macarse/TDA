@@ -45,7 +45,6 @@ public class EditSocialWorkerFormController extends
 				socialWorkerFormId, FormType.socialworker);
 
 		model.addAttribute("editable", editable);
-
 		return SOCIAL_WORKER_FORM;
 	}
 

@@ -12,8 +12,19 @@
 			_isDirty = true;
 		});
 
-		//if( document.getElementById('distosicRadioButton').checked )
-			//$('.distosicHidden').show();
+		$("#distosicRadioButton").click(function() {
+			$('.distosicHidden').show();
+		});
+
+		$("#nondistosicRadioButton").click(function() {
+			$('.distosicHidden').hide();
+		});
+
+		$(".distosicHidden").hide();
+		
+		if( document.getElementById('distosicRadioButton').checked )
+			$('.distosicHidden').show();
+
 
 		//setInterval(autoSubmitFormAjax,30*1000);
 
@@ -72,6 +83,61 @@
         }
         */
     	});
+
+        function changeTab(e){
+			var code = (e.keyCode ? e.keyCode : e.which);
+			if(code == 9){
+				nextTab('#form-tabs');
+			}
+		}
+
+        $("#birthPlace1").focus();
+
+        for(i=1;i<=2;i++){
+	        $("#exitStatus" + i).keypress(function(e){
+				changeTab(e);
+				$("#takesMedicine").focus();
+			});
+        }
+        
+        $("#otherPatientDiseases").keypress(function(e){
+			changeTab(e);
+			$("#cardiovascular1").focus();
+		});
+
+        $("#otherFamilyDiaseases").keypress(function(e){
+			changeTab(e);
+			$("#maturationAndDevelopment").focus();
+		});
+
+        $("#maturationAndDevelopment").keypress(function(e){
+			changeTab(e);
+			$("#symptoms").focus();
+		});
+
+        $("#pathologyFound").keypress(function(e){
+			changeTab(e);
+			$("#hematrocito").focus();
+		});
+
+
+        for(i=1;i<=3;i++){
+	        $("#chagas" + i).keypress(function(e){
+				changeTab(e);
+				$("#chest").focus();
+			});
+        }
+        
+        $("#radiologyComments").keypress(function(e){
+			changeTab(e);
+			$("#diagnosisId").focus();
+		});
+
+        $("#diagnosisId").keypress(function(e){
+			changeTab(e);
+			$("#interconsultation1").focus();
+		});
+		
 	});
 
 	window.onbeforeunload = nextTabUnload;
@@ -113,6 +179,8 @@
 		document.write("<h3>Este formulario no pertenece a su rol</h3>");
 </script>
 
+<button type="submit" style="width:200px;" onclick="window.open( contextPath + '/patient/history/<c:out value="${pediatricianForm.patient.id}"></c:out>' )" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-arrow-1-n button-icon"></span>Abrir Historia del paciente</button>
+
 <form:form modelAttribute="pediatricianForm" method="post" id="myform">
 	<div id="form-tabs" class="form-tabs">
 		<ul>
@@ -139,7 +207,7 @@
 					</td>
 				</tr>
 			
-				<tr><th colspan="${fieldsPerRow}">
+				<tr><th colspan="${fieldsPerRow}" class="firstTH">
 					<form:label for="birthPlace" path="birthPlace" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.birthPlace" />
 					</form:label></th></tr>
@@ -165,12 +233,12 @@
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
 							<td>
 							<c:choose>
-							<c:when test="${birthType.description == 'Distócico'}">
-								<form:radiobutton id="distosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
-							</c:when>
-							<c:otherwise>
-								<form:radiobutton path="birthType" value="${birthType}"/> ${birthType.description}
-							</c:otherwise>
+								<c:when test="${birthType == 'DYSTOCIC'}">
+									<form:radiobutton id="distosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
+								</c:when>
+								<c:otherwise>
+									<form:radiobutton id="nondistosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
+								</c:otherwise>
 							</c:choose>
 							</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
@@ -216,7 +284,7 @@
 					<div class="form-input"><form:label for="patologyDuringBirth1" path="patologyDuringBirth" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.patologyDuringBirth" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="patologyDuringBirth" /> <form:errors path="patologyDuringBirth" /></div>
+					<div class="form-input"><form:textarea path="patologyDuringBirth" /> <form:errors path="patologyDuringBirth" /></div>
 					</td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
@@ -350,7 +418,14 @@
 				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
 				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 				</td>
-				</tr>
+				</tr>                
+                <tr><td colspan="${fieldsPerRow}">
+                    <div class="form-input"><form:label for="takesMedicine1" path="takesMedicine" cssErrorClass="error">
+                        <fmt:message key="pediatrician.form.takesMedicine" />
+                    </form:label></div>
+                    <div class="form-input"><form:input size="55" path="takesMedicine" /> <form:errors path="takesMedicine" /> </div> </td></tr>
+                
+				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="consumedTobacco1" path="consumedTobacco" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.consumedTobacco" />
@@ -373,31 +448,31 @@
 					<div class="form-input"><form:label for="infectiousDiseases1" path="infectiousDiseases" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.infectiousDiseases" />
 					</form:label></div> 
-					<div class="form-input"><form:checkbox path="infectiousDiseases" /> <form:errors path="infectiousDiseases" /> </div> </td></tr>
+					<div class="form-input"><form:input size="55" path="infectiousDiseases" /> <form:errors path="infectiousDiseases" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="hemorrhagic1" path="hemorrhagic" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.hemorrhagic" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="hemorrhagic" /> <form:errors path="hemorrhagic" /> </div> </td></tr>
+					<div class="form-input"><form:input size="55" path="hemorrhagic" /> <form:errors path="hemorrhagic" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="trauma1" path="trauma" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.trauma" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="trauma" /> <form:errors path="trauma" /> </div> </td></tr>
+					<div class="form-input"><form:input size="55" path="trauma" /> <form:errors path="trauma" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="allergies1" path="allergies" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.allergies" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="allergies" /> <form:errors path="allergies" /> </div> </td></tr>
+					<div class="form-input"><form:input size="55" path="allergies" /> <form:errors path="allergies" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="previousAdmissions1" path="previousAdmissions" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.previousAdmissions" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="previousAdmissions" /> <form:errors path="previousAdmissions" /> </div> </td></tr>
+					<div class="form-input"><form:input size="55" path="previousAdmissions" /> <form:errors path="previousAdmissions" /> </div> </td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="otherPatientDiseases1" path="otherPatientDiseases" cssErrorClass="error">
@@ -511,7 +586,7 @@
 				</td>
 			</tr>
 			
-			<tr><th colspan="${fieldsPerRow}">
+			<tr><th colspan="${fieldsPerRow}" class="firstTH">
 				<form:label for="maturationAndDevelopment" path="maturationAndDevelopment" cssErrorClass="error">
 					<fmt:message key="pediatrician.form.maturationAndDevelopment" />
 				</form:label></th></tr>
@@ -542,12 +617,17 @@
 				<c:choose>
 				<c:when test="${nurseForm != null}">
 				
-				<tr><th colspan="${fieldsPerRow}">
+				<tr><th colspan="${fieldsPerRow}" class="firstTH">
 						<fmt:message key="socialworker.form.fatherAge" />
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
-				<fmt:formatNumber maxFractionDigits="2"><c:out value="${pediatricianForm.patient.age}"></c:out></fmt:formatNumber>
+				<c:if test="${pediatricianForm.patient.age != null}">
+					<fmt:formatNumber maxFractionDigits="2">
+						<c:out value="${pediatricianForm.patient.age}"></c:out>
+					</fmt:formatNumber>
+				</c:if>
+				
 				</td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
@@ -555,7 +635,9 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
+				<c:if test="${nurseForm.weight != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
@@ -563,7 +645,9 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
+				<c:if test="${nurseForm.size != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.size}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>
 
 				<tr><th colspan="${fieldsPerRow}">
@@ -571,7 +655,9 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
+				<c:if test="${nurseForm.headCircumference != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.headCircumference}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>		
 				
 				
@@ -580,7 +666,9 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 
+				<c:if test="${nurseForm.weight != null && nurseForm.size != null && nurseForm.size != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
@@ -588,26 +676,25 @@
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 			
-				
+				<c:if test="${nurseForm.weight != null && nurseForm.size != null && nurseForm.size != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
-				
+				</c:if>
 				</td></tr>
-				
+
 				<tr><th colspan="${fieldsPerRow}">
 						<fmt:message key="pediatrician.form.PIMC" />
 				</th></tr>
 				<tr><td colspan="${fieldsPerRow}">
 						
+				<c:if test="${nurseForm.weight != null && nurseForm.size != null && nurseForm.size != null}">
 				<fmt:formatNumber maxFractionDigits="2"><c:out value="${nurseForm.weight/nurseForm.size/nurseForm.size*10000}"></c:out></fmt:formatNumber>
+				</c:if>
 				</td></tr>
 				
 				</c:when>
 				<c:otherwise>
-				<tr><th colspan="${fieldsPerRow}">
+				<tr><th colspan="${fieldsPerRow}" class="firstTH">
 						<fmt:message key="pediatrician.form.missingNurseData" />
-						<a href="${pageContext.request.contextPath}/patient/${pediatricianForm.patient.id}/nurse/new">
-							<fmt:message key="pediatrician.form.missingNurseDataLink" />
-						</a>
 				</th></tr>
 				</c:otherwise>
 				</c:choose>
@@ -852,7 +939,7 @@
 				</td>
 			</tr>
 			
-				<tr><th colspan="${fieldsPerRow}">
+				<tr><th colspan="${fieldsPerRow}" class="firstTH">
 					<form:label for="chest" path="chest" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.chest" />
 					</form:label></th></tr>

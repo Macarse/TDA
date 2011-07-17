@@ -3,6 +3,7 @@ package com.tda.presentation.controller;
 import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
@@ -30,6 +31,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.OnlineUser;
+import com.tda.model.item.Item;
+import com.tda.model.item.ItemBuilder;
 import com.tda.model.itinerary.Itinerary;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
@@ -38,6 +41,7 @@ import com.tda.model.pediatrician.PediatricianDiagnosis;
 import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
+import com.tda.service.api.ItemService;
 import com.tda.service.api.OnlineUserService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
@@ -51,6 +55,7 @@ public class WelcomeController {
 
 	private PatientInTrainService patientInTrainService;
 	private PatientService patientService;
+	private ItemService itemService;
 	private PediatricianDiagnosisService pediatricianDiagnosisService;
 	private Paginator paginator;
 	private ParamContainer params;
@@ -342,6 +347,20 @@ public class WelcomeController {
 		return gson.toJson(allDiagnosis);
 		// return resultset;
 	}
+	
+	@RequestMapping(value = "/getCategory", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody String getCategory(@RequestParam String q) {
+		List<Item> items = itemService.findByExample(ItemBuilder.createItem().withCategory(q.toLowerCase()).build());
+		
+		List<String> categories = new ArrayList<String>();
+		for (Item item : items) {
+			if (! categories.contains(item.getCategory())) {
+				categories.add(item.getCategory());
+			}
+		}
+		return new Gson().toJson(categories);
+	}
 
 	@Autowired
 	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
@@ -368,6 +387,11 @@ public class WelcomeController {
 	@Autowired
 	public void setPatientService(PatientService patientService) {
 		this.patientService = patientService;
+	}
+	
+	@Autowired
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
 	}
 
 	@Autowired

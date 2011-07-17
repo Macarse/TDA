@@ -5,6 +5,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#category-input").autocomplete({
+		source: function(request, response) {
+			$.get(contextPath + "/getCategory?q="+request.term, function(data) {
+				var data = eval(data);
+				
+				var availableTags = $.map( data, function( item ) {
+                    return item;
+                        //label: item.name,
+                        //value: item.name
+                    });
+				
+                // delegate back to autocomplete, but extract the last term
+                response( availableTags );
+			})
+		},
+		minLength: 2
+    });
+});
+</script>
+
 <form:form modelAttribute="item"
 	action="add" method="post">
 	<fieldset>
@@ -23,11 +45,7 @@
 	<form:input path="quantity" /> <form:errors path="quantity" /></p>
 
 	<p><form:label for="category" path="category" cssErrorClass="error"><fmt:message key="item.form.category" /></form:label><br />
-	<form:select path="category">
-		<c:forEach var="category" items="${categories}">
-			<form:option value="${category}"> ${category.description} </form:option>
-		</c:forEach>
-	</form:select><form:errors path="category" /></p>
+	<form:input id="category-input" path="category" /> <form:errors path="category" /></p>
 
 	<p><form:label for="measureUnit" path="measureUnit"
 		cssErrorClass="error"><fmt:message key="item.form.measureUnit" /></form:label><br />

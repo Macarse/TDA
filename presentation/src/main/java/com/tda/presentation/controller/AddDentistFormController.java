@@ -1,7 +1,5 @@
 package com.tda.presentation.controller;
 
-import java.beans.PropertyEditorSupport;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.tda.model.dentist.DentistForm;
-import com.tda.model.dentist.Tooth;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.presentation.propertyEditor.ToothEditor;

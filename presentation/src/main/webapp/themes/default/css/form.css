@@ -21,6 +21,14 @@ div[class=filter-container]{
 	font-size: 10px;
 }
 
+th.firstTH {
+	font-weight: bolder;
+	text-align: left;
+	border-top: solid 0px !important;
+	font-size: 12px;
+	height: 30px;
+}
+
 .socialworkerform table th, .pediatricianform table th, .dentistform table th, .nurseform table th{
 	font-weight: bolder;
 	text-align: left;

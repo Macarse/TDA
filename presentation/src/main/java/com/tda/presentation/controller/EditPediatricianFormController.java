@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.tda.model.patient.PatientInTrain;
 import com.tda.model.pediatrician.PediatricianForm;
 import com.tda.model.utils.FormType;
 import com.tda.service.api.PatientInTrainService;
@@ -41,11 +42,16 @@ public class EditPediatricianFormController extends
 				.findById(pediatricianFormId);
 		model.addAttribute("pediatricianForm", pediatricianForm);
 
+		PatientInTrain pit = patientInTrainService
+				.findByPatient(pediatricianForm.getPatient());
+
+		if (pit.getNurseform() != null)
+			model.addAttribute("nurseForm", pit.getNurseform());
+
 		boolean editable = patientInTrainService.isActiveForm(
 				pediatricianFormId, FormType.pediatrician);
 
 		model.addAttribute("editable", editable);
-
 		return PEDIATRICIAN_FORM;
 	}
 
