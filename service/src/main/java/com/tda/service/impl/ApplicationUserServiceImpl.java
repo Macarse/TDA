@@ -158,4 +158,8 @@ public class ApplicationUserServiceImpl implements ApplicationUserService,
 
 		return usersFound.get(0);
 	}
+
+	public List<ApplicationUser> findByUsername(String username) {
+		return applicationUserDAO.findByUsername(username);
+	}
 }

@@ -68,7 +68,7 @@
 		document.write("<h3>Este formulario no pertenece a su rol</h3>");
 </script>
 
-<button type="submit" style="width:200px;" onclick="window.open( contextPath + '/patient/history/<c:out value="${socialWorkerForm.patient.id}"></c:out>' )" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-arrow-1-n button-icon"></span>Abrir Historia del paciente</button>
+<button type="submit" style="width:200px;" onclick="window.open( contextPath + '/patient/history/<c:out value="${socialWorkerForm.patient.id}"></c:out>', 'GEEE', 'width=500,height=500' )" class="button-text button-delete fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-arrow-1-n button-icon"></span>Abrir Historia del paciente</button>
 
 <form:form modelAttribute="socialWorkerForm" method="post" id="myform">
 	<div id="form-tabs" class="form-tabs">

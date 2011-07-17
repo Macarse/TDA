@@ -3,6 +3,7 @@ package com.tda.model.patient;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,9 +38,8 @@ public class PatientInTrain implements Serializable {
 		this.dentistform = dentistform;
 	}
 
-	
 	@Null
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	public ApplicationUser getUser() {
 		return user;
 	}
@@ -114,10 +114,10 @@ public class PatientInTrain implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		PatientInTrain other = (PatientInTrain) obj;
-		if( patient.getId() == other.getPatient().getId()) {
-			return true;			
+		if (patient.getId() == other.getPatient().getId()) {
+			return true;
 		}
-		
+
 		return false;
 	}
 

@@ -12,7 +12,12 @@
 	</div>
 </c:if>
 
-Historia de formularios de <c:out value="${patient.firstName}"/> <c:out value="${patient.lastName}"/>
+<h2>Historial de paciente</h2>
+
+
+<jsp:include flush="true" page="../layout/patientheader.jsp">
+ 				<jsp:param name="paramNotUsed" value="" />
+</jsp:include>
 
 <c:choose>
 	<c:when test="${paginator.totalResultsCount<=0}">
@@ -25,7 +30,7 @@ Historia de formularios de <c:out value="${patient.firstName}"/> <c:out value="$
 		<tr>
 			<th>
 				<a href="?orderField=fillingDate&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
-					Fecha
+					Fecha de llenado
 				</a>
 				<c:if test="${paginator.orderField=='fillingDate'}">
 					<c:choose>
@@ -40,7 +45,7 @@ Historia de formularios de <c:out value="${patient.firstName}"/> <c:out value="$
 			</th>
 			<th>
 				<a href="?orderField=formType&orderAscending=<c:out value="${!paginator.orderAscending}&${params}"/>">
-					Tipo
+					Tipo de formulario
 				</a>
 				<c:if test="${paginator.orderField=='formType'}">
 					<c:choose>
