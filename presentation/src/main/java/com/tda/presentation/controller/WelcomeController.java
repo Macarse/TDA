@@ -73,7 +73,7 @@ public class WelcomeController {
 	public WelcomeController() {
 		params = new ParamContainer();
 	}
-	
+
 	@Autowired
 	public void setApplicationUserService(
 			ApplicationUserService applicationUserService) {
@@ -102,31 +102,32 @@ public class WelcomeController {
 				.getPrincipal();
 		return ((UserDetails) aux);
 	}
-	
+
 	@ModelAttribute("userList")
-	public List<ApplicationUser> getUserList(){
+	public List<ApplicationUser> getUserList() {
 		List<ApplicationUser> users = applicationUserService.findAll();
-		
-		//set admin authority
+
+		// set admin authority
 		Authority adminAuth = new Authority();
 		adminAuth.setAuthority("ROLE_ADMIN");
-		
-		//ROLE_USER
+
+		// ROLE_USER
 		Authority userAuth = new Authority();
 		userAuth.setAuthority("ROLE_USER");
-		
+
 		Iterator<ApplicationUser> iter = users.iterator();
 		ApplicationUser user;
-		
-		while(iter.hasNext()){
+
+		while (iter.hasNext()) {
 			user = iter.next();
 			Collection<Authority> auths = user.getMyAuthorities();
-			
-			if(auths.size() == 2 && auths.contains(adminAuth) && auths.contains(userAuth)){
+
+			if (auths.size() == 2 && auths.contains(adminAuth)
+					&& auths.contains(userAuth)) {
 				iter.remove();
 			}
 		}
-		
+
 		return users;
 	}
 
@@ -163,7 +164,7 @@ public class WelcomeController {
 
 		return gson.toJson(users);
 	}
-	
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout() {
 		onlineUserService.setOffline(getUser().getUsername());
@@ -384,15 +385,17 @@ public class WelcomeController {
 		return gson.toJson(allDiagnosis);
 		// return resultset;
 	}
-	
+
 	@RequestMapping(value = "/getCategory", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody String getCategory(@RequestParam String q) {
-		List<Item> items = itemService.findByExample(ItemBuilder.createItem().withCategory(q.toLowerCase()).build());
-		
+	public @ResponseBody
+	String getCategory(@RequestParam String q) {
+		List<Item> items = itemService.findByExample(ItemBuilder.createItem()
+				.withCategory(q.toLowerCase()).build());
+
 		List<String> categories = new ArrayList<String>();
 		for (Item item : items) {
-			if (! categories.contains(item.getCategory())) {
+			if (!categories.contains(item.getCategory())) {
 				categories.add(item.getCategory());
 			}
 		}
@@ -425,7 +428,7 @@ public class WelcomeController {
 	public void setPatientService(PatientService patientService) {
 		this.patientService = patientService;
 	}
-	
+
 	@Autowired
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
