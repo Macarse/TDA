@@ -1,16 +1,11 @@
 package com.tda.presentation.controller;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.ByteBuffer;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -201,7 +196,7 @@ public class PatientController {
 
 		return CREATE_FORM;
 	}
-	
+
 	@RequestMapping(value = "/history/{id}", method = RequestMethod.GET)
 	public ModelAndView getPatientHistory(
 			@PathVariable Long id,
@@ -235,6 +230,7 @@ public class PatientController {
 				.findByExamplePaged(example, paginator);
 
 		ModelAndView modelAndView = new ModelAndView(HISTORY_LIST);
+
 		modelAndView.addObject("formlist", patientforms);
 		modelAndView.addObject("paginator", paginator);
 		modelAndView.addObject("params", params);
@@ -311,13 +307,14 @@ public class PatientController {
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/getform/{patient_id}/{formType}", method = RequestMethod.GET)
 	public ModelAndView getform(@PathVariable Long patient_id,
 			@PathVariable FormType formType) {
-		
-		String model = "redirect:/patient/" + patient_id + "/" + formType.toString();
-		
+
+		String model = "redirect:/patient/" + patient_id + "/"
+				+ formType.toString();
+
 		ModelAndView modelAndView = new ModelAndView("redirect:/patient/");
 		long formId = -1;
 
@@ -332,33 +329,33 @@ public class PatientController {
 				if (pit != null) {
 					switch (formType) {
 					case dentist:
-						if (pit.getDentistform() != null){
-							formId = pit.getDentistform().getId();  
+						if (pit.getDentistform() != null) {
+							formId = pit.getDentistform().getId();
 						}
 						break;
 					case nurse:
-						if (pit.getNurseform() != null){
-							formId = pit.getNurseform().getId();  
+						if (pit.getNurseform() != null) {
+							formId = pit.getNurseform().getId();
 						}
 						break;
 					case pediatrician:
-						if (pit.getPadiatricianform() != null){
-							formId = pit.getPadiatricianform().getId();  
+						if (pit.getPadiatricianform() != null) {
+							formId = pit.getPadiatricianform().getId();
 						}
 						break;
 					case socialworker:
-						if (pit.getSocialworkerform() != null){
-							formId = pit.getSocialworkerform().getId();  
+						if (pit.getSocialworkerform() != null) {
+							formId = pit.getSocialworkerform().getId();
 						}
 						break;
 					}
-					
-					if(formId > 0){
+
+					if (formId > 0) {
 						model += "/" + formId + "/edit";
-					}else{
+					} else {
 						model += "/new";
 					}
-					
+
 					modelAndView = new ModelAndView(model);
 				}
 			}
@@ -407,44 +404,46 @@ public class PatientController {
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/getPicture/{id}", method = RequestMethod.GET)
-	public String getPicture(@PathVariable long id, HttpServletResponse response, HttpServletRequest request){
+	public String getPicture(@PathVariable long id,
+			HttpServletResponse response, HttpServletRequest request) {
 		Patient aPatient = patientService.findById(id);
-		
+
 		String photoPath = request.getSession().getServletContext()
-			.getRealPath("themes/default/image/img-not-found.jpg");
-		
-		try{
+				.getRealPath("themes/default/image/img-not-found.jpg");
+
+		try {
 			response.setContentType("image/jpeg");
 			OutputStream os = response.getOutputStream();
-			if (aPatient.getImage() == null){
-				BufferedInputStream is = new BufferedInputStream(new FileInputStream(new File(photoPath)));
+			if (aPatient.getImage() == null) {
+				BufferedInputStream is = new BufferedInputStream(
+						new FileInputStream(new File(photoPath)));
 				int read = 0;
 				byte[] buffer = new byte[8192];
-				
-				while ((read = is.read(buffer, 0 , 8192)) != -1) {
-					os.write(buffer,0, read);
-  		        }
-				
+
+				while ((read = is.read(buffer, 0, 8192)) != -1) {
+					os.write(buffer, 0, read);
+				}
+
 				is.close();
-			}else{
+			} else {
 				os.write(aPatient.getImage());
 			}
 			os.flush();
 			os.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);
 		}
-		
+
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/takePicture/{id}", method = RequestMethod.GET)
-	public ModelAndView takePicture(@PathVariable long id){
+	public ModelAndView takePicture(@PathVariable long id) {
 		ModelAndView modelAndView = new ModelAndView("patient/takePicture");
-		
+
 		Patient aPatient = patientService.findById(id);
 
 		if (aPatient == null) {
@@ -454,28 +453,28 @@ public class PatientController {
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/takePicture", method = RequestMethod.POST)
 	public @ResponseBody
-	String takePicture(HttpServletRequest request){
+	String takePicture(HttpServletRequest request) {
 		try {
 			InputStream inputStream = request.getInputStream();
-			
+
 			int readBytes = 0;
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			byte[] buffer = new byte[8192];
 			int pos = 0;
-			
+
 			long patientId = Long.parseLong(request.getParameter("id"));
 			while ((readBytes = inputStream.read(buffer, 0, 8192)) != -1) {
-				out.write(buffer,0,readBytes);
+				out.write(buffer, 0, readBytes);
 				pos += readBytes;
 			}
-			
-			Patient aPatient = patientService.findById((long)patientId);
+
+			Patient aPatient = patientService.findById((long) patientId);
 			aPatient.setImage(out.toByteArray());
 			patientService.save(aPatient);
-			
+
 			inputStream.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -483,5 +482,5 @@ public class PatientController {
 
 		return "";
 	}
-	
+
 }

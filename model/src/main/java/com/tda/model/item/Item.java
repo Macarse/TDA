@@ -30,7 +30,7 @@ public class Item implements Serializable {
 	private Long quantity;
 
 	@NotNull
-	private Category category;
+	private String category;
 
 	@NotNull
 	private MeasureUnit measureUnit;
@@ -40,7 +40,7 @@ public class Item implements Serializable {
 	}
 
 	public Item(String name, String description, Long quantity,
-			Category category, MeasureUnit measureUnit) {
+			String category, MeasureUnit measureUnit) {
 		this.name = name;
 		this.description = description;
 		this.quantity = quantity;
@@ -85,12 +85,11 @@ public class Item implements Serializable {
 		this.quantity = quantity;
 	}
 
-	@Enumerated
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 

@@ -6,7 +6,7 @@ public class ItemBuilder {
 	private String name;
 	private String description;
 	private Long quantity;
-	private Category category;
+	private String category;
 	private MeasureUnit measureUnit;
 
 	private ItemBuilder() {
@@ -35,7 +35,7 @@ public class ItemBuilder {
 		return this;
 	}
 
-	public ItemBuilder withCategory(Category category) {
+	public ItemBuilder withCategory(String category) {
 		this.category = category;
 		return this;
 	}

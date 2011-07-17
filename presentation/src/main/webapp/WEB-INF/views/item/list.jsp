@@ -120,7 +120,7 @@
 				<td>${item.name}</td>
 				<td>${item.description}</td>
 				<td><div class='editable' id='${item.id }'>${item.quantity}</div></td>
-				<td>${item.category.description}</td>
+				<td>${item.category}</td>
 				<td>${item.measureUnit.description}</td>
 				<td>
 				<c:if test="${user.admin}">
