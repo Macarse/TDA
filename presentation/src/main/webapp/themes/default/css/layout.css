@@ -172,3 +172,24 @@ a.button-text{  }
 	border-style: solid;
 	padding: 10px;	
 }
+
+.historyDiv{
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;	
+	font-size: 20px;
+	background-color: lightblue;
+	border-radius: 10px;
+	margin: 0px 10px 10px 0px;
+}
+
+.patientPicture{
+	border-style:solid;
+	border-width:5px;	
+	border-radius: 10px;
+}
+
+.patientName{
+	font-size:25px;
+	font-style: italic;	
+}
