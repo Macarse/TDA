@@ -267,6 +267,10 @@ public class DentistForm {
 	}
 
 	public String toothsToString() {
+	    if ( tooths == null || tooths.isEmpty() ) {
+	        return "";
+	    }
+
 	    StringBuilder sb = new StringBuilder();
 
 	    for (Tooth tooth : tooths) {

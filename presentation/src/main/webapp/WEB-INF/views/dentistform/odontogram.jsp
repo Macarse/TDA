@@ -186,6 +186,10 @@ function getData() {
 
 function setData(text) {
 
+	if ( text.length == 0 ) {
+		return;
+	}
+
 	text =  text.substring(0, text.length-1); 
 	var tooths = text.split(';');
 	var i = 0;

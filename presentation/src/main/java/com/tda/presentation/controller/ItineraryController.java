@@ -1,6 +1,7 @@
 package com.tda.presentation.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.AutoPopulatingList;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,6 +91,13 @@ public class ItineraryController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		clearRemovedPlaces(itineraryForm);
+
+		Date start = itineraryForm.getBeginningDate();
+		Date end = itineraryForm.getEndDate();
+		
+		validateDates(result, start, end);
+		validatePlaceDates(itineraryForm, result, start, end);
+		
 		if (result.hasErrors()) {
 			modelAndView.setViewName("itinerary/createForm");
 
@@ -103,6 +112,31 @@ public class ItineraryController {
 		}
 
 		return modelAndView;
+	}
+
+	private void validatePlaceDates(Itinerary itineraryForm,
+			BindingResult result, Date start, Date end) {
+		for (int i = 0; i < itineraryForm.getPlaces().size(); i++) {
+			Date arrivalDate = itineraryForm.getPlaces().get(i).getArrivalDate();
+			if (arrivalDate != null) {
+				if (start.after(arrivalDate) || end.before(arrivalDate)) {
+					FieldError error = new FieldError("currentItinerary", "places[" + i + "].arrivalDate",
+							arrivalDate, false,
+							new String[] { "itinerary.wrongArrivalDate" }, null,
+							"Debe estar comprendido entre el inicio y el final del viaje");
+					result.addError(error);
+				}
+			}
+		}
+	}
+
+	private void validateDates(BindingResult result, Date start, Date end) {
+		if (! start.before(end) || start.equals(end)) {
+			FieldError error = new FieldError("currentItinerary", "endDate", end, false,
+					new String[] { "itinerary.wrongEndDate" }, null,
+					"Debe ser posterior a la fecha de inicio");
+			result.addError(error);
+		}
 	}
 
 	private void clearRemovedPlaces(Itinerary itineraryForm) {
