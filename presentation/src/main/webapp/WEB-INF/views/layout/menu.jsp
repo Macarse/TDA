@@ -197,7 +197,7 @@
 			  success: function(data) {
 				  var listUsers = "<a href=\"#\" onclick=\"sendTo2('${user.username}');\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">Cargar en Cola</a>";
 				  var aux;
-				  
+				  var htmlUsers = "";
 				  $.each(data, function(i,item) {
 					  htmlUsers += "<li><a href=\"javascript:void(0)\" onclick=\"javascript:chatWith('" +
 					  	item.username +"')\">" + item.username +"</a></li>";
