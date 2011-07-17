@@ -14,6 +14,20 @@
 			_isDirty = true;
 		});
 
+		function changeTab(e){
+			var code = (e.keyCode ? e.keyCode : e.which);
+			if(code == 9){
+				nextTab('#form-tabs');
+			}
+		}
+
+		$("#receivedAttentionInTrain1").focus();
+
+		$("#comment").keypress(function(e){
+			changeTab(e);
+			$("#cpod").focus();
+		});
+
 		//setInterval(autoSubmitFormAjax,30*1000);
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "dentist")
