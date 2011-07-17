@@ -74,8 +74,9 @@
 <script language='javascript' type='text/javascript'> 
 	var refreshId;
 	var selectedId;
-	var userType = '${user.currRole}';
+	var userType = '<c:out value="${user.currRole}"></c:out>';
 	var userRole = '${user.currRole}';
+	
 
 	if( userType == "admin" )
 		userType = "socialworker";
