@@ -36,4 +36,6 @@ public interface ApplicationUserService extends UserDetailsService {
 	List<ApplicationUser> findByExamplePaged(ApplicationUser example,
 			Paginator paginator, List<String> excludedFields);
 
+	List<ApplicationUser> findByUsername(String username);
+
 }
