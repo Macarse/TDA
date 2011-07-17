@@ -1,6 +1,8 @@
 package com.tda.presentation.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,6 +24,7 @@ import com.tda.model.dentist.DentistForm;
 import com.tda.model.dentist.Tooth;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
+import com.tda.presentation.propertyEditor.ToothEditor;
 import com.tda.service.api.DentistFormService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
@@ -44,13 +47,9 @@ public class AddDentistFormController extends BaseDentistFormController {
 		DentistForm dentistForm = new DentistForm();
 		dentistForm.setPatient(patient);
 		model.addAttribute("dentistForm", dentistForm);
+		model.addAttribute("toothString", dentistForm.toothsToString());
 
 		return DENTIST_ADD_FORM;
-	}
-
-	@ModelAttribute("tooths")
-	public Tooth[] populateTooths() {
-		return null;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -58,7 +57,6 @@ public class AddDentistFormController extends BaseDentistFormController {
 			@Valid @ModelAttribute("dentistForm") DentistForm dentistForm,
 			BindingResult result, SessionStatus status) {
 
-		System.out.println("CALLATE PABLO!!!");
 		if (result.hasErrors()) {
 			return DENTIST_ADD_FORM;
 		} else {
@@ -96,24 +94,6 @@ public class AddDentistFormController extends BaseDentistFormController {
 
 	@InitBinder
 	public void initBinder(WebDataBinder b) {
-		b.registerCustomEditor(Tooth.class, new ToothEditor());
+		b.registerCustomEditor(Collection.class, "tooths", new ToothEditor());
 	}
-
-	private class ToothEditor extends PropertyEditorSupport {
-
-		@Override
-		public void setAsText(String text) throws IllegalArgumentException {
-			Tooth tooth = new Tooth();
-			tooth.setNumber(1);
-			tooth.setCenter("center");
-			setValue(tooth);
-		}
-
-		@Override
-		public String getAsText() {
-			Tooth t = new Tooth();
-			return t.toString();
-		}
-	}
-
 }

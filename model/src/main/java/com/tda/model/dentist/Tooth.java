@@ -61,6 +61,11 @@ public class Tooth {
 	public void setCenter(String center) {
 		this.center = center;
 	}
+
+	@Override
+	public String toString() {
+	    return String.format("%s:%s:%s:%s:%s;", north, east, south, west, center);
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

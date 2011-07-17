@@ -54,8 +54,6 @@ public class DentistForm {
 
 	private Collection<Tooth> tooths;
 
-	// TODO falta odontograma
-
 	// INSPECTION
 
 	private String stains;
@@ -266,6 +264,16 @@ public class DentistForm {
 
 	public void setTooths(Collection<Tooth> tooths) {
 		this.tooths = tooths;
+	}
+
+	public String toothsToString() {
+	    StringBuilder sb = new StringBuilder();
+
+	    for (Tooth tooth : tooths) {
+            sb.append(tooth.toString());
+        }
+
+	    return sb.toString();
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tooth.class, cascade=CascadeType.ALL)

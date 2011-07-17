@@ -1,11 +1,15 @@
 package com.tda.presentation.controller;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.tda.model.dentist.DentistForm;
 import com.tda.model.utils.FormType;
+import com.tda.presentation.propertyEditor.ToothEditor;
 import com.tda.service.api.DentistFormService;
 import com.tda.service.api.PatientInTrainService;
 
@@ -37,6 +42,7 @@ public class EditDentistFormController extends BaseDentistFormController {
 			Model model) {
 		DentistForm dentistForm = dentistFormService.findById(dentistFormId);
 		model.addAttribute("dentistForm", dentistForm);
+		model.addAttribute("toothString", dentistForm.toothsToString());
 
 		boolean editable = patientInTrainService.isActiveForm(dentistFormId,
 				FormType.dentist);
@@ -63,4 +69,9 @@ public class EditDentistFormController extends BaseDentistFormController {
 	public void setDentistFormService(DentistFormService dentistFormService) {
 		this.dentistFormService = dentistFormService;
 	}
+
+	   @InitBinder
+	    public void initBinder(WebDataBinder b) {
+	        b.registerCustomEditor(Collection.class, "tooths", new ToothEditor());
+	    }
 }

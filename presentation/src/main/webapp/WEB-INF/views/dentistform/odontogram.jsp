@@ -136,29 +136,85 @@ div, p {
 
 <script type="text/javascript">
 
-$(document).ready(function(){
+var dientes = [];
+var arr = ['rgb(255, 255, 255)', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(0, 255, 0)', 'rgb(0, 0, 0)'];
+var arrDict = new Array();
 
-	var arr = ['#ffffff', '#ff0000', '#0000ff', '#00ff00', '#000000'];
-	var dientes = [],
-	    i = 0;
+$(document).ready(function() {
+
+	arrDict['rgb(255, 255, 255)'] = 0;
+	arrDict['rgb(255, 0, 0)'] = 1;
+	arrDict['rgb(0, 0, 255)'] = 2;
+	arrDict['rgb(0, 255, 0)'] = 3;
+	arrDict['rgb(0, 0, 0)'] = 4;
+	
+	var i = 0;
 	$(".diente p").each(function() {
 	
-	    var p = $(this),
-	        place = p.attr("class"),
-	        newColor = 1;
+	    var p = {'obj': $(this), 'color': 1 };
+	    var place = p.obj.attr("class");
 	    dientes[i++] = p;
 	
-	    p.click(function() {
+	    p.obj.click(function() {
 	        if (place === 'center') {
-	            p.removeAttr("style").css("background-color", arr[newColor]);
+	            p.obj.removeAttr("style").css("background-color", arr[p.color]);
 	        } else {
-	            p.removeAttr("style").css("border-" + place + "-color", arr[newColor]);
+	            p.obj.removeAttr("style").css("border-" + place + "-color", arr[p.color]);
 	        }
 	
-	        newColor = (newColor + 1) % arr.length;
+	        p.color = (p.color + 1) % arr.length;
 	    });
 	});
+
+	var tooths = '<c:out value="${toothString}"></c:out>';
+	setData(tooths);
 });
+
+function getData() {
+	var ret = "";
+
+	for( i=0 ; i< dientes.length ; i = i+5 ) {
+		for (j=0 ; j < 4 ; j++ ) {
+			ret += dientes[i+j].obj.css("border-" + dientes[i+j].obj.attr("class") + "-color") + ":";
+		}
+
+		ret += dientes[i+j].obj.css("background-color") + ";";
+	}
+
+	return ret;
+}
+
+function setData(text) {
+
+	text =  text.substring(0, text.length-1); 
+	var tooths = text.split(';');
+	var i = 0;
+
+	for( j=0 ; j < tooths.length ; j++ ) {
+
+		var parts = tooths[j].split(':');
+
+		for( k=0 ; k < parts.length ; k++ ) {
+
+			var jj = parts[k];
+			var tanito =  arrDict[parts[k]];
+			dientes[i].color = arrDict[parts[k]];
+			var place = dientes[i].obj.attr("class");
+
+			if ( place === 'center' ) {
+				dientes[i].obj.removeAttr("style").css("background-color", arr[dientes[i].color]);
+	        } else {
+	        	dientes[i].obj.removeAttr("style").css("border-" + place + "-color", arr[dientes[i].color]);
+	        }
+
+			dientes[i].color = (dientes[i].color + 1) % arr.length;
+			i++;
+		}
+	}
+
+	return;
+}
+
 </script>
 
 <div id="fila1">
@@ -169,7 +225,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -177,7 +233,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -185,7 +241,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -193,7 +249,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -201,7 +257,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -209,7 +265,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -217,7 +273,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -225,7 +281,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
     </div>
     
@@ -236,7 +292,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -244,7 +300,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -252,7 +308,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -260,7 +316,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -268,7 +324,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -276,7 +332,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -284,7 +340,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -292,7 +348,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
     </div>
 </div>
@@ -305,7 +361,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -313,7 +369,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -321,7 +377,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -329,7 +385,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -337,7 +393,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -345,7 +401,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -353,7 +409,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -361,7 +417,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
     </div>
     
@@ -372,7 +428,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -380,7 +436,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -388,7 +444,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -396,7 +452,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -404,7 +460,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -412,7 +468,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -420,7 +476,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -428,7 +484,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
     </div>
 </div>
@@ -441,7 +497,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -449,7 +505,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -457,7 +513,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -465,7 +521,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -473,7 +529,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
     </div>
 
@@ -484,7 +540,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -492,7 +548,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -500,7 +556,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -508,7 +564,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -516,7 +572,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
     </div>
 </div>
@@ -529,7 +585,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -537,7 +593,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -545,7 +601,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -553,7 +609,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -561,7 +617,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
     </div>
 
@@ -572,7 +628,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -580,7 +636,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -588,7 +644,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -596,7 +652,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -604,7 +660,7 @@ $(document).ready(function(){
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
-            <p class="marco"></p>
+            <div class="marco"></div>
         </div>
     </div>
 </div>

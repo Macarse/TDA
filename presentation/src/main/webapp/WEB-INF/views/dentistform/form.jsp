@@ -7,14 +7,19 @@
 
 <script type="text/javascript">
 
-	$(document).ready(function(){
+	$(document).ready(function() {
+
 		$("#form-tabs").tabs();
-		
+
 		$("#myform").change(function() {
 			_isDirty = true;
 		});
 
-		//setInterval(autoSubmitFormAjax,30*1000);
+	$("#myform").submit(function() {
+		var tooths = getData();
+		$("#tooths").val(tooths);
+		return true;
+	});
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "dentist")
         	$('input, select').attr('disabled', 'disabled');
@@ -84,14 +89,14 @@
 				</form:label></td>
 				<td><form:checkbox path="receivedAnesthesia" /> <form:errors path="receivedAnesthesia" />
 			</td></tr>
-			
+
 			<tr><td>
 				<form:label for="haemorrhage" path="haemorrhage" cssErrorClass="error">
 					<fmt:message key="dentist.form.haemorrhage" />
 				</form:label></td>
 				<td><form:checkbox path="haemorrhage" /> <form:errors path="haemorrhage" />
 			</td></tr>
-			
+
 			<tr><td>
 				<form:label for="medicineAllergic" path="medicineAllergic" cssErrorClass="error">
 					<fmt:message key="dentist.form.medicineAllergic" />
@@ -119,17 +124,17 @@
 		
 		</table>
 	</div>
-	
+
 	<div id="tab-odontogram" class="dentistform">
 		<table width="100%">
-		
+
 			<tr>
 				<td colspan="${fieldsPerRow}" class="doubleband">
 				<div style="float:left;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="previousTab('#form-tabs')">Anterior</a></div>
 				<div style="float:right;"><a href="#" class="button-text button-search fg-button ui-state-default ui-corner-all" onClick="nextTab('#form-tabs')">Siguiente</a></div>
 				</td>
 			</tr>
-		
+
 			<tr>
 				<td>
 					<form:label for="cpod" path="cpod" cssErrorClass="error">
@@ -145,7 +150,7 @@
 					<form:errors path="cpod" />
 				</td>
 			</tr>
-			
+
 			<tr>
 				<td>
 					<form:label for="cpos" path="cpos" cssErrorClass="error">
@@ -193,17 +198,31 @@
 					<form:errors path="ceos" />
 				</td>
 			</tr>
-			
+
+			<tr>
+				<td>
+					<form:label for="tooths" path="tooths" cssErrorClass="error">
+						<fmt:message key="dentist.form.tooths" />
+					</form:label>
+				</td>
+				<td>
+					<form:hidden path="tooths"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<form:errors path="tooths" />
+				</td>
+			</tr>
+
 		<tr>
 		<td colspan="2">
 		<br/><br/>
 		<p>
-<%-- 		<form:label for="tooths" path="tooths" --%>
-<%-- 		cssErrorClass="error"><fmt:message key="user.form.tooths" /></form:label><br /> --%>
-<%-- 		<form:input path="tooths" cssStyle="display:none;" /> <form:errors path="tooths" /> --%>
+
 		<div id="odontogram">
 			<jsp:include flush="true" page="odontogram.jsp">
- 				<jsp:param name="abc" value="xyz" />
+ 				<jsp:param name="paramNotUsed" value="" />
 			</jsp:include>
 		</div>
 		</td>
@@ -327,7 +346,7 @@
 		</table>
 	</div>
 	<div class="form-save-button">
-		<input id="formSubmitBtn" type="submit" value="Guardar Formulario" onClick="_isDirty = false;"/>
+		<input id="formSubmitBtn" type="submit" value="Guardar Formulario"/>
 	</div>
 	<div style="clear: both">
 		<hr>
