@@ -2,6 +2,8 @@ package com.tda.presentation.controller;
 
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,11 +20,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.Authority;
+import com.tda.model.applicationuser.OnlineUser;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.ApplicationUserService;
@@ -83,6 +88,37 @@ public class ApplicationUserController {
 		model.addAttribute(new ApplicationUser());
 
 		return USER_CREATE_FORM;
+	}
+	
+	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
+	public @ResponseBody
+	String getOnlineUsers() {
+		// find all users
+		List<ApplicationUser> users = applicationUserService.findAll();
+		
+		//set admin authority
+		Authority adminAuth = new Authority();
+		adminAuth.setAuthority("ROLE_ADMIN");
+		
+		//ROLE_USER
+		Authority userAuth = new Authority();
+		userAuth.setAuthority("ROLE_USER");
+		
+		Iterator<ApplicationUser> iter = users.iterator();
+		ApplicationUser user;
+		
+		while(iter.hasNext()){
+			user = iter.next();
+			Collection<Authority> auths = user.getMyAuthorities();
+			
+			if(auths.size() == 2 && auths.contains(adminAuth) && auths.contains(userAuth)){
+				iter.remove();
+			}
+		}
+		
+		Gson gson = new Gson();
+		
+		return gson.toJson(users);
 	}
 
 	private void validateUserPasswords(ApplicationUser applicationUser,

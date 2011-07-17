@@ -1,3 +1,10 @@
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
+<%@ page session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <div class="box">
 	<ul id="tabMenu">
 	  <li class="menu-pacientsontrain selected" title="Pacientes en el tren">
@@ -29,11 +36,17 @@
 
 <div id="queue-dialog" style="display: none" "title="Seleccione una Opcion">
 	<div style="clear: both;">Enviar a </div>
-	<div id='queuemenu-usersonline'></div>
+		<div id='patientlist-users'>
+		<c:forEach var="userl" items="${userList}">
+		<div>
+			<a href="#" onclick="sendTo('${userl.username}');" class="queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all">${userl.username}</a>
+		</div> 
+		</c:forEach>
+	</div>
 	<div style="clear: both;">Ir a </div>
 	<div>
 		<div id='queuemenu-socialform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
-		<div id='queuemenu-pediaform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
+		<div id='queuemenu-pediaform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario PediatrÃ­a</a></div>
 		<div id='queuemenu-nurseform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
 		<div id='queuemenu-dentform1' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
 	</div>
@@ -41,11 +54,17 @@
 
 <div id="patientlist-dialog" style="display: none" title="Seleccione una Opcion">
 	<div style="clear: both;">Enviar a </div>
-	<div id='patientlist-usersonline'></div>
+	<div id='patientlist-users'>
+		<c:forEach var="userl" items="${userList}">
+		<div>
+			<a href="#" onclick="sendTo2('${userl.username}');" class="queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all">${userl.username}</a>
+		</div> 
+		</c:forEach>
+	</div>
 	<div style="clear: both;">Ir a </div>
 	<div>
 		<div id='queuemenu-socialform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Trabajador Social</a></div>
-		<div id='queuemenu-pediaform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Pediatría</a></div>
+		<div id='queuemenu-pediaform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario PediatrÃ­a</a></div>
 		<div id='queuemenu-nurseform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Enfermero</a></div>
 		<div id='queuemenu-dentform2' class='queuemenu-button'><a href='#' class='button-text button-search fg-button-nf ui-state-default ui-corner-all'>Formulario Dentista</a></div>
 	</div>
@@ -175,8 +194,6 @@
 			  cache: false,
 			  dataType: "json",
 			  success: function(data) {
-				  var htmlUsers = "";
-				  var queueUsers = "";
 				  var listUsers = "<a href=\"#\" onclick=\"sendTo2('${user.username}');\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">Cargar en Cola</a>";
 				  var aux;
 				  
@@ -185,20 +202,13 @@
 					  	item.username +"')\">" + item.username +"</a></li>";
 
 					  	aux = "'" + item.username + "'";
-					    queueUsers += "<a href=\"#\" onclick=\"sendTo(" + aux + ");\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">" + item.username + "</a>";
-					    listUsers += "<a href=\"#\" onclick=\"sendTo2(" + aux + ");\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">" + item.username + "</a>";
 				  });
 		       
 		       if(data != ''){
 		    	   $("#onlineusers").html('<ul>' + htmlUsers + '</ul>');
-				   $("#queuemenu-usersonline").html(queueUsers);
 		       }else{
 		    	   $('#onlineusers').html('<ul><i>No hay usuarios conectados</i></ul>');
-		    	   $("#queuemenu-usersonline").html("No hay usuarios conectados.");
 		       }
-		       
-			   $("#patientlist-usersonline").html(listUsers);
-
 			  }
 		});
 	}
@@ -269,4 +279,3 @@
 		 });
 	});
 </script>
-
