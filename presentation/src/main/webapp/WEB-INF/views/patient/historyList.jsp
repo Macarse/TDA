@@ -12,7 +12,9 @@
 	</div>
 </c:if>
 
-Historia de formularios de <c:out value="${patient.firstName}"/> <c:out value="${patient.lastName}"/>
+<jsp:include flush="true" page="../layout/patientheader.jsp">
+ 				<jsp:param name="paramNotUsed" value="" />
+</jsp:include>
 
 <c:choose>
 	<c:when test="${paginator.totalResultsCount<=0}">
