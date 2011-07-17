@@ -21,22 +21,16 @@
 		return true;
 	});
 
-	function changeTab(e, did){
-		var code = (e.keyCode ? e.keyCode : e.which);
-		if(code == 9){
-			nextTab('#form-tabs');
-			$("#" + did).focus();
-		}
-	}
-
-	$("#receivedAttentionInTrain1").focus();
-
 	$("#comment").keypress(function(e){
 		changeTab(e,'cpod');
 	});
 
      if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "dentist")
      	$('input, select').attr('disabled', 'disabled');
+
+     if (!checkTabErrors('#form-tabs', ["tab-history","tab-odontogram", "tab-inspection"])){
+    	 $("#receivedAttentionInTrain1").focus();
+     }
 	});
 
 	window.onbeforeunload = nextTabUnload;

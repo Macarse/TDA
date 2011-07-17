@@ -8,6 +8,11 @@ span[id*=".errors"]{
 	font-weight: bold;
 }
 
+.form-errors{
+	color: red;
+	font-weight: bold;
+}
+
 .doubleband{
 	border-bottom: solid 1px;
 	border-top: solid 1px;

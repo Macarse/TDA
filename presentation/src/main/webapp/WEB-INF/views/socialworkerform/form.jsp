@@ -37,25 +37,13 @@
 			changeTab(e,'workingPeople');
 		});
 
-		$("#fatherFirstName").focus();
-
-		// bind 'myForm' and provide a simple callback function 
-        //$('#myform').ajaxForm(function() { 
-          //  alert("Thank you for your comment!"); 
-        //});
-        //setInterval(autoSubmitFormAjax,1000);
-
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "socialworker")
         	$('input, select').attr('disabled', 'disabled');
-	});
 
-	function changeTab(e, did){
-		var code = (e.keyCode ? e.keyCode : e.which);
-		if(code == 9){
-			nextTab('#form-tabs');
-			$("#" + did).focus();
-		}
-	}
+        if (!checkTabErrors('#form-tabs', ["tab-gf","tab-viv", "tab-esc", "tab-eco"])){
+        	$("#fatherFirstName").focus();
+        }
+	});
 
 	window.onbeforeunload = nextTabUnload;
 	var _isDirty = false;
@@ -94,7 +82,6 @@
 	<!-- Aca empieza la seccion de Grupo Familiar -->
 	<div id="tab-gf" class="socialworkerform">
 		<table width="100%">
-		
 			<tr>
 				<td colspan="${fieldsPerRow}" class="doubleband">
 				<div style="float:right;">

@@ -59,6 +59,34 @@ function nextTab( tabName ) {
 	return false;
 }
 
+function checkTabErrors(tabName, tabs){
+    var firstTab = -1;
+    for(i in tabs){
+        if($("#" + tabs[i] + " span[id*='errors']").length > 0){
+            if(firstTab == -1){
+            	firstTab = i;
+            }
+        	var data = $("a[href*='" + tabs[i] + "']").html();
+        	$("a[href*='" + tabs[i] + "']").html("<span class='form-errors'>" + data + "</span>");
+        }
+    }
+    
+    if(firstTab > -1){
+    	$(tabName).tabs('select', parseInt(firstTab));
+    	return true;
+    }
+    
+    return false;
+}
+
+function changeTab(e, did){
+	var code = (e.keyCode ? e.keyCode : e.which);
+	if(code == 9){
+		nextTab('#form-tabs');
+		$("#" + did).focus();
+	}
+}
+
 function previousTab( tabName ) {
 	var $tabs = $(tabName).tabs();
 	var selected = $tabs.tabs('option', 'selected'); // => 0
@@ -68,5 +96,5 @@ function previousTab( tabName ) {
 
 function nextTabUnload() {
 	if( _isDirty )
-  		return 'Hubo cambios que no fueron guardados, Àseguro que desea salir?';
+  		return 'Hubo cambios que no fueron guardados, ï¿½seguro que desea salir?';
 }

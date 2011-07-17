@@ -12,16 +12,6 @@
 			_isDirty = true;
 		});
 
-		//setInterval(autoSubmitFormAjax,30*1000);
-		
-		function changeTab(e, did){
-			var code = (e.keyCode ? e.keyCode : e.which);
-			if(code == 9){
-				nextTab('#form-tabs');
-				$("#" + did).focus();
-			}
-		}
-		
 		$("#size").focus();
 
 		$("#percentile").keypress(function(e){
@@ -38,6 +28,10 @@
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "nurse" )
         	$('input, select').attr('disabled', 'disabled');
+
+        if (!checkTabErrors('#form-tabs', ["tab-vitalChecks","tab-taControl", "tab-vaccines", "tab-actions"])){
+        	$("#size").focus();
+         }
 	});
 
 	window.onbeforeunload = nextTabUnload;

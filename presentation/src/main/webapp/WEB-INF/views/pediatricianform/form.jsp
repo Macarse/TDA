@@ -26,8 +26,6 @@
 			$('.distosicHidden').show();
 
 
-		//setInterval(autoSubmitFormAjax,30*1000);
-
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "pediatrician" )
         	$('input, select').attr('disabled', 'disabled');
 
@@ -84,15 +82,9 @@
         */
     	});
 
-        function changeTab(e, did){
-			var code = (e.keyCode ? e.keyCode : e.which);
-			if(code == 9){
-				nextTab('#form-tabs');
-				$("#" + did).focus();
-			}
-		}
-
-        $("#birthPlace1").focus();
+        if (!checkTabErrors('#form-tabs', ["tab-peb","tab-pab", "tab-fab", "tab-mat", "tab-phy", "tab-lab", "tab-rad", "tab-dia", "tab-int"])){
+        	$("#birthPlace1").focus();
+         }
 
         for(i=1;i<=2;i++){
 	        $("#exitStatus" + i).keypress(function(e){
