@@ -1,9 +1,9 @@
 @CHARSET "UTF-8";
 
-a:link {text-decoration:none;}
+a:link {text-decoration:none; color: black; text-decoration: underline;}
 a:visited {text-decoration:none; color: black;}
 a:hover {text-decoration:none; background-color: blue; color: white;}
-a:active {text-decoration:none;}
+a:active {text-decoration:none; color: black;}
 
 html,body{
 	background-color: graytext;
@@ -67,10 +67,9 @@ html,body{
 	clear: both;
 	margin: 0 auto;
 	text-align: center;
-	border-style: solid;
-	border-width: 1px;
 	background-color: white;
-	border-radius: 10px;
+	border-top: solid 1px;
+	padding-bottom: 10px;
 }
 
 /* menu */
@@ -176,7 +175,11 @@ a.button-text{  }
 
 .reportRow{
 	border-style: solid;
+	border-width: 1px;
 	padding: 10px;	
+	border-radius: 10px;
+	margin-right: 10px;
+	background-color: lightblue;
 }
 
 .historyDiv{
@@ -198,4 +201,13 @@ a.button-text{  }
 .patientName{
 	font-size:25px;
 	font-style: italic;	
+}
+
+.syncdiv{
+	border-style:solid;
+	border-width: 1px;
+	margin-right: 10px;
+	padding: 5px;
+	background-color: lightblue;
+	border-radius: 10px;
 }

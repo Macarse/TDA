@@ -5,14 +5,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-	<span style="font-size:15px;"><fmt:message key="report.availables" /></span>
+	<h2><fmt:message key="report.availables" /></h2>
 
 	<div class="reportRow">
 		<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReport" method="get">
 			<table>
 				<thead>
 					<tr>
-						<th colspan="2">
+						<th colspan="2" align="left">
 							<fmt:message key="report.patientReport" />
 						</th>
 					</tr>
@@ -43,7 +43,7 @@
 			<table>
 			<thead>
 					<tr>
-						<th colspan="2">
+						<th colspan="2" align="left">
 							<fmt:message key="report.patientReportDate" />
 						</th>
 					</tr>
@@ -84,7 +84,7 @@
 			<table>
 			<thead>
 					<tr>
-						<th colspan="2">
+						<th colspan="2" align="left">
 							<fmt:message key="report.sexGraphReport" />
 						</th>
 					</tr>
@@ -117,7 +117,7 @@
 			<table>
 			<thead>
 					<tr>
-						<th colspan="2">
+						<th colspan="2" align="left">
 							<fmt:message key="report.itineraryReport" />
 						</th>
 					</tr>
@@ -150,7 +150,7 @@
 			<table>
 			<thead>
 					<tr>
-						<th colspan="2">
+						<th colspan="2" align="left">
 							<fmt:message key="report.patientReportAge" />
 						</th>
 					</tr>
@@ -193,7 +193,7 @@
 			<table>
 			<thead>
 					<tr>
-						<th colspan="2">
+						<th colspan="2" align="left">
 							<fmt:message key="report.ageGraphReport" />
 						</th>
 					</tr>
