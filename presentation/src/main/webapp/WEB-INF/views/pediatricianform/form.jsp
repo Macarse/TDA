@@ -83,6 +83,61 @@
         }
         */
     	});
+
+        function changeTab(e){
+			var code = (e.keyCode ? e.keyCode : e.which);
+			if(code == 9){
+				nextTab('#form-tabs');
+			}
+		}
+
+        $("#birthPlace1").focus();
+
+        for(i=1;i<=2;i++){
+	        $("#exitStatus" + i).keypress(function(e){
+				changeTab(e);
+				$("#takesMedicine").focus();
+			});
+        }
+        
+        $("#otherPatientDiseases").keypress(function(e){
+			changeTab(e);
+			$("#cardiovascular1").focus();
+		});
+
+        $("#otherFamilyDiaseases").keypress(function(e){
+			changeTab(e);
+			$("#maturationAndDevelopment").focus();
+		});
+
+        $("#maturationAndDevelopment").keypress(function(e){
+			changeTab(e);
+			$("#symptoms").focus();
+		});
+
+        $("#pathologyFound").keypress(function(e){
+			changeTab(e);
+			$("#hematrocito").focus();
+		});
+
+
+        for(i=1;i<=3;i++){
+	        $("#chagas" + i).keypress(function(e){
+				changeTab(e);
+				$("#chest").focus();
+			});
+        }
+        
+        $("#radiologyComments").keypress(function(e){
+			changeTab(e);
+			$("#diagnosisId").focus();
+		});
+
+        $("#diagnosisId").keypress(function(e){
+			changeTab(e);
+			$("#interconsultation1").focus();
+		});
+		
 	});
 
 	window.onbeforeunload = nextTabUnload;
