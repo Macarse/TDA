@@ -1,5 +1,6 @@
 package com.tda.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +12,12 @@ import com.tda.model.utils.FormType;
 import com.tda.persistence.dao.PatientInTrainDAO;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.service.api.PatientInTrainService;
+import com.tda.service.api.PatientService;
 
 public class PatientInTrainServiceImpl implements PatientInTrainService {
 
 	private PatientInTrainDAO patientInTrainDAO;
+	private PatientService patientService;
 
 	public void setPatientInTrainDAO(PatientInTrainDAO patientInTrainDAO) {
 		this.patientInTrainDAO = patientInTrainDAO;
@@ -58,13 +61,25 @@ public class PatientInTrainServiceImpl implements PatientInTrainService {
 
 	@Transactional(readOnly = true)
 	public List<PatientInTrain> findByDni(String dni) {
-		PatientInTrain example = new PatientInTrain();
-		return patientInTrainDAO.findByExample(example);
+		List<Patient> results = patientService.findByDni(dni);
+		if (results != null && results.size() == 1) {
+			PatientInTrain inTrain = patientInTrainDAO.findByPatient(results.get(0));
+			if (inTrain != null) {
+				List<PatientInTrain> list = new ArrayList<PatientInTrain>();
+				list.add(inTrain);
+				return list;
+			}
+		}
+		
+		return null;
 	}
 
 	@Transactional(readOnly = true)
 	public List<PatientInTrain> findBySex(Sex sex) {
 		PatientInTrain example = new PatientInTrain();
+		Patient patient = new Patient();
+		patient.setSex(sex);
+		example.setPatient(patient);
 		return patientInTrainDAO.findByExample(example);
 	}
 
@@ -87,5 +102,9 @@ public class PatientInTrainServiceImpl implements PatientInTrainService {
 
 	public boolean isActiveForm(Long formId, FormType formType) {
 		return patientInTrainDAO.isActiveForm(formId, formType);
+	}
+
+	public void setPatientService(PatientService patientService) {
+		this.patientService = patientService;
 	}
 }

@@ -60,6 +60,7 @@
 
 	<bean id="patientInTrainService" class="com.tda.service.impl.PatientInTrainServiceImpl">
 		<property name="patientInTrainDAO" ref="patientInTrainDAO" />
+		<property name="patientService" ref="patientService" />
 	</bean>
 
 
