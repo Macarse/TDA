@@ -14,15 +14,15 @@
 
 		$("#size").focus();
 
-		$("#percentile").keypress(function(e){
+		$("#percentile").keydown(function(e){
 			changeTab(e, 'TAmin');
 		});
 
-		$("#saturation").keypress(function(e){
+		$("#saturation").keydown(function(e){
 			changeTab(e,'vaxines1');
 		});
 
-		$("#vaxines12").keypress(function(e){
+		$("#vaxines12").keydown(function(e){
 			changeTab(e,'nurseActions1');
 		});
 

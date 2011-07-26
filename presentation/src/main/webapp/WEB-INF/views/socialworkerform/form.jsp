@@ -13,27 +13,27 @@
 			_isDirty = true;
 		});
 
-		$("#peopleAtHomeUnderTen").keypress(function(e){
+		$("#peopleAtHomeUnderTen").keydown(function(e){
 			changeTab(e,'roomsExcludingKitchenAndBathroom');
 		});
 		
-		$("#electricity1").keypress(function(e){
+		$("#electricity1").keydown(function(e){
 			changeTab(e,'knowsHowToReadAndWrite1');
 		});
-		$("#electricity2").keypress(function(e){
+		$("#electricity2").keydown(function(e){
 			changeTab(e,'knowsHowToReadAndWrite1');
 		});
-		$("#electricity3").keypress(function(e){
+		$("#electricity3").keydown(function(e){
 			changeTab(e,'knowsHowToReadAndWrite1');
 		});
 
-		$("#schoolService1").keypress(function(e){
+		$("#schoolService1").keydown(function(e){
 			changeTab(e,'workingPeople');
 		});
-		$("#schoolService2").keypress(function(e){
+		$("#schoolService2").keydown(function(e){
 			changeTab(e,'workingPeople');
 		});
-		$("#schoolService3").keypress(function(e){
+		$("#schoolService3").keydown(function(e){
 			changeTab(e,'workingPeople');
 		});
 

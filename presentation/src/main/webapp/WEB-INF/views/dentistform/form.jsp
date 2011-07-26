@@ -21,7 +21,7 @@
 		return true;
 	});
 
-	$("#comment").keypress(function(e){
+	$("#comment").keydown(function(e){
 		changeTab(e,'cpod');
 	});
 
@@ -356,7 +356,7 @@
 		</table>
 	</div>
 	<div class="form-save-button">
-		<input id="formSubmitBtn" type="submit" value="Guardar Formulario"/>
+		<input id="formSubmitBtn" type="submit" value="Guardar Formulario" onclick="_isDirty = false;"/>
 	</div>
 	<div style="clear: both">
 		<hr>
