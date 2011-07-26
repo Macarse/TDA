@@ -120,7 +120,7 @@ function createChatBox(chatboxtitle,statusChatBox) {
 }
 
 function renderChat(statusChatBox, chatboxtitle){
-	switch(statusChatBox){
+	switch(parseInt(statusChatBox)){
 		case 0:
 			break;
 		case 1:
@@ -360,7 +360,7 @@ function startChatSession(){
 			$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
 			setTimeout('$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);', 100); // yet another strange ie bug
 			status = eval("data.windowStatus." + chatboxtitle);
-			renderChat(status, chatboxtitle)
+			renderChat(status, chatboxtitle);
 		}
 	
 	setTimeout('chatHeartbeat();',chatHeartbeatTime);
