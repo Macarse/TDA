@@ -27,7 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.Authority;
-import com.tda.model.applicationuser.OnlineUser;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.ApplicationUserService;
@@ -164,7 +163,7 @@ public class ApplicationUserController {
 
 		// TODO if we're editing and not adding a new item the message
 		// seems somewhat... misleading, CHANGE IT :D
-		if (result.hasErrors()) {
+		if (result.hasErrors() && result.getFieldErrorCount() > 2) {
 			modelAndView.setViewName(USER_EDIT_FORM);
 		} else {
 			modelAndView.setViewName(REDIRECT_TO_USER_LIST);
