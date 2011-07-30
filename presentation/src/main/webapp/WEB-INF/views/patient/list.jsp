@@ -11,7 +11,13 @@
 <spring:message text="Eliminar" var="deleteLabel" />
 <spring:url value="edit" var="editUrl" />
 <spring:url value="history" var="historyUrl" />
-<spring:url value="add" var="addUrl" />
+<spring:url value="add" var="addUrl">
+	<spring:param name="firstName" value="${patient.firstName }"></spring:param>
+	<spring:param name="lastName" value="${patient.lastName }"></spring:param>
+	<spring:param name="sex" value="${patient.sex }"></spring:param>
+	<spring:param name="birthdate"><fmt:formatDate value="${patient.birthdate}" pattern="dd/MM/yyyy"/></spring:param>
+	<spring:param name="dni" value="${patient.dni }"></spring:param>
+</spring:url>
 <spring:url value="search" var="searchUrl" />
 <spring:message text="Editar" var="editLabel" />
 <spring:message text="Historia" var="historyLabel" />
@@ -24,7 +30,24 @@
 
 <c:choose>
 <c:when test="${paginator.totalResultsCount<=0}">
-	<div style="font-size: 15px;">No se encontraron registros</div>
+	<div style="font-size: 15px;">
+		No se encontraron registros con:
+		<c:if test="${!empty patient.firstName }">
+			<div class="search-not-found">Nombre '<b><c:out value="${patient.firstName }"></c:out></b>'</div> 
+		</c:if>
+		<c:if test="${!empty patient.lastName }">
+			<div class="search-not-found">Apellido '<b><c:out value="${patient.lastName }"></c:out></b>'</div> 
+		</c:if>
+		<c:if test="${!empty patient.sex }">
+			<div class="search-not-found">Sexo '<b><c:out value="${patient.sex }"></c:out></b>'</div> 
+		</c:if>
+		<c:if test="${!empty patient.birthdate }">
+			<div class="search-not-found">Fecha de Nacimiento '<b><fmt:formatDate value="${patient.birthdate}" pattern="dd/MM/yyyy"/></b>'</div> 
+		</c:if>
+		<c:if test="${!empty patient.dni }">
+			<div class="search-not-found">Dni '<b><c:out value="${patient.dni }"></c:out></b>'</div> 
+		</c:if>
+	</div>
 </c:when>
 <c:otherwise>
 

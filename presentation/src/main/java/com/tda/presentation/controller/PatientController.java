@@ -146,13 +146,16 @@ public class PatientController {
 
 		modelAndView = processRequest(modelAndView, aPatient, pageNumber,
 				orderField, orderAscending);
+		
+		modelAndView.addObject("patient", aPatient);
 
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getCreateForm(Model model) {
-		model.addAttribute("patient", new Patient());
+	public String getCreateForm(Model model,
+			@ModelAttribute Patient aPatient) {
+		model.addAttribute("patient", aPatient);
 
 		return CREATE_FORM;
 	}
