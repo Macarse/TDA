@@ -27,6 +27,7 @@ import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
 import com.tda.model.patient.Patient;
 import com.tda.model.report.AgeForReport;
+import com.tda.model.report.InterconsultPerYearReport;
 import com.tda.model.report.NbiForDestinationReport;
 import com.tda.model.report.SexForReport;
 import com.tda.model.utils.ConfigReport;
@@ -433,6 +434,95 @@ public class ReportService {
 		groupedNbi.add(nbi5);
 
 		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "Nbifordestinationreport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(request, jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
+	}
+
+	public void downloadInterconsultPerYearReport(HttpServletRequest request,
+			HttpServletResponse response, ExportFormat format,
+			ConfigReport configReport) throws ColumnBuilderException,
+			ChartBuilderException, ClassNotFoundException, JRException {
+
+		InterconsultPerYearReportLayout layout = new InterconsultPerYearReportLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<InterconsultPerYearReport> groupedICR = new ArrayList<InterconsultPerYearReport>();
+
+		InterconsultPerYearReport icr1 = new InterconsultPerYearReport();
+		icr1.setYear("1990");
+		icr1.setQuantity(10);
+
+		InterconsultPerYearReport icr2 = new InterconsultPerYearReport();
+		icr2.setYear("1995");
+		icr2.setQuantity(5);
+
+		InterconsultPerYearReport icr3 = new InterconsultPerYearReport();
+		icr3.setYear("1998");
+		icr3.setQuantity(100);
+
+		InterconsultPerYearReport icr4 = new InterconsultPerYearReport();
+		icr4.setYear("2000");
+		icr4.setQuantity(150);
+
+		InterconsultPerYearReport icr5 = new InterconsultPerYearReport();
+		icr5.setYear("2003");
+		icr5.setQuantity(15);
+
+		groupedICR.add(icr1);
+		groupedICR.add(icr2);
+		groupedICR.add(icr3);
+		groupedICR.add(icr4);
+		groupedICR.add(icr5);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedICR);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
 
 		// Create our output byte stream

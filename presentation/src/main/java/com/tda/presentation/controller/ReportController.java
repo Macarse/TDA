@@ -177,4 +177,23 @@ public class ReportController {
 					configReport.getFormat(), configReport);
 		}
 	}
+
+	@RequestMapping(value = "/interconsultPerYearReport", method = RequestMethod.GET)
+	public void doInterconsultPerYearReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadInterconsultPerYearReport(request, response,
+					configReport.getFormat(), configReport);
+		}
+	}
 }
