@@ -33,12 +33,10 @@ import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.OnlineUser;
 import com.tda.model.item.Item;
 import com.tda.model.item.ItemBuilder;
-import com.tda.model.itinerary.Itinerary;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.model.pediatrician.PediatricianDiagnosis;
-import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.ApplicationUserService;
@@ -50,7 +48,7 @@ import com.tda.service.api.PediatricianDiagnosisService;
 
 @Controller
 @RequestMapping(value = "/")
-@SessionAttributes({ "patient", "user", "currentItinerary"})
+@SessionAttributes({ "patient", "user"})
 public class WelcomeController extends CommonController{
 	private static final String LIST = "welcome/list";
 
@@ -65,7 +63,6 @@ public class WelcomeController extends CommonController{
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 			"dd/MM/yyyy");
 	private OnlineUserService onlineUserService;
-	private ItineraryDAO itineraryDAO;
 
 	public WelcomeController() {
 		params = new ParamContainer();
@@ -80,17 +77,6 @@ public class WelcomeController extends CommonController{
 	@ModelAttribute("sex")
 	public Sex[] populateCategories() {
 		return Sex.values();
-	}
-
-	@ModelAttribute("currentItinerary")
-	public Itinerary getCurrentItinerary() {
-		Itinerary itinerary = itineraryDAO.findNextItinerary();
-
-		if (itinerary == null) {
-			return new Itinerary();
-		} else {
-			return itinerary;
-		}
 	}
 
 	@ModelAttribute("user")
@@ -369,11 +355,6 @@ public class WelcomeController extends CommonController{
 			}
 		}
 		return new Gson().toJson(categories);
-	}
-
-	@Autowired
-	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
-		this.itineraryDAO = itineraryDAO;
 	}
 
 	@Autowired

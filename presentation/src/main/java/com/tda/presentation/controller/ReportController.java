@@ -28,7 +28,7 @@ import com.tda.service.report.ReportService;
 
 @Controller
 @RequestMapping(value = "/report")
-public class ReportController {
+public class ReportController extends CommonController{
 
 	private ReportService reportService;
 	private static String LIST = "report/list";

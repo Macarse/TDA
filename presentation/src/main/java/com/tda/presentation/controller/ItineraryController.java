@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.itinerary.Itinerary;
@@ -28,7 +27,6 @@ import com.tda.service.api.ItineraryService;
 
 @Controller
 @RequestMapping(value = "/itinerary")
-@SessionAttributes({ "currentItinerary" })
 public class ItineraryController extends CommonController{
 	private ItineraryService itineraryService;
 	private List<Integer> removedIndexes = new ArrayList<Integer>();

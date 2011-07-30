@@ -9,10 +9,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.Authority;
+import com.tda.model.itinerary.Itinerary;
+import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.service.api.ApplicationUserService;
 
 public class CommonController {
 	protected ApplicationUserService applicationUserService;
+	protected ItineraryDAO itineraryDAO;
+
+	@Autowired
+	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
+		this.itineraryDAO = itineraryDAO;
+	}
 	
 	@Autowired
 	public void setApplicationUserService(
@@ -46,5 +54,16 @@ public class CommonController {
 		}
 
 		return users;
+	}
+	
+	@ModelAttribute("currentItinerary")
+	public Itinerary getCurrentItinerary() {
+		Itinerary itinerary = itineraryDAO.findNextItinerary();
+
+		if (itinerary == null) {
+			return new Itinerary();
+		} else {
+			return itinerary;
+		}
 	}
 }
