@@ -109,26 +109,36 @@ div, p {
     margin-left: 20px;
 }
 
+#odontograma{
+    background-image:url('/presentation/themes/default/image/odontograma.png');
+}
+
 #fila1{
     overflow:hidden;
     width:510px;
+    padding-top: 20px;
+    margin-bottom: 5px;
 }
 
 #fila2{
     overflow:hidden;
     width:510px;
+    padding-bottom: 10px;
 }
 
 #fila3{
     overflow:hidden;
     width: 510px;
+    padding-top: 10px;
     margin-left: 90px;
+    margin-bottom: 5px;
     margin-top: 10px;
 }
 
 #fila4{
     overflow:hidden;
     width: 510px;
+    padding-bottom: 20px;
     margin-left: 90px;
 }
 
@@ -221,6 +231,7 @@ function setData(text) {
 
 </script>
 
+<div id="odontograma">
 <div id="fila1">
     <div id="fila1_izq_mandibula8">
         <div class="diente">
@@ -667,4 +678,5 @@ function setData(text) {
             <div class="marco"></div>
         </div>
     </div>
+</div>
 </div>
