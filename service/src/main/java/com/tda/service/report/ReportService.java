@@ -29,6 +29,7 @@ import com.tda.model.patient.Patient;
 import com.tda.model.report.AgeForDestinationReport;
 import com.tda.model.report.AgeForReport;
 import com.tda.model.report.NbiForDestinationReport;
+import com.tda.model.report.PrevalentDiagnosticForDestinationReport;
 import com.tda.model.report.SexForReport;
 import com.tda.model.utils.ConfigReport;
 import com.tda.model.utils.ExportFormat;
@@ -537,7 +538,7 @@ public class ReportService {
 		// it
 		Exporter exporter = new Exporter();
 
-		String fileName = "Nbifordestinationreport.";
+		String fileName = "InterconsultantPerYearReport.";
 
 		switch (format) {
 		case XLS:
@@ -629,7 +630,7 @@ public class ReportService {
 		// it
 		Exporter exporter = new Exporter();
 
-		String fileName = "Nbifordestinationreport.";
+		String fileName = "AgeForDestinationReport.";
 
 		switch (format) {
 		case XLS:
@@ -656,6 +657,98 @@ public class ReportService {
 
 		// Write to reponse stream
 		writeReportToResponseStream(response, baos);
+	}
+
+	public void downloadPrevalentDiagnosticForDestinationReport(
+			HttpServletRequest request, HttpServletResponse response,
+			ExportFormat format, ConfigReport configReport) throws JRException,
+			ColumnBuilderException, ChartBuilderException,
+			ClassNotFoundException {
+
+		PrevalentDiagnosticForDestinationReportLayout layout = new PrevalentDiagnosticForDestinationReportLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<PrevalentDiagnosticForDestinationReport> groupedNbi = new ArrayList<PrevalentDiagnosticForDestinationReport>();
+
+		PrevalentDiagnosticForDestinationReport nbi1 = new PrevalentDiagnosticForDestinationReport();
+		nbi1.setDestination("buenosaires");
+		nbi1.setDiagnostic("resfrio");
+		nbi1.setQuantity(50);
+		PrevalentDiagnosticForDestinationReport nbi2 = new PrevalentDiagnosticForDestinationReport();
+		nbi2.setDestination("buenosaires");
+		nbi2.setDiagnostic("fiebre");
+		nbi2.setQuantity(10);
+		PrevalentDiagnosticForDestinationReport nbi3 = new PrevalentDiagnosticForDestinationReport();
+		nbi3.setDestination("catamarca");
+		nbi3.setDiagnostic("resfrio");
+		nbi3.setQuantity(75);
+		PrevalentDiagnosticForDestinationReport nbi4 = new PrevalentDiagnosticForDestinationReport();
+		nbi4.setDestination("catamarca");
+		nbi4.setDiagnostic("fiebre");
+		nbi4.setQuantity(150);
+		PrevalentDiagnosticForDestinationReport nbi5 = new PrevalentDiagnosticForDestinationReport();
+		nbi5.setDestination("catamarca");
+		nbi5.setDiagnostic("aesd");
+		nbi5.setQuantity(10);
+
+		groupedNbi.add(nbi1);
+		groupedNbi.add(nbi2);
+		groupedNbi.add(nbi3);
+		groupedNbi.add(nbi4);
+		groupedNbi.add(nbi5);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "PrevalentDiagnosticForDestinationReport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(request, jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
+
 	}
 
 }
