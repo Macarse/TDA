@@ -196,4 +196,23 @@ public class ReportController {
 					configReport.getFormat(), configReport);
 		}
 	}
+	
+	@RequestMapping(value = "/scholarityByDestinationReport", method = RequestMethod.GET)
+	public void doScholarityByDestinationReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadScholarityByDestinationReport(request, response,
+					configReport.getFormat(), configReport);
+		}
+	}
 }

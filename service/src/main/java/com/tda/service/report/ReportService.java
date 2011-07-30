@@ -29,6 +29,7 @@ import com.tda.model.patient.Patient;
 import com.tda.model.report.AgeForReport;
 import com.tda.model.report.InterconsultPerYearReport;
 import com.tda.model.report.NbiForDestinationReport;
+import com.tda.model.report.ScholarityByDestinationReport;
 import com.tda.model.report.SexForReport;
 import com.tda.model.utils.ConfigReport;
 import com.tda.model.utils.ExportFormat;
@@ -564,6 +565,95 @@ public class ReportService {
 		// Write to reponse stream
 		writeReportToResponseStream(response, baos);
 
+	}
+
+	public void downloadScholarityByDestinationReport(
+			HttpServletRequest request, HttpServletResponse response,
+			ExportFormat format, ConfigReport configReport) throws ColumnBuilderException, ChartBuilderException, 
+			ClassNotFoundException, JRException {
+		ScholarityByDestinationLayout layout = new ScholarityByDestinationLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<ScholarityByDestinationReport> groupedNbi = new ArrayList<ScholarityByDestinationReport>();
+
+		ScholarityByDestinationReport sch1 = new ScholarityByDestinationReport();
+		sch1.setDestination("buenosaires");
+		sch1.setScholarity("jardín");
+		sch1.setQuantity(50);
+		ScholarityByDestinationReport sch2 = new ScholarityByDestinationReport();
+		sch2.setDestination("buenosaires");
+		sch2.setScholarity("terciario");
+		sch2.setQuantity(50);
+		ScholarityByDestinationReport sch3 = new ScholarityByDestinationReport();
+		sch3.setDestination("catamarca");
+		sch3.setScholarity("hacinamiento");
+		sch3.setQuantity(75);
+		ScholarityByDestinationReport sch4 = new ScholarityByDestinationReport();
+		sch4.setDestination("catamarca");
+		sch4.setScholarity("vivienda");
+		sch4.setQuantity(15);
+		ScholarityByDestinationReport sch5 = new ScholarityByDestinationReport();
+		sch5.setDestination("catamarca");
+		sch5.setScholarity("aesd");
+		sch5.setQuantity(10);
+
+		groupedNbi.add(sch1);
+		groupedNbi.add(sch2);
+		groupedNbi.add(sch3);
+		groupedNbi.add(sch4);
+		groupedNbi.add(sch5);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "Nbifordestinationreport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(request, jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
 	}
 
 }
