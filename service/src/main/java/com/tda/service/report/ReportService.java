@@ -28,14 +28,16 @@ import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import com.tda.model.patient.Patient;
 import com.tda.model.report.AgeForDestinationReport;
 import com.tda.model.report.AgeForReport;
+import com.tda.model.report.InterconsultPerYearReport;
 import com.tda.model.report.NbiForDestinationReport;
-import com.tda.model.report.ScholarityByDestinationReport;
 import com.tda.model.report.PrevalentDiagnosticForDestinationReport;
+import com.tda.model.report.ScholarityByDestinationReport;
 import com.tda.model.report.SexForReport;
 import com.tda.model.utils.ConfigReport;
 import com.tda.model.utils.ExportFormat;
 import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.persistence.dao.PatientDAO;
+import com.tda.persistence.dao.PatientcubeDAO;
 import com.tda.persistence.dao.PlaceDAO;
 
 /**
@@ -51,6 +53,11 @@ public class ReportService {
 	@SuppressWarnings("unused")
 	private PlaceDAO placeDAO;
 	private ItineraryDAO itineraryDAO;
+	private PatientcubeDAO patientcubeDAO;
+
+	public void setPatientcubeDAO(PatientcubeDAO patientcubeDAO) {
+		this.patientcubeDAO = patientcubeDAO;
+	}
 
 	public void setPatientDAO(PatientDAO patientDAO) {
 		this.patientDAO = patientDAO;
@@ -406,34 +413,8 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<NbiForDestinationReport> groupedNbi = new ArrayList<NbiForDestinationReport>();
-
-		NbiForDestinationReport nbi1 = new NbiForDestinationReport();
-		nbi1.setDestination("buenosaires");
-		nbi1.setNbi("hacinamiento");
-		nbi1.setQuantity(50);
-		NbiForDestinationReport nbi2 = new NbiForDestinationReport();
-		nbi2.setDestination("buenosaires");
-		nbi2.setNbi("vivienda");
-		nbi2.setQuantity(50);
-		NbiForDestinationReport nbi3 = new NbiForDestinationReport();
-		nbi3.setDestination("catamarca");
-		nbi3.setNbi("hacinamiento");
-		nbi3.setQuantity(75);
-		NbiForDestinationReport nbi4 = new NbiForDestinationReport();
-		nbi4.setDestination("catamarca");
-		nbi4.setNbi("vivienda");
-		nbi4.setQuantity(15);
-		NbiForDestinationReport nbi5 = new NbiForDestinationReport();
-		nbi5.setDestination("catamarca");
-		nbi5.setNbi("aesd");
-		nbi5.setQuantity(10);
-
-		groupedNbi.add(nbi1);
-		groupedNbi.add(nbi2);
-		groupedNbi.add(nbi3);
-		groupedNbi.add(nbi4);
-		groupedNbi.add(nbi5);
+		Collection<NbiForDestinationReport> groupedNbi = patientcubeDAO
+				.findNbiForDestination();
 
 		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
@@ -483,7 +464,7 @@ public class ReportService {
 			ConfigReport configReport) throws ColumnBuilderException,
 			ChartBuilderException, ClassNotFoundException, JRException {
 
-		AgeForDestinationReportLayout layout = new AgeForDestinationReportLayout();
+		InterconsultPerYearReportLayout layout = new InterconsultPerYearReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
 
 		// params is used for passing extra parameters like when passing
@@ -496,34 +477,8 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<AgeForDestinationReport> grouped = new ArrayList<AgeForDestinationReport>();
-
-		AgeForDestinationReport afd1 = new AgeForDestinationReport();
-		afd1.setAge("10");
-		afd1.setDestination("buenos aires");
-		afd1.setQuantity(4);
-		AgeForDestinationReport afd2 = new AgeForDestinationReport();
-		afd2.setAge("15");
-		afd2.setDestination("buenos aires");
-		afd2.setQuantity(18);
-		AgeForDestinationReport afd3 = new AgeForDestinationReport();
-		afd3.setAge("18");
-		afd3.setDestination("buenos aires");
-		afd3.setQuantity(2);
-		AgeForDestinationReport afd4 = new AgeForDestinationReport();
-		afd4.setAge("11");
-		afd4.setDestination("catamarca");
-		afd4.setQuantity(3);
-		AgeForDestinationReport afd5 = new AgeForDestinationReport();
-		afd5.setAge("19");
-		afd5.setDestination("catamarca");
-		afd5.setQuantity(10);
-
-		grouped.add(afd1);
-		grouped.add(afd2);
-		grouped.add(afd3);
-		grouped.add(afd4);
-		grouped.add(afd5);
+		Collection<InterconsultPerYearReport> grouped = patientcubeDAO
+				.findInterconsultPerYear();
 
 		JRDataSource ds = new JRBeanCollectionDataSource(grouped);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
@@ -754,7 +709,8 @@ public class ReportService {
 
 	public void downloadScholarityByDestinationReport(
 			HttpServletRequest request, HttpServletResponse response,
-			ExportFormat format, ConfigReport configReport) throws ColumnBuilderException, ChartBuilderException, 
+			ExportFormat format, ConfigReport configReport)
+			throws ColumnBuilderException, ChartBuilderException,
 			ClassNotFoundException, JRException {
 		ScholarityByDestinationLayout layout = new ScholarityByDestinationLayout();
 		DynamicReport dr = layout.buildReportLayout();

@@ -86,8 +86,47 @@ public class PatientDAO extends GenericDAOImpl<Patient> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Collection<AgeForReport> findGroupedAge() {
 
-		Collection<AgeForReport> list = (Collection<AgeForReport>) getHibernateTemplate().execute(
-				new HibernateCallback() {
+		Collection<AgeForReport> list = (Collection<AgeForReport>) getHibernateTemplate()
+				.execute(new HibernateCallback() {
+					@SuppressWarnings("deprecation")
+					public Object doInHibernate(Session session)
+							throws HibernateException {
+						Collection<AgeForReport> list = new ArrayList<AgeForReport>();
+						try {
+							// Transaction tx = session.beginTransaction();
+							String SQL_QUERY = "SELECT DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(birthdate, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(birthdate, '00-%m-%d')) AS age, COUNT(*) from Patient GROUP BY birthdate;";
+							// Query query = session.createQuery(SQL_QUERY);
+
+							Statement st = session.connection()
+									.createStatement();
+							ResultSet rs = st.executeQuery(SQL_QUERY);
+
+							while (rs.next()) {
+								AgeForReport afr = new AgeForReport(rs
+										.getInt(1), rs.getInt(2));
+								list.add(afr);
+							}
+
+							// tx.commit();
+							// session.flush();
+							// releaseSession(session);
+						} catch (Exception ex) {
+						}
+						return list;
+					}
+				});
+
+		if (list == null || list.size() <= 0)
+			return null;
+
+		return list;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public Collection<AgeForReport> findGroupedAgeForDestination() {
+
+		Collection<AgeForReport> list = (Collection<AgeForReport>) getHibernateTemplate()
+				.execute(new HibernateCallback() {
 					@SuppressWarnings("deprecation")
 					public Object doInHibernate(Session session)
 							throws HibernateException {

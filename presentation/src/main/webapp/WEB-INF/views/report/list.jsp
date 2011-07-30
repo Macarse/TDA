@@ -350,6 +350,39 @@
 			</table>
 		</form:form>
 	</div>
+		
+	<br></br>
+	
+	<div class="reportRow">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/scholarityByDestinationReport" method="get">
+			<table>
+			<thead>
+					<tr>
+						<th colspan="2" align="left">
+							<fmt:message key="report.scholarity" />
+						</th>
+					</tr>
+				</thead>
+				<tbody>	
+	
+					<tr>
+						<td><form:label for="format" path="format" cssErrorClass="error">
+							<fmt:message key="report.format" /></form:label></td>
+						<td><form:select path="format" items="${allFormat}"/> <form:errors path="format" /></td></tr>
+						
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>
+						<div class="filter-submit">	
+							<button type="submit" class="button-text fg-button ui-state-default ui-corner-all"><span class="ui-icon button-icon"></span> <fmt:message key="report.export" /></button>
+						</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</form:form>
+	</div>
 	
 	<br></br>
 

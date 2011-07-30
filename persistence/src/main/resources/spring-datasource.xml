@@ -49,6 +49,7 @@
 				<value>com.tda.model.itinerary.Itinerary</value>
 				<value>com.tda.model.itinerary.Place</value>
 				<value>com.tda.model.pediatrician.PediatricianDiagnosis</value>
+				<value>com.tda.model.itinerary.PatientCube</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
