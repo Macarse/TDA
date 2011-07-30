@@ -7,7 +7,7 @@
 		<a href="${pageContext.request.contextPath}">Principal</a> | <a href="${pageContext.request.contextPath}/patient/"><span>Pacientes</span></a> | <a href="${pageContext.request.contextPath}/item/"><span>Inventario</span></a> 
 		
 		<c:if test="${user.admin}">
-		| <a href="${pageContext.request.contextPath}/applicationUser/"><span>Usuarios</span></a> | <a href="${pageContext.request.contextPath}/sync/main"><span>Sincronización</span></a> | <a href="${pageContext.request.contextPath}/report/list"><span>Reportes</span></a>
+		| <a href="${pageContext.request.contextPath}/applicationUser/"><span>Usuarios</span></a> | <a href="${pageContext.request.contextPath}/sync/main"><span>Sincronización</span></a> | <a href="${pageContext.request.contextPath}/report/list"><span>Reportes</span></a> | <a href="${pageContext.request.contextPath}/auditLog/"><span>Logs</span></a> 
 		</c:if>
 	</div>
 </div>

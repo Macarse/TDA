@@ -12,7 +12,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:mysql://localhost:8889/tda</value>
+			<value>jdbc:mysql://localhost/tda</value>
 		</property>
 		<property name="username">
 			<value>tda</value>
@@ -30,6 +30,7 @@
 
 		<property name="annotatedClasses">
 			<list>
+				<value>com.tda.model.audit.AuditLog</value>
 				<value>com.tda.model.item.Item</value>
 				<value>com.tda.model.applicationuser.ApplicationUser</value>
 				<value>com.tda.model.applicationuser.Authority</value>
@@ -53,7 +54,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.max_fetch_depth">2</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
