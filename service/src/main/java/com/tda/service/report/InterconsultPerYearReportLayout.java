@@ -17,7 +17,7 @@ import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
 import ar.com.fdvs.dj.domain.builders.GroupBuilder;
 import ar.com.fdvs.dj.domain.chart.DJChart;
 import ar.com.fdvs.dj.domain.chart.DJChartOptions;
-import ar.com.fdvs.dj.domain.chart.builder.DJPie3DChartBuilder;
+import ar.com.fdvs.dj.domain.chart.builder.DJAreaChartBuilder;
 import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.GroupLayout;
@@ -28,7 +28,7 @@ import ar.com.fdvs.dj.domain.entities.DJGroup;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn;
 
-public class NbiForDestinationReportLayout {
+public class InterconsultPerYearReportLayout {
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	public DynamicReport buildReportLayout() throws ColumnBuilderException,
@@ -45,29 +45,22 @@ public class NbiForDestinationReportLayout {
 		headerStyle.setTextColor(Color.WHITE);
 		headerStyle.setTransparency(Transparency.OPAQUE);
 
-		// Destino:
-		AbstractColumn columnDestination = ColumnBuilder.getNew()
-				.setColumnProperty("destination", String.class.getName())
-				.setTitle("Destino").setWidth(new Integer(85)).build();
-		// Hacinamiento:
-		AbstractColumn columnNbi = ColumnBuilder.getNew()
-				.setColumnProperty("nbi", String.class.getName())
-				.setTitle("NBI").setWidth(new Integer(85)).build();
+		AbstractColumn columnYear = ColumnBuilder.getNew()
+				.setColumnProperty("year", String.class.getName())
+				.setTitle("Año").setWidth(new Integer(85)).build();
 		AbstractColumn columnQuantity = ColumnBuilder.getNew()
 				.setColumnProperty("quantity", Integer.class.getName())
 				.setTitle("Cantidad").setWidth(new Integer(85)).build();
 
-		// drb.addColumn(columnSex);
-		drb.addColumn(columnDestination);
-		drb.addColumn(columnNbi);
+		drb.addColumn(columnYear);
 		drb.addColumn(columnQuantity);
 
-		drb.setTitle("Necesidades Basicas Insatisfechas por Destino")
+		drb.setTitle("Interconsultas por año")
 				.setSubtitle("Este reporte fue generado en " + new Date())
 				.setUseFullPageWidth(true);
 
 		GroupBuilder gb1 = new GroupBuilder();
-		DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnDestination)
+		DJGroup g1 = gb1.setCriteriaColumn((PropertyColumn) columnYear)
 		// .addFooterVariable(columnSexName, DJCalculation.NOTHING)
 		// .addVariable("group_sex_name", columnSexName,
 		// DJCalculation.)
@@ -77,7 +70,7 @@ public class NbiForDestinationReportLayout {
 
 		drb.setUseFullPageWidth(true);
 		drb.setDefaultStyles(null, null, headerStyle, null);
-		DJChart djChart = new DJPie3DChartBuilder()
+		DJChart djChart = new DJAreaChartBuilder()
 				// chart
 				.setX(20)
 				.setY(10)
@@ -101,9 +94,8 @@ public class NbiForDestinationReportLayout {
 				.setLineStyle(DJChartOptions.LINE_STYLE_DOTTED).setLineWidth(1)
 				.setLineColor(Color.DARK_GRAY).setPadding(5)
 				// dataset
-				.setKey((PropertyColumn) columnNbi).addSerie(columnQuantity)
-				// plot
-				.setDepthFactor(0.1).setCircular(true).build();
+				.setCategory((PropertyColumn) columnYear)
+				.addSerie(columnQuantity).build();
 
 		drb.addChart(djChart);
 

@@ -1,0 +1,24 @@
+package com.tda.model.report;
+
+public class InterconsultPerYearReport {
+
+	private String year;
+	private Integer quantity;
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+}
