@@ -27,7 +27,7 @@ import com.tda.service.api.ItemService;
 @Controller
 @RequestMapping(value = "/item")
 @SessionAttributes({"item"})
-public class ItemController {
+public class ItemController extends CommonController{
 
 	private static final String ITEM_FORM_DELETE_ERROR = "item.form.deleteError";
 	private static final String ITEM_FORM_NOT_FOUND = "item.form.notFound";

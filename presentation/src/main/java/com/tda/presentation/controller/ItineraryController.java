@@ -29,7 +29,7 @@ import com.tda.service.api.ItineraryService;
 @Controller
 @RequestMapping(value = "/itinerary")
 @SessionAttributes({ "currentItinerary" })
-public class ItineraryController {
+public class ItineraryController extends CommonController{
 	private ItineraryService itineraryService;
 	private List<Integer> removedIndexes = new ArrayList<Integer>();
 

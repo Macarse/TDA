@@ -40,7 +40,7 @@ import com.tda.service.api.PatientService;
 @Controller
 @RequestMapping(value = "/patient")
 @SessionAttributes("patient")
-public class PatientController {
+public class PatientController extends CommonController{
 	private static final String FORM_DELETE_ERROR = "form.deleteError";
 	private static final String FORM_NOT_FOUND = "form.notFound";
 	private static final String FORM_MESSAGE = "message";
