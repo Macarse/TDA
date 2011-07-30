@@ -197,6 +197,25 @@ public class ReportController {
 		}
 	}
 
+	@RequestMapping(value = "/scholarityByDestinationReport", method = RequestMethod.GET)
+	public void doScholarityByDestinationReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadScholarityByDestinationReport(request, response,
+					configReport.getFormat(), configReport);
+		}
+	}
+
 	@RequestMapping(value = "/ageForDestinationReport", method = RequestMethod.GET)
 	public void doAgeForDestinationReport(
 			@Valid @ModelAttribute ConfigReport configReport,
@@ -211,8 +230,27 @@ public class ReportController {
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadAgeForDestinationReport(request, response,
-					configReport.getFormat(), configReport);
+			reportService.downloadAgeForDestinationReport(request,
+					response, configReport.getFormat(), configReport);
+		}
+	}
+
+	@RequestMapping(value = "/prevalentDiagnosticForDestinationReport", method = RequestMethod.GET)
+	public void doPrevalentDiagnosticForDestinationReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadPrevalentDiagnosticForDestinationReport(
+					request, response, configReport.getFormat(), configReport);
 		}
 	}
 }
