@@ -35,6 +35,7 @@
 		<property name="patientDAO" ref="patientDAO" />
 		<property name="placeDAO" ref="placeDAO" />
 		<property name="itineraryDAO" ref="itineraryDAO" />
+		<property name="patientcubeDAO" ref="patientcubeDAO" />
 	</bean>
 
 	<bean id="chatService" class="com.tda.service.impl.ChatServiceImpl">
@@ -91,6 +92,10 @@
 	
 	<bean id="pediatricianDiagnosisService" class="com.tda.service.impl.PediatricianDiagnosisServiceImpl">
 		<property name="pediatricianDiagnosisDAO" ref="pediatricianDiagnosisDAO" />
+	</bean>
+	
+	<bean id="patientcubeService" class="com.tda.service.impl.PatientcubeServiceImpl">
+		<property name="patientcubeDAO" ref="patientcubeDAO" />
 	</bean>
 
 	<bean id="userProvider" class="com.tda.service.provider.UserDefaultProvider"

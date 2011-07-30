@@ -5,6 +5,15 @@ public class InterconsultPerYearReport {
 	private String year;
 	private Integer quantity;
 
+	public InterconsultPerYearReport() {
+
+	}
+
+	public InterconsultPerYearReport(String year, int quantity) {
+		this.year = year;
+		this.quantity = quantity;
+	}
+
 	public String getYear() {
 		return year;
 	}

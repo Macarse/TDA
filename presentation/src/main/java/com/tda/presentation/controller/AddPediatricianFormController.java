@@ -1,5 +1,6 @@
 package com.tda.presentation.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.tda.model.itinerary.PatientCube;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.pediatrician.PediatricianForm;
+import com.tda.model.utils.FormType;
+import com.tda.service.api.ItineraryService;
 import com.tda.service.api.PatientInTrainService;
 import com.tda.service.api.PatientService;
+import com.tda.service.api.PatientcubeService;
 import com.tda.service.api.PediatricianFormService;
 
 @Controller
@@ -33,6 +38,8 @@ public class AddPediatricianFormController extends
 	private PediatricianFormService pediatricianFormService;
 	private PatientService patientService;
 	private PatientInTrainService patientInTrainService;
+	private PatientcubeService patientcubeService;
+	private ItineraryService itineraryService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(@PathVariable("patientId") long patientId,
@@ -61,6 +68,14 @@ public class AddPediatricianFormController extends
 			return PEDIATRICIAN_ADD_FORM;
 		} else {
 			pediatricianFormService.save(pediatricianForm);
+
+			PatientCube pc = new PatientCube();
+			pc.setPatientId(pediatricianForm.getPatient().getId());
+			pc.setFormType(FormType.pediatrician);
+			pc.setFormId(pediatricianForm.getId());
+			pc.setPlace(itineraryService.findCurrent());
+			pc.setInsertedDate(new Date());
+			patientcubeService.save(pc);
 
 			Patient patient = pediatricianForm.getPatient();
 			List<PatientInTrain> patientInTrain = patientInTrainService
@@ -91,5 +106,15 @@ public class AddPediatricianFormController extends
 	public void setPatientInTrainService(
 			PatientInTrainService patientInTrainService) {
 		this.patientInTrainService = patientInTrainService;
+	}
+
+	@Autowired
+	public void setPatientcubeService(PatientcubeService patientcubeService) {
+		this.patientcubeService = patientcubeService;
+	}
+
+	@Autowired
+	public void setItineraryService(ItineraryService itineraryService) {
+		this.itineraryService = itineraryService;
 	}
 }

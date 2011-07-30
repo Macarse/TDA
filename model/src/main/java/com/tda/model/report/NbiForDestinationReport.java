@@ -1,10 +1,22 @@
 package com.tda.model.report;
 
+import com.tda.model.socialworker.NBI;
+
 public class NbiForDestinationReport {
 
 	private String destination;
 	private String nbi;
 	private Integer quantity;
+
+	public NbiForDestinationReport() {
+
+	}
+
+	public NbiForDestinationReport(String dest, String nbi, Integer quantity) {
+		this.destination = dest;
+		this.nbi = NBI.valueOf(nbi).getDescription();
+		this.quantity = quantity;
+	}
 
 	public String getDestination() {
 		return destination;
