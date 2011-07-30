@@ -74,7 +74,8 @@ $(document).ready(function() {
 		var date = $(this).datepicker("getDate", '+1d');
 		date.setDate(date.getDate() + 1)
 		var endDate = $("#endDate");
-		endDate.datepicker("setDate", date);
+		if(endDate.val() == "")
+			endDate.datepicker("setDate", date);
 	});
 	
 	if (placePosition < 0) {
