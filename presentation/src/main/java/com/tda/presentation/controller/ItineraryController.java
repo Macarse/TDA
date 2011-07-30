@@ -131,7 +131,7 @@ public class ItineraryController {
 	}
 
 	private void validateDates(BindingResult result, Date start, Date end) {
-		if (! start.before(end) || start.equals(end)) {
+		if (start == null || end == null || ! start.before(end) || start.equals(end)) {
 			FieldError error = new FieldError("currentItinerary", "endDate", end, false,
 					new String[] { "itinerary.wrongEndDate" }, null,
 					"Debe ser posterior a la fecha de inicio");
