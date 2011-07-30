@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,16 +30,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.tda.model.applicationuser.ApplicationUser;
-import com.tda.model.applicationuser.Authority;
 import com.tda.model.applicationuser.OnlineUser;
 import com.tda.model.item.Item;
 import com.tda.model.item.ItemBuilder;
-import com.tda.model.itinerary.Itinerary;
 import com.tda.model.patient.Patient;
 import com.tda.model.patient.PatientInTrain;
 import com.tda.model.patient.Sex;
 import com.tda.model.pediatrician.PediatricianDiagnosis;
-import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.persistence.paginator.Paginator;
 import com.tda.presentation.params.ParamContainer;
 import com.tda.service.api.ApplicationUserService;
@@ -52,15 +48,14 @@ import com.tda.service.api.PediatricianDiagnosisService;
 
 @Controller
 @RequestMapping(value = "/")
-@SessionAttributes({ "patient", "user", "currentItinerary" })
-public class WelcomeController {
+@SessionAttributes({ "patient", "user"})
+public class WelcomeController extends CommonController{
 	private static final String LIST = "welcome/list";
 
 	private PatientInTrainService patientInTrainService;
 	private PatientService patientService;
 	private ItemService itemService;
 	private PediatricianDiagnosisService pediatricianDiagnosisService;
-	private ApplicationUserService applicationUserService;
 	private Paginator paginator;
 	private ParamContainer params;
 
@@ -68,7 +63,6 @@ public class WelcomeController {
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 			"dd/MM/yyyy");
 	private OnlineUserService onlineUserService;
-	private ItineraryDAO itineraryDAO;
 
 	public WelcomeController() {
 		params = new ParamContainer();
@@ -85,50 +79,11 @@ public class WelcomeController {
 		return Sex.values();
 	}
 
-	@ModelAttribute("currentItinerary")
-	public Itinerary getCurrentItinerary() {
-		Itinerary itinerary = itineraryDAO.findNextItinerary();
-
-		if (itinerary == null) {
-			return new Itinerary();
-		} else {
-			return itinerary;
-		}
-	}
-
 	@ModelAttribute("user")
 	public UserDetails getUser() {
 		Object aux = SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 		return ((UserDetails) aux);
-	}
-
-	@ModelAttribute("userList")
-	public List<ApplicationUser> getUserList() {
-		List<ApplicationUser> users = applicationUserService.findAll();
-
-		// set admin authority
-		Authority adminAuth = new Authority();
-		adminAuth.setAuthority("ROLE_ADMIN");
-
-		// ROLE_USER
-		Authority userAuth = new Authority();
-		userAuth.setAuthority("ROLE_USER");
-
-		Iterator<ApplicationUser> iter = users.iterator();
-		ApplicationUser user;
-
-		while (iter.hasNext()) {
-			user = iter.next();
-			Collection<Authority> auths = user.getMyAuthorities();
-
-			if (auths.size() == 2 && auths.contains(adminAuth)
-					&& auths.contains(userAuth)) {
-				iter.remove();
-			}
-		}
-
-		return users;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -400,11 +355,6 @@ public class WelcomeController {
 			}
 		}
 		return new Gson().toJson(categories);
-	}
-
-	@Autowired
-	public void setItineraryDAO(ItineraryDAO itineraryDAO) {
-		this.itineraryDAO = itineraryDAO;
 	}
 
 	@Autowired

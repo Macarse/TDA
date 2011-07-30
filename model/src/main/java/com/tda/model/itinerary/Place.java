@@ -91,10 +91,23 @@ public class Place {
 
 	@Override
 	public String toString() {
-		return "Place [id=" + id + ", arrivalDate=" + arrivalDate
-				+ ", province=" + province + ", city=" + city
-				+ ", neighbourhood=" + neighbourhood + ", additionalInfo="
-				+ additionalInfo + "]";
-	}
+		String toString = "";
 
+		if (province != null && !province.isEmpty())
+			toString += province;
+
+		if (city != null && !city.isEmpty()) {
+			if (!toString.isEmpty())
+				toString += " - ";
+			toString += city;
+		}
+
+		if (neighbourhood != null && !neighbourhood.isEmpty()) {
+			if (!toString.isEmpty())
+				toString += " - ";
+			toString += neighbourhood;
+		}
+
+		return toString;
+	}
 }

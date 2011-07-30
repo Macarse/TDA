@@ -109,6 +109,12 @@
 		</property>
 	</bean>
 	
+	<bean id="patientcubeDAO" class="com.tda.persistence.dao.PatientcubeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
 	<bean id="formContainerDAO" class="com.tda.persistence.dao.FormContainerDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />

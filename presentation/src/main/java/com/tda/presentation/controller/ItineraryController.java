@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tda.model.itinerary.Itinerary;
@@ -28,8 +27,7 @@ import com.tda.service.api.ItineraryService;
 
 @Controller
 @RequestMapping(value = "/itinerary")
-@SessionAttributes({ "currentItinerary" })
-public class ItineraryController {
+public class ItineraryController extends CommonController{
 	private ItineraryService itineraryService;
 	private List<Integer> removedIndexes = new ArrayList<Integer>();
 
@@ -131,7 +129,7 @@ public class ItineraryController {
 	}
 
 	private void validateDates(BindingResult result, Date start, Date end) {
-		if (! start.before(end) || start.equals(end)) {
+		if (start == null || end == null || ! start.before(end) || start.equals(end)) {
 			FieldError error = new FieldError("currentItinerary", "endDate", end, false,
 					new String[] { "itinerary.wrongEndDate" }, null,
 					"Debe ser posterior a la fecha de inicio");

@@ -13,7 +13,7 @@ public interface ItineraryService {
 	void update(Itinerary itinerary);
 
 	List<Itinerary> getAll();
-	
+
 	Itinerary getById(Long id);
 
 	Itinerary getCurrent();
@@ -21,4 +21,6 @@ public interface ItineraryService {
 	Itinerary getForSpecificDate(Date date);
 
 	Itinerary getNext();
+
+	String findCurrent();
 }

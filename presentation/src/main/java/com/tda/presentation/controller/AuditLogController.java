@@ -18,7 +18,7 @@ import com.tda.service.api.AuditLogService;
 
 @Controller
 @RequestMapping(value = "/auditLog")
-public class AuditLogController {
+public class AuditLogController extends CommonController{
     private static final String AUDIT_LOG_LIST = "auditLog/list";
 
     private AuditLogService auditLogService;
