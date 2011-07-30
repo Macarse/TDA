@@ -158,4 +158,99 @@ public class ReportController {
 					configReport.getFormat(), configReport);
 		}
 	}
+
+	@RequestMapping(value = "/nbiForDestinationReport", method = RequestMethod.GET)
+	public void doNbiForDestinationReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadNbiForDestinationReport(request, response,
+					configReport.getFormat(), configReport);
+		}
+	}
+
+	@RequestMapping(value = "/interconsultPerYearReport", method = RequestMethod.GET)
+	public void doInterconsultPerYearReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadInterconsultPerYearReport(request, response,
+					configReport.getFormat(), configReport);
+		}
+	}
+
+	@RequestMapping(value = "/scholarityByDestinationReport", method = RequestMethod.GET)
+	public void doScholarityByDestinationReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadScholarityByDestinationReport(request, response,
+					configReport.getFormat(), configReport);
+		}
+	}
+
+	@RequestMapping(value = "/ageForDestinationReport", method = RequestMethod.GET)
+	public void doAgeForDestinationReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadAgeForDestinationReport(request,
+					response, configReport.getFormat(), configReport);
+		}
+	}
+
+	@RequestMapping(value = "/prevalentDiagnosticForDestinationReport", method = RequestMethod.GET)
+	public void doPrevalentDiagnosticForDestinationReport(
+			@Valid @ModelAttribute ConfigReport configReport,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws ServletException, IOException,
+			ClassNotFoundException, SQLException, ColumnBuilderException,
+			JRException, ChartBuilderException {
+
+		ModelAndView model = new ModelAndView(LIST);
+
+		if (result.hasErrors()) {
+			// Primero valido el formulario
+			model.addObject("configReport", configReport);
+		} else {
+			reportService.downloadPrevalentDiagnosticForDestinationReport(
+					request, response, configReport.getFormat(), configReport);
+		}
+	}
 }

@@ -26,7 +26,11 @@ import ar.com.fdvs.dj.domain.builders.ChartBuilderException;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
 import com.tda.model.patient.Patient;
+import com.tda.model.report.AgeForDestinationReport;
 import com.tda.model.report.AgeForReport;
+import com.tda.model.report.NbiForDestinationReport;
+import com.tda.model.report.ScholarityByDestinationReport;
+import com.tda.model.report.PrevalentDiagnosticForDestinationReport;
 import com.tda.model.report.SexForReport;
 import com.tda.model.utils.ConfigReport;
 import com.tda.model.utils.ExportFormat;
@@ -90,7 +94,7 @@ public class ReportService {
 							configReport.getAgeFrom(), configReport.getAgeTo()));
 			fileName = "PatientReportAge.";
 			reportTitle = "Pacientes entre " + configReport.getAgeFrom()
-					+ " y " + configReport.getAgeTo() + " a–os";
+					+ " y " + configReport.getAgeTo() + " aï¿½os";
 		} else {
 			ds = new JRBeanCollectionDataSource(patientDAO.findAll());
 			fileName = "PatientReport.";
@@ -355,7 +359,460 @@ public class ReportService {
 		// it
 		Exporter exporter = new Exporter();
 
-		String fileName = "SexGraphReport.";
+		String fileName = "AgeReport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(request, jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
+	}
+
+	public void downloadNbiForDestinationReport(HttpServletRequest request,
+			HttpServletResponse response, ExportFormat format,
+			ConfigReport configReport) throws ColumnBuilderException,
+			ChartBuilderException, ClassNotFoundException, JRException {
+
+		NbiForDestinationReportLayout layout = new NbiForDestinationReportLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<NbiForDestinationReport> groupedNbi = new ArrayList<NbiForDestinationReport>();
+
+		NbiForDestinationReport nbi1 = new NbiForDestinationReport();
+		nbi1.setDestination("buenosaires");
+		nbi1.setNbi("hacinamiento");
+		nbi1.setQuantity(50);
+		NbiForDestinationReport nbi2 = new NbiForDestinationReport();
+		nbi2.setDestination("buenosaires");
+		nbi2.setNbi("vivienda");
+		nbi2.setQuantity(50);
+		NbiForDestinationReport nbi3 = new NbiForDestinationReport();
+		nbi3.setDestination("catamarca");
+		nbi3.setNbi("hacinamiento");
+		nbi3.setQuantity(75);
+		NbiForDestinationReport nbi4 = new NbiForDestinationReport();
+		nbi4.setDestination("catamarca");
+		nbi4.setNbi("vivienda");
+		nbi4.setQuantity(15);
+		NbiForDestinationReport nbi5 = new NbiForDestinationReport();
+		nbi5.setDestination("catamarca");
+		nbi5.setNbi("aesd");
+		nbi5.setQuantity(10);
+
+		groupedNbi.add(nbi1);
+		groupedNbi.add(nbi2);
+		groupedNbi.add(nbi3);
+		groupedNbi.add(nbi4);
+		groupedNbi.add(nbi5);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "Nbifordestinationreport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(request, jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
+	}
+
+	public void downloadInterconsultPerYearReport(HttpServletRequest request,
+			HttpServletResponse response, ExportFormat format,
+			ConfigReport configReport) throws ColumnBuilderException,
+			ChartBuilderException, ClassNotFoundException, JRException {
+
+		AgeForDestinationReportLayout layout = new AgeForDestinationReportLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<AgeForDestinationReport> grouped = new ArrayList<AgeForDestinationReport>();
+
+		AgeForDestinationReport afd1 = new AgeForDestinationReport();
+		afd1.setAge("10");
+		afd1.setDestination("buenos aires");
+		afd1.setQuantity(4);
+		AgeForDestinationReport afd2 = new AgeForDestinationReport();
+		afd2.setAge("15");
+		afd2.setDestination("buenos aires");
+		afd2.setQuantity(18);
+		AgeForDestinationReport afd3 = new AgeForDestinationReport();
+		afd3.setAge("18");
+		afd3.setDestination("buenos aires");
+		afd3.setQuantity(2);
+		AgeForDestinationReport afd4 = new AgeForDestinationReport();
+		afd4.setAge("11");
+		afd4.setDestination("catamarca");
+		afd4.setQuantity(3);
+		AgeForDestinationReport afd5 = new AgeForDestinationReport();
+		afd5.setAge("19");
+		afd5.setDestination("catamarca");
+		afd5.setQuantity(10);
+
+		grouped.add(afd1);
+		grouped.add(afd2);
+		grouped.add(afd3);
+		grouped.add(afd4);
+		grouped.add(afd5);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(grouped);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "InterconsultantPerYearReport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(request, jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
+
+	}
+
+	public void downloadAgeForDestinationReport(HttpServletRequest request,
+			HttpServletResponse response, ExportFormat format,
+			ConfigReport configReport) throws JRException,
+			ColumnBuilderException, ChartBuilderException,
+			ClassNotFoundException {
+
+		AgeForDestinationReportLayout layout = new AgeForDestinationReportLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<AgeForDestinationReport> grouped = new ArrayList<AgeForDestinationReport>();
+
+		AgeForDestinationReport afd1 = new AgeForDestinationReport();
+		afd1.setAge("10");
+		afd1.setDestination("buenos aires");
+		afd1.setQuantity(4);
+		AgeForDestinationReport afd2 = new AgeForDestinationReport();
+		afd2.setAge("15");
+		afd2.setDestination("buenos aires");
+		afd2.setQuantity(18);
+		AgeForDestinationReport afd3 = new AgeForDestinationReport();
+		afd3.setAge("18");
+		afd3.setDestination("buenos aires");
+		afd3.setQuantity(2);
+		AgeForDestinationReport afd4 = new AgeForDestinationReport();
+		afd4.setAge("11");
+		afd4.setDestination("catamarca");
+		afd4.setQuantity(3);
+		AgeForDestinationReport afd5 = new AgeForDestinationReport();
+		afd5.setAge("19");
+		afd5.setDestination("catamarca");
+		afd5.setQuantity(10);
+
+		grouped.add(afd1);
+		grouped.add(afd2);
+		grouped.add(afd3);
+		grouped.add(afd4);
+		grouped.add(afd5);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(grouped);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "AgeForDestinationReport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(request, jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
+	}
+
+	public void downloadPrevalentDiagnosticForDestinationReport(
+			HttpServletRequest request, HttpServletResponse response,
+			ExportFormat format, ConfigReport configReport) throws JRException,
+			ColumnBuilderException, ChartBuilderException,
+			ClassNotFoundException {
+
+		PrevalentDiagnosticForDestinationReportLayout layout = new PrevalentDiagnosticForDestinationReportLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<PrevalentDiagnosticForDestinationReport> groupedNbi = new ArrayList<PrevalentDiagnosticForDestinationReport>();
+
+		PrevalentDiagnosticForDestinationReport nbi1 = new PrevalentDiagnosticForDestinationReport();
+		nbi1.setDestination("buenosaires");
+		nbi1.setDiagnostic("resfrio");
+		nbi1.setQuantity(50);
+		PrevalentDiagnosticForDestinationReport nbi2 = new PrevalentDiagnosticForDestinationReport();
+		nbi2.setDestination("buenosaires");
+		nbi2.setDiagnostic("fiebre");
+		nbi2.setQuantity(10);
+		PrevalentDiagnosticForDestinationReport nbi3 = new PrevalentDiagnosticForDestinationReport();
+		nbi3.setDestination("catamarca");
+		nbi3.setDiagnostic("resfrio");
+		nbi3.setQuantity(75);
+		PrevalentDiagnosticForDestinationReport nbi4 = new PrevalentDiagnosticForDestinationReport();
+		nbi4.setDestination("catamarca");
+		nbi4.setDiagnostic("fiebre");
+		nbi4.setQuantity(150);
+		PrevalentDiagnosticForDestinationReport nbi5 = new PrevalentDiagnosticForDestinationReport();
+		nbi5.setDestination("catamarca");
+		nbi5.setDiagnostic("aesd");
+		nbi5.setQuantity(10);
+
+		groupedNbi.add(nbi1);
+		groupedNbi.add(nbi2);
+		groupedNbi.add(nbi3);
+		groupedNbi.add(nbi4);
+		groupedNbi.add(nbi5);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "PrevalentDiagnosticForDestinationReport.";
+
+		switch (format) {
+		case XLS:
+			exporter.exportXLS(jp, baos);
+			fileName += "xls";
+			response.setContentType("application/vnd.ms-excel");
+			break;
+		case PDF:
+			exporter.exportPDF(jp, baos);
+			fileName += "pdf";
+			response.setContentType("application/pdf");
+			break;
+		case HTML:
+			exporter.exportHTML(request, jp, baos);
+			fileName += "html";
+			response.setContentType("text/html");
+			break;
+		}
+
+		response.setHeader("Content-Disposition", "inline; filename="
+				+ fileName);
+
+		response.setContentLength(baos.size());
+
+		// Write to reponse stream
+		writeReportToResponseStream(response, baos);
+
+	}
+
+	public void downloadScholarityByDestinationReport(
+			HttpServletRequest request, HttpServletResponse response,
+			ExportFormat format, ConfigReport configReport) throws ColumnBuilderException, ChartBuilderException, 
+			ClassNotFoundException, JRException {
+		ScholarityByDestinationLayout layout = new ScholarityByDestinationLayout();
+		DynamicReport dr = layout.buildReportLayout();
+
+		// params is used for passing extra parameters like when passing
+		// a custom datasource, such as Hibernate datasource
+		// In this application we won't utilize this parameter
+		@SuppressWarnings("rawtypes")
+		HashMap params = new HashMap();
+
+		// Compile our report layout
+		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
+				new ClassicLayoutManager(), params);
+
+		Collection<ScholarityByDestinationReport> groupedNbi = new ArrayList<ScholarityByDestinationReport>();
+
+		ScholarityByDestinationReport sch1 = new ScholarityByDestinationReport();
+		sch1.setDestination("buenosaires");
+		sch1.setScholarity("jardÃ­n");
+		sch1.setQuantity(50);
+		ScholarityByDestinationReport sch2 = new ScholarityByDestinationReport();
+		sch2.setDestination("buenosaires");
+		sch2.setScholarity("terciario");
+		sch2.setQuantity(50);
+		ScholarityByDestinationReport sch3 = new ScholarityByDestinationReport();
+		sch3.setDestination("catamarca");
+		sch3.setScholarity("hacinamiento");
+		sch3.setQuantity(75);
+		ScholarityByDestinationReport sch4 = new ScholarityByDestinationReport();
+		sch4.setDestination("catamarca");
+		sch4.setScholarity("vivienda");
+		sch4.setQuantity(15);
+		ScholarityByDestinationReport sch5 = new ScholarityByDestinationReport();
+		sch5.setDestination("catamarca");
+		sch5.setScholarity("aesd");
+		sch5.setQuantity(10);
+
+		groupedNbi.add(sch1);
+		groupedNbi.add(sch2);
+		groupedNbi.add(sch3);
+		groupedNbi.add(sch4);
+		groupedNbi.add(sch5);
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
+		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
+
+		// Create our output byte stream
+		// This is the stream where the data will be written
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		// Export to output stream
+		// The data will be exported to the ByteArrayOutputStream baos
+		// We delegate the exporting to a custom Exporter instance
+		// The Exporter is a wrapper class I made. Feel free to remove or modify
+		// it
+		Exporter exporter = new Exporter();
+
+		String fileName = "Nbifordestinationreport.";
 
 		switch (format) {
 		case XLS:

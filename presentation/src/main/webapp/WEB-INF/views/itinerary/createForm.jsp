@@ -61,11 +61,21 @@ $(document).ready(function() {
 				$("#submitRow").before(data);
 				addPickerToNewContent(placePosition);
 				removeHandlerForNewContent(placePosition);
+
+				var last = $("[id$='province']:last");
+				last.focus();
 		});
 	});
 	
 	setupRemoveHandlers(placePosition);
 	initialDatePickers(placePosition);
+
+	$("#beginningDate").change(function(){
+		var date = $(this).datepicker("getDate", '+1d');
+		date.setDate(date.getDate() + 1)
+		var endDate = $("#endDate");
+		endDate.datepicker("setDate", date);
+	});
 	
 	if (placePosition < 0) {
 		document.getElementById('addPlaceButton').click();
@@ -103,11 +113,6 @@ $(document).ready(function() {
 				<form:input path="description"/>
 				<form:errors path="description" />
 			</li>
-			
-			<!-- LUGARES -->
-		
-			<li><input type="button" id="addPlaceButton" value="Agregar otro destino"  /></li>
-		
 		</ol>
 		</fieldset>
 	</div>
@@ -161,8 +166,11 @@ $(document).ready(function() {
 	</fieldset>
 	</div>
 	</c:forEach>
-	
-	<div id="submitRow"><input type="submit" value="Guardar"/></div>
+
+	<div style="clear: both;">	
+		<div id="submitRow" style="float: right;"><input type="submit" value="Guardar"/></div>
+		<div style="float: left;"><input type="button" id="addPlaceButton" value="Agregar otro destino"  /></div>
+	</div>
 	
 	
 	</fieldset>

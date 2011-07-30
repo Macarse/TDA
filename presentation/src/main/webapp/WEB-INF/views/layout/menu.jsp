@@ -95,7 +95,7 @@
 		   		if(patients.length > 0){
 			   		for(i=0; i<patients.length; i++ ) {
 			   	   		//Cada elemento esta separado por =:
-						innerHtml += "<li>" + patients[i].firstName + ' ' + patients[i].lastName +  " <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif'/></a> <a href='#' onclick='showPatientMenu(" + patients[i].id + ")'> <img src='" + contextPath + "/themes/default/image/refresh.png'/> </a></li>";
+						innerHtml += "<li><a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</a> <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif'/></a> <a href='#' onclick='showPatientMenu(" + patients[i].id + ")'> <img src='" + contextPath + "/themes/default/image/refresh.png'/> </a></li>";
 			   		}
 				}else{
 					innerHtml = '<i>No hay Pacientes en el tren</i>';
@@ -117,7 +117,7 @@
 		   		if(patients.length > 0){
 			   		for(i=0; i<patients.length; i++ ) {
 			   	   		//Cada elemento esta separado por =:
-			   	   		innerHtml += "<li>" + patients[i].firstName + ' ' + patients[i].lastName +  " <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif'/></a> <a href='#' onclick='showQueueMenu(" + patients[i].id + ")'> <img src='" + contextPath + "/themes/default/image/refresh.png'/> </a></li>";
+			   	   		innerHtml += "<li><a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'>" + patients[i].firstName + ' ' + patients[i].lastName +  " </a> <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif'/></a> <a href='#' onclick='showQueueMenu(" + patients[i].id + ")'> <img src='" + contextPath + "/themes/default/image/refresh.png'/> </a></li>";
 						//innerHtml += "<li onclick='showQueueMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
 			   		}
 				}else{
