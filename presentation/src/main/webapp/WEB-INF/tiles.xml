@@ -25,6 +25,12 @@
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
 	</definition>
 
+	<!-- AuditLog -->
+	<definition name="auditLog/list" extends="base.definition">
+		<put-attribute name="title" value="Logs" />
+		<put-attribute name="body" value="/WEB-INF/views/auditLog/list.jsp" />
+	</definition>
+
 	<!-- Item -->
 	<definition name="item/list" extends="base.definition">
 		<put-attribute name="title" value="Inventario de ítems" />

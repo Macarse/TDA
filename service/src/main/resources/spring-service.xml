@@ -8,6 +8,10 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
+	<bean id="auditLogService" class="com.tda.service.impl.AuditLogServiceImpl">
+		<property name="auditLogDAO" ref="auditLogDAO" />
+	</bean>
+
 	<bean id="itemService" class="com.tda.service.impl.ItemServiceImpl">
 		<property name="itemDAO" ref="itemDAO" />
 	</bean>
