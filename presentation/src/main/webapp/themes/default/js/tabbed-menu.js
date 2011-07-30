@@ -73,6 +73,7 @@ function checkTabErrors(tabName, tabs){
     
     if(firstTab > -1){
     	$(tabName).tabs('select', parseInt(firstTab));
+    	$("span[id*='errors']:first").prev().focus();
     	return true;
     }
     
