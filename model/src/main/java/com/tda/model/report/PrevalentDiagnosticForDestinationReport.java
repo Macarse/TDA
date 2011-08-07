@@ -6,6 +6,19 @@ public class PrevalentDiagnosticForDestinationReport {
 	private String diagnostic;
 	private Integer quantity;
 
+	public PrevalentDiagnosticForDestinationReport() {
+
+	}
+
+	public PrevalentDiagnosticForDestinationReport(String destination,
+			String diagnostic, int quantity) {
+		this.destination = (destination != null && !destination.isEmpty() ? destination
+				: "Destino sin definir");
+		this.diagnostic = (diagnostic != null && !diagnostic.isEmpty() ? diagnostic
+				: "Diagnóstico sin definir");
+		this.quantity = quantity;
+	}
+
 	public String getDestination() {
 		return destination;
 	}

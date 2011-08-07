@@ -12,9 +12,12 @@ public class NbiForDestinationReport {
 
 	}
 
-	public NbiForDestinationReport(String dest, String nbi, Integer quantity) {
-		this.destination = dest;
-		this.nbi = NBI.valueOf(nbi).getDescription();
+	public NbiForDestinationReport(String destination, String nbi,
+			Integer quantity) {
+		this.destination = (destination != null && !destination.isEmpty() ? destination
+				: "Destino sin definir");
+		this.nbi = (nbi != null && !nbi.isEmpty() ? NBI.valueOf(nbi)
+				.getDescription() : "NBI sin definir");
 		this.quantity = quantity;
 	}
 

@@ -608,34 +608,8 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<PrevalentDiagnosticForDestinationReport> groupedNbi = new ArrayList<PrevalentDiagnosticForDestinationReport>();
-
-		PrevalentDiagnosticForDestinationReport nbi1 = new PrevalentDiagnosticForDestinationReport();
-		nbi1.setDestination("buenosaires");
-		nbi1.setDiagnostic("resfrio");
-		nbi1.setQuantity(50);
-		PrevalentDiagnosticForDestinationReport nbi2 = new PrevalentDiagnosticForDestinationReport();
-		nbi2.setDestination("buenosaires");
-		nbi2.setDiagnostic("fiebre");
-		nbi2.setQuantity(10);
-		PrevalentDiagnosticForDestinationReport nbi3 = new PrevalentDiagnosticForDestinationReport();
-		nbi3.setDestination("catamarca");
-		nbi3.setDiagnostic("resfrio");
-		nbi3.setQuantity(75);
-		PrevalentDiagnosticForDestinationReport nbi4 = new PrevalentDiagnosticForDestinationReport();
-		nbi4.setDestination("catamarca");
-		nbi4.setDiagnostic("fiebre");
-		nbi4.setQuantity(150);
-		PrevalentDiagnosticForDestinationReport nbi5 = new PrevalentDiagnosticForDestinationReport();
-		nbi5.setDestination("catamarca");
-		nbi5.setDiagnostic("aesd");
-		nbi5.setQuantity(10);
-
-		groupedNbi.add(nbi1);
-		groupedNbi.add(nbi2);
-		groupedNbi.add(nbi3);
-		groupedNbi.add(nbi4);
-		groupedNbi.add(nbi5);
+		Collection<PrevalentDiagnosticForDestinationReport> groupedNbi = patientcubeDAO
+				.findPrevalentDiagnosticForDestination();
 
 		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
@@ -699,34 +673,8 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<ScholarityByDestinationReport> groupedNbi = new ArrayList<ScholarityByDestinationReport>();
-
-		ScholarityByDestinationReport sch1 = new ScholarityByDestinationReport();
-		sch1.setDestination("buenosaires");
-		sch1.setScholarity("jardín");
-		sch1.setQuantity(50);
-		ScholarityByDestinationReport sch2 = new ScholarityByDestinationReport();
-		sch2.setDestination("buenosaires");
-		sch2.setScholarity("terciario");
-		sch2.setQuantity(50);
-		ScholarityByDestinationReport sch3 = new ScholarityByDestinationReport();
-		sch3.setDestination("catamarca");
-		sch3.setScholarity("hacinamiento");
-		sch3.setQuantity(75);
-		ScholarityByDestinationReport sch4 = new ScholarityByDestinationReport();
-		sch4.setDestination("catamarca");
-		sch4.setScholarity("vivienda");
-		sch4.setQuantity(15);
-		ScholarityByDestinationReport sch5 = new ScholarityByDestinationReport();
-		sch5.setDestination("catamarca");
-		sch5.setScholarity("aesd");
-		sch5.setQuantity(10);
-
-		groupedNbi.add(sch1);
-		groupedNbi.add(sch2);
-		groupedNbi.add(sch3);
-		groupedNbi.add(sch4);
-		groupedNbi.add(sch5);
+		Collection<ScholarityByDestinationReport> groupedNbi = patientcubeDAO
+				.findScholarityByDestination();
 
 		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
@@ -742,7 +690,7 @@ public class ReportService {
 		// it
 		Exporter exporter = new Exporter();
 
-		String fileName = "Nbifordestinationreport.";
+		String fileName = "ScholarityByDestinationReport.";
 
 		switch (format) {
 		case XLS:

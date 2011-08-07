@@ -10,7 +10,7 @@ public class InterconsultPerYearReport {
 	}
 
 	public InterconsultPerYearReport(String year, int quantity) {
-		this.year = year;
+		this.year = (year != null && !year.isEmpty() ? year : "Año sin definir");
 		this.quantity = quantity;
 	}
 

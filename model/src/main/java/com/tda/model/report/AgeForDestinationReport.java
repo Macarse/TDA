@@ -12,8 +12,9 @@ public class AgeForDestinationReport {
 
 	public AgeForDestinationReport(String destination, String age,
 			Integer quantity) {
-		this.destination = destination;
-		this.age = age;
+		this.destination = (destination != null && !destination.isEmpty() ? destination
+				: "Destino sin definir");
+		this.age = (age != null && !age.isEmpty() ? age : "Edad sin definir");
 		this.quantity = quantity;
 	}
 

@@ -6,6 +6,18 @@ public class ScholarityByDestinationReport {
 	private String scholarity;
 	private Integer quantity;
 
+	public ScholarityByDestinationReport() {
+	}
+
+	public ScholarityByDestinationReport(String destination, String scholarity,
+			int quantity) {
+		this.destination = (destination != null && !destination.isEmpty() ? destination
+				: "Destino sin definir");
+		this.scholarity = (scholarity != null && !scholarity.isEmpty() ? scholarity
+				: "Escolaridad sin definir");
+		this.quantity = quantity;
+	}
+
 	public String getDestination() {
 		return destination;
 	}
