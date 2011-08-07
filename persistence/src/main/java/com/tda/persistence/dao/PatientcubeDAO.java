@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
 import com.tda.model.itinerary.PatientCube;
+import com.tda.model.report.AgeForDestinationReport;
 import com.tda.model.report.InterconsultPerYearReport;
 import com.tda.model.report.NbiForDestinationReport;
 import com.tda.model.utils.FormType;
@@ -93,6 +94,46 @@ public class PatientcubeDAO extends GenericDAOImpl<PatientCube> {
 							while (rs.next()) {
 								InterconsultPerYearReport afr = new InterconsultPerYearReport(
 										rs.getString(1), rs.getInt(2));
+								list.add(afr);
+							}
+
+							// tx.commit();
+							// session.flush();
+							// releaseSession(session);
+						} catch (Exception ex) {
+						}
+						return list;
+					}
+				});
+
+		if (list == null || list.size() <= 0)
+			return null;
+
+		return list;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<AgeForDestinationReport> findAgeForDestination() {
+
+		List<AgeForDestinationReport> list = (List<AgeForDestinationReport>) getHibernateTemplate()
+				.execute(new HibernateCallback() {
+					@SuppressWarnings("deprecation")
+					public Object doInHibernate(Session session)
+							throws HibernateException {
+						List<AgeForDestinationReport> list = new ArrayList<AgeForDestinationReport>();
+						try {
+							// Transaction tx = session.beginTransaction();
+							String SQL_QUERY = "SELECT place, DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(birthdate, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(birthdate, '00-%m-%d')) AS age, COUNT(*) from Patient as pat inner join (select Distinct patientId,place from patientcube) as pc on pat.id=pc.patientId GROUP BY (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(birthdate, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(birthdate, '00-%m-%d'))), place";
+							// Query query = session.createQuery(SQL_QUERY);
+
+							Statement st = session.connection()
+									.createStatement();
+							ResultSet rs = st.executeQuery(SQL_QUERY);
+
+							while (rs.next()) {
+								AgeForDestinationReport afr = new AgeForDestinationReport(
+										rs.getString(1), rs.getString(2), rs
+												.getInt(3));
 								list.add(afr);
 							}
 

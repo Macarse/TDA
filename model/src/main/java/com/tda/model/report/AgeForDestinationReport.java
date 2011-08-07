@@ -6,6 +6,17 @@ public class AgeForDestinationReport {
 	private String age;
 	private Integer quantity;
 
+	public AgeForDestinationReport() {
+
+	}
+
+	public AgeForDestinationReport(String destination, String age,
+			Integer quantity) {
+		this.destination = destination;
+		this.age = age;
+		this.quantity = quantity;
+	}
+
 	public String getDestination() {
 		return destination;
 	}

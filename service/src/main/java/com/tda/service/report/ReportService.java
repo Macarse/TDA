@@ -543,34 +543,8 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<AgeForDestinationReport> grouped = new ArrayList<AgeForDestinationReport>();
-
-		AgeForDestinationReport afd1 = new AgeForDestinationReport();
-		afd1.setAge("10");
-		afd1.setDestination("buenos aires");
-		afd1.setQuantity(4);
-		AgeForDestinationReport afd2 = new AgeForDestinationReport();
-		afd2.setAge("15");
-		afd2.setDestination("buenos aires");
-		afd2.setQuantity(18);
-		AgeForDestinationReport afd3 = new AgeForDestinationReport();
-		afd3.setAge("18");
-		afd3.setDestination("buenos aires");
-		afd3.setQuantity(2);
-		AgeForDestinationReport afd4 = new AgeForDestinationReport();
-		afd4.setAge("11");
-		afd4.setDestination("catamarca");
-		afd4.setQuantity(3);
-		AgeForDestinationReport afd5 = new AgeForDestinationReport();
-		afd5.setAge("19");
-		afd5.setDestination("catamarca");
-		afd5.setQuantity(10);
-
-		grouped.add(afd1);
-		grouped.add(afd2);
-		grouped.add(afd3);
-		grouped.add(afd4);
-		grouped.add(afd5);
+		Collection<AgeForDestinationReport> grouped = patientcubeDAO
+				.findAgeForDestination();
 
 		JRDataSource ds = new JRBeanCollectionDataSource(grouped);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
