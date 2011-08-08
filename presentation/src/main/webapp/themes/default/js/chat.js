@@ -64,6 +64,7 @@ function chatWith(chatuser) {
 	$.post(contextPath + "/chat/open", { to: chatuser} , function(){});
 	createChatBox(chatuser);
 	$("#chatbox_"+chatuser+" .chatboxtextarea").focus();
+	createChatBox(chatuser);
 }
 
 function createChatBox(chatboxtitle,statusChatBox) {
