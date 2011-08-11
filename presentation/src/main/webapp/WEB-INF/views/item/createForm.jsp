@@ -55,6 +55,6 @@ $(document).ready(function(){
 		</c:forEach>
 	</form:select><form:errors path="measureUnit" /></p>
 
-	<p><input type="submit" /></p>
+	<p><input type="submit" value="Guardar"/></p>
 	</fieldset>
 </form:form>

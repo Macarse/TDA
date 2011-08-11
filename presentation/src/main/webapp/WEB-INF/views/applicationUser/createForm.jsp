@@ -27,6 +27,6 @@
 		cssErrorClass="error"><fmt:message key="user.form.autorities" /></form:label><br />
 	<form:checkboxes items="${allAuthorities}" path="myAuthorities" itemLabel="name" itemValue="authority"/><form:errors path="myAuthorities" /></p>
 
-	<p><input type="submit"/></p>
+	<p><input type="submit" value="Guardar"/></p>
 	</fieldset>
 </form:form>
