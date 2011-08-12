@@ -83,48 +83,48 @@
 				<form:label for="receivedAttentionInTrain" path="receivedAttentionInTrain" cssErrorClass="error">
 					<fmt:message key="dentist.form.receivedAttentionInTrain" />
 				</form:label></td>
-				<td><form:checkbox path="receivedAttentionInTrain" /> <form:errors path="receivedAttentionInTrain" />
+				<td><form:checkbox tabindex="1" path="receivedAttentionInTrain" /> <form:errors path="receivedAttentionInTrain" />
 			</td></tr>
 			
 			<tr><td>
 				<form:label for="receivedAttentionOutsideTrain" path="receivedAttentionInTrain" cssErrorClass="error">
 					<fmt:message key="dentist.form.receivedAttentionOutsideTrain" />
 				</form:label></td>
-				<td><form:checkbox path="receivedAttentionOutsideTrain" /> <form:errors path="receivedAttentionOutsideTrain" />
+				<td><form:checkbox tabindex="2" path="receivedAttentionOutsideTrain" /> <form:errors path="receivedAttentionOutsideTrain" />
 			</td></tr>
 			
 			<tr><td>
 				<form:label for="receivedAnesthesia" path="receivedAnesthesia" cssErrorClass="error">
 					<fmt:message key="dentist.form.receivedAnesthesia" />
 				</form:label></td>
-				<td><form:checkbox path="receivedAnesthesia" /> <form:errors path="receivedAnesthesia" />
+				<td><form:checkbox tabindex="3" path="receivedAnesthesia" /> <form:errors path="receivedAnesthesia" />
 			</td></tr>
 
 			<tr><td>
 				<form:label for="haemorrhage" path="haemorrhage" cssErrorClass="error">
 					<fmt:message key="dentist.form.haemorrhage" />
 				</form:label></td>
-				<td><form:checkbox path="haemorrhage" /> <form:errors path="haemorrhage" />
+				<td><form:checkbox tabindex="4" path="haemorrhage" /> <form:errors path="haemorrhage" />
 			</td></tr>
 
 			<tr><td>
 				<form:label for="medicineAllergic" path="medicineAllergic" cssErrorClass="error">
 					<fmt:message key="dentist.form.medicineAllergic" />
 				</form:label></td>
-				<td><form:checkbox path="medicineAllergic" /> <form:errors path="medicineAllergic" />
+				<td><form:checkbox tabindex="5" path="medicineAllergic" /> <form:errors path="medicineAllergic" />
 			</td></tr>
 			
 			<tr><td>
 				<form:label for="yodoAllergic" path="yodoAllergic" cssErrorClass="error">
 					<fmt:message key="dentist.form.yodoAllergic" />
 				</form:label></td>
-				<td><form:checkbox path="yodoAllergic" /> <form:errors path="yodoAllergic" />
+				<td><form:checkbox tabindex="6" path="yodoAllergic" /> <form:errors path="yodoAllergic" />
 			</td></tr>
 			
 			<tr>
 				<th colspan="2"><form:label for="comment" path="comment" cssErrorClass="error"><fmt:message key="dentist.form.comment" /></form:label></th></tr>
 			<tr>
-				<td colspan="2"><form:textarea path="comment" /> <form:errors path="comment" /></td></tr>
+				<td colspan="2"><form:textarea tabindex="7" path="comment" /> <form:errors path="comment" /></td></tr>
 		
 			<tr>
 				<td colspan="${fieldsPerRow}" class="doubleband">
@@ -152,7 +152,7 @@
 					</form:label>
 				</td>
 				<td>
-					<form:input path="cpod" />
+					<form:input tabindex="8" path="cpod" />
 				</td>
 			</tr>
 			<tr>
@@ -168,7 +168,7 @@
 					</form:label>
 				</td>
 				<td>
-					<form:input path="cpos" />
+					<form:input tabindex="9" path="cpos" />
 				</td>
 			</tr>
 			<tr>
@@ -184,7 +184,7 @@
 					</form:label>
 				</td>
 				<td>
-					<form:input path="ceod" />
+					<form:input tabindex="10" path="ceod" />
 				</td>
 			</tr>
 			<tr>
@@ -200,7 +200,7 @@
 					</form:label>
 				</td>
 				<td>
-					<form:input path="ceos" />
+					<form:input tabindex="11" path="ceos" />
 				</td>
 			</tr>
 			<tr>
@@ -265,7 +265,7 @@
 				</th></tr>
 			<tr>
 				<td colspan="2">
-					<form:textarea path="stains" />
+					<form:textarea tabindex="12" path="stains" />
 				</td>
 			</tr>
 			<tr>
@@ -278,20 +278,20 @@
 				<form:label for="cleftPalate" path="cleftPalate" cssErrorClass="error">
 					<fmt:message key="dentist.form.cleftPalate" />
 				</form:label></td>
-				<td><form:checkbox path="cleftPalate" /> <form:errors path="cleftPalate" />
+				<td><form:checkbox tabindex="13" path="cleftPalate" /> <form:errors path="cleftPalate" />
 			</td></tr>
 			
 			<tr><td>
 				<form:label for="cleftLip" path="cleftLip" cssErrorClass="error">
 					<fmt:message key="dentist.form.cleftLip" />
 				</form:label></td>
-				<td><form:checkbox path="cleftLip" /> <form:errors path="cleftLip" />
+				<td><form:checkbox tabindex="14" path="cleftLip" /> <form:errors path="cleftLip" />
 			</td></tr>
 			
 			<tr>
 				<th colspan="2"><form:label for="cleftComments" path="cleftComments" cssErrorClass="error"><fmt:message key="dentist.form.cleftComments" /></form:label></th></tr>
 			<tr> 
-				<td colspan="2"><form:textarea path="cleftComments" /> <form:errors path="cleftComments" /></td></tr>
+				<td colspan="2"><form:textarea tabindex="15" path="cleftComments" /> <form:errors path="cleftComments" /></td></tr>
 				
 			<tr><th colspan="2">
 					<form:label for="gumDisease" path="gumDisease" cssErrorClass="error">
@@ -301,7 +301,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="gumDisease" items="${gumDisease}">
 						<c:if test="${count%2 == 0 }"><tr></c:if>
-							<td><form:radiobutton path="gumDisease" value="${gumDisease}" /> ${gumDisease.description}</td>
+							<td><form:radiobutton tabindex="${count+16}" path="gumDisease" value="${gumDisease}" /> ${gumDisease.description}</td>
 						<c:if test="${count%2 == 1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -317,7 +317,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="periodontalDisease" items="${periodontalDisease}">
 						<c:if test="${count%2 == 0 }"><tr></c:if>
-							<td><form:radiobutton path="periodontalDisease" value="${periodontalDisease}" /> ${periodontalDisease.description}</td>
+							<td><form:radiobutton tabindex="${count+19}" path="periodontalDisease" value="${periodontalDisease}" /> ${periodontalDisease.description}</td>
 						<c:if test="${count%2 == 1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -333,7 +333,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="toothMobility" items="${toothMobility}">
 						<c:if test="${count%2 == 0 }"><tr></c:if>
-							<td><form:radiobutton path="toothMobility" value="${toothMobility}" /> ${toothMobility.description}</td>
+							<td><form:radiobutton tabindex="${count+22}" path="toothMobility" value="${toothMobility}" /> ${toothMobility.description}</td>
 						<c:if test="${count%2 == 1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -344,7 +344,7 @@
 			<tr>
 				<th colspan="2"><form:label for="severityLevelComments" path="severityLevelComments" cssErrorClass="error"><fmt:message key="dentist.form.severityLevelComments" /></form:label></th></tr>
 			<tr>
-				<td><form:textarea path="severityLevelComments" /> <form:errors path="severityLevelComments" /></td></tr>
+				<td><form:textarea tabindex="25" path="severityLevelComments" /> <form:errors path="severityLevelComments" /></td></tr>
 				
 		<tr>
 			<td colspan="${fieldsPerRow}" class="doubleband">
@@ -356,7 +356,7 @@
 		</table>
 	</div>
 	<div class="form-save-button">
-		<input id="formSubmitBtn" type="submit" value="Guardar Formulario" onclick="_isDirty = false;"/>
+		<input id="formSubmitBtn" tabindex="26" type="submit" value="Guardar Formulario" onclick="_isDirty = false;"/>
 	</div>
 	<div style="clear: both">
 		<hr>
