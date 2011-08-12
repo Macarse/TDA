@@ -198,7 +198,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="birthPlace" items="${birthPlace}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-							<td><form:radiobutton path="birthPlace" value="${birthPlace}" /> ${birthPlace.description}</td>
+							<td><form:radiobutton tabindex="${count+1}" path="birthPlace" value="${birthPlace}" /> ${birthPlace.description}</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -217,10 +217,10 @@
 							<td>
 							<c:choose>
 								<c:when test="${birthType == 'DYSTOCIC'}">
-									<form:radiobutton id="distosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
+									<form:radiobutton tabindex="5" id="distosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
 								</c:when>
 								<c:otherwise>
-									<form:radiobutton id="nondistosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
+									<form:radiobutton tabindex="4" id="nondistosicRadioButton" path="birthType" value="${birthType}"/> ${birthType.description}
 								</c:otherwise>
 							</c:choose>
 							</td>
@@ -239,7 +239,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="birthTypePresentation" items="${birthTypePresentation}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr class="distosicHidden"></c:if>
-							<td><form:radiobutton path="birthTypePresentation" value="${birthTypePresentation}" /> ${birthTypePresentation.description}</td>
+							<td><form:radiobutton tabindex="${count+6}" path="birthTypePresentation" value="${birthTypePresentation}" /> ${birthTypePresentation.description}</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -255,7 +255,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="birthTypeTermination" items="${birthTypeTermination}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr class="distosicHidden"></c:if>
-							<td><form:radiobutton path="birthTypeTermination" value="${birthTypeTermination}" /> ${birthTypeTermination.description}</td>
+							<td><form:radiobutton tabindex="${count+8}" path="birthTypeTermination" value="${birthTypeTermination}" /> ${birthTypeTermination.description}</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -267,14 +267,14 @@
 					<div class="form-input"><form:label for="patologyDuringBirth1" path="patologyDuringBirth" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.patologyDuringBirth" />
 					</form:label></div>
-					<div class="form-input"><form:textarea path="patologyDuringBirth" /> <form:errors path="patologyDuringBirth" /></div>
+					<div class="form-input"><form:textarea tabindex="12" path="patologyDuringBirth" /> <form:errors path="patologyDuringBirth" /></div>
 					</td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="gestationalAge" path="gestationalAge" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.gestationalAge" />
 					</form:label></div>
-					<div class="form-input"><form:input path="gestationalAge" /> <form:errors path="gestationalAge" /></div>
+					<div class="form-input"><form:input tabindex="13" path="gestationalAge" /> <form:errors path="gestationalAge" /></div>
 					</td></tr>
 				
 				
@@ -282,21 +282,21 @@
 					<div class="form-input"><form:label for="birthWeight" path="birthWeight" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.birthWeight" />
 					</form:label></div>
-					<div class="form-input"><form:input path="birthWeight" /> <form:errors path="birthWeight" /></div>
+					<div class="form-input"><form:input tabindex="14" path="birthWeight" /> <form:errors path="birthWeight" /></div>
 					</td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="size" path="size" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.size" />
 					</form:label> </div>
-					<div class="form-input"><form:input path="size" />
+					<div class="form-input"><form:input tabindex="15" path="size" />
 					<form:errors path="size" /></div></td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="headCircumference" path="headCircumference" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.headCircumference" />
 					</form:label></div>
-					<div class="form-input"><form:input path="headCircumference" />
+					<div class="form-input"><form:input tabindex="16" path="headCircumference" />
 					<form:errors path="headCircumference" /></div>
 					</td></tr>
 			
@@ -304,66 +304,66 @@
 					<div class="form-input"><form:label for="apgarDepressed1" path="apgarDepressed" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.apgarDepressed" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="apgarDepressed" />
+					<div class="form-input"><form:checkbox tabindex="17" path="apgarDepressed" />
 					<form:errors path="apgarDepressed" /></div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="apgarReanimated1" path="apgarReanimated" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.apgarReanimated" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="apgarReanimated" />
+					<div class="form-input"><form:checkbox tabindex="18" path="apgarReanimated" />
 					<form:errors path="apgarReanimated" /></div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="malformation1" path="malformation" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.malformation" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="malformation" />
+					<div class="form-input"><form:checkbox tabindex="19" path="malformation" />
 					<form:errors path="malformation" /></div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="jaundice1" path="jaundice" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.jaundice" /></form:label></div>
-					<div class="form-input"><form:checkbox path="jaundice" /><form:errors path="jaundice" /></div></td></tr>
+					<div class="form-input"><form:checkbox tabindex="20" path="jaundice" /><form:errors path="jaundice" /></div></td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="respiratoryDisease1" path="respiratoryDisease" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.respiratoryDisease" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="respiratoryDisease" />
+					<div class="form-input"><form:checkbox tabindex="21" path="respiratoryDisease" />
 					<form:errors path="respiratoryDisease" /></div></td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="congenitalInfection1" path="congenitalInfection" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.congenitalInfection" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="congenitalInfection" /> 
+					<div class="form-input"><form:checkbox tabindex="22" path="congenitalInfection" /> 
 					<form:errors path="congenitalInfection" /></div></td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="neurologicalProblems1" path="neurologicalProblems" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.neurologicalProblems" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="neurologicalProblems" /> <form:errors path="neurologicalProblems" /></div></td></tr>
+					<div class="form-input"><form:checkbox tabindex="23" path="neurologicalProblems" /> <form:errors path="neurologicalProblems" /></div></td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="aids1" path="aids" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.aids" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="aids" /> <form:errors path="aids" /></div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="24" path="aids" /> <form:errors path="aids" /></div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow }">
 					<div class="form-input"><form:label for="acquiredInfection1" path="acquiredInfection" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.acquiredInfection" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="acquiredInfection" /> <form:errors path="acquiredInfection" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="25" path="acquiredInfection" /> <form:errors path="acquiredInfection" /> </div> </td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="otherPerinatalDiseases" path="otherPerinatalDiseases" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.otherPerinatalDiseases" />
 					</form:label></th></tr>
 				<tr><td colspan="${fieldsPerRow}">
-					<form:textarea path="otherPerinatalDiseases" /></td></tr>
+					<form:textarea tabindex="26" path="otherPerinatalDiseases" /></td></tr>
 				<tr><td>
 					<form:errors path="otherPerinatalDiseases" /></td></tr>
 				
@@ -372,9 +372,10 @@
 						<fmt:message key="pediatrician.form.exitStatus" />
 					</form:label></th></tr>
 					
+					<c:set var="count" value="0" />
 					<c:forEach var="exitStatus" items="${exitStatus}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-							<td><form:radiobutton path="exitStatus" value="${exitStatus}" /> ${exitStatus.description}</td>
+							<td><form:radiobutton tabindex="${count+27}" path="exitStatus" value="${exitStatus}" /> ${exitStatus.description}</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -406,63 +407,63 @@
                     <div class="form-input"><form:label for="takesMedicine1" path="takesMedicine" cssErrorClass="error">
                         <fmt:message key="pediatrician.form.takesMedicine" />
                     </form:label></div>
-                    <div class="form-input"><form:input size="55" path="takesMedicine" /> <form:errors path="takesMedicine" /> </div> </td></tr>
+                    <div class="form-input"><form:input tabindex="29" size="55" path="takesMedicine" /> <form:errors path="takesMedicine" /> </div> </td></tr>
                 
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="consumedTobacco1" path="consumedTobacco" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.consumedTobacco" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="consumedTobacco" /> <form:errors path="consumedTobacco" /></div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="30" path="consumedTobacco" /> <form:errors path="consumedTobacco" /></div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="consumedAlcohol1" path="consumedAlcohol" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.consumedAlcohol" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="consumedAlcohol" /> <form:errors path="consumedAlcohol" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="31" path="consumedAlcohol" /> <form:errors path="consumedAlcohol" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="tattooed1" path="tattooed" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.tattooed" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="tattooed" /> <form:errors path="tattooed" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="32" path="tattooed" /> <form:errors path="tattooed" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="infectiousDiseases1" path="infectiousDiseases" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.infectiousDiseases" />
 					</form:label></div> 
-					<div class="form-input"><form:input size="55" path="infectiousDiseases" /> <form:errors path="infectiousDiseases" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="33" size="55" path="infectiousDiseases" /> <form:errors path="infectiousDiseases" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="hemorrhagic1" path="hemorrhagic" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.hemorrhagic" />
 					</form:label></div>
-					<div class="form-input"><form:input size="55" path="hemorrhagic" /> <form:errors path="hemorrhagic" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="34" size="55" path="hemorrhagic" /> <form:errors path="hemorrhagic" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="trauma1" path="trauma" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.trauma" />
 					</form:label></div>
-					<div class="form-input"><form:input size="55" path="trauma" /> <form:errors path="trauma" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="35" size="55" path="trauma" /> <form:errors path="trauma" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="allergies1" path="allergies" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.allergies" />
 					</form:label></div>
-					<div class="form-input"><form:input size="55" path="allergies" /> <form:errors path="allergies" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="36" size="55" path="allergies" /> <form:errors path="allergies" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="previousAdmissions1" path="previousAdmissions" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.previousAdmissions" />
 					</form:label></div>
-					<div class="form-input"><form:input size="55" path="previousAdmissions" /> <form:errors path="previousAdmissions" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="37" size="55" path="previousAdmissions" /> <form:errors path="previousAdmissions" /> </div> </td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="otherPatientDiseases1" path="otherPatientDiseases" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.otherPatientDiseases" />
 					</form:label></th></tr>
 				<tr><td colspan="${fieldsPerRow}">
-					<form:textarea path="otherPatientDiseases" /></td></tr>
+					<form:textarea tabindex="38" path="otherPatientDiseases" /></td></tr>
 				<tr><td><form:errors path="otherPatientDiseases" /></td></tr>
 				
 			<tr>
@@ -490,62 +491,62 @@
 					<div class="form-input"><form:label for="cardiovascular1" path="cardiovascular" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.cardiovascular" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="cardiovascular" /> <form:errors path="cardiovascular" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="39" path="cardiovascular" /> <form:errors path="cardiovascular" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="dbt1" path="dbt" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.dbt" />
 					</form:label> </div> 
-					<div class="form-input"><form:checkbox path="dbt" /> <form:errors path="dbt" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="40" path="dbt" /> <form:errors path="dbt" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="hta1" path="hta" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.hta" />
 					</form:label> </div> 
-					<div class="form-input"><form:checkbox path="hta" /> <form:errors path="hta" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="41" path="hta" /> <form:errors path="hta" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="asthma1" path="asthma" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.asthma" />
 					</form:label> </div>
-					<div class="form-input"> <form:checkbox path="asthma" /> <form:errors path="asthma" /> </div> </td></tr>
+					<div class="form-input"> <form:checkbox tabindex="42" path="asthma" /> <form:errors path="asthma" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"> <form:label for="mentalDisorder1" path="mentalDisorder" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.mentalDisorder" />
 					</form:label> </div> 
-					<div class="form-input"><form:checkbox path="mentalDisorder" /> <form:errors path="mentalDisorder" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="43" path="mentalDisorder" /> <form:errors path="mentalDisorder" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="familyAllergies1" path="familyAllergies" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.familyAllergies" />
 					</form:label> </div> 
-					<div class="form-input"><form:checkbox path="familyAllergies" /> <form:errors path="familyAllergies" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="44" path="familyAllergies" /> <form:errors path="familyAllergies" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="addictions1" path="addictions" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.addictions" />
 					</form:label> </div> 
-					<div class="form-input"><form:checkbox path="addictions" /> <form:errors path="addictions" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="45" path="addictions" /> <form:errors path="addictions" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="familyInfectiousDiseases1" path="familyInfectiousDiseases" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.familyInfectiousDiseases" />
 					</form:label> </div> 
-					<div class="form-input"><form:checkbox path="familyInfectiousDiseases" /> <form:errors path="familyInfectiousDiseases" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="46" path="familyInfectiousDiseases" /> <form:errors path="familyInfectiousDiseases" /> </div> </td></tr>
 							
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="familyHemorrhagic1" path="familyHemorrhagic" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.familyHemorrhagic" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="familyHemorrhagic" /> <form:errors path="familyHemorrhagic" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="47" path="familyHemorrhagic" /> <form:errors path="familyHemorrhagic" /> </div> </td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="otherFamilyDiaseases" path="otherFamilyDiaseases" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.otherFamilyDiaseases" />
 					</form:label></th></tr>
 				<tr><td colspan="${fieldsPerRow}">
-					<form:textarea path="otherFamilyDiaseases" /><form:errors path="otherFamilyDiaseases" />
+					<form:textarea tabindex="48" path="otherFamilyDiaseases" /><form:errors path="otherFamilyDiaseases" />
 				</td></tr>	
 				
 			<tr>
@@ -573,7 +574,7 @@
 				<form:label for="maturationAndDevelopment" path="maturationAndDevelopment" cssErrorClass="error">
 					<fmt:message key="pediatrician.form.maturationAndDevelopment" />
 				</form:label></th></tr>
-			<tr><td colspan="${fieldsPerRow}"><form:textarea path="maturationAndDevelopment" /></td></tr>
+			<tr><td colspan="${fieldsPerRow}"><form:textarea tabindex="49" path="maturationAndDevelopment" /></td></tr>
 			<tr><td><form:errors path="maturationAndDevelopment" /></td></tr>
 				
 			<tr>
@@ -686,14 +687,14 @@
 					<form:label for="symptoms" path="symptoms" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.symptoms" />
 					</form:label></th></tr>
-				<tr><td colspan="${fieldsPerRow}"><form:textarea path="symptoms" /></td></tr>
+				<tr><td colspan="${fieldsPerRow}"><form:textarea tabindex="50" path="symptoms" /></td></tr>
 				<tr><td><form:errors path="symptoms" /></td></tr>	
 				
 				<tr><th>
 					<form:label for="pathologyFound" path="pathologyFound" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.pathologyFound" />
 					</form:label></th></tr>
-				<tr><td colspan="${fieldsPerRow}"><form:textarea path="pathologyFound" /></td></tr>
+				<tr><td colspan="${fieldsPerRow}"><form:textarea tabindex="51" path="pathologyFound" /></td></tr>
 				<tr><td><form:errors path="pathologyFound" /></td></tr>	
 				
 			<tr>
@@ -721,37 +722,37 @@
 					<div class="form-input"><form:label for="hematrocito" path="hematrocito" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.hematocrito" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="hematrocito" /> <form:errors path="hematrocito" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="52" path="hematrocito" /> <form:errors path="hematrocito" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="globulosBlancos" path="globulosBlancos" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.globulosBlancos" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="globulosBlancos" /> <form:errors path="globulosBlancos" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="53" path="globulosBlancos" /> <form:errors path="globulosBlancos" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="leucocitaria" path="leucocitaria" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.leucocitaria" />
 					</form:label> </div>
-					<div class="form-input"><form:input path="leucocitaria" /> <form:errors path="leucocitaria" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="54" path="leucocitaria" /> <form:errors path="leucocitaria" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="plaquetas" path="plaquetas" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.plaquetas" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="plaquetas" /> <form:errors path="plaquetas" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="55" path="plaquetas" /> <form:errors path="plaquetas" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="eritrosedimentacion" path="eritrosedimentacion" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.eritrosedimentacion" />
 					</form:label></div>
-					<div class="form-input"><form:input path="eritrosedimentacion" /> <form:errors path="eritrosedimentacion" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="56" path="eritrosedimentacion" /> <form:errors path="eritrosedimentacion" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="tiempoSangria" path="tiempoSangria" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.sangria" />
 					</form:label></div>
-					<div class="form-input"><form:input path="tiempoSangria" /> <form:errors path="tiempoSangria" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="57" path="tiempoSangria" /> <form:errors path="tiempoSangria" /> </div> </td></tr>
 					
 					
 				<tr><th colspan="${fieldsPerRow}">
@@ -759,9 +760,10 @@
 						<fmt:message key="pediatrician.form.suero" />
 					</form:label></th></tr>
 					
+					<c:set var="count" value="0" />
 					<c:forEach var="suero" items="${suero}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-							<td><form:radiobutton path="suero" value="${suero}" /> ${suero.description}</td>
+							<td><form:radiobutton tabindex="${count+58}" path="suero" value="${suero}" /> ${suero.description}</td>
 					    <c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 						<c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -772,62 +774,62 @@
 					<div class="form-input"><form:label for="glucosa" path="glucosa" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.glucosa" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="glucosa" /> <form:errors path="glucosa" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="63" path="glucosa" /> <form:errors path="glucosa" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="urea" path="urea" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.urea" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="urea" /> <form:errors path="urea" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="64" path="urea" /> <form:errors path="urea" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="got" path="got" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.got" />
 					</form:label> </div>
-					<div class="form-input"><form:input path="got" /> <form:errors path="got" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="65" path="got" /> <form:errors path="got" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="gpt" path="gpt" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.gpt" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="gpt" /> <form:errors path="gpt" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="66" path="gpt" /> <form:errors path="gpt" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="colesterol" path="colesterol" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.colesterol" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="colesterol" /> <form:errors path="colesterol" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="67" path="colesterol" /> <form:errors path="colesterol" /> </div> </td></tr>
 					
 										
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="proteinas" path="proteinas" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.proteinas" />
 					</form:label> </div>
-					<div class="form-input"><form:input path="proteinas" /> <form:errors path="proteinas" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="68" path="proteinas" /> <form:errors path="proteinas" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="albumina" path="albumina" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.albumina" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="albumina" /> <form:errors path="albumina" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="69" path="albumina" /> <form:errors path="albumina" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="orina" path="orina" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.orina" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="orina" /> <form:errors path="orina" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="70" path="orina" /> <form:errors path="orina" /> </div> </td></tr>
 										
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="anticuerpos" path="anticuerpos" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.anticuerpos" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="anticuerpos" /> <form:errors path="anticuerpos" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="71" path="anticuerpos" /> <form:errors path="anticuerpos" /> </div> </td></tr>
 					
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="reumatoideo" path="reumatoideo" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.reumatoideo" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="reumatoideo" /> <form:errors path="reumatoideo" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="72" path="reumatoideo" /> <form:errors path="reumatoideo" /> </div> </td></tr>
 					
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="testEmbarazo" path="testEmbarazo" cssErrorClass="error">
@@ -837,7 +839,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="testEmbarazo" items="${testEmbarazo}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-							<td><form:radiobutton path="testEmbarazo" value="${testEmbarazo}" /> ${testEmbarazo.description}</td>
+							<td><form:radiobutton tabindex="${count+73}" path="testEmbarazo" value="${testEmbarazo}" /> ${testEmbarazo.description}</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -852,7 +854,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="streptococos" items="${streptococos}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-							<td><form:radiobutton path="streptococos" value="${streptococos}" /> ${streptococos.description}</td>
+							<td><form:radiobutton tabindex="${count+75}" path="streptococos" value="${streptococos}" /> ${streptococos.description}</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -863,13 +865,13 @@
 					<div class="form-input"><form:label for="vdrl" path="vdrl" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.vdrl" />
 					</form:label></div>
-					<div class="form-input"><form:input path="vdrl" /> <form:errors path="vdrl" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="77" path="vdrl" /> <form:errors path="vdrl" /> </div> </td></tr>
 										
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="parasitologico" path="parasitologico" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.parasitologico" />
 					</form:label> </div> 
-					<div class="form-input"><form:input path="parasitologico" /> <form:errors path="parasitologico" /> </div> </td></tr>
+					<div class="form-input"><form:input tabindex="78" path="parasitologico" /> <form:errors path="parasitologico" /> </div> </td></tr>
 
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="testGraham" path="testGraham" cssErrorClass="error">
@@ -879,7 +881,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="testGraham" items="${testGraham}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-							<td><form:radiobutton path="testGraham" value="${testGraham}" /> ${testGraham.description}</td>
+							<td><form:radiobutton tabindex="${count+79}" path="testGraham" value="${testGraham}" /> ${testGraham.description}</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -894,7 +896,7 @@
 					<c:set var="count" value="0" />
 					<c:forEach var="chagas" items="${chagas}">
 						<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-							<td><form:radiobutton path="chagas" value="${chagas}" /> ${chagas.description}</td>
+							<td><form:radiobutton tabindex="${count+81}" path="chagas" value="${chagas}" /> ${chagas.description}</td>
 						<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 					    <c:set var="count" value="${count+1}" />
 					</c:forEach>
@@ -926,28 +928,28 @@
 					<form:label for="chest" path="chest" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.chest" />
 					</form:label></th></tr>
-				<tr><td colspan="${fieldsPerRow}"><form:textarea path="chest" /></td></tr>
+				<tr><td colspan="${fieldsPerRow}"><form:textarea tabindex="84" path="chest" /></td></tr>
 				<tr><td><form:errors path="chest" /></td></tr>
 				
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="bones" path="bones" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.bones" />
 					</form:label></th></tr>
-				<tr><td colspan="${fieldsPerRow}"><form:textarea path="bones" /></td></tr>
+				<tr><td colspan="${fieldsPerRow}"><form:textarea tabindex="85" path="bones" /></td></tr>
 				<tr><td><form:errors path="bones" /></td></tr>
 							
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="radiologyOther" path="radiologyOther" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.radiologyOther" />
 					</form:label></th></tr>
-				<tr><td colspan="${fieldsPerRow}"><form:textarea path="radiologyOther" /></td></tr>
+				<tr><td colspan="${fieldsPerRow}"><form:textarea tabindex="86" path="radiologyOther" /></td></tr>
 				<tr><td><form:errors path="radiologyOther" /></td></tr>
 										
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="radiologyComments" path="radiologyComments" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.radiologyComments" />
 					</form:label></th></tr>
-				<tr><td colspan="${fieldsPerRow}"><form:textarea path="radiologyComments" /></td></tr>
+				<tr><td colspan="${fieldsPerRow}"><form:textarea tabindex="87" path="radiologyComments" /></td></tr>
 				<tr><td><form:errors path="radiologyComments" /></td></tr>
 				
 			<tr>
@@ -978,7 +980,7 @@
 						<fmt:message key="pediatrician.form.diagnosis" />
 					</form:label>
 				</div>
-				<div class="form-input"><form:textarea path="diagnosis" id="diagnosisId"/>
+				<div class="form-input"><form:textarea tabindex="88" path="diagnosis" id="diagnosisId"/>
 					<form:errors path="diagnosis" />
 				</div>
 			</td>
@@ -1007,20 +1009,20 @@
 					<div class="form-input"><form:label for="interconsultation" path="interconsultation" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.interconsultation" />
 					</form:label> </div>
-					<div class="form-input"><form:checkbox path="interconsultation" /> <form:errors path="interconsultation" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="89" path="interconsultation" /> <form:errors path="interconsultation" /> </div> </td></tr>
 				
 				<tr><td colspan="${fieldsPerRow}">
 					<div class="form-input"><form:label for="internment" path="internment" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.internment" />
 					</form:label></div>
-					<div class="form-input"><form:checkbox path="internment" /> <form:errors path="internment" /> </div> </td></tr>
+					<div class="form-input"><form:checkbox tabindex="90" path="internment" /> <form:errors path="internment" /> </div> </td></tr>
 								
 				<tr><th colspan="${fieldsPerRow}">
 					<form:label for="treatment" path="treatment" cssErrorClass="error">
 						<fmt:message key="pediatrician.form.treatment" />
 					</form:label></th></tr>
 				<tr><td colspan="${fieldsPerRow}">
-					<form:textarea path="treatment" /></td></tr>
+					<form:textarea path="treatment" tabindex="91" /></td></tr>
 				<tr><td>
 					<form:errors path="treatment" /></td></tr>
 					
@@ -1033,7 +1035,7 @@
 			</table>
 		</div>
 		<div class="form-save-button">
-		<input id="formSubmitBtn" type="submit" value="Guardar Formulario" onClick="_isDirty = false;"/>
+		<input id="formSubmitBtn" tabindex="92" type="submit" value="Guardar Formulario" onClick="_isDirty = false;"/>
 	</div>
 	<div style="clear: both">
 		<hr>
