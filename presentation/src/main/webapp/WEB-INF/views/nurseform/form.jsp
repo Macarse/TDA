@@ -78,16 +78,16 @@
 
 			<tr>
 				<td><form:label for="size" path="size" cssErrorClass="error"><fmt:message key="nurse.form.size" /></form:label></td> 
-				<td><form:input path="size" /> <form:errors path="size" /></td></tr>
+				<td><form:input tabindex="1" path="size" /> <form:errors path="size" /></td></tr>
 			<tr>
 				<td><form:label for="weight" path="weight" cssErrorClass="error"><fmt:message key="nurse.form.weight" /></form:label></td>
-				<td><form:input path="weight" /> <form:errors path="weight" /></td></tr>
+				<td><form:input tabindex="2" path="weight" /> <form:errors path="weight" /></td></tr>
 			<tr>
 				<td><form:label for="headCircumference" path="headCircumference" cssErrorClass="error"><fmt:message key="nurse.form.headCircumference" /></form:label></td>
-				<td><form:input path="headCircumference" /> <form:errors path="headCircumference" /></td></tr>
+				<td><form:input tabindex="3" path="headCircumference" /> <form:errors path="headCircumference" /></td></tr>
 			<tr>
 				<td><form:label for="percentile" path="percentile" cssErrorClass="error"><fmt:message key="nurse.form.percentile" /></form:label></td>
-				<td><form:input path="percentile" /> <form:errors path="percentile" /></td></tr>
+				<td><form:input tabindex="4" path="percentile" /> <form:errors path="percentile" /></td></tr>
 				
 			<tr>
 				<td colspan="${fieldsPerRow}" class="doubleband">
@@ -110,22 +110,22 @@
 
 			<tr>
 				<td><form:label for="TAmin" path="TAmin" cssErrorClass="error"><fmt:message key="nurse.form.TAmin" /></form:label></td> 
-				<td><form:input path="TAmin" /> <form:errors path="TAmin" /></td></tr>
+				<td><form:input tabindex="5" path="TAmin" /> <form:errors path="TAmin" /></td></tr>
 			<tr>
 				<td><form:label for="TAmax" path="TAmax" cssErrorClass="error"><fmt:message key="nurse.form.TAmax" /></form:label></td>
-				<td><form:input path="TAmax" /> <form:errors path="TAmax" /></td></tr>
+				<td><form:input tabindex="6" path="TAmax" /> <form:errors path="TAmax" /></td></tr>
 				
 			<tr>
 				<td><form:label for="TempMin" path="TempMin" cssErrorClass="error"><fmt:message key="nurse.form.TempMin" /></form:label></td>
-				<td><form:input path="TempMin" /> <form:errors path="TempMin" /></td></tr>
+				<td><form:input tabindex="7" path="TempMin" /> <form:errors path="TempMin" /></td></tr>
 				
 			<tr>
 				<td><form:label for="TempMax" path="TempMax" cssErrorClass="error"><fmt:message key="nurse.form.TempMax" /></form:label></td>
-				<td><form:input path="TempMax" /> <form:errors path="TempMax" /></td></tr>
+				<td><form:input tabindex="8" path="TempMax" /> <form:errors path="TempMax" /></td></tr>
 				
 			<tr>
 				<td><form:label for="saturation" path="saturation" cssErrorClass="error"><fmt:message key="nurse.form.saturation" /></form:label></td>
-				<td><form:input path="saturation" /> <form:errors path="saturation" /></td></tr>
+				<td><form:input tabindex="9" path="saturation" /> <form:errors path="saturation" /></td></tr>
 		
 			<tr>
 				<td colspan="${fieldsPerRow}" class="doubleband">
@@ -149,7 +149,7 @@
 			<c:set var="count" value="0" />
 			<c:forEach var="vaxine" items="${allVaxines}">
 				<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-					<td><form:checkbox path="vaxines" value="${vaxine}" /> ${vaxine.name}</td>
+					<td><form:checkbox tabindex="${count+10}" path="vaxines" value="${vaxine}" /> ${vaxine.name}</td>
 				<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 			    <c:set var="count" value="${count+1}" />
 			</c:forEach>
@@ -179,7 +179,7 @@
 			<c:set var="count" value="0" />
 			<c:forEach var="nurseAction" items="${allNurseActions}">
 				<c:if test="${count%fieldsPerRow == 0 }"><tr></c:if>
-					<td><form:checkbox path="nurseActions" value="${nurseAction}" /> ${nurseAction.description}</td>
+					<td><form:checkbox tabindex="${count+22}" path="nurseActions" value="${nurseAction}" /> ${nurseAction.description}</td>
 				<c:if test="${count%fieldsPerRow == fieldsPerRow-1 }"></tr></c:if>
 			    <c:set var="count" value="${count+1}" />
 			</c:forEach>
@@ -189,7 +189,7 @@
 			<tr>
 				<th colspan="${fieldsPerRow }"><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="nurse.form.observations" /></form:label></th></tr>
 			<tr> 
-				<th colspan="${fieldsPerRow }"><form:textarea path="observations" /> <form:errors path="observations" /></td></tr>
+				<th colspan="${fieldsPerRow }"><form:textarea tabindex="28" path="observations" /> <form:errors path="observations" /></td></tr>
 				
 			<tr>
 				<td colspan="${fieldsPerRow}" class="doubleband">
@@ -200,7 +200,7 @@
 		</table>
 	</div>
 	<div class="form-save-button">
-		<input id="formSubmitBtn" type="submit" value="Guardar Formulario" onClick="_isDirty = false;"/>
+		<input id="formSubmitBtn" tabindex="29" type="submit" value="Guardar Formulario" onClick="_isDirty = false;"/>
 	</div>
 	<div style="clear: both">
 		<hr>
