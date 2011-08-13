@@ -24,9 +24,13 @@
 			<fmt:message key="auditLog.form.controllerUsed" /></form:label></td>
 					<td><form:input path="controllerUsed" /> <form:errors path="controllerUsed" /></td></tr>
 				<tr>
-					<td><form:label for="timestamp" path="timestamp" cssErrorClass="error">
-			<fmt:message key="auditLog.form.timestamp" /></form:label></td>
-					<td><form:input path="timestamp" /><form:errors path="timestamp" /></td></tr>
+					<td><form:label for="timestampFrom" path="timestampFrom" cssErrorClass="error">
+			<fmt:message key="auditLog.form.timestampFrom" /></form:label></td>
+					<td><form:input path="timestampFrom" /><form:errors path="timestampFrom" /></td></tr>
+				<tr>
+					<td><form:label for="timestampTo" path="timestampTo" cssErrorClass="error">
+			<fmt:message key="auditLog.form.timestampTo" /></form:label></td>
+					<td><form:input path="timestampTo" /><form:errors path="timestampTo" /></td></tr>
 			</tbody>
 			<tfoot>
 				<tr><td colspan="2">
@@ -39,3 +43,29 @@
 		</table>
 	</form:form>
 </div>
+
+<script>
+	$(function() {
+		$( "#timestampFrom" ).datepicker(
+			{ dateFormat: 'dd/mm/yy',
+			  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+			  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			  changeYear: true,
+			  changeMonth: true,
+			  yearRange: 'c-100,c+00'
+		    }
+		);
+
+		$( "#timestampTo" ).datepicker(
+				{ dateFormat: 'dd/mm/yy',
+				  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+				  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+				  changeYear: true,
+				  changeMonth: true,
+				  yearRange: 'c-100,c+00'
+			    }
+		);
+	});
+</script>

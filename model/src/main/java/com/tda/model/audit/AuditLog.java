@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class AuditLog implements Serializable {
@@ -23,6 +26,14 @@ public class AuditLog implements Serializable {
 
     @Past
     private Date timestamp;
+
+    @Past
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date timestampFrom;
+
+    @Past
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date timestampTo;
 
     public AuditLog() {
         
@@ -76,5 +87,23 @@ public class AuditLog implements Serializable {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Transient
+    public Date getTimestampFrom() {
+        return timestampFrom;
+    }
+
+    public void setTimestampFrom(Date timestampFrom) {
+        this.timestampFrom = timestampFrom;
+    }
+
+    @Transient
+    public Date getTimestampTo() {
+        return timestampTo;
+    }
+
+    public void setTimestampTo(Date timestampTo) {
+        this.timestampTo = timestampTo;
     }
 }

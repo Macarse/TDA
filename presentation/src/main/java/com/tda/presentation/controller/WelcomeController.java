@@ -58,10 +58,6 @@ public class WelcomeController extends CommonController{
 	private PediatricianDiagnosisService pediatricianDiagnosisService;
 	private Paginator paginator;
 	private ParamContainer params;
-
-	// TODO should be localized?
-	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-			"dd/MM/yyyy");
 	private OnlineUserService onlineUserService;
 
 	public WelcomeController() {
@@ -217,6 +213,8 @@ public class WelcomeController extends CommonController{
 	}
 
 	private class DateEditor extends PropertyEditorSupport {
+	    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+        "dd/MM/yyyy");
 
 		@Override
 		public void setAsText(String text) throws IllegalArgumentException {
@@ -240,6 +238,8 @@ public class WelcomeController extends CommonController{
 	}
 
 	private class PediatricianDiagnosisEditor extends PropertyEditorSupport {
+	    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+        "dd/MM/yyyy");
 
 		@Override
 		public void setAsText(String text) throws IllegalArgumentException {

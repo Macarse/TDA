@@ -1,8 +1,6 @@
 package com.tda.persistence.dao;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import com.tda.model.audit.AuditLog;
@@ -15,21 +13,22 @@ public class AuditLogDAO extends GenericDAOImpl<AuditLog> {
 		return AuditLog.class;
 	}
 
-	public Collection<AuditLog> findByExamplePaged(AuditLog al,
-			Paginator paginator, Date from, Date to) {
+	@Override
+	public List<AuditLog> findByExamplePaged(AuditLog al,
+			Paginator paginator) {
 		String DATE_FORMAT = "yyyy/MM/dd";
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
 		String query = "from AuditLog";
 		String union = " where ";
 
-		if (from != null) {
-			query += (union + "timestamp >= '" + sdf.format(from) + "' ");
+		if (al.getTimestampFrom() != null) {
+			query += (union + "DATE(timestamp) >= '" + sdf.format(al.getTimestampFrom()) + "' ");
 			union = " and ";
 		}
 
-		if (to != null) {
-			query += (union + "timestamp <= '" + sdf.format(to) + "' ");
+		if (al.getTimestampTo() != null) {
+			query += (union + "DATE(timestamp) <= '" + sdf.format(al.getTimestampTo()) + "' ");
 			union = " and ";
 		}
 
@@ -47,6 +46,9 @@ public class AuditLogDAO extends GenericDAOImpl<AuditLog> {
 			query += (union + " formId=" + al.getFormId());
 			union = " and ";
 		}
+		
+		// TODO Hardcoded count, it must do just a COUNT, not retrieve the data
+        paginator.setTotalResultsCount(getHibernateTemplate().find(query).size());
 
 		if (paginator.getOrderField() != null
 				&& paginator.getOrderField() != "")

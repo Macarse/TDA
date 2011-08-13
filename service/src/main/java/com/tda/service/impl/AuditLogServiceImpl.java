@@ -1,7 +1,5 @@
 package com.tda.service.impl;
 
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import com.tda.model.audit.AuditLog;
@@ -26,8 +24,4 @@ public class AuditLogServiceImpl implements AuditLogService {
 		return auditLogDAO.findByExamplePaged(example, paginator);
 	}
 
-	public Collection<AuditLog> findByExamplePaged(AuditLog al,
-			Paginator paginator, Date from, Date to) {
-		return auditLogDAO.findByExamplePaged(al, paginator, from, to);
-	}
 }

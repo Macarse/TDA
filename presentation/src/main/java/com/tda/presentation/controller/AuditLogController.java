@@ -1,5 +1,6 @@
 package com.tda.presentation.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class AuditLogController extends CommonController {
 	private AuditLogService auditLogService;
 	private Paginator paginator;
 	private ParamContainer params;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 	public AuditLogController() {
 		params = new ParamContainer();
@@ -66,8 +68,12 @@ public class AuditLogController extends CommonController {
 			params.setParam("controllerUsed", auditLog.getControllerUsed());
 		}
 
-		if (auditLog.getTimestamp() != null) {
-			params.setParam("timestamp", auditLog.getTimestamp().toString());
+		if (auditLog.getTimestampFrom() != null) {
+		    params.setParam("timestampFrom", simpleDateFormat.format(auditLog.getTimestampFrom()));
+		}
+
+		if (auditLog.getTimestampTo() != null) {
+			params.setParam("timestampTo", simpleDateFormat.format(auditLog.getTimestampTo()));
 		}
 
 		modelAndView = processRequest(modelAndView, auditLog, pageNumber,
@@ -108,10 +114,9 @@ public class AuditLogController extends CommonController {
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
 
-		// auditLogList = auditLogService.findByExamplePaged(auditLog,
-		// paginator);
+
 		auditLogList = (List<AuditLog>) auditLogService.findByExamplePaged(
-				auditLog, paginator, null, null);
+				auditLog, paginator);
 
 		modelAndView.addObject("auditLog", new AuditLog());
 		modelAndView.addObject("auditLogList", auditLogList);
