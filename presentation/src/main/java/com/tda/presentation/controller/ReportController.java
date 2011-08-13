@@ -24,11 +24,12 @@ import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 
 import com.tda.model.utils.ConfigReport;
 import com.tda.model.utils.ExportFormat;
+import com.tda.service.exception.NoDataFoundException;
 import com.tda.service.report.ReportService;
 
 @Controller
 @RequestMapping(value = "/report")
-public class ReportController extends CommonController{
+public class ReportController extends CommonController {
 
 	private ReportService reportService;
 	private static String LIST = "report/list";
@@ -46,7 +47,7 @@ public class ReportController extends CommonController{
 	}
 
 	@RequestMapping(value = "/patientReport", method = RequestMethod.GET)
-	public void doPatientReport(
+	public ModelAndView doPatientReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -59,13 +60,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadPatientReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadPatientReport(request, response,
+						configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/patientReportDate", method = RequestMethod.GET)
-	public void doPatientReportDate(
+	public ModelAndView doPatientReportDate(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -78,13 +87,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadPatientReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadPatientReport(request, response,
+						configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/sexGraphReport", method = RequestMethod.GET)
-	public void doSexGraphReport(
+	public ModelAndView doSexGraphReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -97,13 +114,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadSexGraphReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadSexGraphReport(request, response,
+						configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/itineraryReport", method = RequestMethod.GET)
-	public void doItineraryReport(
+	public ModelAndView doItineraryReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -116,13 +141,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadItineraryReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadItineraryReport(request, response,
+						configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/patientReportAge", method = RequestMethod.GET)
-	public void doPatientReportAge(
+	public ModelAndView doPatientReportAge(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -135,13 +168,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadPatientReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadPatientReport(request, response,
+						configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/ageGraphReport", method = RequestMethod.GET)
-	public void doAgeGraphReport(
+	public ModelAndView doAgeGraphReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -154,13 +195,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadAgeGraphReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadAgeGraphReport(request, response,
+						configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/nbiForDestinationReport", method = RequestMethod.GET)
-	public void doNbiForDestinationReport(
+	public ModelAndView doNbiForDestinationReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -173,13 +222,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadNbiForDestinationReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadNbiForDestinationReport(request,
+						response, configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/interconsultPerYearReport", method = RequestMethod.GET)
-	public void doInterconsultPerYearReport(
+	public ModelAndView doInterconsultPerYearReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -192,13 +249,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadInterconsultPerYearReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadInterconsultPerYearReport(request,
+						response, configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/scholarityByDestinationReport", method = RequestMethod.GET)
-	public void doScholarityByDestinationReport(
+	public ModelAndView doScholarityByDestinationReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -211,13 +276,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadScholarityByDestinationReport(request, response,
-					configReport.getFormat(), configReport);
+			try {
+				reportService.downloadScholarityByDestinationReport(request,
+						response, configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/ageForDestinationReport", method = RequestMethod.GET)
-	public void doAgeForDestinationReport(
+	public ModelAndView doAgeForDestinationReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -230,13 +303,21 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadAgeForDestinationReport(request,
-					response, configReport.getFormat(), configReport);
+			try {
+				reportService.downloadAgeForDestinationReport(request,
+						response, configReport.getFormat(), configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/prevalentDiagnosticForDestinationReport", method = RequestMethod.GET)
-	public void doPrevalentDiagnosticForDestinationReport(
+	public ModelAndView doPrevalentDiagnosticForDestinationReport(
 			@Valid @ModelAttribute ConfigReport configReport,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws ServletException, IOException,
@@ -249,8 +330,17 @@ public class ReportController extends CommonController{
 			// Primero valido el formulario
 			model.addObject("configReport", configReport);
 		} else {
-			reportService.downloadPrevalentDiagnosticForDestinationReport(
-					request, response, configReport.getFormat(), configReport);
+			try {
+				reportService.downloadPrevalentDiagnosticForDestinationReport(
+						request, response, configReport.getFormat(),
+						configReport);
+			} catch (NoDataFoundException e) {
+				model.addObject("configReport", configReport);
+				model.addObject("allFormat", ExportFormat.values());
+				model.addObject("nodata", true);
+				return model;
+			}
 		}
+		return null;
 	}
 }

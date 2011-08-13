@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ import com.tda.model.patient.Patient;
 import com.tda.model.report.AgeForDestinationReport;
 import com.tda.model.report.AgeForReport;
 import com.tda.model.report.InterconsultPerYearReport;
+import com.tda.model.report.ItineraryForReport;
 import com.tda.model.report.NbiForDestinationReport;
 import com.tda.model.report.PrevalentDiagnosticForDestinationReport;
 import com.tda.model.report.ScholarityByDestinationReport;
@@ -39,6 +41,7 @@ import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.persistence.dao.PatientDAO;
 import com.tda.persistence.dao.PatientcubeDAO;
 import com.tda.persistence.dao.PlaceDAO;
+import com.tda.service.exception.NoDataFoundException;
 
 /**
  * Service for processing DynamicJasper reports Issues
@@ -74,7 +77,7 @@ public class ReportService {
 	public void downloadPatientReport(HttpServletRequest request,
 			HttpServletResponse response, ExportFormat format,
 			ConfigReport configReport) throws ColumnBuilderException,
-			ClassNotFoundException, JRException {
+			ClassNotFoundException, JRException, NoDataFoundException {
 
 		// Retrieve our data source
 		JRDataSource ds = null;
@@ -83,30 +86,41 @@ public class ReportService {
 
 		String DATE_FORMAT = "dd/MM/yyyy";
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+		int count = 0;
 
 		if (configReport.getDateFrom() != null
 				|| configReport.getDateTo() != null) {
-			ds = new JRBeanCollectionDataSource(
-					patientDAO.findPatientsAttendedByDate(
-							configReport.getDateFrom(),
-							configReport.getDateTo()));
+
+			List<Patient> data = patientDAO.findPatientsAttendedByDate(
+					configReport.getDateFrom(), configReport.getDateTo());
+			if (data != null)
+				count = data.size();
+			ds = new JRBeanCollectionDataSource(data);
 			fileName = "PatientReportDate.";
 			reportTitle = "Pacientes atendidos entre "
 					+ sdf.format(configReport.getDateFrom()) + " y "
 					+ sdf.format(configReport.getDateTo());
 		} else if (configReport.getAgeFrom() != null
 				|| configReport.getAgeTo() != null) {
-			ds = new JRBeanCollectionDataSource(
-					patientDAO.findPatientsBetweenAges(
-							configReport.getAgeFrom(), configReport.getAgeTo()));
+			List<Patient> data = patientDAO.findPatientsBetweenAges(
+					configReport.getAgeFrom(), configReport.getAgeTo());
+			if (data != null)
+				count = data.size();
+			ds = new JRBeanCollectionDataSource(data);
 			fileName = "PatientReportAge.";
 			reportTitle = "Pacientes entre " + configReport.getAgeFrom()
 					+ " y " + configReport.getAgeTo() + " a�os";
 		} else {
-			ds = new JRBeanCollectionDataSource(patientDAO.findAll());
+			List<Patient> data = patientDAO.findAll();
+			if (data != null)
+				count = data.size();
+			ds = new JRBeanCollectionDataSource(data);
 			fileName = "PatientReport.";
 			reportTitle = "Pacientes registrados";
 		}
+
+		if (count == 0)
+			throw new NoDataFoundException();
 
 		// Create our report layout
 		// We delegate the reporting layout to a custom ReportLayout instance
@@ -185,7 +199,8 @@ public class ReportService {
 	public void downloadSexGraphReport(HttpServletRequest request,
 			HttpServletResponse response, ExportFormat format,
 			ConfigReport configReport) throws ColumnBuilderException,
-			ClassNotFoundException, JRException, ChartBuilderException {
+			ClassNotFoundException, JRException, ChartBuilderException,
+			NoDataFoundException {
 
 		SexGraphReportLayout layout = new SexGraphReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -225,6 +240,9 @@ public class ReportService {
 
 		allPatientsSex.add(male);
 		allPatientsSex.add(female);
+
+		if (allPatientsSex == null || allPatientsSex.size() < 1)
+			throw new NoDataFoundException();
 
 		JRDataSource ds = new JRBeanCollectionDataSource(allPatientsSex);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
@@ -272,7 +290,8 @@ public class ReportService {
 	public void downloadItineraryReport(HttpServletRequest request,
 			HttpServletResponse response, ExportFormat format,
 			ConfigReport configReport) throws ColumnBuilderException,
-			ClassNotFoundException, JRException, ChartBuilderException {
+			ClassNotFoundException, JRException, ChartBuilderException,
+			NoDataFoundException {
 
 		ItineraryReportLayout layout = new ItineraryReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -287,10 +306,14 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
+		Collection<ItineraryForReport> data = itineraryDAO.reportCollection();
+
+		if (data == null || data.size() < 1)
+			throw new NoDataFoundException();
+
 		// Creates the JasperPrint object
 		// It needs a JasperReport layout and a datasource
-		JRDataSource ds = new JRBeanCollectionDataSource(
-				itineraryDAO.reportCollection());
+		JRDataSource ds = new JRBeanCollectionDataSource(data);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
 
 		// Create our output byte stream
@@ -336,7 +359,8 @@ public class ReportService {
 	public void downloadAgeGraphReport(HttpServletRequest request,
 			HttpServletResponse response, ExportFormat format,
 			ConfigReport configReport) throws ColumnBuilderException,
-			ClassNotFoundException, JRException, ChartBuilderException {
+			ClassNotFoundException, JRException, ChartBuilderException,
+			NoDataFoundException {
 
 		AgeGraphReportLayout layout = new AgeGraphReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -352,6 +376,10 @@ public class ReportService {
 				new ClassicLayoutManager(), params);
 
 		Collection<AgeForReport> groupedAge = patientDAO.findGroupedAge();
+
+		if (groupedAge == null || groupedAge.size() < 1)
+			throw new NoDataFoundException();
+
 		JRDataSource ds = new JRBeanCollectionDataSource(groupedAge);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
 
@@ -398,7 +426,8 @@ public class ReportService {
 	public void downloadNbiForDestinationReport(HttpServletRequest request,
 			HttpServletResponse response, ExportFormat format,
 			ConfigReport configReport) throws ColumnBuilderException,
-			ChartBuilderException, ClassNotFoundException, JRException {
+			ChartBuilderException, ClassNotFoundException, JRException,
+			NoDataFoundException {
 
 		NbiForDestinationReportLayout layout = new NbiForDestinationReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -415,6 +444,9 @@ public class ReportService {
 
 		Collection<NbiForDestinationReport> groupedNbi = patientcubeDAO
 				.findNbiForDestination();
+
+		if (groupedNbi == null || groupedNbi.size() < 1)
+			throw new NoDataFoundException();
 
 		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
@@ -462,7 +494,8 @@ public class ReportService {
 	public void downloadInterconsultPerYearReport(HttpServletRequest request,
 			HttpServletResponse response, ExportFormat format,
 			ConfigReport configReport) throws ColumnBuilderException,
-			ChartBuilderException, ClassNotFoundException, JRException {
+			ChartBuilderException, ClassNotFoundException, JRException,
+			NoDataFoundException {
 
 		InterconsultPerYearReportLayout layout = new InterconsultPerYearReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -477,10 +510,13 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<InterconsultPerYearReport> grouped = patientcubeDAO
+		Collection<InterconsultPerYearReport> groupedInter = patientcubeDAO
 				.findInterconsultPerYear();
 
-		JRDataSource ds = new JRBeanCollectionDataSource(grouped);
+		if (groupedInter == null || groupedInter.size() < 1)
+			throw new NoDataFoundException();
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedInter);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
 
 		// Create our output byte stream
@@ -528,7 +564,7 @@ public class ReportService {
 			HttpServletResponse response, ExportFormat format,
 			ConfigReport configReport) throws JRException,
 			ColumnBuilderException, ChartBuilderException,
-			ClassNotFoundException {
+			ClassNotFoundException, NoDataFoundException {
 
 		AgeForDestinationReportLayout layout = new AgeForDestinationReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -543,10 +579,14 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<AgeForDestinationReport> grouped = patientcubeDAO
+		Collection<AgeForDestinationReport> groupedAge = patientcubeDAO
 				.findAgeForDestination();
 
-		JRDataSource ds = new JRBeanCollectionDataSource(grouped);
+		if (groupedAge == null || groupedAge.size() < 1)
+			throw new NoDataFoundException();
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedAge);
+
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
 
 		// Create our output byte stream
@@ -593,7 +633,7 @@ public class ReportService {
 			HttpServletRequest request, HttpServletResponse response,
 			ExportFormat format, ConfigReport configReport) throws JRException,
 			ColumnBuilderException, ChartBuilderException,
-			ClassNotFoundException {
+			ClassNotFoundException, NoDataFoundException {
 
 		PrevalentDiagnosticForDestinationReportLayout layout = new PrevalentDiagnosticForDestinationReportLayout();
 		DynamicReport dr = layout.buildReportLayout();
@@ -608,10 +648,13 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<PrevalentDiagnosticForDestinationReport> groupedNbi = patientcubeDAO
+		Collection<PrevalentDiagnosticForDestinationReport> groupedPrevalent = patientcubeDAO
 				.findPrevalentDiagnosticForDestination();
 
-		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
+		if (groupedPrevalent == null || groupedPrevalent.size() < 1)
+			throw new NoDataFoundException();
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedPrevalent);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
 
 		// Create our output byte stream
@@ -659,7 +702,7 @@ public class ReportService {
 			HttpServletRequest request, HttpServletResponse response,
 			ExportFormat format, ConfigReport configReport)
 			throws ColumnBuilderException, ChartBuilderException,
-			ClassNotFoundException, JRException {
+			ClassNotFoundException, JRException, NoDataFoundException {
 		ScholarityByDestinationLayout layout = new ScholarityByDestinationLayout();
 		DynamicReport dr = layout.buildReportLayout();
 
@@ -673,10 +716,13 @@ public class ReportService {
 		JasperReport jr = DynamicJasperHelper.generateJasperReport(dr,
 				new ClassicLayoutManager(), params);
 
-		Collection<ScholarityByDestinationReport> groupedNbi = patientcubeDAO
+		Collection<ScholarityByDestinationReport> groupedSchool = patientcubeDAO
 				.findScholarityByDestination();
 
-		JRDataSource ds = new JRBeanCollectionDataSource(groupedNbi);
+		if (groupedSchool == null || groupedSchool.size() < 1)
+			throw new NoDataFoundException();
+
+		JRDataSource ds = new JRBeanCollectionDataSource(groupedSchool);
 		JasperPrint jp = JasperFillManager.fillReport(jr, params, ds);
 
 		// Create our output byte stream
