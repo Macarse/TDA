@@ -61,6 +61,16 @@ div, p {
     position:absolute;top:0;left:0;
     width:25px;
 }
+
+.tachado{
+    background-image:url('/presentation/themes/default/image/diente_tachado.png');
+    height:40px;
+    pointer-events:none;
+    position:absolute;top:0;left:0;
+    width:25px;
+    display: none;
+}
+
 #fila1_izq_mandibula8{
     overflow:hidden;
     width:250px;
@@ -146,7 +156,28 @@ div, p {
 
 <script type="text/javascript">
 
+// Src: https://gist.github.com/399624
+jQuery.fn.single_double_click = function(single_click_callback, double_click_callback, timeout) {
+	  return this.each(function(){
+	    var clicks = 0, self = this;
+	    jQuery(this).click(function(event){
+	      clicks++;
+	      if (clicks == 1) {
+	        setTimeout(function(){
+	          if(clicks == 1) {
+	            single_click_callback.call(self, event);
+	          } else {
+	            double_click_callback.call(self, event);
+	          }
+	          clicks = 0;
+	        }, timeout || 300);
+	      }
+	    });
+	  });
+	}
+
 var dientes = [];
+var crossColor = 'rgb(1, 1, 1)';
 var arr = ['rgb(255, 255, 255)', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(0, 255, 0)', 'rgb(0, 0, 0)'];
 var arrDict = new Array();
 
@@ -160,20 +191,53 @@ $(document).ready(function() {
 	
 	var i = 0;
 	$(".diente p").each(function() {
-	
+
 	    var p = {'obj': $(this), 'color': 1 };
+
 	    var place = p.obj.attr("class");
 	    dientes[i++] = p;
-	
-	    p.obj.click(function() {
+
+	    p.obj.single_double_click( function() {
+
+	    	if ( isCrossed(p) ) {
+	    		return;
+	    	}
+
+	    	var index = -1;
+	    	var actualIndex = -1;
+
+	    	if ( p.color == 0 ) {
+	    		index = arr.lenght - 1;
+	    	} else {
+	    		index = p.color - 1;
+	    	}
+
+	    	if (place === 'center') {
+		    	actualIndex = arrDict[p.obj.css("background-color")];
+	    	} else {
+	    		actualIndex = arrDict[p.obj.css("border-" + place + "-color")];
+	    	}
+
+	    	if ( index !=  actualIndex ) {
+	    		p.color =  (actualIndex + 1) % arr.length;
+	    	}
+
 	        if (place === 'center') {
 	            p.obj.removeAttr("style").css("background-color", arr[p.color]);
 	        } else {
 	            p.obj.removeAttr("style").css("border-" + place + "-color", arr[p.color]);
 	        }
-	
+
 	        p.color = (p.color + 1) % arr.length;
-	    });
+
+	    }, function() {
+	    	if ( !isCrossed(p) ) {
+	    		showCross(p);
+	    	} else {
+	    		hideCross(p);
+	    	}
+
+	    }, 200);
 	});
 
 	var tooths = '<c:out value="${toothString}"></c:out>';
@@ -206,27 +270,74 @@ function setData(text) {
 
 	for( j=0 ; j < tooths.length ; j++ ) {
 
-		var parts = tooths[j].split(':');
+		if ( tooths[j].search('1, 1, 1') != -1) {
+			showCross(dientes[i]);
+			i=i+5;
 
-		for( k=0 ; k < parts.length ; k++ ) {
+		} else {
 
-			var jj = parts[k];
-			var tanito =  arrDict[parts[k]];
-			dientes[i].color = arrDict[parts[k]];
-			var place = dientes[i].obj.attr("class");
+			hideCross(dientes[i]);
+			var parts = tooths[j].split(':');
 
-			if ( place === 'center' ) {
-				dientes[i].obj.removeAttr("style").css("background-color", arr[dientes[i].color]);
-	        } else {
-	        	dientes[i].obj.removeAttr("style").css("border-" + place + "-color", arr[dientes[i].color]);
-	        }
+			for( k=0 ; k < parts.length ; k++ ) {
 
-			dientes[i].color = (dientes[i].color + 1) % arr.length;
-			i++;
+				dientes[i].color = arrDict[parts[k]];
+				var place = dientes[i].obj.attr("class");
+
+				if ( place === 'center' ) {
+					dientes[i].obj.removeAttr("style").css("background-color", arr[dientes[i].color]);
+		        } else {
+		        	dientes[i].obj.removeAttr("style").css("border-" + place + "-color", arr[dientes[i].color]);
+		        }
+
+				dientes[i].color = (dientes[i].color + 1) % arr.length;
+				i++;
+			}
 		}
 	}
 
 	return;
+}
+function isCrossed(part) {
+    var parent = $(part.obj.parent().get(0));
+    var tachado = $(parent.children('.tachado').get(0));
+    return tachado.is(':visible');
+}
+
+function showCross(part) {
+    var parent = $(part.obj.parent().get(0));
+    var tachado = $(parent.children('.tachado').get(0));
+    tachado.show();
+
+    var parts = parent.children('p');
+
+    for( i=0 ; i < parts.length ; i++ ) {
+    	var place = $(parts[i]).attr("class");
+
+		if ( place === 'center' ) {
+			$(parts[i]).removeAttr("style").css("background-color", crossColor);
+        } else {
+        	$(parts[i]).removeAttr("style").css("border-" + place + "-color", arr[0]);
+        }
+    }
+}
+
+function hideCross(part) {
+	var parent = $(part.obj.parent().get(0));
+	var tachado = $(parent.children('.tachado').get(0));
+    tachado.hide();
+
+    var parts = parent.children('p');
+
+    for( i=0 ; i < parts.length ; i++ ) {
+    	var place = $(parts[i]).attr("class");
+
+		if ( place === 'center' ) {
+			$(parts[i]).removeAttr("style").css("background-color", arr[0]);
+        } else {
+        	$(parts[i]).removeAttr("style").css("border-" + place + "-color", arr[0]);
+        }
+    }
 }
 
 </script>
@@ -240,7 +351,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -248,7 +361,10 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -256,7 +372,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -264,7 +382,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -272,7 +392,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -280,7 +402,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -288,7 +412,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -296,7 +422,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
     </div>
     
@@ -307,7 +435,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -315,7 +445,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -323,7 +455,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -331,7 +465,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -339,7 +475,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -347,7 +485,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -355,7 +495,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -363,7 +505,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
     </div>
 </div>
@@ -376,7 +520,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -384,7 +530,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -392,7 +540,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -400,7 +550,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -408,7 +560,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -416,7 +570,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -424,7 +580,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -432,7 +590,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
     </div>
     
@@ -443,7 +603,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -451,7 +613,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -459,7 +623,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -467,7 +633,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -475,7 +643,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -483,7 +653,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -491,7 +663,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -499,7 +673,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
     </div>
 </div>
@@ -512,7 +688,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -520,7 +698,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -528,7 +708,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -536,7 +718,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -544,7 +728,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
     </div>
 
@@ -555,7 +741,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -563,7 +751,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -571,7 +761,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -579,7 +771,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -587,7 +781,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
     </div>
 </div>
@@ -600,7 +796,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -608,7 +806,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -616,7 +816,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -624,7 +826,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -632,7 +836,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
     </div>
 
@@ -643,7 +849,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -651,7 +859,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -659,7 +869,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -667,7 +879,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
         <div class="diente">
             <p class="top"></p>
@@ -675,7 +889,9 @@ function setData(text) {
             <p class="bottom"></p>
             <p class="left"></p>
             <p class="center"></p>
+            <div class="tachado"></div>
             <div class="marco"></div>
+
         </div>
     </div>
 </div>
