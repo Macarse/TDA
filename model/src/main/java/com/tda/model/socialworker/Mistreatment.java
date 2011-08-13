@@ -1,7 +1,7 @@
 package com.tda.model.socialworker;
 
 public enum Mistreatment {
-	PHYSICAL("Físico"), PSYCHOLOGICAL("Psicológico");
+	PHYSICAL("F&iacute;sico"), PSYCHOLOGICAL("Psicol&oacute;gico");
 
 	private String description;
 

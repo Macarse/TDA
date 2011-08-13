@@ -1,8 +1,8 @@
 package com.tda.model.socialworker;
 
 public enum BathroomSewerType {
-	PUBLIC("A red pública (cloaca)"), CESSPIT("A pozo ciego"), EARTH_HOLE(
-			"A hoyo/excavación en la tierra");
+	PUBLIC("A red p&uacute;blica (cloaca)"), CESSPIT("A pozo ciego"), EARTH_HOLE(
+			"A hoyo/excavaci&oacute;n en la tierra");
 
 	private String description;
 

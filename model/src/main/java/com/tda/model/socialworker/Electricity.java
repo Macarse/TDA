@@ -1,7 +1,7 @@
 package com.tda.model.socialworker;
 
 public enum Electricity {
-	PUBLIC("Público"), PRIVATE("Privado (motor-generador, otros"), NONE(
+	PUBLIC("P&uacute;blico"), PRIVATE("Privado (motor-generador, otros"), NONE(
 			"No tiene");
 
 	private String description;

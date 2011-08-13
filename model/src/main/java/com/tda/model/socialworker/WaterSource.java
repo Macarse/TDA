@@ -2,7 +2,7 @@ package com.tda.model.socialworker;
 
 public enum WaterSource {
 
-	PIPES("Por cañería dentro de la vivienda"), OUTSIDE_LIVING_PLACE(
+	PIPES("Por ca&ntilde;er&iacute;a dentro de la vivienda"), OUTSIDE_LIVING_PLACE(
 			"Fuera de la vivienda pero adentro del terreno"), OUTSIDE_TERRAIN(
 			"Fuera del terreno");
 

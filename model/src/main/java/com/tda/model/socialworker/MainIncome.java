@@ -1,7 +1,7 @@
 package com.tda.model.socialworker;
 
 public enum MainIncome {
-	WORK_SALARY("Salario por trabajo"), PENSION("Jubilación o pensión"), SUBSIDY(
+	WORK_SALARY("Salario por trabajo"), PENSION("Jubilaci&oacute;n o pensi&oacute;n"), SUBSIDY(
 			"Subsidio o ayuda social del gobierno o iglesias"), OUTSIDE_MONEY(
 			"Ayuda en dinero de personas que no viven en el hogar");
 

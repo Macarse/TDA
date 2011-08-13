@@ -1,8 +1,8 @@
 package com.tda.model.socialworker;
 
 public enum SchoolHours {
-	MORNING("Por la mañana"), AFTERNOON("Por la tarde"), DOUBLE(
-			"Mañana y tarde"), WARD("Permanece en la escuela durante la semana");
+	MORNING("Por la ma&ntilde;ana"), AFTERNOON("Por la tarde"), DOUBLE(
+			"Ma&ntilde;ana y tarde"), WARD("Permanece en la escuela durante la semana");
 
 	private String description;
 

@@ -1,7 +1,7 @@
 package com.tda.model.socialworker;
 
 public enum InteriorFloor {
-	MOSAIC("Mosaico/baldosa/madera/cerámica/alfombra"), CONCRETE(
+	MOSAIC("Mosaico/baldosa/madera/cer&aacute;mica/alfombra"), CONCRETE(
 			"Cemento/ladrillo fijo"), BRICKS("Ladrillo suelto/tierra");
 
 	private String description;

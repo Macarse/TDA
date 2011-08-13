@@ -1,7 +1,7 @@
 package com.tda.model.socialworker;
 
 public enum Scholarity {
-	KINDER_GARDEN("Jardín de infantes"), PRIMARY_SCHOOL("Primaria"), HIGH_SCHOOL(
+	KINDER_GARDEN("Jard&iacute;n de infantes"), PRIMARY_SCHOOL("Primaria"), HIGH_SCHOOL(
 			"Secundaria"), TERCIARY("Terciaria"), DISABLED(
 			"Escuela de discapacitados");
 

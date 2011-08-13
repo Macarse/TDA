@@ -1,7 +1,7 @@
 package com.tda.model.socialworker;
 
 public enum WaterSourceType {
-	PUBLIC("Red pública (agua corriente)"), OTHER("Otros");
+	PUBLIC("Red p&uacute;blica (agua corriente)"), OTHER("Otros");
 
 	private String description;
 
