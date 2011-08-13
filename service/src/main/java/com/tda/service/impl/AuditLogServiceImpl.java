@@ -1,5 +1,7 @@
 package com.tda.service.impl;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import com.tda.model.audit.AuditLog;
@@ -9,19 +11,23 @@ import com.tda.service.api.AuditLogService;
 
 public class AuditLogServiceImpl implements AuditLogService {
 
-    private AuditLogDAO auditLogDAO;
+	private AuditLogDAO auditLogDAO;
 
-    public void setAuditLogDAO(AuditLogDAO auditLogDAO) {
-        this.auditLogDAO = auditLogDAO;
-    }
+	public void setAuditLogDAO(AuditLogDAO auditLogDAO) {
+		this.auditLogDAO = auditLogDAO;
+	}
 
-    public void save(AuditLog auditLog) {
-        auditLogDAO.save(auditLog);
-    }
+	public void save(AuditLog auditLog) {
+		auditLogDAO.save(auditLog);
+	}
 
-    public List<AuditLog> findByExamplePaged(AuditLog example,
-            Paginator paginator) {
-        return auditLogDAO.findByExamplePaged(example, paginator);
-    }
+	public List<AuditLog> findByExamplePaged(AuditLog example,
+			Paginator paginator) {
+		return auditLogDAO.findByExamplePaged(example, paginator);
+	}
 
+	public Collection<AuditLog> findByExamplePaged(AuditLog al,
+			Paginator paginator, Date from, Date to) {
+		return auditLogDAO.findByExamplePaged(al, paginator, from, to);
+	}
 }

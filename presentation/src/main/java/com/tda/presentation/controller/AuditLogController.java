@@ -18,104 +18,108 @@ import com.tda.service.api.AuditLogService;
 
 @Controller
 @RequestMapping(value = "/auditLog")
-public class AuditLogController extends CommonController{
-    private static final String AUDIT_LOG_LIST = "auditLog/list";
+public class AuditLogController extends CommonController {
+	private static final String AUDIT_LOG_LIST = "auditLog/list";
 
-    private AuditLogService auditLogService;
-    private Paginator paginator;
-    private ParamContainer params;
+	private AuditLogService auditLogService;
+	private Paginator paginator;
+	private ParamContainer params;
 
-    public AuditLogController() {
-        params = new ParamContainer();
-    }
+	public AuditLogController() {
+		params = new ParamContainer();
+	}
 
-    @Autowired
-    public void setAuditLogService(AuditLogService auditLogService) {
-        this.auditLogService = auditLogService;
-    }
+	@Autowired
+	public void setAuditLogService(AuditLogService auditLogService) {
+		this.auditLogService = auditLogService;
+	}
 
-    @Autowired
-    public void setPaginator(Paginator paginator) {
-        this.paginator = paginator;
-        paginator.setOrderAscending(true);
-        paginator.setOrderField("id");
-    }
+	@Autowired
+	public void setPaginator(Paginator paginator) {
+		this.paginator = paginator;
+		paginator.setOrderAscending(true);
+		paginator.setOrderField("id");
+	}
 
-    @RequestMapping(value = "search", method = RequestMethod.GET)
-    public ModelAndView search(
-            @ModelAttribute AuditLog auditLog,
-            BindingResult result,
-            @RequestParam(value = "page", required = false) Integer pageNumber,
-            @RequestParam(value = "orderField", required = false) String orderField,
-            @RequestParam(value = "orderAscending", required = false) Boolean orderAscending){
-        
-        ModelAndView modelAndView = new ModelAndView(AUDIT_LOG_LIST);
-        
-        //set first page paginator
-        paginator.setPageIndex(1);
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public ModelAndView search(
+			@ModelAttribute AuditLog auditLog,
+			BindingResult result,
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 
-        if ( auditLog.getFormId() != null ) {
-            params.setParam("formId", auditLog.getFormId().toString());
-        }
+		ModelAndView modelAndView = new ModelAndView(AUDIT_LOG_LIST);
 
-        if ( auditLog.getUser() != null ) {
-            params.setParam("user", auditLog.getUser());
-        }
+		// set first page paginator
+		paginator.setPageIndex(1);
 
-        if ( auditLog.getControllerUsed() != null ) {
-            params.setParam("controllerUsed", auditLog.getControllerUsed());
-        }
+		if (auditLog.getFormId() != null) {
+			params.setParam("formId", auditLog.getFormId().toString());
+		}
 
-        if ( auditLog.getTimestamp() != null ) {
-            params.setParam("timestamp", auditLog.getTimestamp().toString());
-        }
+		if (auditLog.getUser() != null) {
+			params.setParam("user", auditLog.getUser());
+		}
 
+		if (auditLog.getControllerUsed() != null) {
+			params.setParam("controllerUsed", auditLog.getControllerUsed());
+		}
 
-        modelAndView = processRequest(modelAndView, auditLog, pageNumber, orderField, orderAscending);
-        return modelAndView;
-    }
+		if (auditLog.getTimestamp() != null) {
+			params.setParam("timestamp", auditLog.getTimestamp().toString());
+		}
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getList(
-            @RequestParam(value = "page", required = false) Integer pageNumber,
-            @RequestParam(value = "orderField", required = false) String orderField,
-            @RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
-        ModelAndView modelAndView = new ModelAndView(AUDIT_LOG_LIST);
+		modelAndView = processRequest(modelAndView, auditLog, pageNumber,
+				orderField, orderAscending);
+		return modelAndView;
+	}
 
-        modelAndView = processRequest(modelAndView, new AuditLog(), pageNumber, orderField, orderAscending);
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView getList(
+			@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "orderField", required = false) String orderField,
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
+		ModelAndView modelAndView = new ModelAndView(AUDIT_LOG_LIST);
 
-        return modelAndView;
-    }
+		modelAndView = processRequest(modelAndView, new AuditLog(), pageNumber,
+				orderField, orderAscending);
 
-    private ModelAndView processRequest(ModelAndView modelAndView, 
-            AuditLog auditLog, Integer pageNumber, String orderField,
-            Boolean orderAscending){
+		return modelAndView;
+	}
 
-        List<AuditLog> auditLogList = null;
-        
-        // Pagination
-        if (pageNumber != null) {
-            paginator.setPageIndex(pageNumber);
-        }
+	private ModelAndView processRequest(ModelAndView modelAndView,
+			AuditLog auditLog, Integer pageNumber, String orderField,
+			Boolean orderAscending) {
 
-        // Order
-        if (orderField == null || orderAscending == null) {
-            orderField = "id";
-            orderAscending = true;
-        }
+		List<AuditLog> auditLogList = null;
 
-        paginator.setOrderAscending(orderAscending);
-        paginator.setOrderField(orderField);
+		// Pagination
+		if (pageNumber != null) {
+			paginator.setPageIndex(pageNumber);
+		}
 
-        auditLogList = auditLogService.findByExamplePaged(auditLog, paginator);
+		// Order
+		if (orderField == null || orderAscending == null) {
+			orderField = "id";
+			orderAscending = true;
+		}
 
-        modelAndView.addObject("auditLog", new AuditLog());
-        modelAndView.addObject("auditLogList", auditLogList);
-        modelAndView.addObject("paginator", paginator);
-        modelAndView.addObject("params", params);
-        modelAndView.addObject("orderField", orderField);
-        modelAndView.addObject("orderAscending", orderAscending.toString());
-        
-        return modelAndView;
-    }
+		paginator.setOrderAscending(orderAscending);
+		paginator.setOrderField(orderField);
+
+		// auditLogList = auditLogService.findByExamplePaged(auditLog,
+		// paginator);
+		auditLogList = (List<AuditLog>) auditLogService.findByExamplePaged(
+				auditLog, paginator, null, null);
+
+		modelAndView.addObject("auditLog", new AuditLog());
+		modelAndView.addObject("auditLogList", auditLogList);
+		modelAndView.addObject("paginator", paginator);
+		modelAndView.addObject("params", params);
+		modelAndView.addObject("orderField", orderField);
+		modelAndView.addObject("orderAscending", orderAscending.toString());
+
+		return modelAndView;
+	}
 }
