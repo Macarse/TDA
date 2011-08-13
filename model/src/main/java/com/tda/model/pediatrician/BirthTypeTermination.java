@@ -1,7 +1,7 @@
 package com.tda.model.pediatrician;
 
 public enum BirthTypeTermination {
-	SPONTANEOUS("Espontánea"), FORCEPS("Fórceps"), VACUUM("Vacuum"), CAESAREAN(
+	SPONTANEOUS("Espont&aacute;nea"), FORCEPS("F&oacute;rceps"), VACUUM("Vacuum"), CAESAREAN(
 			"Cesárea");
 
 	private String description;

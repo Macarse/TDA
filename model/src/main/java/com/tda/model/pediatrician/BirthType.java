@@ -1,7 +1,8 @@
 package com.tda.model.pediatrician;
 
 public enum BirthType {
-	UNCOMPLICATED("Eutócico"), DYSTOCIC("Distócico");
+	UNCOMPLICATED("Eut&oacute;cico"),
+	DYSTOCIC("Dist&oacute;cico");
 
 	private String description;
 

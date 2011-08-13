@@ -1,9 +1,13 @@
 package com.tda.model.socialworker;
 
 public enum LivesWith {
-	PARENTS("Padres"), SINGLE_PARENT("Padre/Madre solo"), GRAND_PARENTS(
-			"Abuelos"), UNCLES("Tíos"), BROTHERS("Hermanos"), FIANCEE("Pareja"), SONS(
-			"Hijo/s"), OTHER("Otros");
+	PARENTS("Padres"), SINGLE_PARENT("Padre/Madre solo"), 
+	GRAND_PARENTS("Abuelos"), 
+	UNCLES("Tíos"), 
+	BROTHERS("Hermanos"), 
+	FIANCEE("Pareja"), 
+	SONS("Hijo/s"),
+	OTHER("Otros");
 
 	private String description;
 

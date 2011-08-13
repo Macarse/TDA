@@ -1,7 +1,7 @@
 package com.tda.model.pediatrician;
 
 public enum BirthTypePresentation {
-	BREECH("Podálica"), TRANSVERSE("Transversa");
+	BREECH("Pod&aacute;lica"), TRANSVERSE("Transversa");
 
 	private String description;
 

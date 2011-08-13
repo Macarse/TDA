@@ -1,7 +1,7 @@
 package com.tda.model.pediatrician;
 
 public enum SueroType {
-	ANICTERICO("Anictérico"), ICTERICO("Ictérico"), OPALESCENTE("Opalescente"), TURBIO(
+	ANICTERICO("Anict&eacute;rico"), ICTERICO("Ict&eacute;rico"), OPALESCENTE("Opalescente"), TURBIO(
 			"Turbio"), LECHOSO("Lechoso");
 
 	private String description;

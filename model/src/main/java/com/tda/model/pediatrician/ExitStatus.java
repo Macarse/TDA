@@ -1,7 +1,7 @@
 package com.tda.model.pediatrician;
 
 public enum ExitStatus {
-	HEALTHY("Sano"), PATHOLOGY("Con patología");
+	HEALTHY("Sano"), PATHOLOGY("Con patolog&iacute;a");
 
 	private String description;
 
