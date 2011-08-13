@@ -6,6 +6,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 	<h2><fmt:message key="report.availables" /></h2>
+	
+	<c:if test="${nodata == true}">
+		<h3 class="form-errors">No hay datos para generar el reporte</h3>
+	</c:if>
 
 	<div class="reportRow">
 		<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReport" method="get">
