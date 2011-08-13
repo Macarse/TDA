@@ -1,7 +1,7 @@
 package com.tda.model.nurse;
 
 public enum NurseAction {
-	GIVE_MEDICINE("Entrega de medicamentos"), PERFORM_CURATION("Curación"), PERFORM_SUTURE(
+	GIVE_MEDICINE("Entrega de medicamentos"), PERFORM_CURATION("Curaci&oacute;n"), PERFORM_SUTURE(
 			"Sutura"), BURN("Quemadura"), SPRAY_THERAPY("Aerosol Terapia"), NEBULIZATIONS(
 			"Nebulizaciones");
 
