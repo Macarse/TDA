@@ -178,7 +178,7 @@ jQuery.fn.single_double_click = function(single_click_callback, double_click_cal
 
 var dientes = [];
 var crossColor = 'rgb(1, 1, 1)';
-var arr = ['rgb(255, 255, 255)', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)', 'rgb(0, 255, 0)', 'rgb(0, 0, 0)'];
+var arr = ['rgb(255, 255, 255)', 'rgb(255, 0, 0)', 'rgb(0, 0, 255)'];
 var arrDict = new Array();
 
 $(document).ready(function() {
@@ -186,9 +186,7 @@ $(document).ready(function() {
 	arrDict['rgb(255, 255, 255)'] = 0;
 	arrDict['rgb(255, 0, 0)'] = 1;
 	arrDict['rgb(0, 0, 255)'] = 2;
-	arrDict['rgb(0, 255, 0)'] = 3;
-	arrDict['rgb(0, 0, 0)'] = 4;
-	
+
 	var i = 0;
 	$(".diente p").each(function() {
 
