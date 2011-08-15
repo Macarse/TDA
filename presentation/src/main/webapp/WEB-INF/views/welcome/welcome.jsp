@@ -21,7 +21,15 @@
             <strong>Itinerario:</strong>
             <c:choose>
                 <c:when test="${empty currentItinerary.beginningDate }">
-                    No se ha definido el itinerario. Click <a href="${pageContext.request.contextPath }/itinerary/add">aquí</a> para hacerlo.
+                    No se ha definido el itinerario.
+                    <c:choose>
+                    	<c:when test="${user.admin}">
+                    		Click <a href="${pageContext.request.contextPath }/itinerary/add">aquí</a> para hacerlo.
+                   		</c:when>
+                   		<c:otherwise>
+                   			Solo el rol ADMIN puede configurar el itinerario.
+             			</c:otherwise>
+           			</c:choose>
                 </c:when>
                 <c:otherwise>
                     El próximo viaje es desde el <b><fmt:formatDate value="${currentItinerary.beginningDate }" pattern="dd/MM/yyyy"/></b>  hasta el <b><fmt:formatDate value="${currentItinerary.endDate}" pattern="dd/MM/yyyy"/></b>.
