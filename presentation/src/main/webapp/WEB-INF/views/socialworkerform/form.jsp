@@ -14,27 +14,27 @@
 		});
 
 		$("#peopleAtHomeUnderTen").keydown(function(e){
-			changeTab(e,'roomsExcludingKitchenAndBathroom');
+			changeTab(e,'tab-viv');
 		});
 		
 		$("#electricity1").keydown(function(e){
-			changeTab(e,'knowsHowToReadAndWrite1');
+			changeTab(e,'tab-esc');
 		});
 		$("#electricity2").keydown(function(e){
-			changeTab(e,'knowsHowToReadAndWrite1');
+			changeTab(e,'tab-esc');
 		});
 		$("#electricity3").keydown(function(e){
-			changeTab(e,'knowsHowToReadAndWrite1');
+			changeTab(e,'tab-esc');
 		});
 
 		$("#schoolService1").keydown(function(e){
-			changeTab(e,'workingPeople');
+			changeTab(e,'tab-eco');
 		});
 		$("#schoolService2").keydown(function(e){
-			changeTab(e,'workingPeople');
+			changeTab(e,'tab-eco');
 		});
 		$("#schoolService3").keydown(function(e){
-			changeTab(e,'workingPeople');
+			changeTab(e,'tab-eco');
 		});
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "socialworker")

@@ -22,7 +22,7 @@
 	});
 
 	$("#comment").keydown(function(e){
-		changeTab(e,'cpod');
+		changeTab(e,'tab-odontogram');
 	});
 
      if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "dentist")
@@ -228,7 +228,6 @@
 		<tr>
 		<td colspan="2">
 		<br/><br/>
-		<p>
 
 		<div id="odontogram">
 			<jsp:include flush="true" page="odontogram.jsp">

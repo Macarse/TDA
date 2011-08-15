@@ -15,15 +15,15 @@
 		$("#size").focus();
 
 		$("#percentile").keydown(function(e){
-			changeTab(e, 'TAmin');
+			changeTab(e, 'tab-taControl');
 		});
 
 		$("#saturation").keydown(function(e){
-			changeTab(e,'vaxines1');
+			changeTab(e,'tab-vaccines');
 		});
 
 		$("#vaxines12").keydown(function(e){
-			changeTab(e,'nurseActions1');
+			changeTab(e,'tab-actions');
 		});
 
         if( ('<c:out value="${editable}"></c:out>') == 'false' || userRole != "nurse" )
@@ -189,7 +189,7 @@
 			<tr>
 				<th colspan="${fieldsPerRow }"><form:label for="observations" path="observations" cssErrorClass="error"><fmt:message key="nurse.form.observations" /></form:label></th></tr>
 			<tr> 
-				<th colspan="${fieldsPerRow }"><form:textarea tabindex="28" path="observations" /> <form:errors path="observations" /></td></tr>
+				<th colspan="${fieldsPerRow }"><form:textarea tabindex="28" path="observations" /> <form:errors path="observations" /></th></tr>
 				
 			<tr>
 				<td colspan="${fieldsPerRow}" class="doubleband">

@@ -87,39 +87,39 @@
          }
 
         for(i=1;i<=2;i++){
-	        $("#exitStatus" + i).keypress(function(e){
-				changeTab(e,'takesMedicine');
+	        $("#exitStatus" + i).keydown(function(e){
+				changeTab(e,'tab-pab');
 			});
         }
         
-        $("#otherPatientDiseases").keypress(function(e){
-			changeTab(e,'cardiovascular1');
+        $("#otherPatientDiseases").keydown(function(e){
+			changeTab(e,'tab-fab');
 		});
 
-        $("#otherFamilyDiaseases").keypress(function(e){
-			changeTab(e,'maturationAndDevelopment');
+        $("#otherFamilyDiaseases").keydown(function(e){
+			changeTab(e,'tab-mat');
 		});
 
-        $("#maturationAndDevelopment").keypress(function(e){
-			changeTab(e,'symptoms');
+        $("#maturationAndDevelopment").keydown(function(e){
+			changeTab(e,'tab-phy');
 		});
 
-        $("#pathologyFound").keypress(function(e){
-			changeTab(e,'hematrocito');
+        $("#pathologyFound").keydown(function(e){
+			changeTab(e,'tab-lab');
 		});
 
         for(i=1;i<=3;i++){
-	        $("#chagas" + i).keypress(function(e){
-				changeTab(e,'chest');
+	        $("#chagas" + i).keydown(function(e){
+				changeTab(e,'tab-rad');
 			});
         }
         
-        $("#radiologyComments").keypress(function(e){
-			changeTab(e,'diagnosisId');
+        $("#radiologyComments").keydown(function(e){
+			changeTab(e,'tab-dia');
 		});
 
-        $("#diagnosisId").keypress(function(e){
-			changeTab(e,'interconsultation1');
+        $("#diagnosisId").keydown(function(e){
+			changeTab(e,'tab-int');
 		});
 	});
 
