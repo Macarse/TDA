@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -138,9 +140,9 @@ public class PatientController extends CommonController{
 			params.setParam("lastName", aPatient.getLastName());
 		if (aPatient.getDni() != null)
 			params.setParam("dni", aPatient.getDni());
-		// TODO: birdhday format?
+		Format formatter = new SimpleDateFormat("dd/MM/yyyy"); 
 		if (aPatient.getBirthdate() != null)
-			params.setParam("birthday", aPatient.getBirthdate().toString());
+			params.setParam("birthday", formatter.format(aPatient.getBirthdate()));
 		if (aPatient.getSex() != null)
 			params.setParam("sex", aPatient.getSex().toString());
 
