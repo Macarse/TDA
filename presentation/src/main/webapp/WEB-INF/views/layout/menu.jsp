@@ -216,12 +216,14 @@
 		$.get(contextPath + "/patientqueue/assigntos?patient=" + selectedId + "&medic=" + username, function(){
 		});
 		$("#patientlist-dialog").dialog('close');
+		location.reload(true);
 	}
 
 	function sendTo(username){
 		$.get(contextPath + "/patientqueue/assigntos?patient=" + selectedId + "&medic=" + username, function(){
 		});
 		$("#queue-dialog").dialog('close');
+		location.reload(true);
 	}
 
 	function redirectTo(url){

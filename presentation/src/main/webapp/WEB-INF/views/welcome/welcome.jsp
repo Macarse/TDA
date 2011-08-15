@@ -114,7 +114,7 @@
 						</c:otherwise>
 					</c:choose>
 					</td>
-				<td>
+				<td align="center">
 					<c:choose>
 						<c:when test="${patientintrain.user != null}">
 							${patientintrain.user.username}
