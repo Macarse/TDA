@@ -67,8 +67,8 @@
 	<tbody>
 		<c:forEach items="${formlist}" var="oneForm" varStatus="indexStatus">
 			<tr>
-				<td>${oneForm.fillingDate}</td>
-				<td>${oneForm.formType.description}</td>
+				<td align="center"><fmt:formatDate value="${oneForm.fillingDate}" pattern="dd/MM/yyyy"/></td>
+				<td align="center">${oneForm.formType.description}</td>
 				<td><form:form method="GET"
 						action="${pageContext.request.contextPath}/patient/${patient.id}/${oneForm.formType}/${oneForm.id}/edit">
 						<button type="submit" class="button-text button-edit fg-button ui-state-default ui-corner-all"><span class="ui-icon ui-icon-transferthick-e-w button-icon"></span> Ver</button>

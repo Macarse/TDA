@@ -5,7 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.Authority;
@@ -13,6 +16,7 @@ import com.tda.model.itinerary.Itinerary;
 import com.tda.persistence.dao.ItineraryDAO;
 import com.tda.service.api.ApplicationUserService;
 
+@SessionAttributes({ "user" })
 public class CommonController {
 	protected ApplicationUserService applicationUserService;
 	protected ItineraryDAO itineraryDAO;
@@ -31,6 +35,10 @@ public class CommonController {
 	@ModelAttribute("userList")
 	public List<ApplicationUser> getUserList() {
 		List<ApplicationUser> users = applicationUserService.findAll();
+		
+		//actual user
+		Object aux = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails user = ((UserDetails) aux);
 
 		// set admin authority
 		Authority adminAuth = new Authority();
@@ -41,14 +49,14 @@ public class CommonController {
 		userAuth.setAuthority("ROLE_USER");
 
 		Iterator<ApplicationUser> iter = users.iterator();
-		ApplicationUser user;
+		ApplicationUser appUser;
 
 		while (iter.hasNext()) {
-			user = iter.next();
-			Collection<Authority> auths = user.getMyAuthorities();
-
-			if (auths.size() == 2 && auths.contains(adminAuth)
-					&& auths.contains(userAuth)) {
+			appUser = iter.next();
+			Collection<Authority> auths = appUser.getMyAuthorities();
+			
+			if ((auths.size() == 2 && auths.contains(adminAuth)
+					&& auths.contains(userAuth)) || appUser.getUsername().equals(user.getUsername())) {
 				iter.remove();
 			}
 		}
