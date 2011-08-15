@@ -3,6 +3,23 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<script language='javascript' type='text/javascript'> 
+    $(document).ready(function(){
+    	$(function() {
+    		$( "#filterdate" ).datepicker(
+    			{ dateFormat: 'dd/mm/yy',
+    			  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    			  monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    			  dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+    			  changeYear: true,
+    			  changeMonth: true,
+    			  yearRange: 'c-100,c+00'
+    		    }
+    		);
+    });
+    }); 
+</script>
+
 <div class="filter-container">
 	<form:form modelAttribute="patient"
 		action="search" method="get">
@@ -30,7 +47,7 @@
 				<tr>
 					<td><form:label for="birthdate" path="birthdate" cssErrorClass="error">
 						<fmt:message key="patient.form.birthdate" /></form:label></td>
-					<td><form:input path="birthdate" /> <form:errors path="birthdate" /></td></tr>
+					<td><form:input id="filterdate" path="birthdate" /> <form:errors path="birthdate" /></td></tr>
 				<tr>
 					<td><form:label for="dni" path="dni" cssErrorClass="error">
 						<fmt:message key="patient.form.dni" /></form:label></td>
