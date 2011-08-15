@@ -12,7 +12,7 @@
 	</c:if>
 
 	<div class="reportRow">
-		<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReport" method="get">
+		<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReport" method="get" target="_blank">
 			<table>
 				<thead>
 					<tr>
@@ -43,7 +43,7 @@
 	<br></br>
 
 	<div class="reportRow">
-		<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReportDate" method="get">
+		<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReportDate" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -84,7 +84,7 @@
 	<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/sexGraphReport" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/sexGraphReport" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -117,7 +117,7 @@
 	<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/itineraryReport" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/itineraryReport" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -150,7 +150,7 @@
 	<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReportAge" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/patientReportAge" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -193,7 +193,7 @@
 		<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/ageGraphReport" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/ageGraphReport" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -226,7 +226,7 @@
 	<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/nbiForDestinationReport" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/nbiForDestinationReport" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -259,7 +259,7 @@
 	<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/interconsultPerYearReport" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/interconsultPerYearReport" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -292,7 +292,7 @@
 	<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/ageForDestinationReport" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/ageForDestinationReport" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -325,7 +325,7 @@
 	<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/prevalentDiagnosticForDestinationReport" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/prevalentDiagnosticForDestinationReport" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
@@ -358,7 +358,7 @@
 	<br></br>
 	
 	<div class="reportRow">
-				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/scholarityByDestinationReport" method="get">
+				<form:form modelAttribute="configReport" action="${pageContext.request.contextPath}/report/scholarityByDestinationReport" method="get" target="_blank">
 			<table>
 			<thead>
 					<tr>
