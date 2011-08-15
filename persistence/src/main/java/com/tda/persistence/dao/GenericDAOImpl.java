@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.tda.persistence.paginator.Paginator;
@@ -103,9 +104,8 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 
 	@SuppressWarnings("unchecked")
 	public List<T> findByExamplePaged(T exampleObject, Paginator paginator) {
-
-		// TODO Hardcoded count, it must do just a COUNT, not retrieve the data
-		paginator.setTotalResultsCount(findByExample(exampleObject).size());
+		paginator.setTotalResultsCount((Integer) findByExampleCount(
+				exampleObject).get(0));
 
 		Example example = Example.create(exampleObject);
 		example.enableLike(MatchMode.ANYWHERE);
@@ -146,12 +146,47 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<T> findByExampleCount(T exampleObject) {
+		Example example = Example.create(exampleObject);
+		example.enableLike(MatchMode.ANYWHERE);
+		example.ignoreCase();
+
+		// for (String field : excludedFields)
+		// example.excludeProperty(field);
+
+		DetachedCriteria c = DetachedCriteria.forClass(persistentClass).add(
+				example);
+
+		c.setProjection(Projections.rowCount());
+
+		return getHibernateTemplate().findByCriteria(c);
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<T> findByExampleCount(T exampleObject,
+			List<String> excludedFields) {
+		Example example = Example.create(exampleObject);
+		example.enableLike(MatchMode.ANYWHERE);
+		example.ignoreCase();
+
+		for (String field : excludedFields)
+			example.excludeProperty(field);
+
+		DetachedCriteria c = DetachedCriteria.forClass(persistentClass).add(
+				example);
+
+		c.setProjection(Projections.rowCount());
+
+		return getHibernateTemplate().findByCriteria(c);
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<T> findByExamplePaged(T exampleObject, Paginator paginator,
 			List<String> excludedFields) {
 
 		// TODO Hardcoded count, it must do just a COUNT, not retrieve the data
-		paginator.setTotalResultsCount(findByExample(exampleObject,
-				excludedFields).size());
+		paginator.setTotalResultsCount((Integer) findByExampleCount(
+				exampleObject, excludedFields).get(0));
 
 		Example example = Example.create(exampleObject);
 		example.enableLike(MatchMode.ANYWHERE);

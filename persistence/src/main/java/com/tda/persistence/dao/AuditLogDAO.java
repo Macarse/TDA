@@ -13,9 +13,9 @@ public class AuditLogDAO extends GenericDAOImpl<AuditLog> {
 		return AuditLog.class;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<AuditLog> findByExamplePaged(AuditLog al,
-			Paginator paginator) {
+	public List<AuditLog> findByExamplePaged(AuditLog al, Paginator paginator) {
 		String DATE_FORMAT = "yyyy/MM/dd";
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
@@ -23,22 +23,25 @@ public class AuditLogDAO extends GenericDAOImpl<AuditLog> {
 		String union = " where ";
 
 		if (al.getTimestampFrom() != null) {
-			query += (union + "DATE(timestamp) >= '" + sdf.format(al.getTimestampFrom()) + "' ");
+			query += (union + "DATE(timestamp) >= '"
+					+ sdf.format(al.getTimestampFrom()) + "' ");
 			union = " and ";
 		}
 
 		if (al.getTimestampTo() != null) {
-			query += (union + "DATE(timestamp) <= '" + sdf.format(al.getTimestampTo()) + "' ");
+			query += (union + "DATE(timestamp) <= '"
+					+ sdf.format(al.getTimestampTo()) + "' ");
 			union = " and ";
 		}
 
 		if (al.getControllerUsed() != null && !al.getControllerUsed().isEmpty()) {
-			query += (union + " controllerUsed like '" + al.getControllerUsed() + "' ");
+			query += (union + " controllerUsed like '%"
+					+ al.getControllerUsed() + "%' ");
 			union = " and ";
 		}
 
 		if (al.getUser() != null && !al.getUser().isEmpty()) {
-			query += (union + " user like '" + al.getUser() + "' ");
+			query += (union + " user like '%" + al.getUser() + "%' ");
 			union = " and ";
 		}
 
@@ -46,9 +49,12 @@ public class AuditLogDAO extends GenericDAOImpl<AuditLog> {
 			query += (union + " formId=" + al.getFormId());
 			union = " and ";
 		}
-		
-		// TODO Hardcoded count, it must do just a COUNT, not retrieve the data
-        paginator.setTotalResultsCount(getHibernateTemplate().find(query).size());
+
+		List<Object> asd = getHibernateTemplate().find(
+				"select count(*) " + query);
+		Long count = (Long) asd.get(0);
+
+		paginator.setTotalResultsCount(count.intValue());
 
 		if (paginator.getOrderField() != null
 				&& paginator.getOrderField() != "")
@@ -59,7 +65,6 @@ public class AuditLogDAO extends GenericDAOImpl<AuditLog> {
 				+ (paginator.getResultsPerPage() * (paginator.getPageIndex() - 1))
 				+ "," + paginator.getResultsPerPage();
 
-		@SuppressWarnings("unchecked")
 		List<AuditLog> list = getHibernateTemplate().find(query);
 
 		if (list == null || list.size() <= 0)
