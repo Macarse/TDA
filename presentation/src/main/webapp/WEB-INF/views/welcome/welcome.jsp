@@ -25,7 +25,7 @@
                 </c:when>
                 <c:otherwise>
                     El próximo viaje es desde el <b><fmt:formatDate value="${currentItinerary.beginningDate }" pattern="dd/MM/yyyy"/></b>  hasta el <b><fmt:formatDate value="${currentItinerary.endDate}" pattern="dd/MM/yyyy"/></b>.
-                     Haga click <a href="${pageContext.request.contextPath }/itinerary/edit/${currentItinerary.id}">aquí</a> para cambiarlo.
+                     Haga click <a href="${pageContext.request.contextPath }/itinerary/edit/${currentItinerary.id}">aquí</a> para <c:choose><c:when test="${user.admin}">cambiarlo</c:when><c:otherwise>verlo</c:otherwise></c:choose>.
                 </c:otherwise>
             </c:choose>
             <span id="close-itinerary-banner"><strong><a href="#">[x]</a></strong></span>

@@ -81,7 +81,17 @@ $(document).ready(function() {
 	if (placePosition < 0) {
 		document.getElementById('addPlaceButton').click();
 	}
+
+	//deshabilitar todo si no es admin
+	if(userRole != 'admin')
+    	$('input, select').attr('disabled', 'disabled');
+	
 });
+</script>
+
+<script type="text/javascript">
+	if( userRole != "admin" )
+		document.write("<h3>Solo el rol ADMIN puede configurar el itinerario</h3>");
 </script>
 
 <div class="itinerary-form">
