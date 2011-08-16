@@ -184,7 +184,6 @@ public abstract class GenericDAOImpl<T> extends HibernateDaoSupport implements
 	public List<T> findByExamplePaged(T exampleObject, Paginator paginator,
 			List<String> excludedFields) {
 
-		// TODO Hardcoded count, it must do just a COUNT, not retrieve the data
 		paginator.setTotalResultsCount((Integer) findByExampleCount(
 				exampleObject, excludedFields).get(0));
 

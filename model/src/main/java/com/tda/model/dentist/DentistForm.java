@@ -75,8 +75,6 @@ public class DentistForm {
 
 	private String severityLevelComments;
 
-	// TODO falta lista de tratamientos realizados
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
@@ -267,23 +265,22 @@ public class DentistForm {
 	}
 
 	public String toothsToString() {
-	    if ( tooths == null || tooths.isEmpty() ) {
-	        return "";
-	    }
+		if (tooths == null || tooths.isEmpty()) {
+			return "";
+		}
 
-	    StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-	    for (Tooth tooth : tooths) {
-            sb.append(tooth.toString());
-        }
+		for (Tooth tooth : tooths) {
+			sb.append(tooth.toString());
+		}
 
-	    return sb.toString();
+		return sb.toString();
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tooth.class, cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tooth.class, cascade = CascadeType.ALL)
 	@Fetch(value = FetchMode.SUBSELECT)
 	@ForeignKey(name = "ID_USER", inverseName = "ID_TOOTH")
-	
 	public Collection<Tooth> getTooths() {
 		return tooths;
 	}

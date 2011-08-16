@@ -55,8 +55,6 @@ public class NurseForm {
 	// Nurse Actions
 	private Collection<NurseAction> nurseActions;
 
-	// TODO CURATION
-
 	// Observations
 	private String observations;
 

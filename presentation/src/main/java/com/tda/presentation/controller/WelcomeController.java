@@ -48,8 +48,8 @@ import com.tda.service.api.PediatricianDiagnosisService;
 
 @Controller
 @RequestMapping(value = "/")
-@SessionAttributes({ "patient", "user"})
-public class WelcomeController extends CommonController{
+@SessionAttributes({ "patient", "user" })
+public class WelcomeController extends CommonController {
 	private static final String LIST = "welcome/list";
 
 	private PatientInTrainService patientInTrainService;
@@ -155,18 +155,6 @@ public class WelcomeController extends CommonController{
 		// set first page paginator
 		paginator.setPageIndex(1);
 
-		// if (aPatient.getFirstName() != null)
-		// params.setParam("firstName", aPatient.getFirstName());
-		// if (aPatient.getLastName() != null)
-		// params.setParam("lastName", aPatient.getLastName());
-		// if (aPatient.getDni() != null)
-		// params.setParam("dni", aPatient.getDni());
-		// // TODO: birdhday format?
-		// if (aPatient.getBirthdate() != null)
-		// params.setParam("birthday", aPatient.getBirthdate().toString());
-		// if (aPatient.getSex() != null)
-		// params.setParam("sex", aPatient.getSex().toString());
-
 		modelAndView = processRequest(modelAndView, aPatient, pageNumber,
 				orderField, orderAscending);
 
@@ -213,8 +201,8 @@ public class WelcomeController extends CommonController{
 	}
 
 	private class DateEditor extends PropertyEditorSupport {
-	    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-        "dd/MM/yyyy");
+		private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"dd/MM/yyyy");
 
 		@Override
 		public void setAsText(String text) throws IllegalArgumentException {
@@ -222,14 +210,12 @@ public class WelcomeController extends CommonController{
 			try {
 				setValue(simpleDateFormat.parse(text));
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
 		@Override
 		public String getAsText() {
-			// TODO why its entering here when getValue() == null?
 			if (getValue() == null)
 				return null;
 
@@ -238,8 +224,8 @@ public class WelcomeController extends CommonController{
 	}
 
 	private class PediatricianDiagnosisEditor extends PropertyEditorSupport {
-	    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-        "dd/MM/yyyy");
+		private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"dd/MM/yyyy");
 
 		@Override
 		public void setAsText(String text) throws IllegalArgumentException {
@@ -248,7 +234,6 @@ public class WelcomeController extends CommonController{
 
 		@Override
 		public String getAsText() {
-			// TODO why its entering here when getValue() == null?
 			if (getValue() == null)
 				return null;
 

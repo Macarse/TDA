@@ -27,7 +27,6 @@ public class UserDefaultProvider implements UserProvider {
 		try {
 			loadDefaultUsers(propertiesHolder);
 		} catch (Exception e) {
-			// TODO log error in user loading
 		}
 	}
 
@@ -38,8 +37,6 @@ public class UserDefaultProvider implements UserProvider {
 			String[] props = properties.getProperty(key).split(",");
 
 			if (props.length < 2) {
-				// TODO Do something about this. At least we need a password and
-				// one role
 			} else {
 				ApplicationUser anUser = null;
 				try {

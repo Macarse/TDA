@@ -46,6 +46,10 @@ public class FormContainerServiceImpl implements FormContainerService {
 		this.patientInTrainDAO = patientInTrainDAO;
 	}
 
+	public PatientInTrainDAO getPatientInTrainDAO() {
+		return patientInTrainDAO;
+	}
+
 	public List<FormContainer> findByExamplePaged(FormContainer example,
 			Paginator paginator) {
 		return formContainerDAO.findByExamplePaged(example, paginator);

@@ -30,7 +30,7 @@ import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn;
 
 public class SexGraphReportLayout {
 
-	@SuppressWarnings({ "rawtypes", "unchecked", "unused", "serial" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	public DynamicReport buildReportLayout() throws ColumnBuilderException,
 			ClassNotFoundException, ChartBuilderException {
 

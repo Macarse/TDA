@@ -22,6 +22,7 @@ public class ItineraryDAO extends GenericDAOImpl<Itinerary> {
 		return Itinerary.class;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Itinerary> findItineraryForDate(Date date) {
 		DetachedCriteria crit = DetachedCriteria.forClass(Itinerary.class);
 		crit.add(Restrictions.and(Restrictions.le("beginningDate", date),
@@ -39,6 +40,7 @@ public class ItineraryDAO extends GenericDAOImpl<Itinerary> {
 		DetachedCriteria crit = DetachedCriteria.forClass(Itinerary.class);
 		crit.add(Restrictions.ge("beginningDate", currentDate));
 		crit.addOrder(Order.asc("beginningDate"));
+		@SuppressWarnings("unchecked")
 		List<Itinerary> nextItineraries = getHibernateTemplate()
 				.findByCriteria(crit);
 		if (nextItineraries.size() > 0) {

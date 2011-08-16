@@ -14,7 +14,6 @@ public class HashService {
 		try {
 			bytesOfMessage = password.getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -22,7 +21,6 @@ public class HashService {
 		try {
 			md = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		byte[] thedigest = md.digest(bytesOfMessage);
@@ -31,7 +29,6 @@ public class HashService {
 		try {
 			hashedString = getHexString(thedigest);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return hashedString;

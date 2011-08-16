@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,33 +39,34 @@ public class PatientQueueServiceImpl implements PatientQueueService {
 		Patient pPatient = patientDAO.findById(patientId);
 		// Search for the user
 		ApplicationUser pUser = applicationUserDAO.findById(applicationUserId);
-		
-		if(pPatient != null && pUser != null){
+
+		if (pPatient != null && pUser != null) {
 			// assing
 			PatientQueue queue = new PatientQueue();
 			queue.setPatient(pPatient);
 			queue.setUser(pUser);
 			queue.setTime(new Date());
-	
+
 			// persist
 			patientQueueDAO.save(queue);
 		}
 	}
-	
+
 	@Transactional
 	public void assignToS(Long patientId, String applicationUserUserName) {
 		// Search for the patient
 		Patient pPatient = patientDAO.findById(patientId);
 		// Search for the user
-		List<ApplicationUser> pUsers = applicationUserDAO.findByUsername(applicationUserUserName);
+		List<ApplicationUser> pUsers = applicationUserDAO
+				.findByUsername(applicationUserUserName);
 		// assing
-		
-		if(pPatient != null && pUsers.size() > 0){
+
+		if (pPatient != null && pUsers.size() > 0) {
 			PatientQueue queue = new PatientQueue();
 			queue.setPatient(pPatient);
 			queue.setUser(pUsers.get(0));
 			queue.setTime(new Date());
-	
+
 			// persist
 			patientQueueDAO.save(queue);
 		}
@@ -75,17 +75,15 @@ public class PatientQueueServiceImpl implements PatientQueueService {
 
 	@Transactional
 	public List<Patient> getPatients(Long applicationUserId) {
-		// TODO Auto-generated method stub
 		List<Patient> patients = new ArrayList<Patient>();
 
-		// for (PatientQueue patientQueue : patientQueueDAO.findAll()) {
 		Long currentUserId = ((ApplicationUser) SecurityContextHolder
 				.getContext().getAuthentication().getPrincipal()).getId();
-		
+
 		List<PatientQueue> patientList = patientQueueDAO
-			.findPatientsByApplicationUserId(currentUserId);
-		
-		if(patientList != null)
+				.findPatientsByApplicationUserId(currentUserId);
+
+		if (patientList != null)
 			for (PatientQueue patientQueue : patientList) {
 				patients.add(patientQueue.getPatient());
 			}

@@ -45,10 +45,8 @@ public class BaseNurseFormController {
 			try {
 				setValue(vaxineService.findByName(text));
 			} catch (SingleResultExpectedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (NoDataFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

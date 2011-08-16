@@ -47,8 +47,6 @@ public class RoleDefaultProvider implements RoleProvider {
 				authorityService.save(authority);
 
 			} catch (SingleResultExpectedException e) {
-				// TODO we should log this as it is an anomaly in the data
-				// representation
 			}
 
 		}

@@ -26,8 +26,8 @@ import com.tda.service.api.ItemService;
 
 @Controller
 @RequestMapping(value = "/item")
-@SessionAttributes({"item"})
-public class ItemController extends CommonController{
+@SessionAttributes({ "item" })
+public class ItemController extends CommonController {
 
 	private static final String ITEM_FORM_DELETE_ERROR = "item.form.deleteError";
 	private static final String ITEM_FORM_NOT_FOUND = "item.form.notFound";
@@ -43,7 +43,7 @@ public class ItemController extends CommonController{
 	public ItemController() {
 		params = new ParamContainer();
 	}
-	
+
 	@Autowired
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
@@ -67,22 +67,21 @@ public class ItemController extends CommonController{
 
 		return ITEM_CREATE_FORM;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public @ResponseBody
 	String open(@RequestParam Long id, @RequestParam String value) {
-		
-		try{
+
+		try {
 			Item item = this.itemService.findById(id);
-			
+
 			item.setQuantity(Long.valueOf(value));
-			
+
 			this.itemService.update(item);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return "error";
 		}
-		
-		
+
 		return value;
 	}
 
@@ -92,15 +91,17 @@ public class ItemController extends CommonController{
 		ModelAndView modelAndView = new ModelAndView();
 
 		// Check for name uniqueness
-		List<Item> itemsWithName = itemService.findByExactName(anItem.getName());
-		if (!itemsWithName.isEmpty() && !itemsWithName.get(0).getId().equals(anItem.getId())) {
-			FieldError uniquenessError = new FieldError("item", "name", anItem.getName(), false, 
-					new String[] {"error.item.duplicated"}, new Object[] {"El item ya existe"}, "El item ya existe");
+		List<Item> itemsWithName = itemService
+				.findByExactName(anItem.getName());
+		if (!itemsWithName.isEmpty()
+				&& !itemsWithName.get(0).getId().equals(anItem.getId())) {
+			FieldError uniquenessError = new FieldError("item", "name",
+					anItem.getName(), false,
+					new String[] { "error.item.duplicated" },
+					new Object[] { "El item ya existe" }, "El item ya existe");
 			result.addError(uniquenessError);
 		}
-		
-		// TODO if we're editing and not adding a new item the message
-		// seems somewhat... misleading, CHANGE IT :D
+
 		if (result.hasErrors()) {
 			modelAndView.setViewName(ITEM_CREATE_FORM);
 		} else {
@@ -138,35 +139,34 @@ public class ItemController extends CommonController{
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public ModelAndView search(
 			@ModelAttribute Item anItem,
 			BindingResult result,
 			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "orderField", required = false) String orderField,
-			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending){
-		
+			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
+
 		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
-		
-		//set first page paginator
+
+		// set first page paginator
 		paginator.setPageIndex(1);
-		
+
 		params.setParam("description", anItem.getDescription());
 		params.setParam("name", anItem.getName());
 		if (anItem.getCategory() != null)
 			params.setParam("category", anItem.getCategory().toString());
 		if (anItem.getMeasureUnit() != null)
-			params.setParam("measureunit", anItem.getMeasureUnit()
-					.toString());
+			params.setParam("measureunit", anItem.getMeasureUnit().toString());
 		if (anItem.getQuantity() != null)
 			params.setParam("quantity", anItem.getQuantity().toString());
-		
-		modelAndView = processRequest(modelAndView, anItem, pageNumber, orderField, orderAscending);
-		
+
+		modelAndView = processRequest(modelAndView, anItem, pageNumber,
+				orderField, orderAscending);
+
 		return modelAndView;
 	}
-
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getList(
@@ -175,15 +175,16 @@ public class ItemController extends CommonController{
 			@RequestParam(value = "orderAscending", required = false) Boolean orderAscending) {
 		ModelAndView modelAndView = new ModelAndView(ITEM_LIST);
 
-		modelAndView = processRequest(modelAndView, new Item(), pageNumber, orderField, orderAscending);
+		modelAndView = processRequest(modelAndView, new Item(), pageNumber,
+				orderField, orderAscending);
 
 		return modelAndView;
 	}
-	
-	private ModelAndView processRequest(ModelAndView modelAndView, 
-			Item item, Integer pageNumber, String orderField, Boolean orderAscending){
+
+	private ModelAndView processRequest(ModelAndView modelAndView, Item item,
+			Integer pageNumber, String orderField, Boolean orderAscending) {
 		List<Item> itemList = null;
-		
+
 		// Pagination
 		if (pageNumber != null) {
 			paginator.setPageIndex(pageNumber);
@@ -194,19 +195,19 @@ public class ItemController extends CommonController{
 			orderField = "name";
 			orderAscending = true;
 		}
-		
+
 		paginator.setOrderAscending(orderAscending);
 		paginator.setOrderField(orderField);
-		
+
 		itemList = itemService.findByExamplePaged(item, paginator);
-		
+
 		modelAndView.addObject("item", new Item());
 		modelAndView.addObject("itemList", itemList);
 		modelAndView.addObject("paginator", paginator);
 		modelAndView.addObject("params", params);
 		modelAndView.addObject("orderField", orderField);
 		modelAndView.addObject("orderAscending", orderAscending.toString());
-		
+
 		return modelAndView;
 	}
 }

@@ -124,9 +124,6 @@ public class ApplicationUserController {
 	private void validateUserPasswords(ApplicationUser applicationUser,
 			BindingResult result) {
 		// Checking if passwords are the same
-		// FIXME: We should do something similar to this:
-		// http://stackoverflow.com/questions/1972933/cross-field-validation-with-hibernate-validator-jsr-303
-		// http://stackoverflow.com/questions/3503798/handling-password-confirmations-on-spring-mvc
 		if (!applicationUser.getPassword().equals(
 				applicationUser.getConfirmPassword())) {
 			result.addError(new FieldError("applicationUser",
@@ -142,8 +139,6 @@ public class ApplicationUserController {
 
 		validateUserPasswords(applicationUser, result);
 
-		// TODO if we're editing and not adding a new item the message
-		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors()) {
 			modelAndView.setViewName(PASSWORD_EDIT_FORM);
 		} else {
@@ -164,8 +159,6 @@ public class ApplicationUserController {
 
 		validateUsername(applicationUser, result);
 
-		// TODO if we're editing and not adding a new item the message
-		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors() && result.getFieldErrorCount() > 2) {
 			modelAndView.setViewName(USER_EDIT_FORM);
 		} else {
@@ -187,8 +180,6 @@ public class ApplicationUserController {
 		validateUserPasswords(applicationUser, result);
 		validateUsername(applicationUser, result);
 
-		// TODO if we're editing and not adding a new item the message
-		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors()) {
 			modelAndView.setViewName(USER_CREATE_FORM);
 		} else {
@@ -341,10 +332,8 @@ public class ApplicationUserController {
 			try {
 				setValue(authorityService.findByAuthority(text));
 			} catch (SingleResultExpectedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (NoDataFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

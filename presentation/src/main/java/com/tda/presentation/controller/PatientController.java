@@ -42,7 +42,7 @@ import com.tda.service.api.PatientService;
 @Controller
 @RequestMapping(value = "/patient")
 @SessionAttributes("patient")
-public class PatientController extends CommonController{
+public class PatientController extends CommonController {
 	private static final String FORM_DELETE_ERROR = "form.deleteError";
 	private static final String FORM_NOT_FOUND = "form.notFound";
 	private static final String FORM_MESSAGE = "message";
@@ -140,23 +140,23 @@ public class PatientController extends CommonController{
 			params.setParam("lastName", aPatient.getLastName());
 		if (aPatient.getDni() != null)
 			params.setParam("dni", aPatient.getDni());
-		Format formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+		Format formatter = new SimpleDateFormat("dd/MM/yyyy");
 		if (aPatient.getBirthdate() != null)
-			params.setParam("birthday", formatter.format(aPatient.getBirthdate()));
+			params.setParam("birthday",
+					formatter.format(aPatient.getBirthdate()));
 		if (aPatient.getSex() != null)
 			params.setParam("sex", aPatient.getSex().toString());
 
 		modelAndView = processRequest(modelAndView, aPatient, pageNumber,
 				orderField, orderAscending);
-		
+
 		modelAndView.addObject("patient", aPatient);
 
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getCreateForm(Model model,
-			@ModelAttribute Patient aPatient) {
+	public String getCreateForm(Model model, @ModelAttribute Patient aPatient) {
 		model.addAttribute("patient", aPatient);
 
 		return CREATE_FORM;
@@ -180,8 +180,6 @@ public class PatientController extends CommonController{
 			result.addError(error);
 		}
 
-		// TODO if we're editing and not adding a new item the message
-		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors()) {
 			modelAndView.setViewName(CREATE_FORM);
 		} else {
@@ -438,7 +436,6 @@ public class PatientController extends CommonController{
 			os.flush();
 			os.close();
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e);
 		}
 
