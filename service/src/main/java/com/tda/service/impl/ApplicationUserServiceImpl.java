@@ -40,7 +40,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService,
 
 	@Transactional
 	public void save(ApplicationUser applicationUser) {
-		// En el save hasheo
+		// passwords must be hashed
 		applicationUser.setPassword(HashService.getHash(applicationUser
 				.getPassword()));
 		applicationUser.setConfirmPassword(HashService.getHash(applicationUser
@@ -55,14 +55,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService,
 
 	@Transactional
 	public void update(ApplicationUser applicationUser) {
-		// En el update hasheo, pero tengo que asegurarme que se cambio
-		// la pwd, que no es el hash, sino texto plano
-		if (applicationUser.getPassword().length() > 8) {
-			applicationUser.setPassword(HashService.getHash(applicationUser
-					.getPassword()));
-			applicationUser.setConfirmPassword(HashService
-					.getHash(applicationUser.getConfirmPassword()));
-		}
+		// Update will not hash password
 		applicationUserDAO.update(applicationUser);
 	}
 
@@ -125,10 +118,6 @@ public class ApplicationUserServiceImpl implements ApplicationUserService,
 	private List<ApplicationUser> filterByAuthority(
 			List<ApplicationUser> originalList,
 			Collection<Authority> authorityList) {
-
-		// TODO this method should be erased, the filter by authority should be
-		// done by
-		// hibernate in the findByExample
 
 		List<ApplicationUser> authorityFilteredList = new ArrayList<ApplicationUser>(
 				originalList);
