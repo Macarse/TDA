@@ -172,7 +172,7 @@ public class ApplicationUserController {
 			modelAndView.setViewName(REDIRECT_TO_USER_LIST);
 			modelAndView
 					.addObject(USER_FORM_MESSAGE, USER_FORM_EDIT_SUCCESSFUL);
-			applicationUserService.save(applicationUser);
+			applicationUserService.update(applicationUser);
 		}
 
 		return modelAndView;
