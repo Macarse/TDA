@@ -88,35 +88,36 @@ public class ApplicationUserController {
 
 		return USER_CREATE_FORM;
 	}
-	
+
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
 	public @ResponseBody
 	String getOnlineUsers() {
 		// find all users
 		List<ApplicationUser> users = applicationUserService.findAll();
-		
-		//set admin authority
+
+		// set admin authority
 		Authority adminAuth = new Authority();
 		adminAuth.setAuthority("ROLE_ADMIN");
-		
-		//ROLE_USER
+
+		// ROLE_USER
 		Authority userAuth = new Authority();
 		userAuth.setAuthority("ROLE_USER");
-		
+
 		Iterator<ApplicationUser> iter = users.iterator();
 		ApplicationUser user;
-		
-		while(iter.hasNext()){
+
+		while (iter.hasNext()) {
 			user = iter.next();
 			Collection<Authority> auths = user.getMyAuthorities();
-			
-			if(auths.size() == 2 && auths.contains(adminAuth) && auths.contains(userAuth)){
+
+			if (auths.size() == 2 && auths.contains(adminAuth)
+					&& auths.contains(userAuth)) {
 				iter.remove();
 			}
 		}
-		
+
 		Gson gson = new Gson();
-		
+
 		return gson.toJson(users);
 	}
 
@@ -161,6 +162,8 @@ public class ApplicationUserController {
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 
+		validateUsername(applicationUser, result);
+
 		// TODO if we're editing and not adding a new item the message
 		// seems somewhat... misleading, CHANGE IT :D
 		if (result.hasErrors() && result.getFieldErrorCount() > 2) {
@@ -182,6 +185,7 @@ public class ApplicationUserController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		validateUserPasswords(applicationUser, result);
+		validateUsername(applicationUser, result);
 
 		// TODO if we're editing and not adding a new item the message
 		// seems somewhat... misleading, CHANGE IT :D
@@ -194,6 +198,24 @@ public class ApplicationUserController {
 		}
 
 		return modelAndView;
+	}
+
+	private void validateUsername(ApplicationUser applicationUser,
+			BindingResult result) {
+		/* Check username uniqueness */
+		List<ApplicationUser> usersWithSameName = applicationUserService
+				.findByUsername(applicationUser.getUsername());
+
+		if (!usersWithSameName.isEmpty()
+				&& !usersWithSameName.get(0).getId()
+						.equals(applicationUser.getId())) {
+			FieldError error = new FieldError("user", "username",
+					applicationUser.getUsername(), false,
+					new String[] { "error.username.duplicated" },
+					new Object[] { "Nombre de usuario duplicado" },
+					"Nombre de usuario duplicado");
+			result.addError(error);
+		}
 	}
 
 	@RequestMapping(value = "/passwordEdit/{id}", method = RequestMethod.GET)
