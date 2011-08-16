@@ -29,8 +29,6 @@ public class RedirectingExceptionResolver implements HandlerExceptionResolver {
         System.out.println("Unexpected error [" + errorRef + "] for path [" + lookupPath + "]: " + ex);
         logger.error("Unexpected error [" + errorRef + "] for path [" + lookupPath + "]: " + ex, ex);
 
-        //return new ModelAndView(redirectTo(ErrorPresenter.class).withVar("errorRef", errorRef).build());
-
         return modelAndView;
     }
 }
