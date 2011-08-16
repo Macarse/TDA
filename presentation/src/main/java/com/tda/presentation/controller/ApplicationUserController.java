@@ -123,6 +123,7 @@ public class ApplicationUserController {
 
 	private void validateUserPasswords(ApplicationUser applicationUser,
 			BindingResult result) {
+
 		// Checking if passwords are the same
 		if (!applicationUser.getPassword().equals(
 				applicationUser.getConfirmPassword())) {
@@ -155,6 +156,7 @@ public class ApplicationUserController {
 	public ModelAndView edit(@PathVariable Long id, Model model,
 			@Valid @ModelAttribute ApplicationUser applicationUser,
 			BindingResult result) {
+
 		ModelAndView modelAndView = new ModelAndView();
 
 		validateUsername(applicationUser, result);
