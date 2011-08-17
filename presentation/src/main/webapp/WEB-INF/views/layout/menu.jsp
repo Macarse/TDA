@@ -79,59 +79,105 @@
 	if( userType == "admin" )
 		userType = "socialworker";
 
+	var chatTimeout = [5000, 30000];
+	var queueMinTimeout = [5000, 30000];
+	var processQueue = 3;
+	var idWatchdogTimer = 0;
+
 	function refreshPatients() {
-		clearInterval(refreshId);
-	
 		$('#loadImage').show();
 		$('#menu-icon').hide();
-	
-		$.get(contextPath + "/getPatientsInTrain", function(data){
-			//Me llega la lista separada por &:
-			if(data != ''){
-		   		var patients = eval(data);
-		   		var innerHtml = "";
-		   		var i;
 
-		   		if(patients.length > 0){
-			   		for(i=0; i<patients.length; i++ ) {
-			   	   		//Cada elemento esta separado por =:
-						innerHtml += "<li><a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</a> <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif' style='border: 0px;'/></a> <a href='#' onclick='showPatientMenu(" + patients[i].id + ")'> <img src='" + contextPath + "/themes/default/image/refresh.png' style='border: 0px;'/> </a></li>";
-			   		}
-				}else{
-					innerHtml = '<i>No hay Pacientes en el tren</i>';
-				}
-		
-		   		$('#m-pacients').html(patients.length);
-		   		$('#menu-pacientsontrain').html('<ul>' + innerHtml + '</ul>');
-			}
-	   		$('#loadImage').hide();
-	   		$('#menu-icon').show();
-	 	});
-	
-		$.get(contextPath + "/patientqueue/get", function(data){
-			if(data != ''){
-		   		var patients = eval(data);
-		   		var innerHtml = "";
-		   		var i;
+		if(processQueue == 3){
 
-		   		if(patients.length > 0){
-			   		for(i=0; i<patients.length; i++ ) {
-			   	   		//Cada elemento esta separado por =:
-			   	   		innerHtml += "<li><a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'>" + patients[i].firstName + ' ' + patients[i].lastName +  " </a> <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif' style='border: 0px;'/></a> <a href='#' onclick='showQueueMenu(" + patients[i].id + ")' > <img src='" + contextPath + "/themes/default/image/refresh.png' style='border: 0px;'/> </a></li>";
-						//innerHtml += "<li onclick='showQueueMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
-			   		}
-				}else{
-					innerHtml = '<i>No tiene pacientes en cola</i>';
+			processQueue = 0;
+			
+			$.get(contextPath + "/getPatientsInTrain", function(data){
+				//Me llega la lista separada por &:
+				if(data != ''){
+			   		var patients = eval(data);
+			   		var innerHtml = "";
+			   		var i;
+	
+			   		if(patients.length > 0){
+				   		for(i=0; i<patients.length; i++ ) {
+				   	   		//Cada elemento esta separado por =:
+							innerHtml += "<li><a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</a> <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif' style='border: 0px;'/></a> <a href='#' onclick='showPatientMenu(" + patients[i].id + ")'> <img src='" + contextPath + "/themes/default/image/refresh.png' style='border: 0px;'/> </a></li>";
+				   		}
+					}else{
+						innerHtml = '<i>No hay Pacientes en el tren</i>';
+					}
+			
+			   		$('#m-pacients').html(patients.length);
+			   		$('#menu-pacientsontrain').html('<ul>' + innerHtml + '</ul>');
 				}
+		   		$('#loadImage').hide();
+		   		$('#menu-icon').show();
+	
+		   		processQueue +=1;
+		 	});
 		
-		   		//$('#m-pacients').html(parsedData.length);
-		   		$('#menu-patientqueue').html('<ul>' + innerHtml + '</ul>');
-			}
-	   		$('#loadImage').hide();
-	   		$('#menu-icon').show();
-	 	});
+			$.get(contextPath + "/patientqueue/get", function(data){
+				if(data != ''){
+			   		var patients = eval(data);
+			   		var innerHtml = "";
+			   		var i;
+	
+			   		if(patients.length > 0){
+				   		for(i=0; i<patients.length; i++ ) {
+				   	   		//Cada elemento esta separado por =:
+				   	   		innerHtml += "<li><a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'>" + patients[i].firstName + ' ' + patients[i].lastName +  " </a> <a href='" + contextPath + "/patient/getform/" + patients[i].id + "/" + userType + "'><img src='" + contextPath + "/themes/default/image/edit.gif' style='border: 0px;'/></a> <a href='#' onclick='showQueueMenu(" + patients[i].id + ")' > <img src='" + contextPath + "/themes/default/image/refresh.png' style='border: 0px;'/> </a></li>";
+							//innerHtml += "<li onclick='showQueueMenu(" + patients[i].id + ")'>" + patients[i].firstName + ' ' + patients[i].lastName +  "</li>";
+				   		}
+					}else{
+						innerHtml = '<i>No tiene pacientes en cola</i>';
+					}
+			
+			   		//$('#m-pacients').html(parsedData.length);
+			   		$('#menu-patientqueue').html('<ul>' + innerHtml + '</ul>');
+				}
+		   		$('#loadImage').hide();
+		   		$('#menu-icon').show();
+		   		processQueue +=1;
+		 	});
+
+			$.ajax({
+				  url: contextPath + "/getOnlineUsers",
+				  cache: false,
+				  dataType: "json",
+				  success: function(data) {
+					  var listUsers = "<a href=\"#\" onclick=\"sendTo2('${user.username}');\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">Cargar en Cola</a>";
+					  var aux;
+					  var htmlUsers = "";
+					  $.each(data, function(i,item) {
+						  htmlUsers += "<li><a href=\"javascript:void(0)\" onclick=\"javascript:chatWith('" +
+						  	item.username +"')\">" + item.username +"</a></li>";
+
+						  	aux = "'" + item.username + "'";
+					  });
+			       
+			       if(data != ''){
+			    	   $("#onlineusers").html('<ul>' + htmlUsers + '</ul>');
+			       }else{
+			    	   $('#onlineusers').html('<ul><i>No hay usuarios conectados</i></ul>');
+			       }
+
+			       processQueue +=1;
+				  }
+			});
+
+			//borro el watchdog
+			clearTimeout(idWatchdogTimer);
+			//seteo el nuevo timeout
+			idWatchdogTimer = setTimeout(checkQueueTimer, queueTimeout[1]);
+		}
 		
-		refreshId = setInterval(refreshPatients, 5000);
+		setTimeout(refreshPatients, queueTimeout[0]);
+	}
+
+	function checkQueueTimer(){
+		processQueue = 3;
+		refreshPatients();
 	}
 	
 	function replaceAll( text, busca, reemplaza ){
@@ -187,31 +233,6 @@
 		window.location.href = url;
 	}
 
-	function refreshOnlineUsers() {
-		$.ajax({
-			  url: contextPath + "/getOnlineUsers",
-			  cache: false,
-			  dataType: "json",
-			  success: function(data) {
-				  var listUsers = "<a href=\"#\" onclick=\"sendTo2('${user.username}');\" class=\"queuemenu-userbutton button-text button-search fg-button ui-state-default ui-corner-all\">Cargar en Cola</a>";
-				  var aux;
-				  var htmlUsers = "";
-				  $.each(data, function(i,item) {
-					  htmlUsers += "<li><a href=\"javascript:void(0)\" onclick=\"javascript:chatWith('" +
-					  	item.username +"')\">" + item.username +"</a></li>";
-
-					  	aux = "'" + item.username + "'";
-				  });
-		       
-		       if(data != ''){
-		    	   $("#onlineusers").html('<ul>' + htmlUsers + '</ul>');
-		       }else{
-		    	   $('#onlineusers').html('<ul><i>No hay usuarios conectados</i></ul>');
-		       }
-			  }
-		});
-	}
-
 	function sendTo2(username){
 		$.get(contextPath + "/patientqueue/assigntos?patient=" + selectedId + "&medic=" + username, function(){
 			location.reload(true);
@@ -232,7 +253,7 @@
 
 	$(document).ready(function(){
 		refreshPatients();
-
+		
 		$("#queue-dialog").dialog({ 
 			autoOpen: false,
 			modal: true,
@@ -263,9 +284,6 @@
 			 window.location.href = contextPath + '/patient/' + selectedId + '/dentist/new';
 		 });
 		*/
-		 refreshOnlineUsers();
-		 var refreshOnlineUsersTimer = setInterval(refreshOnlineUsers, 5000);
-
 
 		 $("[title]").tooltip({
 			 track: true, 
