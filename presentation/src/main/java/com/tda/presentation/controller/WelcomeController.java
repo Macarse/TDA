@@ -269,9 +269,12 @@ public class WelcomeController extends CommonController {
 		Gson gson = new Gson();
 
 		LinkedList<Patient> patients = new LinkedList<Patient>();
+		Patient aPatient;
 
 		for (PatientInTrain patient : patientInTrainService.findAll()) {
-			patients.add(patient.getPatient());
+			aPatient = patient.getPatient();
+			aPatient.setImage(null);
+			patients.add(aPatient);
 		}
 
 		return gson.toJson(patients);

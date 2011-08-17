@@ -107,7 +107,7 @@ public class SyncController extends HttpServlet {
 									respMessage = "Error desconocido";
 								}
 							else
-								respMessage = "Timeout: intente mas tarde";
+								respMessage = "Timeout: intente mas tarde. Verifique que la IP y Puerto sean correctas.";
 						} catch (InterruptedException ex) {
 							worker.interrupt();
 						} finally {
