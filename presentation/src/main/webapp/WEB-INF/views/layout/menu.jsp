@@ -80,7 +80,7 @@
 		userType = "socialworker";
 
 	var chatTimeout = [5000, 30000];
-	var queueMinTimeout = [5000, 30000];
+	var queueTimeout = [5000, 30000];
 	var processQueue = 3;
 	var idWatchdogTimer = 0;
 
