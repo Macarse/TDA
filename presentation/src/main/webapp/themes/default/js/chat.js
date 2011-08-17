@@ -363,7 +363,7 @@ function startChatSession(){
 			status = eval("data.windowStatus." + chatboxtitle);
 			renderChat(status, chatboxtitle);
 		}
-	
+	restructureChatBoxes();
 	setTimeout('chatHeartbeat();',chatHeartbeatTime);
 		
 	}});

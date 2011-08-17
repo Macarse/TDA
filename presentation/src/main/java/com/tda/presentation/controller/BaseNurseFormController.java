@@ -14,7 +14,7 @@ import com.tda.service.api.VaxineService;
 import com.tda.service.exception.NoDataFoundException;
 import com.tda.service.exception.SingleResultExpectedException;
 
-public class BaseNurseFormController {
+public class BaseNurseFormController extends CommonController {
 	private VaxineService vaxineService;
 
 	@ModelAttribute("allVaxines")

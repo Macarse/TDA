@@ -60,4 +60,19 @@ public class PatientInTrainDAO extends GenericDAOImpl<PatientInTrain> {
 
 		return true;
 	}
+
+	public PatientInTrain findByPatientId(Long patient) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder
+				.append("from PatientInTrain as pit where pit.patient.id=");
+		stringBuilder.append(patient.toString());
+		@SuppressWarnings("unchecked")
+		List<PatientInTrain> list = getHibernateTemplate().find(
+				stringBuilder.toString());
+
+		if (list == null || list.size() != 1)
+			return null;
+
+		return list.get(0);
+	}
 }

@@ -38,4 +38,6 @@ public interface PatientInTrainService {
 	PatientInTrain findByPatient(Patient patient);
 
 	boolean isActiveForm(Long formId, FormType formType);
+
+	PatientInTrain findByPatientId(long patient);
 }

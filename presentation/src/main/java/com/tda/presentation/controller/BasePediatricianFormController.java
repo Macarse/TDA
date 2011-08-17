@@ -13,7 +13,7 @@ import com.tda.model.pediatrician.PositiveNegativeOrUndefined;
 import com.tda.model.pediatrician.PositiveOrNegative;
 import com.tda.model.pediatrician.SueroType;
 
-public class BasePediatricianFormController {
+public class BasePediatricianFormController extends CommonController {
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");

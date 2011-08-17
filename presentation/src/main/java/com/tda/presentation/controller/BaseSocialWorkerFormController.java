@@ -21,7 +21,7 @@ import com.tda.model.socialworker.SchoolService;
 import com.tda.model.socialworker.WaterSource;
 import com.tda.model.socialworker.WaterSourceType;
 
-public class BaseSocialWorkerFormController {
+public class BaseSocialWorkerFormController extends CommonController {
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");

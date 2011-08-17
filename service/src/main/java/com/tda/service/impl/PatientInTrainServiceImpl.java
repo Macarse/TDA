@@ -63,14 +63,15 @@ public class PatientInTrainServiceImpl implements PatientInTrainService {
 	public List<PatientInTrain> findByDni(String dni) {
 		List<Patient> results = patientService.findByDni(dni);
 		if (results != null && results.size() == 1) {
-			PatientInTrain inTrain = patientInTrainDAO.findByPatient(results.get(0));
+			PatientInTrain inTrain = patientInTrainDAO.findByPatient(results
+					.get(0));
 			if (inTrain != null) {
 				List<PatientInTrain> list = new ArrayList<PatientInTrain>();
 				list.add(inTrain);
 				return list;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -106,5 +107,9 @@ public class PatientInTrainServiceImpl implements PatientInTrainService {
 
 	public void setPatientService(PatientService patientService) {
 		this.patientService = patientService;
+	}
+
+	public PatientInTrain findByPatientId(long patient) {
+		return patientInTrainDAO.findByPatientId(patient);
 	}
 }

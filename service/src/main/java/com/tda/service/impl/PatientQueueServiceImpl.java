@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tda.model.applicationuser.ApplicationUser;
@@ -77,11 +76,8 @@ public class PatientQueueServiceImpl implements PatientQueueService {
 	public List<Patient> getPatients(Long applicationUserId) {
 		List<Patient> patients = new ArrayList<Patient>();
 
-		Long currentUserId = ((ApplicationUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal()).getId();
-
 		List<PatientQueue> patientList = patientQueueDAO
-				.findPatientsByApplicationUserId(currentUserId);
+				.findPatientsByApplicationUserId(applicationUserId);
 
 		if (patientList != null)
 			for (PatientQueue patientQueue : patientList) {

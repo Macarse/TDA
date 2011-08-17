@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.tda.model.dentist.DentistAction;
 import com.tda.model.dentist.SeverityLevel;
 
-public class BaseDentistFormController {
+public class BaseDentistFormController extends CommonController {
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {

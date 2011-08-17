@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
@@ -44,6 +46,7 @@ public class PatientQueueController {
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody
 	String get() {
 		ApplicationUser user = (ApplicationUser) this.getUser();
@@ -63,7 +66,7 @@ public class PatientQueueController {
 	@RequestMapping(value = "/assignto", method = RequestMethod.GET)
 	public @ResponseBody
 	void assignto(@RequestParam long patient, @RequestParam long medic) {
-		PatientInTrain pit = patientInTrainService.findById(patient);
+		PatientInTrain pit = patientInTrainService.findByPatientId(patient);
 		ApplicationUser au = applicationUserService.findById(medic);
 
 		if (pit != null && au != null) {
@@ -77,7 +80,7 @@ public class PatientQueueController {
 	@RequestMapping(value = "/assigntos", method = RequestMethod.GET)
 	public @ResponseBody
 	void assignto(@RequestParam long patient, @RequestParam String medic) {
-		PatientInTrain pit = patientInTrainService.findById(patient);
+		PatientInTrain pit = patientInTrainService.findByPatientId(patient);
 		List<ApplicationUser> aus = applicationUserService
 				.findByUsername(medic);
 

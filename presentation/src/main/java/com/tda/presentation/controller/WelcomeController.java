@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -29,7 +27,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.tda.model.applicationuser.ApplicationUser;
 import com.tda.model.applicationuser.OnlineUser;
 import com.tda.model.item.Item;
 import com.tda.model.item.ItemBuilder;
@@ -239,26 +236,6 @@ public class WelcomeController extends CommonController {
 
 			return simpleDateFormat.format((Date) getValue());
 		}
-	}
-
-	// Ajax method to get User Personal Queue
-	@RequestMapping(value = "/getUserQueue", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody
-	MultiValueMap<String, String> getUserQueue() {
-		PatientInTrain example = new PatientInTrain();
-		example.setUser((ApplicationUser) getUser());
-		List<PatientInTrain> list = patientInTrainService
-				.findByExample(example);
-
-		MultiValueMap<String, String> retList = new LinkedMultiValueMap<String, String>();
-
-		for (PatientInTrain pit : list) {
-			retList.add(pit.getPatient().getFirstName() + " "
-					+ pit.getPatient().getLastName(), pit.getId().toString());
-		}
-
-		return retList;
 	}
 
 	// Ajax method to get User Personal Queue
